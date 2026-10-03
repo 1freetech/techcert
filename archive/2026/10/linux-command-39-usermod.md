@@ -79,8 +79,8 @@ The following is the complete final Gutenberg source fetched from WordPress afte
 <p>Imagine that <code>labtech</code> already belongs to the supplementary groups <code>lab_readers</code> and <code>video</code>. You want to add <code>lab_ops</code>.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:image {"id":20284,"sizeSlug":"full","linkDestination":"none"} -->
-<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-command-39-usermod-group-diagram.jpg" alt="Comparison: usermod -aG adds lab_ops while retaining lab_readers and video; usermod -G replaces the supplementary list with lab_ops. The primary group is unchanged." class="wp-image-20284" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech diagram: -aG retains existing supplementary groups and adds lab_ops; -G alone replaces that list. The primary group is unchanged. Colors distinguish the two paths; this is a concept diagram.</em></figcaption></figure>
+<!-- wp:image {"id":20284,"sizeSlug":"full","linkDestination":"media"} -->
+<figure class="wp-block-image size-full"><a href="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-command-39-usermod-group-diagram.jpg"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-command-39-usermod-group-diagram.jpg" alt="Comparison: usermod -aG adds lab_ops while retaining lab_readers and video; usermod -G replaces the supplementary list with lab_ops. The primary group is unchanged." class="wp-image-20284" /></a><figcaption class="wp-element-caption"><em>Tap the diagram to open the full-size image. Original BitcoinVersus.Tech diagram: -aG retains existing supplementary groups and adds lab_ops; -G alone replaces that list. The primary group is unchanged. Colors distinguish the two paths; this is a concept diagram.</em></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:table -->

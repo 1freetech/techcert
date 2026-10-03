@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-03T20:14:23Z",
+  "rotation": [
+    "networking",
+    "python",
+    "linux",
+    "windows",
+    "electrical_engineering",
+    "electrical_technician",
+    "cpp"
+  ],
+  "last_completed": {
+    "subject": "linux",
+    "lesson_number": 39,
+    "title": "Linux Command #39 – usermod (Linux OS)",
+    "wordpress_post_id": 20288,
+    "live_url": "https://bitcoinversus.tech/2026/10/03/linux-command-39-usermod/",
+    "archive_path": "archive/2026/10/linux-command-39-usermod.md",
+    "verified_repositories": [
+      "1freetech/Bitcoinversus.tech",
+      "1freetech/techcert"
+    ]
+  },
+  "next": {
+    "subject": "windows",
+    "lesson_number": 29,
+    "title_format": "Windows Command #29 – {command} (Windows OS)",
+    "previous_lesson": {
+      "wordpress_post_id": 20228,
+      "title": "Windows Command #28 – net view (Windows OS)"
+    }
+  },
+  "numbering_note": "Existing Python .020 numbering conflict observed; no existing posts renamed or renumbered. This state advances the established subject rotation after Linux #39."
+}

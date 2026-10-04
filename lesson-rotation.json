@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T03:43:56Z",
+  "updated_at": "2026-10-04T04:29:20Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,24 +24,24 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "electrical_engineering",
-    "lesson_number": 10,
-    "title": "OSEEC.010: Overcurrent Protection — Circuit Breakers, Fuses, Fault Current, and Selective Coordination",
-    "wordpress_post_id": 20410,
-    "live_url": "https://bitcoinversus.tech/2026/10/03/oseec-010-overcurrent-protection-circuit-breakers-fuses-fault-current-selective-coordination/",
-    "archive_path": "archive/2026/10/oseec-010-overcurrent-protection-circuit-breakers-fuses-fault-current-selective-coordination.md",
+    "subject": "electrical_technician",
+    "lesson_number": 25,
+    "title": "OSETC.025: Temperature Switches and Thermostat Control Basics",
+    "wordpress_post_id": 20418,
+    "live_url": "https://bitcoinversus.tech/2026/10/04/osetc-025-temperature-switches-thermostat-control-basics/",
+    "archive_path": "archive/2026/10/osetc-025-temperature-switches-thermostat-control-basics.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert"
     ]
   },
   "next": {
-    "subject": "electrical_technician",
-    "lesson_number": 25,
-    "title_format": "OSETC.025: {topic}",
+    "subject": "cpp",
+    "lesson_number": 19,
+    "title_format": "OSC++.019: {topic}",
     "previous_lesson": {
-      "wordpress_post_id": 20320,
-      "title": "OSETC.024: Pressure Switches and Pressure Control Basics"
+      "wordpress_post_id": 20249,
+      "title": "OSC++.018: Virtual Functions and Polymorphism Basics"
     }
   },
   "new_track_starts": {
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.002: {topic}"
     }
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Per user instruction, the expanded cycle started with OSHistory.001, then advanced through Networking, Python, Linux, Windows, Electrical Engineering, and now Electrical Technician. After publishing and verifying OSEEC.010, rotation advanced to OSETC.025. OSHistory uses the OSHistory prefix."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Per user instruction, the expanded cycle started with OSHistory.001, then advanced through Networking, Python, Linux, Windows, Electrical Engineering, Electrical Technician, and now C++. After publishing and verifying OSETC.025, rotation advanced to OSC++.019. OSHistory uses the OSHistory prefix."
 }

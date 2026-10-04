@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-04T01:24:56Z",
+  "updated_at": "2026-10-04T01:37:16Z",
   "rotation": [
     "networking",
     "python",
@@ -11,25 +11,25 @@
     "cpp"
   ],
   "last_completed": {
-    "subject": "electrical_engineering",
-    "lesson_number": 9,
-    "title": "OSEEC.009: Electrical Power Distribution: Switchgear, Switchboards, Panelboards, and PDUs",
-    "wordpress_post_id": 20312,
-    "live_url": "https://bitcoinversus.tech/2026/10/03/oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus/",
-    "archive_path": "archive/2026/10/oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus.md",
+    "subject": "electrical_technician",
+    "lesson_number": 24,
+    "title": "OSETC.024: Pressure Switches and Pressure Control Basics",
+    "wordpress_post_id": 20320,
+    "live_url": "https://bitcoinversus.tech/2026/10/03/osetc-024-pressure-switches-pressure-control-basics/",
+    "archive_path": "archive/2026/10/osetc-024-pressure-switches-pressure-control-basics.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert"
     ]
   },
   "next": {
-    "subject": "electrical_technician",
-    "lesson_number": 24,
-    "title_format": "OSETC.024: {topic}",
+    "subject": "cpp",
+    "lesson_number": 19,
+    "title_format": "OSC++.019: {topic}",
     "previous_lesson": {
-      "wordpress_post_id": 20234,
-      "title": "OSETC.023: Float Switches and Level Control Basics"
+      "wordpress_post_id": 20249,
+      "title": "OSC++.018: Virtual Functions and Polymorphism Basics"
     }
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Rotation advanced after OSEEC.009."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Rotation advanced after OSETC.024."
 }

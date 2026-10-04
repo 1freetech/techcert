@@ -1,6 +1,8 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "updated_at": "2026-10-04T01:37:16Z",
+  "rotation_expanded_on": "2026-10-04",
+  "curriculum_registry": "curriculum.json",
   "rotation": [
     "networking",
     "python",
@@ -8,7 +10,18 @@
     "windows",
     "electrical_engineering",
     "electrical_technician",
-    "cpp"
+    "cpp",
+    "semiconductor_technician",
+    "semiconductor_engineer",
+    "robotics_technician",
+    "robotics_engineer",
+    "data_center_technician",
+    "data_center_engineer",
+    "fiber_optics_technician",
+    "fiber_optics_engineer",
+    "firmware_technician",
+    "firmware_engineer",
+    "history_money_technology_bitcoin"
   ],
   "last_completed": {
     "subject": "electrical_technician",
@@ -31,5 +44,62 @@
       "title": "OSC++.018: Virtual Functions and Polymorphism Basics"
     }
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Rotation advanced after OSETC.024."
+  "new_track_starts": {
+    "semiconductor_technician": {
+      "acronym": "OSSTC",
+      "lesson_number": 1,
+      "title_format": "OSSTC.001: {topic}"
+    },
+    "semiconductor_engineer": {
+      "acronym": "OSSEC",
+      "lesson_number": 1,
+      "title_format": "OSSEC.001: {topic}"
+    },
+    "robotics_technician": {
+      "acronym": "OSRTC",
+      "lesson_number": 1,
+      "title_format": "OSRTC.001: {topic}"
+    },
+    "robotics_engineer": {
+      "acronym": "OSREC",
+      "lesson_number": 1,
+      "title_format": "OSREC.001: {topic}"
+    },
+    "data_center_technician": {
+      "acronym": "OSDCTC",
+      "lesson_number": 1,
+      "title_format": "OSDCTC.001: {topic}"
+    },
+    "data_center_engineer": {
+      "acronym": "OSDCEC",
+      "lesson_number": 1,
+      "title_format": "OSDCEC.001: {topic}"
+    },
+    "fiber_optics_technician": {
+      "acronym": "OSFOTC",
+      "lesson_number": 1,
+      "title_format": "OSFOTC.001: {topic}"
+    },
+    "fiber_optics_engineer": {
+      "acronym": "OSFOEC",
+      "lesson_number": 1,
+      "title_format": "OSFOEC.001: {topic}"
+    },
+    "firmware_technician": {
+      "acronym": "OSFTC",
+      "lesson_number": 1,
+      "title_format": "OSFTC.001: {topic}"
+    },
+    "firmware_engineer": {
+      "acronym": "OSFEC",
+      "lesson_number": 1,
+      "title_format": "OSFEC.001: {topic}"
+    },
+    "history_money_technology_bitcoin": {
+      "acronym": "OSHMTBC",
+      "lesson_number": 1,
+      "title": "OSHMTBC.001: The Coincidence of Wants"
+    }
+  },
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. The rotation was expanded after OSETC.024 with semiconductor, robotics, data center, fiber optics, firmware, and History of Money, Technology & Bitcoin tracks. Current next lesson remains OSC++.019."
 }

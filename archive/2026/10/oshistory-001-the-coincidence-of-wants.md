@@ -7,8 +7,8 @@ live_url: "https://bitcoinversus.tech/2026/10/03/oshistory-001-the-coincidence-o
 series: "History of Money, Technology & Bitcoin"
 subject: history_money_technology_bitcoin
 lesson_number: "001"
-featured_media_id: 20337
-featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/oshistory.001-coincidence-of-wants-cover.png"
+featured_media_id: 20358
+featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/539c431e-82cd-4de4-9372-78720f442da1.jpeg"
 youtube_1: "https://www.youtube.com/watch?v=3SB_7DBhymI"
 youtube_2: "https://www.youtube.com/watch?v=ok2vtKnSZzY"
 youtube_3: "https://www.youtube.com/watch?v=94BtOtGVqLw"

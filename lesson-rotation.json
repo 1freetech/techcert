@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T05:08:03Z",
+  "updated_at": "2026-10-04T05:15:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,22 +24,21 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "robotics_technician",
+    "subject": "robotics_engineer",
     "lesson_number": 1,
-    "title": "OSRTC.001: Industrial Robot Safety — E-Stops, Safeguarding, and Safe Workcell Entry",
-    "wordpress_post_id": 20483,
-    "live_url": "https://bitcoinversus.tech/2026/10/04/osrtc-001-industrial-robot-safety-e-stops-safeguarding-safe-workcell-entry/",
-    "archive_path": "archive/2026/10/osrtc-001-industrial-robot-safety-e-stops-safeguarding-safe-workcell-entry.md",
+    "title": "OSREC.001: Robot Kinematics and Coordinate Frames — Forward and Inverse Kinematics",
+    "wordpress_post_id": 20482,
+    "live_url": "https://bitcoinversus.tech/2026/10/04/osrec-001-robot-kinematics-coordinate-frames-forward-inverse-kinematics/",
+    "archive_path": "archive/2026/10/osrec-001-robot-kinematics-coordinate-frames-forward-inverse-kinematics.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
-      "1freetech/techcert",
-      "1freetech/opencert.tech"
+      "1freetech/techcert"
     ]
   },
   "next": {
-    "subject": "robotics_engineer",
+    "subject": "data_center_technician",
     "lesson_number": 1,
-    "title_format": "OSREC.001: {topic}",
+    "title_format": "OSDCTC.001: {topic}",
     "track_start": true,
     "previous_lesson": null
   },
@@ -47,7 +46,7 @@
     "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 2, "title_format": "OSSTC.002: {topic}"},
     "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 2, "title_format": "OSSEC.002: {topic}"},
     "robotics_technician": {"acronym": "OSRTC", "lesson_number": 2, "title_format": "OSRTC.002: {topic}"},
-    "robotics_engineer": {"acronym": "OSREC", "lesson_number": 1, "title_format": "OSREC.001: {topic}"},
+    "robotics_engineer": {"acronym": "OSREC", "lesson_number": 2, "title_format": "OSREC.002: {topic}"},
     "data_center_technician": {"acronym": "OSDCTC", "lesson_number": 1, "title_format": "OSDCTC.001: {topic}"},
     "data_center_engineer": {"acronym": "OSDCEC", "lesson_number": 1, "title_format": "OSDCEC.001: {topic}"},
     "fiber_optics_technician": {"acronym": "OSFOTC", "lesson_number": 1, "title_format": "OSFOTC.001: {topic}"},
@@ -56,5 +55,5 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 1, "title_format": "OSFEC.001: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 2, "title_format": "OSHistory.002: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. Rotation advanced to OSREC.001 after verified OSRTC.001."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. Rotation advanced to OSDCTC.001 after verified OSREC.001."
 }

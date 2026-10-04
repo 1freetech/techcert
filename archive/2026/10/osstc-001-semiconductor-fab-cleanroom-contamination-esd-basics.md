@@ -4,15 +4,7 @@
 
 <!-- wp:heading --><h2 class="wp-block-heading">The entire lesson in one picture</h2><!-- /wp:heading -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>People + materials + equipment
-             ↓
-   can create particles and static
-             ↓
-Cleanroom + gowning + filtration + ESD controls
-             ↓
-       protect the wafer
-             ↓
-Higher process stability and fewer avoidable defects</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>People + materials + equipment<br>↓<br>can create particles and static<br>↓<br>Cleanroom + gowning + filtration + ESD controls<br>↓<br>protect the wafer<br>↓<br>Higher process stability and fewer avoidable defects</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>That is the basic technician mindset: <strong>protect the process before you touch the process.</strong></p><!-- /wp:paragraph -->
 
@@ -22,11 +14,7 @@ Higher process stability and fewer avoidable defects</code></pre><!-- /wp:code -
 
 <!-- wp:paragraph --><p>Modern fabs are divided into controlled areas. The cleanroom contains process equipment and wafer-handling systems. Supporting spaces may include sub-fabs, utility areas, chemical-delivery systems, vacuum systems, abatement equipment, electrical distribution, chilled water, exhaust, compressed gases, and many other facility systems.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>FAB
-├── Cleanroom → wafer processing tools
-├── Sub-fab   → pumps, abatement, support equipment
-├── Utilities → power, gases, water, exhaust, cooling
-└── Support   → metrology, maintenance, material handling</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>FAB<br>Cleanroom → wafer processing tools<br>Sub-fab → pumps, abatement, support equipment<br>Utilities → power, gases, water, exhaust, cooling<br>Support → metrology, maintenance, material handling</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>A semiconductor technician may work directly on process equipment, support equipment, facilities systems, material handling, or metrology—but the contamination and safety rules still matter across the facility.</p><!-- /wp:paragraph -->
 
@@ -34,15 +22,7 @@ Higher process stability and fewer avoidable defects</code></pre><!-- /wp:code -
 
 <!-- wp:paragraph --><p>Semiconductor features are extremely small. A particle that looks invisible to a person can still be large enough to interfere with a process step, block a pattern, scratch a surface, alter a film, or create a defect.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>Particle lands on wafer
-        ↓
-Process continues
-        ↓
-Pattern / film / surface may be disturbed
-        ↓
-Defect risk increases
-        ↓
-Yield can decrease</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Particle lands on wafer<br>↓<br>Process continues<br>↓<br>Pattern / film / surface may be disturbed<br>↓<br>Defect risk increases<br>↓<br>Yield can decrease</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>Samsung Semiconductor explains that semiconductor cleanrooms are designed to keep dust and particles away from the manufacturing area through controlled airflow and filtration. Its cleanroom overview shows air showers, filtration, and the tightly controlled production environment.</p><!-- /wp:paragraph -->
 
@@ -64,15 +44,7 @@ https://www.youtube.com/watch?v=L_1fJAGrA1U
 
 <!-- wp:paragraph --><p>People naturally shed particles from skin, hair, clothing, shoes, cosmetics, paper, tools, and ordinary movement. That is why semiconductor cleanrooms use controlled gowning procedures and rules about what can enter the area.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>Street environment
-      ↓
-Gowning procedure
-      ↓
-Controlled garments + footwear + gloves as required
-      ↓
-Cleanroom entry
-      ↓
-Move and work without creating unnecessary contamination</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Street environment<br>↓<br>Gowning procedure<br>↓<br>Controlled garments + footwear + gloves as required<br>↓<br>Cleanroom entry<br>↓<br>Move and work without creating unnecessary contamination</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>The exact gowning order is site-specific. Follow the facility's posted procedure instead of memorizing one universal sequence from the internet.</p><!-- /wp:paragraph -->
 
@@ -86,17 +58,7 @@ Move and work without creating unnecessary contamination</code></pre><!-- /wp:co
 
 <!-- wp:paragraph --><p>A silicon wafer may pass through many tools over a long manufacturing flow. In many modern 300 mm fabs, wafers travel inside a closed carrier called a <strong>FOUP</strong>—a Front Opening Unified Pod.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>FOUP
-  ↓
-Tool load port
-  ↓
-Automated wafer-handling robot
-  ↓
-Process chamber
-  ↓
-Wafer returns to carrier
-  ↓
-Next tool</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>FOUP<br>↓<br>Tool load port<br>↓<br>Automated wafer-handling robot<br>↓<br>Process chamber<br>↓<br>Wafer returns to carrier<br>↓<br>Next tool</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>The carrier helps isolate wafers from the room environment and allows automated material-handling systems to move lots between tools.</p><!-- /wp:paragraph -->
 
@@ -106,15 +68,7 @@ Next tool</code></pre><!-- /wp:code -->
 
 <!-- wp:paragraph --><p>A person can accumulate static charge simply by moving, walking, changing garments, or contacting and separating materials. A discharge that is too small for you to feel can still damage sensitive electronics.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>Contact / separation of materials
-            ↓
-Static charge develops
-            ↓
-Potential difference exists
-            ↓
-Discharge occurs
-            ↓
-Sensitive device may be damaged</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Contact / separation of materials<br>↓<br>Static charge develops<br>↓<br>Potential difference exists<br>↓<br>Discharge occurs<br>↓<br>Sensitive device may be damaged</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>The EOS/ESD Association explains that basic ESD control uses grounding, controlled work surfaces, personnel grounding, ionization where appropriate, and verified ESD-control procedures.</p><!-- /wp:paragraph -->
 
@@ -132,9 +86,7 @@ https://www.youtube.com/watch?v=GM9G_Nojif4
 
 <!-- wp:list --><ul class="wp-block-list"><li><strong>ESD — Electrostatic Discharge:</strong> charge transfers suddenly and can damage product or disturb equipment.</li><li><strong>ESA — Electrostatic Attraction:</strong> a charged wafer, carrier, reticle, or surface attracts particles that can contaminate the process.</li></ul><!-- /wp:list -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>Static charge
-    ├── ESD → discharge damage / equipment upset
-    └── ESA → particles attracted to critical surfaces</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Static charge<br>ESD → discharge damage / equipment upset<br>ESA → particles attracted to critical surfaces</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>SEMI notes that electrostatic charge in wafer fabs can contribute to both ESD and particle attraction. Repeated wafer handling, robotic movement, insulators, carriers, and tool materials can all become part of the static-control problem.</p><!-- /wp:paragraph -->
 
@@ -144,15 +96,7 @@ https://www.youtube.com/watch?v=GM9G_Nojif4
 
 <!-- wp:paragraph --><p>A useful beginner rule is:</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>Conductive object with unwanted static charge
-            ↓
-Proper grounding can provide a controlled path
-
-Insulating object with unwanted static charge
-            ↓
-Grounding alone may not remove the charge
-            ↓
-Ionization or other approved ESD controls may be needed</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Conductive object with unwanted static charge<br>↓<br>Proper grounding can provide a controlled path<br><br>Insulating object with unwanted static charge<br>↓<br>Grounding alone may not remove the charge<br>↓<br>Ionization or other approved ESD controls may be needed</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>This is why a semiconductor fab may use conductive or dissipative floors, approved footwear, grounded work surfaces, grounding points, continuous monitors, ionizers, and other controls depending on the process.</p><!-- /wp:paragraph -->
 
@@ -188,21 +132,7 @@ https://www.youtube.com/watch?v=Bu52CE55BN0
 
 <!-- wp:paragraph --><p>Imagine a tool begins showing an increase in particle-related defects.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>Particle trend rises
-      ↓
-Do not immediately replace random parts
-      ↓
-Check process history and alarms
-      ↓
-Check maintenance activity
-      ↓
-Check approved cleaning state
-      ↓
-Check wafer / carrier handling
-      ↓
-Check airflow / filtration / tool condition as authorized
-      ↓
-Use data to isolate the source</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Particle trend rises<br>↓<br>Do not immediately replace random parts<br>↓<br>Check process history and alarms<br>↓<br>Check maintenance activity<br>↓<br>Check approved cleaning state<br>↓<br>Check wafer / carrier handling<br>↓<br>Check airflow / filtration / tool condition as authorized<br>↓<br>Use data to isolate the source</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>A technician's job is not to guess. It is to preserve evidence, follow the troubleshooting procedure, and make controlled changes one step at a time.</p><!-- /wp:paragraph -->
 
@@ -210,17 +140,7 @@ Use data to isolate the source</code></pre><!-- /wp:code -->
 
 <!-- wp:paragraph --><p>Suppose an ESD monitor or workstation check fails.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>ESD control check fails
-       ↓
-Stop handling exposed ESD-sensitive product
-       ↓
-Verify approved grounding / monitor setup
-       ↓
-Check required footwear / wrist strap / mat / connections
-       ↓
-Correct the control problem
-       ↓
-Re-verify before resuming work</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>ESD control check fails<br>↓<br>Stop handling exposed ESD-sensitive product<br>↓<br>Verify approved grounding / monitor setup<br>↓<br>Check required footwear / wrist strap / mat / connections<br>↓<br>Correct the control problem<br>↓<br>Re-verify before resuming work</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>Do not continue handling sensitive product just because “it worked yesterday.” ESD controls must work now.</p><!-- /wp:paragraph -->
 
@@ -254,11 +174,7 @@ Re-verify before resuming work</code></pre><!-- /wp:code -->
 
 <!-- wp:paragraph --><p><strong>A semiconductor technician protects three things at the same time: people, product, and process.</strong> Cleanroom discipline protects the wafer from contamination. ESD controls protect sensitive product and equipment from static effects. Safety procedures protect people from the very real electrical, chemical, mechanical, vacuum, thermal, and gas hazards inside a fab.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>PEOPLE  → safety procedures
-PRODUCT → cleanroom + ESD control
-PROCESS → disciplined, documented work
-
-All three matter.</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>PEOPLE → safety procedures<br>PRODUCT → cleanroom + ESD control<br>PROCESS → disciplined, documented work<br><br>All three matter.</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p><em>Display note: all diagrams in this lesson are plain educational diagrams, not simulated terminals. No VS Code, Windows, or Linux terminal palette is being represented or invented.</em></p><!-- /wp:paragraph -->
 

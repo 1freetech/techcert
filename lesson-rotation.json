@@ -96,10 +96,10 @@
       "title_format": "OSFEC.001: {topic}"
     },
     "history_money_technology_bitcoin": {
-      "acronym": "OSHMTBC",
+      "acronym": "OSHistory",
       "lesson_number": 1,
-      "title": "OSHMTBC.001: The Coincidence of Wants"
+      "title": "OSHistory.001: The Coincidence of Wants"
     }
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. The rotation was expanded after OSETC.024 with semiconductor, robotics, data center, fiber optics, firmware, and History of Money, Technology & Bitcoin tracks. Current next lesson remains OSC++.019."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. The rotation was expanded after OSETC.024 with semiconductor, robotics, data center, fiber optics, firmware, and History of Money, Technology & Bitcoin tracks. The History track uses the OSHistory prefix. Current next lesson remains OSC++.019."
 }

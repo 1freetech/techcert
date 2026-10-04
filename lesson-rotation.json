@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T07:02:30Z",
+  "updated_at": "2026-10-04T07:14:16Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,12 +24,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "history_money_technology_bitcoin",
-    "lesson_number": 2,
-    "title": "OSHistory.002: Commodity Money — Why Some Goods Work Better as Money",
-    "wordpress_post_id": 20601,
-    "live_url": "https://bitcoinversus.tech/2026/10/04/oshistory-002-commodity-money-why-some-goods-work-better-as-money/",
-    "archive_path": "archive/2026/10/oshistory-002-commodity-money-why-some-goods-work-better-as-money.md",
+    "subject": "networking",
+    "lesson_number": 14,
+    "title": "OSNTC.014: TCP and UDP Transport Basics",
+    "wordpress_post_id": 20611,
+    "live_url": "https://bitcoinversus.tech/2026/10/04/osntc-014-tcp-udp-transport-basics/",
+    "archive_path": "archive/2026/10/osntc-014-tcp-udp-transport-basics.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -37,11 +37,11 @@
     ]
   },
   "next": {
-    "subject": "networking",
-    "lesson_number": 14,
-    "title_format": "OSNTC.014: {topic}",
+    "subject": "python",
+    "lesson_number": 24,
+    "title_format": "OSPython.024: {topic}",
     "track_start": false,
-    "previous_lesson": "OSNTC.013"
+    "previous_lesson": "OSPython.023"
   },
   "new_track_starts": {
     "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 2, "title_format": "OSSTC.002: {topic}"},
@@ -56,5 +56,5 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 2, "title_format": "OSFEC.002: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 3, "title_format": "OSHistory.003: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. OSDCTC launched with OSDCTC.001 and its next lesson is OSDCTC.002. OSDCEC launched with OSDCEC.001 and its next lesson is OSDCEC.002. OSFOTC launched with OSFOTC.001 and its next lesson is OSFOTC.002. OSFOEC launched with OSFOEC.001 and its next lesson is OSFOEC.002. OSFTC launched with OSFTC.001 and its next lesson is OSFTC.002. OSFEC launched with OSFEC.001 and its next lesson is OSFEC.002. OSHistory.002 published and the History track next lesson is OSHistory.003. Rotation wrapped to Networking at OSNTC.014 after live WordPress verification that OSNTC.013 is the latest published technician lesson."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. OSDCTC launched with OSDCTC.001 and its next lesson is OSDCTC.002. OSDCEC launched with OSDCEC.001 and its next lesson is OSDCEC.002. OSFOTC launched with OSFOTC.001 and its next lesson is OSFOTC.002. OSFOEC launched with OSFOEC.001 and its next lesson is OSFOEC.002. OSFTC launched with OSFTC.001 and its next lesson is OSFTC.002. OSFEC launched with OSFEC.001 and its next lesson is OSFEC.002. OSHistory.002 is published and the History track next lesson is OSHistory.003. OSNTC.014 is published and the Networking technician track next lesson is OSNTC.015. Global rotation advanced to Python at OSPython.024 after live WordPress verification that OSPython.023 is the latest published Python lesson."
 }

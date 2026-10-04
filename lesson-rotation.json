@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T04:29:20Z",
+  "updated_at": "2026-10-04T04:34:56Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,82 +24,36 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "electrical_technician",
-    "lesson_number": 25,
-    "title": "OSETC.025: Temperature Switches and Thermostat Control Basics",
-    "wordpress_post_id": 20418,
-    "live_url": "https://bitcoinversus.tech/2026/10/04/osetc-025-temperature-switches-thermostat-control-basics/",
-    "archive_path": "archive/2026/10/osetc-025-temperature-switches-thermostat-control-basics.md",
+    "subject": "cpp",
+    "lesson_number": 19,
+    "title": "OSC++.019: Pure Virtual Functions and Abstract Classes Basics",
+    "wordpress_post_id": 20425,
+    "live_url": "https://bitcoinversus.tech/2026/10/04/oscpp-019-pure-virtual-functions-abstract-classes-basics/",
+    "archive_path": "archive/2026/10/oscpp-019-pure-virtual-functions-abstract-classes-basics.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert"
     ]
   },
   "next": {
-    "subject": "cpp",
-    "lesson_number": 19,
-    "title_format": "OSC++.019: {topic}",
-    "previous_lesson": {
-      "wordpress_post_id": 20249,
-      "title": "OSC++.018: Virtual Functions and Polymorphism Basics"
-    }
+    "subject": "semiconductor_technician",
+    "lesson_number": 1,
+    "title_format": "OSSTC.001: {topic}",
+    "track_start": true,
+    "previous_lesson": null
   },
   "new_track_starts": {
-    "semiconductor_technician": {
-      "acronym": "OSSTC",
-      "lesson_number": 1,
-      "title_format": "OSSTC.001: {topic}"
-    },
-    "semiconductor_engineer": {
-      "acronym": "OSSEC",
-      "lesson_number": 1,
-      "title_format": "OSSEC.001: {topic}"
-    },
-    "robotics_technician": {
-      "acronym": "OSRTC",
-      "lesson_number": 1,
-      "title_format": "OSRTC.001: {topic}"
-    },
-    "robotics_engineer": {
-      "acronym": "OSREC",
-      "lesson_number": 1,
-      "title_format": "OSREC.001: {topic}"
-    },
-    "data_center_technician": {
-      "acronym": "OSDCTC",
-      "lesson_number": 1,
-      "title_format": "OSDCTC.001: {topic}"
-    },
-    "data_center_engineer": {
-      "acronym": "OSDCEC",
-      "lesson_number": 1,
-      "title_format": "OSDCEC.001: {topic}"
-    },
-    "fiber_optics_technician": {
-      "acronym": "OSFOTC",
-      "lesson_number": 1,
-      "title_format": "OSFOTC.001: {topic}"
-    },
-    "fiber_optics_engineer": {
-      "acronym": "OSFOEC",
-      "lesson_number": 1,
-      "title_format": "OSFOEC.001: {topic}"
-    },
-    "firmware_technician": {
-      "acronym": "OSFTC",
-      "lesson_number": 1,
-      "title_format": "OSFTC.001: {topic}"
-    },
-    "firmware_engineer": {
-      "acronym": "OSFEC",
-      "lesson_number": 1,
-      "title_format": "OSFEC.001: {topic}"
-    },
-    "history_money_technology_bitcoin": {
-      "acronym": "OSHistory",
-      "lesson_number": 2,
-      "title_format": "OSHistory.002: {topic}"
-    }
+    "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 1, "title_format": "OSSTC.001: {topic}"},
+    "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 1, "title_format": "OSSEC.001: {topic}"},
+    "robotics_technician": {"acronym": "OSRTC", "lesson_number": 1, "title_format": "OSRTC.001: {topic}"},
+    "robotics_engineer": {"acronym": "OSREC", "lesson_number": 1, "title_format": "OSREC.001: {topic}"},
+    "data_center_technician": {"acronym": "OSDCTC", "lesson_number": 1, "title_format": "OSDCTC.001: {topic}"},
+    "data_center_engineer": {"acronym": "OSDCEC", "lesson_number": 1, "title_format": "OSDCEC.001: {topic}"},
+    "fiber_optics_technician": {"acronym": "OSFOTC", "lesson_number": 1, "title_format": "OSFOTC.001: {topic}"},
+    "fiber_optics_engineer": {"acronym": "OSFOEC", "lesson_number": 1, "title_format": "OSFOEC.001: {topic}"},
+    "firmware_technician": {"acronym": "OSFTC", "lesson_number": 1, "title_format": "OSFTC.001: {topic}"},
+    "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 1, "title_format": "OSFEC.001: {topic}"},
+    "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 2, "title_format": "OSHistory.002: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Per user instruction, the expanded cycle started with OSHistory.001, then advanced through Networking, Python, Linux, Windows, Electrical Engineering, Electrical Technician, and now C++. After publishing and verifying OSETC.025, rotation advanced to OSC++.019. OSHistory uses the OSHistory prefix."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. Rotation advanced to OSSTC.001 after verified OSC++.019."
 }

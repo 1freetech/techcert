@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "description": "Canonical lesson-track registry for the TechCert / BitcoinVersus curriculum.",
+  "tracks": [
+    {
+      "subject": "networking",
+      "name": "Open Source Networking Technician Certification",
+      "acronym": "OSNTC",
+      "title_format": "OSNTC.{number}: {topic}",
+      "status": "active"
+    },
+    {
+      "subject": "python",
+      "name": "Open Source Python",
+      "acronym": "OSPython",
+      "title_format": "OSPython.{number}: {topic}",
+      "status": "active"
+    },
+    {
+      "subject": "linux",
+      "name": "Linux Command Lessons",
+      "acronym": "Linux Command",
+      "title_format": "Linux Command #{number} – {topic} (Linux OS)",
+      "status": "active"
+    },
+    {
+      "subject": "windows",
+      "name": "Windows Command Lessons",
+      "acronym": "Windows Command",
+      "title_format": "Windows Command #{number} – {topic} (Windows OS)",
+      "status": "active"
+    },
+    {
+      "subject": "electrical_engineering",
+      "name": "Open Source Electrical Engineer Certification",
+      "acronym": "OSEEC",
+      "title_format": "OSEEC.{number}: {topic}",
+      "status": "active"
+    },
+    {
+      "subject": "electrical_technician",
+      "name": "Open Source Electrical Technician Certification",
+      "acronym": "OSETC",
+      "title_format": "OSETC.{number}: {topic}",
+      "status": "active"
+    },
+    {
+      "subject": "cpp",
+      "name": "Open Source C++",
+      "acronym": "OSC++",
+      "title_format": "OSC++.{number}: {topic}",
+      "status": "active"
+    },
+    {
+      "subject": "semiconductor_technician",
+      "name": "Open Source Semiconductor Technician Certification",
+      "acronym": "OSSTC",
+      "title_format": "OSSTC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active"
+    },
+    {
+      "subject": "semiconductor_engineer",
+      "name": "Open Source Semiconductor Engineer Certification",
+      "acronym": "OSSEC",
+      "title_format": "OSSEC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active"
+    },
+    {
+      "subject": "robotics_technician",
+      "name": "Open Source Robotics Technician Certification",
+      "acronym": "OSRTC",
+      "title_format": "OSRTC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active"
+    },
+    {
+      "subject": "robotics_engineer",
+      "name": "Open Source Robotics Engineer Certification",
+      "acronym": "OSREC",
+      "title_format": "OSREC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active"
+    },
+    {
+      "subject": "data_center_technician",
+      "name": "Open Source Data Center Technician Certification",
+      "acronym": "OSDCTC",
+      "title_format": "OSDCTC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active"
+    },
+    {
+      "subject": "data_center_engineer",
+      "name": "Open Source Data Center Engineer Certification",
+      "acronym": "OSDCEC",
+      "title_format": "OSDCEC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active"
+    },
+    {
+      "subject": "fiber_optics_technician",
+      "name": "Open Source Fiber Optics Technician Certification",
+      "acronym": "OSFOTC",
+      "title_format": "OSFOTC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active"
+    },
+    {
+      "subject": "fiber_optics_engineer",
+      "name": "Open Source Fiber Optics Engineer Certification",
+      "acronym": "OSFOEC",
+      "title_format": "OSFOEC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active"
+    },
+    {
+      "subject": "firmware_technician",
+      "name": "Open Source Firmware Technician Certification",
+      "acronym": "OSFTC",
+      "title_format": "OSFTC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active"
+    },
+    {
+      "subject": "firmware_engineer",
+      "name": "Open Source Firmware Engineer Certification",
+      "acronym": "OSFEC",
+      "title_format": "OSFEC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active"
+    },
+    {
+      "subject": "history_money_technology_bitcoin",
+      "name": "History of Money, Technology & Bitcoin",
+      "acronym": "OSHMTBC",
+      "title_format": "OSHMTBC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "first_lesson": {
+        "lesson_number": 1,
+        "title": "OSHMTBC.001: The Coincidence of Wants",
+        "focus": "Explain the coincidence-of-wants problem in barter and why it creates demand for more generally accepted media of exchange."
+      },
+      "status": "active"
+    }
+  ]
+}

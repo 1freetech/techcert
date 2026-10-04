@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T04:44:20Z",
+  "updated_at": "2026-10-04T04:53:24Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,27 +24,27 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "semiconductor_technician",
+    "subject": "semiconductor_engineer",
     "lesson_number": 1,
-    "title": "OSSTC.001: Semiconductor Fab Cleanroom, Contamination, and ESD Basics",
-    "wordpress_post_id": 20434,
-    "live_url": "https://bitcoinversus.tech/2026/10/04/osstc-001-semiconductor-fab-cleanroom-contamination-esd-basics/",
-    "archive_path": "archive/2026/10/osstc-001-semiconductor-fab-cleanroom-contamination-esd-basics.md",
+    "title": "OSSEC.001: Semiconductor Device Physics — Band Gaps, Doping, and PN Junctions",
+    "wordpress_post_id": 20450,
+    "live_url": "https://bitcoinversus.tech/2026/10/04/ossec-001-semiconductor-device-physics-band-gaps-doping-pn-junctions/",
+    "archive_path": "archive/2026/10/ossec-001-semiconductor-device-physics-band-gaps-doping-pn-junctions.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert"
     ]
   },
   "next": {
-    "subject": "semiconductor_engineer",
+    "subject": "robotics_technician",
     "lesson_number": 1,
-    "title_format": "OSSEC.001: {topic}",
+    "title_format": "OSRTC.001: {topic}",
     "track_start": true,
     "previous_lesson": null
   },
   "new_track_starts": {
     "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 2, "title_format": "OSSTC.002: {topic}"},
-    "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 1, "title_format": "OSSEC.001: {topic}"},
+    "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 2, "title_format": "OSSEC.002: {topic}"},
     "robotics_technician": {"acronym": "OSRTC", "lesson_number": 1, "title_format": "OSRTC.001: {topic}"},
     "robotics_engineer": {"acronym": "OSREC", "lesson_number": 1, "title_format": "OSREC.001: {topic}"},
     "data_center_technician": {"acronym": "OSDCTC", "lesson_number": 1, "title_format": "OSDCTC.001: {topic}"},
@@ -55,5 +55,5 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 1, "title_format": "OSFEC.001: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 2, "title_format": "OSHistory.002: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. Rotation advanced to OSSEC.001 after verified OSSTC.001."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. Rotation advanced to OSRTC.001 after verified OSSEC.001."
 }

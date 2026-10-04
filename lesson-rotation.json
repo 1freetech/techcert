@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T07:27:20Z",
+  "updated_at": "2026-10-04T07:51:06Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,12 +24,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "python",
-    "lesson_number": 24,
-    "title": "OSPython.024: Dataclasses Basics",
-    "wordpress_post_id": 20627,
-    "live_url": "https://bitcoinversus.tech/2026/10/04/ospython-024-dataclasses-basics/",
-    "archive_path": "archive/2026/10/ospython-024-dataclasses-basics.md",
+    "subject": "linux",
+    "lesson_number": 41,
+    "title": "Linux Command #41 – groupdel (Linux OS)",
+    "wordpress_post_id": 20640,
+    "live_url": "https://bitcoinversus.tech/2026/10/04/linux-command-41-groupdel/",
+    "archive_path": "archive/2026/10/linux-command-41-groupdel.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -37,11 +37,11 @@
     ]
   },
   "next": {
-    "subject": "linux",
-    "lesson_number": 41,
-    "title_format": "Linux Command #41 – {topic} (Linux OS)",
+    "subject": "windows",
+    "lesson_number": 31,
+    "title_format": "Windows Command #31 – {topic} (Windows OS)",
     "track_start": false,
-    "previous_lesson": "Linux Command #40 – groupadd"
+    "previous_lesson": "Windows Command #30 – net file"
   },
   "new_track_starts": {
     "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 2, "title_format": "OSSTC.002: {topic}"},
@@ -56,5 +56,5 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 2, "title_format": "OSFEC.002: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 3, "title_format": "OSHistory.003: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.024 is published and the Python track next lesson is OSPython.025. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. OSDCTC launched with OSDCTC.001 and its next lesson is OSDCTC.002. OSDCEC launched with OSDCEC.001 and its next lesson is OSDCEC.002. OSFOTC launched with OSFOTC.001 and its next lesson is OSFOTC.002. OSFOEC launched with OSFOEC.001 and its next lesson is OSFOEC.002. OSFTC launched with OSFTC.001 and its next lesson is OSFTC.002. OSFEC launched with OSFEC.001 and its next lesson is OSFEC.002. OSHistory.002 is published and the History track next lesson is OSHistory.003. OSNTC.014 is published and the Networking technician track next lesson is OSNTC.015. Global rotation advanced to Linux Command #41 after live WordPress verification that Linux Command #40 – groupadd is the latest published Linux command lesson."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.024 is published and the Python track next lesson is OSPython.025. Linux Command #41 is published and the Linux track next lesson is Linux Command #42. Windows Command #30 – net file is the latest published Windows command, so the global rotation advances to Windows Command #31. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. OSDCTC launched with OSDCTC.001 and its next lesson is OSDCTC.002. OSDCEC launched with OSDCEC.001 and its next lesson is OSDCEC.002. OSFOTC launched with OSFOTC.001 and its next lesson is OSFOTC.002. OSFOEC launched with OSFOEC.001 and its next lesson is OSFOEC.002. OSFTC launched with OSFTC.001 and its next lesson is OSFTC.002. OSFEC launched with OSFEC.001 and its next lesson is OSFEC.002. OSHistory.002 is published and the History track next lesson is OSHistory.003. OSNTC.014 is published and the Networking technician track next lesson is OSNTC.015."
 }

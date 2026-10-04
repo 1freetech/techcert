@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-03T20:14:23Z",
+  "updated_at": "2026-10-04T00:53:16Z",
   "rotation": [
     "networking",
     "python",
@@ -11,24 +11,24 @@
     "cpp"
   ],
   "last_completed": {
-    "subject": "linux",
-    "lesson_number": 39,
-    "title": "Linux Command #39 – usermod (Linux OS)",
-    "wordpress_post_id": 20288,
-    "live_url": "https://bitcoinversus.tech/2026/10/03/linux-command-39-usermod/",
-    "archive_path": "archive/2026/10/linux-command-39-usermod.md",
+    "subject": "windows",
+    "lesson_number": 29,
+    "title": "Windows Command #29 – net session (Windows OS)",
+    "wordpress_post_id": 20296,
+    "live_url": "https://bitcoinversus.tech/2026/10/03/windows-command-29-net-session/",
+    "archive_path": "archive/2026/10/windows-command-29-net-session.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert"
     ]
   },
   "next": {
-    "subject": "windows",
-    "lesson_number": 29,
-    "title_format": "Windows Command #29 – {command} (Windows OS)",
+    "subject": "electrical_engineering",
+    "lesson_number": 9,
+    "title_format": "OSEEC.009: {topic}",
     "previous_lesson": {
-      "wordpress_post_id": 20228,
-      "title": "Windows Command #28 – net view (Windows OS)"
+      "wordpress_post_id": 20139,
+      "title": "OSEEC.008: Three-Phase Power Fundamentals"
     }
   },
   "numbering_note": "Existing Python .020 numbering conflict observed; no existing posts renamed or renumbered. This state advances the established subject rotation after Linux #39."

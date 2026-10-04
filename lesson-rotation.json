@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T03:36:37Z",
+  "updated_at": "2026-10-04T03:43:56Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,24 +24,24 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "windows",
-    "lesson_number": 30,
-    "title": "Windows Command #30 – net file (Windows OS)",
-    "wordpress_post_id": 20401,
-    "live_url": "https://bitcoinversus.tech/2026/10/03/windows-command-30-net-file/",
-    "archive_path": "archive/2026/10/windows-command-30-net-file.md",
+    "subject": "electrical_engineering",
+    "lesson_number": 10,
+    "title": "OSEEC.010: Overcurrent Protection — Circuit Breakers, Fuses, Fault Current, and Selective Coordination",
+    "wordpress_post_id": 20410,
+    "live_url": "https://bitcoinversus.tech/2026/10/03/oseec-010-overcurrent-protection-circuit-breakers-fuses-fault-current-selective-coordination/",
+    "archive_path": "archive/2026/10/oseec-010-overcurrent-protection-circuit-breakers-fuses-fault-current-selective-coordination.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert"
     ]
   },
   "next": {
-    "subject": "electrical_engineering",
-    "lesson_number": 10,
-    "title_format": "OSEEC.010: {topic}",
+    "subject": "electrical_technician",
+    "lesson_number": 25,
+    "title_format": "OSETC.025: {topic}",
     "previous_lesson": {
-      "wordpress_post_id": 20312,
-      "title": "OSEEC.009: Electrical Power Distribution: Switchgear, Switchboards, Panelboards, and PDUs"
+      "wordpress_post_id": 20320,
+      "title": "OSETC.024: Pressure Switches and Pressure Control Basics"
     }
   },
   "new_track_starts": {
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.002: {topic}"
     }
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Per user instruction, the expanded cycle started with OSHistory.001, then advanced through Networking, Python, Linux, Windows, and now Electrical Engineering. After publishing and verifying Windows Command #30 – net file, rotation advanced to OSEEC.010. OSHistory uses the OSHistory prefix."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Per user instruction, the expanded cycle started with OSHistory.001, then advanced through Networking, Python, Linux, Windows, Electrical Engineering, and now Electrical Technician. After publishing and verifying OSEEC.010, rotation advanced to OSETC.025. OSHistory uses the OSHistory prefix."
 }

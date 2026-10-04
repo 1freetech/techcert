@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T03:07:51Z",
+  "updated_at": "2026-10-04T03:28:04Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,24 +24,24 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "python",
-    "lesson_number": 23,
-    "title": "OSPython.023: Type Hints and Annotations Basics",
-    "wordpress_post_id": 20393,
-    "live_url": "https://bitcoinversus.tech/2026/10/03/ospython-023-type-hints-annotations-basics/",
-    "archive_path": "archive/2026/10/ospython-023-type-hints-annotations-basics.md",
+    "subject": "linux",
+    "lesson_number": 40,
+    "title": "Linux Command #40 – groupadd (Linux OS)",
+    "wordpress_post_id": 20397,
+    "live_url": "https://bitcoinversus.tech/2026/10/03/linux-command-40-groupadd/",
+    "archive_path": "archive/2026/10/linux-command-40-groupadd.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert"
     ]
   },
   "next": {
-    "subject": "linux",
-    "lesson_number": 40,
-    "title_format": "Linux Command #40 – {topic} (Linux OS)",
+    "subject": "windows",
+    "lesson_number": 30,
+    "title_format": "Windows Command #30 – {topic} (Windows OS)",
     "previous_lesson": {
-      "wordpress_post_id": 20288,
-      "title": "Linux Command #39 – usermod (Linux OS)"
+      "wordpress_post_id": 20296,
+      "title": "Windows Command #29 – net session (Windows OS)"
     }
   },
   "new_track_starts": {
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.002: {topic}"
     }
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Per user instruction, the expanded cycle started with OSHistory.001, then advanced to Networking, then Python. After publishing and verifying OSPython.023, rotation advanced to Linux Command #40. OSHistory uses the OSHistory prefix."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Per user instruction, the expanded cycle started with OSHistory.001, then advanced to Networking, Python, Linux, and now Windows. After publishing and verifying Linux Command #40 – groupadd, rotation advanced to Windows Command #30. OSHistory uses the OSHistory prefix."
 }

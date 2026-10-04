@@ -134,12 +134,12 @@
     {
       "subject": "history_money_technology_bitcoin",
       "name": "History of Money, Technology & Bitcoin",
-      "acronym": "OSHMTBC",
-      "title_format": "OSHMTBC.{number}: {topic}",
+      "acronym": "OSHistory",
+      "title_format": "OSHistory.{number}: {topic}",
       "starting_lesson_number": 1,
       "first_lesson": {
         "lesson_number": 1,
-        "title": "OSHMTBC.001: The Coincidence of Wants",
+        "title": "OSHistory.001: The Coincidence of Wants",
         "focus": "Explain the coincidence-of-wants problem in barter and why it creates demand for more generally accepted media of exchange."
       },
       "status": "active"

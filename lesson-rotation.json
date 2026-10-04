@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T06:16:55Z",
+  "updated_at": "2026-10-04T06:26:32Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,12 +24,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "firmware_technician",
+    "subject": "firmware_engineer",
     "lesson_number": 1,
-    "title": "OSFTC.001: Firmware Images, Safe Flashing, Bootloaders, and Recovery Basics",
-    "wordpress_post_id": 20534,
-    "live_url": "https://bitcoinversus.tech/2026/10/04/osftc-001-firmware-images-safe-flashing-bootloaders-recovery-basics/",
-    "archive_path": "archive/2026/10/osftc-001-firmware-images-safe-flashing-bootloaders-recovery-basics.md",
+    "title": "OSFEC.001: Microcontroller Architecture — Memory Maps, Registers, and Interrupts",
+    "wordpress_post_id": 20545,
+    "live_url": "https://bitcoinversus.tech/2026/10/04/osfec-001-microcontroller-architecture-memory-maps-registers-interrupts/",
+    "archive_path": "archive/2026/10/osfec-001-microcontroller-architecture-memory-maps-registers-interrupts.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -37,11 +37,11 @@
     ]
   },
   "next": {
-    "subject": "firmware_engineer",
-    "lesson_number": 1,
-    "title_format": "OSFEC.001: {topic}",
-    "track_start": true,
-    "previous_lesson": null
+    "subject": "history_money_technology_bitcoin",
+    "lesson_number": 2,
+    "title_format": "OSHistory.002: {topic}",
+    "track_start": false,
+    "previous_lesson": "OSHistory.001"
   },
   "new_track_starts": {
     "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 2, "title_format": "OSSTC.002: {topic}"},
@@ -53,8 +53,8 @@
     "fiber_optics_technician": {"acronym": "OSFOTC", "lesson_number": 2, "title_format": "OSFOTC.002: {topic}"},
     "fiber_optics_engineer": {"acronym": "OSFOEC", "lesson_number": 2, "title_format": "OSFOEC.002: {topic}"},
     "firmware_technician": {"acronym": "OSFTC", "lesson_number": 2, "title_format": "OSFTC.002: {topic}"},
-    "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 1, "title_format": "OSFEC.001: {topic}"},
+    "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 2, "title_format": "OSFEC.002: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 2, "title_format": "OSHistory.002: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. OSDCTC launched with OSDCTC.001 and its next lesson is OSDCTC.002. OSDCEC launched with OSDCEC.001 and its next lesson is OSDCEC.002. OSFOTC launched with OSFOTC.001 and its next lesson is OSFOTC.002. OSFOEC launched with OSFOEC.001 and its next lesson is OSFOEC.002. OSFTC launched with OSFTC.001 and its next lesson is OSFTC.002. Rotation advanced to OSFEC.001 after verified OSFTC.001."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. OSDCTC launched with OSDCTC.001 and its next lesson is OSDCTC.002. OSDCEC launched with OSDCEC.001 and its next lesson is OSDCEC.002. OSFOTC launched with OSFOTC.001 and its next lesson is OSFOTC.002. OSFOEC launched with OSFOEC.001 and its next lesson is OSFOEC.002. OSFTC launched with OSFTC.001 and its next lesson is OSFTC.002. OSFEC launched with OSFEC.001 and its next lesson is OSFEC.002. Rotation advanced to OSHistory.002 after verified OSFEC.001."
 }

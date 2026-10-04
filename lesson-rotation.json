@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T05:49:03Z",
+  "updated_at": "2026-10-04T05:59:11Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,12 +24,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "fiber_optics_technician",
+    "subject": "fiber_optics_engineer",
     "lesson_number": 1,
-    "title": "OSFOTC.001: Fiber Optic Safety, Handling, Inspection, and Cleaning Basics",
-    "wordpress_post_id": 20511,
-    "live_url": "https://bitcoinversus.tech/2026/10/04/osfotc-001-fiber-optic-safety-handling-inspection-cleaning-basics/",
-    "archive_path": "archive/2026/10/osfotc-001-fiber-optic-safety-handling-inspection-cleaning-basics.md",
+    "title": "OSFOEC.001: Optical Link Budget Engineering — dB, Power Budget, Loss Budget, and Design Margin",
+    "wordpress_post_id": 20520,
+    "live_url": "https://bitcoinversus.tech/2026/10/04/osfoec-001-optical-link-budget-engineering-db-power-loss-design-margin/",
+    "archive_path": "archive/2026/10/osfoec-001-optical-link-budget-engineering-db-power-loss-design-margin.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -37,9 +37,9 @@
     ]
   },
   "next": {
-    "subject": "fiber_optics_engineer",
+    "subject": "firmware_technician",
     "lesson_number": 1,
-    "title_format": "OSFOEC.001: {topic}",
+    "title_format": "OSFTC.001: {topic}",
     "track_start": true,
     "previous_lesson": null
   },
@@ -51,10 +51,10 @@
     "data_center_technician": {"acronym": "OSDCTC", "lesson_number": 2, "title_format": "OSDCTC.002: {topic}"},
     "data_center_engineer": {"acronym": "OSDCEC", "lesson_number": 2, "title_format": "OSDCEC.002: {topic}"},
     "fiber_optics_technician": {"acronym": "OSFOTC", "lesson_number": 2, "title_format": "OSFOTC.002: {topic}"},
-    "fiber_optics_engineer": {"acronym": "OSFOEC", "lesson_number": 1, "title_format": "OSFOEC.001: {topic}"},
+    "fiber_optics_engineer": {"acronym": "OSFOEC", "lesson_number": 2, "title_format": "OSFOEC.002: {topic}"},
     "firmware_technician": {"acronym": "OSFTC", "lesson_number": 1, "title_format": "OSFTC.001: {topic}"},
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 1, "title_format": "OSFEC.001: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 2, "title_format": "OSHistory.002: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. OSDCTC launched with OSDCTC.001 and its next lesson is OSDCTC.002. OSDCEC launched with OSDCEC.001 and its next lesson is OSDCEC.002. OSFOTC launched with OSFOTC.001 and its next lesson is OSFOTC.002. Rotation advanced to OSFOEC.001 after verified OSFOTC.001."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSSTC launched with OSSTC.001 and its next lesson is OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. OSDCTC launched with OSDCTC.001 and its next lesson is OSDCTC.002. OSDCEC launched with OSDCEC.001 and its next lesson is OSDCEC.002. OSFOTC launched with OSFOTC.001 and its next lesson is OSFOTC.002. OSFOEC launched with OSFOEC.001 and its next lesson is OSFOEC.002. Rotation advanced to OSFTC.001 after verified OSFOEC.001."
 }

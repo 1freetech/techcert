@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-10-04T00:53:16Z",
+  "updated_at": "2026-10-04T01:24:56Z",
   "rotation": [
     "networking",
     "python",
@@ -11,25 +11,25 @@
     "cpp"
   ],
   "last_completed": {
-    "subject": "windows",
-    "lesson_number": 29,
-    "title": "Windows Command #29 – net session (Windows OS)",
-    "wordpress_post_id": 20296,
-    "live_url": "https://bitcoinversus.tech/2026/10/03/windows-command-29-net-session/",
-    "archive_path": "archive/2026/10/windows-command-29-net-session.md",
+    "subject": "electrical_engineering",
+    "lesson_number": 9,
+    "title": "OSEEC.009: Electrical Power Distribution: Switchgear, Switchboards, Panelboards, and PDUs",
+    "wordpress_post_id": 20312,
+    "live_url": "https://bitcoinversus.tech/2026/10/03/oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus/",
+    "archive_path": "archive/2026/10/oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert"
     ]
   },
   "next": {
-    "subject": "electrical_engineering",
-    "lesson_number": 9,
-    "title_format": "OSEEC.009: {topic}",
+    "subject": "electrical_technician",
+    "lesson_number": 24,
+    "title_format": "OSETC.024: {topic}",
     "previous_lesson": {
-      "wordpress_post_id": 20139,
-      "title": "OSEEC.008: Three-Phase Power Fundamentals"
+      "wordpress_post_id": 20234,
+      "title": "OSETC.023: Float Switches and Level Control Basics"
     }
   },
-  "numbering_note": "Existing Python .020 numbering conflict observed; no existing posts renamed or renumbered. This state advances the established subject rotation after Linux #39."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Rotation advanced after OSEEC.009."
 }

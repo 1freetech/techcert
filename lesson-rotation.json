@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-04T02:15:59Z",
+  "updated_at": "2026-10-04T02:48:42Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,24 +24,24 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "history_money_technology_bitcoin",
-    "lesson_number": 1,
-    "title": "OSHistory.001: The Coincidence of Wants",
-    "wordpress_post_id": 20338,
-    "live_url": "https://bitcoinversus.tech/2026/10/03/oshistory-001-the-coincidence-of-wants/",
-    "archive_path": "archive/2026/10/oshistory-001-the-coincidence-of-wants.md",
+    "subject": "networking",
+    "lesson_number": 13,
+    "title": "OSNTC.013: Router Basics",
+    "wordpress_post_id": 20370,
+    "live_url": "https://bitcoinversus.tech/2026/10/03/osntc-013-router-basics/",
+    "archive_path": "archive/2026/10/osntc-013-router-basics.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert"
     ]
   },
   "next": {
-    "subject": "networking",
-    "lesson_number": 13,
-    "title_format": "OSNTC.013: {topic}",
+    "subject": "python",
+    "lesson_number": 23,
+    "title_format": "OSPython.023: {topic}",
     "previous_lesson": {
-      "wordpress_post_id": 20263,
-      "title": "OSNTC.012: Network Switch Basics"
+      "wordpress_post_id": 20280,
+      "title": "OSPython.022: Context Managers and the with Statement Basics"
     }
   },
   "new_track_starts": {
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.002: {topic}"
     }
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Per user instruction, the expanded cycle started with OSHistory.001. After publishing and verifying OSHistory.001, rotation advanced to Networking. OSHistory uses the OSHistory prefix."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved; no existing posts were renamed or renumbered. Per user instruction, the expanded cycle started with OSHistory.001, then advanced to Networking. After publishing and verifying OSNTC.013, rotation advanced to OSPython.023. OSHistory uses the OSHistory prefix."
 }

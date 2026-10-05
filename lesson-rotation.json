@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-05T16:56:00Z",
+  "updated_at": "2026-10-05T17:31:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "cpp",
-    "lesson_number": 21,
-    "title": "OSC++.021: Smart Pointers — unique_ptr, shared_ptr, weak_ptr, and Ownership",
-    "wordpress_post_id": 20978,
-    "live_url": "https://bitcoinversus.tech/2026/10/05/oscpp-021-smart-pointers-unique-ptr-shared-ptr-weak-ptr-ownership/",
-    "archive_path": "archive/2026/10/oscpp-021-smart-pointers-unique-ptr-shared-ptr-weak-ptr-ownership.md",
+    "subject": "semiconductor_technician",
+    "lesson_number": 3,
+    "title": "OSSTC.003: Semiconductor Vacuum Systems — Roughing Pumps, Turbomolecular Pumps, Gauges, and Leak Checks",
+    "wordpress_post_id": 20980,
+    "live_url": "https://bitcoinversus.tech/2026/10/05/osstc-003-semiconductor-vacuum-systems-roughing-pumps-turbomolecular-pumps-gauges-leak-checks/",
+    "archive_path": "archive/2026/10/osstc-003-semiconductor-vacuum-systems-roughing-pumps-turbomolecular-pumps-gauges-leak-checks.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,15 +38,15 @@
     ]
   },
   "next": {
-    "subject": "semiconductor_technician",
+    "subject": "semiconductor_engineer",
     "lesson_number": 3,
-    "title_format": "OSSTC.003: {topic}",
+    "title_format": "OSSEC.003: {topic}",
     "track_start": false,
-    "previous_lesson": "OSSTC.002"
+    "previous_lesson": "OSSEC.002"
   },
   "new_track_starts": {
     "information_technology": {"acronym": "OSITC", "lesson_number": 1, "title_format": "OSITC.001: {topic}"},
-    "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 3, "title_format": "OSSTC.003: {topic}"},
+    "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 4, "title_format": "OSSTC.004: {topic}"},
     "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 3, "title_format": "OSSEC.003: {topic}"},
     "robotics_technician": {"acronym": "OSRTC", "lesson_number": 3, "title_format": "OSRTC.003: {topic}"},
     "robotics_engineer": {"acronym": "OSREC", "lesson_number": 3, "title_format": "OSREC.003: {topic}"},
@@ -58,6 +58,6 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 3, "title_format": "OSFEC.003: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 4, "title_format": "OSHistory.004: {topic}"}
   },
-  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.002, OSSEC.002, OSRTC.002, OSREC.002, OSDCTC.002, OSDCEC.002, OSFOTC.002, OSFOEC.002, OSFTC.002, and OSFEC.002 are published; each corresponding track next lesson is .003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSSTC.003 after verified OSC++.021.",
+  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.002 is published; next OSSEC.003. OSRTC.002, OSREC.002, OSDCTC.002, OSDCEC.002, OSFOTC.002, OSFOEC.002, OSFTC.002, and OSFEC.002 are published; each corresponding track next lesson is .003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSSEC.003 after verified OSSTC.003.",
   "verification_hold": null
 }

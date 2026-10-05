@@ -3,7 +3,26 @@
   "updated_at": "2026-10-05T05:16:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
-  "rotation": ["networking","python","linux","windows","electrical_engineering","electrical_technician","cpp","semiconductor_technician","semiconductor_engineer","robotics_technician","robotics_engineer","data_center_technician","data_center_engineer","fiber_optics_technician","fiber_optics_engineer","firmware_technician","firmware_engineer","history_money_technology_bitcoin"],
+  "rotation": [
+    "networking",
+    "python",
+    "linux",
+    "windows",
+    "electrical_engineering",
+    "electrical_technician",
+    "cpp",
+    "semiconductor_technician",
+    "semiconductor_engineer",
+    "robotics_technician",
+    "robotics_engineer",
+    "data_center_technician",
+    "data_center_engineer",
+    "fiber_optics_technician",
+    "fiber_optics_engineer",
+    "firmware_technician",
+    "firmware_engineer",
+    "history_money_technology_bitcoin"
+  ],
   "last_completed": {
     "subject": "linux",
     "lesson_number": 42,
@@ -11,7 +30,11 @@
     "wordpress_post_id": 20910,
     "live_url": "https://bitcoinversus.tech/2026/10/05/linux-command-42-groupmod/",
     "archive_path": "archive/2026/10/linux-command-42-groupmod.md",
-    "verified_repositories": ["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]
+    "verified_repositories": [
+      "1freetech/Bitcoinversus.tech",
+      "1freetech/techcert",
+      "1freetech/opencert.tech"
+    ]
   },
   "next": {
     "subject": "windows",
@@ -21,17 +44,67 @@
     "previous_lesson": "Windows Command #31"
   },
   "new_track_starts": {
-    "semiconductor_technician": {"acronym":"OSSTC","lesson_number":3,"title_format":"OSSTC.003: {topic}"},
-    "semiconductor_engineer": {"acronym":"OSSEC","lesson_number":3,"title_format":"OSSEC.003: {topic}"},
-    "robotics_technician": {"acronym":"OSRTC","lesson_number":3,"title_format":"OSRTC.003: {topic}"},
-    "robotics_engineer": {"acronym":"OSREC","lesson_number":3,"title_format":"OSREC.003: {topic}"},
-    "data_center_technician": {"acronym":"OSDCTC","lesson_number":3,"title_format":"OSDCTC.003: {topic}"},
-    "data_center_engineer": {"acronym":"OSDCEC","lesson_number":3,"title_format":"OSDCEC.003: {topic}"},
-    "fiber_optics_technician": {"acronym":"OSFOTC","lesson_number":3,"title_format":"OSFOTC.003: {topic}"},
-    "fiber_optics_engineer": {"acronym":"OSFOEC","lesson_number":3,"title_format":"OSFOEC.003: {topic}"},
-    "firmware_technician": {"acronym":"OSFTC","lesson_number":3,"title_format":"OSFTC.003: {topic}"},
-    "firmware_engineer": {"acronym":"OSFEC","lesson_number":3,"title_format":"OSFEC.003: {topic}"},
-    "history_money_technology_bitcoin": {"acronym":"OSHistory","lesson_number":4,"title_format":"OSHistory.004: {topic}"}
+    "semiconductor_technician": {
+      "acronym": "OSSTC",
+      "lesson_number": 3,
+      "title_format": "OSSTC.003: {topic}"
+    },
+    "semiconductor_engineer": {
+      "acronym": "OSSEC",
+      "lesson_number": 3,
+      "title_format": "OSSEC.003: {topic}"
+    },
+    "robotics_technician": {
+      "acronym": "OSRTC",
+      "lesson_number": 3,
+      "title_format": "OSRTC.003: {topic}"
+    },
+    "robotics_engineer": {
+      "acronym": "OSREC",
+      "lesson_number": 3,
+      "title_format": "OSREC.003: {topic}"
+    },
+    "data_center_technician": {
+      "acronym": "OSDCTC",
+      "lesson_number": 3,
+      "title_format": "OSDCTC.003: {topic}"
+    },
+    "data_center_engineer": {
+      "acronym": "OSDCEC",
+      "lesson_number": 3,
+      "title_format": "OSDCEC.003: {topic}"
+    },
+    "fiber_optics_technician": {
+      "acronym": "OSFOTC",
+      "lesson_number": 3,
+      "title_format": "OSFOTC.003: {topic}"
+    },
+    "fiber_optics_engineer": {
+      "acronym": "OSFOEC",
+      "lesson_number": 3,
+      "title_format": "OSFOEC.003: {topic}"
+    },
+    "firmware_technician": {
+      "acronym": "OSFTC",
+      "lesson_number": 3,
+      "title_format": "OSFTC.003: {topic}"
+    },
+    "firmware_engineer": {
+      "acronym": "OSFEC",
+      "lesson_number": 3,
+      "title_format": "OSFEC.003: {topic}"
+    },
+    "history_money_technology_bitcoin": {
+      "acronym": "OSHistory",
+      "lesson_number": 4,
+      "title_format": "OSHistory.004: {topic}"
+    }
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.025 is published and the Python track next lesson is OSPython.026. Linux Command #42 – groupmod is published and the Linux track next lesson is Linux Command #43. Windows Command #31 – net config is published and the Windows track next lesson is Windows Command #32. OSEEC.011 is published and the Electrical Engineering track next lesson is OSEEC.012. OSETC.026 is published and the Electrical Technician track next lesson is OSETC.027. OSC++.020 is published and the C++ track next lesson is OSC++.021. OSSTC.002 is published and the Semiconductor Technician track next lesson is OSSTC.003. OSSEC.002 is published and the Semiconductor Engineer track next lesson is OSSEC.003. OSRTC.002 is published and the Robotics Technician track next lesson is OSRTC.003. OSREC.002 is published and the Robotics Engineer track next lesson is OSREC.003. OSDCTC.002 is published and the Data Center Technician track next lesson is OSDCTC.003. OSDCEC.002 is published and the Data Center Engineer track next lesson is OSDCEC.003. OSFOTC.002 is published and the Fiber Optics Technician track next lesson is OSFOTC.003. OSFOEC.002 is published and the Fiber Optics Engineer track next lesson is OSFOEC.003. OSFTC.002 is published and the Firmware Technician track next lesson is OSFTC.003. OSFEC.002 is published and the Firmware Engineer track next lesson is OSFEC.003. OSHistory.003 is published and the History track next lesson is OSHistory.004. OSNTC.015 is published and the Networking technician track next lesson is OSNTC.016. The global rotation now advances to Windows Command #32."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.025 is published and the Python track next lesson is OSPython.026. Linux Command #42 – groupmod is published and the Linux track next lesson is Linux Command #43. Windows Command #31 – net config is published and the Windows track next lesson is Windows Command #32. OSEEC.011 is published and the Electrical Engineering track next lesson is OSEEC.012. OSETC.026 is published and the Electrical Technician track next lesson is OSETC.027. OSC++.020 is published and the C++ track next lesson is OSC++.021. OSSTC.002 is published and the Semiconductor Technician track next lesson is OSSTC.003. OSSEC.002 is published and the Semiconductor Engineer track next lesson is OSSEC.003. OSRTC.002 is published and the Robotics Technician track next lesson is OSRTC.003. OSREC.002 is published and the Robotics Engineer track next lesson is OSREC.003. OSDCTC.002 is published and the Data Center Technician track next lesson is OSDCTC.003. OSDCEC.002 is published and the Data Center Engineer track next lesson is OSDCEC.003. OSFOTC.002 is published and the Fiber Optics Technician track next lesson is OSFOTC.003. OSFOEC.002 is published and the Fiber Optics Engineer track next lesson is OSFOEC.003. OSFTC.002 is published and the Firmware Technician track next lesson is OSFTC.003. OSFEC.002 is published and the Firmware Engineer track next lesson is OSFEC.003. OSHistory.003 is published and the History track next lesson is OSHistory.004. OSNTC.015 is published and the Networking technician track next lesson is OSNTC.016. The global rotation now advances to Windows Command #32.",
+  "verification_hold": {
+    "wordpress_post_id": 20910,
+    "title": "Linux Command #42 – groupmod (Linux OS)",
+    "reason": "YouTube playback has not been verified; a private embed was replaced and exact corrected Gutenberg was fetched back from all three archives.",
+    "advance_allowed": false
+  }
 }

@@ -1,6 +1,6 @@
 # linux/commands
 
-41 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+42 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -45,3 +45,4 @@
 | 39 | [Linux Command #39 – usermod (Linux OS)](./039-linux-command-39-usermod-20288.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/linux-command-39-usermod/) |
 | 40 | [Linux Command #40 – groupadd (Linux OS)](./040-linux-command-40-groupadd-20397.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/linux-command-40-groupadd/) |
 | 41 | [Linux Command #41 – groupdel (Linux OS)](./041-linux-command-41-groupdel-20640.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/linux-command-41-groupdel/) |
+| 42 | [Linux Command #42 – groupmod (Linux OS)](./042-linux-command-42-groupmod-20910.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/linux-command-42-groupmod/) |

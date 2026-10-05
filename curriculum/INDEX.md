@@ -2,7 +2,7 @@
 
 OpenCert is the free curriculum. TechCert is the backup repository. Both contain the same published lesson source archive.
 
-**285 published lessons, command guides, tutorials and training modules**, organized into 31 track folders. Exact saved Gutenberg bodies accompany each Markdown lesson. Existing historical files are retained. Historical BitcoinVersus archives are preserved under `source-archive/bitcoinversus/`.
+**286 published lessons, command guides, tutorials and training modules**, organized into 31 track folders. Exact saved Gutenberg bodies accompany each Markdown lesson. Existing historical files are retained. Historical BitcoinVersus archives are preserved under `source-archive/bitcoinversus/`.
 
 | Track | Lessons | Index |
 | --- | ---: | --- |
@@ -21,7 +21,7 @@ OpenCert is the free curriculum. TechCert is the backup repository. Both contain
 | firmware/technician | 2 | [Browse](lessons/firmware/technician/README.md) |
 | history-money-technology-bitcoin | 3 | [Browse](lessons/history-money-technology-bitcoin/README.md) |
 | javascript | 1 | [Browse](lessons/javascript/README.md) |
-| linux/commands | 41 | [Browse](lessons/linux/commands/README.md) |
+| linux/commands | 42 | [Browse](lessons/linux/commands/README.md) |
 | linux/filesystem | 14 | [Browse](lessons/linux/filesystem/README.md) |
 | linux/tutorials | 7 | [Browse](lessons/linux/tutorials/README.md) |
 | networking/engineer | 2 | [Browse](lessons/networking/engineer/README.md) |

@@ -6,7 +6,7 @@
     "1freetech/techcert": "backup"
   },
   "source_post_inventory": 2627,
-  "published_lessons": 285,
+  "published_lessons": 286,
   "tracks": {
     "computer-security": 2,
     "cpp": 20,
@@ -23,7 +23,7 @@
     "firmware/technician": 2,
     "history-money-technology-bitcoin": 3,
     "javascript": 1,
-    "linux/commands": 41,
+    "linux/commands": 42,
     "linux/filesystem": 14,
     "linux/tutorials": 7,
     "networking/engineer": 2,
@@ -3796,6 +3796,18 @@
       "featured_media": 6194,
       "lesson_path": "curriculum/lessons/windows/tutorials/how-to-ping-a-switch-6190.md",
       "raw_path": "curriculum/lessons/windows/tutorials/how-to-ping-a-switch-6190.gutenberg.html"
+    },
+    {
+      "id": 20910,
+      "title": "Linux Command #42 – groupmod (Linux OS)",
+      "slug": "linux-command-42-groupmod",
+      "track": "linux/commands",
+      "lesson_number": 42,
+      "live_url": "https://bitcoinversus.tech/2026/10/05/linux-command-42-groupmod/",
+      "published": "2026-10-05T01:15:17",
+      "featured_media": 20907,
+      "lesson_path": "curriculum/lessons/linux/commands/042-linux-command-42-groupmod-20910.md",
+      "raw_path": "curriculum/lessons/linux/commands/042-linux-command-42-groupmod-20910.gutenberg.html"
     }
   ]
 }

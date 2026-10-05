@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "Canonical lesson-track registry for the TechCert / BitcoinVersus curriculum.",
   "tracks": [
-    {"subject":"networking","name":"Open Source Networking Technician Certification","acronym":"OSNTC","title_format":"OSNTC.{number}: {topic}","status":"active"},
+    {"subject":"networking","name":"Open Source Networking Technician Certification","acronym":"OSNTC","title_format":"OSNTC.{number}: {topic}","status":"active","latest_lesson":{"lesson_number":15,"title":"OSNTC.015: NAT and PAT Basics — Private Addresses, Port Translation, State Tables, and Troubleshooting","wordpress_post_id":20887,"live_url":"https://bitcoinversus.tech/2026/10/05/osntc-015-nat-pat-basics-private-addresses-port-translation-state-tables-troubleshooting/","archive_path":"archive/2026/10/osntc-015-nat-pat-basics-private-addresses-port-translation-state-tables-troubleshooting.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":16},
     {"subject":"python","name":"Open Source Python","acronym":"OSPython","title_format":"OSPython.{number}: {topic}","status":"active"},
     {"subject":"linux","name":"Linux Command Lessons","acronym":"Linux Command","title_format":"Linux Command #{number} – {topic} (Linux OS)","status":"active"},
     {"subject":"windows","name":"Windows Command Lessons","acronym":"Windows Command","title_format":"Windows Command #{number} – {topic} (Windows OS)","status":"active"},

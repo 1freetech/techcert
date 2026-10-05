@@ -1,60 +1,37 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-05T02:48:09Z",
+  "updated_at": "2026-10-05T03:00:12Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
-  "rotation": [
-    "networking",
-    "python",
-    "linux",
-    "windows",
-    "electrical_engineering",
-    "electrical_technician",
-    "cpp",
-    "semiconductor_technician",
-    "semiconductor_engineer",
-    "robotics_technician",
-    "robotics_engineer",
-    "data_center_technician",
-    "data_center_engineer",
-    "fiber_optics_technician",
-    "fiber_optics_engineer",
-    "firmware_technician",
-    "firmware_engineer",
-    "history_money_technology_bitcoin"
-  ],
+  "rotation": ["networking","python","linux","windows","electrical_engineering","electrical_technician","cpp","semiconductor_technician","semiconductor_engineer","robotics_technician","robotics_engineer","data_center_technician","data_center_engineer","fiber_optics_technician","fiber_optics_engineer","firmware_technician","firmware_engineer","history_money_technology_bitcoin"],
   "last_completed": {
-    "subject": "data_center_engineer",
-    "lesson_number": 2,
-    "title": "OSDCEC.002: Data Center Capacity Planning — IT Load, PUE, Rack Density, and Growth Headroom",
-    "wordpress_post_id": 20820,
-    "live_url": "https://bitcoinversus.tech/2026/10/04/osdcec-002-data-center-capacity-planning-it-load-pue-rack-density-growth-headroom/",
-    "archive_path": "archive/2026/10/osdcec-002-data-center-capacity-planning-it-load-pue-rack-density-growth-headroom.md",
-    "verified_repositories": [
-      "1freetech/Bitcoinversus.tech",
-      "1freetech/techcert",
-      "1freetech/opencert.tech"
-    ]
-  },
-  "next": {
     "subject": "fiber_optics_technician",
     "lesson_number": 2,
-    "title_format": "OSFOTC.002: {topic}",
+    "title": "OSFOTC.002: Optical Power Meter Basics — dBm, Wavelength, Reference Levels, and Receive Power",
+    "wordpress_post_id": 20825,
+    "live_url": "https://bitcoinversus.tech/2026/10/04/osfotc-002-optical-power-meter-basics-dbm-wavelength-reference-levels-receive-power/",
+    "archive_path": "archive/2026/10/osfotc-002-optical-power-meter-basics-dbm-wavelength-reference-levels-receive-power.md",
+    "verified_repositories": ["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]
+  },
+  "next": {
+    "subject": "fiber_optics_engineer",
+    "lesson_number": 2,
+    "title_format": "OSFOEC.002: {topic}",
     "track_start": false,
-    "previous_lesson": "OSFOTC.001"
+    "previous_lesson": "OSFOEC.001"
   },
   "new_track_starts": {
-    "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 3, "title_format": "OSSTC.003: {topic}"},
-    "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 3, "title_format": "OSSEC.003: {topic}"},
-    "robotics_technician": {"acronym": "OSRTC", "lesson_number": 3, "title_format": "OSRTC.003: {topic}"},
-    "robotics_engineer": {"acronym": "OSREC", "lesson_number": 3, "title_format": "OSREC.003: {topic}"},
-    "data_center_technician": {"acronym": "OSDCTC", "lesson_number": 3, "title_format": "OSDCTC.003: {topic}"},
-    "data_center_engineer": {"acronym": "OSDCEC", "lesson_number": 3, "title_format": "OSDCEC.003: {topic}"},
-    "fiber_optics_technician": {"acronym": "OSFOTC", "lesson_number": 2, "title_format": "OSFOTC.002: {topic}"},
-    "fiber_optics_engineer": {"acronym": "OSFOEC", "lesson_number": 2, "title_format": "OSFOEC.002: {topic}"},
-    "firmware_technician": {"acronym": "OSFTC", "lesson_number": 2, "title_format": "OSFTC.002: {topic}"},
-    "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 2, "title_format": "OSFEC.002: {topic}"},
-    "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 3, "title_format": "OSHistory.003: {topic}"}
+    "semiconductor_technician": {"acronym":"OSSTC","lesson_number":3,"title_format":"OSSTC.003: {topic}"},
+    "semiconductor_engineer": {"acronym":"OSSEC","lesson_number":3,"title_format":"OSSEC.003: {topic}"},
+    "robotics_technician": {"acronym":"OSRTC","lesson_number":3,"title_format":"OSRTC.003: {topic}"},
+    "robotics_engineer": {"acronym":"OSREC","lesson_number":3,"title_format":"OSREC.003: {topic}"},
+    "data_center_technician": {"acronym":"OSDCTC","lesson_number":3,"title_format":"OSDCTC.003: {topic}"},
+    "data_center_engineer": {"acronym":"OSDCEC","lesson_number":3,"title_format":"OSDCEC.003: {topic}"},
+    "fiber_optics_technician": {"acronym":"OSFOTC","lesson_number":3,"title_format":"OSFOTC.003: {topic}"},
+    "fiber_optics_engineer": {"acronym":"OSFOEC","lesson_number":2,"title_format":"OSFOEC.002: {topic}"},
+    "firmware_technician": {"acronym":"OSFTC","lesson_number":2,"title_format":"OSFTC.002: {topic}"},
+    "firmware_engineer": {"acronym":"OSFEC","lesson_number":2,"title_format":"OSFEC.002: {topic}"},
+    "history_money_technology_bitcoin": {"acronym":"OSHistory","lesson_number":3,"title_format":"OSHistory.003: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.024 is published and the Python track next lesson is OSPython.025. Linux Command #41 is published and the Linux track next lesson is Linux Command #42. Windows Command #31 – net config is published and the Windows track next lesson is Windows Command #32. OSEEC.011 is published and the Electrical Engineering track next lesson is OSEEC.012. OSETC.026 is published and the Electrical Technician track next lesson is OSETC.027. OSC++.020 is published and the C++ track next lesson is OSC++.021. OSSTC.002 is published and the Semiconductor Technician track next lesson is OSSTC.003. OSSEC.002 is published and the Semiconductor Engineer track next lesson is OSSEC.003. OSRTC.002 is published and the Robotics Technician track next lesson is OSRTC.003. OSREC.002 is published and the Robotics Engineer track next lesson is OSREC.003. OSDCTC.002 is published and the Data Center Technician track next lesson is OSDCTC.003. OSDCEC.002 is published and the Data Center Engineer track next lesson is OSDCEC.003. The global rotation now advances to OSFOTC.002. OSFOEC launched with OSFOEC.001 and its next lesson is OSFOEC.002. OSFTC launched with OSFTC.001 and its next lesson is OSFTC.002. OSFEC launched with OSFEC.001 and its next lesson is OSFEC.002. OSHistory.002 is published and the History track next lesson is OSHistory.003. OSNTC.014 is published and the Networking technician track next lesson is OSNTC.015."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.024 is published and the Python track next lesson is OSPython.025. Linux Command #41 is published and the Linux track next lesson is Linux Command #42. Windows Command #31 – net config is published and the Windows track next lesson is Windows Command #32. OSEEC.011 is published and the Electrical Engineering track next lesson is OSEEC.012. OSETC.026 is published and the Electrical Technician track next lesson is OSETC.027. OSC++.020 is published and the C++ track next lesson is OSC++.021. OSSTC.002 is published and the Semiconductor Technician track next lesson is OSSTC.003. OSSEC.002 is published and the Semiconductor Engineer track next lesson is OSSEC.003. OSRTC.002 is published and the Robotics Technician track next lesson is OSRTC.003. OSREC.002 is published and the Robotics Engineer track next lesson is OSREC.003. OSDCTC.002 is published and the Data Center Technician track next lesson is OSDCTC.003. OSDCEC.002 is published and the Data Center Engineer track next lesson is OSDCEC.003. OSFOTC.002 is published and the Fiber Optics Technician track next lesson is OSFOTC.003. The global rotation now advances to OSFOEC.002. OSFOEC.001 is published and the Fiber Optics Engineer track next lesson is OSFOEC.002. OSFTC launched with OSFTC.001 and its next lesson is OSFTC.002. OSFEC launched with OSFEC.001 and its next lesson is OSFEC.002. OSHistory.002 is published and the History track next lesson is OSHistory.003. OSNTC.014 is published and the Networking technician track next lesson is OSNTC.015."
 }

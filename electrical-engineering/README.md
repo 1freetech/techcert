@@ -3,7 +3,7 @@
 **Track:** Electrical Engineering  
 **Acronym:** OSEEC  
 **Status:** active  
-**Current next lesson:** `OSEEC.012`
+**Current next lesson:** `OSEEC.013`
 
 The Electrical Engineering track progresses from circuit fundamentals into AC systems, transformers, three-phase power, distribution, protection, grounding, system studies, controls, and power-system engineering.
 
@@ -14,6 +14,7 @@ The Electrical Engineering track progresses from circuit fundamentals into AC sy
 - `OSEEC.009: Electrical Power Distribution: Switchgear, Switchboards, Panelboards, and PDUs`
 - `OSEEC.010: Overcurrent Protection — Circuit Breakers, Fuses, Fault Current, and Selective Coordination`
 - [OSEEC.011: Grounding, Bonding, and Fault-Return Paths](oseec-011-grounding-bonding-fault-return-paths.md) — WordPress post 20720.
+- [OSEEC.012: Short-Circuit and Fault Analysis — Thevenin Equivalents, Symmetrical Components, and Fault Current](../archive/2026/10/oseec-012-short-circuit-fault-analysis-thevenin-equivalents-symmetrical-components-fault-current.md) — WordPress post 20960.
 
 ## Publishing rules
 
@@ -25,4 +26,4 @@ The Electrical Engineering track progresses from circuit fundamentals into AC sy
 - Link earlier electrical lessons when they materially support the topic.
 - Archive the exact final Gutenberg source to BitcoinVersus, TechCert, and Open CERT.
 
-The next Electrical Engineering lesson is `OSEEC.012`.
+The next Electrical Engineering lesson is `OSEEC.013`.

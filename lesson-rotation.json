@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-05T01:08:53Z",
+  "updated_at": "2026-10-05T01:19:13Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -24,12 +24,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "cpp",
-    "lesson_number": 20,
-    "title": "OSC++.020: Virtual Destructors and Polymorphic Cleanup",
-    "wordpress_post_id": 20775,
-    "live_url": "https://bitcoinversus.tech/2026/10/04/oscpp-020-virtual-destructors-polymorphic-cleanup/",
-    "archive_path": "archive/2026/10/oscpp-020-virtual-destructors-polymorphic-cleanup.md",
+    "subject": "semiconductor_technician",
+    "lesson_number": 2,
+    "title": "OSSTC.002: Wafer Handling, FOUPs, and Automated Material Flow Basics",
+    "wordpress_post_id": 20781,
+    "live_url": "https://bitcoinversus.tech/2026/10/04/osstc-002-wafer-handling-foups-automated-material-flow-basics/",
+    "archive_path": "archive/2026/10/osstc-002-wafer-handling-foups-automated-material-flow-basics.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -37,14 +37,14 @@
     ]
   },
   "next": {
-    "subject": "semiconductor_technician",
+    "subject": "semiconductor_engineer",
     "lesson_number": 2,
-    "title_format": "OSSTC.002: {topic}",
+    "title_format": "OSSEC.002: {topic}",
     "track_start": false,
-    "previous_lesson": "OSSTC.001: Semiconductor Fab Cleanroom, Contamination, and ESD Basics"
+    "previous_lesson": "OSSEC.001: Semiconductor Device Physics, Band Gaps, Doping, and PN Junctions"
   },
   "new_track_starts": {
-    "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 2, "title_format": "OSSTC.002: {topic}"},
+    "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 3, "title_format": "OSSTC.003: {topic}"},
     "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 2, "title_format": "OSSEC.002: {topic}"},
     "robotics_technician": {"acronym": "OSRTC", "lesson_number": 2, "title_format": "OSRTC.002: {topic}"},
     "robotics_engineer": {"acronym": "OSREC", "lesson_number": 2, "title_format": "OSREC.002: {topic}"},
@@ -56,5 +56,5 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 2, "title_format": "OSFEC.002: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 3, "title_format": "OSHistory.003: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.024 is published and the Python track next lesson is OSPython.025. Linux Command #41 is published and the Linux track next lesson is Linux Command #42. Windows Command #31 – net config is published and the Windows track next lesson is Windows Command #32. OSEEC.011 is published and the Electrical Engineering track next lesson is OSEEC.012. OSETC.026 is published and the Electrical Technician track next lesson is OSETC.027. OSC++.020 is published and the C++ track next lesson is OSC++.021. OSSTC.001 is published and the global rotation now advances to OSSTC.002. OSSEC launched with OSSEC.001 and its next lesson is OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. OSDCTC launched with OSDCTC.001 and its next lesson is OSDCTC.002. OSDCEC launched with OSDCEC.001 and its next lesson is OSDCEC.002. OSFOTC launched with OSFOTC.001 and its next lesson is OSFOTC.002. OSFOEC launched with OSFOEC.001 and its next lesson is OSFOEC.002. OSFTC launched with OSFTC.001 and its next lesson is OSFTC.002. OSFEC launched with OSFEC.001 and its next lesson is OSFEC.002. OSHistory.002 is published and the History track next lesson is OSHistory.003. OSNTC.014 is published and the Networking technician track next lesson is OSNTC.015."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.024 is published and the Python track next lesson is OSPython.025. Linux Command #41 is published and the Linux track next lesson is Linux Command #42. Windows Command #31 – net config is published and the Windows track next lesson is Windows Command #32. OSEEC.011 is published and the Electrical Engineering track next lesson is OSEEC.012. OSETC.026 is published and the Electrical Technician track next lesson is OSETC.027. OSC++.020 is published and the C++ track next lesson is OSC++.021. OSSTC.002 is published and the Semiconductor Technician track next lesson is OSSTC.003. OSSEC.001 is published and the global rotation now advances to OSSEC.002. OSRTC launched with OSRTC.001 and its next lesson is OSRTC.002. OSREC launched with OSREC.001 and its next lesson is OSREC.002. OSDCTC launched with OSDCTC.001 and its next lesson is OSDCTC.002. OSDCEC launched with OSDCEC.001 and its next lesson is OSDCEC.002. OSFOTC launched with OSFOTC.001 and its next lesson is OSFOTC.002. OSFOEC launched with OSFOEC.001 and its next lesson is OSFOEC.002. OSFTC launched with OSFTC.001 and its next lesson is OSFTC.002. OSFEC launched with OSFEC.001 and its next lesson is OSFEC.002. OSHistory.002 is published and the History track next lesson is OSHistory.003. OSNTC.014 is published and the Networking technician track next lesson is OSNTC.015."
 }

@@ -125,7 +125,20 @@
       "acronym": "OSRTC",
       "title_format": "OSRTC.{number}: {topic}",
       "starting_lesson_number": 1,
-      "status": "active"
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 2,
+        "title": "OSRTC.002: Teach Pendant Basics — Jogging, Coordinate Frames, Speed, and Safe Manual Positioning",
+        "wordpress_post_id": 20798,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/osrtc-002-teach-pendant-jogging-coordinate-frames-speed-safe-manual-positioning/",
+        "archive_path": "archive/2026/10/osrtc-002-teach-pendant-jogging-coordinate-frames-speed-safe-manual-positioning.md",
+        "verified_repositories": [
+          "1freetech/Bitcoinversus.tech",
+          "1freetech/techcert",
+          "1freetech/opencert.tech"
+        ]
+      },
+      "next_lesson_number": 3
     },
     {
       "subject": "robotics_engineer",

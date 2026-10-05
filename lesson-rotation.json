@@ -1,24 +1,24 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-05T04:43:00Z",
+  "updated_at": "2026-10-05T04:57:59Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": ["networking","python","linux","windows","electrical_engineering","electrical_technician","cpp","semiconductor_technician","semiconductor_engineer","robotics_technician","robotics_engineer","data_center_technician","data_center_engineer","fiber_optics_technician","fiber_optics_engineer","firmware_technician","firmware_engineer","history_money_technology_bitcoin"],
   "last_completed": {
-    "subject": "history_money_technology_bitcoin",
-    "lesson_number": 3,
-    "title": "OSHistory.003: Standardized Coinage — Weights, Mints, Seigniorage, and Trust",
-    "wordpress_post_id": 20879,
-    "live_url": "https://bitcoinversus.tech/2026/10/05/oshistory-003-standardized-coinage-weights-mints-seigniorage-trust/",
-    "archive_path": "archive/2026/10/oshistory-003-standardized-coinage-weights-mints-seigniorage-trust.md",
+    "subject": "networking",
+    "lesson_number": 15,
+    "title": "OSNTC.015: NAT and PAT Basics — Private Addresses, Port Translation, State Tables, and Troubleshooting",
+    "wordpress_post_id": 20887,
+    "live_url": "https://bitcoinversus.tech/2026/10/05/osntc-015-nat-pat-basics-private-addresses-port-translation-state-tables-troubleshooting/",
+    "archive_path": "archive/2026/10/osntc-015-nat-pat-basics-private-addresses-port-translation-state-tables-troubleshooting.md",
     "verified_repositories": ["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]
   },
   "next": {
-    "subject": "networking",
-    "lesson_number": 15,
-    "title_format": "OSNTC.015: {topic}",
+    "subject": "python",
+    "lesson_number": 25,
+    "title_format": "OSPython.025: {topic}",
     "track_start": false,
-    "previous_lesson": "OSNTC.014"
+    "previous_lesson": "OSPython.024"
   },
   "new_track_starts": {
     "semiconductor_technician": {"acronym":"OSSTC","lesson_number":3,"title_format":"OSSTC.003: {topic}"},
@@ -33,5 +33,5 @@
     "firmware_engineer": {"acronym":"OSFEC","lesson_number":3,"title_format":"OSFEC.003: {topic}"},
     "history_money_technology_bitcoin": {"acronym":"OSHistory","lesson_number":4,"title_format":"OSHistory.004: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.024 is published and the Python track next lesson is OSPython.025. Linux Command #41 is published and the Linux track next lesson is Linux Command #42. Windows Command #31 – net config is published and the Windows track next lesson is Windows Command #32. OSEEC.011 is published and the Electrical Engineering track next lesson is OSEEC.012. OSETC.026 is published and the Electrical Technician track next lesson is OSETC.027. OSC++.020 is published and the C++ track next lesson is OSC++.021. OSSTC.002 is published and the Semiconductor Technician track next lesson is OSSTC.003. OSSEC.002 is published and the Semiconductor Engineer track next lesson is OSSEC.003. OSRTC.002 is published and the Robotics Technician track next lesson is OSRTC.003. OSREC.002 is published and the Robotics Engineer track next lesson is OSREC.003. OSDCTC.002 is published and the Data Center Technician track next lesson is OSDCTC.003. OSDCEC.002 is published and the Data Center Engineer track next lesson is OSDCEC.003. OSFOTC.002 is published and the Fiber Optics Technician track next lesson is OSFOTC.003. OSFOEC.002 is published and the Fiber Optics Engineer track next lesson is OSFOEC.003. OSFTC.002 is published and the Firmware Technician track next lesson is OSFTC.003. OSFEC.002 is published and the Firmware Engineer track next lesson is OSFEC.003. OSHistory.003 is published and the History track next lesson is OSHistory.004. The global rotation now advances to OSNTC.015. OSNTC.014 is published and the Networking technician track next lesson is OSNTC.015."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.024 is published and the Python track next lesson is OSPython.025. Linux Command #41 is published and the Linux track next lesson is Linux Command #42. Windows Command #31 – net config is published and the Windows track next lesson is Windows Command #32. OSEEC.011 is published and the Electrical Engineering track next lesson is OSEEC.012. OSETC.026 is published and the Electrical Technician track next lesson is OSETC.027. OSC++.020 is published and the C++ track next lesson is OSC++.021. OSSTC.002 is published and the Semiconductor Technician track next lesson is OSSTC.003. OSSEC.002 is published and the Semiconductor Engineer track next lesson is OSSEC.003. OSRTC.002 is published and the Robotics Technician track next lesson is OSRTC.003. OSREC.002 is published and the Robotics Engineer track next lesson is OSREC.003. OSDCTC.002 is published and the Data Center Technician track next lesson is OSDCTC.003. OSDCEC.002 is published and the Data Center Engineer track next lesson is OSDCEC.003. OSFOTC.002 is published and the Fiber Optics Technician track next lesson is OSFOTC.003. OSFOEC.002 is published and the Fiber Optics Engineer track next lesson is OSFOEC.003. OSFTC.002 is published and the Firmware Technician track next lesson is OSFTC.003. OSFEC.002 is published and the Firmware Engineer track next lesson is OSFEC.003. OSHistory.003 is published and the History track next lesson is OSHistory.004. OSNTC.015 is published and the Networking technician track next lesson is OSNTC.016. The global rotation now advances to OSPython.025."
 }

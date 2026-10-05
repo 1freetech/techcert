@@ -104,7 +104,20 @@
       "acronym": "OSSEC",
       "title_format": "OSSEC.{number}: {topic}",
       "starting_lesson_number": 1,
-      "status": "active"
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 2,
+        "title": "OSSEC.002: Carrier Transport — Drift, Diffusion, Mobility, and Recombination",
+        "wordpress_post_id": 20791,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/ossec-002-carrier-transport-drift-diffusion-mobility-recombination/",
+        "archive_path": "archive/2026/10/ossec-002-carrier-transport-drift-diffusion-mobility-recombination.md",
+        "verified_repositories": [
+          "1freetech/Bitcoinversus.tech",
+          "1freetech/techcert",
+          "1freetech/opencert.tech"
+        ]
+      },
+      "next_lesson_number": 3
     },
     {
       "subject": "robotics_technician",

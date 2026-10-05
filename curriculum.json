@@ -188,7 +188,20 @@
       "acronym": "OSDCEC",
       "title_format": "OSDCEC.{number}: {topic}",
       "starting_lesson_number": 1,
-      "status": "active"
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 2,
+        "title": "OSDCEC.002: Data Center Capacity Planning — IT Load, PUE, Rack Density, and Growth Headroom",
+        "wordpress_post_id": 20820,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/osdcec-002-data-center-capacity-planning-it-load-pue-rack-density-growth-headroom/",
+        "archive_path": "archive/2026/10/osdcec-002-data-center-capacity-planning-it-load-pue-rack-density-growth-headroom.md",
+        "verified_repositories": [
+          "1freetech/Bitcoinversus.tech",
+          "1freetech/techcert",
+          "1freetech/opencert.tech"
+        ]
+      },
+      "next_lesson_number": 3
     },
     {
       "subject": "fiber_optics_technician",

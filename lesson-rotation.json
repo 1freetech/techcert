@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-05T06:35:00Z",
+  "updated_at": "2026-10-05T06:38:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -8,6 +8,7 @@
     "python",
     "linux",
     "windows",
+    "information_technology",
     "electrical_engineering",
     "electrical_technician",
     "cpp",
@@ -44,6 +45,7 @@
     "previous_lesson": "OSETC.026"
   },
   "new_track_starts": {
+    "information_technology": {"acronym": "OSITC", "lesson_number": 1, "title_format": "OSITC.001: {topic}"},
     "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 3, "title_format": "OSSTC.003: {topic}"},
     "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 3, "title_format": "OSSEC.003: {topic}"},
     "robotics_technician": {"acronym": "OSRTC", "lesson_number": 3, "title_format": "OSRTC.003: {topic}"},
@@ -56,6 +58,6 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 3, "title_format": "OSFEC.003: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 4, "title_format": "OSHistory.004: {topic}"}
   },
-  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSEEC.012 is published; next OSEEC.013. OSETC.026 is published; next OSETC.027. OSC++.020 is published; next OSC++.021. OSSTC.002, OSSEC.002, OSRTC.002, OSREC.002, OSDCTC.002, OSDCEC.002, OSFOTC.002, OSFOEC.002, OSFTC.002, and OSFEC.002 are published; each corresponding track next lesson is .003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSETC.027 after verified OSEEC.012.",
+  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.026 is published; next OSETC.027. OSC++.020 is published; next OSC++.021. OSSTC.002, OSSEC.002, OSRTC.002, OSREC.002, OSDCTC.002, OSDCEC.002, OSFOTC.002, OSFOEC.002, OSFTC.002, and OSFEC.002 are published; each corresponding track next lesson is .003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSETC.027 after verified OSEEC.012.",
   "verification_hold": null
 }

@@ -42,7 +42,20 @@
       "name": "Open Source Electrical Technician Certification",
       "acronym": "OSETC",
       "title_format": "OSETC.{number}: {topic}",
-      "status": "active"
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 26,
+        "title": "OSETC.026: Flow Switches and Flow-Proving Basics",
+        "wordpress_post_id": 20761,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/osetc-026-flow-switches-flow-proving-basics/",
+        "archive_path": "archive/2026/10/osetc-026-flow-switches-flow-proving-basics.md",
+        "verified_repositories": [
+          "1freetech/Bitcoinversus.tech",
+          "1freetech/techcert",
+          "1freetech/opencert.tech"
+        ]
+      },
+      "next_lesson_number": 27
     },
     {
       "subject": "cpp",

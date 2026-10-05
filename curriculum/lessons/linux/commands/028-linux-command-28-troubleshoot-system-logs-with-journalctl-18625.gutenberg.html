@@ -1,0 +1,63 @@
+<!-- wp:paragraph --><p>Linux Command #28 covers <code>journalctl</code>, the command-line interface for reading and filtering logs collected by <code>systemd-journald</code>. For technicians and administrators, it is one of the fastest ways to investigate failed services, boot problems, authentication events, and other system behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Start With the Journal</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>journalctl</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Running the command without filters displays journal entries available to your account. Because a busy system can produce a large amount of output, practical troubleshooting usually starts by narrowing the results.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Current Boot</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>journalctl -b</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>-b</code> option limits output to the current boot. This is useful when a server, workstation, or data-center system developed a problem after its most recent restart.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Inspect One Service</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>journalctl -u ssh
+journalctl -u nginx
+journalctl -u docker</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>-u</code> option filters by a systemd unit. Substitute the actual service name on your system. This is especially useful after <code>systemctl status</code> reports that a service failed.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Watch Logs Live</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>journalctl -u ssh -f</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>-f</code> option follows new journal entries as they arrive. A technician can keep this running while reproducing a fault in another terminal.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Filter by Time</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>journalctl --since "1 hour ago"
+journalctl --since "today"
+journalctl -u ssh --since "yesterday"</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Time filtering reduces noise when you know approximately when an incident occurred.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Show Errors</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>journalctl -p err
+journalctl -b -p err</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The priority filter can isolate higher-severity messages. Combining it with <code>-b</code> is a useful first check after a problematic boot.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Kernel Messages</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>journalctl -k
+journalctl -k -b</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Kernel messages can reveal hardware detection, storage, driver, networking, and other low-level problems. In data-center troubleshooting, these entries can help distinguish an application failure from an operating-system or hardware issue.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A Practical Troubleshooting Pattern</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>systemctl status ssh
+journalctl -u ssh -b
+journalctl -u ssh --since "30 minutes ago"
+journalctl -u ssh -f</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>First check service status. Then inspect that service's current-boot history, narrow the time window, and finally follow the log while reproducing the problem. This workflow turns a large journal into a focused diagnostic trail.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Be Careful With Log Cleanup</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><code>journalctl</code> also supports journal maintenance and vacuum operations. Do not remove logs casually. Production environments may have operational, security, audit, or retention requirements. Preserve evidence before deleting historical records.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video Reference</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Learn Linux TV demonstrates the command directly, including service filtering, live follow mode, SSH troubleshooting, time filters, user filtering, and journal maintenance.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=0dG3vUYt7Uk","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=0dG3vUYt7Uk
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>On a systemd-based Linux test machine, identify one running service with <code>systemctl</code>. Use <code>journalctl -u</code> to inspect its logs, restrict the results to the current boot, then follow new entries live. The goal is to become comfortable moving from a broad system view to a precise service and time window.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Reference:</strong> systemd journal documentation and Learn Linux TV's Linux Crash Course lesson on <code>journalctl</code>.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true,"className":"is-provider-x wp-block-embed-x"} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong>Related BitcoinVersus.tech coverage:</strong> <a href="https://bitcoinversus.tech/2026/09/25/command-27-ip-linux-os/">Linux ip command</a> · <a href="https://bitcoinversus.tech/2026/09/24/command-26-ss-linux-os/">Linux ss command</a> · <a href="https://bitcoinversus.tech/2026/09/26/command-15-netstat-windows-os/">Windows netstat</a> · <a href="https://bitcoinversus.tech/2026/09/25/command-14-ipconfig-windows-os/">Windows ipconfig</a></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong>BitcoinVersus.Tech Editor's Note:</strong> We volunteer daily to help ensure the credibility of information on this platform is verifiably true. BitcoinVersus.tech is not a financial advisor. This article is independent reporting and educational content for informational purposes only.</p><!-- /wp:paragraph -->

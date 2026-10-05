@@ -1,0 +1,26 @@
+<!-- wp:paragraph --><p>The Linux <code>whoami</code> command tells you which user account the current command is running as. It is one of the simplest Linux commands, but it is useful when troubleshooting permissions, working over SSH, using <code>sudo</code>, or checking which account a script is using.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Basic Syntax</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>whoami</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>If your current effective user is <code>student</code>, the command prints:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>student</code></pre><!-- /wp:code -->
+<!-- wp:heading --><h2 class="wp-block-heading">Why This Matters</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Linux permissions depend on the user running a command. Before changing files, restarting services, or troubleshooting access problems, it can help to confirm your current user identity.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video: Linux whoami Command</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>This short beginner tutorial demonstrates <code>whoami</code>, <code>sudo whoami</code>, and related identity commands.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=EftEnvuG9Ms","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=EftEnvuG9Ms
+</div></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">Compare Normal and sudo</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>whoami
+sudo whoami</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The first command prints the effective user for your current shell. If your account is allowed to use <code>sudo</code>, the second command normally prints <code>root</code> because that individual command is running with root privileges.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Simple Troubleshooting Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Suppose a file-editing command returns <code>Permission denied</code>. Running <code>whoami</code> helps confirm which user is attempting the operation. That makes it easier to compare the current user with the file's ownership and permissions.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">SSH Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>When you connect to several Linux servers, prompts can look similar. Run <code>whoami</code> after connecting to confirm which account you are using before making changes.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Data Center Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A technician remotely logging into a server may have a normal account for everyday work and elevated privileges for specific administrative commands. <code>whoami</code> provides a quick identity check before troubleshooting access or service issues.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Open a Linux terminal.</li><li>Run <code>whoami</code>.</li><li>Write down the username returned.</li><li>If your account has sudo access, run <code>sudo whoami</code>.</li><li>Explain why the two results may be different.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><code>whoami</code> prints the name of the current effective user. Use it whenever you need a quick check of the identity and privilege context under which a Linux command is running.</p><!-- /wp:paragraph -->

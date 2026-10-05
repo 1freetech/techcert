@@ -1,0 +1,30 @@
+---
+title: "OSETC.003: Resistance and Continuity Testing"
+wordpress_post_id: 19459
+source: BitcoinVersus.tech
+published: 2026-09-29T19:41:51
+modified: 2026-09-29T22:10:34
+live_url: https://bitcoinversus.tech/2026/09/29/osetc-003-resistance-continuity-testing/
+track: electrical/technician
+lesson_number: 3
+raw_source: 003-osetc-003-resistance-continuity-testing-19459.gutenberg.html
+---
+
+<!-- wp:paragraph --><p><strong>OSET.003</strong> continues the Open-Source Electrical Technician meter sequence with resistance and continuity testing. These measurements are useful for checking conductors, fuses, switches, coils, connections, and components after the circuit has been placed in a safe condition.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Resistance</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Resistance describes opposition to electric current and is measured in ohms (Ω). A digital multimeter can apply a small internal test signal and calculate the resistance between its probes. Unlike a voltage measurement, resistance testing is performed with the circuit de-energized.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Continuity</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Continuity mode is a fast way to determine whether a sufficiently low-resistance electrical path exists between two points. Many meters provide an audible tone when that path is detected. Continuity is useful when tracing wiring or checking devices such as fuses, switches, and conductors, but a beep alone does not prove that a component will operate correctly under load.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">De-energize before resistance testing</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Do not connect a meter in resistance or continuity mode to an energized circuit. Follow the applicable workplace energy-control procedure and verify the circuit condition before testing. <a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333">OSHA 29 CFR 1910.333</a> requires electrical safety-related work practices and verification of de-energized conditions for covered work.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=b9LznMD3B3Q","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-block-embed-youtube wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=b9LznMD3B3Q
+</div><figcaption class="wp-element-caption"><em>Video reference: Fluke demonstrates electrical resistance and resistance measurement with a digital multimeter.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">Basic meter setup</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>With the circuit safely de-energized, inspect the meter and leads. On a typical digital multimeter, place the black lead in COM and the red lead in the resistance-capable input. Select Ω for resistance or the meter’s continuity function. Touching the probes together provides a useful functional check: the resistance should be very low, and continuity mode will commonly sound its indicator.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Interpreting a measurement</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A very low resistance can indicate a continuous conductive path. A very high or over-range reading can indicate an open path. The expected value depends on the component being tested, so technicians should compare measurements with schematics, specifications, known-good equipment, or manufacturer documentation rather than assuming every low or high reading is automatically correct or defective.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Technician exercise</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Use only a safe, isolated training circuit or loose components.</li><li>Inspect the meter and leads.</li><li>Select continuity and touch the probes together to observe the meter response.</li><li>Test a known-good fuse or short conductor.</li><li>Switch to resistance mode and record its measured resistance.</li><li>Compare a known continuous path with an intentionally open path.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">OSET takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Voltage testing asks what electrical potential exists between two points. Resistance and continuity testing ask about the electrical path itself. Knowing which measurement is appropriate—and establishing a safe circuit condition before making it—is a core technician skill.</p><!-- /wp:paragraph -->

@@ -1,0 +1,69 @@
+<!-- wp:paragraph {"fontSize":"large"} -->
+<p class="has-large-font-size"><strong>The Windows <code>net accounts</code> command displays and changes local password and sign-in policy settings from Command Prompt.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In <a href="https://bitcoinversus.tech/2026/10/02/windows-command-24-net-localgroup/">Windows Command #24 – net localgroup</a>, we managed local group membership. <code>net accounts</code> shifts the focus to account policy: password age, minimum password length, password history, lockout thresholds, and related settings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Display the current account policy</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>net accounts</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Run the command without additional options to inspect the effective local account-policy values exposed by the command. On a standalone Windows workstation, this is a fast way to check several password and lockout settings from one screen.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: The Windows net command</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=pgEtYG8RV1U","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=pgEtYG8RV1U
+</div><figcaption class="wp-element-caption"><em>SecOps Insider introduces the Windows net command family and the administrative tasks available through it.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Set a minimum password length</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>net accounts /minpwlen:12</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>/minpwlen</code> option sets the minimum number of characters required by the local password policy. Administrative privileges are required to change policy settings. Before changing a production machine, record the existing value and follow the site's change-control requirements.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Control password age</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>net accounts /minpwage:1
+net accounts /maxpwage:90</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p><code>/minpwage</code> controls how soon a password may be changed again, while <code>/maxpwage</code> controls how long a password can remain valid before Windows requires a change under that policy. Organizations increasingly evaluate password-expiration rules alongside modern identity guidance, so technicians should implement the policy they are actually assigned rather than inventing one.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Set password history</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>net accounts /uniquepw:5</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>/uniquepw</code> option specifies how many previous passwords Windows remembers when enforcing password-history requirements. This can help prevent immediate reuse when password history is part of the organization's local policy.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: Windows password policy</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=GRy5GFuZfWw","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=GRy5GFuZfWw
+</div><figcaption class="wp-element-caption"><em>This Windows Server administration lesson demonstrates password-policy concepts such as password age, length, complexity, and lockout settings in a managed Windows environment.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Configure account lockout</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>net accounts /lockoutthreshold:5
+net accounts /lockoutduration:30
+net accounts /lockoutwindow:30</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The lockout threshold controls how many failed sign-in attempts trigger a lockout. The duration controls how long a locked account remains locked, and the lockout window controls the interval Windows uses when counting failed attempts. These settings interact, so inspect the current policy before modifying them.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Local policy versus domain policy</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A workstation's local settings are not necessarily the final authority in an organization. Domain Group Policy, Microsoft Entra management, Intune, or other enterprise controls may define or enforce account-security requirements. A technician should therefore identify whether the machine is standalone or centrally managed before treating a local command result as the organization's complete policy.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: Modern local administrator password management</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=QkLwZI76SN4","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=QkLwZI76SN4
+</div><figcaption class="wp-element-caption"><em>John Savill’s Technical Training explains Microsoft Windows LAPS and why centrally managed local-administrator passwords matter in modern Windows security.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A technician audit workflow</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>net accounts
+net user
+net localgroup administrators</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>This three-command sequence gives a useful local snapshot: account policy, local user accounts, and membership of the local Administrators group. The previous <code>net user</code> and <code>net localgroup</code> lessons provide the account and group-management context behind the audit.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common beginner mistakes</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li>Changing password policy without first recording the existing values.</li><li>Assuming local policy overrides centrally managed domain or device policy.</li><li>Setting an aggressive lockout threshold without considering help-desk and denial-of-service consequences.</li><li>Confusing <code>net accounts</code> with <code>net user</code>; the first manages policy while the second manages individual accounts.</li><li>Testing policy changes on a production system instead of an approved lab or maintenance window.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Open Command Prompt and run <code>net accounts</code>.</li><li>Identify the minimum password length and maximum password age shown on your lab system.</li><li>Identify the lockout threshold and duration.</li><li>Run <code>net user</code> and compare what it reports with <code>net accounts</code>.</li><li>On an approved disposable lab VM, change one policy value, verify it with <code>net accounts</code>, and restore the original setting.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><code>net accounts</code> is a compact Windows command for inspecting and administering local account-policy settings. Use it to understand password and lockout configuration, but always distinguish local policy from centrally managed enterprise policy before making changes.</p><!-- /wp:paragraph -->

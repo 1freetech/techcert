@@ -1,0 +1,46 @@
+---
+title: "OSNEC.001: OSPF Fundamentals"
+wordpress_post_id: 19952
+source: BitcoinVersus.tech
+published: 2026-10-02T00:39:37
+modified: 2026-10-02T00:39:54
+live_url: https://bitcoinversus.tech/2026/10/02/osnec-001-ospf-fundamentals/
+track: networking/engineer
+lesson_number: 1
+raw_source: 001-osnec-001-ospf-fundamentals-19952.gutenberg.html
+---
+
+<!-- wp:paragraph --><p><strong>OSPF</strong> stands for Open Shortest Path First. It is an open-standard <strong>link-state interior gateway protocol</strong> used by routers to learn network topology and calculate routes inside an autonomous system.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>This is the first <strong>Open-Source Networking Engineer Certification (OSNEC)</strong> lesson. The technician pathway teaches device addressing and verification; the engineer pathway now moves into routing behavior, topology, convergence, and design.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">The Core OSPF Idea</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>OSPF routers discover neighbors, exchange information about their links, build a shared view of the topology, and calculate the best paths from that information. Instead of simply asking a neighboring router for a distance, each OSPF router builds a link-state database and runs a shortest-path calculation.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Five Terms to Know</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Neighbor:</strong> another OSPF router discovered on a connected OSPF-enabled network.</li><li><strong>Adjacency:</strong> the relationship formed when appropriate neighbors exchange routing information.</li><li><strong>LSA:</strong> Link-State Advertisement, a message describing topology information.</li><li><strong>LSDB:</strong> Link-State Database, the topology information an OSPF router maintains for an area.</li><li><strong>SPF:</strong> Shortest Path First calculation, based on Dijkstra's algorithm, used to determine best paths.</li></ul><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">OSPF Cost</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>OSPF selects paths using a metric called <strong>cost</strong>. Lower total path cost is preferred. Interface cost is commonly derived from bandwidth using an implementation's reference-bandwidth rules, and engineers can tune it when the design requires a different path preference.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video: Understanding OSPF</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>CBT Nuggets trainer Keith Barker gives an engineering-oriented overview of OSPF, including areas, link-state advertisements, adjacencies, and route calculation.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=BPf6_9oAbXM","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=BPf6_9oAbXM
+</div><figcaption class="wp-element-caption"><em>CBT Nuggets provides an overview of OSPF areas, LSAs, adjacencies, and routing behavior.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">Areas and Area 0</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>OSPF can divide a routing domain into <strong>areas</strong>. The backbone is <strong>Area 0</strong>. Multi-area OSPF designs use the backbone to connect other areas and reduce how much topology information must be processed everywhere in a large network.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Simple Three-Router Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Imagine R1 can reach R3 directly with cost 30, or through R2 with cost 10 from R1 to R2 plus cost 10 from R2 to R3. The path through R2 has a total OSPF cost of 20, so OSPF can prefer that route over the direct cost-30 path.</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>R1 ---- cost 10 ---- R2 ---- cost 10 ---- R3
+ \                                      /
+  ----------- cost 30 ------------------</code></pre><!-- /wp:code -->
+<!-- wp:heading --><h2 class="wp-block-heading">Hello Packets and Neighbor Formation</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>OSPF routers use Hello packets to discover and maintain neighbors. Parameters must be compatible for the routers to form the expected neighbor relationship. When troubleshooting, engineers verify the interface, addressing, area assignment, timers where applicable, authentication where configured, and other adjacency requirements.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">DR and BDR</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>On multi-access networks such as Ethernet, OSPF can elect a <strong>Designated Router (DR)</strong> and <strong>Backup Designated Router (BDR)</strong>. This reduces the number of full adjacencies and the amount of link-state exchange required on the segment.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Data Center Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A routed data-center environment may use OSPF between infrastructure routers or Layer 3 devices. If one routed link fails, OSPF can update topology information and recalculate paths, subject to the network design and timers.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Bitcoin Mining Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A large mining campus with multiple routed buildings or network zones could use a dynamic routing protocol such as OSPF so infrastructure devices can learn reachable networks without maintaining every route manually. The exact protocol choice depends on the architecture.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Engineering Verification Checklist</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Confirm the intended OSPF-enabled interfaces and IP networks.</li><li>Confirm the intended area assignment.</li><li>Check neighbor state and router IDs.</li><li>Inspect the OSPF database and learned routes.</li><li>Compare path costs with the intended traffic design.</li><li>Verify that a failure produces the expected alternate path rather than assuming convergence works.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Expand the acronym OSPF.</li><li>Explain the difference between an LSA and the LSDB.</li><li>What does SPF calculate?</li><li>Which total cost is preferred: 20 or 30?</li><li>What is special about Area 0?</li><li>Why are DR and BDR roles useful on a multi-access segment?</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>OSPF is a link-state routing protocol. Routers discover neighbors, exchange link-state information, maintain a topology database, and calculate lowest-cost paths. For a network engineer, understanding adjacencies, LSAs, areas, costs, and convergence is the foundation for designing and troubleshooting OSPF networks.</p><!-- /wp:paragraph -->

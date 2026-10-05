@@ -1,0 +1,217 @@
+<!-- wp:paragraph --><p><strong><code>groupadd</code> creates a new local Linux group.</strong> A group gives the system a named identity that can be used to organize users and assign shared access to files, directories, devices, and services.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/03/linux-command-39-usermod/">Linux Command #39 – usermod</a>. That lesson showed how to add an existing user to an existing supplementary group. This lesson fills in the missing step: <strong>how the group itself is created.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>By the end:</strong> you will be able to create a group, understand its GID, verify it with <code>getent</code>, recognize system groups, and connect <code>groupadd</code> to the account-management commands you already learned.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Start with the smallest useful command</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo groupadd lab_ops</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Read it as: “Create a local group named <code>lab_ops</code>.”</p><!-- /wp:paragraph -->
+
+<!-- wp:table --><figure class="wp-block-table"><table><thead><tr><th>Part</th><th>Meaning</th></tr></thead><tbody><tr><td><code>sudo</code></td><td>Run with administrative privileges, if your account is authorized.</td></tr><tr><td><code>groupadd</code></td><td>Create a local group account.</td></tr><tr><td><code>lab_ops</code></td><td>The new group name.</td></tr></tbody></table></figure><!-- /wp:table -->
+
+<!-- wp:paragraph --><p>The Debian <a href="https://manpages.debian.org/testing/passwd/groupadd.8.en.html">groupadd manual</a> describes the basic syntax as <code>groupadd [OPTIONS] NEWGROUP</code>. The exact defaults come from the local system configuration, so always check <code>man groupadd</code> on the machine you are administering.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What gets created?</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A group has two important identifiers:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Group name</strong> — a human-readable name such as <code>lab_ops</code>.</li><li><strong>GID</strong> — the numeric Group ID Linux uses internally.</li></ul><!-- /wp:list -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>Group name: lab_ops
+       ↓
+Numeric GID: 1005   ← example only
+       ↓
+Linux can use the group for ownership and access rules</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The number above is only an example. If you do not choose a GID manually, the system selects one according to its configured group-ID ranges and current group database.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: Linux group management from the ground up</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=GnlgAD8-GhE","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=GnlgAD8-GhE
+</div><figcaption class="wp-element-caption"><em>Learn Linux TV — Linux Crash Course: Managing Groups. This walkthrough covers creating groups, removing groups, and managing user memberships.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Always check before creating</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Before creating a group, check whether the name already exists:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>getent group lab_ops</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>If a matching group exists, <code>getent</code> returns a record. If nothing is returned, the name was not found through the system's configured group lookup sources.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>This matters because <code>getent</code> can consult more than just local files. A system may also use LDAP, Active Directory integration, or another identity source. Do not create a local group that accidentally conflicts with an organization-managed identity.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Create, then verify</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo groupadd lab_ops
+getent group lab_ops</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>A local system might return something shaped like this:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>lab_ops:x:1005:</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Do not memorize the example GID. Focus on the fields:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>lab_ops : x : 1005 :
+   │      │     │    └─ supplementary member list
+   │      │     └────── GID
+   │      └──────────── password placeholder / group-password field marker
+   └─────────────────── group name</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>On systems using the traditional local account files, group information is commonly stored in <code>/etc/group</code>, with protected group-password information handled separately. Use <code>getent</code> for normal lookups instead of assuming every identity comes only from local files.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">groupadd creates the group — it does not automatically add users</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>This is one of the most important beginner distinctions.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo groupadd lab_ops
+        ↓
+Group now exists
+        ↓
+No supplementary users are added automatically</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>To add an existing user afterward, use the pattern from Linux Command #39:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo usermod -aG lab_ops labtech</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Then verify:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>id -nG labtech
+getent group lab_ops</code></pre><!-- /wp:code -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: A dedicated groupadd walkthrough</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jq7oFpBsko0","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=jq7oFpBsko0
+</div><figcaption class="wp-element-caption"><em>DexTutor — Creating Groups in Linux / groupadd. This lesson focuses directly on creating groups and choosing a GID.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Choosing a specific GID with -g</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Most of the time, letting the system choose the GID is simplest. Sometimes an environment needs a specific numeric GID, especially when matching identity numbers across systems or shared storage.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo groupadd -g 5100 lab_ops</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Here, <code>-g 5100</code> requests GID <code>5100</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Before choosing a fixed GID, check whether it is already in use:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>getent group 5100</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>If that number already belongs to another group, stop and determine the correct ID plan instead of forcing a collision.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Regular groups vs. system groups</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A service may need a group that exists for software or daemon ownership rather than for normal human collaboration. The <code>-r</code> option requests a <strong>system group</strong>:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo groupadd -r telemetry_agent</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The numeric range used for system groups is distribution and configuration dependent. The local <code>/etc/login.defs</code> settings and the installed account-management tools determine the ranges. Do not teach yourself that “system group always means GID below one fixed number” because that is not universal.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What about -f?</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <code>-f</code> or <code>--force</code> option can make <code>groupadd</code> return success when the requested group name already exists:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo groupadd -f lab_ops</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>That can be useful in some scripts, but beginners should normally <strong>inspect first</strong> with <code>getent</code>. Silently accepting an existing name can hide a mistaken assumption about which group you are actually using.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: groupadd in a short focused example</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=LFQpGVipY6I","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=LFQpGVipY6I
+</div><figcaption class="wp-element-caption"><em>InfoWorld — How to use the groupadd command. A short focused demonstration of creating a Linux group.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A safe practice lab</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Use a disposable VM or training machine that you administer. Do not experiment with production identity groups.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Step 1: Check the names.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>getent group lab_readers
+getent group lab_ops</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>If the names are already in use for something you did not create, choose different practice names.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Step 2: Create two groups.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo groupadd lab_readers
+sudo groupadd lab_ops</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><strong>Step 3: Verify both.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>getent group lab_readers
+getent group lab_ops</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><strong>Step 4: If the practice user from earlier lessons exists, add it to one group.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>getent passwd labtech
+sudo usermod -aG lab_ops labtech
+id -nG labtech</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Only run the <code>usermod</code> line if <code>labtech</code> is your intended practice account. Do not substitute a production account casually.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Why groups matter for permissions</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Creating a group by itself does not grant access. Something still has to use the group in an ownership or policy rule.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>Create group
+    ↓
+Add intended users
+    ↓
+Assign resource or policy to that group
+    ↓
+Verify access</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>For example, a shared directory can have a group owner. File permissions can then give members of that group specific access. Red Hat's <a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/managing-users-and-groups_configuring-basic-system-settings">user and group administration guide</a> documents <code>groupadd</code>, supplementary groups, and group-based shared-directory workflows.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Local groups vs. centrally managed groups</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>groupadd</code> is for creating a local group through the system's local account-management tools. In enterprise environments, users and groups may instead come from Active Directory, LDAP, FreeIPA, or another centralized identity platform.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>If <code>getent group some_name</code> returns a group that is centrally managed, do not assume <code>groupadd</code> is the correct way to modify it. Use the administration workflow for the identity source that owns the group.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting without guessing</h2><!-- /wp:heading -->
+
+<!-- wp:table --><figure class="wp-block-table"><table><thead><tr><th>What you see</th><th>What to check</th></tr></thead><tbody><tr><td>“group already exists”</td><td>Run <code>getent group groupname</code>. Confirm whether the existing group is the one you intended.</td></tr><tr><td>Requested GID already exists</td><td>Run <code>getent group GID</code>. Follow the site's GID allocation plan instead of reusing a number accidentally.</td></tr><tr><td>Permission denied / cannot lock group file</td><td>Confirm administrative authorization and whether another account-management process is running. Do not delete lock files casually.</td></tr><tr><td>Group exists but user has no access</td><td>Check user membership, fresh-session group state, resource ownership, permissions, ACLs, and application policy.</td></tr><tr><td>Group appears in getent but not /etc/group</td><td>The identity may come from another NSS source such as LDAP or directory integration.</td></tr></tbody></table></figure><!-- /wp:table -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">How groupadd connects to the commands you already know</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>groupadd  → create a group
+useradd   → create a user
+usermod   → change an existing user
+passwd    → manage a user's password
+getent    → query identity databases
+groups    → show group memberships
+id        → show numeric and named identity information</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>These commands start to form one coherent account-management toolkit rather than a list of unrelated commands.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Check your understanding</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>What is the basic purpose of <code>groupadd</code>?</li><li>What is a GID?</li><li>Which command can verify that a group exists?</li><li>Does creating a group automatically add users to it?</li><li>What does <code>-g</code> let you choose?</li><li>What does <code>-r</code> request?</li><li>Why should you check <code>getent</code> before creating a group on an enterprise system?</li></ol><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answers:</strong> <code>groupadd</code> creates a local group. A GID is the numeric Group ID. <code>getent group</code> can verify the group. No, creating a group does not automatically add supplementary users. <code>-g</code> requests a specific GID. <code>-r</code> requests a system group. <code>getent</code> can reveal identities supplied by local or configured external sources, helping you avoid conflicts.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What to remember</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>The safest beginner pattern is: check → create → verify → add only the users who actually need membership.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>getent group lab_ops
+sudo groupadd lab_ops
+getent group lab_ops
+sudo usermod -aG lab_ops labtech
+id -nG labtech</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><em>Presentation note: every command and sample result in this lesson is shown as plain text. No simulated VS Code, Windows, or Linux terminal colors are used or invented. Actual colors depend on the terminal application, profile, theme, shell, and command configuration.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech advertisement.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong><em>Editor's Note:</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

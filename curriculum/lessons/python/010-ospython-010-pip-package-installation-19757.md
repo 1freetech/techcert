@@ -1,0 +1,43 @@
+---
+title: "OSPython.010: pip and Package Installation"
+wordpress_post_id: 19757
+source: BitcoinVersus.tech
+published: 2026-10-01T08:12:41
+modified: 2026-10-01T08:13:07
+live_url: https://bitcoinversus.tech/2026/10/01/ospython-010-pip-package-installation/
+track: python
+lesson_number: 10
+raw_source: 010-ospython-010-pip-package-installation-19757.gutenberg.html
+---
+
+<!-- wp:paragraph --><p>Python includes many useful tools, but sometimes your program needs something that is not included with Python itself. <strong>pip</strong> is the standard package installer used to add Python packages to your environment.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/01/ospython-009-virtual-environments/">OSPython.009: Virtual Environments</a>. A virtual environment gives a project its own space; pip lets you install the packages that project needs inside that space.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">The Basic Command</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Suppose a Python project needs the popular <code>requests</code> package. In a terminal, you can install it with:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>python -m pip install requests</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p><code>python -m pip</code> tells the selected Python interpreter to run pip. <code>install</code> tells pip what action to perform, and <code>requests</code> is the package name.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Use the Package</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>After installation, a program can import the package:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>import requests
+
+print(requests.__version__)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The important beginner idea is the sequence: <strong>install first, import second</strong>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video: Installing Python Packages With pip</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>This tutorial demonstrates downloading and installing Python packages with pip. Watch it after trying the basic command above.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jnpC_Ib_lbc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=jnpC_Ib_lbc
+</div></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">See What Is Installed</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>python -m pip list</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>This displays packages installed in the current Python environment. If you activated a virtual environment first, the list reflects that environment.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Remove a Package</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>python -m pip uninstall requests</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>pip will ask for confirmation before removing the package.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Gaming Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Imagine you are building a simple game utility that needs a package another developer created. Instead of copying that developer's files into your project manually, pip can install the package into your Python environment.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Bitcoin Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A small Bitcoin-related Python project might use an external package to make a web request to a public data service. pip handles installing that package; your Python code then imports it when needed.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Activate a practice virtual environment from the previous lesson.</li><li>Run <code>python -m pip list</code>.</li><li>Install <code>requests</code> with <code>python -m pip install requests</code>.</li><li>Run <code>python -m pip list</code> again and find <code>requests</code>.</li><li>Create a short Python file that imports <code>requests</code> and prints its version.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>pip installs and manages Python packages. A virtual environment keeps a project's packages separate, while pip adds the specific packages that project needs.</p><!-- /wp:paragraph -->

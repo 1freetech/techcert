@@ -1,0 +1,191 @@
+---
+title: "OSFTC.001: Firmware Images, Safe Flashing, Bootloaders, and Recovery Basics"
+status: published
+wordpress_post_id: 20534
+published: "2026-10-04T02:16:55"
+live_url: "https://bitcoinversus.tech/2026/10/04/osftc-001-firmware-images-safe-flashing-bootloaders-recovery-basics/"
+series: "Open Source Firmware Technician Certification"
+pathway: firmware/technician
+lesson_number: "001"
+featured_media_id: 20530
+youtube_1: "https://www.youtube.com/watch?v=dARiwyQ3IJ0"
+youtube_2: "https://www.youtube.com/watch?v=qMUzLU636s8"
+youtube_3: "https://www.youtube.com/watch?v=IC108KdVYz4"
+---
+
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>Firmware service is controlled change on hardware that can become unusable if the wrong image, wrong target, interrupted write, incompatible configuration, or failed recovery path is handled badly.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>This is <strong>OSFTC.001</strong>, the first lesson in the Open Source Firmware Technician Certification track. It establishes the field workflow for identifying firmware, backing up what matters, validating an image, entering the correct boot or recovery mode, flashing through the right interface, preserving rollback options, collecting evidence, and proving the device works after the change.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The safe firmware workflow</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>identify exact hardware → record current version → back up configuration/image if supported → obtain approved image → verify integrity and compatibility → establish recovery path → enter correct programming mode → flash without interruption → reboot → validate hardware functions → compare logs/telemetry → document result → retain rollback evidence</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">1. What firmware is</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>Firmware</strong> is software stored in nonvolatile memory that controls hardware at a low level. Depending on the device, it may initialize processors, configure peripherals, expose network or serial interfaces, manage sensors and power states, enforce security policy, or launch higher-level software.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Firmware can live in internal MCU flash, external NOR/NAND flash, EEPROM, eMMC, SPI flash, or another nonvolatile storage device. A single product may contain several independent firmware images for a main processor, management controller, FPGA, power controller, network device, or peripheral.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Your existing <a href="https://bitcoinversus.tech/2026/10/02/armv8-m-architecture-explained/"><strong>Armv8-M architecture</strong></a> lesson is useful background for understanding the processor side of many embedded devices.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">2. Never start with the file—start with the target</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Before flashing anything, identify the exact target:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>manufacturer and model;</li><li>PCB or hardware revision;</li><li>processor or controller part number;</li><li>bootloader version if exposed;</li><li>current firmware version/build;</li><li>memory size or flash layout where relevant;</li><li>region, feature, or hardware variant;</li><li>power requirements;</li><li>supported programming/recovery interface.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>A file that is valid firmware for one board revision can still be destructive on another. The warning pattern is familiar in mining hardware too: <a href="https://bitcoinversus.tech/2026/09/27/braiins-warns-bitmain-firmware-third-party-installs/"><strong>firmware compatibility and installation restrictions</strong></a> can change across vendor releases and hardware generations.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">3. Record the current state before changing it</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Capture enough evidence to reconstruct what existed before the change:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>current firmware version and build identifier;</li><li>bootloader version;</li><li>device serial number or asset identity;</li><li>configuration export;</li><li>network settings;</li><li>calibration or tuning data if applicable;</li><li>logs and health state;</li><li>screenshots or command output showing normal operation;</li><li>backup of the existing image if the platform and authorization allow it.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>This is the firmware equivalent of creating a known-good baseline. Your <a href="https://bitcoinversus.tech/2026/09/29/axeos-fundamentals-open-source-bitaxe-firmware-guide/"><strong>AxeOS firmware guide</strong></a> provides a practical mining-device example of how firmware, configuration, and hardware behavior stay tightly coupled.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">4. Verify the image before you flash it</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An approved firmware image should come from a trusted release location or controlled internal repository. Verify the filename, version, target family, release notes, and integrity information before starting the write.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A checksum or cryptographic hash such as SHA-256 can detect accidental corruption when compared against a trusted published value. But remember: <strong>integrity is not the same as authenticity.</strong> A matching hash only proves you have the same bytes as the reference hash you trusted. Digital signatures and a trusted signing chain are stronger authenticity controls.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: Boot modes, system bootloader, and SWD</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=dARiwyQ3IJ0","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=dARiwyQ3IJ0
+</div><figcaption class="wp-element-caption"><em>PinkBugLab — STM32 Essential Circuit Design, Part 4: boot modes and SWD debugging circuits.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">5. Understand the boot chain</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <strong>boot chain</strong> is the sequence that takes the device from reset to running application firmware. A simplified embedded path may look like:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>reset → boot-mode selection → ROM/system bootloader or primary bootloader → validate/select application image → initialize runtime → application starts</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Not every platform uses the same structure. On many STM32 devices, for example, ST provides a factory system-memory bootloader that can accept code through selected interfaces such as USART, USB, CAN, I²C, or SPI depending on the specific MCU. ST documents these device-specific details in <a href="https://www.st.com/resource/en/application_note/an2606-stm32-microcontroller-system-memory-boot-mode-stmicroelectronics.pdf"><strong>AN2606: STM32 system memory boot mode</strong></a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The technician rule is: <strong>do not assume the recovery method from a similar chip applies to this chip.</strong> Read the target's actual documentation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">6. Main flash, system memory, and recovery modes</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A microcontroller may boot from its normal application flash, a factory bootloader in ROM/system memory, SRAM, or another mapped location depending on option bytes, boot pins, straps, fuses, and device family.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For STM32 as one example, ST explains that boot configuration is resolved at reset and that the system bootloader is stored in internal system memory programmed at production. The exact behavior varies by family and device. See ST's <a href="https://community.st.com/t5/stm32-mcus/faq-stm32-boot-process/ta-p/49358"><strong>STM32 boot-process reference</strong></a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">7. Serial console and UART: your first recovery window</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A UART or serial console can expose boot messages before network services start. It may reveal:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>bootloader banner and version;</li><li>memory initialization;</li><li>flash-detection errors;</li><li>kernel or RTOS startup;</li><li>watchdog resets;</li><li>failed image validation;</li><li>filesystem or configuration problems;</li><li>recovery prompts.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Technicians must confirm voltage levels before connecting. A 3.3 V TTL UART is not the same electrical interface as classic RS-232. Incorrect voltage or pinout can damage hardware.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">8. SWD and JTAG: programming plus low-level visibility</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>SWD</strong> and <strong>JTAG</strong> are common hardware debug/programming interfaces. Depending on the target and security configuration, they can allow tools to halt the processor, inspect memory/registers, erase or program flash, set breakpoints, and recover a board that no longer boots normally.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>These interfaces are powerful enough to make a bad situation worse. Confirm target voltage, pinout, ground reference, reset behavior, interface selection, and device identity before issuing erase/program commands.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: SWD, ST-Link, flashing, and debugging</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=qMUzLU636s8","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=qMUzLU636s8
+</div><figcaption class="wp-element-caption"><em>Phil's Lab — STM32 + SWD + ST-Link + CubeIDE: connecting, programming, flashing, and debugging custom hardware.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">9. Safe flashing is mostly about controlling failure modes</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Before pressing <em>Program</em>, eliminate preventable failures:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>stable power source;</li><li>known-good cable and programmer;</li><li>correct target selection;</li><li>correct image;</li><li>verified bootloader/recovery path;</li><li>configuration backup;</li><li>no pending power shutdown or maintenance conflict;</li><li>laptop power secured where applicable;</li><li>no other tool simultaneously accessing the target;</li><li>documented rollback procedure.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Your <a href="https://bitcoinversus.tech/2026/09/30/solo-satoshi-web-flasher-bitaxe-nerdaxe/"><strong>Bitaxe/NerdAxe web-flasher story</strong></a> is a good real-world example of reducing technician friction by standardizing the flashing path.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">10. Erase, program, verify</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Many flashing workflows reduce to three core operations:</p><!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li><strong>Erase</strong> the required flash region.</li><li><strong>Program</strong> the new image into the correct address range.</li><li><strong>Verify</strong> the programmed contents against the source image or tool's verification method.</li></ol><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Do not use a full-chip erase when the procedure only requires a region erase unless the vendor procedure explicitly calls for it. Full erase can destroy calibration, keys, device identity, factory data, option bytes, or configuration stored outside the application image.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">11. Flash addresses matter</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A valid binary written to the wrong address is still wrong. Technicians should know whether the image format carries address information:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>.bin</strong> files are often raw bytes and may require the operator to provide the start address.</li><li><strong>.hex</strong> and <strong>.elf</strong> files can contain address/section information, depending on the tool and workflow.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Follow the vendor's exact procedure. Never guess the flash base address from a different board.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">12. Backup and rollback are part of the flash plan</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A firmware change is not complete until you know what happens if the new image fails.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Can the previous image be restored?</li><li>Can configuration be imported separately?</li><li>Is there an A/B image scheme?</li><li>Does the bootloader automatically fall back?</li><li>Is there a recovery button, jumper, serial command, or ROM bootloader?</li><li>Does secure boot prevent older images from loading?</li><li>Will rollback cross a bootloader or data-format compatibility boundary?</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Your <a href="https://bitcoinversus.tech/2026/09/27/nmaxe-v3-1-03-adds-nexus-support-and-safer-bitcoin-miner-recovery/"><strong>NMAxe recovery story</strong></a> shows why recovery behavior deserves first-class attention rather than being treated as an afterthought.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">13. Configuration is not always firmware</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Keep firmware image, bootloader, calibration data, keys, and user configuration conceptually separate. An upgrade may preserve some of them, migrate some, or erase some.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Do not assume a successful flash preserves network settings, pool credentials, tuning values, certificates, or calibration. Read the release notes and back up independently when supported.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">14. Post-flash validation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>“Programming completed successfully” only proves the programmer completed its task. It does not prove the device works.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>After reboot, validate:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>reported firmware version;</li><li>bootloader and boot reason;</li><li>serial/console startup log;</li><li>network link and management access;</li><li>sensors and telemetry;</li><li>fans, pumps, relays, or actuators where applicable;</li><li>clock/time state;</li><li>configuration persistence;</li><li>error counters;</li><li>normal workload;</li><li>reboot behavior;</li><li>recovery path if required by the test plan.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>For mining hardware, the same discipline appears in <a href="https://bitcoinversus.tech/2026/09/29/axeos-fundamentals-first-boot-to-first-share/"><strong>first-boot-to-first-share validation</strong></a>: a device is not truly restored until the intended workload is functioning.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: What JTAG and SWD are actually doing</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=IC108KdVYz4","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=IC108KdVYz4
+</div><figcaption class="wp-element-caption"><em>38C3 / media.ccc.de — Demystifying Common Microcontroller Debug Protocols: JTAG, SWD, memory access, flash programming, breakpoints, and processor control.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">15. Common ways technicians brick devices</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>flashing firmware for the wrong hardware revision;</li><li>losing power during an unprotected bootloader update;</li><li>erasing factory/calibration regions;</li><li>writing a raw binary at the wrong address;</li><li>changing option bytes or fuses without understanding the consequences;</li><li>disabling the only available debug/recovery interface;</li><li>interrupting bootloader or partition migration;</li><li>ignoring secure-boot/anti-rollback rules;</li><li>restoring an incompatible old configuration after a schema change;</li><li>assuming network recovery will work after the device loses its network configuration.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">16. Firmware technician field checklist</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Identify the exact hardware and revision.</li><li>Record current firmware and bootloader versions.</li><li>Export configuration and calibration data where supported.</li><li>Save current logs/telemetry.</li><li>Confirm the approved target firmware.</li><li>Read release notes and compatibility warnings.</li><li>Verify hash/signature when provided.</li><li>Confirm stable power.</li><li>Confirm the programming interface and voltage.</li><li>Confirm recovery mode before erasing anything.</li><li>Flash using the documented address and method.</li><li>Verify the written image.</li><li>Reboot and watch startup logs.</li><li>Verify version, networking, sensors, and workload.</li><li>Confirm rollback or recovery remains possible.</li><li>Document the final state and evidence.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice exercise</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>You receive a control board labeled revision B. It currently reports firmware 1.4.2. A ticket says “upgrade to 1.7.0,” but the download folder contains builds for revision A, revision B, and revision C. The device has Ethernet, a USB service port, UART pads, and an SWD header.</p><!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Which file do you select?</li><li>What evidence do you capture before the upgrade?</li><li>How do you verify the image was not corrupted?</li><li>Which recovery interfaces exist if normal boot fails?</li><li>What must you know before attaching a USB-to-UART adapter?</li><li>What would you validate after the flash?</li><li>What information would you record in the ticket?</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>1. What is the first thing to identify before flashing?</strong><br>The exact hardware target and revision.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>2. Does a matching checksum prove firmware is authentic?</strong><br>Not by itself. It proves byte integrity relative to the trusted checksum; authenticity requires a trusted source or signature chain.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>3. Why is a bootloader important to a technician?</strong><br>It may provide the path used to load, select, validate, or recover application firmware.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>4. What is the difference between a successful flash and a successful repair?</strong><br>A flash is successful when bytes were programmed correctly; the repair is successful only when the device boots and performs its required functions.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>5. Why should technicians care about SWD/JTAG?</strong><br>They can provide low-level programming and debug access when normal software paths fail.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>6. Why avoid unnecessary full-chip erase?</strong><br>It may destroy configuration, keys, calibration, identity, option bytes, or other factory data outside the application image.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>Firmware technicians protect recoverability.</strong> Identify the exact target, preserve the current state, verify the new image, understand the boot path, control power and interfaces, flash carefully, validate the real workload, and leave enough evidence that another technician can recover or reproduce the result.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Safety and service note: Firmware programming can permanently change security state, option bytes, calibration, keys, or boot behavior. Use the manufacturer's procedure, approved tools, ESD controls, correct interface voltages, and site change-management requirements.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech advertisement.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong><em>Editor's Note:</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

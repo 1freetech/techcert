@@ -1,0 +1,121 @@
+---
+title: "OSPython.019: Generators and yield Basics"
+wordpress_post_id: 20247
+source: BitcoinVersus.tech
+published: 2026-10-03T10:29:25
+modified: 2026-10-03T10:29:25
+live_url: https://bitcoinversus.tech/2026/10/03/ospython-019-generators-yield-basics/
+track: python
+lesson_number: 19
+raw_source: 019-ospython-019-generators-yield-basics-20247.gutenberg.html
+---
+
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>A generator produces values one at a time instead of building the whole sequence in memory first.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The key word is <code>yield</code>. When Python reaches <code>yield</code>, it gives one value back and pauses the function. The next time Python asks for a value, execution continues from where it paused.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Start with the smallest generator</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>def count_to_three():
+    yield 1
+    yield 2
+    yield 3
+
+for number in count_to_three():
+    print(number)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Output:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>1
+2
+3</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The function does not return a normal list. Calling it creates a generator object that can produce the next value when needed.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: Generators and their benefits</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=bD05uGo_sVI","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=bD05uGo_sVI
+</div><figcaption class="wp-element-caption"><em>Corey Schafer demonstrates Python generators, why they are useful, and how they can reduce memory use.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">return vs. yield</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><code>return</code> finishes a function. <code>yield</code> produces a value and pauses the generator so it can continue later.</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>def normal_function():
+    return 10
+
+def generator_function():
+    yield 10</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p><code>normal_function()</code> gives you <code>10</code>. <code>generator_function()</code> gives you a generator that can later yield <code>10</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use next() to see the pause</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>def letters():
+    yield "A"
+    yield "B"
+    yield "C"
+
+items = letters()
+
+print(next(items))
+print(next(items))
+print(next(items))</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Each call to <code>next()</code> resumes the generator until the next <code>yield</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: Generators explained step by step</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=u3T7hmLthUU","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=u3T7hmLthUU
+</div><figcaption class="wp-element-caption"><em>Tech With Tim connects iterators, <code>next()</code>, generator functions, and generator comprehensions.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Generate values with a loop</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>def squares(limit):
+    for number in range(limit):
+        yield number * number
+
+for value in squares(5):
+    print(value)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Output:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>0
+1
+4
+9
+16</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>This is where generators become practical. Python can calculate each square only when the loop asks for it.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Why generators can save memory</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A list comprehension creates every result immediately:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>squares_list = [n * n for n in range(1_000_000)]</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>A generator expression can produce those values lazily:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>squares_generator = (n * n for n in range(1_000_000))</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The generator does not need to create one million squared integers before you start consuming them.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: Lazy sequences and generator pipelines</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=tmeKsb2Fras","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=tmeKsb2Fras
+</div><figcaption class="wp-element-caption"><em>mCoding shows generators as lazy sequences and demonstrates generator expressions, file processing, and pipelines.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A practical file-processing pattern</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>def nonempty_lines(path):
+    with open(path, "r", encoding="utf-8") as file:
+        for line in file:
+            line = line.strip()
+            if line:
+                yield line</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>This pattern can process a file line by line instead of first copying every line into a large list.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A generator is usually consumed once</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>numbers = (n for n in range(3))
+
+print(list(numbers))
+print(list(numbers))</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Output:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>[0, 1, 2]
+[]</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The first conversion consumes the generator. If you need to iterate again, create a new generator.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">How this connects to the previous lesson</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><a href="https://bitcoinversus.tech/2026/10/03/ospython-018-decorators-basics/">OSPython.018: Decorators Basics</a> showed that Python functions can be passed around and wrapped. Generators add another important function behavior: a function can pause and resume while producing a sequence of values.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common beginner mistakes</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li>Expecting a generator function call to immediately produce all its values.</li><li>Using <code>return</code> when you mean to produce multiple values over time.</li><li>Calling <code>next()</code> after the generator is exhausted without handling <code>StopIteration</code>.</li><li>Trying to reuse an already-consumed generator.</li><li>Converting a generator to a list immediately when lazy processing was the reason for using it.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Quick practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Create a generator named <code>even_numbers(limit)</code>.</li><li>Loop from <code>0</code> to <code>limit - 1</code>.</li><li>Use <code>yield</code> only when the number is even.</li><li>Print the values with a <code>for</code> loop.</li><li>Create another generator with a generator expression.</li><li>Call <code>next()</code> twice so you can see the generator advance one value at a time.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><code>yield</code> turns a function into a generator function.</strong> Generators produce values on demand, remember where they paused, and are especially useful when you do not need an entire sequence stored in memory at once.</p><!-- /wp:paragraph -->

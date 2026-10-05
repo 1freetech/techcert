@@ -1,0 +1,143 @@
+---
+title: "OSPython.017: Class Variables and Instance Variables"
+wordpress_post_id: 20210
+source: BitcoinVersus.tech
+published: 2026-10-03T07:30:07
+modified: 2026-10-03T07:30:07
+live_url: https://bitcoinversus.tech/2026/10/03/ospython-017-class-variables-instance-variables/
+track: python
+lesson_number: 17
+raw_source: 017-ospython-017-class-variables-instance-variables-20210.gutenberg.html
+---
+
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>A class variable is shared. An instance variable belongs to one object.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>That is the whole lesson in one sentence.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>If you create two dogs, both dogs can share the fact that they are canine. But each dog can have its own name.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Start with the smallest example</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>class Dog:
+    species = "canine"
+
+    def __init__(self, name):
+        self.name = name</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>There are two kinds of data here:</p><!-- /wp:paragraph -->
+<!-- wp:list --><ul class="wp-block-list"><li><code>species</code> is a <strong>class variable</strong>. It is defined on the class and shared as class-level data.</li><li><code>self.name</code> is an <strong>instance variable</strong>. Each <code>Dog</code> object gets its own name.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Create two dogs</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>dog1 = Dog("Buddy")
+dog2 = Dog("Max")
+
+print(dog1.name)
+print(dog2.name)
+
+print(dog1.species)
+print(dog2.species)</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Output:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>Buddy
+Max
+canine
+canine</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><code>Buddy</code> belongs to <code>dog1</code>. <code>Max</code> belongs to <code>dog2</code>. Both objects can read the shared class value <code>canine</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: Class variables vs. instance variables</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=qSDiHI1kP98","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=qSDiHI1kP98
+</div><figcaption class="wp-element-caption"><em>This focused Python lesson compares class variables with instance variables directly.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Think: shared vs. unique</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A simple way to decide which kind of variable makes sense is to ask:</p><!-- /wp:paragraph -->
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Should every object normally share this value?</strong> A class variable may fit.</li><li><strong>Can each object have a different value?</strong> An instance variable usually fits.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>For a game, every basic enemy might start with the same category:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>class Enemy:
+    category = "basic"
+
+    def __init__(self, name, health):
+        self.name = name
+        self.health = health</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><code>category</code> is shared class-level data. But one enemy can be named <code>Goblin</code> with 50 health while another is named <code>Guard</code> with 100 health.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: Class variables in a simple example</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=bytvWg4fPB0","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=bytvWg4fPB0
+</div><figcaption class="wp-element-caption"><em>This short lesson focuses specifically on Python class variables and shared data.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">You can read a class variable from the class</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>print(Dog.species)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Output:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>canine</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>This makes the relationship clear: <code>species</code> lives on <code>Dog</code> as class data.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">An instance can have its own value</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>dog1.species = "robot dog"
+
+print(dog1.species)
+print(dog2.species)
+print(Dog.species)</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Output:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>robot dog
+canine
+canine</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Here, assigning <code>dog1.species</code> creates an instance attribute that hides the class value when you read that name through <code>dog1</code>. It does not change <code>Dog.species</code> or <code>dog2.species</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The shared-list mistake</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>This is one of the most important beginner mistakes to recognize.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class Dog:
+    tricks = []
+
+    def __init__(self, name):
+        self.name = name</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Because <code>tricks</code> is a class variable, the same list is shared.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>dog1 = Dog("Buddy")
+dog2 = Dog("Max")
+
+dog1.tricks.append("sit")
+
+print(dog2.tricks)</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>You may be surprised to see:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>['sit']</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Why? Both objects are using the same class-level list.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The simple fix</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>If every dog should have its own tricks, create the list on each instance:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class Dog:
+    species = "canine"
+
+    def __init__(self, name):
+        self.name = name
+        self.tricks = []</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Now every new <code>Dog</code> gets a separate <code>tricks</code> list.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: Another direct comparison</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=En7NJ8NC6Ow","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=En7NJ8NC6Ow
+</div><figcaption class="wp-element-caption"><em>This tutorial reinforces the difference between data shared by a Python class and data stored on individual instances.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">How this connects to earlier lessons</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><a href="https://bitcoinversus.tech/2026/10/02/ospython-012-classes-objects/">OSPython.012: Classes and Objects</a> introduced classes and objects. This lesson zooms in on where object data can live.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>The official Python tutorial describes instance variables as data unique to each instance and class variables as data shared by all instances of the class.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common beginner mistakes</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li>Putting unique object data in a class variable.</li><li>Using a mutable class variable such as a list when each object needs its own list.</li><li>Assuming changing an instance attribute always changes the class variable.</li><li>Forgetting that <code>self.name</code> belongs to the current object.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Quick practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Create a <code>Player</code> class.</li><li>Add <code>game = "Hash Race"</code> as a class variable.</li><li>Give each player its own <code>name</code> in <code>__init__()</code>.</li><li>Create two players with different names.</li><li>Print both names and the shared game value.</li><li>Add an empty inventory list to each instance, not to the class.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong>Class variable = shared class-level data. Instance variable = data belonging to one object.</strong> If every object needs its own mutable value, such as its own list, create that value on the instance.</p><!-- /wp:paragraph -->

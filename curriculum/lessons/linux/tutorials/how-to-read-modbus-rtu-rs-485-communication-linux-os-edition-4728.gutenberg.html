@@ -1,0 +1,201 @@
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong><br></strong><em><a href="https://en.wikipedia.org/wiki/Modbus">Modbus</a> RTU (Remote Terminal Unit) is a widely used <strong>serial communication protocol</strong> developed by Schneider Electric in 1979 for industrial applications. It's designed for communication between various devices such as programmable logic controllers (PLCs), sensors, and other industrial electronic devices.<br><br>Modbus RTU uses a <strong>Commander/Executor</strong> architecture, where one device (Commander) initiates communication and controls one or more devices (Executors). Communication is typically done over serial lines such as RS-232 or <strong>RS-485</strong>.</em><br><em><br><strong>This article contains a real-time ledger of a modbus directory change and operation.</strong></em><br><br><strong>Modbus Command Formula:</strong><br>./modbus-cli --target rtuovertcp://&lt;IP_ADDRESS&gt;:&lt;PORT&gt; --unit-id &lt;UNIT_ID&gt; &lt;OPERATION&gt;</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><br><em>The picture provided below shows the sequence of events that occurred when changing the directory and operating the modbus cli command via Linux OS</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4742,"width":"613px","height":"auto"} -->
+<figure class="wp-block-image is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/image-13.png" alt="" class="wp-image-4742" style="width:613px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong>Navigating the Directory:</strong><strong></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4737,"width":"591px","height":"auto"} -->
+<figure class="wp-block-image is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/image-9.png" alt="" class="wp-image-4737" style="width:591px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>bill@Layer1:~$ ls /mnt/c/Users/Bill/Downloads/modbus-cli</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The ls command lists the files on your Linux terminal.<br></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>/mnt/c/Users/Bill/Downloads/modbus-cli.<br>The modbus-cli files are present in the parent /mnt/c/ directory and are also present in the /Downloads subdirectory</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>/mnt/c/ is essentially pointing to the root directory of the C: drive on a Windows system</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Copying modbus-cli to Home Directory:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>bill@Layer1:~$ cp /mnt/c/Users/Bill/Downloads/modbus-cli ./</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This command copies the modbus-cli files from the Downloads folder to the parent home/working directory (C: drive on the Windows OS).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em>Listing the Contents of the Home Directory:</em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>bill@Layer1:~$ ls</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This command lists the files available, showing that modbus-cli has been copied successfully.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em>Change the Directory to the one you need to work in:</em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>bill@Layer1:~$ cd modbus-cli</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Cd This command changes the current directory to modbus-cli.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>After directory is changed, Execute Moddbus-cli to locate and measure PDU</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4739,"width":"1450px","height":"auto"} -->
+<figure class="wp-block-image is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/image-14.png" alt="" class="wp-image-4739" style="width:1450px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>bill@Layer1:~$ modbus-cli --target rtuovertcp://10.31.10.7:502 --unit-id 12 rh:uint16:5001+2</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This command attempts to run modbus-cli with specific parameters:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>--target rtuovertcp://10.31.10.7:502: Specifies the target Modbus server over TCP/IP with the given IP address and port. In this case the modbus server is in container 31</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>However, it appears there is an error:</strong><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXePwoV1-Vyh2IBe4Cxeu-_UeXMRCggxIRIoRAPl6KMTBWoY4PmLBqo7C_haRVad7Gla-b_a3uidpUQI0s7jiz_f5FwlfI4NgVBcuSjyD_u-gD71F20cpaRLfqNgwPvzE6BRLzKhPwg1nqkpSYSbcJlssbo?key=7n9C330fP8a-AB-dZCiJaQ" width="624" height="56"></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>modbus-cli: command not found</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Correcting the Command:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4740,"width":"1252px","height":"auto"} -->
+<figure class="wp-block-image is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/image-16.png" alt="" class="wp-image-4740" style="width:1252px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>bill@Layer1:~$ ./modbus-cli --target rtuovertcp://10.31.10.7:502 --unit-id 12 rh:uint16:5001+2</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The corrected command includes the ./ prefix to specify the current directory, making sure the shell can locate the modbus-cli executable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Reading Modbus Registers:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4734,"width":"1139px","height":"auto"} -->
+<figure class="wp-block-image is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/image-8.png" alt="" class="wp-image-4734" style="width:1139px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong><em>1. Outlet Status: Identifying specific sockets. </em></strong>5001+8</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>bill@Layer1:~$ ./modbus-cli --target rtuovertcp://10.31.10.7:502 --unit-id 12 rh:uint16:5001+8</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This parameter will read all 9 sockets of the PDU’s in container 31 Modbus address 5001.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em>2. Identify specific PDU in respective container. </em></strong>&nbsp;--unit-id 12&nbsp;</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4735,"width":"993px","height":"auto"} -->
+<figure class="wp-block-image is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/image-10.png" alt="" class="wp-image-4735" style="width:993px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><br>bill@Layer1:~$ ./modbus-cli --target rtuovertcp://10.31.10.7:502 --unit-id 12 rh:uint16:5001+8</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This parameter identifies the specific pdu that you're communicating with in that respective container</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em>3. Phase Balance for each phase. </em></strong>1016+2</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4738,"width":"1213px","height":"auto"} -->
+<figure class="wp-block-image is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/image-12.png" alt="" class="wp-image-4738" style="width:1213px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>bill@Layer1:~$ ./modbus-cli --target rtuovertcp://10.31.10.7:502 --unit-id 12 rh:uint16:1016+2</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This parameter will read the phase balance of each pdu</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em>4.</em></strong> <strong><em>Outlet Power Measure:&nbsp;</em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4741,"width":"1450px","height":"auto"} -->
+<figure class="wp-block-image is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/image-15.png" alt="" class="wp-image-4741" style="width:1450px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>bill@Layer1:~$ for i in 0 1 2 3 4 5 6 7 8; do ./modbus-cli --target rtuovertcp://10.38.10.7:502 --unit-id 31 rh:uint16:$((1032 + 5*$i)); done</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>for i in 0 1 2 3 4 5 6 7 8; do: This is a for loop in shell scripting. It sets up a loop that will execute the following commands for each value of i from 0 to 8.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>rh:uint16:$((1032 + 5*$i)): This part of the command is the read holding registers operation. rh stands for read holding registers, uint16 indicates that the data type of the register is an unsigned 16-bit integer</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>$((1032 + 5*$i)) is an arithmetic expansion that calculates the register address to read from. For each iteration of the loop, it reads from a register address starting at 1032 and increases by 5 for each subsequent value of i.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The loop will execute the modbus-cli command 9 times in total, each time reading from a different register address calculated by the expression 1032 + 5*$i. The first read operation will be from register 1032, the second from 1037, and so on, up to the last read operation from register 1072.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4736,"width":"174px","height":"auto"} -->
+<figure class="wp-block-image is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/image-11.png" alt="" class="wp-image-4736" style="width:174px;height:auto" /></figure>
+<!-- /wp:image -->

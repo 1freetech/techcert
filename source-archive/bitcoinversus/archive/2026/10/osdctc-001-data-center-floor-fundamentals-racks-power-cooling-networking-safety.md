@@ -1,0 +1,182 @@
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>A data center technician works where computing, electrical power, cooling, networking, and physical safety all meet.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>This is <strong>OSDCTC.001</strong>, the first lesson in the Open Source Data Center Technician Certification track. The goal is to give you a map of the data center floor before later lessons go deeper into racks, servers, cabling, power systems, cooling systems, monitoring, and troubleshooting.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The data center in one simple flow</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>utility / generator power<br>↓<br>switchgear + UPS + distribution<br>↓<br>rack power<br>↓<br>servers + storage + network equipment<br>↓<br>computing work becomes heat<br>↓<br>cooling removes the heat<br>↓<br>network links move data in and out<br>↓<br>monitoring + alarms tell technicians when something is wrong</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A technician does not need to be the design engineer for every subsystem, but you do need to understand how those systems depend on each other.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">1. What is a data center?</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A data center is a facility built to operate computing and network equipment reliably. The IT equipment is only one part of the building. The facility also needs electrical distribution, cooling, fire protection, physical security, monitoring, maintenance access, and operating procedures.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Schneider Electric's data-center overview makes the same distinction: the IT space sits inside a larger physical infrastructure that includes electrical and cooling systems.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: What is a data center?</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=6HaQ6Qfioxc","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=6HaQ6Qfioxc
+</div><figcaption class="wp-element-caption"><em>Schneider Electric — What is a data center? A beginner overview of IT space, electrical infrastructure, cooling infrastructure, and common data-center types.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">2. Racks organize the IT equipment</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Most enterprise data-center equipment is installed in standardized racks. Servers, storage systems, switches, patch panels, rack PDUs, console equipment, and cable-management hardware may all share the same rack.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Rack unit (U):</strong> the vertical measurement used to describe equipment height.</li><li><strong>Rails:</strong> support equipment inside the rack.</li><li><strong>Front and rear:</strong> matter for airflow, cabling, and service access.</li><li><strong>Blanking panels:</strong> can help prevent unwanted recirculation through unused rack spaces.</li><li><strong>Cable managers:</strong> keep copper, fiber, and power routes organized and serviceable.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Technicians should know the rack name, rack position, device U-position, power source, network path, and asset identity before moving or replacing equipment.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">3. Power does not go directly from the utility to the server</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The electrical path can include utility feeds, generators, automatic transfer equipment, switchgear, transformers, UPS systems, distribution panels, remote power panels, floor or rack distribution, and finally server power supplies.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Our earlier lesson on <a href="https://bitcoinversus.tech/2026/10/03/oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus/"><strong>switchgear, switchboards, panelboards, and power distribution units (PDUs)</strong></a> explains those distribution layers in detail.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Data-center technicians should also recognize that <a href="https://bitcoinversus.tech/2026/10/03/oseec-010-overcurrent-protection-circuit-breakers-fuses-fault-current-selective-coordination/"><strong>overcurrent protection</strong></a> is part of that path. Breakers and fuses protect circuits from abnormal current; they are not simply ON/OFF switches to be reset repeatedly without understanding why they operated.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: Data-center power flow</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Y_8P3wzxsqY","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Y_8P3wzxsqY
+</div><figcaption class="wp-element-caption"><em>MEP Academy — Data Center Power Flow: From Utility Grid to Server Rack.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">4. A and B power paths</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Critical equipment may have two power supplies connected to separate power paths, often called <strong>A</strong> and <strong>B</strong>. The purpose is to prevent one power-path failure or maintenance event from automatically taking down the device.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Before disconnecting a cord, verify which feed it belongs to and whether the device really has a healthy alternate feed. Never assume “two cords” automatically means “two independent sources.”</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">5. UPS does not mean infinite backup time</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An uninterruptible power supply helps bridge power disturbances and outages. In a facility with generators, the UPS commonly carries the critical load while backup generation starts and stabilizes.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The important technician idea is sequence:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>utility problem<br>↓<br>UPS keeps critical load supported<br>↓<br>generator starts and reaches acceptable conditions<br>↓<br>transfer system moves the load as designed<br>↓<br>UPS continues conditioning / supporting the critical bus</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Exact architecture varies by site. Follow the one-line diagram, operating procedure, and equipment labeling for the facility you are working in.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">6. Every watt eventually becomes heat</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Servers, GPUs, storage systems, switches, and power electronics all produce heat. Cooling systems move that heat away from the equipment and ultimately reject it outside the building or into another heat-rejection system.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Room air cooling:</strong> conditions the room or contained aisle.</li><li><strong>In-row / close-coupled cooling:</strong> places cooling closer to the load.</li><li><strong>Rear-door heat exchangers:</strong> remove heat near the rack exhaust.</li><li><strong>Direct-to-chip liquid cooling:</strong> moves coolant directly to cold plates on high-heat components.</li><li><strong>Immersion cooling:</strong> places equipment in a dielectric fluid designed for heat removal.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Cooling architecture is changing quickly as rack power density rises, but the technician's basic job remains the same: keep the supported temperature, flow, pressure, leak-detection, and alarm systems operating within the site's approved limits.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Where discrete thermal controls are used, our lesson on <a href="https://bitcoinversus.tech/2026/10/04/osetc-025-temperature-switches-thermostat-control-basics/"><strong>temperature switches and thermostat control</strong></a> explains setpoints, differential, contact states, and troubleshooting.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: Data-center cooling methods</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=iRLCUWbi0o4","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=iRLCUWbi0o4
+</div><figcaption class="wp-element-caption"><em>MEP Academy — Data Center Cooling Methods Explained: air, liquid, and immersion cooling.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">7. Hot aisle and cold aisle</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Many air-cooled data centers arrange racks so server fronts face one another in a cold aisle and server exhausts face one another in a hot aisle.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>cold supply air → server intake → server fans → hot exhaust air</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The point is to keep hot exhaust from mixing back into server intakes. Missing blanking panels, open floor penetrations, incorrect fan direction, blocked doors, or poorly routed cables can all hurt airflow management.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">8. Networking connects every rack to the rest of the system</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Data-center network equipment can include top-of-rack switches, end-of-row switches, aggregation switches, routers, firewalls, load balancers, optical transport equipment, and management networks.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>If you need the switching foundation, revisit <a href="https://bitcoinversus.tech/2026/10/03/osntc-012-network-switch-basics/"><strong>network switch basics</strong></a>. For Layer-3 traffic between networks, use <a href="https://bitcoinversus.tech/2026/10/03/osntc-013-router-basics/"><strong>router basics</strong></a>. For logical network separation, our <a href="https://bitcoinversus.tech/2026/09/30/osntc-004-vlan-basics/"><strong>VLAN basics</strong></a> lesson explains why multiple networks can share switching infrastructure while remaining logically separated.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The server itself connects through one or more <a href="https://bitcoinversus.tech/2026/10/03/osntc-011-network-interface-card-nic-basics/"><strong>network interface cards (NICs)</strong></a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">9. Cabling is infrastructure, not decoration</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Copper and fiber cabling must be labeled, supported, routed, bent, and serviced correctly. A cable can be electrically or optically functional and still be installed badly enough to create future failures.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Keep power and data routing organized according to site standards.</li><li>Do not exceed cable bend limits.</li><li>Protect fiber connectors from dust and damage.</li><li>Do not block airflow with unmanaged cable bundles.</li><li>Label both ends before removing or replacing a cable.</li><li>Never pull a cable just because the port light is off—verify the circuit identity first.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>For current context on why this matters at AI scale, see our article on <a href="https://bitcoinversus.tech/2026/10/01/ai-data-center-cabling-more-valuable-expensive/"><strong>data-center cabling</strong></a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">10. Monitoring turns physical conditions into alarms</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Data centers monitor electrical load, breaker state, UPS status, battery health, temperatures, humidity, fan status, pump status, pressure, leak detection, generator condition, network devices, access-control systems, and many other points.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Building-management systems, electrical-power monitoring systems, DCIM platforms, network-management tools, and equipment-specific controllers may all contribute alarms.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A technician should treat the alarm as a starting point, not as automatic proof that one particular part has failed.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">11. Redundancy changes how you work</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Data centers often use redundant capacity or distribution paths so maintenance or a single failure does not automatically interrupt the critical load. Common terms include <strong>N</strong>, <strong>N+1</strong>, <strong>2N</strong>, and concurrently maintainable designs.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Uptime Institute's Tier framework separates facilities by the performance of their power, cooling, distribution, maintenance, and fault-tolerance topology. Tier III, for example, is designed around concurrent maintainability: planned removal of capacity components or distribution paths should not require taking the critical IT operation down.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Reference: <a href="https://uptimeinstitute.com/tiers">Uptime Institute — Tier Classification System</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">12. Redundancy is only useful if technicians preserve it</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A perfectly designed redundant system can still be defeated by bad operations.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Both server power supplies accidentally connected to the same rack PDU.</li><li>Both network uplinks patched through the same failure domain.</li><li>A backup pump left unavailable after maintenance.</li><li>A breaker left open after a test.</li><li>A bypass path left in the wrong position.</li><li>An alarm acknowledged without restoring the failed component.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>This is why change control, labeling, peer checks, maintenance procedures, and post-work verification matter.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">13. Safety comes before uptime</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Data centers contain hazardous electrical energy, batteries, rotating equipment, stored mechanical energy, pressurized piping, refrigerants, fuel systems, hot surfaces, elevated work, heavy equipment, and fire-suppression systems.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Do not open energized electrical equipment, defeat interlocks, remove guards, enter restricted rooms, or perform live measurements unless you are trained, qualified, authorized, and following the site's safety program.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Our earlier lesson on <a href="https://bitcoinversus.tech/2026/10/01/osetc-018-interlocks-permissives-basics/"><strong>interlocks and permissives</strong></a> explains why equipment may intentionally refuse to operate when required safety or process conditions are not proven.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">14. Technician walkdown: what to look at first</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li><strong>Identify the rack or equipment.</strong> Confirm labels before touching anything.</li><li><strong>Look for active alarms.</strong> Record them before clearing them.</li><li><strong>Check power state.</strong> Are both expected feeds healthy?</li><li><strong>Check airflow.</strong> Are fans operating, intakes clear, and temperatures normal for the site?</li><li><strong>Check network link state.</strong> Are the expected ports and uplinks active?</li><li><strong>Inspect cabling.</strong> Look for loose, damaged, sharply bent, or unlabeled cables.</li><li><strong>Inspect for leaks or unusual smells.</strong> Do not touch unknown liquids.</li><li><strong>Listen.</strong> Bearing noise, fan changes, arcing sounds, or pump cavitation can matter.</li><li><strong>Check the monitoring system.</strong> Compare local indicators with remote telemetry.</li><li><strong>Make one controlled change at a time.</strong> Preserve evidence and verify the result.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">15. Fast fault-isolation examples</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>Server is off:</strong><br>asset identity → rack PDU outlet → power cord → server PSU LEDs → upstream breaker / distribution status → server hardware state</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Server is hot:</strong><br>inlet temperature → fan status → front obstruction → blanking / recirculation → rack load → room cooling condition</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Network link is down:</strong><br>NIC → patch cable → patch panel → switch port → transceiver → upstream switch / configuration</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Rack lost one power feed:</strong><br>identify A or B path → rack PDU status → branch protection → upstream distribution → verify alternate path remains healthy</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">16. Practice exercise</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A dual-corded server remains online but reports that one power supply lost input power.</p><!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Confirm which PSU lost power.</li><li>Trace that power cord to its rack PDU.</li><li>Confirm whether the rack PDU itself is energized.</li><li>Check whether only one outlet, one branch, or the entire feed is affected.</li><li>Verify the alternate server PSU is on an independent healthy path.</li><li>Review upstream alarms before operating any breaker.</li><li>Escalate according to the site's electrical procedure.</li></ol><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>The server staying online does not mean the problem can be ignored. The site is now operating with reduced redundancy.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>1. Why is a data center more than a room full of servers?</strong><br>Because the IT load depends on power, cooling, networking, monitoring, security, and facility systems to remain available.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>2. What is the purpose of A and B power paths?</strong><br>To reduce the chance that one power-path failure or maintenance event removes all input power from a dual-corded critical device.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>3. Why are hot and cold aisles used?</strong><br>To reduce mixing between cool server-intake air and hot server-exhaust air.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>4. What does redundancy mean operationally?</strong><br>It means alternate capacity or paths exist, and technicians must preserve those alternatives during maintenance and troubleshooting.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>5. Why should an alarm be recorded before clearing it?</strong><br>Because the alarm is evidence that can help identify the root cause and sequence of events.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>6. What should happen before unplugging any cable?</strong><br>Verify the device, port, cable identity, redundancy state, and approved work procedure.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>A data center is a connected physical system.</strong> Racks hold the IT equipment. Electrical infrastructure delivers reliable power. Cooling removes the heat created by computing. Networks move data. Monitoring exposes failures. Redundancy gives the site alternative paths. Technician discipline keeps those paths available.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Display note: all flows and troubleshooting sequences in this lesson use ordinary article text and line breaks. No fixed-width code boxes and no Windows, Linux, or VS Code terminal color palette are used.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech advertisement.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong><em>Editor's Note:</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

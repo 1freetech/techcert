@@ -1,0 +1,75 @@
+<!-- wp:paragraph --><p>Python #4 introduces for loops, range(), and iteration. Loops let a program repeat an operation across a collection of data instead of writing the same instruction again and again. That pattern appears everywhere from Bitcoin mining telemetry to games, sports statistics, and entertainment applications.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Loop Through Bitcoin Miners</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>miners = ["S21", "S21 Pro", "S19 XP"]
+
+for miner in miners:
+    print(miner)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>On each pass through the loop, <code>miner</code> refers to the next item in the list. A monitoring script could use the same pattern to process a fleet of ASIC miners.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use range()</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>for rack_number in range(1, 6):
+    print("Checking rack", rack_number)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p><code>range(1, 6)</code> produces the integers 1 through 5. The ending value is not included.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Gaming Example: Inventory</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>inventory = ["pickaxe", "battery", "cooling kit", "ASIC miner"]
+
+for item in inventory:
+    print("Inventory item:", item)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>A game can iterate through inventory, characters, buildings, map tiles, missions, or other collections using the same basic loop.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Sports Example: Total a Score</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>quarter_scores = [7, 10, 3, 14]
+total = 0
+
+for points in quarter_scores:
+    total += points
+
+print("Final score:", total)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>This loop accumulates points from four quarters. The same technique can total statistics, mining rewards, game resources, or other numeric data.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Loop Through the Dictionary from Python #3</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>miner = {
+    "model": "S21",
+    "hashrate_th": 200,
+    "status": "online"
+}
+
+for key, value in miner.items():
+    print(key, value)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Python #3 introduced dictionaries. The <code>items()</code> method lets a loop receive each key and its associated value. This connects dictionaries directly to iteration.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Nested Loops: Mining Racks</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>for rack in range(1, 3):
+    for miner_slot in range(1, 4):
+        print("Rack", rack, "Miner", miner_slot)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>A nested loop runs one loop inside another. This simplified example visits three miner positions on each of two racks. Similar patterns can traverse game grids, tournament data, seating layouts, or equipment groups.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">break and continue</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>temperatures = [62, 65, 71, 96, 68]
+
+for temperature in temperatures:
+    if temperature &gt;= 90:
+        print("High-temperature alert:", temperature)
+        break</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p><code>break</code> exits the loop immediately. <code>continue</code> skips the remainder of the current iteration and proceeds to the next one. Both are useful, but straightforward loops are usually easier to read when special control flow is unnecessary.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video Lesson</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Programming with Mosh’s Python Full Course for Beginners includes dedicated chapters on for loops, for-else, nested loops, iterables, and while loops. The for-loop section begins around 1:24:18.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=K5KVEU3aaeQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=K5KVEU3aaeQ
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Create a list containing four ASIC miner models and print each one with a <code>for</code> loop.</li><li>Use <code>range()</code> to print rack numbers 1 through 10.</li><li>Create a game inventory and loop through every item.</li><li>Total four sports scoring periods using a loop.</li><li>Create a miner dictionary and print every key-value pair with <code>items()</code>.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A <code>for</code> loop processes items from an iterable one at a time. <code>range()</code> supplies integer sequences, nested loops handle multidimensional repetition, and dictionary iteration connects directly to Python #3.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true,"className":"is-provider-x wp-block-embed-x"} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong>Related BitcoinVersus.tech coverage:</strong> <a href="https://bitcoinversus.tech/2026/09/26/python-dictionaries-key-value-data/">Python dictionaries</a> · <a href="https://bitcoinversus.tech/2026/09/24/python-functions-parameters-return-values/">Python functions</a> · <a href="https://bitcoinversus.tech/2026/09/27/qant-photonic-computing-python-cpp-sdk/">Q.ANT Python and C++ SDK</a> · <a href="https://bitcoinversus.tech/2026/09/26/c-lesson-7-pointers-and-memory-addresses/">C++ pointers</a></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong>BitcoinVersus.Tech Editor's Note:</strong> We volunteer daily to help ensure the credibility of information on this platform is verifiably true. BitcoinVersus.tech is not a financial advisor. This article is independent reporting and educational content for informational purposes only.</p><!-- /wp:paragraph -->

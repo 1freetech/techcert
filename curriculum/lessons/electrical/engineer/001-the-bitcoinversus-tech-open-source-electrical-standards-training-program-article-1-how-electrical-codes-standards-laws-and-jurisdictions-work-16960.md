@@ -1,0 +1,1239 @@
+---
+title: "OSEEC.001: How Electrical Codes, Standards, Laws, and Jurisdictions Work"
+wordpress_post_id: 16960
+source: BitcoinVersus.tech
+published: 2026-07-15T06:21:00
+modified: 2026-09-30T23:24:26
+live_url: https://bitcoinversus.tech/2026/07/15/the-bitcoinversus-tech-open-source-electrical-standards-training-program-article-1-how-electrical-codes-standards-laws-and-jurisdictions-work/
+track: electrical/engineer
+lesson_number: 1
+raw_source: 001-the-bitcoinversus-tech-open-source-electrical-standards-training-program-article-1-how-electrical-codes-standards-laws-and-jurisdictions-work-16960.gutenberg.html
+---
+
+<!-- wp:group -->
+<div class="wp-block-group"><!-- wp:paragraph -->
+<p><strong>In simple terms:</strong> An electrical rulebook tells you how work should be done, but you also need to know who makes those rules apply at your jobsite. A standards organization may publish a code; the government may adopt an edition and add local changes; an inspector or other responsible authority checks the work. Before using a rule, ask: Where is the job? Which rules apply? Which edition is required? Who approves the work?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Definitions:</strong> A <strong>standard</strong> is an agreed technical document. A <strong>code</strong> is an organized set of requirements. A <strong>law</strong> is a legally binding rule; a <strong>regulation</strong> is a rule issued by a government agency under legal authority. A <strong>jurisdiction</strong> is the area or subject an authority governs. The <strong>AHJ</strong>, or authority having jurisdiction, is the organization or person responsible for enforcing requirements or approving work within that authority.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --><!-- wp:paragraph -->
+<p>There is no single electrical code, license, organization, or enforcement authority governing every electrical installation in the world.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Electrical safety is controlled through a layered system of international standards, national laws, regional codes, local amendments, workplace regulations, product-certification requirements, utility rules, licensing boards, inspectors, employers, and authorities having jurisdiction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An installation may comply with a respected international standard and still be illegal in the location where it is built. A worker may understand the newest edition of a code but be tested under an older edition. Equipment may be technically capable of performing a task but still be unacceptable because it lacks the required listing, certification, labeling, or local approval.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The first responsibility of an electrical professional is therefore not merely knowing a rule. It is knowing:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Who created the rule</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>What type of document contains it</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Where it applies</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Whether it has been legally adopted</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Which edition is enforceable</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Who interprets it</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Who inspects the work</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Who licenses the worker</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>What happens when different requirements overlap</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>This article establishes the framework that every future jurisdiction report in the Global Electrical Standards Project will follow.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">1. No Organization Is the Electrical Authority for the Entire World</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The International Electrotechnical Commission, or IEC, is one of the most important international organizations for electrical and electronic standards. Its members are national committees representing participating countries, and those committees appoint experts to take part in IEC standardization and conformity-assessment work. the IEC is not a world government.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An IEC publication does not automatically become enforceable law in every participating country. A country may adopt it directly, modify it, incorporate portions of it into national requirements, use a regional variation, or maintain a separate national code.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>IEC 60364 is the principal international standards series addressing low-voltage electrical installations. The 2025 edition of IEC 60364-1 establishes the series’ scope, fundamental safety principles, general installation characteristics, and definitions. Other parts address protection, equipment selection, verification, and specialized installations. 4 gives the international electrical community a common technical foundation, but the enforceable requirements remain dependent on national and local adoption.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">2. A Standard Is Not Automatically a Law</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>standard</strong> is a technical document developed to establish agreed rules, characteristics, methods, or practices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Standards are commonly created through a consensus process involving engineers, manufacturers, inspectors, regulators, employers, labor representatives, testing organizations, researchers, and other technical stakeholders.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>CEN and CENELEC describe a European Standard as a consensus document approved by a recognized organization for common and repeated use. CENELEC specifically develops voluntary electrotechnical standards for Europe. <strong>voluntary</strong> does not mean that a standard is unimportant. A voluntary standard can become practically or legally mandatory when it is:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Incorporated into a law or regulation</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Adopted as a building or electrical code</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Referenced by a government contract</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Required by an insurer</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Required by a utility</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Included in an employer safety program</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Specified by an engineer</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Required by a product-certification system</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Incorporated into a construction contract</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Used to demonstrate compliance with legislation</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>European standards illustrate this relationship. CENELEC standards are generally voluntary, but harmonized standards can support compliance with European Union legislation such as the Low Voltage Directive, Electromagnetic Compatibility Directive, and Radio Equipment Directive. rd’s legal effect therefore depends on how a jurisdiction, regulator, contract, or enforcement system uses it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">3. What Is an Electrical Code?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An electrical code is an organized collection of requirements governing electrical systems, equipment, installations, or work practices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=BgyJGk3mLRY\u0026amp;pp=ygUbV2hhdCBJcyBhbiBFbGVjdHJpY2FsIENvZGU_","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=BgyJGk3mLRY&amp;pp=ygUbV2hhdCBJcyBhbiBFbGVjdHJpY2FsIENvZGU_
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>A code is usually written so that a government or another governing authority can adopt it. The original publisher may develop the technical requirements, but the jurisdiction determines whether that code has legal force.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the United States, NFPA 70 is better known as the <strong>National Electrical Code</strong>, or NEC. It is the primary national model code for electrical design, installation, and inspection in residential, commercial, and industrial environments. The current publisher’s edition is the 2026 NEC. its name, the National Electrical Code is not automatically a single federal installation law applied identically across the United States.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=SkzaAsvOpHM\u0026amp;pp=ygU3TkZQQSA3MCBpcyBiZXR0ZXIga25vd24gYXMgdGhlIE5hdGlvbmFsIEVsZWN0cmljYWwgQ29kZQ%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=SkzaAsvOpHM&amp;pp=ygU3TkZQQSA3MCBpcyBiZXR0ZXIga25vd24gYXMgdGhlIE5hdGlvbmFsIEVsZWN0cmljYWwgQ29kZQ%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>States and local governments adopt particular NEC editions according to their own legislative and regulatory processes. They may also issue amendments, delay adoption, delegate adoption to cities or counties, or apply different requirements to different facilities.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>As of March 1, 2026, NFPA reported that different NEC editions remained in effect across the United States, including the 2023, 2020, 2017, and older editions. ustrates one of the most important principles in electrical research:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p>The newest published code is not necessarily the code currently enforced at a particular jobsite.</p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">4. What Is a Regulation?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A regulation is a requirement issued under governmental legal authority.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the United States, the Occupational Safety and Health Administration establishes federal workplace safety regulations. OSHA’s general-industry electrical requirements include 29 CFR 1910 Subpart S, which addresses electrical utilization systems, wiring design and protection, wiring methods, equipment, hazardous locations, special systems, and safety-related work practices. ulations are different from privately developed consensus standards.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jh2MfsxAG2U\u0026amp;pp=ygUVZWxlY3RyaWNhbCByZWd1bGF0aW9u","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=jh2MfsxAG2U&amp;pp=ygUVZWxlY3RyaWNhbCByZWd1bGF0aW9u
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>For example, NFPA 70E provides a highly developed framework for protecting workers from electrical shock, electrocution, arc flash, and arc blast. The current publisher’s edition is NFPA 70E 2027, released in early 2026. and OSHA may address closely related hazards, but they do not hold the same legal position:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>OSHA regulations establish enforceable employer obligations.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>NFPA 70E is a consensus safety standard.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Employers may use NFPA 70E to develop electrical-safety programs and work practices.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A company procedure may impose additional site-specific controls.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>State occupational-safety agencies may administer requirements through approved state plans.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Contracts and facility policies may require compliance beyond the regulatory minimum.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>OSHA requires safety-related work practices when employees work on or near equipment or circuits that are or may be energized. Its regulations generally require exposed live parts to be de-energized before work unless de-energizing introduces additional hazards or is infeasible for specifically recognized reasons. lation establishes the obligation. The safety standard, employer program, job plan, and qualified worker determine how that obligation is implemented in the field.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">5. What Is a Law or Statute?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A statute is legislation enacted by a governmental lawmaking body.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Electrical statutes commonly establish:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Licensing boards</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Electrician classifications</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Contractor requirements</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Permit authority</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Inspection authority</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Penalties</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Experience requirements</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Apprenticeship requirements</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Examination authority</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Continuing-education requirements</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Enforcement powers</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>A statute may authorize a government agency to create more detailed regulations. Those regulations may then adopt an electrical code by reference.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The complete legal chain may look like this:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Legislature → statute → regulatory agency → administrative regulation → adopted electrical code → local amendment → inspector interpretation</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This is why code research cannot stop at the standards publisher’s website. A complete jurisdiction report must also identify the legislation and administrative rules giving the code legal force.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">6. What Is a Jurisdiction?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A jurisdiction is the governmental, regulatory, contractual, or organizational territory within which an authority can create, apply, interpret, or enforce requirements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Electrical jurisdictions can exist at several levels:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>International</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Supranational or regional</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>National</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Federal</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>State</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Provincial</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Territorial</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>County</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Parish</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Borough</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Municipal</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Tribal or Indigenous</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Military</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Utility</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Port</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Railway</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Mining</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Maritime</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Aviation</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Industrial-facility</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Government-property</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Special economic zone</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Two projects separated by one municipal boundary may be governed by different electrical-code editions or amendment packages.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A utility may also have service requirements that extend beyond the general electrical code. These may address metering, transformer locations, service entrances, clearances, distributed generation, conductor ownership, fault-current information, and the exact point where utility responsibility ends and customer responsibility begins.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The location of a project must therefore be established before its controlling requirements can be accurately identified.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">7. What Is an Authority Having Jurisdiction?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The term <strong>authority having jurisdiction</strong>, commonly abbreviated <strong>AHJ</strong>, refers to the organization, office, or individual responsible for approving equipment, installations, procedures, or compliance within a particular area of authority.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=9PWUoiW2ANM\u0026amp;pp=ygUdQXV0aG9yaXR5IEhhdmluZyBKdXJpc2RpY3Rpb24%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=9PWUoiW2ANM&amp;pp=ygUdQXV0aG9yaXR5IEhhdmluZyBKdXJpc2RpY3Rpb24%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Depending on the project, an AHJ might be:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>A state electrical inspector</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A municipal building department</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A fire marshal</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A labor or workplace-safety agency</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A utility representative</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A federal agency</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A military installation official</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>An insurance representative</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A port authority</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A mining regulator</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>An industrial facility’s designated authority</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Another legally authorized inspection organization</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>There may be more than one AHJ on the same project.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For example, a municipal electrical inspector may approve the building wiring, a utility may approve the service connection, a fire authority may review emergency systems, and a workplace regulator may evaluate employee safety practices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The AHJ does not necessarily write the underlying standard. The AHJ applies and interprets the requirements within the scope of its authority.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">8. Licensing Authority Is Not Always the Code Authority</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Electrician licensing and electrical-code enforcement are related, but they are not always administered by the same organization.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A licensing board may determine:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Who may legally perform electrical work</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>What classifications are available</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Required experience hours</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Apprenticeship requirements</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Examination requirements</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>License-renewal periods</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Continuing education</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Reciprocity</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Disciplinary procedures</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>A separate building department or inspection agency may determine:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Which code edition applies</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Whether a permit is required</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Which drawings must be submitted</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>When inspections must occur</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Whether an installation is approved</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Which local amendments apply</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The title <strong>journeyman electrician</strong> is also not universal. Other jurisdictions may use terms such as:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Journey-level electrician</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Electrical mechanic</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Wireman</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Installation electrician</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Qualified electrician</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Authorized electrician</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Competent person</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Registered electrical worker</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Licensed electrical worker</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Electrical fitter</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Electrical contractor</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Future jurisdiction reports will identify the locally recognized title rather than forcing every country into an American licensing model.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">9. Product Approval Is a Separate Layer</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A properly designed circuit can still fail inspection if the installed equipment is not approved for its intended application.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>OSHA requires electrical equipment in workplaces to be free from recognized hazards and recognizes listing or labeling as evidence that equipment is suitable for an identified purpose. conformity systems may involve:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Testing laboratories</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Certification bodies</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Inspection bodies</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Manufacturer declarations</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Listing marks</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Certification marks</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Field evaluations</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>National conformity systems</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Regional market-access requirements</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The acceptable certification system varies by jurisdiction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A mark accepted in one country may not automatically satisfy another country’s requirements. Product approval must therefore be researched independently from wiring-code compliance and electrician licensing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">10. ANSI, NFPA, IEC, CENELEC and OSHA Perform Different Functions</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>These organizations are often discussed together even though they perform different roles.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">IEC</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The IEC develops international electrotechnical standards through participating national committees. Its work provides a foundation for national and regional electrical requirements, product standards, testing systems, and conformity assessment. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=4aPFtSlVPUc\u0026amp;pp=ygUeaWVjIGVsZWN0cmljaWFuIGFwcHJlbnRpY2VzaGlw","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=4aPFtSlVPUc&amp;pp=ygUeaWVjIGVsZWN0cmljaWFuIGFwcHJlbnRpY2VzaGlw
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>CENELEC develops voluntary European electrotechnical standards. These standards promote technical consistency across participating European countries and may support compliance with European legislation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>ANSI coordinates the United States voluntary standards and conformity-assessment system. It is not itself the developer of every American standard. ANSI also represents United States interests in ISO and, through the U.S. National Committee, in the IEC.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>NFPA develops fire, life-safety, electrical, and related consensus codes and standards. Its electrical publications include NFPA 70, NFPA 70E, and NFPA 70B.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">OSHA</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>OSHA is a United States federal workplace-safety regulator. It establishes and enforces occupational-safety requirements rather than functioning merely as a voluntary standards-development organization.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Understanding these distinctions prevents one of the most common research errors: treating every technical publication as though it carries the same legal authority.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">11. The Electrical Compliance Hierarchy</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A useful starting hierarchy is:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li>Applicable constitution or governing legal framework</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>National, federal, state, provincial, territorial, or local statute</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Administrative regulation</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Adopted electrical or building code</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Local amendments</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>AHJ interpretations and formal rulings</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Permit conditions and approved construction documents</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Utility service requirements</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Referenced standards</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Equipment listing and manufacturer instructions</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Employer electrical-safety program</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Site-specific procedures and job plans</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Contract specifications</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Engineering requirements</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>This is not an absolute ranking for every dispute. Legal priority depends on the jurisdiction, enabling legislation, contract, facility, and subject matter.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>It is nevertheless a reliable research structure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">12. The Four Questions Every Electrician Must Ask</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Before applying any electrical rule, determine:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Question 1: Where is the work located?</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Identify the country, state, province, territory, county, municipality, utility territory, and any special jurisdiction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Question 2: What type of installation is involved?</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Residential wiring, industrial equipment, a utility substation, a mine, a ship, a data center, a railway, and an offshore platform may be governed by different authorities.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Question 3: Which edition has been adopted?</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Record both the newest publisher’s edition and the legally adopted edition. Never assume they are identical.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Question 4: Who has final approval authority?</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Identify the permit office, inspector, utility, regulator, licensing authority, and any additional AHJs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Without these answers, a statement about electrical compliance remains incomplete.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">13. Research Rules for the Global Electrical Standards Project</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Every jurisdiction report in this project will follow the same evidence standard.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Rule 1: Official sources come first</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary sources include:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Legislation</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Administrative regulations</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Government agencies</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Licensing boards</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Official gazettes</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Standards organizations</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Utility manuals</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Examination bulletins</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Official code-adoption records</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Rule 2: Publication and enforcement are separate facts</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Every article will identify:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Latest published edition</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Adopted edition</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Adoption date</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Effective date</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Transition period</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Known local amendments</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Rule 3: Licensing and installation rules are documented separately</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Knowing the code does not automatically authorize someone to perform regulated electrical work.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Rule 4: National rules do not erase local authority</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>State, provincial, municipal, territorial, utility, and specialized requirements will be investigated independently.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Rule 5: Historical editions remain part of the record</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Older code editions matter because existing installations, examinations, legal cases, and renovation requirements may still depend on them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Rule 6: Copyrighted standards will be explained, not republished</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The project will summarize requirements in original language, provide limited references to relevant sections, and link readers to authorized sources.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Rule 7: Every article receives a verification date</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Electrical laws, adopted editions, examination providers, fees, and licensing requirements change. Each page will state when its sources were last reviewed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Rule 8: Corrections become part of the permanent record</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>When a requirement changes, the article will be updated with an editorial note rather than silently rewriting history.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">14. What This Project Will Cover</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Global Electrical Standards Project will ultimately document:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Every country with publicly available electrical regulations</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>States, provinces, and territories</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Major municipal jurisdictions</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>National standards organizations</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Electrical licensing systems</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Journeyman-equivalent credentials</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Electrical contractor licensing</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Apprenticeship requirements</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Workplace electrical-safety systems</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Product-certification systems</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Inspection procedures</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Permit requirements</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Utility interconnection rules</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Low-, medium-, and high-voltage standards</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Residential, commercial, and industrial installations</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Data centers and critical infrastructure</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Mining and energy facilities</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Renewable energy and energy storage</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Electric-vehicle infrastructure</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Telecommunications and low-voltage systems</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Hazardous locations</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Maritime, rail, aviation, and military systems</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Historical code development</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Code changes and adoption delays</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Enforcement disputes and major electrical incidents</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The first 1,000 articles will create the foundation. They will not complete the subject.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">15. Can This Project Issue a Certification?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The project will provide an open-source, independent <strong>certificate of completion</strong> documenting completed lessons, research modules, examinations, and continuing study (the certification will be available to customize for your self via GitHub, I want to keep this as open source as possible).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>That certificate must be described accurately.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>It will not automatically constitute:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>An NFPA certification</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>An IEC credential</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>An OSHA authorization</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A government electrician license</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A registered apprenticeship</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Approved classroom hours</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Verified field-experience hours</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Permission to perform regulated electrical work</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Approval by a licensing board or AHJ</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The project’s value will come from the quality of its research, assessments, documentation, and technical education—not from pretending to possess governmental or organizational authority that it does not have.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The electrical world is not governed by a single book.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>International organizations develop technical standards. National and regional bodies adapt them. Legislatures create legal authority. Regulators issue enforceable requirements. Local governments adopt codes. Utilities establish service rules. Licensing boards determine who may perform the work. Testing organizations evaluate products. Employers establish safety programs. Inspectors and other authorities having jurisdiction determine whether particular installations are acceptable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A competent electrical professional must understand all of these layers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The Global Electrical Standards Project begins with one central principle:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><!-- wp:paragraph -->
+<p>Never ask only, “What does the electrical code say?” Ask which code, which edition, which jurisdiction, which amendment, which authority, and which type of installation.</p>
+<!-- /wp:paragraph --></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+<p>That question will guide every article that follows.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Article 1 Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>1. Does an IEC standard automatically become law in every IEC member country?</strong><br />No. National or regional authorities determine whether and how an IEC standard is adopted.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>2. Is the newest NEC edition automatically enforced throughout the United States?</strong><br />No. Each applicable jurisdiction determines the adopted edition and amendments.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>3. Are a standard and a regulation legally identical?</strong><br />No. A standard may be voluntary until adopted, referenced, or otherwise made mandatory. A regulation is issued under governmental authority.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>4. Can more than one AHJ apply to the same electrical project?</strong><br />Yes. Building departments, utilities, fire authorities, workplace regulators, and specialized agencies may each have authority over different portions of the work.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>5. Does passing this project’s coursework create a government electrician license?</strong><br />No. Licensing remains controlled by the applicable jurisdiction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>6. What four facts should be established before applying an electrical requirement?</strong><br />The project location, installation type, adopted edition, and responsible approval authorities.</p>
+<!-- /wp:paragraph -->

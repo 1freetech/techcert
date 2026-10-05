@@ -1,0 +1,141 @@
+---
+title: "Linux Command #31 – stat (Linux OS)"
+wordpress_post_id: 19735
+source: BitcoinVersus.tech
+published: 2026-10-01T05:59:17
+modified: 2026-10-01T05:59:17
+live_url: https://bitcoinversus.tech/2026/10/01/linux-command-31-stat-file-metadata/
+track: linux/commands
+lesson_number: 31
+raw_source: 031-linux-command-31-stat-file-metadata-19735.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>A file can exist and still cause trouble: its permissions may block access, or its contents may have changed since your last check. <code>stat</code> gives you a quick report so you can examine those details before changing anything.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What does stat mean?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Definition:</strong> <code>stat</code> is a command that displays file status. <strong>Metadata</strong> means information about a file—such as its size, owner, permissions, and timestamps. Think of this report as a file’s information card.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>By the end of this Open CERT lesson, you will inspect one file, identify its important fields, and distinguish a content edit from a permission change. These examples use GNU stat on Linux; other implementations may use different options.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Start with one file</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Choose a disposable practice folder. Run each line separately. If <code>mkdir</code> reports that this folder already exists, choose a different name before continuing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>mkdir linux-stat-practice</code><br><code>cd linux-stat-practice</code><br><code>printf 'Open CERT\n' &gt; notes.txt</code><br><code>stat notes.txt</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The sample text is nine characters plus a newline: ten bytes. In the tested environment, the report showed <code>Size: 10</code>, <code>Blocks: 8</code>, and <code>IO Block: 4096</code>. Your other values will differ.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read the useful fields first</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Size</strong> is the file’s logical length in bytes. <strong>Blocks</strong> reports allocated storage in 512-byte units on Linux, so eight blocks represents 4,096 bytes. <strong>IO Block</strong> describes a preferred I/O size; it is not the multiplier for the Blocks field. Allocation varies by filesystem.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Access</strong> near the permission string shows access rights. <strong>Uid</strong> and <strong>Gid</strong> identify the owner and group. The later Access line is a timestamp. Read the surrounding text to distinguish these two uses of the same label.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This connects directly to <a href="https://bitcoinversus.tech/2026/09/30/linux-command-30-du-disk-usage/">Linux Command #30 – du</a>: a file’s logical length and its disk usage can differ. Start with Size when checking content length; use allocation information when investigating storage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Watch the command in action</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Pause here for LearnLinuxTV’s walkthrough. Focus on the basic report and the distinction between modification and change times, then return for the exercise.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=MYE4W32oCfA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=MYE4W32oCfA
+</div><figcaption class="wp-element-caption"><em>LearnLinuxTV — How To Use The Stat Command In Linux (Complete Guide).</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Modify, Change, and Birth</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Modify (mtime)</strong> concerns the last content modification. <strong>Change (ctime)</strong> concerns a file status change, such as permissions; a content write normally updates it too. <strong>Change is not creation time.</strong> <strong>Birth</strong> is creation time when available; a dash means it is unknown.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Access (atime)</strong> concerns reading file data, but filesystem mount policies can delay or suppress updates. Do not treat it as a complete audit trail.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice: change permissions, then contents</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Inspect the file, give its owner read/write permission, and inspect it again:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>stat notes.txt</code><br><code>chmod 600 notes.txt</code><br><code>stat notes.txt</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The permission mode should now be <code>0600</code>: owner read/write, with no permission bits for group or others. If the mode changed, Change should update while Modify stays the same. This affects only your practice file.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Next, add a second line and inspect the result:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>printf 'Practice\n' &gt;&gt; notes.txt</code><br><code>stat notes.txt</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Size becomes 19 bytes. Modify and Change normally update. For a shorter report, run:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>stat -c '%n | %s bytes | %a permissions' notes.txt</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Expected: <code>notes.txt | 19 bytes | 600 permissions</code>. The format codes select the name, size, and numeric mode.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Quick review</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>1.</strong> Is Change the creation date? <strong>2.</strong> Can a ten-byte file occupy more than ten bytes of disk storage? <strong>3.</strong> Which command prints a full status report?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Answers:</strong> 1. No; it is status change time. 2. Yes; storage allocation can be larger. 3. <code>stat notes.txt</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> Inspect first. Size helps you check content length; permissions help you check access; timestamps help you interpret what changed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Reference:</strong> <a href="https://www.gnu.org/software/coreutils/manual/html_node/stat-invocation.html">GNU Coreutils: stat</a> and <a href="https://www.gnu.org/software/coreutils/manual/html_node/File-timestamps.html">file timestamps</a>.</p>
+<!-- /wp:paragraph -->

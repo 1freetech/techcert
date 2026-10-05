@@ -1,0 +1,339 @@
+---
+title: "OSC++.019: Pure Virtual Functions and Abstract Classes Basics"
+wordpress_post_id: 20425
+source: BitcoinVersus.tech
+published: 2026-10-04T00:34:56
+modified: 2026-10-04T00:34:56
+live_url: https://bitcoinversus.tech/2026/10/04/oscpp-019-pure-virtual-functions-abstract-classes-basics/
+track: cpp
+lesson_number: 19
+raw_source: 019-oscpp-019-pure-virtual-functions-abstract-classes-basics-20425.gutenberg.html
+---
+
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>A pure virtual function says: every concrete derived class must provide this behavior, but the base class does not provide the normal implementation that objects will use.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/03/oscpp-018-virtual-functions-polymorphism-basics/">OSC++.018: Virtual Functions and Polymorphism Basics</a>. That lesson showed how a base-class reference can call the correct overridden function at runtime. Now we take the next step: making some base-class functions <strong>required</strong>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Start with the one line that changes everything</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>virtual void start() = 0;</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The <code>= 0</code> makes this a <strong>pure virtual function</strong>.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>virtual void start() = 0;
+│       │           │
+│       │           └─ pure virtual
+│       └──────────── function name
+└──────────────────── runtime-polymorphic function</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>A class containing a pure virtual function is an <strong>abstract class</strong>. You cannot directly create an ordinary object of that abstract class.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The smallest useful example</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>#include &lt;iostream&gt;
+
+class Machine {
+public:
+    virtual void start() = 0;
+};
+
+class Fan : public Machine {
+public:
+    void start() override {
+        std::cout &lt;&lt; "Fan starting\n";
+    }
+};
+
+int main() {
+    Fan fan;
+    fan.start();
+}</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Output:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>Fan starting</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><code>Machine</code> defines the rule: every concrete machine must know how to <code>start()</code>. <code>Fan</code> satisfies that rule by providing an override.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: Abstract classes and pure virtual functions</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=wE0_F4LpGVc","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=wE0_F4LpGVc
+</div><figcaption class="wp-element-caption"><em>Portfolio Courses — Abstract Classes and Pure Virtual Functions. This lesson explains why abstract base classes exist and how pure virtual functions require derived implementations.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Why can’t we instantiate the abstract class?</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>This will not compile:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>Machine machine;</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Why? Because <code>Machine</code> contains a pure virtual function. It describes a common interface, but it is intentionally incomplete as a concrete object type.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>Machine
+  │
+  ├── says every machine must provide start()
+  │
+  └── does not represent one complete concrete machine
+
+Fan
+  └── provides start() → can be instantiated</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Microsoft's C++ documentation explains that a class with at least one pure virtual function is abstract and cannot be used to instantiate objects directly.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Reference: <a href="https://learn.microsoft.com/en-us/cpp/cpp/abstract-classes-cpp?view=msvc-170">Microsoft Learn — Abstract Classes (C++)</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Pure virtual vs. ordinary virtual</h2><!-- /wp:heading -->
+
+<!-- wp:table --><figure class="wp-block-table"><table><thead><tr><th>Function</th><th>Meaning</th></tr></thead><tbody><tr><td><code>virtual void start() { ... }</code></td><td>The base class provides behavior that derived classes may override.</td></tr><tr><td><code>virtual void start() = 0;</code></td><td>The function is pure virtual. A concrete derived class must provide a non-pure final override before objects of that derived type can be instantiated.</td></tr></tbody></table></figure><!-- /wp:table -->
+
+<!-- wp:paragraph --><p>Think of the difference this way:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>ordinary virtual:
+"Here is a default behavior; replace it if needed."
+
+pure virtual:
+"This behavior is part of the interface; a concrete derived type must provide it."</code></pre><!-- /wp:code -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What happens if the derived class does not override it?</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class Machine {
+public:
+    virtual void start() = 0;
+};
+
+class Fan : public Machine {
+    // no start() override
+};</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><code>Fan</code> is still abstract because its inherited pure virtual requirement has not been satisfied by a non-pure final override.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>Fan fan;   // error: Fan is abstract</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>That is useful. The compiler helps prevent you from accidentally creating an incomplete concrete type.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: Pure virtual functions step by step</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=FA5bvYW4iUc","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=FA5bvYW4iUc
+</div><figcaption class="wp-element-caption"><em>LearningLad — C++ Pure Virtual Functions and Abstract Classes. This walkthrough focuses on the syntax, base-class requirement, and derived-class implementation.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">One interface, many implementations</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Now add another concrete machine:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class Pump : public Machine {
+public:
+    void start() override {
+        std::cout &lt;&lt; "Pump starting\n";
+    }
+};</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The hierarchy becomes:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>          Machine
+       start() = 0
+          /   \
+         /     \
+       Fan     Pump
+     start()  start()</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Both classes obey the same interface while implementing the behavior differently.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use the abstract class through a reference</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>void start_machine(Machine&amp; machine) {
+    machine.start();
+}</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Now the function can work with any concrete class derived from <code>Machine</code> that fulfills the interface:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>Fan fan;
+Pump pump;
+
+start_machine(fan);
+start_machine(pump);</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Output:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>Fan starting
+Pump starting</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>This is the payoff: code can depend on the common <code>Machine</code> interface instead of being hard-coded to one specific machine type.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Abstract does not mean empty</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An abstract class can still contain data members, constructors, ordinary member functions, and normal virtual functions.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+class Machine {
+protected:
+    std::string name;
+
+public:
+    Machine(const std::string&amp; machine_name)
+        : name(machine_name) {}
+
+    void show_name() const {
+        std::cout &lt;&lt; name &lt;&lt; '\n';
+    }
+
+    virtual void start() = 0;
+};</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The class is abstract because of <code>start() = 0</code>, but it can still provide shared state and shared behavior to derived classes.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A practical data-center example</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Imagine software that monitors several kinds of equipment. Every device must report status, but the details differ.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>#include &lt;iostream&gt;
+
+class Device {
+public:
+    virtual void report_status() const = 0;
+};
+
+class Server : public Device {
+public:
+    void report_status() const override {
+        std::cout &lt;&lt; "Server: online\n";
+    }
+};
+
+class CoolingUnit : public Device {
+public:
+    void report_status() const override {
+        std::cout &lt;&lt; "Cooling unit: running\n";
+    }
+};</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The monitoring code can ask every <code>Device</code> to report status without needing one completely separate interface for servers and cooling units.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">ASIC-mining example</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class Miner {
+public:
+    virtual double hashrate_th() const = 0;
+};
+
+class S21 : public Miner {
+public:
+    double hashrate_th() const override {
+        return 200.0;
+    }
+};
+
+class OtherMiner : public Miner {
+public:
+    double hashrate_th() const override {
+        return 150.0;
+    }
+};</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The base class defines the question—“What is your hashrate?”—while each miner model supplies the answer appropriate to that class.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: Beginner pure-virtual and abstract-class walkthrough</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=XNHSSduMBbY","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=XNHSSduMBbY
+</div><figcaption class="wp-element-caption"><em>ProgrammingKnowledge — C++ Tutorial for Beginners: Pure Virtual Functions and Abstract Classes. Reinforces the syntax and why abstract classes are used as base interfaces.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Why use override on the derived function?</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>void start() override</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><code>override</code> asks the compiler to verify that this function really overrides a virtual function from the base class.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For example, this typo is useful to catch:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class Machine {
+public:
+    virtual void start() = 0;
+};
+
+class Fan : public Machine {
+public:
+    void Start() override {   // capital S: does not match
+    }
+};</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The compiler can tell you that <code>Start()</code> does not override <code>start()</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">An abstract class can have more than one pure virtual function</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class Device {
+public:
+    virtual void start() = 0;
+    virtual void stop() = 0;
+    virtual bool healthy() const = 0;
+};</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>A concrete derived class must satisfy every remaining pure virtual requirement.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>ConcreteDevice
+  must provide:
+  ├── start()
+  ├── stop()
+  └── healthy()</code></pre><!-- /wp:code -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Pure virtual destructors are a special case</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>C++ allows a destructor to be pure virtual, but unlike an ordinary pure virtual member function, a pure virtual destructor still needs a definition because derived-object destruction eventually invokes the base destructor.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class Base {
+public:
+    virtual ~Base() = 0;
+};
+
+Base::~Base() = default;</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>You do not need to use this pattern yet. The important beginner rule is simpler: if a class is intended to be used polymorphically through base pointers, understand virtual destructors before owning/deleting derived objects through that base. A later lesson can go deeper into object lifetime.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Reference: <a href="https://en.cppreference.com/w/cpp/language/abstract_class.html">cppreference — Abstract class and pure virtual function</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common beginner mistakes</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Trying to instantiate the abstract base class directly.</li><li>Forgetting <code>= 0</code> when a function is supposed to be pure virtual.</li><li>Forgetting to override every required pure virtual function in a class that should be concrete.</li><li>Assuming an abstract class cannot contain constructors, fields, or ordinary functions.</li><li>Thinking <code>= 0</code> means “assign zero to the function.” It is special C++ syntax declaring the function pure virtual.</li><li>Leaving off <code>override</code> and missing a signature mismatch.</li><li>Using inheritance only because it exists instead of because the derived types genuinely share the base interface.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Quick practice</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Create an abstract class named <code>Sensor</code>.</li><li>Add a pure virtual function named <code>read()</code> that returns <code>double</code>.</li><li>Create a class named <code>TemperatureSensor</code> that derives from <code>Sensor</code>.</li><li>Override <code>read()</code>.</li><li>Create a <code>TemperatureSensor</code> object.</li><li>Create a <code>Sensor&amp;</code> reference to it and call <code>read()</code>.</li><li>Then temporarily remove the override and observe why the derived class becomes abstract.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>1. What does <code>= 0</code> mean after a virtual function declaration?</strong><br>It declares the function pure virtual.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>2. What makes a class abstract?</strong><br>In this beginner context, a class is abstract when it has at least one pure virtual function that remains pure as a final overrider.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>3. Can you create a direct object of an abstract class?</strong><br>No.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>4. Can an abstract class contain normal member functions and data?</strong><br>Yes.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>5. What does a concrete derived class normally need to do?</strong><br>Provide non-pure overrides for all inherited pure virtual requirements that remain unsatisfied.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>A pure virtual function defines required behavior in a base interface. A class with an unsatisfied pure virtual function is abstract and cannot be instantiated directly. Concrete derived classes complete the interface by providing overrides.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>Abstract base class
+        ↓
+Defines required interface
+        ↓
+Concrete derived classes
+        ↓
+Provide the actual behavior
+        ↓
+One common interface, many implementations</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><em>Display note: all C++ examples and diagrams in this lesson are plain educational code blocks. They are not simulated VS Code, Windows, or Linux terminals, so no terminal color palette is invented or represented.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech advertisement.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong><em>Editor's Note:</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

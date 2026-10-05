@@ -1,0 +1,55 @@
+---
+title: "How to Use Python (Linux OS Edition)"
+wordpress_post_id: 10709
+source: BitcoinVersus.tech
+published: 2025-03-06T13:43:44
+modified: 2025-03-30T00:14:44
+live_url: https://bitcoinversus.tech/2025/03/06/how-to-use-python-linux-os-edition/
+track: linux/tutorials
+lesson_number: null
+raw_source: how-to-use-python-linux-os-edition-10709.gutenberg.html
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Before you can use <a href="https://bitcoinversus.tech/2024/07/09/my-red-tea-infusion-full-python-course-review-final-score/">python</a> in the <a href="https://bitcoinversus.tech/2024/11/14/top-linux-distributions-and-their-key-features/">Linux</a> terminal, you need to download the python version that you wish to utilize on your operating system. <br><br>For example your python version might be 3.12 so make the call "python3 --version"</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":10712,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/03/image-5.png?w=426" alt="" class="wp-image-10712" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">After you confirm python is downloaded run the application by calling the version for example, "python3" is the version I've got so I will call that version. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":10720,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/03/image3.png?w=689" alt="" class="wp-image-10720" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">After your done using python in the terminal you can type the command "exit()" to exit the python application.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":10715,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/03/screenshot-from-2025-03-06-12-04-19.png?w=689" alt="" class="wp-image-10715" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">You can also run <a href="https://bitcoinversus.tech/2025/01/23/how-to-set-up-a-flask-api-server-for-application-control/">Python scripts</a> by typing <code>python3 your_script.py</code>, replacing “your_script.py” with the name or path of the Python file you want to execute. Additionally, if you need extra libraries, you can install them via <code><a href="https://bitcoinversus.tech/2025/03/03/pip-installs-packages-pip-overview/">pip3 install package_name</a></code>, which downloads and installs the desired package from the Python Package Index (PyPI). </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This combination of checking your Python version, installing Python if needed, and using the interpreter or script execution commands provides a straightforward foundation for working with Python in a Linux environment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

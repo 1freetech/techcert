@@ -1,0 +1,96 @@
+---
+title: "OSPython.003: Dictionaries and Key-Value Data"
+wordpress_post_id: 18668
+source: BitcoinVersus.tech
+published: 2026-09-26T22:32:31
+modified: 2026-09-30T20:08:31
+live_url: https://bitcoinversus.tech/2026/09/26/python-dictionaries-key-value-data/
+track: python
+lesson_number: 3
+raw_source: 003-python-dictionaries-key-value-data-18668.gutenberg.html
+---
+
+<!-- wp:paragraph --><p>Python dictionaries store information as key-value pairs. They are useful when a program needs to look up a value by a meaningful name instead of only by a numeric position. That makes dictionaries a natural fit for Bitcoin miner telemetry, game-character statistics, sports data, and many everyday applications.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Create a Dictionary</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>miner = {
+    "model": "S21",
+    "hashrate_th": 200,
+    "efficiency_j_th": 17.5,
+    "status": "online"
+}
+
+print(miner["model"])
+print(miner["hashrate_th"])</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Each key identifies a value. Here, <code>"model"</code> points to <code>"S21"</code>, while <code>"hashrate_th"</code> points to <code>200</code>. This resembles the structured telemetry and configuration data used in mining and data-center software.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Read and Update Values</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>miner["status"] = "maintenance"
+miner["temperature_c"] = 68
+
+print(miner["status"])
+print(miner["temperature_c"])</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Assigning to an existing key updates its value. Assigning to a new key adds another key-value pair.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use get() for Safer Lookups</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>fan_speed = miner.get("fan_rpm", "not reported")
+print(fan_speed)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Directly requesting a missing key with square brackets raises a <code>KeyError</code>. The <code>get()</code> method can instead return a fallback value.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Gaming Example: Character Stats</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>player = {
+    "name": "Nova",
+    "level": 12,
+    "health": 95,
+    "inventory_slots": 24
+}
+
+player["health"] -= 15
+print(player)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>A game can group related properties for a character under readable keys. Dictionaries are especially useful when the program cares about what each value represents.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Sports Example: Player Records</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>quarterback = {
+    "name": "QB1",
+    "passing_yards": 312,
+    "touchdowns": 3,
+    "interceptions": 0
+}
+
+for stat, value in quarterback.items():
+    print(stat, value)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>items()</code> method makes it easy to loop through both keys and values. The same pattern can be used for box-score data, game results, entertainment catalogs, or hardware monitoring records.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Nested Dictionaries</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>mining_farm = {
+    "rack_01": {
+        "miners": 48,
+        "online": 46
+    },
+    "rack_02": {
+        "miners": 48,
+        "online": 48
+    }
+}
+
+print(mining_farm["rack_01"]["online"])</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Values inside a dictionary can themselves be dictionaries. Nested dictionaries can represent racks, teams, game worlds, media libraries, or other structured records.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video Lesson</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Programming with Mosh’s Python beginner course includes a dedicated dictionaries chapter beginning around 2:18:21, followed by an emoji-converter exercise that puts dictionary lookup into practice.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=_uQrJ0TkZlc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=_uQrJ0TkZlc
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Create a dictionary for one Bitcoin miner with model, hashrate, efficiency, and status.</li><li>Add a temperature key after creating the dictionary.</li><li>Use <code>get()</code> to request a key that may not exist.</li><li>Create either a game-character or sports-player dictionary.</li><li>Loop through it with <code>items()</code> and print each key and value.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Lists are ideal when position and sequence matter. Dictionaries are ideal when values should be identified by meaningful keys. Real programs frequently combine both structures.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true,"className":"is-provider-x wp-block-embed-x"} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong>Related BitcoinVersus.tech coverage:</strong> <a href="https://bitcoinversus.tech/2026/09/27/python-4-for-loops-range-iteration/">Python loops</a> · <a href="https://bitcoinversus.tech/2026/09/24/python-functions-parameters-return-values/">Python functions</a> · <a href="https://bitcoinversus.tech/2026/09/26/c-lesson-7-pointers-and-memory-addresses/">C++ pointers</a> · <a href="https://bitcoinversus.tech/2026/09/27/qant-photonic-computing-python-cpp-sdk/">Q.ANT Python and C++</a></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong>BitcoinVersus.Tech Editor's Note:</strong> We volunteer daily to help ensure the credibility of information on this platform is verifiably true. BitcoinVersus.tech is not a financial advisor. This article is independent reporting and educational content for informational purposes only.</p><!-- /wp:paragraph -->

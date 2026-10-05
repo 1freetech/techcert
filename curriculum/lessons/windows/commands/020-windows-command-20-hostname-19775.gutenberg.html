@@ -1,0 +1,24 @@
+<!-- wp:paragraph --><p>The Windows <strong><code>hostname</code></strong> command answers a very simple but important technician question: <strong>what is this computer called on the network?</strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/01/windows-command-19-arp/">Windows Command #19 – arp (Windows OS)</a>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Run hostname</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>hostname</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>A computer might return:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>DC-TECH-01</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>That text is the computer's host name. Windows uses computer names to help identify machines, and technicians often need the name when checking inventory, remote systems, network records, or support tickets.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video: Find a Windows Host Name</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>This short Windows tutorial explains what a host/device name is and demonstrates finding it from Command Prompt.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=GQuyFINGUVo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=GQuyFINGUVo
+</div></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">Another Way to Check</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Windows also has a <code>COMPUTERNAME</code> environment variable. In Command Prompt, try:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>echo %COMPUTERNAME%</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Microsoft notes that this usually prints the same computer name as <code>hostname</code>, commonly in uppercase.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Data Center Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>You are standing at a Windows workstation in a data center and need to confirm which machine is listed in a maintenance ticket. Open Command Prompt, run <code>hostname</code>, and compare the returned name with the ticket or asset record before making changes.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Networking Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>If several Windows computers are connected to the same network, their host names help people distinguish one system from another. A clear name such as <code>DC-TECH-01</code> is easier to recognize than guessing which physical computer a record refers to.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Open Command Prompt.</li><li>Run <code>hostname</code>.</li><li>Write down the returned computer name.</li><li>Run <code>echo %COMPUTERNAME%</code>.</li><li>Compare the two results.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><code>hostname</code> quickly displays the name of the Windows computer you are working on. It is a simple identification command that is useful before troubleshooting, documenting, or remotely working with systems.</p><!-- /wp:paragraph -->

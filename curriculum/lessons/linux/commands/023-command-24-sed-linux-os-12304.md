@@ -1,0 +1,59 @@
+---
+title: "Command #23: sed (Linux OS)"
+wordpress_post_id: 12304
+source: BitcoinVersus.tech
+published: 2025-06-14T08:10:00
+modified: 2025-04-09T17:09:10
+live_url: https://bitcoinversus.tech/2025/06/14/command-24-sed-linux-os/
+track: linux/commands
+lesson_number: 23
+raw_source: 023-command-24-sed-linux-os-12304.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>The <code>sed</code> command in Linux is a powerful stream editor used to filter, find, and modify text within files or input streams. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Short for “stream editor,” <code>sed</code> operates line-by-line and can perform operations like search-and-replace, deletion, insertion, or even complex pattern matching using regular expressions. It is commonly used for parsing and transforming text in automation scripts or when editing files without opening a text editor.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=TFq5YxN7pE0\u0026amp;pp=ygUOc2VkIChMaW51eCBPUynSBwkJfgkBhyohjO8%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=TFq5YxN7pE0&amp;pp=ygUOc2VkIChMaW51eCBPUynSBwkJfgkBhyohjO8%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>In the screenshot, the user first creates a file called <code>newfile.txt</code> containing the sentence “This is an error” using the <code>echo</code> command. They confirm the file’s contents with <code>cat newfile.txt</code>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Next, the command <code>sed 's/error/OK/' newfile.txt</code> is used to <strong>display</strong> the modified version of the file where “error” is replaced with “OK” — but it does not actually change the file. To apply the change permanently, the user runs <code>sed -i 's/error/OK/' newfile.txt</code>, where <code>-i</code> stands for "in-place," meaning the file is directly updated. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Running <code>cat newfile.txt</code> afterward confirms the change has been saved. This sequence demonstrates both the power of <code>sed</code> as a tool for temporary text transformation and how to make those changes persistent in Linux.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":12379,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/04/screenshot-from-2025-04-09-14-38-25.png?w=608" alt="" class="wp-image-12379" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:embed {"url":"https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l","type":"rich","providerNameSlug":"bluesky-social"} -->
+<figure class="wp-block-embed is-type-rich is-provider-bluesky-social wp-block-embed-bluesky-social"><div class="wp-block-embed__wrapper">
+https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

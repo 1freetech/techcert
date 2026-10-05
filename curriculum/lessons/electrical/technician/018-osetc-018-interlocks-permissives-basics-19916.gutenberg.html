@@ -1,0 +1,39 @@
+<p class="wp-block-paragraph">An <strong>interlock</strong> or <strong>permissive</strong> adds a condition to an electrical control circuit. Instead of allowing a device to run whenever START is pressed, the circuit checks whether another required condition is satisfied first.</p>
+<p class="wp-block-paragraph">This lesson builds directly on OSETC.017. The simple technician idea is: <strong>a permissive says “this must be true before you may start,” while an interlock helps prevent an unwanted or conflicting operation.</strong></p>
+<h2 class="wp-block-heading">What Is a Permissive?</h2>
+<p class="wp-block-paragraph">A permissive is a condition that must be satisfied before an output is allowed to operate. In a ladder diagram, a permissive may appear as a contact placed in series with the output coil&#8217;s control path.</p>
+<p class="wp-block-paragraph">For example, Motor 2 may be allowed to start only when Motor 1 is already running. A contact associated with Motor 1 can act as the permissive in Motor 2&#8217;s control rung.</p>
+<h2 class="wp-block-heading">What Is an Interlock?</h2>
+<p class="wp-block-paragraph">An interlock prevents an operation when another condition makes that operation unsafe, undesirable, or mechanically incompatible. Interlocks can be electrical, mechanical, or part of a control system.</p>
+<h2 class="wp-block-heading">Simple Two-Motor Example</h2>
+<p class="wp-block-paragraph">Imagine two fans where Fan 2 should not run unless Fan 1 is running. Fan 1&#8217;s auxiliary contact can be placed in Fan 2&#8217;s control path. If Fan 1 is off, that permissive is not satisfied and Fan 2 cannot start through the normal control sequence.</p>
+<h2 class="wp-block-heading">Video: Forward/Reverse Motor Contactor Interlocking</h2>
+<p class="wp-block-paragraph">This PLC Automation Academy lesson walks through a forward/reverse three-phase motor contactor ladder diagram and demonstrates electrical and mechanical interlocking so conflicting contactors cannot operate together.</p>
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio">
+<div class="wp-block-embed__wrapper">
+<span class="embed-youtube" style="text-align:center;display: block"><span class="embed-youtube" style="text-align:center;display: block">[youtube https://www.youtube.com/watch?v=fab9xMFCasw?version=3&#038;rel=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;fs=1&#038;hl=en&#038;autohide=2&#038;wmode=transparent&w=640&h=360]</span></span>
+</div>
+</figure>
+<h2 class="wp-block-heading">Forward and Reverse Example</h2>
+<p class="wp-block-paragraph">A motor-control system may have separate contactors for forward and reverse operation. An interlock can prevent both contactors from being energized at the same time. The exact design depends on the equipment and approved schematic.</p>
+<h2 class="wp-block-heading">Permissive vs. Seal-In Contact</h2>
+<p class="wp-block-paragraph">A permissive is a condition that must be satisfied. A seal-in contact, introduced in OSETC.017, is commonly used to maintain a control circuit after a momentary START command. They can appear in the same ladder diagram but perform different jobs.</p>
+<h2 class="wp-block-heading">Data Center Example</h2>
+<p class="wp-block-paragraph">A cooling pump may require proof that another pump, valve, airflow condition, or other approved prerequisite is present before it is commanded to run. Those conditions can appear as permissives in the control sequence.</p>
+<h2 class="wp-block-heading">Bitcoin Mining Example</h2>
+<p class="wp-block-paragraph">A mining facility&#8217;s cooling system may require a pump or fan condition before other cooling equipment is enabled. Understanding permissives helps a technician recognize why pressing START does not always mean a device should immediately run.</p>
+<h2 class="wp-block-heading">Troubleshooting Mindset</h2>
+<p class="wp-block-paragraph">If an output does not energize, do not immediately assume the contactor or motor is bad. Read the approved control diagram from left to right and identify every required condition in the rung. An open permissive or active interlock may be correctly preventing operation.</p>
+<h2 class="wp-block-heading">Safety Boundary</h2>
+<p class="wp-block-paragraph">Never bypass an interlock, permissive, overload, emergency stop, or other protective condition merely to make equipment run. These conditions may exist to protect people or equipment. Follow the approved schematic, lockout/tagout procedures, PPE requirements, equipment documentation, and qualified-person boundaries.</p>
+<h2 class="wp-block-heading">Practice</h2>
+<ol class="wp-block-list">
+<li>Define a permissive in plain language.</li>
+<li>Define an interlock in plain language.</li>
+<li>Explain why Motor 2 might require Motor 1 to be running first.</li>
+<li>Explain the difference between a permissive and a seal-in contact.</li>
+<li>Trace a simple rung and identify each condition that must be satisfied before the coil can energize.</li>
+<li>Explain why bypassing an interlock is not a normal troubleshooting step.</li>
+</ol>
+<h2 class="wp-block-heading">Key Takeaway</h2>
+<p class="wp-block-paragraph">Permissives establish conditions that must be satisfied before operation, while interlocks prevent conflicting or unwanted operations. For technicians, the key skill is tracing each control condition systematically and understanding that a device that does not start may be behaving exactly as the control design intends.</p>

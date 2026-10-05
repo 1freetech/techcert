@@ -1,0 +1,174 @@
+---
+title: "OSRTC.001: Industrial Robot Safety — E-Stops, Safeguarding, and Safe Workcell Entry"
+wordpress_post_id: 20483
+source: BitcoinVersus.tech
+published: 2026-10-04T01:08:03
+modified: 2026-10-04T01:08:03
+live_url: https://bitcoinversus.tech/2026/10/04/osrtc-001-industrial-robot-safety-e-stops-safeguarding-safe-workcell-entry/
+track: robotics/technician
+lesson_number: 1
+raw_source: 001-osrtc-001-industrial-robot-safety-e-stops-safeguarding-safe-workcell-entry-20483.gutenberg.html
+---
+
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>A robotics technician's first job is not making the robot move. It is knowing when the robot must not move, what can still move after a stop, and what conditions must be proven before a person enters the hazardous space.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>This is <strong>OSRTC.001</strong>, the first lesson in the Open Source Robotics Technician Certification track. It establishes the safety vocabulary and technician habits required before later lessons on teach pendants, jogging, homing, calibration, encoders, actuators, preventive maintenance, wiring, fault recovery, and end effectors.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The safety model in one picture</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>hazardous robot motion + tooling + stored energy<br>↓<br>risk assessment identifies who can be exposed and how<br>↓<br>guards + interlocks + presence sensing reduce access risk<br>↓<br>safety-rated stop functions respond when safeguards are triggered<br>↓<br>manual/teach mode adds reduced motion + enabling controls<br>↓<br>maintenance requiring hazardous-zone access uses <a href="https://bitcoinversus.tech/2026/09/30/osetc-011-lockout-tagout-energy-isolation/">lockout/tagout and energy isolation</a><br>↓<br>verification before entry + controlled reset before restart</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>OSHA notes that many robot accidents occur during <strong>non-routine conditions</strong> such as programming, maintenance, testing, setup, and adjustment—exactly the work technicians often perform. See the current <a href="https://www.osha.gov/robotics">OSHA Robotics overview</a> and the updated <a href="https://www.osha.gov/otm/section-4-safety-hazards/chapter-4">OSHA Technical Manual chapter on industrial robot systems</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">1. Robot, work envelope, and safeguarded space are not the same thing</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Robot:</strong> the programmable manipulator itself.</li><li><strong>End effector:</strong> the tool attached to the robot wrist—gripper, welder, suction cup, screwdriver, cutter, dispenser, and so on.</li><li><strong>Work envelope:</strong> the volume the robot can physically reach through its possible motions.</li><li><strong>Robot cell:</strong> the robot plus tooling, fixtures, conveyors, guarding, controls, sensors, and other integrated equipment.</li><li><strong>Safeguarded space:</strong> the space where access is controlled by guards or protective devices because hazardous motion or energy may exist.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>The hazard does not stop at the robot arm. A gripper can crush, a fixture can clamp, a pneumatic cylinder can extend, a conveyor can pull, and a dropped payload can fall even if the robot itself has stopped.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">2. The main hazard families</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Impact:</strong> the robot, payload, or end effector strikes a person.</li><li><strong>Crush and pinch:</strong> a person is trapped between the robot and a fixed object, fixture, fence, machine, or another axis.</li><li><strong>Shear/cut/puncture:</strong> sharp tooling, weld equipment, cutters, drills, or moving mechanisms create process-specific hazards.</li><li><strong>Unexpected startup:</strong> automatic restart, remote commands, program execution, control faults, or another person initiating motion.</li><li><strong>Electrical energy:</strong> controller cabinets, drives, motors, capacitors, and connected equipment may remain energized.</li><li><strong>Pneumatic/hydraulic energy:</strong> pressure can remain trapped after electrical motion stops.</li><li><strong>Gravity and stored mechanical energy:</strong> raised axes, springs, counterbalances, payloads, or fixtures can move after power removal.</li><li><strong>Process hazards:</strong> welding arc, heat, laser, chemicals, chips, fumes, or high-pressure fluids may belong to the application even when robot motion is controlled.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">3. E-stop: emergency action, not routine safeguarding</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An <strong>emergency stop</strong> is a manually initiated emergency function intended to stop hazardous operation when a dangerous situation is recognized. It is not a substitute for perimeter guarding, presence sensing, safe entry procedures, or <a href="https://bitcoinversus.tech/2026/09/30/osetc-011-lockout-tagout-energy-isolation/">LOTO</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Know every E-stop location before beginning work.</li><li>An E-stop should be readily identifiable and accessible.</li><li>Pressing an E-stop does not prove every energy source is isolated.</li><li>Releasing or resetting an E-stop must not be treated as permission to restart blindly.</li><li>The cause of the emergency condition must be understood before motion resumes.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>A useful current manufacturer example is Universal Robots' safety documentation, which explicitly distinguishes an <strong>Emergency Stop</strong> from a safeguard/protective stop and states that an E-stop is for emergency purposes rather than normal safeguarding.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: ABB emergency stop behavior</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=6JY5csFG4RE","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=6JY5csFG4RE
+</div><figcaption class="wp-element-caption"><em>ABB Robotics — IRC5 Controllers: Emergency Stop. Manufacturer training on a common industrial-robot emergency-stop function.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">4. Safeguarding: keep people separated from hazardous motion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Safeguarding is normally layered. One device rarely controls every hazard.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Fixed perimeter fencing:</strong> prevents casual entry into a hazardous robot cell.</li><li><strong><a href="https://bitcoinversus.tech/2026/10/01/osetc-018-interlocks-permissives-basics/">Interlocked gates</a>:</strong> opening the access gate changes the safety state and prevents normal automatic operation.</li><li><strong><a href="https://bitcoinversus.tech/2026/10/02/osetc-021-photoelectric-sensors-basics/">Light curtains / photoelectric presence sensing</a>:</strong> optical beams detect intrusion into a protected opening.</li><li><strong>Safety laser scanners:</strong> monitor configured areas and can trigger warning, reduced-speed, or stop behavior depending on the safety design.</li><li><strong>Pressure-sensitive devices:</strong> mats or edges can detect presence in certain applications.</li><li><strong><a href="https://bitcoinversus.tech/2026/10/02/osetc-020-limit-switches-proximity-sensors-basics/">Position and proximity sensing</a>:</strong> confirms gate, fixture, axis, or mechanism state where the safety design requires it.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>A normal industrial sensor is not automatically a safety-rated device. The full safety function—from sensing device through logic to the final stopping element—must be designed and validated for the required risk reduction.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">5. Interlocks and permissives</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A robotics cell depends heavily on <a href="https://bitcoinversus.tech/2026/10/01/osetc-018-interlocks-permissives-basics/">interlocks and permissives</a>. A permissive asks, “Are all required conditions true before this action is allowed?” An interlock prevents or changes operation when a condition is unsafe or incompatible.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Typical cell logic might require:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>gate closed and safety circuit healthy<br>AND<br>no E-stop active<br>AND<br>fixture in safe state<br>AND<br>other machine axes ready<br>AND<br>robot controller ready<br>↓<br>automatic-cycle start permitted</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The technician should understand the underlying <a href="https://bitcoinversus.tech/2026/10/01/osetc-017-control-circuit-symbols-ladder-diagrams-basics/">control-circuit and ladder-diagram concepts</a> without assuming ordinary PLC logic alone is sufficient for a required safety function.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">6. Protective/safeguard stop versus emergency stop</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The exact terminology and stop behavior depend on the robot/controller and the applicable safety design, but the conceptual distinction matters:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Emergency stop:</strong> manually triggered because a person recognizes an emergency.</li><li><strong>Safeguard or protective stop:</strong> triggered by a protective safety function—for example, an interlocked gate or safety scanner—to protect people during normal safeguarding.</li><li><strong>Operational/program stop:</strong> a normal process stop; it should never be assumed to provide personnel protection unless the safety design explicitly says it does.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Do not reduce this to “stopped equals safe.” Ask: <strong>what initiated the stop, what category/function is active, what energy remains, what can restart it, and what must happen before entry?</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: ABB SafeMove2</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=HPuLsNWlz34","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=HPuLsNWlz34
+</div><figcaption class="wp-element-caption"><em>ABB Robotics — SafeMove2. Demonstrates safety-rated robot monitoring concepts used to constrain motion and support safer cell designs.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">7. Manual/teach mode changes the job, not the laws of physics</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Teaching often requires an authorized technician or programmer to work closer to the robot than during automatic operation. That means the risk-control strategy changes.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Use the manufacturer's designated manual/teach operating mode.</li><li>Use the required enabling device when the system calls for one.</li><li>Maintain reduced speed and other configured safety limits.</li><li>Keep clear of pinch points and trapped-person locations even at reduced speed.</li><li>Know the effect of releasing, fully squeezing, or correctly holding a three-position enabling device on the specific system.</li><li>Do not defeat gate switches, scanners, or other protective devices to “make troubleshooting easier.”</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>OSHA's updated Technical Manual describes manual/teach-mode safeguarding and notes a reduced teach speed of approximately <strong>250 mm/s (10 in/s)</strong> in the referenced industrial-robot safety framework. Site and manufacturer requirements still control the actual job.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">8. Three-position enabling device</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Many industrial systems use a three-position enabling device on the teach pendant:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>released → motion not enabled<br>middle / deliberate hold → manual motion may be enabled<br>fully squeezed in panic → motion not enabled</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The goal is to avoid a control that continues allowing hazardous motion if the operator either lets go or reflexively clenches tightly during an emergency. Exact behavior must be learned from the robot manufacturer's documentation and the site's validated safety configuration.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">9. LOTO: when a stop is not enough</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>For maintenance, repair, jam clearing, component replacement, or other servicing where unexpected energization or release of stored energy could injure someone, follow the site's hazardous-energy procedure and applicable <a href="https://bitcoinversus.tech/2026/09/30/osetc-011-lockout-tagout-energy-isolation/">lockout/tagout</a> requirements.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A technician must think beyond the controller's motor power:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>electrical feeds</li><li>DC-bus/capacitor energy</li><li>pneumatic pressure and vacuum</li><li>hydraulic pressure</li><li>springs and counterbalances</li><li>gravity-loaded axes or payloads</li><li>adjacent conveyors and machines</li><li>tooling with independent energy sources</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>An E-stop is not an energy-isolation device.</strong> A safety-rated stop can stop motion and still leave electrical or other energy available by design.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">10. Safe workcell entry: technician sequence</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>This general sequence is an educational model. The approved manufacturer and site procedure always takes precedence.</p><!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li><strong>Identify the task.</strong> Observation, teaching, fault recovery, jam clearing, maintenance, and component replacement do not have the same controls.</li><li><strong>Identify every hazardous energy source.</strong> Robot motion is only one source.</li><li><strong>Determine the required operating state.</strong> Automatic, manual/teach, safeguard stop, or full hazardous-energy isolation.</li><li><strong>Stop the process using the approved method.</strong></li><li><strong>Apply LOTO when servicing criteria require it.</strong></li><li><strong>Verify the safe state.</strong> Do not assume a screen message or silent motor proves isolation.</li><li><strong>Control access.</strong> Prevent another person from unexpectedly resetting, energizing, or starting equipment.</li><li><strong>Perform the work while maintaining awareness of gravity, stored pressure, tooling, and adjacent equipment.</strong></li><li><strong>Account for people and tools before exit.</strong></li><li><strong>Restore guards and protective devices.</strong></li><li><strong>Remove locks/tags only under the approved procedure.</strong></li><li><strong>Reset from outside the hazardous space.</strong></li><li><strong>Warn affected personnel before restart.</strong></li><li><strong>Perform a controlled test before normal automatic operation.</strong></li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">11. Reset is not restart</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>This distinction prevents bad habits. <strong>Reset</strong> acknowledges or restores a safety/control condition. <strong>Restart</strong> initiates machine operation. Good cell design and procedure prevent an access-gate reset from unexpectedly launching automatic robot motion while someone is still exposed.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>When troubleshooting <a href="https://bitcoinversus.tech/2026/10/02/osetc-020-limit-switches-proximity-sensors-basics/">limit/proximity sensors</a>, <a href="https://bitcoinversus.tech/2026/10/02/osetc-021-photoelectric-sensors-basics/">photoelectric devices</a>, or <a href="https://bitcoinversus.tech/2026/10/01/osetc-018-interlocks-permissives-basics/">interlocks</a>, never force a signal or bypass a safety function unless an approved, qualified, controlled procedure specifically permits the diagnostic method.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">12. Technician pre-shift / pre-work safety check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Perimeter fence and barriers physically intact.</li><li>Interlocked gates close and latch correctly.</li><li>E-stops are present, accessible, undamaged, and not physically defeated.</li><li>Safety scanners/light curtains are unobstructed and aligned as designed.</li><li>Teach pendant cable, buttons, enabling device, and E-stop appear serviceable.</li><li>No unauthorized jumpers, taped switches, defeated interlocks, or bypassed sensors.</li><li>Fixtures and end effectors are secure.</li><li>Pneumatic/hydraulic hoses and fittings show no obvious damage or leakage.</li><li>Robot base/anchors and visible fasteners show no obvious abnormality.</li><li>No unexpected objects or people are inside the safeguarded space before automatic startup.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">13. Safety standards technicians should recognize</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The international industrial-robot safety standard was substantially revised in 2025. <a href="https://www.iso.org/standard/73933.html">ISO 10218-1:2025</a> covers industrial robot safety requirements, while ISO 10218-2:2025 addresses robot applications and robot cells. In the United States, <a href="https://www.automate.org/robotics/safety/robot-safety-standard-documents">ANSI/A3 R15.06-2025</a> is the current national industrial robot safety standard family based on those ISO revisions.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>OSHA currently states that there is no single OSHA standard written exclusively for the robotics industry; instead, applicable requirements can include hazardous-energy control, machine guarding, electrical, PPE, and other general-industry standards. Standards and site procedures are complementary: a technician still follows the approved machine-specific procedure for the actual task.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: What changed in modern robot safety standards</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=khhw2R2q2VY","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=khhw2R2q2VY
+</div><figcaption class="wp-element-caption"><em>Automate/A3 panel with Universal Robots and Agility Robotics — a 2025 discussion of the updated ISO 10218 framework and emerging robot-safety standards.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">14. Real-world example: safety can live beyond the robot controller</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Modern systems increasingly coordinate robot safety with external safety controllers, scanners, and cell-level devices. BitcoinVersus.Tech recently covered <a href="https://bitcoinversus.tech/2026/10/02/agility-fort-digit-5-offboard-safety-bridge/">Agility Robotics and FORT extending Digit 5 safety beyond the robot itself</a>. The technician lesson is the same: <strong>evaluate the entire application and safeguarded space, not just the robot arm.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">15. Fault response: stop guessing</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>If a safety circuit will not reset or a robot will not enter automatic operation, do not immediately jumper the input. Troubleshoot the chain logically:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>safety device state<br>↓<br>wiring / connector state<br>↓<br>safety I/O state<br>↓<br>safety controller / robot controller diagnostics<br>↓<br>interlock/permissive conditions<br>↓<br>reset conditions<br>↓<br>controlled functional test</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Useful prior foundations include <a href="https://bitcoinversus.tech/2026/10/01/osetc-017-control-circuit-symbols-ladder-diagrams-basics/">control circuit symbols and ladder diagrams</a>, <a href="https://bitcoinversus.tech/2026/10/01/osetc-018-interlocks-permissives-basics/">interlocks and permissives</a>, and <a href="https://bitcoinversus.tech/2026/10/02/osetc-020-limit-switches-proximity-sensors-basics/">limit/proximity sensors</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice scenarios</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>The robot has stopped after a gate opened. Is it automatically safe to climb into the cell? Explain what else must be known.</li><li>A gripper is pneumatic and the robot motors are off. What stored-energy hazard remains?</li><li>An E-stop is pressed during a jam. Why might LOTO still be required before clearing it?</li><li>A photoelectric safety device trips repeatedly. Why is bypassing it to keep production running unacceptable?</li><li>You are in teach mode at reduced speed. Name at least three hazards that can still injure you.</li><li>A safety gate closes and resets. Why should that not automatically mean the robot begins moving?</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>1. What is an E-stop for?</strong><br>A manual emergency action to stop hazardous operation when an emergency is recognized; it is not a substitute for safeguarding or energy isolation.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>2. What is an interlocked gate?</strong><br>A physical access point whose safety state is monitored so opening it changes or prevents hazardous automatic operation according to the safety design.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>3. Why can a stopped robot still be dangerous?</strong><br>Electrical, pneumatic, hydraulic, gravitational, mechanical, process, or adjacent-machine energy may remain.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>4. What is the technician's most important question before entering a cell?</strong><br>Not merely “Is it stopped?” but “What hazardous energy and motion remain, what can restart them, and what verified safe state does this task require?”</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>5. What should happen before a safety bypass is used?</strong><br>Only an approved procedure, authorized/qualified personnel, defined compensating controls, and the specific diagnostic conditions required by the manufacturer/site may permit one. Production convenience is not a justification.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>Robot safety is a system, not a button.</strong> A competent technician understands the work envelope, safeguarded space, stop functions, interlocks, presence sensing, teach-mode controls, stored energy, LOTO, safe entry, reset discipline, and the specific manufacturer/site procedure. Only after that foundation is solid does learning how to move and recover the robot become useful.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Safety note: This lesson is general technical education. It does not authorize work on any robot or replace OSHA requirements, consensus standards, a site risk assessment, manufacturer instructions, site-specific LOTO procedures, or qualified-person training.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech advertisement.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong><em>Editor's Note:</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

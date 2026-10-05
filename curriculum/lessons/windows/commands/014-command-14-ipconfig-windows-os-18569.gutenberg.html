@@ -1,0 +1,26 @@
+<!-- wp:paragraph --><p>Windows <code>ipconfig</code> is a fast command-line tool for inspecting a machine's TCP/IP configuration and troubleshooting DHCP, gateway, and DNS problems. Microsoft documents it for Windows 10, Windows 11, Windows Server, and Azure Local.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Basic network configuration</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>ipconfig</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The basic output shows IPv4 and IPv6 addresses, subnet information, and the default gateway for network adapters.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Get the full adapter details</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>ipconfig /all</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Use <code>/all</code> when you need more detail, including adapter information, DHCP state, DNS configuration, and physical addressing. In a server rack or data-center troubleshooting session, this is usually the most useful starting point.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Renew a DHCP address</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>ipconfig /release
+ipconfig /renew</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>These commands release and renew DHCP configuration. Be careful when running them remotely because releasing the active adapter can interrupt the connection you are using to administer the machine.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Flush the DNS resolver cache</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>ipconfig /flushdns</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>This clears the local DNS resolver cache. It is useful when a hostname resolves incorrectly after a DNS record has changed or when testing name-resolution problems.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Field troubleshooting workflow</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>ipconfig /all
+ping &lt;default-gateway&gt;
+nslookup example.com
+tracert example.com</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Read the commands as a sequence: verify local addressing, test the gateway, test DNS resolution, then inspect the path beyond the local network. If the address begins with <code>169.254</code>, investigate DHCP connectivity because Windows can use an automatic private address when it cannot obtain the expected DHCP configuration.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Official reference</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/ipconfig">Microsoft Learn: ipconfig</a></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><a href="https://support.microsoft.com/en-us/windows/experience/connectivity-networking/fix-ethernet-connection-problems-in-windows">Microsoft Support: Fix Ethernet connection problems in Windows</a></p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video lesson</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=2a5B9QX4Yw8","type":"video","providerNameSlug":"youtube"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=2a5B9QX4Yw8</div></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong>BitcoinVersus.tech Tech Docs</strong> focuses on practical field-ready commands for computing, networking, data centers, electrical infrastructure, and Bitcoin mining operations.</p><!-- /wp:paragraph -->

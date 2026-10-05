@@ -1,0 +1,44 @@
+<!-- wp:paragraph --><p>Python functions let you package a task into a reusable block of code. A function can accept information through parameters, perform work, and return a result. This keeps programs organized and prevents the same logic from being copied repeatedly.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Define a function</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>def add(a, b):
+    return a + b</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>def</code> keyword starts a function definition. <code>add</code> is the function name, while <code>a</code> and <code>b</code> are parameters. The <code>return</code> statement sends a value back to the code that called the function.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Call the function</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>total = add(12, 8)
+print(total)</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The values <code>12</code> and <code>8</code> are arguments supplied to the function. The returned value, <code>20</code>, is stored in <code>total</code>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Parameters and arguments</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Parameters are the names defined by the function. Arguments are the actual values passed when the function is called. Python also supports keyword arguments, which make the meaning of a call easier to read.</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>def miner_power(volts, amps):
+    return volts * amps
+
+watts = miner_power(volts=240, amps=20)
+print(watts)</code></pre><!-- /wp:code -->
+<!-- wp:heading --><h2 class="wp-block-heading">A practical power calculation</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>def power_kw(volts, amps):
+    return (volts * amps) / 1000
+
+kw = power_kw(240, 20)
+print(f"{kw} kW")</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>This simple example returns 4.8 kW from 240 volts and 20 amps. It represents a basic DC or unity-power-factor calculation. Real AC systems may also require power factor and phase to calculate real power correctly.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Default parameter values</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>def status(device="miner"):
+    print(f"{device} online")
+
+status()
+status("switch")</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>A default value lets the function run even when that argument is omitted. The caller can still provide another value when needed.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">A function without an explicit return value</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>def show_status():
+    print("System online")</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>A Python function does not need an explicit <code>return</code> statement. If execution reaches the end without returning another value, Python returns <code>None</code>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Why functions matter</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Functions make larger programs easier to read, test, reuse, and troubleshoot. A monitoring program, for example, can use separate functions for reading sensor data, calculating power, checking thresholds, communicating with devices, and displaying results.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Quick practice</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Create a function named <code>amps</code> that accepts watts and volts and returns current using <code>watts / volts</code>. Then create a second function named <code>over_limit</code> that accepts a measured value and a limit and returns <code>True</code> when the measurement exceeds the limit.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Official reference</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>The official Python tutorial covers function definitions, default argument values, keyword arguments, special parameters, and related function concepts: <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">Python documentation — Defining Functions</a>.</p><!-- /wp:paragraph -->
+<!-- wp:separator --><hr class="wp-block-separator has-alpha-channel-opacity" /><!-- /wp:separator -->
+<!-- wp:paragraph --><p><strong>BitcoinVersus.Tech Editor's Note:</strong><br>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><a href="https://x.com/1BitcoinVersus/status/1937006164555993338">BitcoinVersus.Tech on X</a></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

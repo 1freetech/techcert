@@ -1,0 +1,117 @@
+---
+title: "Linux Command #30 – du (Linux OS)"
+wordpress_post_id: 19661
+source: BitcoinVersus.tech
+published: 2026-09-30T20:50:19
+modified: 2026-09-30T20:50:19
+live_url: https://bitcoinversus.tech/2026/09/30/linux-command-30-du-disk-usage/
+track: linux/commands
+lesson_number: 30
+raw_source: 030-linux-command-30-du-disk-usage-19661.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>The Linux <strong>du</strong> command helps answer a practical question: <strong>which folder is using disk space?</strong> It follows <a href="https://bitcoinversus.tech/2026/09/27/linux-command-29-df-check-available-disk-space/">Linux Command #29: df</a>, which checks filesystem capacity and available space.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Start With One Folder</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>du -sh ./logs</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Replace <code>./logs</code> with a folder that exists on your computer. The <code>-s</code> option produces a summary for the supplied path. The <code>-h</code> option displays readable units.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An illustrative result might be:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>24M    ./logs</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>That result estimates roughly 24 mebibytes of disk usage for the logs folder and its contents. Your output will depend on the files and filesystem. The command reports usage; it does not remove anything.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Compare Two Folders</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>du -sh ./logs ./backups</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Suppose the example reports <strong>24M</strong> for logs and <strong>1.2G</strong> for backups. The backup directory is the larger place to investigate. A large directory may still hold required information; size alone is not a reason to delete it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The short demonstration below reviews readable output and summaries before we examine the next level of folders.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=t-wuNq8XiTQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=t-wuNq8XiTQ
+</div><figcaption class="wp-element-caption"><em>Robert Elder demonstrates the Linux du command and common options for inspecting disk usage.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inspect One Level Below</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>du -h --max-depth=1 ./logs</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>With GNU du, <code>--max-depth=1</code> limits the displayed directory totals to the starting directory and its immediate subdirectories. It still counts deeper contents when calculating those totals. Start with a small known path rather than scanning an entire server.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why du and df Can Differ</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The commands measure different things. <code>df</code> reports filesystem space, while <code>du</code> walks the selected files and directories. Deleted files still held open by a process can remain allocated. Permission errors can leave a du scan incomplete. Filesystem details can also affect the comparison.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>By default, du measures allocated usage rather than the file’s apparent length. Sparse files can therefore have a large apparent size but consume much less storage. For the beginner exercise, read the ordinary <code>du -sh</code> result and note any error messages.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice in a Small Folder</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Create a new practice folder in your home directory using the file manager. Name it <strong>du-practice</strong>, place a small text file inside, then open a terminal in the parent folder. Run:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>du -sh du-practice</code><br><code></code><br><code>du -h --max-depth=1 du-practice</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Record the total. Add a subfolder and another text file, then run both commands again. Identify which line represents the whole practice folder and which represents its immediate subfolder. Tiny files may occupy more disk space than their text length because storage is allocated in blocks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Data Center Use</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>When a management host approaches its storage limit, a technician can compare approved log and backup paths. Record the path, reported usage, and any permission errors. Use the result to guide a retention review rather than deleting logs during an incident.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Key Takeaway</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>df</strong> tells you how full a filesystem is. <strong>du</strong> helps locate the folders consuming space. Begin with <code>du -sh folder</code>, then inspect one directory level when you need more detail.</p>
+<!-- /wp:paragraph -->

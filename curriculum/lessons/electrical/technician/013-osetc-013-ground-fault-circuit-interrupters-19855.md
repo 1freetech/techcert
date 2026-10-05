@@ -1,0 +1,183 @@
+---
+title: "OSETC.013: Ground-Fault Circuit Interrupters (GFCIs)"
+wordpress_post_id: 19855
+source: BitcoinVersus.tech
+published: 2026-10-01T12:53:04
+modified: 2026-10-01T12:53:04
+live_url: https://bitcoinversus.tech/2026/10/01/osetc-013-ground-fault-circuit-interrupters/
+track: electrical/technician
+lesson_number: 13
+raw_source: 013-osetc-013-ground-fault-circuit-interrupters-19855.gutenberg.html
+---
+
+<!-- wp:paragraph {"fontSize":"large"} -->
+<p class="has-large-font-size"><strong>A ground-fault circuit interrupter (GFCI) is a safety device that watches whether the current leaving on the hot conductor matches the current returning on the neutral. If some current takes an unintended path, the GFCI quickly interrupts power.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In plain language: electricity sent into a load should come back through the intended circuit. A mismatch suggests that some current may be flowing through water, damaged insulation, equipment grounding paths—or a person. The GFCI reacts to that imbalance. It does not wait for a normal circuit breaker to detect a large overload.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why this follows grounding and bonding</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In <a href="https://bitcoinversus.tech/2026/10/01/osetc-012-grounding-bonding-basics/">OSETC.012: Grounding and Bonding Basics</a>, you learned how grounding and bonding help create intentional fault-current paths. A GFCI adds another layer: it compares current going out with current coming back and trips when the difference is unsafe. These protections work together, but they are not the same thing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The simple operating idea</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Normal condition:</strong> the current on the hot conductor and the returning current on the neutral are essentially equal.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Ground-fault condition:</strong> some current leaves the intended return path.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Protective response:</strong> the GFCI senses the difference and opens the circuit.</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>OSHA explains that a Class A GFCI detects a difference of about 5 milliamperes and can shut off power in as little as 1/40 of a second. That speed reduces risk, but it does not make electrical contact safe.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=XTPQe6GtqlM","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=XTPQe6GtqlM
+</div><figcaption class="wp-element-caption"><em>GFCI breaker basics — The Engineering Mindset. Watch for the current-balance principle and the trip mechanism.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Three forms you should recognize</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Receptacle type:</strong> a wall outlet with visible TEST and RESET buttons.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Circuit-breaker type:</strong> protection built into a breaker at the electrical panel.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Portable or cord-connected type:</strong> protection in an extension assembly or temporary power device.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The location and form can change, but the principle stays the same: detect leakage by comparing outgoing and returning current.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">TEST and RESET: what the buttons mean</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <strong>TEST</strong> button creates an internal imbalance so the device should trip. The <strong>RESET</strong> button restores operation after a successful test and after the fault condition has been removed. Testing verifies the protective mechanism—it is not an invitation to open the device or perform energized work.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Safe recognition exercise</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Follow the manufacturer’s instructions and your site’s electrical-safety procedure. For a receptacle-type device, a common check uses a small lamp: with the lamp on, press TEST. The lamp should turn off. Press RESET and the lamp should turn on again. The U.S. Consumer Product Safety Commission recommends testing after installation, at least monthly, after a power failure, and according to the manufacturer’s directions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>If TEST does not remove power, RESET does not restore it, the device is damaged, or the area is wet:</strong> stop using the receptacle, label or report it according to site procedure, and have a qualified person evaluate it. Do not disassemble it for this lesson.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What a GFCI does not do</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>It does not replace a circuit breaker or fuse that provides overload and short-circuit protection. Review <a href="https://bitcoinversus.tech/2026/09/30/osetc-010-fuses-circuit-breakers/">OSETC.010: Fuses &amp; Circuit Breakers</a>.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>It does not make energized work acceptable. Use the isolation principles from <a href="https://bitcoinversus.tech/2026/09/30/osetc-011-lockout-tagout-energy-isolation/">OSETC.011: Lockout/Tagout &amp; Energy Isolation</a>.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>It may not protect a person who contacts two live conductors, such as two hot wires or a hot and neutral, because the current can still remain balanced.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>It reduces shock risk; it does not eliminate every electrical hazard.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Quick knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li>What two current values does a GFCI compare?</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>What should happen when the TEST button is pressed?</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Why is a GFCI not a substitute for lockout/tagout?</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Name three common GFCI forms.</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:details -->
+<details class="wp-block-details"><summary>Check your answers</summary><!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li>Current leaving on the hot conductor and current returning on the neutral.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>The GFCI should trip and remove power from the protected load.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>A GFCI can reduce shock risk but does not establish a verified de-energized condition or control hazardous energy.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Receptacle, circuit-breaker, and portable or cord-connected types.</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list --></details>
+<!-- /wp:details -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Technician takeaway</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A GFCI is an imbalance detector. Recognize its form, understand what TEST and RESET do, follow the required test procedure, and remove a failed device from service. Treat it as one protective layer—not permission to work live.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><a href="https://www.osha.gov/etools/construction/electrical-incidents/ground-fault-circuit-interrupters">OSHA: Ground-Fault Circuit Interrupters</a></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><a href="https://www.cpsc.gov/s3fs-public/099_0.pdf">U.S. CPSC: GFCI Fact Sheet</a></li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->

@@ -1,0 +1,148 @@
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>Polymorphism means the same kind of call can produce different behavior depending on the actual object.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>In C++, a <code>virtual</code> function lets a derived class provide its own version of a base-class function and have that version selected through a base-class reference or pointer.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Start with one simple idea:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>Animal says: "Animal"
+Dog says:    "Woof"
+Cat says:    "Meow"</code></pre><!-- /wp:code -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The smallest useful example</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>#include &lt;iostream&gt;
+
+class Animal {
+public:
+    virtual void speak() {
+        std::cout &lt;&lt; "Animal\n";
+    }
+};
+
+class Dog : public Animal {
+public:
+    void speak() override {
+        std::cout &lt;&lt; "Woof\n";
+    }
+};
+
+int main() {
+    Dog dog;
+    Animal&amp; pet = dog;
+
+    pet.speak();
+}</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Output:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>Woof</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The variable <code>pet</code> is an <code>Animal</code> reference, but it refers to a real <code>Dog</code> object. Because <code>speak()</code> is virtual, C++ calls <code>Dog::speak()</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: Virtual functions and override</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=lWvq8nSQs_M","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=lWvq8nSQs_M
+</div><figcaption class="wp-element-caption"><em>This focused C++ lesson demonstrates virtual functions and overriding in an inheritance hierarchy.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What does virtual do?</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Look at the base class:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>virtual void speak()</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The keyword <code>virtual</code> tells C++ that derived classes may provide their own version and that the program should select the appropriate overridden function when calling through a base reference or pointer.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Without getting into the internal machinery yet, think:</p><!-- /wp:paragraph -->
+<!-- wp:quote --><blockquote class="wp-block-quote"><p><strong>virtual = let the actual object choose the overridden behavior.</strong></p></blockquote><!-- /wp:quote -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What does override do?</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>void speak() override</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><code>override</code> tells the compiler, “I intend this function to override a virtual function from a base class.”</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>That is useful because the compiler can catch mistakes. If the function does not actually match a virtual base-class function, the compiler reports an error instead of silently accepting your intention.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: Runtime method selection</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=K7l8T55fnXM","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=K7l8T55fnXM
+</div><figcaption class="wp-element-caption"><em>This beginner lesson connects virtual functions to runtime polymorphism and method selection.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Add a Cat</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>class Cat : public Animal {
+public:
+    void speak() override {
+        std::cout &lt;&lt; "Meow\n";
+    }
+};</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Now both <code>Dog</code> and <code>Cat</code> are kinds of <code>Animal</code>, but each can respond differently to the same <code>speak()</code> call.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>Dog dog;
+Cat cat;
+
+Animal&amp; first = dog;
+Animal&amp; second = cat;
+
+first.speak();
+second.speak();</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Output:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>Woof
+Meow</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Same base-class interface. Different actual objects. Different behavior. That is the beginner version of runtime polymorphism.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">How this connects to inheritance</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>The previous lesson, <a href="https://bitcoinversus.tech/2026/10/02/oscpp-017-inheritance-basics/">OSC++.017: Inheritance Basics</a>, introduced base and derived classes.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Inheritance gives us the relationship:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>Animal
+  ├── Dog
+  └── Cat</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Virtual functions add behavior to that relationship:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>Animal reference → Dog object → Dog behavior
+Animal reference → Cat object → Cat behavior</code></pre><!-- /wp:code -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Simple game example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Imagine a game with different characters. Every character can perform an action, but the action is different for each character.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class Character {
+public:
+    virtual void action() {
+        std::cout &lt;&lt; "Character acts\n";
+    }
+};
+
+class Miner : public Character {
+public:
+    void action() override {
+        std::cout &lt;&lt; "Miner deploys an ASIC\n";
+    }
+};
+
+class Engineer : public Character {
+public:
+    void action() override {
+        std::cout &lt;&lt; "Engineer repairs equipment\n";
+    }
+};</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The game can work with a <code>Character</code> interface while each real character supplies its own action.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: Polymorphism, virtual functions, and abstract classes</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=IMUaLJiCHzg","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=IMUaLJiCHzg
+</div><figcaption class="wp-element-caption"><em>This beginner OOP tutorial reinforces polymorphism and virtual functions and previews how the idea extends into abstract classes.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Reference vs. copy</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>For this lesson, notice the ampersand:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>Animal&amp; pet = dog;</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>This makes <code>pet</code> a reference to the existing <code>dog</code> object. We are not creating a separate <code>Animal</code> copy.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>This connects back to <a href="https://bitcoinversus.tech/2026/09/25/cpp-lesson-6-references-pass-by-reference/">OSC++.006: References and Pass by Reference</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common beginner mistakes</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li>Forgetting <code>virtual</code> on the base-class function when runtime overriding is intended.</li><li>Leaving off <code>override</code> and making a signature mistake that the compiler could have caught.</li><li>Thinking polymorphism means every function must be virtual.</li><li>Confusing overriding with overloading. Overriding replaces inherited virtual behavior in a derived class; overloading uses the same function name with different parameter lists.</li><li>Trying to learn vtables before understanding the simple behavior first.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Quick practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Create a base class named <code>Vehicle</code>.</li><li>Add a virtual function named <code>move()</code>.</li><li>Create <code>Car</code> and <code>Bike</code> classes that inherit from <code>Vehicle</code>.</li><li>Override <code>move()</code> in both classes.</li><li>Create a <code>Car</code> and a <code>Bike</code>.</li><li>Use <code>Vehicle&amp;</code> references to call <code>move()</code> and observe the different output.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><code>virtual</code> enables runtime selection of overridden behavior through a base-class interface, and <code>override</code> lets the compiler verify that a derived function really overrides a base virtual function.</strong> In plain English: the program can say “speak” to an <code>Animal</code> and still get the correct <code>Dog</code> or <code>Cat</code> behavior.</p><!-- /wp:paragraph -->

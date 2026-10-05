@@ -1,0 +1,19 @@
+# electrical/engineer
+
+13 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+
+| Number | Lesson | Source |
+| --- | --- | --- |
+| 0 | [OSEEC.000: What We Are Building, How We Are Building It, and Why](./000-article-0-what-we-are-building-how-we-are-building-it-and-why-16970.md) | [Published lesson](https://bitcoinversus.tech/2026/07/12/article-0-what-we-are-building-how-we-are-building-it-and-why/) |
+| 1 | [OSEEC.001: How Electrical Codes, Standards, Laws, and Jurisdictions Work](./001-the-bitcoinversus-tech-open-source-electrical-standards-training-program-article-1-how-electrical-codes-standards-laws-and-jurisdictions-work-16960.md) | [Published lesson](https://bitcoinversus.tech/2026/07/15/the-bitcoinversus-tech-open-source-electrical-standards-training-program-article-1-how-electrical-codes-standards-laws-and-jurisdictions-work/) |
+| 2 | [OSEEC.002: Voltage, Current, Resistance, and Power](./002-electrical-technician-training-article-2-voltage-current-resistance-power-18106.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/electrical-technician-training-article-2-voltage-current-resistance-power/) |
+| 2 | [OSEEC.002: Voltage, Current, Resistance, and Power](./002-open-source-electrical-engineering-training-article-2-voltage-current-resistance-power-18475.md) | [Published lesson](https://bitcoinversus.tech/2026/09/24/open-source-electrical-engineering-training-article-2-voltage-current-resistance-power/) |
+| 3 | [OSEEC.003: Series and Parallel Circuits](./003-open-source-electrical-engineering-training-program-article-3-series-and-parallel-circuits-18617.md) | [Published lesson](https://bitcoinversus.tech/2026/09/26/open-source-electrical-engineering-training-program-article-3-series-and-parallel-circuits/) |
+| 4 | [OSEEC.004: Kirchhoff’s Laws: KVL and KCL](./004-oseec-004-kirchhoffs-laws-kvl-kcl-18143.md) | [Published lesson](https://bitcoinversus.tech/2026/09/30/oseec-004-kirchhoffs-laws-kvl-kcl/) |
+| 5 | [OSEEC.005: AC Fundamentals](./005-oseec-005-ac-fundamentals-18145.md) | [Published lesson](https://bitcoinversus.tech/2026/10/01/oseec-005-ac-fundamentals/) |
+| 6 | [OSEEC.006: Capacitance, Inductance, and Reactance](./006-oseec-006-capacitance-inductance-reactance-18238.md) | [Published lesson](https://bitcoinversus.tech/2026/10/02/oseec-006-capacitance-inductance-reactance/) |
+| 7 | [OSEEC.007: Transformers: Turns Ratio, Step-Up/Step-Down, and Isolation](./007-oseec-007-transformers-turns-ratio-step-up-step-down-isolation-20058.md) | [Published lesson](https://bitcoinversus.tech/2026/10/02/oseec-007-transformers-turns-ratio-step-up-step-down-isolation/) |
+| 8 | [OSEEC.008: Three-Phase Power Fundamentals](./008-oseec-008-three-phase-power-fundamentals-20139.md) | [Published lesson](https://bitcoinversus.tech/2026/10/02/oseec-008-three-phase-power-fundamentals/) |
+| 9 | [OSEEC.009: Electrical Power Distribution: Switchgear, Switchboards, Panelboards, and PDUs](./009-oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus-20312.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus/) |
+| 10 | [OSEEC.010: Overcurrent Protection — Circuit Breakers, Fuses, Fault Current, and Selective Coordination](./010-oseec-010-overcurrent-protection-circuit-breakers-fuses-fault-current-selective-coordination-20410.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/oseec-010-overcurrent-protection-circuit-breakers-fuses-fault-current-selective-coordination/) |
+| 11 | [OSEEC.011: Grounding, Bonding, and Fault-Return Paths](./011-oseec-011-grounding-bonding-fault-return-paths-20720.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/oseec-011-grounding-bonding-fault-return-paths/) |

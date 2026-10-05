@@ -1,0 +1,28 @@
+<!-- wp:paragraph --><p><strong>DNS</strong> stands for <strong>Domain Name System</strong>. Its basic job is to help devices turn easy-to-remember names such as <code>example.com</code> into IP addresses that computers can use to communicate.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/01/osntc-005-dhcp-basics/">OSNTC.005: DHCP Basics</a>. DHCP can give a device its network settings, including DNS-server addresses. DNS then helps that device find services by name.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Names and IP Addresses</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>People usually remember names better than long numeric addresses. DNS connects those two ideas. You enter a name; a DNS lookup can return the IP address associated with that name.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">A Simple DNS Lookup</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>You enter a domain name.</li><li>Your device asks its configured DNS resolver for an answer.</li><li>The DNS system finds or retrieves the appropriate record.</li><li>The resolver returns the answer to your device.</li><li>Your device can then contact the destination using the returned address.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video: How DNS Works</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>This PowerCert Animated Videos lesson gives a beginner-friendly visual explanation of DNS resolution, including resolvers, root servers, domain servers, and authoritative name servers.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=mpQZVYPuDGU","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=mpQZVYPuDGU
+</div></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">DNS Resolver</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A <strong>DNS resolver</strong> is the DNS server your device asks for help. Your laptop, phone, server, or mining-management computer may receive the resolver address automatically through DHCP or use one that was configured manually.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">A and AAAA Records</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>An <strong>A record</strong> maps a name to an IPv4 address. An <strong>AAAA record</strong> maps a name to an IPv6 address. There are many other DNS record types, but these two make the basic name-to-address idea easy to see.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Test DNS With nslookup</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>nslookup example.com</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p><code>nslookup</code> can ask DNS for information about a name. A technician can use it to separate a name-resolution problem from a more general network-connectivity problem.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Simple Troubleshooting Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Imagine a computer can reach its default gateway but a website name will not resolve. Check the computer's DNS-server setting, then try <code>nslookup</code>. If DNS fails while basic IP connectivity works, the problem may be related to name resolution rather than the Ethernet link itself.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Data Center Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A technician may be able to ping a server by IP address but fail to reach it by hostname. That difference is a useful clue: the network path may be working while DNS configuration or records need attention.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Bitcoin Mining Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A mining machine may be configured with a pool hostname instead of a numeric IP address. DNS must resolve that hostname before the miner can connect to the destination. A DNS failure can therefore look like a pool-connectivity problem even when the local network is otherwise online.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Explain DNS in one sentence.</li><li>Find the DNS-server address configured on your computer.</li><li>Run <code>nslookup example.com</code>.</li><li>Identify the name you queried and the address returned.</li><li>Explain why reaching an IP address but not a hostname can point toward DNS.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>DNS translates human-friendly names into network information such as IP addresses. For a technician, the essential skills are knowing what DNS does, identifying the configured resolver, testing a lookup, and recognizing when a problem is specifically about name resolution.</p><!-- /wp:paragraph -->

@@ -1,0 +1,65 @@
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The <code>compgen</code> command in Linux is a built-in feature of the Bash shell used to display a list of available commands, functions, aliases, and reserved words. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://youtu.be/Y_cag2JadMM?si=YafmzPuJvftlf9Qp","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://youtu.be/Y_cag2JadMM?si=YafmzPuJvftlf9Qp
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">It's part of the programmable completion system and is mainly used to introspect what the shell knows. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">For example, running <code>compgen -c</code> outputs all executable commands that the shell can auto-complete, while <code>compgen -b</code> shows all built-in shell commands. This makes it a powerful tool for users exploring available capabilities or writing shell scripts that rely on specific command environments.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">In addition to command discovery, <code>compgen</code> supports filtered output based on prefixes. Running <code>compgen -c ls</code> will return commands starting with “ls,” such as <code>ls</code>, <code>lsof</code>, and <code>lsblk</code>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This is helpful for quickly identifying related commands or verifying whether a command exists before using it in a script. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Since <code>compgen</code> works directly with the shell’s command hash table, it reflects real-time availability based on the current user’s <code>$PATH</code> and environment. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">For example, The command pipeline <code><em><strong>compgen -c | wc -l</strong></em></code> is a powerful one-liner in Linux that combines two tools to count the number of available commands in the current shell session. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":11524,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/03/screenshot-from-2025-03-27-10-59-41.png?w=488" alt="" class="wp-image-11524" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The first part, <code>compgen -c</code>, lists <strong>every command</strong> the Bash shell recognizes—this includes binaries, aliases, functions, and built-ins that are accessible within your environment. It's a complete reflection of your command landscape based on your <code>$PATH</code> and shell configuration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The second part of the pipeline, <code>| wc -l</code>, counts the number of lines output by <code>compgen -c</code>, effectively returning the total number of commands. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">In the screenshot, the output is <code>4711</code>, which means the terminal environment has 4,711 recognized commands available for execution. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This includes everything from system utilities and installed packages to user-defined functions, making it an excellent benchmark of system complexity and capability.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

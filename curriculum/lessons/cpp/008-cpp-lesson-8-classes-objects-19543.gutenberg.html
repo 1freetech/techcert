@@ -1,0 +1,57 @@
+<!-- wp:paragraph --><p>A C++ <strong>class</strong> is a way to describe a kind of thing in a program. An <strong>object</strong> is one actual thing created from that class. Think of a class as a character template in a game and an object as one character made from that template.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">A Simple Gaming Example</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+class Player {
+public:
+    std::string name;
+    int health;
+};
+
+int main() {
+    Player hero;
+    hero.name = "Alex";
+    hero.health = 100;
+
+    std::cout &lt;&lt; hero.name &lt;&lt; " has "
+              &lt;&lt; hero.health &lt;&lt; " health.\n";
+
+    return 0;
+}</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p><code>Player</code> is the class. <code>hero</code> is an object created from that class. The object has a name and health value because those pieces of data are members of <code>Player</code>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Class vs. Object</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Class:</strong> the definition or template.</li><li><strong>Object:</strong> an instance created from that class.</li><li><strong>Member:</strong> data or behavior that belongs to the class.</li></ul><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Bitcoin Mining Example</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>class Miner {
+public:
+    std::string model;
+    int hashrate;
+};
+
+Miner machine;
+machine.model = "Miner A";
+machine.hashrate = 200;</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Here, <code>Miner</code> describes a simple type of mining machine. <code>machine</code> is one object. Keeping the example small makes the new idea clear: related information can be grouped into a class.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Sports Example</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>class Team {
+public:
+    std::string name;
+    int score;
+};
+
+Team home;
+home.name = "Home";
+home.score = 21;</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The same pattern works for a sports team, game character, Bitcoin miner, car, song, or almost anything else a program needs to represent.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Why Classes Matter</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Classes let programmers create their own types and keep related information together. Later lessons can add member functions, constructors, private data, and other object-oriented programming features. For now, focus only on the relationship: <strong>class defines the type; object is an instance of that type.</strong></p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video Reference</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Bro Code provides a focused beginner explanation of C++ classes and objects.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=_8H2n0nDfd4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=_8H2n0nDfd4
+</div></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Create a class named <code>Game</code>.</li><li>Add a string named <code>title</code>.</li><li>Add an integer named <code>score</code>.</li><li>Create one <code>Game</code> object.</li><li>Give the object a title and score, then print them.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A class defines a program-created type. An object is an instance of that type. This gives C++ programs a simple way to represent familiar things while keeping related data together.</p><!-- /wp:paragraph -->

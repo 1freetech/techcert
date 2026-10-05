@@ -1,0 +1,83 @@
+---
+title: "Electrical Engineering: What is a Battery"
+wordpress_post_id: 15479
+source: BitcoinVersus.tech
+published: 2025-11-26T08:59:50
+modified: 2025-11-26T08:59:50
+live_url: https://bitcoinversus.tech/2025/11/26/electrical-engineering-what-is-a-battery/
+track: electrical/training
+lesson_number: null
+raw_source: electrical-engineering-what-is-a-battery-15479.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>A battery is an electrochemical device that converts stored <a href="https://bitcoinversus.tech/2025/11/25/physics-the-anatomy-of-the-atom/">chemical energy</a> directly into <a href="https://bitcoinversus.tech/2025/04/12/power-is-money-the-economical-physics-of-bitcoin-2/">electrical energy</a> (Direct Current or DC). </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=PXNKkcB0pI4\u0026amp;pp=ygUpRWxlY3RyaWNhbCBFbmdpbmVlcmluZzogV2hhdCBpcyBhIEJhdHRlcnk%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=PXNKkcB0pI4&amp;pp=ygUpRWxlY3RyaWNhbCBFbmdpbmVlcmluZzogV2hhdCBpcyBhIEJhdHRlcnk%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>It is composed of one or more electrochemical cells, each containing two electrodes—a positive cathode and a negative anode—which are separated by a conductive medium called an electrolyte. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=5UeJIvtCjzY\u0026amp;pp=ygUpRWxlY3RyaWNhbCBFbmdpbmVlcmluZzogV2hhdCBpcyBhIEJhdHRlcnk%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=5UeJIvtCjzY&amp;pp=ygUpRWxlY3RyaWNhbCBFbmdpbmVlcmluZzogV2hhdCBpcyBhIEJhdHRlcnk%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>When an external circuit is connected, a chemical reaction (a redox reaction) occurs within the battery, causing <a href="https://bitcoinversus.tech/2024/11/09/electron-gun-accelerates-electrons-to-500-million-mph/">electrons</a> to flow from the anode to the cathode through the external circuit, thereby generating an electric current.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Conversely, in a rechargeable, or secondary battery, this chemical reaction can be reversed by applying an external electric current (charging), which stores the energy again as chemical potential.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=QWPVzHhXnQA\u0026amp;pp=ygUcc2Vjb25kYXJ5IGJhdHRlcnkgZGVmaW5pdGlvbg%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=QWPVzHhXnQA&amp;pp=ygUcc2Vjb25kYXJ5IGJhdHRlcnkgZGVmaW5pdGlvbg%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>The charge a battery holds refers to the amount of electrical energy it can store and deliver before being fully discharged. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This capacity is typically measured in ampere-hours (Ah) or milliampere-hours (mAh), which represents the amount of current (in Amperes or milliamperes) the battery can supply for one hour at its nominal voltage. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://youtu.be/mMQrF4nfG2s","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://youtu.be/mMQrF4nfG2s
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>A higher Ah or mAh rating indicates a greater storage capacity and a longer operating time. The battery's current energy level, relative to its maximum capacity, is called its <strong>State of Charge (SOC)</strong>, often expressed as a percentage. Over time, due to chemical aging and cycling, a battery's maximum capacity will gradually diminish, affecting its overall lifespan and ability to hold a charge.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True.&nbsp;</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>If you would like to support to help further secure the integrity of our research initiatives, please donate here: bc1qrved9tfquym6u3age7xhmnkjs2lq8j9aulperagkuhtuk5w5c35ssfpge8</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

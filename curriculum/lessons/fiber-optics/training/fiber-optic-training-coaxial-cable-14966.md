@@ -1,0 +1,93 @@
+---
+title: "Fiber Optic Training: Coaxial Cable"
+wordpress_post_id: 14966
+source: BitcoinVersus.tech
+published: 2025-12-05T07:00:00
+modified: 2026-09-11T11:32:38
+live_url: https://bitcoinversus.tech/2025/12/05/fiber-optic-training-coaxial-cable/
+track: fiber-optics/training
+lesson_number: null
+raw_source: fiber-optic-training-coaxial-cable-14966.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>A coaxial cable is a specialized electrical cable designed to carry high-frequency signals with minimal interference. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":15001,"aspectRatio":"1.823881447705899","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/12/coaxcablechart.jpeg?w=828" alt="" class="wp-image-15001" style="aspect-ratio:1.823881447705899" /><figcaption class="wp-element-caption"><sup>Image Credit: <a href="https://www.udemy.com/course/foa-certified-cabling-technician-exam-prep-free-book/">Udemy ICT Certified Premise Cable Installer Technician ICT/PREM</a></sup></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Its name comes from its concentric structure—each layer shares the same axis, which helps preserve signal integrity. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=-LgcGpXKIG4\u0026amp;pp=ygUTY29heGlhbCBjYWJsZSB0eXBlcw%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=-LgcGpXKIG4&amp;pp=ygUTY29heGlhbCBjYWJsZSB0eXBlcw%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Coaxial cables are widely used in applications like cable television, internet service, radio transmission, and closed-circuit video systems.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>At the center of the cable is the conductor, usually made of solid copper or copper-clad steel, which carries the signal. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=salK9NdUpHI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=salK9NdUpHI
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Surrounding this is a dielectric insulator, typically made of polyethylene foam, that keeps the conductor properly spaced from the shielding layer. This spacing is critical for maintaining consistent impedance and reducing signal loss.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=s6iShJrc56E\u0026amp;pp=ygUTY29heGlhbCBjYWJsZSB0eXBlcw%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=s6iShJrc56E&amp;pp=ygUTY29heGlhbCBjYWJsZSB0eXBlcw%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>The shielding layer wraps around the dielectric and serves two purposes: it blocks external electromagnetic interference (EMI) and provides a grounding path. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=EB2oSFhtNNU\u0026amp;pp=ygUTY29heGlhbCBjYWJsZSBjcmltcA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=EB2oSFhtNNU&amp;pp=ygUTY29heGlhbCBjYWJsZSBjcmltcA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Shields can be made of braided copper, aluminum foil, or a combination of both, with higher-grade cables using multiple layers for added protection. This shielding is what makes coaxial cable superior to unshielded twisted pair in noisy environments.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=cajgvdNkgrc\u0026amp;pp=ygUTY29heGlhbCBjYWJsZSBjcmltcA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=cajgvdNkgrc&amp;pp=ygUTY29heGlhbCBjYWJsZSBjcmltcA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Finally, the outer jacket protects the cable from physical damage, moisture, and UV exposure. It’s usually made of PVC for indoor use or polyethylene for outdoor applications. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Some variants include gel-filled jackets for direct burial or messenger wires for aerial installations. Together, these components make coaxial cable a durable and reliable medium for signal transmission across a range of environments.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

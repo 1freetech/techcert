@@ -1,0 +1,26 @@
+<!-- wp:paragraph --><p>The Windows <code>tracert</code> command shows the path your computer takes toward another computer or website. Think of it like seeing the stops along a road trip instead of seeing only the final destination.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Try the Basic Command</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>tracert microsoft.com</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Open Command Prompt, type the command, and press Enter. Windows will begin listing the stops, called <strong>hops</strong>, between your computer and the destination.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Think of Hops as Stops</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>If you drive across town, you may pass several intersections before arriving. Internet traffic can also pass through several network devices before reaching a destination. <code>tracert</code> lets you see those steps.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Simple Example</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>tracert microsoft.com
+
+1    2 ms    1 ms    2 ms    192.168.1.1
+2   12 ms   11 ms   13 ms    ...
+3   20 ms   19 ms   21 ms    ...</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The number at the left is the hop number. The times shown in <strong>ms</strong> are milliseconds. For this beginner lesson, simply remember: each new line is another step along the route.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Familiar Examples</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Gaming:</strong> You can inspect the route from your Windows PC toward an online destination when learning about network delay.</li><li><strong>Websites:</strong> You can see the network path toward a website.</li><li><strong>Home networking:</strong> The first hop is often a device on your local network, such as your router.</li></ul><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">What Does an Asterisk Mean?</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>You may sometimes see <code>*</code> instead of a time. That does not automatically mean the Internet is broken. Some devices along a route do not return the response that <code>tracert</code> expects.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video Reference</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>This Windows 10 and Windows 11 demonstration shows how to open Command Prompt, run <code>tracert</code>, and read the hops returned by the command.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=CI3-AuWYDqA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=CI3-AuWYDqA
+</div></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">Quick Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Open Command Prompt.</li><li>Run <code>tracert microsoft.com</code>.</li><li>Find hop number 1.</li><li>Count how many hops appear before the trace finishes.</li><li>Explain a hop in your own words.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><code>tracert</code> shows the path toward a network destination one hop at a time. Microsoft documents it as a Windows diagnostic tool for determining the path to a destination.</p><!-- /wp:paragraph -->

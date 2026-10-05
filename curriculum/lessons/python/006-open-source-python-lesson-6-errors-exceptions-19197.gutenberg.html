@@ -1,0 +1,55 @@
+<!-- wp:paragraph --><p>Open-Source Python Lesson #6 teaches errors and exception handling with <code>try</code>, <code>except</code>, <code>else</code>, and <code>finally</code>. Robust programs should anticipate recoverable failures instead of crashing whenever input, files, telemetry, or other runtime conditions are imperfect.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Bitcoin Mining Example: Validate Telemetry</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>raw_hashrate = "offline"
+
+try:
+    hashrate_th = float(raw_hashrate)
+    print("Hashrate:", hashrate_th, "TH/s")
+except ValueError:
+    print("Miner returned non-numeric hashrate data")</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Converting a non-numeric string with <code>float()</code> raises <code>ValueError</code>. Catching that specific exception lets a monitoring program respond deliberately.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Gaming Example: Protect Player Input</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>choice = "turbo"
+
+try:
+    selected_slot = int(choice)
+except ValueError:
+    print("Inventory slot must be a number")</code></pre><!-- /wp:code -->
+<!-- wp:heading --><h2 class="wp-block-heading">Sports Example: Avoid Division by Zero</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>points = 24
+games_played = 0
+
+try:
+    average = points / games_played
+except ZeroDivisionError:
+    print("Average unavailable until a game is played")</code></pre><!-- /wp:code -->
+<!-- wp:heading --><h2 class="wp-block-heading">else: Run Only After Success</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>temperature = "72"
+
+try:
+    temperature_c = int(temperature)
+except ValueError:
+    print("Invalid temperature")
+else:
+    print("Valid telemetry:", temperature_c, "C")</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>else</code> block runs when the <code>try</code> block completes without raising an exception.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">finally: Cleanup That Must Run</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>connection_open = True
+
+try:
+    print("Reading miner telemetry")
+finally:
+    connection_open = False
+    print("Connection closed")</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p><code>finally</code> is intended for cleanup that should run whether an exception occurs or not.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Catch Specific Exceptions</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Prefer specific handlers such as <code>ValueError</code>, <code>ZeroDivisionError</code>, or <code>OSError</code> when you know which failures you can meaningfully handle. Broad exception handling can hide programming mistakes.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video Lesson</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Programming with Mosh’s widely viewed Python beginner course includes a dedicated Exceptions chapter at approximately 2:53:42.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=_uQrJ0TkZlc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=_uQrJ0TkZlc
+</div></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Handle invalid ASIC hashrate telemetry with <code>ValueError</code>.</li><li>Protect numeric game input with <code>try</code>/<code>except</code>.</li><li>Handle a sports average when games played is zero.</li><li>Add an <code>else</code> block that reports successful parsing.</li><li>Add a <code>finally</code> block representing connection cleanup.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><code>try</code> contains code that may fail, <code>except</code> handles selected exceptions, <code>else</code> runs after a successful try block, and <code>finally</code> provides cleanup that runs regardless of the outcome.</p><!-- /wp:paragraph -->

@@ -1,0 +1,54 @@
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>The Linux <code>groups</code> command shows which user groups an account belongs to.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>If you have ever been added to a team at work, a group chat, or a multiplayer squad, you already understand the basic idea. Linux groups collect users together so the system can give several accounts the same access or permissions.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Start with groups</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>groups</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Run the command with no extra options to see the groups associated with your current account.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>$ groups
+burton sudo developers</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>This example says the current user belongs to three groups: <code>burton</code>, <code>sudo</code>, and <code>developers</code>. Your own output will be different.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: The groups command</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=88hgZJPoP14","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=88hgZJPoP14
+</div><figcaption class="wp-element-caption"><em>LinuxSimply demonstrates the Linux groups command with practical examples.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Why groups exist</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Imagine five people share a computer project. Instead of configuring the same access separately for all five accounts, Linux can place them in one group and assign access to that group.</p><!-- /wp:paragraph -->
+<!-- wp:list --><ul class="wp-block-list"><li>A <strong>user</strong> is an individual account.</li><li>A <strong>group</strong> is a collection of user accounts.</li><li>Group membership can help determine what files, folders, devices, or administrative actions a user may access.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>The previous lesson, <a href="https://bitcoinversus.tech/2026/10/02/linux-command-34-id/">Linux Command #34 – id</a>, shows user and group IDs. <code>groups</code> is narrower: it gives you a quick list of group names.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Check another user</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>groups alex</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>If the account exists and you are allowed to query it, this asks Linux to display the groups associated with <code>alex</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: Creating and working with Linux groups</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=RecADYq9E30","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=RecADYq9E30
+</div><figcaption class="wp-element-caption"><em>This Linux tutorial shows how groups are created and used, giving context to the membership displayed by the groups command.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A familiar permissions example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Suppose a family computer has a folder that only members of a <code>photos</code> group may edit. If your username appears as a member of <code>photos</code>, Linux can use that membership when deciding whether you have group-level access.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>At work, the same idea might be used for a shared project folder. On a Linux server, a group might collect the accounts that are allowed to perform a particular task. The exact permissions are configured elsewhere; <code>groups</code> simply helps you see membership.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Simple data-center example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>You log into a Linux management computer and a tool says you do not have permission to use a shared file. Running <code>groups</code> is a quick first check: are you actually a member of the team group that should have access?</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: Managing users and groups from the command line</h2><!-- /wp:heading -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=tlSWXBah904","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=tlSWXBah904
+</div><figcaption class="wp-element-caption"><em>This command-line demonstration shows users, groups, and shared group access working together.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">groups vs. id</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li><code>groups</code>: quickly lists group names.</li><li><code>id</code>: shows more identity information, including numeric user and group IDs.</li></ul><!-- /wp:list -->
+<!-- wp:paragraph --><p>Use <code>groups</code> when the simple question is: <strong>Which groups does this user belong to?</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Open a Linux terminal.</li><li>Run <code>groups</code>.</li><li>Count how many group names appear.</li><li>Run <code>id</code> and find the group information there.</li><li>In one sentence, explain why putting several users into one group can make permissions easier to manage.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><code>groups</code> answers one straightforward Linux question: <strong>Which groups does this user belong to?</strong> It is a fast identity and permissions troubleshooting command and a natural companion to <code>whoami</code> and <code>id</code>.</p><!-- /wp:paragraph -->

@@ -1,0 +1,265 @@
+<!-- wp:paragraph -->
+<p>You already have the AC fundamentals in place, so the next step is understanding why <strong>capacitors and inductors behave differently from ordinary resistors when AC is applied</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Plain English:</strong> a resistor turns electrical energy into heat. A capacitor and an inductor temporarily store energy, then can return it to the circuit. Because AC repeatedly changes direction, these components change how much current flows and when it peaks. That frequency-dependent opposition is called <strong>reactance</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Capacitor</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>capacitor</strong> stores energy in an <strong>electric field</strong>. <strong>Capacitance</strong> describes how much charge it stores per volt: C = Q / V. Its unit is the <strong>farad (F)</strong>; practical components commonly use µF, nF, or pF.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A capacitor opposes <strong>changes in voltage</strong>. In a DC circuit, it draws current while charging and then ideally approaches an open circuit after reaching the supply voltage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Field example:</strong> A single-phase AC motor may use a start or run capacitor to create the electrical conditions needed for starting and operation. A failed capacitor can leave a motor energized but unable to start properly.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Inductor</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An <strong>inductor</strong> stores energy in a <strong>magnetic field</strong>. <strong>Inductance</strong> describes the relationship between changing current and the voltage across the component: v = L × di/dt. Its unit is the <strong>henry (H)</strong>. You do not need calculus yet: a faster current change requires more voltage across the same ideal inductor.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An inductor opposes <strong>changes in current</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Motor windings, transformer windings, relay coils, contactor coils, and filtering chokes all have inductance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Field example:</strong> When a relay coil is energized, its magnetic field operates the relay. When power is removed, the collapsing magnetic field can generate a substantial voltage spike. DC control circuits commonly use suppression components to manage that transient.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Reactance</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Resistance is not the only thing opposing AC current. The following formulas describe ideal components in sinusoidal steady-state AC. Use f in hertz, L in henries, and C in farads.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Reactance</strong> is opposition to AC caused by capacitance or inductance. Like resistance, reactance is measured in <strong>ohms (Ω)</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For an inductor:<br><strong>X<sub>L</sub>=2π fL</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Increasing frequency increases <strong>inductive reactance</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a capacitor:<br><strong>X<sub>C</sub>=(1) / (2π fC)</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Increasing frequency decreases <strong>capacitive reactance</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>That distinction is worth memorizing:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Higher frequency → inductors oppose current more.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Higher frequency → capacitors oppose current less.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Watch how an inductor stores energy</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Engineering Mindset’s animation shows the coil and its changing magnetic field. Watch for why current does not change instantly. Then return to combine resistance and reactance in the worked example.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=KSylo01n5FY","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=KSylo01n5FY
+</div><figcaption class="wp-element-caption">The Engineering Mindset — Inductors Explained.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Impedance</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Real AC circuits can contain resistance and reactance simultaneously. An ideal capacitor’s current leads its voltage by 90°; an ideal inductor’s current lags its voltage by 90°. These are quarter-cycle timing offsets, not energy losses. Real components also have losses.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Their combined opposition is called <strong>impedance</strong>, represented by <strong>Z</strong> and measured in ohms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a simple series R-L circuit, the magnitude of impedance is:<br><strong>Z=√(R<sup>2</sup>+X<sub>L</sub><sup>2</sup>)</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Suppose a coil circuit has:<br><strong>R=30 Ω</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>and:<br><strong>X<sub>L</sub>=40 Ω</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Then:<br><strong>Z=√(30<sup>2</sup>+40<sup>2</sup>)</strong><br><strong>Z=√(2500)=50 Ω</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a hypothetical 120 V RMS sinusoidal source, current is also an RMS value:<br><strong>I=(V) / (Z)=(120) / (50)=2.4A</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Notice that using only the winding's 30 Ω resistance would incorrectly predict 4 A. <strong>AC troubleshooting sometimes requires impedance rather than DC resistance alone.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Practical troubleshooting scenario</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a hypothetical 120 V AC contactor coil receiving its rated voltage but drawing abnormal current. This is a reasoning example, not a live measurement exercise.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A resistance measurement on a properly isolated, verified de-energized winding can tell you about the winding's DC resistance, but it doesn't completely describe the energized AC circuit. The coil also has <strong>inductive reactance</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This explains an important technician concept:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Resistance is not always the same thing as total opposition to current.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In DC:<br><strong>In a settled DC winding, opposition is its resistance.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In AC:<br><strong>Opposition can include resistance + reactance.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The resulting quantity is <strong>impedance</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Practice</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>1. What does a capacitor store?</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Energy in an <strong>electric field</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>2. What does an inductor store?</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Energy in a <strong>magnetic field</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>3. A relay coil is primarily resistive, capacitive, or inductive?</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Inductive.</strong> Its winding creates a magnetic field that operates the relay.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>4. What happens to inductive reactance when frequency increases?</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>It <strong>increases</strong>, because:<br><strong>X<sub>L</sub>=2π fL</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>5. Challenge:</strong> A series AC circuit has 60 Ω resistance and 80 Ω inductive reactance. Find its impedance.<br><strong>Z=√(60<sup>2</sup>+80<sup>2</sup>)</strong><br><strong>Z=√(3600+6400)</strong><br><strong>Z=100 Ω</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a hypothetical 120 V RMS sinusoidal supply:<br><strong>I=(120) / (100)=1.2A</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Term stack</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Capacitance → charge stored per volt; electric-field storage</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Inductance → voltage response to changing current; magnetic-field storage</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Reactance → frequency-dependent opposition to AC</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Impedance → total opposition to AC</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Transient → short-duration electrical change</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Coil → wound conductor that produces a magnetic field</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Field rule:</strong> <strong>Resistance tells only part of the story in many AC circuits. When capacitors or inductors are involved, frequency affects current through reactance, and impedance describes the circuit's total opposition.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Next in the progression: <strong>transformers—turns ratio, step-up versus step-down operation, primary/secondary windings, isolation, and practical transformer measurements.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Safe study and review</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use pencil calculations or a circuit simulator for this lesson. Capacitors can retain energy after power is removed, and interrupting coil current can produce a voltage spike. Do not treat a disconnected circuit as automatically safe or attempt live mains experiments from these examples.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Review the same-module prerequisites: <a href="https://bitcoinversus.tech/2026/09/26/open-source-electrical-engineering-training-program-article-3-series-and-parallel-circuits/">OSEEC.003: Series and Parallel Circuits</a>; <a href="https://bitcoinversus.tech/2026/09/30/oseec-004-kirchhoffs-laws-kvl-kcl/">OSEEC.004: Kirchhoff’s Laws: KVL and KCL</a>; <a href="https://bitcoinversus.tech/2026/10/01/oseec-005-ac-fundamentals/">OSEEC.005: AC Fundamentals</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Further reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://openstax.org/books/university-physics-volume-2/pages/15-2-simple-ac-circuits">OpenStax: Simple AC Circuits</a> explains ideal component reactance and phase. <a href="https://openstax.org/books/university-physics-volume-2/pages/15-3-rlc-series-circuits-with-ac">OpenStax: RLC Series Circuits with AC</a> extends impedance to circuits containing both capacitors and inductors.</p>
+<!-- /wp:paragraph -->

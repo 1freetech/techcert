@@ -1,0 +1,31 @@
+---
+title: "OSETC.005: Ohm’s Law and Field Calculations"
+wordpress_post_id: 19461
+source: BitcoinVersus.tech
+published: 2026-09-29T20:06:48
+modified: 2026-09-29T22:10:45
+live_url: https://bitcoinversus.tech/2026/09/29/osetc-005-ohms-law-field-calculations/
+track: electrical/technician
+lesson_number: 5
+raw_source: 005-osetc-005-ohms-law-field-calculations-19461.gutenberg.html
+---
+
+<!-- wp:paragraph --><p><strong>OSET.005</strong> connects the measurements from the previous technician lessons. Voltage, current, and resistance are not isolated values: in many resistive circuits, their relationship can be analyzed with <strong>Ohm’s Law</strong>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">The three quantities</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Voltage (V) is electrical potential difference, current (I) is charge flow measured in amperes, and resistance (R) is opposition to current measured in ohms. <a href="https://www.fluke.com/en-us/learn/blog/electrical/what-is-ohms-law">Fluke’s Ohm’s Law reference</a> gives the core relationship as <strong>V = I × R</strong>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Rearrange the formula</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Technicians can solve for the unknown quantity when the other two are known: <strong>V = I × R</strong>, <strong>I = V ÷ R</strong>, and <strong>R = V ÷ I</strong>. Always keep the units attached to the values so the result remains clear.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Example: calculate current</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A simple 24 V resistive circuit has 12 Ω of resistance. Current is I = V ÷ R, so I = 24 ÷ 12 = <strong>2 A</strong>. This calculation gives the expected value that a technician can compare with an appropriate measurement.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=8jB6hDUqN0Y","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-block-embed-youtube wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=8jB6hDUqN0Y
+</div><figcaption class="wp-element-caption"><em>Video reference: SparkFun demonstrates voltage, current, resistance, and Ohm’s Law with a real resistor circuit and measurements.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">Example: calculate resistance</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>If a 24 V circuit is drawing 6 A, R = V ÷ I = 24 ÷ 6 = <strong>4 Ω</strong>. A calculated value can help a technician decide whether a later de-energized resistance measurement is reasonable. Never switch an energized circuit directly into resistance mode.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Use calculations as a troubleshooting baseline</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Calculations are most valuable when paired with measurements, schematics, equipment specifications, and known-good baselines. If measured behavior differs substantially from the expected relationship, investigate the circuit rather than forcing the numbers to fit.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Technician exercise</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Calculate current for 12 V across 6 Ω.</li><li>Calculate resistance when 24 V produces 3 A.</li><li>Calculate voltage when 2 A flows through 10 Ω.</li><li>Write the correct unit beside every answer.</li><li>On a safe training circuit, compare a calculated value with an appropriate meter measurement.</li></ol><!-- /wp:list -->
+<!-- wp:paragraph --><p>Answers: <strong>2 A</strong>, <strong>8 Ω</strong>, and <strong>20 V</strong>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">OSET takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Ohm’s Law turns voltage, current, and resistance into a practical troubleshooting relationship. A technician who can measure two quantities and correctly calculate the third has another way to test whether a circuit is behaving as expected.</p><!-- /wp:paragraph -->

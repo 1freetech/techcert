@@ -1,0 +1,75 @@
+---
+title: "OSC++.007: Pointers and Memory Addresses"
+wordpress_post_id: 18634
+source: BitcoinVersus.tech
+published: 2026-09-26T22:26:10
+modified: 2026-09-30T20:08:35
+live_url: https://bitcoinversus.tech/2026/09/26/c-lesson-7-pointers-and-memory-addresses/
+track: cpp
+lesson_number: 7
+raw_source: 007-c-lesson-7-pointers-and-memory-addresses-18634.gutenberg.html
+---
+
+<!-- wp:paragraph --><p>C++ Lesson 7 continues directly from references and pass-by-reference by introducing pointers and memory addresses. A pointer stores the memory address of another object. Pointers are fundamental to arrays, dynamic memory, data structures, APIs, and systems programming.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Create and Dereference a Pointer</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>int value = 42;
+int* ptr = &amp;value;
+std::cout &lt;&lt; *ptr &lt;&lt; '\n';</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p><code>&amp;value</code> obtains the address of <code>value</code>. The pointer stores that address. <code>*ptr</code> dereferences it and accesses the object.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Modify Through a Pointer</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>int value = 42;
+int* ptr = &amp;value;
+*ptr = 100;
+std::cout &lt;&lt; value &lt;&lt; '\n';</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>After the assignment, <code>value</code> is 100. The pointer gives the program another way to access the same integer in memory.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use nullptr</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>int* ptr = nullptr;
+if (ptr != nullptr) {
+    std::cout &lt;&lt; *ptr;
+}</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Do not dereference a pointer unless it refers to a valid object. Initializing a pointer to <code>nullptr</code> makes an intentionally empty pointer explicit and testable.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Pointers and Functions</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>void set_value(int* number) {
+    if (number != nullptr) {
+        *number = 75;
+    }
+}
+
+int value = 10;
+set_value(&amp;value);
+std::cout &lt;&lt; value &lt;&lt; '\n';</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The function receives the address of <code>value</code>. Dereferencing <code>number</code> lets the function modify the original integer.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Pointers and Arrays</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>int numbers[] = {10, 20, 30};
+int* ptr = numbers;
+
+std::cout &lt;&lt; *ptr &lt;&lt; '\n';
+std::cout &lt;&lt; *(ptr + 1) &lt;&lt; '\n';</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>In many expressions, an array can provide a pointer to its first element. Pointer arithmetic can then move between elements, but code must stay within valid array bounds.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Dynamic Memory: Know the Risk</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Pointers also appear in dynamic memory management. Modern C++ generally favors automatic storage and standard-library ownership tools such as containers and smart pointers instead of manually owning memory with raw pointers. When raw dynamic allocation is encountered, every allocation needs a clear lifetime and ownership plan to avoid leaks and invalid access.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video Lesson</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>The selected video is freeCodeCamp.org’s focused Pointers in C/C++ course. It covers working with pointers, pointer types, function arguments, arrays, dynamic memory, function pointers, and memory leaks.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=zuegQmMdy8M","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=zuegQmMdy8M
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Create an integer and a pointer to it.</li><li>Print the integer's value through the pointer.</li><li>Change the integer by dereferencing the pointer.</li><li>Create another pointer initialized to <code>nullptr</code>.</li><li>Use an <code>if</code> check before attempting to dereference it.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Reference</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Use cppreference C++ language documentation for detailed language-reference material. The embedded freeCodeCamp.org course provides a longer visual walkthrough of pointer mechanics and memory concepts.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true,"className":"is-provider-x wp-block-embed-x"} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong>Related BitcoinVersus.tech coverage:</strong> <a href="https://bitcoinversus.tech/2026/09/25/cpp-lesson-6-references-pass-by-reference/">C++ references</a> · <a href="https://bitcoinversus.tech/2026/09/24/cpp-lesson-5-functions-parameters-return-values/">C++ functions</a> · <a href="https://bitcoinversus.tech/2026/09/26/python-dictionaries-key-value-data/">Python dictionaries</a> · <a href="https://bitcoinversus.tech/2026/09/27/qant-photonic-computing-python-cpp-sdk/">Q.ANT Python and C++</a></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong>BitcoinVersus.Tech Editor's Note:</strong> We volunteer daily to help ensure the credibility of information on this platform is verifiably true. BitcoinVersus.tech is not a financial advisor. This article is independent reporting and educational content for informational purposes only.</p><!-- /wp:paragraph -->

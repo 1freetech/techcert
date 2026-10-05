@@ -1,0 +1,151 @@
+---
+title: "Windows Command #22 – whoami (Windows OS)"
+wordpress_post_id: 19991
+source: BitcoinVersus.tech
+published: 2026-10-02T09:49:50
+modified: 2026-10-02T09:49:50
+live_url: https://bitcoinversus.tech/2026/10/02/windows-command-22-whoami/
+track: windows/commands
+lesson_number: 22
+raw_source: 022-windows-command-22-whoami-19991.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>A command can fail simply because it is running under the wrong account. Before changing permissions, use whoami to check which identity the current Windows terminal is using.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Definition</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>whoami is a Windows identity-reporting command. Without options, it displays the computer or domain name followed by the account name. A security identifier (SID) is Windows’ identifier for an account or group.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Basic Syntax</h2>
+<!-- /wp:heading -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>whoami</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Fictional example output:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>sports-pc\bitcoin</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>SPORTS-PC is the fictional computer name; bitcoin is the fictional local account. Treat the backslash as the separator between the account authority and username. Your output will differ.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Useful Options</h2>
+<!-- /wp:heading -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>whoami /user
+whoami /groups
+whoami /priv
+whoami /all</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>/user adds the account SID. /groups lists groups in the current token. /priv lists security privileges and their states. /all combines these views. An access token is the identity and security information attached to the running process.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Video Walkthrough</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Watch this short Windows demonstration, then return to the practice steps below.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=-RY6kaQH_1o","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=-RY6kaQH_1o
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Sports Scoreboard Example</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine a fictional sports scoreboard computer cannot save a results file. Start with whoami. If the terminal is using the bitcoin account but the folder belongs to another account, you now have a concrete lead to investigate. The command reports identity; it does not fix the folder’s permissions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Compare Two Terminal Sessions</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Open a normal Command Prompt and record whoami /groups and whoami /priv. If you are authorized to administer a lab computer, compare those results with an elevated Command Prompt. The username may stay the same while token details differ. A group entry alone does not prove a permission is active; read its attributes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Readable Output</h2>
+<!-- /wp:heading -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>whoami /all /fo list
+whoami /user /fo csv
+whoami /?</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Use list format for a readable report, CSV for structured output, and /? for built-in help. These identity queries do not alter accounts or permissions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>1. Open Command Prompt and run whoami.<br>2. Identify the account authority and username.<br>3. Run whoami /user and locate the SID.<br>4. Run whoami /groups and inspect one group’s attributes.<br>5. Explain why confirming identity should come before changing access.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Which command adds the SID? Answer: whoami /user. Which command combines identity, groups, and privileges? Answer: whoami /all.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Previous Windows Lessons</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2026/10/01/windows-command-21-getmac/">Windows Command #21 – getmac (Windows OS)</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2026/10/01/windows-command-20-hostname/">Windows Command #20 – hostname (Windows OS)</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2026/10/01/windows-command-19-arp/">Windows Command #19 – arp (Windows OS)</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reference</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/whoami">Microsoft’s whoami command reference</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Key Takeaway</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use whoami as the first identity check in a Windows terminal. Confirm the account before investigating access or requesting a permission change.</p>
+<!-- /wp:paragraph -->
+

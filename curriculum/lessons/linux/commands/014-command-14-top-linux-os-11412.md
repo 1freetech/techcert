@@ -1,0 +1,65 @@
+---
+title: "Command #14 - top - (Linux OS)"
+wordpress_post_id: 11412
+source: BitcoinVersus.tech
+published: 2025-05-06T08:00:00
+modified: 2025-05-06T12:55:04
+live_url: https://bitcoinversus.tech/2025/05/06/command-14-top-linux-os/
+track: linux/commands
+lesson_number: 14
+raw_source: 014-command-14-top-linux-os-11412.gutenberg.html
+---
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The <code>top</code> command in <a href="https://bitcoinversus.tech/2025/03/16/command-6-apropos-linux-os/">Linux</a> provides real-time monitoring of system processes, resource usage, and performance metrics directly from the terminal. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://youtu.be/3r_PBLaZoFQ?si=MdRFgZ_k0lT68yn_","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://youtu.be/3r_PBLaZoFQ?si=MdRFgZ_k0lT68yn_
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">It dynamically displays essential information, including <a href="https://bitcoinversus.tech/2025/03/09/overclocking-the-cpu/">CPU</a> utilization, <a href="https://bitcoinversus.tech/2025/03/15/comparing-cpu-architectures-x64-x86-risc/">memory consumption</a>, swap usage, and running tasks. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The interactive output updates automatically, offering an immediate overview of the system's operational state, making it invaluable for troubleshooting, performance monitoring, and identifying resource-intensive processes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">In the provided terminal screenshot, running <code>top</code> displays detailed system statistics. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The header summarizes overall system usage, such as uptime (10 minutes), number of users logged in (1 user), load averages indicating CPU activity over 1, 5, and 15 minutes (1.99, 0.85, 0.36 respectively), and CPU resource percentages. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Additionally, memory details including total, used, free, buffer/cache, and available memory are clearly visible.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Below the header is a dynamically updating table listing active processes, organized by their CPU and memory usage. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Each entry provides specific information: process ID (<code>PID</code>), user, priority (<code>PR</code>), virtual memory size (<code>VIRT</code>), resident memory (<code>RES</code>), shared memory (<code>SHR</code>), current process status (<code>S</code>), CPU usage percentage (<code>%CPU</code>), memory usage percentage (<code>%MEM</code>), accumulated CPU time (<code>TIME+</code>), and the command responsible for each process (<code>COMMAND</code>). </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This detailed overview helps administrators quickly pinpoint processes that might be impacting system performance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup><br /><a href="https://bitcoinversus.tech/">BitcoinVersus.Tech</a> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","fontSize":"small"} -->
+<p class="has-small-font-size">BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

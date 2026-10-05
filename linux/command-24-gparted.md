@@ -1,0 +1,80 @@
+---
+title: "Command #24 - gparted (Linux OS)"
+source: BitcoinVersus.tech
+wordpress_post_id: 11487
+published: 2025-06-21T23:59:00
+live_url: https://bitcoinversus.tech/2025/06/21/comman-24-gparted-linux-os/
+slug: comman-24-gparted-linux-os
+---
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">According to Linux.com, GParted—short for GNOME Partition Editor—remains one of the most trusted tools in the Linux ecosystem for managing disk partitions, especially in systems using EFI bootloaders and encrypted logical volume management (LVM). </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Kyz9x71gEPI\u0026amp;pp=ygURZ3BhcnRlZChMaW51eCBPUyk%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Kyz9x71gEPI&amp;pp=ygURZ3BhcnRlZChMaW51eCBPUyk%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">sers can graphically create, resize, format, and delete partitions across a wide range of file systems including ext4, fat32, and NTFS. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">On encrypted disks such as those shown in <code>/dev/mapper/dm_crypt-0</code>, GParted identifies the encrypted volume but displays an “unrecognized disk label” if encryption metadata blocks partition table access without the proper decryption layer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Per Ubuntu’s documentation, users working with LVM-backed encrypted partitions—like <code>/dev/mmcblk0p3</code> labeled as <code>[Encrypted] lvm2 pv</code>—may find that these partitions are unavailable for edit until unlocked and mapped correctly. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=O5kh_-6e4kk\u0026amp;pp=ygURZ3BhcnRlZChMaW51eCBPUyk%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=O5kh_-6e4kk&amp;pp=ygURZ3BhcnRlZChMaW51eCBPUyk%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This functionality is critical for setups that prioritize disk-level encryption via LUKS, particularly when paired with UEFI systems where boot loaders reside in dedicated FAT32 <code>/boot/efi</code> partitions. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The dual-partition structure observed, with <code>/boot</code> on ext4 and <code>/boot/efi</code> on fat32, reflects a standard full-disk encrypted installation using UEFI and GRUB.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Users encountering the “unrecognized disk label” message at the terminal level, as seen in GParted’s CLI output, are typically viewing encrypted devices prior to unlocking with <code>cryptsetup</code>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">According to Arch Wiki, GParted requires that these devices be decrypted and activated with device-mapper tools before graphical interaction can proceed. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Once unlocked, the partition editor can interpret and visualize LVM structures, allowing adjustments to logical volumes and physical extents.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">GParted continues to support secure resizing and alignment tools for advanced filesystems like ext4, improving disk utilization for users booting from solid-state or embedded media such as <code>/dev/mmcblk0</code>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">It is also regularly compiled with libparted and <code>--enable-online-resize</code>, enabling users to apply changes on mounted partitions in certain configurations. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The version 1.5.0 shown includes compatibility with <code>libparted 3.6</code>, delivering enhancements for both encrypted and unencrypted disk workflows.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}},"fontSize":"small"} -->
+<p class="has-small-font-size" style="text-transform:none"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}},"fontSize":"small"} -->
+<p class="has-small-font-size" style="text-transform:none"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}},"fontSize":"small"} -->
+<p class="has-small-font-size" style="text-transform:none">BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.<br></p>
+<!-- /wp:paragraph -->

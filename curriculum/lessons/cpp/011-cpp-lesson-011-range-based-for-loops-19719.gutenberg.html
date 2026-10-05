@@ -1,0 +1,97 @@
+<!-- wp:paragraph -->
+<p><strong>Simple explanation:</strong> Imagine reading a list of scores from top to bottom. You do the same action for each score, then stop at the end. A range-based for loop expresses that idea in C++ without making you count positions yourself.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Definition:</strong> A <em>range-based for loop</em> repeats its body for each element in a range, such as an array or vector. One pass through the body is an <em>iteration</em>. An <em>element</em> is one item in the collection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In <a href="https://bitcoinversus.tech/2026/09/30/cpp-lesson-010-arrays-vectors/">OSC++.010: Arrays and Vectors</a>, we stored several values under one name. Now we will visit those values one at a time.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read the loop like a sentence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>for (int score : scores)</code> means “for each integer score in scores.” The colon separates the current-item declaration from the collection. The braces contain the action to repeat.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Our three fictional scores are 10, 20, and 30. The loop visits them in that order. An empty vector would run the body zero times.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A complete example</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Type the following lines into a C++ source file. The small function named <code>print</code> belongs to our example; it is not a built-in C++ command. It sends one number to standard output followed by a newline.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>#include &lt;iostream&gt;<br>#include &lt;vector&gt;<br><br>void print(int score) {<br>    std::cout &lt;&lt; score &lt;&lt; '\n';<br>}<br><br>int main() {<br>    std::vector&lt;int&gt; scores = {10, 20, 30};<br>    for (int score : scores) {<br>        print(score);<br>    }<br>}</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Expected output: <code>10</code>, then <code>20</code>, then <code>30</code>, each on its own line. You can compile with <code>g++ -std=c++17 lesson.cpp -o lesson</code> if GCC is installed. The example also works in a C++17-capable Visual Studio project.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Watch a beginner walkthrough</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Bro Code’s C++ course covers the same loop style in its “Foreach loop” section at 3:05:40. Watch that short section, then return to the copy-versus-reference exercise below. In standard C++, the syntax is <code>for</code> with a colon, as shown above.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=-TkoO8Z07hI\u0026amp;t=11140s","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=-TkoO8Z07hI&amp;t=11140s
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Video: “C++ Full Course for free” — Bro Code. Relevant section begins at 3:05:40.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Changing a copy versus changing the original</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Keep the same vector. Add <code>for (int score : scores) { score += 5; }</code> after the first loop. Here, <code>score</code> is a copy of the current integer. Changing that copy leaves the stored scores at 10, 20, and 30.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Now try <code>for (int&amp; score : scores) { score += 5; }</code>. The <code>&amp;</code> makes score a reference to the actual element. The vector becomes 15, 25, and 35. References were introduced in <a href="https://bitcoinversus.tech/2026/09/25/cpp-lesson-6-references-pass-by-reference/">OSC++.006: References and Pass by Reference</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For reading without copying each element, <code>for (const int&amp; score : scores) { print(score); }</code> uses a reference that cannot modify the integer through score. For this small integer example, a plain copy is also reasonable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice with simulated readings</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Replace the scores with fictional temperatures: <code>std::vector&lt;int&gt; temperatures = {61, 63, 60, 64};</code>. Create <code>int total = 0;</code>, then write <code>for (int temperature : temperatures) { total += temperature; }</code>. Print total.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Check:</strong> The total should be 248. Next, use a reference loop to add 1 to each simulated reading. The values should become 62, 64, 61, and 65. These are practice numbers, not a recommendation to alter real sensor measurements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Keep the loop predictable</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use this loop when you need each item rather than its position. During these exercises, keep the vector’s size unchanged inside the loop: do not add or erase elements while traversing it. Changing existing integer values through references is the operation being practiced.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Remember: <code>int score</code> gives a copy, <code>int&amp; score</code> gives a modifiable reference, and <code>const int&amp; score</code> gives a read-only reference to the element. Microsoft’s <a href="https://learn.microsoft.com/en-us/cpp/cpp/range-based-for-statement-cpp?view=msvc-170">range-based for documentation</a> provides additional examples.</p>
+<!-- /wp:paragraph -->

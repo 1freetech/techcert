@@ -1,0 +1,341 @@
+---
+title: "OSEEC.009: Electrical Power Distribution: Switchgear, Switchboards, Panelboards, and PDUs"
+wordpress_post_id: 20312
+source: BitcoinVersus.tech
+published: 2026-10-03T21:24:56
+modified: 2026-10-03T21:24:56
+live_url: https://bitcoinversus.tech/2026/10/03/oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus/
+track: electrical/engineer
+lesson_number: 9
+raw_source: 009-oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus-20312.gutenberg.html
+---
+
+<!-- wp:paragraph {"fontSize":"large"} -->
+<p class="has-large-font-size"><strong>Electrical power distribution is the system that moves electricity from the source to the equipment that actually uses it. The easiest way to understand it is as a chain: receive power, transform it when needed, protect it, divide it into smaller circuits, and deliver it to the final load.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/02/oseec-008-three-phase-power-fundamentals/">OSEEC.008: Three-Phase Power Fundamentals</a>. That lesson explained the three-phase source. OSEEC.009 follows the power downstream through the equipment that controls, protects, and distributes it inside a real facility.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Start with one simple idea: power moves downstream</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A large facility can contain many different voltage levels and many layers of protection. A one-line diagram simplifies that complexity by representing a three-phase electrical system with a single line.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>Utility / Generator
+        |
+        v
+Medium-voltage switchgear
+        |
+        v
+Transformer
+        |
+        v
+Low-voltage switchgear or switchboard
+        |
+        v
+UPS / PDU / busway / panelboard
+        |
+        v
+RPP / rack PDU / branch circuit
+        |
+        v
+Final load</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p><strong>This is only one example.</strong> Real designs vary. A facility may place generators, automatic transfer switches, UPS systems, static transfer switches, transformers, busway, or redundant A/B paths in different locations. The one-line diagram for the actual site is the authority.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The four names that cause the most confusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:table -->
+<figure class="wp-block-table"><table><thead><tr><th>Equipment</th><th>Main job</th><th>Where you commonly see it</th></tr></thead><tbody><tr><td><strong>Switchgear</strong></td><td>Controls, protects, isolates, and interrupts major power circuits.</td><td>Service entrance, substations, medium-voltage systems, large low-voltage distribution.</td></tr><tr><td><strong>Switchboard</strong></td><td>Divides a large low-voltage feed into multiple protected feeder circuits.</td><td>Commercial buildings, industrial facilities, data centers.</td></tr><tr><td><strong>Panelboard</strong></td><td>Divides a feeder into smaller branch circuits.</td><td>Walls, electrical rooms, offices, mechanical areas, local equipment distribution.</td></tr><tr><td><strong>PDU</strong></td><td>Distributes power closer to the load; some units also transform, meter, or monitor it.</td><td>Data centers, telecom rooms, IT spaces, industrial installations.</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>The names describe different classes of equipment, not just different cabinet sizes. Voltage class, construction, standards, protection, access, fault-current capability, and intended use all matter.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Video 1: Medium-voltage switchgear fundamentals</h2>
+<!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=BY4VHcbTT_E","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=BY4VHcbTT_E
+</div><figcaption class="wp-element-caption"><em>Eaton Power Systems Experience Center explains medium-voltage switchgear, including metal-clad, metal-enclosed, compact designs, protection, isolation, and arc-resistant construction.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Switchgear: protect and control the big circuits</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Switchgear sits high in the distribution hierarchy because it handles important feeders and can isolate large sections of a system. Depending on the design, it may contain circuit breakers, disconnecting devices, protective relays, metering, current transformers, voltage transformers, bus, control power, and communication equipment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In medium-voltage systems, switchgear is common between the utility source and large transformers or major facility feeders. In the United States, medium-voltage switchgear is commonly associated with IEEE C37 equipment standards. Low-voltage switchgear is a separate equipment class and is commonly associated with UL 1558.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The engineering question is not simply “Can this breaker carry the normal load?” The equipment must also be suitable for the system voltage, continuous current, available fault current, protective scheme, environmental conditions, and required operating method.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Switchboard: divide a large low-voltage feed</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A switchboard is usually a low-voltage distribution assembly. It receives a large feed and divides that power into multiple feeder circuits. Those feeders can supply panelboards, PDUs, motors, mechanical equipment, UPS systems, transformers, or other downstream loads.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Switchboards and low-voltage switchgear can look similar from across an electrical room, but they are not interchangeable names. Their construction and product standards differ. In common U.S. practice, switchboards are associated with UL 891 while low-voltage switchgear is associated with UL 1558.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Video 2: Eaton switchboard basics</h2>
+<!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=P6q0rgqaAk0","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=P6q0rgqaAk0
+</div><figcaption class="wp-element-caption"><em>Eaton explains how switchboards distribute low-voltage power, the major internal parts, and the practical differences among switchboards, switchgear, and panelboards.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Panelboard: branch circuits live here</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A panelboard usually appears farther downstream. It receives a feeder and divides it into smaller branch circuits. A panelboard commonly contains busbars, circuit breakers, a neutral bar when the system requires one, an equipment-grounding bar, and an enclosure with a dead front.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Think of the hierarchy this way: a switchboard may feed several panelboards, and each panelboard may feed many individual branch circuits. In common U.S. practice, panelboards are associated with UL 67.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Video 3: Eaton panelboard basics</h2>
+<!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=FuhDgp8fQKs","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=FuhDgp8fQKs
+</div><figcaption class="wp-element-caption"><em>Eaton shows how panelboards divide a feeder into protected branch circuits and identifies the enclosure, chassis, busbars, breakers, neutral and grounding bars, dead front, metering, and surge-protection options.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">PDU can mean two different things in a data center</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Facility PDU:</strong> A floor-level power distribution unit can receive a larger three-phase feed and distribute multiple downstream circuits. Traditional units may also include a transformer, branch breakers, monitoring, or metering.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Rack PDU, or rPDU:</strong> This is the device mounted in or beside an IT rack that provides multiple outlets to servers, network equipment, storage, or other rack loads. Basic models only distribute power. Metered and intelligent models can report current, energy, voltage, outlet state, or environmental data depending on the design.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Do not assume that the word “PDU” always means the same physical device. Read the one-line diagram, equipment label, and project documentation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">RPP and busway: two more distribution tools</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An <strong>RPP</strong>, or remote power panel, is a downstream distribution panel placed closer to the loads it serves. It lets a facility bring a larger feeder into the white space or equipment area, then split that power into many smaller branch circuits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Busway</strong> uses enclosed bus conductors instead of running an individual cable all the way to every load. In data centers and industrial facilities, plug-in or tap-off units can connect loads at multiple points along the busway. This can make expansion and rearrangement easier, but the exact ratings and installation rules still matter.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A simple data-center example</h2>
+<!-- /wp:heading -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>Utility medium voltage
+        |
+        v
+MV switchgear
+        |
+        v
+Transformer
+        |
+        v
+LV switchgear / switchboard
+        |
+        v
+UPS
+        |
+        v
+PDU or busway
+        |
+        v
+RPP or rack PDU
+        |
+        v
+Server / network / storage load</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Many modern data centers use two independent distribution paths, often described as A and B. Dual-corded IT equipment can receive one feed from each path. Redundancy is useful only when the supposedly independent paths do not share an unexpected single point of failure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A simple Bitcoin-mining-site example</h2>
+<!-- /wp:heading -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>Utility / substation
+        |
+        v
+Switchgear
+        |
+        v
+Transformer
+        |
+        v
+Switchboard / distribution gear
+        |
+        v
+Container or building distribution
+        |
+        v
+Branch protection / PDU
+        |
+        v
+ASIC miners, pumps, fans, controls</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Mining loads are different from conventional IT loads because a large ASIC fleet is often treated as an interruptible industrial load rather than a mission-critical load that must ride through an outage on UPS power. Control systems, networking, monitoring, and safety equipment may still use separate backed-up power.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Three ratings you should never ignore</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul><li><strong>Voltage rating:</strong> The equipment must be designed for the system voltage and connection.</li><li><strong>Continuous-current rating:</strong> Bus, breakers, conductors, and equipment must be sized for the load and applicable design rules.</li><li><strong>Fault-current capability:</strong> Equipment and protective devices must be able to withstand or interrupt the available short-circuit current as required by their ratings and the system design.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>A breaker can carry normal current perfectly and still be unsafe if the available fault current exceeds what the equipment can safely interrupt or withstand. This is why short-circuit studies and equipment ratings matter.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Protection should become more selective downstream</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>When a fault occurs on one small branch circuit, the goal is usually to clear that fault without unnecessarily shutting down healthy upstream sections. Engineers coordinate protective devices so the device closest to the fault can operate first when the design allows it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This is called <strong>selective coordination</strong>. Achieving it can require breaker trip curves, fuse characteristics, relay settings, short-circuit calculations, and time-current studies. It is an engineering task, not a matter of simply choosing the largest breaker.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How to read a distribution one-line</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>Find the source: utility, generator, inverter, battery system, or another upstream bus.</li><li>Write down each voltage level.</li><li>Identify transformers and their primary/secondary voltages.</li><li>Follow the main bus through switchgear or switchboards.</li><li>Identify each feeder and the equipment it supplies.</li><li>Look for normally open ties, redundant paths, and alternate sources.</li><li>Note protective-device names, ratings, and relay functions.</li><li>Follow the path all the way to the final load.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>If you lose track of the drawing, return to the source and move downstream one device at a time. Do not try to understand the entire sheet at once.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Electrical-room safety</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Switchgear and switchboards can contain lethal voltage and extremely high available fault current. A lesson about equipment names is <strong>not</strong> authorization to open doors, remove dead fronts, rack breakers, defeat interlocks, probe energized conductors, or perform energized work.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Field work requires the site's electrical-safety program, the correct qualification level, lockout/tagout where required, appropriate PPE, properly rated test equipment, verified absence of voltage when de-energized work is intended, and the applicable procedures for that specific equipment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice: trace the path</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use this simplified path:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>13.8 kV utility
+  -&gt; MV switchgear
+  -&gt; 13.8 kV / 480 V transformer
+  -&gt; 480 V switchboard
+  -&gt; 480 V PDU
+  -&gt; 208Y/120 V branch distribution
+  -&gt; rack PDU
+  -&gt; server</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>Which device first controls and protects the incoming medium-voltage feeders?</li><li>Which device changes the voltage from 13.8 kV to 480 V?</li><li>Which device divides the 480 V system into downstream feeder circuits?</li><li>Which device is physically closest to the server?</li><li>If the server loses power, list every upstream device you would want identified on the one-line before troubleshooting.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>1. What is the main difference between a feeder and a branch circuit?</strong><br>A feeder carries power from one distribution point to another downstream distribution point or load group; a branch circuit is the final circuit supplying utilization equipment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>2. Is every PDU a rack power strip?</strong><br>No. “PDU” can refer to larger facility distribution equipment or to a rack-mounted distribution unit.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>3. Why does available fault current matter?</strong><br>Because the equipment and protective devices must safely withstand or interrupt the fault current that can reach them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>4. Why use a one-line diagram?</strong><br>It shows the electrical relationship among sources, buses, transformers, protective devices, feeders, and loads without drawing every conductor.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Previous electrical-engineering lessons</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2026/10/02/oseec-007-transformers-turns-ratio-step-up-step-down-isolation/">OSEEC.007: Transformers: Turns Ratio, Step-Up/Step-Down, and Isolation</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2026/10/02/oseec-006-capacitance-inductance-reactance/">OSEEC.006: Capacitance, Inductance, and Reactance</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Key takeaway</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Switchgear protects and controls major circuits. Switchboards divide large low-voltage feeds. Panelboards divide feeders into branch circuits. PDUs, RPPs, and busway move power closer to the final load.</strong> Read the one-line from source to load, verify the voltage at every stage, and treat equipment ratings and electrical-safety procedures as part of the design—not as afterthoughts.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>Display note: the one-line examples above are plain text diagrams, not simulated terminal screenshots. No custom terminal colors are applied.</em></p>
+<!-- /wp:paragraph -->

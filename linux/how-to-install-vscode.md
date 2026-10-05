@@ -1,0 +1,80 @@
+---
+title: "How to Install VS code (Linux OS Edition) - 4 Easy Steps"
+source: BitcoinVersus.tech
+wordpress_post_id: 4631
+published: 2024-09-13T08:10:00
+live_url: https://bitcoinversus.tech/2024/09/13/how-to-install-vs-code-in-the-linux-os-terminal-4-easy-steps/
+slug: how-to-install-vs-code-in-the-linux-os-terminal-4-easy-steps
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><em>After some weird malfunctions started occurring on my window OS laptop, I  decided to install the Virtual Studio Code application on another laptop in a Linux OS Terminal. Using Linux to download applications via the terminal is a highly valuable practice for system administrators. </em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><em>The terminal allows for precise control over software installations, enabling admins to script and automate deployments, ensuring consistency across multiple systems. It also provides access to repositories and package managers that simplify the installation process, often resulting in quicker and more efficient setups. </em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><em>Furthermore, terminal-based installations give admins the ability to manage dependencies, troubleshoot issues in real-time, and maintain a clean, minimal installation environment. </em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><em>This approach is particularly advantageous in environments where GUI tools might not be available or practical, reinforcing the importance of command-line proficiency in system administration.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Here's how to complete the Virtual Studio Code install in a Linux OS terminal in little to no time:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Step 1: <a href="https://code.visualstudio.com/">Download</a> the <a href="https://code.visualstudio.com/">application</a> on the Debian/Ubuntu Version of the application at <a href="https://code.visualstudio.com/">code.visualstudio.com</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4634,"width":"413px","height":"auto","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/debian-ubuntu-vs-codd-app-webiste-download.png?w=137" alt="" class="wp-image-4634" style="width:413px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Step 2: Verify The file has been downloaded in the File Section </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4641,"width":"397px","height":"auto","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/screenshot-from-2024-08-12-18-29-46.png?w=68" alt="" class="wp-image-4641" style="width:397px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":4642,"width":"405px","height":"auto","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/linux-download-file-virtual-studio-code-1.png?w=137" alt="" class="wp-image-4642" style="width:405px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Step 3: Open the linux terminal (ctrl+ alt + T) and then type in the command </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">"<em>sudo snap install code --classic</em>" and then press "<em>ENTER</em>"</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4636,"width":"775px","height":"auto","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/vs-code-linux-terminal.png?w=819" alt="" class="wp-image-4636" style="width:775px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Step 4: Great Job! You should now have Virtual Studio Code Installed on your Linux OS. Happy Coding!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":4648,"width":"700px","height":"auto","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/linux-os-vs-code-terminal-pic.png?w=737" alt="" class="wp-image-4648" style="width:700px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":4644,"width":"401px","height":"auto","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/08/vs-code-terminal-logo-in-linux-os.png?w=77" alt="" class="wp-image-4644" style="width:401px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

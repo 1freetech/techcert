@@ -1,0 +1,39 @@
+---
+title: "OSNTC.007: MAC Address Basics"
+wordpress_post_id: 19949
+source: BitcoinVersus.tech
+published: 2026-10-02T00:37:19
+modified: 2026-10-02T00:37:36
+live_url: https://bitcoinversus.tech/2026/10/02/osntc-007-mac-address-basics/
+track: networking/technician
+lesson_number: 7
+raw_source: 007-osntc-007-mac-address-basics-19949.gutenberg.html
+---
+
+<!-- wp:paragraph --><p>A <strong>MAC address</strong>, short for Media Access Control address, identifies a network interface on a local network. You will commonly see it written as six pairs of hexadecimal characters, such as <code>3C:52:82:1A:4F:90</code>.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>In <a href="https://bitcoinversus.tech/2026/09/27/open-source-networking-lesson-1-ip-address/">OSNTC.001</a>, you learned that an IP address identifies where a device communicates on an IP network. A MAC address serves a different job at the local Ethernet/Wi-Fi link layer. The simple technician idea is: <strong>IP addresses help traffic reach networks and hosts; MAC addresses help local network interfaces exchange frames.</strong></p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">What a MAC Address Looks Like</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>3C:52:82:1A:4F:90</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>A traditional MAC address contains 48 bits, usually displayed as 12 hexadecimal digits. Depending on the operating system or tool, separators may appear as colons, hyphens, or periods.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">MAC Address vs. IP Address</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li><strong>MAC address:</strong> identifies a network interface for local link-layer communication.</li><li><strong>IP address:</strong> provides logical addressing used to communicate across IP networks.</li></ul><!-- /wp:list -->
+<!-- wp:paragraph --><p>A laptop can keep the same network interface while receiving a different IP address from DHCP. That is one reason technicians should know how to distinguish the two identifiers.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video: MAC Address Explained</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>PowerCert Animated Videos provides a visual beginner explanation of MAC addresses and the difference between MAC and IP addressing.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=TIiQiw7fpsU","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=TIiQiw7fpsU
+</div><figcaption class="wp-element-caption"><em>PowerCert Animated Videos explains MAC addressing and how it differs from IP addressing.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">How a Switch Uses MAC Addresses</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>An Ethernet switch learns which source MAC addresses appear on its ports. It builds a MAC address table so it can forward frames toward the appropriate port instead of treating every destination the same way.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Simple Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Imagine a PC and printer connected to the same switch. The switch can learn which port leads to the PC's MAC address and which port leads to the printer's MAC address. That local information helps it forward Ethernet frames between the devices.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Data Center Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>During rack-and-stack work, a technician may compare a server's documented MAC address with the address learned on a switch port. If the expected address appears on the wrong port, that can point to a cabling or documentation problem.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Bitcoin Mining Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A miner control board connected to Ethernet has a network interface with a MAC address. A technician can use the switch's learned MAC information alongside IP and DHCP information to help identify which physical switch port reaches a particular miner.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">MAC Addresses Can Change</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Do not assume a MAC address is a permanent personal identity. Modern operating systems can use randomized or locally administered MAC addresses, especially on Wi-Fi. Virtual machines and software-defined interfaces can also use assigned virtual MAC addresses.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>What does MAC stand for?</li><li>How many hexadecimal digits are normally displayed in a 48-bit MAC address?</li><li>Explain one difference between a MAC address and an IP address.</li><li>What does an Ethernet switch learn from source MAC addresses?</li><li>Why might a technician compare a switch-port MAC table with device documentation?</li><li>Why should you not assume every MAC address is permanently fixed?</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>MAC addresses identify network interfaces for local link-layer communication. Ethernet switches learn MAC addresses on their ports, while IP addresses handle logical network addressing. Knowing both gives a technician a clearer path from a device's network identity to its physical switch connection.</p><!-- /wp:paragraph -->

@@ -1,0 +1,13 @@
+---
+title: "Electrical Engineering: Line-to-Line vs. Line-to-Neutral Voltage"
+wordpress_post_id: 18474
+source: BitcoinVersus.tech
+published: 2026-09-24T23:57:43
+modified: 2026-09-27T00:54:26
+live_url: https://bitcoinversus.tech/2026/09/24/electrical-engineering-line-to-line-vs-line-to-neutral-voltage/
+track: electrical/training
+lesson_number: null
+raw_source: electrical-engineering-line-to-line-vs-line-to-neutral-voltage-18474.gutenberg.html
+---
+
+<p>Three-phase wye systems commonly provide both line-to-line and line-to-neutral voltages. In a 208Y/120 V system, the nominal values are 208 V line-to-line and 120 V line-to-neutral. In a 480Y/277 V system, they are 480 V and 277 V.</p><h2>The square-root-of-three relationship</h2><p>For a balanced wye system, line-to-line voltage is approximately 1.732 times line-to-neutral voltage. That is why 120 V corresponds to about 208 V and 277 V corresponds to about 480 V.</p><h2>Why technicians care</h2><p>Knowing which conductors a voltage refers to helps when reading panel schedules, equipment labels, schematics, PDUs, and data-center power distribution. A voltage number is meaningful only when you know the two points between which it is measured.</p><h2>Measurement context</h2><p>Fluke's three-phase guidance distinguishes measurements across phase conductors from measurements referenced to neutral or ground. Energized electrical measurements can expose workers to shock and arc-flash hazards, so only qualified and authorized personnel should perform them using appropriately rated equipment, PPE, and procedures.</p><h2>Quick reference</h2><p><strong>208Y/120 V:</strong> about 208 V line-to-line and 120 V line-to-neutral.<br><strong>480Y/277 V:</strong> about 480 V line-to-line and 277 V line-to-neutral.<br><strong>Balanced wye:</strong> V(L-L) ≈ √3 × V(L-N).</p><p><strong>BitcoinVersus.Tech Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. Support our research: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</p><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>

@@ -1,0 +1,55 @@
+---
+title: "Electrical Rough In Basics"
+wordpress_post_id: 17008
+source: BitcoinVersus.tech
+published: 2026-07-22T06:13:00
+modified: 2026-09-11T09:18:26
+live_url: https://bitcoinversus.tech/2026/07/22/electrical-rough-in-basics/
+track: electrical/training
+lesson_number: null
+raw_source: electrical-rough-in-basics-17008.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>Before outlets, switches, and light fixtures can be installed, electricians complete the electrical rough-in—the phase where the building's hidden electrical infrastructure is installed before insulation and drywall. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=1D5OqJ5SF_I","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=1D5OqJ5SF_I
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>During the rough-in, electricians mount electrical boxes, drill pathways through framing members, route branch-circuit wiring, secure cables, and position the system according to the electrical plans. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Because these components will be concealed inside the walls, precision, planning, and quality workmanship are essential from the start.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=a-Irur6QkI4\u0026amp;list=PLfZcU0E-cRgAiN6udrWd2LvUnUX7zet0y","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=a-Irur6QkI4&amp;list=PLfZcU0E-cRgAiN6udrWd2LvUnUX7zet0y
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>A properly completed rough-in provides the foundation for the entire electrical system and makes the final installation of devices, fixtures, and equipment much more efficient. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Electricians must carefully consider circuit routing, box placement, cable protection, support spacing, and future accessibility while complying with the National Electrical Code (NEC) and all applicable local regulations. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>After the rough-in passes inspection, insulation and drywall can be installed, allowing the project to move into the trim-out, or finish, phase of construction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a> <strong><em><sup>Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</sup></em></strong></p>
+<!-- /wp:paragraph -->

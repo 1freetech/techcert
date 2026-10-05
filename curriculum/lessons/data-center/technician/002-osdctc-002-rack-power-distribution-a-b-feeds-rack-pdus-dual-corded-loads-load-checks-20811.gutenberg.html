@@ -1,0 +1,184 @@
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>Rack power distribution is the technician-level boundary between facility electrical infrastructure and the IT equipment that consumes it. Correct operation requires identifying the actual source path, preserving A/B independence, understanding rack-PDU capabilities, and checking electrical load before a maintenance action removes redundancy.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>OSDCTC.002 continues the Data Center Technician sequence from <a href="https://bitcoinversus.tech/2026/10/04/osdctc-001-data-center-floor-fundamentals-racks-power-cooling-networking-safety/">OSDCTC.001: Data Center Floor Fundamentals — Racks, Power, Cooling, Networking, and Safety</a>. The earlier lesson introduced the power chain at a high level. This lesson focuses on the rack edge: branch circuits, rack PDUs, dual power supplies, A/B source paths, load metering, outlet state, and safe fault isolation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Rack power in one flow</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>upstream distribution<br>↓<br>branch circuit / overcurrent protection<br>↓<br>rack PDU input<br>↓<br>rack PDU outlets<br>↓<br>equipment power cords<br>↓<br>server / switch / storage power supplies<br>↓<br>internal DC rails feeding the electronics</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For broader electrical context, review <a href="https://bitcoinversus.tech/2026/10/03/oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus/">OSEEC.009: Electrical Power Distribution — Switchgear, Switchboards, Panelboards, and PDUs</a> and <a href="https://bitcoinversus.tech/2026/10/03/oseec-010-overcurrent-protection-circuit-breakers-fuses-fault-current-selective-coordination/">OSEEC.010: Overcurrent Protection — Circuit Breakers, Fuses, Fault Current, and Selective Coordination</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">1. Rack PDU does not mean facility PDU</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Data-center terminology can reuse the same acronym for equipment at different levels. A <strong>rack power distribution unit</strong> is the distribution device mounted in or beside the IT rack that provides outlets for servers, switches, storage, and other rack equipment. A larger facility-level PDU may distribute power to many racks or branch circuits.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Schneider Electric groups modern rack PDUs into basic, metered, metered-by-outlet, switched, and switched/metered families. The operational capability increases from simple distribution toward remote visibility and outlet-level control. See <a href="https://www.se.com/us/en/product-subcategory/7410-rack-power-distribution/">Schneider Electric Rack Power Distribution</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 1: Rack PDU architecture and configuration</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=C7-xWEe1mRk","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=C7-xWEe1mRk
+</div><figcaption class="wp-element-caption"><em>Schneider Electric — Configure to Order Rack PDU Overview and How to Configure a PDU. Demonstrates rack-PDU input, outlet, and layout choices used in data-center power distribution.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">2. Common rack-PDU classes</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Basic rack PDU:</strong> distributes power without built-in networked metering or outlet switching.</li><li><strong>Metered-input rack PDU:</strong> reports aggregate input current and often voltage, power, or energy.</li><li><strong>Metered-by-outlet rack PDU:</strong> measures individual outlet loads in addition to broader PDU load.</li><li><strong>Switched rack PDU:</strong> allows authorized remote on/off control of outlets.</li><li><strong>Switched + metered-by-outlet rack PDU:</strong> combines individual load visibility with outlet control.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>These classes are operationally different. A basic PDU may require local current measurement elsewhere in the distribution chain, while an intelligent PDU can expose alarms and load telemetry directly. Schneider Electric notes that metered rack PDUs can provide real-time load monitoring and user-defined overload alarms. Eaton likewise separates basic, metered-input, metered-outlet, and managed platforms. See <a href="https://www.eaton.com/us/en-us/products/backup-power-ups-surge-it-power-distribution/power-distribution-for-it-equipment/power-distribution-units-for-server-racks.html">Eaton Rack PDU</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">3. A and B power paths</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Critical dual-corded IT equipment is commonly connected to two separate power paths. These are often called <strong>A</strong> and <strong>B</strong>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The intended concept is:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A source → A branch → A rack PDU → PSU 1<br>B source → B branch → B rack PDU → PSU 2</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>True redundancy depends on upstream independence. Two cords attached to two rack PDUs do not prove two independent paths if both PDUs ultimately share the same breaker, panel, UPS output, or other failure domain.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The engineering-level treatment of failure domains appears in <a href="https://bitcoinversus.tech/2026/10/04/osdcec-001-data-center-redundancy-failure-domains-n-n1-2n-concurrent-maintainability/">OSDCEC.001: Data Center Redundancy and Failure Domains — N, N+1, 2N, and Concurrent Maintainability</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">4. Never trust color alone</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Many facilities use different rack-PDU or cable colors for A and B feeds, but color conventions are site-specific. Eaton notes that chassis color can be used to visually identify A and B feeds; this is an aid, not proof of electrical independence.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Verify the rack label.</li><li>Verify the PDU asset identity.</li><li>Verify the branch-circuit label.</li><li>Verify the upstream one-line or approved source map when required.</li><li>Verify both equipment PSUs are healthy before removing either path.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">5. Dual-corded equipment</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Servers, storage arrays, and network devices often contain two or more hot-swappable power supplies. In a redundant configuration, each PSU is connected to a different source path.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Important technician details:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Two installed PSUs do not guarantee both are receiving input power.</li><li>Two energized PSUs do not guarantee independent upstream sources.</li><li>Load sharing is implementation-dependent; it may not be exactly 50/50.</li><li>A failed PSU can leave the device online but reduce redundancy.</li><li>Removing one cord can shift nearly all input load to the remaining PSU and remaining power path.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">6. Single-corded equipment</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A single-corded device has only one native input power path. If higher availability is required, the site design may use an approved rack transfer device or another redundancy method. A technician must not improvise a transfer arrangement with unapproved adapters, splitters, or power strips.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">7. Rack-PDU input ratings</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Rack PDUs are built for specific input configurations that can differ by voltage, phase count, current rating, connector type, and outlet family. Common data-center systems can include single-phase and three-phase inputs.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The technician must read the actual equipment label and site documentation rather than infer capacity from connector appearance. A PDU input connector, branch breaker, upstream circuit, and PDU internal design must all match the approved installation.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Vertiv describes rack PDUs as rack-based distribution equipment for IT and other sensitive electrical loads, with different configurations selected for the application. See <a href="https://www.vertiv.com/en-us/products-catalog/critical-power/power-distribution/vertiv-mpe-rack-pdu/">Vertiv MPE Rack PDU</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">8. Electrical quantities technicians should recognize</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Voltage:</strong> electrical potential supplied to the load.</li><li><strong>Current:</strong> load flow, usually monitored in amperes.</li><li><strong>Apparent power:</strong> commonly expressed in volt-amperes or kilovolt-amperes.</li><li><strong>Real power:</strong> commonly expressed in watts or kilowatts.</li><li><strong>Energy:</strong> accumulated consumption, commonly kilowatt-hours.</li><li><strong>Power factor:</strong> relationship between real power and apparent power for AC loads.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>For a simple single-phase approximation, apparent power is <strong>S = VI</strong>. Real power can be represented as <strong>P = VI × PF</strong>. Production decisions must use the site’s approved metering and electrical limits rather than a hand calculation alone.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">9. Load checks are performed before removing redundancy</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Before a planned A-feed or B-feed maintenance action, the remaining path must be capable of carrying the transferred load. The exact approval process is site-specific, but the technician commonly reviews:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>current A-path load;</li><li>current B-path load;</li><li>branch-circuit loading;</li><li>rack-PDU loading;</li><li>phase loading where three-phase distribution is used;</li><li>active alarms;</li><li>failed or unavailable PSUs;</li><li>upstream maintenance or degraded conditions;</li><li>site-defined warning and critical thresholds.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Do not assume that because each path normally carries half of the rack load, either path can safely carry the entire rack load. Equipment behavior, PSU mode, branch capacity, and phase distribution must be verified.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: Intelligent rack-PDU monitoring</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=zDw08cAwCQ8","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=zDw08cAwCQ8
+</div><figcaption class="wp-element-caption"><em>APC by Schneider Electric — NetShelter Rack PDU Advanced demo. Shows physical PDU features, network setup, monitoring, and management functions used for rack-power visibility.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">10. Metered PDU readings</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A metered PDU can expose some combination of input current, branch current, voltage, watts, apparent power, power factor, energy, and per-outlet measurements.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Technician interpretation should distinguish:</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>aggregate PDU load</strong> from one specific outlet;</li><li><strong>instantaneous current</strong> from historical energy use;</li><li><strong>normal operating load</strong> from startup or transient peaks;</li><li><strong>warning threshold</strong> from actual protective-device trip rating;</li><li><strong>one phase</strong> from total three-phase input loading.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">11. Three-phase rack PDUs and phase balance</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Higher-density racks increasingly use three-phase rack-PDU inputs. The PDU may distribute different outlet groups across phases.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>An overloaded phase can become the limiting condition even when total rack kilowatts appear acceptable. Intelligent PDUs can help reveal phase imbalance, but the technician must know how the specific PDU maps outlets to phases.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Identify the PDU input configuration.</li><li>Identify phase assignment by approved documentation or PDU interface.</li><li>Compare phase currents.</li><li>Do not relocate production cords solely to “balance numbers” without approved change control.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">12. Outlet-level switching is powerful and dangerous</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A switched PDU can remotely de-energize an individual outlet. This enables controlled rebooting and power sequencing, but an outlet command can also shut down production equipment instantly.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Confirm the correct PDU.</li><li>Confirm the correct outlet.</li><li>Confirm the asset connected to that outlet.</li><li>Confirm the alternate PSU/path is healthy when redundancy is expected.</li><li>Confirm change approval before switching production power.</li><li>Verify recovery after the operation.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>An unlabeled or stale outlet map is an operational defect. Remote switching should not be used as a guessing tool.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">13. Breakers are protection devices</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Rack PDUs can include internal branch protection, and upstream panels protect the PDU feeder. A breaker that has opened is evidence of an abnormal condition or intentional operation.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Repeatedly resetting a breaker without understanding the cause can restore power into an unresolved fault or overload. Follow the site electrical procedure and escalation path. Only qualified and authorized personnel should perform electrical operations beyond the technician’s approved scope.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">14. Cord and connector discipline</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Verify both ends before disconnecting a cord.</li><li>Use only approved connector and cord types for the device and PDU.</li><li>Confirm retention or locking features are fully engaged where required.</li><li>Route cords so they do not block server airflow or service access.</li><li>Do not exceed bend, strain, or routing requirements.</li><li>Replace damaged cords rather than taping or improvising a repair.</li><li>Preserve A/B separation when routing dual cords.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Video 3: Practical managed rack-PDU installation and monitoring</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=RlnHov22ubE","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=RlnHov22ubE
+</div><figcaption class="wp-element-caption"><em>Cameron Gray — APC Smart-UPS and Managed PDU installation. Provides a practical hardware tour, rack installation, first power-up, battery test, and managed-PDU web interface demonstration.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">15. Fault isolation: one server PSU lost input</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A server remains online but reports loss of AC input on PSU 2.</p><!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Confirm the correct server and PSU alarm.</li><li>Confirm PSU 1 remains healthy and identify its source path.</li><li>Inspect PSU 2 local indicators without disturbing cords.</li><li>Trace PSU 2 to the expected rack-PDU outlet.</li><li>Check the outlet state if the PDU provides outlet-level status.</li><li>Check PDU aggregate and branch alarms.</li><li>Determine whether the fault affects one outlet, one PDU branch, the entire rack PDU, or the upstream feed.</li><li>Preserve the healthy path while escalating the failed path.</li><li>Verify redundancy is restored after correction.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">16. Fault isolation: one entire rack PDU is dark</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>If one rack PDU loses power while its paired PDU remains energized:</p><!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Do not begin unplugging equipment from the failed path.</li><li>Confirm whether critical dual-corded equipment remains online.</li><li>Check whether the surviving PDU has adequate load margin according to site thresholds.</li><li>Review PDU, branch, UPS, and electrical-monitoring alarms.</li><li>Determine the highest common failed point without operating unapproved electrical devices.</li><li>Escalate the affected distribution path under the site procedure.</li><li>After restoration, verify each dual-corded device has both expected feeds and clear all temporary degraded-state tracking.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">17. Common technician mistakes</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Assuming two cords mean two independent feeds.</li><li>Assuming color proves A/B identity.</li><li>Unplugging a cord before verifying the alternate PSU.</li><li>Reading aggregate PDU load but ignoring an overloaded branch or phase.</li><li>Using server PSU nameplate wattage as actual real-time rack load.</li><li>Power-cycling a switched outlet without confirming the attached asset.</li><li>Resetting an opened breaker without understanding why it opened.</li><li>Leaving a repaired device with both cords connected to the same power path.</li><li>Closing a ticket when service is restored but redundancy is still degraded.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">18. Technician pre-maintenance rack-power check</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Confirm rack identity and maintenance scope.</li><li>Confirm A and B PDU identities and upstream source mapping.</li><li>Review active electrical and rack-PDU alarms.</li><li>Confirm dual-corded critical devices have both expected PSUs healthy.</li><li>Review present A and B load.</li><li>Review branch and phase loading where applicable.</li><li>Confirm the surviving path remains inside site-approved operating limits after expected load transfer.</li><li>Verify no overlapping upstream maintenance removes the assumed backup path.</li><li>Obtain required change approval.</li><li>Make one controlled change at a time and verify the effect.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Exercises</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Draw a two-path rack power chain from upstream distribution through A/B rack PDUs to a dual-corded server.</li><li>Explain why two energized rack PDUs may still share a common failure domain.</li><li>Compare a basic rack PDU, metered-input PDU, metered-by-outlet PDU, and switched PDU.</li><li>List the checks required before intentionally removing one feed from a dual-corded server.</li><li>Explain why the surviving rack-PDU load can rise sharply when the opposite path is removed.</li><li>Describe the difference between aggregate PDU loading and per-outlet loading.</li><li>Explain why three-phase phase imbalance can matter even when total rack power appears acceptable.</li><li>Write a fault-isolation sequence for one dark rack PDU while the paired PDU remains online.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>1. What is a rack PDU?</strong><br>A rack-mounted or rack-adjacent device that distributes electrical power to IT equipment within the rack.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>2. What is the purpose of A/B rack power?</strong><br>To provide separate power paths so one path can fail or be maintained without automatically removing all input power from properly dual-corded equipment.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>3. Do two power cords prove power-path independence?</strong><br>No. Upstream source mapping must confirm that the cords ultimately reach separate intended failure domains.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>4. What does a metered rack PDU add?</strong><br>Electrical load visibility such as current and, depending on the model, voltage, power, energy, branch, phase, or outlet data.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>5. Why check load before taking one feed out of service?</strong><br>Because the surviving path may need to carry additional load and must remain within the approved operating limits.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>6. Why can one phase limit a three-phase rack PDU?</strong><br>Because outlet loads may not be evenly distributed, so one phase can reach its limit before the total PDU power appears excessive.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>7. What is the risk of a switched rack PDU?</strong><br>An incorrect outlet command can immediately remove power from production equipment.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>8. What should happen after a failed power path is repaired?</strong><br>Verify normal service and also verify that intended redundancy has actually been restored.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>Rack power work is source-path work. A competent data center technician can identify the actual A/B feeds, understand the rack-PDU feature class, interpret load and phase data, preserve dual-corded redundancy, trace a failed path without disturbing the healthy path, and verify that redundancy—not merely service—has been restored.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Safety note: This lesson is general technical education. It does not authorize energized electrical work, breaker operation, panel access, or live measurements. Site electrical procedures, qualified-person requirements, equipment instructions, and applicable codes govern actual work.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Display note: this lesson uses standard Gutenberg paragraphs, headings, lists, and media embeds only. No decorative text-box or callout-box layout is used.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech advertisement.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong><em>Editor's Note:</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

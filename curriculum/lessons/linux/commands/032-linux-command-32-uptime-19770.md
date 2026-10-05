@@ -1,0 +1,41 @@
+---
+title: "Linux Command #32 – uptime (Linux OS)"
+wordpress_post_id: 19770
+source: BitcoinVersus.tech
+published: 2026-10-01T10:50:28
+modified: 2026-10-01T10:50:55
+live_url: https://bitcoinversus.tech/2026/10/01/linux-command-32-uptime/
+track: linux/commands
+lesson_number: 32
+raw_source: 032-linux-command-32-uptime-19770.gutenberg.html
+---
+
+<!-- wp:paragraph --><p>The Linux <strong><code>uptime</code></strong> command gives you a quick answer to a basic technician question: <strong>how long has this computer been running?</strong> It also shows how many users are signed in and a short view of system load.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>This follows <a href="https://bitcoinversus.tech/2026/10/01/linux-command-31-stat-file-metadata/">Linux Command #31 – stat (Linux OS)</a>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Run the Command</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>uptime</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>A computer might respond with something like:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>10:24:17 up 3 days, 4:26, 2 users, load average: 0.18, 0.24, 0.20</code></pre><!-- /wp:code -->
+<!-- wp:heading --><h2 class="wp-block-heading">Read the Output</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li><strong>10:24:17</strong> — the current system time.</li><li><strong>up 3 days, 4:26</strong> — how long the machine has been running since its last boot.</li><li><strong>2 users</strong> — the number of logged-in user sessions.</li><li><strong>load average</strong> — three numbers summarizing recent system workload over approximately 1, 5, and 15 minutes.</li></ul><!-- /wp:list -->
+<!-- wp:paragraph --><p>For this beginner lesson, remember that load average is a quick workload indicator. We will interpret CPU and process performance in more detail in later lessons.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video: Linux uptime Command</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>This short Linux tutorial demonstrates the basic command, explains its output, and shows the human-readable and boot-time options.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=U0HnfE6gLq8","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=U0HnfE6gLq8
+</div></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">Make It Easier to Read</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>uptime -p</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>-p</code> option means <strong>pretty</strong>. It returns a simpler result such as:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>up 3 days, 4 hours, 26 minutes</code></pre><!-- /wp:code -->
+<!-- wp:heading --><h2 class="wp-block-heading">See When the Computer Started</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>uptime -s</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>-s</code> option shows the date and time when the system started.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Data Center Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A server unexpectedly stops responding and comes back online. A technician can run <code>uptime</code>. If the result says the server has only been up for a few minutes, that is a quick clue that it recently rebooted.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Bitcoin Mining Example</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>If a Linux management computer at a mining site was expected to run continuously, <code>uptime</code> can quickly show whether that computer recently restarted before you investigate applications, networking, or connected miners.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Practice</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Open a Linux terminal.</li><li>Run <code>uptime</code>.</li><li>Identify how long the machine has been running.</li><li>Run <code>uptime -p</code>.</li><li>Run <code>uptime -s</code> and identify the system start time.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><code>uptime</code> is a fast first-check command. It tells a technician how long Linux has been running, how many user sessions are active, and the recent system load.</p><!-- /wp:paragraph -->

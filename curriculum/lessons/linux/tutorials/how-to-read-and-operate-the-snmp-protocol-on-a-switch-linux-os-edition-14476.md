@@ -1,0 +1,117 @@
+---
+title: "How to Read and Operate the SNMP Protocol On a Switch (Linux OS Edition)"
+wordpress_post_id: 14476
+source: BitcoinVersus.tech
+published: 2025-08-25T08:55:00
+modified: 2026-09-28T22:46:26
+live_url: https://bitcoinversus.tech/2025/08/25/how-to-read-and-operate-the-snmp-protocol-on-a-switch-linux-os-edition/
+track: linux/tutorials
+lesson_number: null
+raw_source: how-to-read-and-operate-the-snmp-protocol-on-a-switch-linux-os-edition-14476.gutenberg.html
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>The</strong><a href="https://www.comparitech.com/net-admin/snmpwalk-examples-windows-linux/"><strong> snmpwalk command is used to perform a series of network management requests to a specific device using an IP address(example: 10.31.10.101),starting from the OID 1.3.6.1.2.1.2.2.1, using SNMPv3</strong></a><strong>.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":8121} -->
+<figure class="wp-block-image"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/11/ad_4nxcoqfuitned5w5sleah7ud8olrlkz-vyziebjkxjer_px6uun9cg1tkscmyla2-bu39p0tzpa8bokllxyy_17dehbmoe9wrcrmglwfjaslqdrzn-xd_phgvpwnlily_cdysdunwxzjsjrhgqzdubiwjzto.png" alt="" class="wp-image-8121" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong><br></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>Reference record for OID: </strong><a href="https://oidref.com/1.3.6.1.2.1.2.2.1"><strong>Website to interpret OID Adresses</strong><strong><br></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>snmp</strong><strong>walk</strong><strong> -v3 -l authPriv -u l1monitor -a MD5 -A GEe9bb8h -x DES -X 4ixay7su </strong><strong>10.36.10.108</strong><strong> </strong><strong>1.3.6.1.2.1.2.2.1</strong><strong><br></strong><strong><br></strong><strong>snmpwalk</strong><strong>: This is the command used to retrieve a subset of management values using SNMP.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>a. </strong><strong>-v3</strong><strong>: Specifies that SNMP version 3 is used, which includes enhanced security features.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>b.</strong><strong> -l authPriv</strong><strong>: Sets the security level to </strong><strong>authPriv</strong><strong>, indicating that both authentication and privacy (encryption) are required.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>c. </strong><strong>-u l1monitor</strong><strong>: Defines the username </strong><strong>l1monitor</strong><strong> for authentication with the SNMP agent.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>d. </strong><strong>-a MD5</strong><strong>: Selects MD5 as the authentication protocol.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>e. </strong><strong>-A GEe9bb8h</strong><strong>: Provides the authentication passphrase </strong><strong>GEe9bb8h</strong><strong>.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>f. </strong><strong>-x DES</strong><strong>: Chooses DES as the privacy (encryption) protocol.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>g. </strong><strong>-X 4ixay7su</strong><strong>: Supplies the privacy passphrase </strong><strong>4ixay7su</strong><strong>.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>i. </strong><strong>1.3.6.1.2.1.2.2.1</strong><strong>: This is the </strong><strong>Object Identifier</strong><strong> (OID) that specifies the particular subtree of information you want to retrieve. It typically corresponds to a specific set of information in the MIB (Management Information Base), such as interface details.</strong><strong><br></strong><strong><br></strong><strong>Installing</strong><strong>SNMP</strong><strong>: To install</strong><strong>SNMP</strong><strong>, you can use the following command:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}},"fontSize":"large"} -->
+<p class="has-large-font-size" style="text-transform:none"><strong><em>sudo apt install snmp</em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li><strong>This command will install the necessary SNMPpackages, including snmpwalk.<img width="565" height="278" src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdpHpX3SgXwvhKIkvlz2Bec2i6PeOQIrrMycMSmrlYtMvF0D89AavxozLnqyY79ULQ9l6wi3nip-r1154kKD6QtoeeAGt3DO3_aD7datt5DMC0TDSe2iAAaXLM2yFZg2sisKTvxD08dRnIb4EZgIg73BOM?key=lxfQZzPL174HOmddN9ReFQ"><br></strong></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>During the installation, you’ll notice that some additional packages are being installed, such as libsensors-config, libsensors5, libsnmp-base, libsnmp40, and libwrap0. These packages are dependencies required for SNMP to function properly.<br><img width="453" height="45" src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXc1i8cC9q0mVjAw7AIG3Oi37wMlS7htMb9XPmfyXJWZMMfAwSPkiiWqJjmjVptnwKOxF5t21GFkuLL_6SmidVKM-qEJKlYsz_iWmFzg2hRjNTTrTnnw0iHZPX7O1huNpRIbi281T8nTw6rqPOrV0jzSqWng?key=lxfQZzPL174HOmddN9ReFQ"></strong></li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:list {"ordered":true,"start":3} -->
+<ol start="3" class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Confirmation Prompt: After installing the packages, you’ll be prompted with:</strong></li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:image {"id":8120,"width":"400px","height":"auto"} -->
+<figure class="wp-block-image is-resized"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/11/ad_4nxdl3amkoegzvl98dlgt9dh77kwpfxubkql4h347pkp2irjn3q9blocuciql4hiscozxxphve__y7wqvrufhijoc9oia_gtebxn1_3moyi7qtsywjs1uehu0b0nfjtpzzilf-1igwv9lf3-oxdzvwuct3xs.png" alt="" class="wp-image-8120" style="width:400px;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong>Do</strong><strong> </strong><strong>you</strong><strong> </strong><strong>want</strong><strong> </strong><strong>to</strong><strong> </strong><strong>continue?</strong><strong> </strong><strong>[Y/n]</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true,"start":4} -->
+<ol start="4" class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Press Y to proceed.<br>Afterward the command line will give you the </strong><a href="https://oidref.com/1.3.6.1.2.1.2.2.1"><strong>OID</strong></a><strong> (object identifier) </strong><a href="https://oidref.com/1.3.6.1.2.1.2.2.1"><strong>Addresses </strong></a><strong>that look like &gt;&gt;&gt;&gt;&gt;(1.3.6.1.2.1.2.2.1)<img width="417" height="252" src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXcOqfUITnEd5w5SLeaH7Ud8OlRLkZ-vYzIeBjkXjer_px6UUN9cG1TKScMyLA2-Bu39P0tzPA8bOkLLxYy_17DEhBmOe9WrcrmGlWFjAslqDrzn--XD_pHgVPwNlILy_cdYsdunwXzJSJrhGqZduBiwjzTo?key=lxfQZzPL174HOmddN9ReFQ"><br></strong></li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>5. Checking each individual switch</strong><strong><br></strong>To check each individual switch, change the IP address’s 2nd and 4th octet to get to reach the corresponding switch.<strong> </strong><strong>10.31.10.101</strong><strong> This is the </strong><strong>IP address</strong><strong> of the target device, which in this case, identifies the switch you’re querying. In this example, </strong><strong>31</strong><strong> is the container. </strong><strong>101</strong><strong> is the switch position. </strong><strong><br></strong><strong>snmpwalk</strong><strong> </strong><strong>-v3 -l authPriv -u l1monitor -a MD5 -A GEe9bb8h -x DES -X 4ixay7su </strong><strong>10.31.10.101</strong><strong> 1.3.6.1.2.1.2.2.1</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph --><!-- wp:embed {"url":"https://www.youtube.com/watch?v=2IXP0TkwNJU","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=2IXP0TkwNJU
+</div></figure>
+<!-- /wp:embed -->

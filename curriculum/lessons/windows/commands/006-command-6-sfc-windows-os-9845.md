@@ -1,0 +1,51 @@
+---
+title: "Command #6 – sfc (Windows OS)"
+wordpress_post_id: 9845
+source: BitcoinVersus.tech
+published: 2024-11-23T11:28:00
+modified: 2025-04-02T20:49:16
+live_url: https://bitcoinversus.tech/2024/11/23/command-6-sfc-windows-os/
+track: windows/commands
+lesson_number: 6
+raw_source: 006-command-6-sfc-windows-os-9845.gutenberg.html
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>SFC (System File Checker)</strong><br>System File Checker (SFC) is a built-in Windows utility designed to scan for and repair corrupted or missing system files. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":9851,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/11/image-57.png?w=1024" alt="" class="wp-image-9851" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">SFC ensures the integrity of critical operating system files by replacing them with the correct versions from the Windows installation source, helping to resolve system stability or performance issues. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Keep in mind, you will need administrative privileges to use this command. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>SFC /scannow</strong><br>The <code>sfc /scannow</code> command performs a full system scan, checking all protected files for corruption or damage. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":9849,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/11/screenshot-2024-11-23-104325.png?w=617" alt="" class="wp-image-9849" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">If issues are found, it automatically repairs them by replacing problematic files with verified ones. This command requires administrative privileges and is often used to address errors like crashes, missing features, or failed Windows updates.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}},"fontSize":"small"} -->
+<p class="has-small-font-size" style="text-transform:none"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}},"fontSize":"small"} -->
+<p class="has-small-font-size" style="text-transform:none"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a><strong><em><sup>&nbsp;</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes</p>
+<!-- /wp:paragraph -->

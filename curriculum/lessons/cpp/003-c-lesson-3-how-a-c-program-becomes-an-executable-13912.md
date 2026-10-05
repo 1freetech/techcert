@@ -1,0 +1,77 @@
+---
+title: "OSC++.003: How a C++ Program Becomes an Executable"
+wordpress_post_id: 13912
+source: BitcoinVersus.tech
+published: 2025-07-12T08:00:00
+modified: 2026-09-30T20:09:29
+live_url: https://bitcoinversus.tech/2025/07/12/c-lesson-3-how-a-c-program-becomes-an-executable/
+track: cpp
+lesson_number: 3
+raw_source: 003-c-lesson-3-how-a-c-program-becomes-an-executable-13912.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>When you write a <a href="https://bitcoinversus.tech/category/computer-programming/c/">C++</a> program, you are not writing instructions a computer can understand directly. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>You are writing human-readable source code. The process that transforms your <code>.cpp</code> or <code>.cc</code> files into an executable program is called <strong>compilation</strong>, and it happens in multiple stages. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>These stages are carried out by a <strong>compiler toolchain</strong>, often referred to collectively as the build system. The process begins with the <strong>preprocessor</strong>, which handles directives like <code>#include</code>, <code>#define</code>, and conditional macros. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>It essentially assembles the full source code by inserting header file content, resolving macros, and stripping comments before the compiler sees anything.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=K4h4zFVTe9k","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=K4h4zFVTe9k
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Next, the <strong>compiler</strong> takes this preprocessed source code and translates it into <strong>assembly language</strong>, which is specific to your machine’s architecture. This step performs syntax checks, enforces type rules, and applies optimizations. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The result is a low-level representation of your logic, still not executable, but close. After that, the <strong>assembler</strong> converts the assembly code into <strong>object code</strong>—a binary format containing machine instructions but without the ability to run on its own. These <code>.o</code> or <code>.obj</code> files are created for each source file separately.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The final stage is <strong>linking</strong>, where all the object files and external dependencies (like standard libraries or other compiled modules) are stitched together into a single <strong>executable binary</strong>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This is when the compiler resolves function calls between different files, handles library references, and finalizes memory layout. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If you’re compiling with GCC, this entire process often happens when you run <code>g++ main.cpp -o program</code>. Behind the scenes, it goes through all four stages: preprocessing, compiling, assembling, and linking.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Understanding the compilation process is essential for mastering C++. It explains why header files should not contain function definitions, why circular dependencies break builds, and how linker errors differ from compiler errors. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Bitcoin Core, for instance, has over 600 <code>.cpp</code> and <code>.h</code> files. Without a solid grasp of how those files are compiled and linked, contributing to a system that complex would be nearly impossible.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

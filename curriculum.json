@@ -83,7 +83,20 @@
       "acronym": "OSSTC",
       "title_format": "OSSTC.{number}: {topic}",
       "starting_lesson_number": 1,
-      "status": "active"
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 2,
+        "title": "OSSTC.002: Wafer Handling, FOUPs, and Automated Material Flow Basics",
+        "wordpress_post_id": 20781,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/osstc-002-wafer-handling-foups-automated-material-flow-basics/",
+        "archive_path": "archive/2026/10/osstc-002-wafer-handling-foups-automated-material-flow-basics.md",
+        "verified_repositories": [
+          "1freetech/Bitcoinversus.tech",
+          "1freetech/techcert",
+          "1freetech/opencert.tech"
+        ]
+      },
+      "next_lesson_number": 3
     },
     {
       "subject": "semiconductor_engineer",

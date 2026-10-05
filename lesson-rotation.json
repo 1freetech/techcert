@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-05T19:31:00Z",
+  "updated_at": "2026-10-05T20:05:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "semiconductor_engineer",
+    "subject": "robotics_technician",
     "lesson_number": 3,
-    "title": "OSSEC.003: PN Junction Electrostatics — Depletion Width, Built-In Potential, Electric Field, and Junction Capacitance",
-    "wordpress_post_id": 20990,
-    "live_url": "https://bitcoinversus.tech/2026/10/05/ossec-003-pn-junction-electrostatics-depletion-width-built-in-potential-electric-field-junction-capacitance/",
-    "archive_path": "archive/2026/10/ossec-003-pn-junction-electrostatics-depletion-width-built-in-potential-electric-field-junction-capacitance.md",
+    "title": "OSRTC.003: Robot Mastering and Calibration — Zero Position, Encoders, Reference Marks, and Recovery",
+    "wordpress_post_id": 20996,
+    "live_url": "https://bitcoinversus.tech/2026/10/05/osrtc-003-robot-mastering-calibration-zero-position-encoders-reference-marks-recovery/",
+    "archive_path": "archive/2026/10/osrtc-003-robot-mastering-calibration-zero-position-encoders-reference-marks-recovery.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,17 +38,17 @@
     ]
   },
   "next": {
-    "subject": "robotics_technician",
+    "subject": "robotics_engineer",
     "lesson_number": 3,
-    "title_format": "OSRTC.003: {topic}",
+    "title_format": "OSREC.003: {topic}",
     "track_start": false,
-    "previous_lesson": "OSRTC.002"
+    "previous_lesson": "OSREC.002"
   },
   "new_track_starts": {
     "information_technology": {"acronym": "OSITC", "lesson_number": 1, "title_format": "OSITC.001: {topic}"},
     "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 4, "title_format": "OSSTC.004: {topic}"},
     "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 4, "title_format": "OSSEC.004: {topic}"},
-    "robotics_technician": {"acronym": "OSRTC", "lesson_number": 3, "title_format": "OSRTC.003: {topic}"},
+    "robotics_technician": {"acronym": "OSRTC", "lesson_number": 4, "title_format": "OSRTC.004: {topic}"},
     "robotics_engineer": {"acronym": "OSREC", "lesson_number": 3, "title_format": "OSREC.003: {topic}"},
     "data_center_technician": {"acronym": "OSDCTC", "lesson_number": 3, "title_format": "OSDCTC.003: {topic}"},
     "data_center_engineer": {"acronym": "OSDCEC", "lesson_number": 3, "title_format": "OSDCEC.003: {topic}"},
@@ -58,6 +58,6 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 3, "title_format": "OSFEC.003: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 4, "title_format": "OSHistory.004: {topic}"}
   },
-  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.002, OSREC.002, OSDCTC.002, OSDCEC.002, OSFOTC.002, OSFOEC.002, OSFTC.002, and OSFEC.002 are published; each corresponding track next lesson is .003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSRTC.003 after verified OSSEC.003.",
+  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.002, OSDCTC.002, OSDCEC.002, OSFOTC.002, OSFOEC.002, OSFTC.002, and OSFEC.002 are published; each corresponding track next lesson is .003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSREC.003 after verified OSRTC.003.",
   "verification_hold": null
 }

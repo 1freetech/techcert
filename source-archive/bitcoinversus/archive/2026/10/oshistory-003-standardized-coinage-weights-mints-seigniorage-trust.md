@@ -12,6 +12,10 @@ featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026
 youtube_1: "https://www.youtube.com/watch?v=5auv_xrvoJk"
 youtube_2: "https://www.youtube.com/watch?v=TmDrByb5hsA"
 youtube_3: "https://www.youtube.com/watch?v=pTm18offyuw"
+youtube_4: "https://www.youtube.com/watch?v=-nZkP2b-4vo"
+youtube_5: "https://www.youtube.com/watch?v=rPHTmGjoe2k"
+youtube_6: "https://www.youtube.com/watch?v=GKtNuzakzMA"
+source_playlist_extra_history_paper_money: "https://youtube.com/playlist?list=PLjLK2cYtt-VBAvk3uytqPDhkiPdhLYGtf"
 ---
 
 <!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>Coinage changed monetary exchange by turning weighed metal into standardized units that carried visible information about weight, authority, denomination, and expected quality. A coin was not merely a piece of metal. It was a compact verification technology.</strong></p><!-- /wp:paragraph -->
@@ -177,6 +181,22 @@ https://www.youtube.com/watch?v=pTm18offyuw
 <!-- wp:list --><ul class="wp-block-list"><li>standard units;</li><li>issuer identity;</li><li>authentication marks;</li><li>denominations;</li><li>official monetary production;</li><li>seigniorage;</li><li>counterfeit resistance;</li><li>tension between intrinsic content and nominal value;</li><li>state or institutional control of issuance.</li></ul><!-- /wp:list -->
 
 <!-- wp:paragraph --><p>Paper notes, bank deposits, electronic balances, and Bitcoin solve different monetary problems, but all can be studied through the same deeper questions: What is the unit? Who or what defines validity? How is duplication prevented? How is supply changed? What evidence allows a recipient to accept payment without independently reconstructing its entire history?</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Next OSHistory video source: paper money</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The next OSHistory step should draw from the <strong>Extra History: Paper Money</strong> playlist, especially the episodes on origins of exchange, early paper-money systems, and the transition from commodity backing toward state-enforced paper claims.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=-nZkP2b-4vo","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=-nZkP2b-4vo
+</div><figcaption class="wp-element-caption"><em>Extra History — The History of Paper Money: Origins of Exchange, Part 1.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=rPHTmGjoe2k","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=rPHTmGjoe2k
+</div><figcaption class="wp-element-caption"><em>Extra History — The History of Paper Money: Not Just Noodles, Part 2.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=GKtNuzakzMA","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=GKtNuzakzMA
+</div><figcaption class="wp-element-caption"><em>Extra History — The History of Paper Money: Barebones Economy, Part 3.</em></figcaption></figure><!-- /wp:embed -->
 
 <!-- wp:heading --><h2 class="wp-block-heading">Exercises</h2><!-- /wp:heading -->
 

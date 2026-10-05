@@ -3,7 +3,7 @@ title: "OSHistory.003: Standardized Coinage — Weights, Mints, Seigniorage, and
 wordpress_post_id: 20879
 source: BitcoinVersus.tech
 published: 2026-10-05T00:43:00
-modified: 2026-10-05T00:43:00
+modified: 2026-10-05T01:17:09
 live_url: https://bitcoinversus.tech/2026/10/05/oshistory-003-standardized-coinage-weights-mints-seigniorage-trust/
 track: history-money-technology-bitcoin
 lesson_number: 3
@@ -173,6 +173,33 @@ https://www.youtube.com/watch?v=pTm18offyuw
 <!-- wp:list --><ul class="wp-block-list"><li>standard units;</li><li>issuer identity;</li><li>authentication marks;</li><li>denominations;</li><li>official monetary production;</li><li>seigniorage;</li><li>counterfeit resistance;</li><li>tension between intrinsic content and nominal value;</li><li>state or institutional control of issuance.</li></ul><!-- /wp:list -->
 
 <!-- wp:paragraph --><p>Paper notes, bank deposits, electronic balances, and Bitcoin solve different monetary problems, but all can be studied through the same deeper questions: What is the unit? Who or what defines validity? How is duplication prevented? How is supply changed? What evidence allows a recipient to accept payment without independently reconstructing its entire history?</p><!-- /wp:paragraph -->
+
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Next OSHistory video source: paper money</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The next OSHistory step should draw from the <strong>Extra History: Paper Money</strong> playlist, especially the episodes on origins of exchange, early paper-money systems, and the transition from commodity backing toward state-enforced paper claims.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=-nZkP2b-4vo","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=-nZkP2b-4vo
+</div><figcaption class="wp-element-caption"><em>Extra History: Paper Money, Part 1 — the origins of paper money and the systems that made paper claims usable in exchange.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=rPHTmGjoe2k","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=rPHTmGjoe2k
+</div><figcaption class="wp-element-caption"><em>Extra History: Paper Money, Part 2 — early paper-money experiments, convertibility, and the institutional problem of trust.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=GKtNuzakzMA","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=GKtNuzakzMA
+</div><figcaption class="wp-element-caption"><em>Extra History: Paper Money, Part 3 — how paper claims changed the relationship between money, backing, and state authority.</em></figcaption></figure>
+<!-- /wp:embed -->
 
 <!-- wp:heading --><h2 class="wp-block-heading">Exercises</h2><!-- /wp:heading -->
 

@@ -1,0 +1,181 @@
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2025/11/30/the-bitcoin-mining-air-coolant-energy-operation-equation/">Bitcoin mining</a> has evolved from general-purpose CPUs and GPUs into one of the most specialized forms of computing in the world. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>At the center of every modern miner is an <strong>application-specific integrated circuit (ASIC)</strong> engineered almost exclusively to execute Bitcoin’s SHA-256 proof-of-work calculations at enormous scale. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Companies such as <strong><a href="https://bitcoinversus.tech/2024/10/19/report-bitmain-leads-bitcoin-mining-asic-market/">Bitmain</a>, <a href="https://bitcoinversus.tech/2025/04/06/canaan-unveils-avalon-q-bitcoin-miner-for-home-use/">Canaan</a>, <a href="https://bitcoinversus.tech/2025/06/19/triple-threat-bitmain-canaan-and-microbt-shift-manufacturing-to-u-s-to-avoid-tariffs/">MicroBT</a>, and <a href="https://bitcoinversus.tech/2025/06/16/bitdeer-technologies-expands-mining-operations-in-ethiopia/">Bitdeer</a></strong> now compete at the semiconductor level, where improvements in process nodes, voltage management, thermal design, hashing density, and joules per terahash directly determine the computational productivity of an entire mining system. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Understanding these chips therefore provides a foundation for understanding how Bitcoin mining hardware continues to become faster, denser, and more energy efficient.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Bitmain — BM13xx ASIC Architecture</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Bitmain’s modern Bitcoin mining architecture is built around its proprietary <strong>BM13xx family of SHA-256 ASICs</strong>, with successive generations such as the BM1366, BM1368, BM1370 and related derivatives powering the Antminer S19 and S21 generations. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=N3jM-yVWC5U","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=N3jM-yVWC5U
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>At the silicon level, these chips are not general-purpose processors: most of the die is dedicated to highly parallel <strong>SHA-256 hashing pipelines</strong> designed to repeatedly perform Bitcoin’s double-SHA-256 proof-of-work calculation with extremely little overhead. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Dozens or hundreds of ASICs are distributed across the miner’s hashboards, receiving work from the control board and processing enormous nonce ranges in parallel. Bitmain’s architectural progression has focused on shrinking switching losses, improving voltage/frequency behavior, increasing hashing density and extracting more hashes from each joule. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>That progression is visible at the system level: the original S21 delivers about <strong>200 TH/s at 17.5 J/TH</strong>, while the S21 XP reaches approximately <strong>270 TH/s at 13.5 J/TH</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=9UKbuvNINiI\u0026amp;pp=ygUOYml0bWFpbiBtaW5pbmc%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=9UKbuvNINiI&amp;pp=ygUOYml0bWFpbiBtaW5pbmc%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Canaan — Avalon ASIC Architecture</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Canaan, the company behind the <strong>AvalonMiner</strong> platform and one of the earliest commercial Bitcoin ASIC manufacturers, follows essentially the same fundamental computational model but with its own proprietary SHA-256 silicon, hashboard designs and firmware-level tuning. Avalon ASICs contain large arrays of specialized hashing logic rather than CPU-style execution cores; mining jobs are distributed from the miner controller through the hashboards and then divided among many physical ASIC chips operating simultaneously. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=WaDe7CM6RVA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=WaDe7CM6RVA
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Canaan has historically emphasized relatively robust thermal and electrical operation, while newer Avalon generations have increasingly targeted Bitmain-class efficiency through improved silicon and operating-point optimization. Its current A16 generation illustrates that progression: the <strong>Avalon A16 produces roughly 282 TH/s at 13.8 J/TH</strong>, while the A16XP reaches approximately <strong>300 TH/s at 12.8 J/TH</strong>. Canaan does not publicly expose enough transistor-level detail to responsibly describe the exact internal hashing-core arrangement, so the safest architectural description is a highly parallel, fixed-function SHA-256 compute array optimized around voltage, frequency and thermal efficiency.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">MicroBT — WhatsMiner ASIC Architecture</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>MicroBT’s <strong>WhatsMiner</strong> architecture is the other major mature implementation of industrial Bitcoin SHA-256 computing. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Like Bitmain, MicroBT uses proprietary ASIC silicon mounted across high-current hashboards, with a separate controller supplying block-header work, target information and nonce-search assignments to a large population of parallel hashing engines. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=kx2XSKsoKK4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=kx2XSKsoKK4
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Each ASIC repeatedly executes the SHA-256 compression operations required for Bitcoin mining while the board-level architecture concentrates on delivering extremely stable low-voltage power to the chips and removing several kilowatts of resulting heat. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>MicroBT is particularly notable for treating the ASIC, power supply, firmware and cooling system as one tightly optimized compute platform; its air, hydro and immersion WhatsMiner families therefore represent variations of essentially the same specialized SHA-256 computational architecture operated at different electrical and thermal envelopes. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>MicroBT publishes miner-level performance much more readily than detailed die-level diagrams, so claims about its exact internal pipeline or core count should be treated cautiously unless supported by semiconductor analysis.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Bitdeer — SEAL ASIC Architecture</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Bitdeer is the newest major entrant of these four and arguably the most interesting architecturally because it has publicly discussed its silicon roadmap in unusual detail. Its first proprietary chip, <strong>SEAL01</strong>, was manufactured on a <strong>4 nm process</strong> and demonstrated approximately <strong>18.1 J/TH at the chip level</strong> before being integrated into the SEALMINER A1. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=wJFR1fjnlTg","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=wJFR1fjnlTg
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>The subsequent SEAL02 substantially lowered that figure, with early silicon demonstrating approximately <strong>13.5 J/TH under low-voltage operation</strong> and powering the SEALMINER A2 generation. Bitdeer’s longer-term architecture is especially important: the company has described SEAL04 as a <strong>full redesign using new digital circuit architectures</strong>, rather than simply another process shrink, targeting roughly <strong>5 J/TH at the chip level</strong>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>That means Bitdeer is explicitly attacking Bitcoin mining efficiency through both semiconductor fabrication and changes to the underlying digital implementation of the SHA-256 compute engine. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If successful, this represents the same broader architectural trend visible across Bitcoin ASIC development: increasingly dense parallel hashing engines, reduced switching energy, lower operating voltage and increasingly sophisticated chip-level power optimization.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">AxeOS, Bitaxe and Proto: Open-Source Bitcoin Mining Hardware</h3>
+<!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=yJbalP0R3zE\u0026amp;pp=ygUNcHJvdG8gbWluaW5nIA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=yJbalP0R3zE&amp;pp=ygUNcHJvdG8gbWluaW5nIA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><strong><a href="https://bitcoinversus.tech/2025/03/31/axeos-2-6-1-brings-new-features-and-controls-to-bitcoin-mining-machine/">AxeOS</a> represents the software side of the Bitaxe open-source mining ecosystem</strong>, but it is important to distinguish open-source system design from open-source ASIC silicon. Bitaxe essentially takes proprietary <strong>Bitmain <a href="https://bitcoinversus.tech/2025/03/16/bitaxe-gamma-601-device-overheat-mode-standard-procedure-for-resolving-bitaxe-miner-overheat-alerts/">BM-series ASIC chips</a></strong>—including the BM1397, BM1366, BM1368 and BM1370 originally developed for Antminer platforms—and builds an independently designed, fully documented miner around them. Its ESP32-based <strong>ESP-Miner firmware includes the AxeOS dashboard</strong>, while the PCB schematics, manufacturing files and supporting hardware are publicly available. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In that sense, Bitaxe can be viewed as an open-source branch of the Bitmain hardware ecosystem: the underlying SHA-256 chip remains Bitmain intellectual property, but developers have reverse-engineered enough of its interfaces to place individual Bitmain ASICs into completely new open hardware. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The other major movement toward a more open Bitcoin-mining silicon ecosystem is <strong>Block’s Proto</strong>, which has developed its own 3 nm mining ASIC and explicitly plans to sell chips independently to third-party hardware builders while making its mining technology open-source where possible. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2024/10/18/proto-releases-updates-from-bitcoin-mining-development-kit/">Proto</a> therefore goes a step beyond Bitaxe: rather than simply opening the board and firmware surrounding somebody else’s ASIC, Block is attempting to open access to the <strong>ASIC supply layer itself</strong>, alongside modular mining hardware, development kits and open-source fleet-management software.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a> <strong><em><sup>Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

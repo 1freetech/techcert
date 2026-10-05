@@ -1,13 +1,20 @@
 # fiber-optics/training
 
-38 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+46 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
+| — | [Fiber Optic Cabling](./fiber-optic-cabling-12003.md) | [Published lesson](https://bitcoinversus.tech/2025/04/07/fiber-optic-cabling/) |
+| — | [Fiber Optic Cabling Overview](./fiber-optic-cabling-overview-12402.md) | [Published lesson](https://bitcoinversus.tech/2025/04/10/fiber-optic-cabling-overview/) |
+| — | [OTDR Report Overview (Fiber Optics)](./otdr-report-overview-fiber-optics-12438.md) | [Published lesson](https://bitcoinversus.tech/2025/04/10/otdr-report-overview-fiber-optics/) |
+| — | [Fusion Splicing: Definition and Overview](./fusion-splicing-definition-and-overview-14694.md) | [Published lesson](https://bitcoinversus.tech/2025/11/03/fusion-splicing-definition-and-overview/) |
+| — | [Fiber Optics: Splice-on Connector](./fiber-optics-splice-on-connector-14701.md) | [Published lesson](https://bitcoinversus.tech/2025/11/04/fiber-optics-splice-on-connector/) |
 | — | [Fiber Optic Training: MPO Connectors](./fiber-optic-training-mpo-connectors-14706.md) | [Published lesson](https://bitcoinversus.tech/2025/11/05/fiber-optic-training-mpo-connectors/) |
 | — | [Fiber Optic Training: MPO Test Set](./fiber-optic-training-mpo-test-set-14715.md) | [Published lesson](https://bitcoinversus.tech/2025/11/06/fiber-optic-training-mpo-test-set/) |
 | — | [Fiber Optic Training: Cleaving Fiber](./fiber-optic-training-cleaving-fiber-14721.md) | [Published lesson](https://bitcoinversus.tech/2025/11/07/fiber-optic-training-cleaving-fiber/) |
+| — | [Fiber Optic Splicing](./fiber-optic-splicing-14723.md) | [Published lesson](https://bitcoinversus.tech/2025/11/09/fiber-optic-splicing/) |
 | — | [Fiber Optic Training: OTDR Operation](./fiber-optic-training-otdr-operation-14733.md) | [Published lesson](https://bitcoinversus.tech/2025/11/08/fiber-optic-training-otdr-operation/) |
+| — | [Fiber Optic Theory](./fiber-optic-theory-14745.md) | [Published lesson](https://bitcoinversus.tech/2025/11/10/fiber-optic-theory/) |
 | — | [Fiber Optic Training: Optical Power Meter](./optical-power-meter-14751.md) | [Published lesson](https://bitcoinversus.tech/2025/11/11/optical-power-meter/) |
 | — | [Fiber Optic Training: Fiber Connectors](./fiber-optic-training-fiber-connectors-14759.md) | [Published lesson](https://bitcoinversus.tech/2025/11/12/fiber-optic-training-fiber-connectors/) |
 | — | [Fiber Optic Training: OTDR Operation and PM/LS Measurement Techniques](./fiber-optic-training-otdr-operation-and-pm-ls-measurement-techniques-14783.md) | [Published lesson](https://bitcoinversus.tech/2025/11/03/fiber-optic-training-otdr-operation-and-pm-ls-measurement-techniques/) |
@@ -19,6 +26,7 @@
 | — | [Fiber Optic Training: Attenuation](./fiber-optic-training-attenuation-14838.md) | [Published lesson](https://bitcoinversus.tech/2025/11/20/fiber-optic-training-attenuation/) |
 | — | [Fiber Optic Training: Fiber Connectors](./fiber-optic-training-fiber-connectors-2-14846.md) | [Published lesson](https://bitcoinversus.tech/2025/11/06/fiber-optic-training-fiber-connectors-2/) |
 | — | [Fiber Optics Training: Insertion Loss](./fiber-optics-training-insertion-loss-14854.md) | [Published lesson](https://bitcoinversus.tech/2025/11/21/fiber-optics-training-insertion-loss/) |
+| — | [OM1 - OM5 (Optical Mode Fiber)](./om1-om5-optical-mode-fiber-14866.md) | [Published lesson](https://bitcoinversus.tech/2025/11/24/om1-om5-optical-mode-fiber/) |
 | — | [Fiber Optic Training: Duplex Vs. Simplex Patch Cords](./fiber-optic-training-duplex-vs-simplex-patch-cords-14872.md) | [Published lesson](https://bitcoinversus.tech/2025/11/23/fiber-optic-training-duplex-vs-simplex-patch-cords/) |
 | — | [Fiber Optic Training: UPC vs. APC](./fiber-optic-training-upc-vs-apc-14875.md) | [Published lesson](https://bitcoinversus.tech/2025/11/25/fiber-optic-training-upc-vs-apc/) |
 | — | [Fiber Optic Training: OS1 and OS2](./fiber-optic-training-os1-and-os2-14885.md) | [Published lesson](https://bitcoinversus.tech/2025/11/26/fiber-optic-training-os1-and-os2/) |

@@ -1,6 +1,6 @@
 # python
 
-25 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+26 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -29,3 +29,4 @@
 | 22 | [OSPython.022: Context Managers and the with Statement Basics](./022-ospython-022-context-managers-with-statement-basics-20280.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/ospython-022-context-managers-with-statement-basics/) |
 | 23 | [OSPython.023: Type Hints and Annotations Basics](./023-ospython-023-type-hints-annotations-basics-20393.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/ospython-023-type-hints-annotations-basics/) |
 | 24 | [OSPython.024: Dataclasses Basics](./024-ospython-024-dataclasses-basics-20627.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/ospython-024-dataclasses-basics/) |
+| 25 | [OSPython.025: Enums and Named Constants — Safer Choices, States, and Status Codes](./025-ospython-025-enums-named-constants-safer-choices-states-status-codes-20897.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/ospython-025-enums-named-constants-safer-choices-states-status-codes/) |

@@ -1,0 +1,141 @@
+<!-- wp:paragraph {"className":""} -->
+<p><code><strong>Esptool.py</strong></code> is a Python-based utility created by Espressif for <a href="https://bitcoinversus.tech/2025/02/25/how-to-fix-a-bricked-suprahex/">flashing firmware</a> onto ESP8266 and ESP32 chips. It operates cross-platform—working on Windows, Linux, and macOS—and is executed from the command line using Python. Although its name ends in <code>.py</code>, users interact with it using simple terminal commands, not actual Python code. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":12659,"width":"213px","height":"auto","sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large is-resized"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/04/img_1275-1.jpg?w=768" alt="" class="wp-image-12659" style="width:213px;height:auto" /><figcaption class="wp-element-caption"><em><sup><sub>She's a little dusty, but she's still kicking!</sub></sup></em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>The command-line arguments passed to <code>esptool.py</code> are Python-native in origin but are structured for use in standard shell environments, making them platform-agnostic. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>As long as Python is installed and the correct USB drivers are present, the same flashing commands can be run on any OS.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><code><strong>Bitaxetool</strong></code>, on the other hand, is a simplified wrapper built around <code>esptool.py</code>, designed specifically for open-source <a href="https://bitcoinversus.tech/2025/01/23/suprahex-bitcoin-mining-machine-review/">Bitcoin mining</a> boards like the Bitaxe and NerdAxe. It abstracts away low-level details such as flash offsets and chip configurations, streamlining the flashing process with minimal input. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Under the hood, it still relies on <code>esptool.py</code> to perform the actual data transmission and flashing. When you run a command like <code>bitaxetool -p COM6 -f firmware.bin</code>, you're essentially instructing a Python script to call specific <code>esptool.py</code> functions with preconfigured parameters suitable for devices like the ESP32-S3.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"fontSize":"18px"}}} -->
+<p style="font-size:18px"><strong>Flashing The Machine:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Before initiating <a href="https://bitcoinversus.tech/2025/03/12/serial-communication-and-its-role-in-data-transmission/">serial communication</a> with a Bitaxe or NerdAxe machine using a USB connection, you must ensure that a few essential packages and drivers are installed. First, <a href="https://bitcoinversus.tech/2025/03/03/pip-installs-packages-pip-overview/">install <strong>Python</strong></a> (preferably version 3.7 or higher) from the official Python website, making sure to check the box to add Python to your system PATH. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Next, install the <code>esptool</code> Python package by running:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><code><em>pip install esptool</em></code> </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Which enables direct flashing and communication with ESP32 chips. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>For Windows users, it’s also necessary to install the <strong>Silicon Labs CP210x USB to UART Bridge VCP Driver</strong> or the <strong>CH340 driver</strong> (Likely the CH340), depending on your board’s USB interface. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Once all drivers and tools are installed, you’ll be able to access and flash the device via serial ports such as <code>COM6</code> using tools like <code>esptool.py</code> or <code>bitaxetool</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>To flash the NerdAxe firmware onto an ESP32-S3-based device, connect the microcontroller to your machine using a known working USB cable. Identify the correct COM port, and then run the following <a href="https://bitcoinversus.tech/2025/03/14/command-5-man-linux-os/">command</a> from your terminal:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":12632,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/04/image-4.png?w=952" alt="" class="wp-image-12632" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><code>bitaxetool -p COM6 -f C:\Users\matth_fdi14d3\Downloads\esp-miner-factory-nerd101–v2.1.5.bin<br></code></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>In this command:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><code>-p COM6</code> specifies the serial port connected to the ESP32-S3.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><code>-f</code> defines the full path to the compiled firmware <code>.bin</code> file.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>After executing the command, <code><a href="https://bitcoinversus.tech/2025/02/25/how-to-fix-a-bricked-suprahex/">bitaxetool</a></code> will automatically invoke <code>esptool.py v4.8.1</code>, detect the ESP32-S3 (QFN56, revision v0.2), and upload the flashing stub. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":12650,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/04/screenshot-2025-04-14-201335-1-e1744718412335.png" alt="" class="wp-image-12650" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>The chip features WiFi, BLE, 8MB Embedded PSRAM, and a 40MHz crystal oscillator. Flash memory is erased from <code>0x00000000</code> to <code>0x00f11fff</code>, and the compressed 15.8MB firmware is written and verified by hash integrity.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:gallery {"linkTo":"none"} -->
+<figure class="wp-block-gallery has-nested-images columns-default is-cropped"><!-- wp:image {"id":12648,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/04/screenshot-2025-04-14-201335-e1744718262602.png" alt="" class="wp-image-12648" /></figure>
+<!-- /wp:image --></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>The process ends with a clean hard reset via the RTS pin, signaling a successful flash cycle. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":12634,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/04/image-5.png?w=471" alt="" class="wp-image-12634" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>Congratulations!</strong> You are now ready to connect the NerdAxe to your power supply and configure the setting. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":12656,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/04/image-6.png?w=367" alt="" class="wp-image-12656" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":""} -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>If needed, further configuration can be applied via UART serial or the config CSV before flashing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l","type":"rich","providerNameSlug":"bluesky-social"} -->
+<figure class="wp-block-embed is-type-rich is-provider-bluesky-social wp-block-embed-bluesky-social"><div class="wp-block-embed__wrapper">
+https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

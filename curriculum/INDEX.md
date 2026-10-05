@@ -1,46 +1,52 @@
 # OpenCert / TechCert lesson index
 
-OpenCert is the free curriculum. TechCert is the backup repository. Both contain the same published lesson source archive.
+OpenCert is the free curriculum. TechCert is the backup repository. Both preserve the same captured published sources.
 
-**286 published lessons, command guides, tutorials and training modules**, organized into 31 track folders. Exact saved Gutenberg bodies accompany each Markdown lesson. Existing historical files are retained. Historical BitcoinVersus archives are preserved under `source-archive/bitcoinversus/`.
+**539 published lessons, commands, tutorials and technical training modules**, organized into 37 track folders. Exact saved Gutenberg bodies accompany Markdown copies. Original titles and post IDs are preserved.
 
 | Track | Lessons | Index |
 | --- | ---: | --- |
-| computer-security | 2 | [Browse](lessons/computer-security/README.md) |
+| applied-ai/training | 2 | [Browse](lessons/applied-ai/training/README.md) |
+| computer-security | 12 | [Browse](lessons/computer-security/README.md) |
 | cpp | 20 | [Browse](lessons/cpp/README.md) |
 | data-center/engineer | 2 | [Browse](lessons/data-center/engineer/README.md) |
 | data-center/technician | 2 | [Browse](lessons/data-center/technician/README.md) |
-| electrical/engineer | 13 | [Browse](lessons/electrical/engineer/README.md) |
+| data-center/training | 5 | [Browse](lessons/data-center/training/README.md) |
+| electrical/engineer | 14 | [Browse](lessons/electrical/engineer/README.md) |
 | electrical/technician | 26 | [Browse](lessons/electrical/technician/README.md) |
-| electrical/training | 11 | [Browse](lessons/electrical/training/README.md) |
-| energy/training | 3 | [Browse](lessons/energy/training/README.md) |
+| electrical/training | 19 | [Browse](lessons/electrical/training/README.md) |
+| energy/training | 20 | [Browse](lessons/energy/training/README.md) |
 | fiber-optics/engineer | 2 | [Browse](lessons/fiber-optics/engineer/README.md) |
 | fiber-optics/technician | 2 | [Browse](lessons/fiber-optics/technician/README.md) |
-| fiber-optics/training | 38 | [Browse](lessons/fiber-optics/training/README.md) |
+| fiber-optics/training | 46 | [Browse](lessons/fiber-optics/training/README.md) |
 | firmware/engineer | 2 | [Browse](lessons/firmware/engineer/README.md) |
 | firmware/technician | 2 | [Browse](lessons/firmware/technician/README.md) |
+| firmware/tutorials | 15 | [Browse](lessons/firmware/tutorials/README.md) |
 | history-money-technology-bitcoin | 3 | [Browse](lessons/history-money-technology-bitcoin/README.md) |
+| information-technology/training | 59 | [Browse](lessons/information-technology/training/README.md) |
 | javascript | 1 | [Browse](lessons/javascript/README.md) |
 | linux/commands | 42 | [Browse](lessons/linux/commands/README.md) |
 | linux/filesystem | 14 | [Browse](lessons/linux/filesystem/README.md) |
-| linux/tutorials | 7 | [Browse](lessons/linux/tutorials/README.md) |
+| linux/tutorials | 19 | [Browse](lessons/linux/tutorials/README.md) |
+| machine/tutorials | 6 | [Browse](lessons/machine/tutorials/README.md) |
 | networking/engineer | 2 | [Browse](lessons/networking/engineer/README.md) |
 | networking/technician | 15 | [Browse](lessons/networking/technician/README.md) |
-| networking/training | 1 | [Browse](lessons/networking/training/README.md) |
-| programming/training | 4 | [Browse](lessons/programming/training/README.md) |
-| python | 25 | [Browse](lessons/python/README.md) |
+| networking/training | 47 | [Browse](lessons/networking/training/README.md) |
+| programming/training | 8 | [Browse](lessons/programming/training/README.md) |
+| python | 26 | [Browse](lessons/python/README.md) |
 | python/tutorials | 1 | [Browse](lessons/python/tutorials/README.md) |
 | robotics/engineer | 2 | [Browse](lessons/robotics/engineer/README.md) |
 | robotics/technician | 2 | [Browse](lessons/robotics/technician/README.md) |
+| robotics/training | 1 | [Browse](lessons/robotics/training/README.md) |
 | semiconductor/engineer | 2 | [Browse](lessons/semiconductor/engineer/README.md) |
 | semiconductor/technician | 2 | [Browse](lessons/semiconductor/technician/README.md) |
-| semiconductor/training | 6 | [Browse](lessons/semiconductor/training/README.md) |
-| windows/commands | 31 | [Browse](lessons/windows/commands/README.md) |
-| windows/tutorials | 1 | [Browse](lessons/windows/tutorials/README.md) |
+| semiconductor/training | 58 | [Browse](lessons/semiconductor/training/README.md) |
+| windows/commands | 32 | [Browse](lessons/windows/commands/README.md) |
+| windows/tutorials | 6 | [Browse](lessons/windows/tutorials/README.md) |
 
 ## Numbering conflicts
 
-Duplicate numbers and republished historical guides are preserved as separate post IDs. They are not silently renumbered.
+Unique published posts are retained. Duplicate numbers are distinguished by post ID.
 
 - electrical/engineer 2: post IDs 18106, 18475
 - linux/filesystem 1: post IDs 11881, 14504
@@ -50,10 +56,14 @@ Duplicate numbers and republished historical guides are preserved as separate po
 
 ## Numbering gaps
 
-These numbers are absent from the published inventory; no missing lesson is fabricated.
+No lesson is fabricated for an absent published number.
 
 - linux/filesystem: 11, 12
 
-## Verification scope
+## Audit scope
 
-The published inventory was built from all 2,625 published WordPress posts and selected all OS certificate tracks, Linux/Windows commands and filesystem guides, and named technical lessons, tutorials and training modules. Historical repository-only lessons remain available at their original paths. Media and video URLs remain in the exact source; remote media binaries are not included in this text-source audit. Rotation is preserved and is not advanced by archive maintenance.
+The captured inventory contains 2648 published WordPress posts. 539 educational sources were selected: certificate lessons, commands, tutorials, technical foundations, configuration guides, troubleshooting and repair procedures. News, sports, opinion and employment posts are outside this curriculum archive.
+
+[Source inventory](source-inventory.json), [coverage manifest](coverage-manifest.json), [asset index](assets/README.md) and [asset manifest](assets/manifest.json) record the source and file coverage. 731 original associated image/file binaries are copied. YouTube/social embeds remain remote references. Playback is outside this archive audit. Archive maintenance does not advance rotation.
+
+[Historical BitcoinVersus versions](../source-archive/bitcoinversus/README.md) remain available under their original archive paths.

@@ -1,0 +1,49 @@
+---
+title: "Computer Security: Border Gateway Protocol (BGP)"
+wordpress_post_id: 16260
+source: BitcoinVersus.tech
+published: 2026-04-12T05:48:00
+modified: 2026-09-11T12:12:03
+live_url: https://bitcoinversus.tech/2026/04/12/computer-security-border-gateway-protocol-bgp/
+track: computer-security
+lesson_number: null
+raw_source: computer-security-border-gateway-protocol-bgp-16260.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>Border Gateway Protocol (BGP) is the <strong>core routing protocol of the global Internet</strong>, responsible for exchanging reachability information between large, independently operated networks known as <strong>Autonomous Systems (ASes)</strong>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=z8INzy9E628","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=z8INzy9E628
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>It is classified as an <strong>Exterior Gateway Protocol (EGP)</strong> and operates as a <strong>path‑vector protocol</strong>, meaning it selects routes based on entire AS‑paths rather than simple metrics like hop count. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BGP ensures that data can travel across thousands of interconnected networks by allowing each Autonomous System to advertise which IP prefixes it can reach and by applying routing policies that reflect business relationships, security considerations, and traffic‑engineering goals. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BGP runs over <strong>TCP port 179</strong>, providing reliable session management between routers, and uses attributes such as AS‑PATH, NEXT‑HOP, LOCAL‑PREF, and MED to determine the best path. Its design emphasizes scalability, policy control, and incremental updates, making it the backbone of modern Internet routing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True.&nbsp;</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>If you would like to support to help further secure the integrity of our research initiatives, please donate here: bc1q5qgtq8szqa6yy38tqpsyuk3hynq8zy3xvqhsvzecj8lnryrnzhmqsfmwhh</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,113 @@
+---
+title: "Metal Oxide Semiconductor Capacitance Voltage (MOS-CV)"
+wordpress_post_id: 15811
+source: BitcoinVersus.tech
+published: 2026-02-22T05:32:00
+modified: 2025-11-29T09:52:26
+live_url: https://bitcoinversus.tech/2026/02/22/metal-oxide-semiconductor-capacitance-voltage-mos-cv/
+track: semiconductor/training
+lesson_number: null
+raw_source: metal-oxide-semiconductor-capacitance-voltage-mos-cv-15811.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2025/04/14/cmos-vs-bios/">Metal oxide semiconductor</a> capacitance voltage measurement is a way to electrically study what is happening at the surface of a semiconductor under a gate. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The structure used is <a href="https://bitcoinversus.tech/2025/11/25/properties-of-electricity/">a simple capacitor</a> made of a metal gate on top, a very thin insulating oxide in the middle, and a semiconductor such as <a href="https://bitcoinversus.tech/tag/polycrystalline-silicon-poly-sci-factors-of-resistance/">silicon</a> on the bottom. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=sKmSqjNvGH8\u0026amp;pp=ygUMbW9zIGN2IGN1cnZl0gcJCRUKAYcqIYzv","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=sKmSqjNvGH8&amp;pp=ygUMbW9zIGN2IGN1cnZl0gcJCRUKAYcqIYzv
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>During a measurement, the substrate is usually grounded, a slow changing direct voltage is applied to the gate, and a very small alternating signal is added on top. An instrument measures the resulting alternating current and converts it into an effective capacitance value at each gate voltage. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>By sweeping the gate voltage from very negative to very positive and recording the capacitance, you get a characteristic curve that tells you how the surface charge and electric field are changing inside the semiconductor.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The shape of the curve comes from the fact that the semiconductor surface can be in three main conditions, which depend on the gate voltage. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=UNr6cAwYmuY\u0026amp;t=274s\u0026amp;pp=ygUMbW9zIGN2IGN1cnZl","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=UNr6cAwYmuY&amp;t=274s&amp;pp=ygUMbW9zIGN2IGN1cnZl
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>When the gate voltage pulls majority carriers toward the surface, the semiconductor behaves like a conductor right under the oxide and the measured capacitance is close to the oxide capacitance. This region is called accumulation. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>As the gate voltage moves toward the opposite polarity, it starts pushing majority carriers away from the surface, leaving behind fixed ionized dopants. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A region with very few mobile carriers forms, called the depletion region, and it acts like an additional series capacitor inside the semiconductor. The total measured capacitance drops because part of the voltage now falls across this space charge region.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=v6Mb7J6c6og\u0026amp;pp=ygUMbW9zIGN2IGN1cnZl","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=v6Mb7J6c6og&amp;pp=ygUMbW9zIGN2IGN1cnZl
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>If the gate voltage is driven even further, the surface bands bend enough that minority carriers become more concentrated at the surface than majority carriers. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A thin layer of minority carriers forms, called the inversion layer. In high frequency measurements, these minority carriers cannot be created and removed quickly enough to follow the alternating signal, so the depletion region stays almost fixed in width and the measured capacitance stays near a minimum value. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In low frequency or quasi static measurements, minority carriers have time to respond, the inversion layer behaves like a conducting sheet, and the capacitance can move back toward the oxide value. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Comparing high frequency and quasi static curves gives more insight into the dynamics of carriers and traps at the interface.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>From the capacitance voltage curve, you can extract many important device parameters. The value of the capacitance in accumulation tells you the oxide thickness. The way the capacitance falls in depletion gives you the doping concentration in the semiconductor and the maximum depletion width. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The position of key points such as flatband and threshold on the voltage axis reveals fixed charges in the oxide, work function differences between the gate and the semiconductor, and interface charge. Distortions, humps, or stretches in the curve can indicate interface trap states and mobile ions in the oxide.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In practice, metal oxide semiconductor capacitance voltage measurements are a core electrical characterization technique in semiconductor technology. They are used during process development to monitor oxide quality, interface cleanliness, and doping control. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>They are also used to calibrate models of transistors, since the same physics that governs the metal oxide semiconductor capacitor also governs the gate region of a metal oxide semiconductor field effect transistor. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>By examining how capacitance changes with gate voltage, engineers gain a direct window into the electrostatics of the device surface without needing to cut or damage the sample.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True.&nbsp;</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>If you would like to support to help further secure the integrity of our research initiatives, please donate here: bc1qrved9tfquym6u3age7xhmnkjs2lq8j9aulperagkuhtuk5w5c35ssfpge8</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

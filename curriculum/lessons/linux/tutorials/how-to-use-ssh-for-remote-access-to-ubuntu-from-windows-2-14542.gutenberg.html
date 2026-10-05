@@ -1,0 +1,119 @@
+<!-- wp:paragraph -->
+<p>Secure Shell, commonly known as SSH, is a cryptographic network protocol used to establish secure and encrypted communication between two systems over an unsecured network. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>It allows users to remotely access and control another computer, typically through a command-line interface. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>SSH ensures that all data, including login credentials and command outputs, are encrypted to prevent interception by unauthorized parties. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>It is widely used for secure system administration, file transfers, and remote execution of commands in both personal and enterprise environments</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In this setup, the <a href="https://bitcoinversus.tech/2025/05/19/overview-of-ubuntu-vm-setup-using-virtualbox/">Ubuntu</a> laptop functions as the <a href="https://bitcoinversus.tech/2025/03/08/understanding-network-ports-and-their-importance-in-the-it-industry/">SSH</a> server, while the <a href="https://bitcoinversus.tech/2024/11/20/command-3-ping-windows-os/">Windows computer</a> acts as the SSH client. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://bitcoinversus.tech/2025/01/23/how-to-set-up-a-flask-api-server-for-application-control/">server</a> is the machine that runs the OpenSSH service and listens for incoming connection requests, allowing remote users to securely log in and manage the system. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The client, in this case the Windows machine, initiates the connection using the SSH protocol and authenticates with the server's IP address and user credentials. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This client-server structure is fundamental to <a href="https://bitcoinversus.tech/2025/03/08/understanding-network-ports-and-their-importance-in-the-it-industry/">secure shell communication</a>, enabling remote access and control between devices on the same network. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Understanding this relationship is key to configuring and using SSH effectively for system administration or remote development.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>To remotely access an Ubuntu system from a Windows laptop using SSH, several configuration steps must be completed on the Ubuntu side first. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Begin by installing the OpenSSH server package on the Ubuntu laptop using the command <code>sudo apt install openssh-server</code>: </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":14423,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/08/screenshot-from-2025-07-28-11-12-34.png?w=585" alt="" class="wp-image-14423" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>This package allows the system to accept incoming SSH connections. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Once installed, the SSH service must be enabled to start automatically on system boot using "<code>sudo systemctl enable ssh</code>," </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":14428,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/08/image-1.png?w=655" alt="" class="wp-image-14428" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>followed by <code>sudo systemctl start ssh</code> to launch the service immediately. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":14427,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/08/image.png?w=555" alt="" class="wp-image-14427" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>To verify that SSH is actively running, use the command <code>systemctl status ssh</code>, which should return an “active (running)” status:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":14431,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/08/image-3.png?w=655" alt="" class="wp-image-14431" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>After ensuring the SSH service is operational, determine the IP address of the Ubuntu machine by running the command <code>ip a</code>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":14432,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/08/image-4.png?w=655" alt="" class="wp-image-14432" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Look for the address listed under the active network interface, typically something like <code>wlp2s0</code> for Wi-Fi. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In this case, the valid IP was <code>192.168.12.</code>xx. This is the address used for connecting remotely. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>From the Windows laptop, open PowerShell and run the command <code>ssh username@192.168.12.</code>xx, where <code><em><strong>username</strong></em></code> is the Ubuntu username. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The first time you connect, you’ll be prompted to accept the device’s SSH key fingerprint and enter the Ubuntu user’s password. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Once authenticated, the terminal grants access to the Ubuntu shell, confirming that the SSH connection is successful.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":14418,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/08/ssh-remote-connection.png?w=753" alt="" class="wp-image-14418" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>This setup allows full remote control over the Ubuntu system from the Windows machine, useful for managing tasks, executing scripts, or even building a lightweight local server simulation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Congratulations, you now know how to communicate with servers in a secure manner via the <a href="https://bitcoinversus.tech/2025/03/08/understanding-network-ports-and-their-importance-in-the-it-industry/">secure shell</a> protocol. </p>
+<!-- /wp:paragraph --><!-- wp:embed {"url":"https://www.youtube.com/watch?v=lMMOUSRPfJc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=lMMOUSRPfJc
+</div></figure>
+<!-- /wp:embed -->

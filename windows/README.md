@@ -2,7 +2,7 @@
 
 **Track:** Windows OS command line  
 **Status:** active  
-**Current next lesson:** `Windows Command #32`
+**Lesson awaiting full publishing verification:** `Windows Command #32`
 
 The Windows command track progresses through system inspection, networking, process management, storage, accounts, shares, SMB sessions, services, and troubleshooting.
 
@@ -18,6 +18,8 @@ The Windows command track progresses through system inspection, networking, proc
 - `Windows Command #30 – net file`
 - [Windows Command #31 – net config](command-31-net-config.md) — WordPress post 20651.
 
+- [Windows Command #32 – net statistics](../archive/2026/10/windows-command-32-net-statistics.md) — WordPress post 20924; playback verification pending.
+
 ## Publishing rules
 
 - Verify live WordPress numbering and GitHub duplicates before every lesson.
@@ -28,4 +30,4 @@ The Windows command track progresses through system inspection, networking, proc
 - Link earlier Windows lessons when they materially support the topic.
 - Archive the exact final Gutenberg source to BitcoinVersus, TechCert, and Open CERT.
 
-The next Windows lesson is `Windows Command #32`.
+Windows Command #32 is published and source-archived. YouTube playback verification remains pending; this archive sync does not advance rotation.

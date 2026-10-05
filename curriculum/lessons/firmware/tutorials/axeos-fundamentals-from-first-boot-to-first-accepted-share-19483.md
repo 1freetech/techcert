@@ -1,0 +1,57 @@
+---
+title: "AxeOS Fundamentals: From First Boot to First Accepted Share"
+wordpress_post_id: 19483
+source: BitcoinVersus.tech
+published: 2026-09-29T21:55:31
+modified: 2026-09-29T21:55:31
+live_url: https://bitcoinversus.tech/2026/09/29/axeos-fundamentals-from-first-boot-to-first-accepted-share/
+track: firmware/tutorials
+lesson_number: null
+raw_source: axeos-fundamentals-from-first-boot-to-first-accepted-share-19483.gutenberg.html
+---
+
+<!-- wp:paragraph --><p><strong>AxeOS Fundamentals Part 3 starts at the point every Bitaxe owner eventually reaches: getting a new miner from first power-on to its first accepted share without confusing Wi-Fi, pool credentials and the payout address.</strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>The sequence is simple when each layer is handled separately. The Bitaxe first creates a temporary local Wi-Fi access point. AxeOS then stores the home-network credentials. After the miner joins that network, the operator opens the local dashboard, enters a mining-pool endpoint and replaces the factory Stratum user with a Bitcoin address they control.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>If you are starting from zero, read <a href="https://bitcoinversus.tech/2026/09/29/axeos-fundamentals-open-source-bitaxe-firmware-guide/">Part 1 on how AxeOS, ESP-Miner and Bitaxe fit together</a>. Part 2 explains <a href="https://bitcoinversus.tech/2026/09/29/axeos-fundamentals-bitaxe-telemetry-tuning-guide/">how to read AxeOS telemetry before tuning</a>. This installment focuses only on bringing a stock miner online correctly.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">1. Power the correct hardware with the correct supply</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Do not assume every Bitaxe generation uses the same input voltage. Check the board and vendor documentation before connecting power. The original open-source hardware documentation specifically warns that applying the wrong voltage can damage a board.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><a href="https://github.com/bitaxeorg/ESP-Miner">Upstream ESP-Miner documentation</a> is the authoritative starting point for the software side. Current AxeOS is the browser interface served by ESP-Miner on the device itself, so no cloud account or desktop application is required for ordinary configuration.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">2. Join the temporary Bitaxe Wi-Fi</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A factory-reset or unconfigured Bitaxe broadcasts a temporary network with a name similar to <code>Bitaxe_XXXX</code>. Join it from a phone or laptop. If the captive setup page does not appear automatically, current setup documentation uses <code>192.168.4.1</code> as the local configuration address.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Enter the SSID and password for the network the miner will use. Bitaxe-class ESP32 hardware uses 2.4 GHz Wi-Fi, so a 5 GHz-only network will not work. Save the configuration and restart the miner.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><a href="https://twitter.com/SoloSatoshi/status/1876862530347323644">One community example</a> shows how the open Bitaxe ecosystem extends the same basic AxeOS workflow across different form factors.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/SoloSatoshi/status/1876862530347323644","type":"rich","providerNameSlug":"x","responsive":true,"className":"wp-block-embed-x"} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/SoloSatoshi/status/1876862530347323644
+</div><figcaption class="wp-element-caption"><em>Bitaxe hardware changes across models, but AxeOS keeps the basic local setup and monitoring workflow recognizable.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">3. Find AxeOS on your home network</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>After reboot, the miner should join the configured network. Current ESP-Miner releases support mDNS, so <code>http://bitaxe.local</code> can work on compatible networks. The IP address shown by the miner or router remains the fallback.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>That local-first design is important. You are connecting directly to the web server running on the miner. If the page cannot be reached, troubleshoot local networking before assuming the ASIC itself has failed.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">4. Replace the payout address before mining</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>This is the step to verify twice. The Stratum user field commonly contains the Bitcoin address that determines where a solo-mining reward is paid. Replace any factory or demonstration address with an on-chain Bitcoin receiving address you control. If a fallback pool is configured, verify its user field too.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><a href="https://www.solosatoshi.com/how-to-set-up-bitaxe/">A current setup walkthrough</a> updated for 2026 documents the same flow: connect to the temporary Bitaxe network, configure 2.4 GHz Wi-Fi, reopen AxeOS from the local network, then replace the Stratum user with your own on-chain address.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>The following English-language Solo Satoshi walkthrough shows the physical setup and AxeOS interface directly.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=WDPz2hwnVjA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=WDPz2hwnVjA
+</div><figcaption class="wp-element-caption"><em>Solo Satoshi demonstrates a physical Bitaxe and the AxeOS workflow used to configure Wi-Fi, pool information and mining operation.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2 class="wp-block-heading">5. Understand the four pool fields</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong>Host</strong> identifies the pool server. <strong>Port</strong> identifies the service endpoint. <strong>User</strong> normally carries your Bitcoin address plus an optional worker label. <strong>Password</strong> is pool-specific and is often simply <code>x</code> for public solo pools.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Do not copy a random pool configuration from an old screenshot. Pool hosts, ports, TLS settings and protocol support can change. Confirm the current values with the pool operator before saving them.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>For operators ready to move beyond the basic connection, BitcoinVersus.Tech has a separate guide to <a href="https://bitcoinversus.tech/2026/09/27/bitaxe-pool-adds-encrypted-stratum-v2-mining-through-axeos/">encrypted Stratum V2 through AxeOS</a>. Start with a working baseline first, then change protocols deliberately.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">6. Save, restart and prove the miner is actually working</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>After changing Wi-Fi or pool configuration, save the settings and restart when AxeOS requests it. Back on the dashboard, verify an active pool connection, non-zero hashrate and eventually accepted shares. One accepted share proves more than a spinning fan: the miner received work, hashed it, found a result above the pool's share target and successfully returned that result.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Do not confuse accepted shares with finding a Bitcoin block. Shares are pool-side proof that the miner is participating correctly. A valid network block is dramatically harder.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">7. Keep recovery separate from tuning</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>If first-time setup fails, do not immediately raise frequency or voltage. Fix Wi-Fi, pool configuration, power, firmware and address settings first. Advanced tuning adds variables and makes basic troubleshooting harder.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>For firmware-specific recovery, BitcoinVersus.Tech's <a href="https://bitcoinversus.tech/2025/07/11/how-to-update-your-bitaxe-firmware-axeos-osmu-edition/">AxeOS firmware update guide</a> provides additional context. Current unified ESP-Miner releases embed AxeOS into the main firmware binary, so always compare older flashing instructions with the current upstream release before applying them.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">The fundamentals checklist</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>The complete first-boot chain is: correct power, temporary Bitaxe Wi-Fi, 2.4 GHz home network, local AxeOS access, verified pool host and port, your own Bitcoin address in every active Stratum user field, save and restart, then confirm hashrate and accepted shares.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Once that chain is stable, AxeOS becomes much more than a setup page. It becomes a compact laboratory for learning the same networking, thermal, power, firmware and Stratum concepts that appear in much larger Bitcoin mining systems.</p><!-- /wp:paragraph -->
+<!-- wp:separator --><hr class="wp-block-separator has-alpha-channel-opacity" /><!-- /wp:separator -->
+<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">BitcoinVersus.Tech</h3><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong>Advertisement:</strong> Follow BitcoinVersus.Tech for independent coverage of Bitcoin, ASIC hardware, open-source mining, semiconductors, artificial intelligence, data centers and energy.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true,"className":"is-provider-x wp-block-embed-x"} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech covers open-source mining hardware, firmware, ASIC repair and data-center operations.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a> <strong><em><sup>Editor's Note:</sup></em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</sup></em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

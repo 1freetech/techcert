@@ -1,0 +1,83 @@
+---
+title: "Computer Power Connectors and Their Voltages Explained"
+wordpress_post_id: 10725
+source: BitcoinVersus.tech
+published: 2025-03-12T09:45:00
+modified: 2025-03-07T16:56:56
+live_url: https://bitcoinversus.tech/2025/03/12/computer-power-connectors-and-their-voltages-explained/
+track: information-technology/training
+lesson_number: null
+raw_source: computer-power-connectors-and-their-voltages-explained-10725.gutenberg.html
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The <strong>ATX 24-pin main power connector</strong> (Also known as the P1 connector) provides essential electricity to the motherboard, supplying multiple voltages including 3.3V, 5V, and 12V. It is the primary source of power ensuring all motherboard components function correctly and maintain stable performance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=7SjQo7wrWq4\u0026amp;t=60s\u0026amp;pp=ygUjVGhlIEFUWCAyNC1waW4gbWFpbiBwb3dlciBjb25uZWN0b3I%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=7SjQo7wrWq4&amp;t=60s&amp;pp=ygUjVGhlIEFUWCAyNC1waW4gbWFpbiBwb3dlciBjb25uZWN0b3I%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>The EPS (Extended Power Supply)</strong> connector is an 8-pin power connector delivering dedicated 12-volt power directly to the CPU in high-performance computer systems.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Designed to provide enhanced voltage stability and increased power delivery capabilities compared to the older P4 connector, EPS connectors are essential in systems utilizing advanced, multi-core CPUs. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Its primary function is to ensure stable and efficient power to the CPU under heavy computing workloads, which is critical in high-end gaming, server environments, and intensive computational tasks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=SytUuVo56wc\u0026amp;pp=ygUZVGhlIE1vbGV4IDQtcGluIGNvbm5lY3Rvcg%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=SytUuVo56wc&amp;pp=ygUZVGhlIE1vbGV4IDQtcGluIGNvbm5lY3Rvcg%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The <strong>Molex 4-pin connector</strong>, historically common for peripherals and older storage devices, supplies two standard voltages: 5V and 12V. Though less prevalent today due to the rise of SATA connectors, it is still found powering legacy hardware, fans, and case lighting.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The <strong>SATA power connector</strong> is used extensively for modern storage devices such as hard drives and SSDs. This connector provides three different voltages—3.3V, 5V, and 12V—supporting various needs and enabling efficient power delivery to connected devices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=7M9eSdQA9nE\u0026amp;pp=ygUaYmVyZyA0IHBpbiBwb3dlciBjb25uZWN0b3I%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=7M9eSdQA9nE&amp;pp=ygUaYmVyZyA0IHBpbiBwb3dlciBjb25uZWN0b3I%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The <strong><a href="https://bitcoinversus.tech/2025/01/06/peripheral-component-interconnect-express/">PCIe</a> 6-pin and 8-pin connectors</strong> supply additional power to graphics cards, especially those with high-performance demands. Both connectors deliver 12V exclusively, with the 6-pin providing up to 75 watts and the 8-pin up to 150 watts, allowing GPUs to run optimally under heavy workloads.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=xT36IDSQBX4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=xT36IDSQBX4
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The <strong>Berg 4-pin floppy drive connector</strong>, now considered a legacy connection, historically powered floppy disk drives using 5V and 12V. It is rarely used today but may still be encountered in older or specialized computing environments.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The <strong>4-pin ATX +12V power connector</strong> provides additional CPU power in older or lower-powered systems. This connector delivers 12V directly to the processor, aiding stable operation and supporting basic computing tasks in less demanding systems.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

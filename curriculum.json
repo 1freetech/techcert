@@ -67,7 +67,20 @@
       "name": "Windows Command Lessons",
       "acronym": "Windows Command",
       "title_format": "Windows Command #{number} – {topic} (Windows OS)",
-      "status": "active"
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 32,
+        "title": "Windows Command #32 – net statistics (Windows OS)",
+        "wordpress_post_id": 20924,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/windows-command-32-net-statistics/",
+        "archive_path": "archive/2026/10/windows-command-32-net-statistics.md",
+        "source_match_verified_repositories": [
+          "1freetech/Bitcoinversus.tech",
+          "1freetech/techcert",
+          "1freetech/opencert.tech"
+        ],
+        "verification_status": "pending_youtube_playback"
+      }
     },
     {
       "subject": "electrical_engineering",

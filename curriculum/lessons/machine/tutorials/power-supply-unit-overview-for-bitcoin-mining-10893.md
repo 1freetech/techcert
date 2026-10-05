@@ -1,0 +1,117 @@
+---
+title: "Power Supply Unit Overview for Bitcoin Mining"
+wordpress_post_id: 10893
+source: BitcoinVersus.tech
+published: 2025-04-30T08:00:00
+modified: 2025-03-12T13:26:02
+live_url: https://bitcoinversus.tech/2025/04/30/power-supply-unit-overview-for-bitcoin-mining/
+track: machine/tutorials
+lesson_number: null
+raw_source: power-supply-unit-overview-for-bitcoin-mining-10893.gutenberg.html
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">​Industrial-grade <a href="https://bitcoinversus.tech/2025/02/18/antminer-s21-pro-leads-bitcoin-mining-efficiency-rankings/">Bitcoin mining machines</a> require robust and efficient <a href="https://bitcoinversus.tech/2024/03/01/computer-muscle-understanding-the-power-supply-unit/">power supplies</a> to convert alternating current (AC) from the grid into the direct current (DC) necessary for their operation. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Selecting the appropriate AC to DC <a href="https://bitcoinversus.tech/2025/01/08/understanding-ups-devices-uninterruptible-power-supply/">power supply</a> is crucial for optimal performance and longevity of the mining equipment.​</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Power Requirements and Efficiency</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Each <a href="https://bitcoinversus.tech/2024/10/19/report-bitmain-leads-bitcoin-mining-asic-market/">mining machine model</a> has specific power requirements. For instance, the Antminer S21 demands a power supply capable of delivering 3,500W. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">To accommodate such high power needs, it's essential to use a 30-amp, 240V power distribution unit (PDU) and ensure the electrical circuit can support this load, especially in regions like North America. ​</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Industrial-grade <a href="https://bitcoinversus.tech/2024/08/15/how-to-replace-an-s19-kpro-120th-psu/">Bitcoin mining machines</a> rely on <strong>AC to DC power conversion</strong> due to the widespread availability of <strong>alternating current (AC) from electrical grids</strong> and the direct current (DC) requirements of high-performance computing (HPC) hardware.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=JXJaRPXPwjQ\u0026amp;pp=ygUdImFjIHRvIGRjIiB0cmFuc2ZlciBleHBsYWluZWQ%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=JXJaRPXPwjQ&amp;pp=ygUdImFjIHRvIGRjIiB0cmFuc2ZlciBleHBsYWluZWQ%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>Electricity is transmitted over long distances as AC</strong> because it experiences lower transmission losses and is easier to step up or step down in voltage using transformers. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">However, ASIC miners and other industrial computing devices operate on <strong>DC power</strong>, requiring a conversion process at the facility level. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>Direct DC power distribution is less common</strong> in industrial environments due to the lack of standardized infrastructure, higher costs of implementing large-scale DC power systems, and safety concerns related to high-voltage DC (HVDC) systems. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>AC to DC power supplies are optimized for efficiency</strong>, ensuring that mining hardware receives a stable, regulated voltage with minimal electrical waste, reducing heat generation and improving overall operational stability.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Efficiency ratings of power supplies significantly impact operational costs. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">A power supply operating at 90% efficiency means that to provide 1,000W to the miner, approximately 1,111W is drawn from the power source, with the excess energy dissipated as heat. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Higher efficiency <a href="https://raptorpower.us/support/blog/crypto-power-guide">reduces</a> energy waste and minimizes heat generation, leading to lower cooling expenses and enhanced system reliability. ​</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Voltage Compatibility</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Mining power supplies typically require input voltages ranging from 200V to 250V AC. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">It's imperative to verify that the facility's electrical infrastructure matches these specifications to ensure compatibility and safe operation. ​<a href="https://raptorpower.us/support/blog/crypto-power-guide" target="_blank" rel="noreferrer noopener">raptorpower.us</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Connector Types and Electrical Setup</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The choice of connectors is vital for safe and efficient power delivery. Most ASIC miners utilize C14 or C20 connectors on their power supplies. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Establishing a dedicated electrical setup, such as a 2-pole 30-amp breaker with 10-2 wiring and an L6-30R outlet, is recommended to handle the substantial power demands of mining equipment. ​</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Alternative Power Solutions</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Some miners explore direct DC power solutions, such as integrating solar panels with battery storage and DC-DC converters, to achieve stable and precise voltage levels required by mining equipment. However, this approach necessitates careful design to ensure consistent and reliable power delivery.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

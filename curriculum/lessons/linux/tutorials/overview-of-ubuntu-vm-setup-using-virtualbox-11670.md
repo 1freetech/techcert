@@ -1,0 +1,171 @@
+---
+title: "Ubuntu Virtual Machine Setup (VirtualBox Edition)"
+wordpress_post_id: 11670
+source: BitcoinVersus.tech
+published: 2025-05-19T08:50:00
+modified: 2025-03-30T20:41:30
+live_url: https://bitcoinversus.tech/2025/05/19/overview-of-ubuntu-vm-setup-using-virtualbox/
+track: linux/tutorials
+lesson_number: null
+raw_source: overview-of-ubuntu-vm-setup-using-virtualbox-11670.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>Setting up an Ubuntu <a href="https://bitcoinversus.tech/2025/02/20/cloud-computing-and-the-role-of-hypervisors-in-virtualization/">Virtual Machine</a> (VM) using Oracle VirtualBox begins with downloading the latest ISO file from Ubuntu’s official site.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For Ubuntu 24.04, users typically select the desktop version compatible with their hardware architecture, commonly "amd64." </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Hva8lsV2nTk\u0026amp;pp=ygUyT3ZlcnZpZXcgb2YgVWJ1bnR1IFZNIFNldHVwIFVzaW5nIFZpcnR1YWxCb3ggbGludXg%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Hva8lsV2nTk&amp;pp=ygUyT3ZlcnZpZXcgb2YgVWJ1bnR1IFZNIFNldHVwIFVzaW5nIFZpcnR1YWxCb3ggbGludXg%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>After downloading, users open Oracle VirtualBox, create a new VM, name it, select the Linux operating system type, and choose "Ubuntu (64-bit)" as the specific version.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Commands Used During Installation</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Once the graphical installation is complete, users often execute <code>sudo apt update</code> and <code>sudo apt upgrade</code> to keep the VM current. Troubleshooting commands such as <code>dmesg</code> to review kernel logs and inspection of the system logs at <code>/var/log/syslog</code> are frequently used to address any installation or boot errors.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":11677,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/03/screenshot-from-2025-03-29-22-29-42.png?w=906" alt="" class="wp-image-11677" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong>Detailed VM Configuration Steps</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">After initiating the VM creation, opt to bypass "Unattended Install" to manually customize the installation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">Key configurations involve assigning sufficient RAM, allocating adequate storage space, and critically, setting the graphics controller to "VMSVGA" within VirtualBox’s display settings. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">This particular setting improves compatibility with Ubuntu’s graphics infrastructure, effectively addressing common graphical boot issues.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Fixing Common Graphical Boot Issues</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Initially, despite correctly configuring the graphics controller and other VM settings, your VM continued showing the <code>vmwgfx unsupported hypervisor</code> error. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":11689,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/03/screenshot-from-2025-03-29-22-37-35.png?w=1024" alt="" class="wp-image-11689" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>By specifically entering <strong>Safe Graphics Mode</strong> at boot, Ubuntu bypassed the problematic graphics driver temporarily. This allowed the VM to boot successfully and permanently correct the configuration via guest additions or permanent GRUB modifications.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":11691,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/03/bootscreen.png?w=1020" alt="" class="wp-image-11691" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Once these configurations are set correctly (especially Graphics Controller: <strong>VMSVGA</strong> and disabling <strong>3D acceleration</strong>), the VM will boot consistently without needing Safe Graphics Mode in future boots.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":11676,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/03/screenshot-from-2025-03-29-13-34-43.png?w=1024" alt="" class="wp-image-11676" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Common errors, including messages like "vmwgfx seems to be running on an unsupported hypervisor," are easily resolved by changing the graphics controller to "VMSVGA."</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":11679,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/03/image-25.png?w=336" alt="" class="wp-image-11679" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>There may also be an instance in which you need to download the dnf package. If you need to download the dnf package you will see a terminal error with 'dnf' in the response, as shown in the screen shot below:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":11675,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/03/screenshot-from-2025-03-29-13-26-52.png?w=868" alt="" class="wp-image-11675" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>This step ensures optimal compatibility between VirtualBox's graphics capabilities and the Ubuntu VM, providing a smoother, error-free graphical user experience upon boot.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>To complete the Ubuntu installation process, here are the key terminal commands you need to type:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item {"fontSize":"small"} -->
+<li class="has-small-font-size"><strong>Update the package list:</strong><br>bash<br>sudo apt update<br></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item {"fontSize":"small"} -->
+<li class="has-small-font-size"><strong>Install necessary software:</strong><br>bash<br>sudo apt install -y build-essential linux-headers-$(uname -r)<br></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item {"fontSize":"small"} -->
+<li class="has-small-font-size"><strong>Insert Guest Additions CD:</strong><br><!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Go to the Devices menu in VirtualBox and select "Insert Guest Additions CD".</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>If nothing happens, open the CD image by clicking on it in the dock, right-click on <code>autorun.sh</code>, and select "Run as a Program".</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list --></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item {"fontSize":"small"} -->
+<li class="has-small-font-size"><strong>Set the hostname:</strong><br>bash<br>sudo hostnamectl set-hostname dbhost1.localnet.com<br></li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>These commands will help you set up and configure your Ubuntu virtual machine as shown in the video.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Quick Recap:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Adjusting the VirtualBox settings step-by-step helped solve the graphics issue. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Selecting <strong>VMSVGA</strong> and turning off 3D acceleration fixed most of the boot errors. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Booting Ubuntu once in Safe Graphics Mode showed us exactly where the problem was. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Congratulations! Now your Ubuntu VM is ready for smooth, trouble-free operation!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

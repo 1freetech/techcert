@@ -1,6 +1,6 @@
 # electrical/engineer
 
-13 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+14 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -17,3 +17,4 @@
 | 9 | [OSEEC.009: Electrical Power Distribution: Switchgear, Switchboards, Panelboards, and PDUs](./009-oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus-20312.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/oseec-009-electrical-power-distribution-switchgear-switchboards-panelboards-pdus/) |
 | 10 | [OSEEC.010: Overcurrent Protection — Circuit Breakers, Fuses, Fault Current, and Selective Coordination](./010-oseec-010-overcurrent-protection-circuit-breakers-fuses-fault-current-selective-coordination-20410.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/oseec-010-overcurrent-protection-circuit-breakers-fuses-fault-current-selective-coordination/) |
 | 11 | [OSEEC.011: Grounding, Bonding, and Fault-Return Paths](./011-oseec-011-grounding-bonding-fault-return-paths-20720.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/oseec-011-grounding-bonding-fault-return-paths/) |
+| 12 | [OSEEC.012: Short-Circuit and Fault Analysis — Thevenin Equivalents, Symmetrical Components, and Fault Current](./012-oseec-012-short-circuit-fault-analysis-thevenin-equivalents-symmetrical-components-fault-current-20960.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/oseec-012-short-circuit-fault-analysis-thevenin-equivalents-symmetrical-components-fault-current/) |

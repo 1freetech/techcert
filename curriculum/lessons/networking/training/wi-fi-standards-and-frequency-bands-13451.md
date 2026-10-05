@@ -1,0 +1,71 @@
+---
+title: "Wi-Fi Standards and Frequency Bands"
+wordpress_post_id: 13451
+source: BitcoinVersus.tech
+published: 2025-05-27T05:39:00
+modified: 2025-05-24T11:51:38
+live_url: https://bitcoinversus.tech/2025/05/27/wi-fi-standards-and-frequency-bands/
+track: networking/training
+lesson_number: null
+raw_source: wi-fi-standards-and-frequency-bands-13451.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>Modern <a href="https://bitcoinversus.tech/2025/03/26/installing-and-configuring-basic-wired-wireless-soho-networks/">wireless networks</a> operate using evolving <strong><a href="https://bitcoinversus.tech/2025/04/10/wi-fi-5-802-11ac-versus-wi-fi-6-802-11ax/">Wi-Fi standards</a></strong>, each offering different speed, range, and frequency capabilities. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>These standards, managed by the <a href="https://bitcoinversus.tech/2025/04/09/802-11-wireless-standards/">IEEE</a> under the <a href="https://bitcoinversus.tech/2025/04/09/802-11-wireless-standards/">802.11</a> umbrella, are critical to understand for any technician tasked with configuring or <a href="https://bitcoinversus.tech/2025/04/07/solving-wired-and-wireless-network-problems-in-business-and-home-networks/">troubleshooting wireless networks</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>802.11n</strong>, released in 2009, was the first to support <strong>dual-band operation</strong>—using both <strong>2.4 GHz and 5 GHz</strong> frequencies. It introduced <strong>MIMO (Multiple Input, Multiple Output)</strong> technology, which allowed multiple antennas to boost performance. It offered speeds up to <strong>600 Mbps</strong>, depending on the number of spatial streams.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=-8S9ocPswCE\u0026amp;pp=ygUpODAyLjExIHdpZmkgc3RhbmRhcmRzIGFuZCBmcmVxdWVuY3kgYmFuZHM%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=-8S9ocPswCE&amp;pp=ygUpODAyLjExIHdpZmkgc3RhbmRhcmRzIGFuZCBmcmVxdWVuY3kgYmFuZHM%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><strong>802.11ac</strong>, also known as <strong>Wi-Fi 5</strong>, improved on 802.11n by operating only on the <strong>5 GHz band</strong>, offering wider channels and <strong>MU-MIMO</strong> (Multi-User MIMO) support. It supports theoretical speeds beyond <strong>1 Gbps</strong>, making it ideal for high-bandwidth tasks like streaming and gaming.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=VYfIn9nvCwo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=VYfIn9nvCwo
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><strong>802.11ax</strong>, branded as <strong>Wi-Fi 6</strong>, operates on both <strong>2.4 GHz and 5 GHz</strong>, with improved <strong>OFDMA (Orthogonal Frequency-Division Multiple Access)</strong>, allowing more efficient simultaneous device connections. <strong>Wi-Fi 6E</strong>, an extension of 802.11ax, introduces the <strong>6 GHz band</strong>, reducing congestion and increasing speed and capacity further.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=FMiOF8p4GvM\u0026amp;t=6s\u0026amp;pp=ygUpODAyLjExIHdpZmkgc3RhbmRhcmRzIGFuZCBmcmVxdWVuY3kgYmFuZHM%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=FMiOF8p4GvM&amp;t=6s&amp;pp=ygUpODAyLjExIHdpZmkgc3RhbmRhcmRzIGFuZCBmcmVxdWVuY3kgYmFuZHM%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Technicians should understand that <strong>2.4 GHz offers better range but more interference</strong>, while <strong>5 GHz and 6 GHz offer faster speeds with shorter range</strong>. Device compatibility, channel width, and router configuration all impact wireless performance. When setting up or troubleshooting a SOHO network, knowing which standard is supported by the router and client device ensures optimal throughput and stability.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l","type":"rich","providerNameSlug":"bluesky-social"} -->
+<figure class="wp-block-embed is-type-rich is-provider-bluesky-social wp-block-embed-bluesky-social"><div class="wp-block-embed__wrapper">
+https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

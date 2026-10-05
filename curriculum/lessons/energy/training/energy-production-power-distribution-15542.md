@@ -1,0 +1,91 @@
+---
+title: "Energy Production: Power Distribution"
+wordpress_post_id: 15542
+source: BitcoinVersus.tech
+published: 2025-11-26T12:06:39
+modified: 2026-09-11T18:34:56
+live_url: https://bitcoinversus.tech/2025/11/26/energy-production-power-distribution/
+track: energy/training
+lesson_number: null
+raw_source: energy-production-power-distribution-15542.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2025/04/30/power-supply-unit-overview-for-bitcoin-mining/">Power distribution </a>is the final stage of the power grid responsible for receiving bulk electric energy from the transmission system and delivering it safely, reliably, affordably, and at appropriate voltage and power quality to virtually every end-use customer—residential, commercial, and light industrial—across cities, suburbs, and rural areas.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Mp8Ok6R9GeE\u0026amp;pp=ygUvRW5lcmd5IFByb2R1Y3Rpb246IFBvd2VyIERpc3RyaWJ1dGlvbiBleHBsYWluZWQ%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Mp8Ok6R9GeE&amp;pp=ygUvRW5lcmd5IFByb2R1Y3Rpb246IFBvd2VyIERpc3RyaWJ1dGlvbiBleHBsYWluZWQ%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>It begins at the distribution substation, where incoming transmission or subtransmission voltages are stepped down to medium-voltage primary distribution levels, and extends through thousands of kilometers of overhead lines or underground cables, distribution transformers, protective devices, voltage regulation equipment, and low-voltage secondary networks all the way to the customer’s meter or service entrance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=A4E35Akk7kM\u0026amp;pp=ygUvRW5lcmd5IFByb2R1Y3Rpb246IFBvd2VyIERpc3RyaWJ1dGlvbiBleHBsYWluZWQ%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=A4E35Akk7kM&amp;pp=ygUvRW5lcmd5IFByb2R1Y3Rpb246IFBvd2VyIERpc3RyaWJ1dGlvbiBleHBsYWluZWQ%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>The universally recognized voltage classifications that define the boundaries are:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Transmission voltages: 69 kV and above, with standard nominal levels worldwide of 69 kV, 115 kV, 138 kV, 161 kV, 230 kV, 287 kV, 345 kV, 400 kV, 500 kV, 735 kV, 765 kV, and in some cases 1,000 kV AC or ±500 kV to ±800 kV HVDC.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Subtransmission voltages: typically 34.5 kV to 138 kV (occasionally up to 230 kV in certain utilities), with common nominal levels of 34.5 kV, 46 kV, 69 kV, 88 kV, 115 kV, 132 kV, and 138 kV.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Distribution voltages:<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Primary distribution (medium voltage): 2.4 kV to 69 kV, with the vast majority of systems worldwide operating between 4 kV and 35 kV. Standard primary voltages in active use include 4.16 kV, 4.8 kV, 11 kV, 12.47 kV, 13.2 kV, 13.8 kV, 15 kV, 20 kV, 22 kV, 23 kV, 25 kV, 27 kV, 33 kV, and 34.5 kV.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Secondary distribution (low voltage): below 1 kV, typically 100–600 V, with dominant standards being 120/240 V split-phase (North America), 120/208 V and 277/480 V three-phase wye (North America), 230/400 V three-phase wye (most of Europe, Asia, Africa, Australia), and 220/380 V in some legacy systems.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list --></li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Encompassing radial, loop, open-loop, primary-selective, and secondary-network configurations, power distribution is the most extensive, asset-intensive, and geographically dispersed portion of the entire grid. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>It incorporates overhead pole lines, underground cables, pole- or pad-mounted transformers, automatic voltage regulators, switched capacitor banks, reclosers, sectionalizers, fuses, smart switches, distributed energy resource integration, advanced metering infrastructure, distribution automation, SCADA, DMS, outage management systems, and self-healing technologies—all engineered to achieve high reliability (typically 99.97–99.99 % availability), rapid fault isolation and service restoration, tight voltage regulation (±5 % or better), and acceptable power quality while remaining resilient to weather, vegetation, wildlife, and equipment aging. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>It is the stage where the majority of customer interruptions originate and where the modern bidirectional, intelligent, decarbonized, and resilient smart grid ultimately meets the customer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://twitter.com/BitcoinVersus_/status/1942746259376534000","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/BitcoinVersus_/status/1942746259376534000
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True.&nbsp;</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>If you would like to support to help further secure the integrity of our research initiatives, please donate here: bc1qrved9tfquym6u3age7xhmnkjs2lq8j9aulperagkuhtuk5w5c35ssfpge8</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,213 @@
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The <strong><a href="https://bitcoinversus.tech/2025/01/23/suprahex-bitcoin-mining-machine-review/">SupraHex</a></strong> is a compact, <strong>ESP32-S3-based mining device</strong> designed for small-scale, efficient <a href="https://bitcoinversus.tech/2024/10/07/altair-technology-conducts-comprehensive-review-of-antminer-s21-xp-270t/">Bitcoin mining</a>. Developed by <strong>TinyChipHub</strong> and other vendors recognized by OSMU, it operates on <a href="https://bitcoinversus.tech/2024/11/25/pierre-rochard-highlights-bitaxe-gamma-for-bitcoin-solo-mining/"><strong>AxeOS firmware</strong></a> and supports both <a href="https://bitcoinversus.tech/2024/11/23/solo-miner-strikes-gold-with-199098-bitcoin-block/">solo</a> and <a href="https://bitcoinversus.tech/2025/01/16/ocean-mining-pool-reaches-56-of-unique-bitcoin-miners/">pool mining</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Unlike <a href="https://bitcoinversus.tech/2024/08/25/antminer-s21-xp-hydro-set-for-release-between-october-and-december-2024/">traditional ASICs</a>, it is optimized for <strong>low-power, cost-effective mining</strong> while allowing users to tinker with firmware and system configurations. However, as I quickly learned, <strong>firmware updates can be tricky, and mistakes can <a href="https://bitcoinversus.tech/2025/01/16/troubleshooting-a-bricked-nerdaxe/">brick the machine</a>.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://youtu.be/DH9r566kBDE","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://youtu.be/DH9r566kBDE
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading"><strong>The Problem: A Bricked SupraHex</strong></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">After an attempted firmware update, my SupraHex became completely <strong>unresponsive</strong>:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><strong>No COM port detection</strong> when connected to a computer.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>No network access</strong>, meaning the web interface was unreachable.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>No LED activity</strong>, suggesting the firmware failed to initialize.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">At this point, the device was essentially a <strong>paperweight</strong>, so I had to <strong>manually restore it</strong> using <strong>command-line tools</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"style":{"typography":{"textTransform":"none"}}} -->
+<h2 class="wp-block-heading" style="text-transform:none"><strong>The Solution: Command-Line Debugging and Recovery</strong></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Since <strong>GUI-based troubleshooting wasn’t an option</strong>, I turned to the <strong>command line</strong> for a deep-level firmware recovery.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://twitter.com/BitcoinVersus_/status/1942746259376534000","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/BitcoinVersus_/status/1942746259376534000
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><strong>Step 1: Confirming Device Connection &amp; Entering Bootloader Mode</strong></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">With no visible response from the machine, I had to <strong>force the ESP32-S3 into bootloader mode</strong>:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Disconnected power completely.</strong></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Held down the BOOT button</strong> while reconnecting the device via USB.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Released the button after <strong>5–10 seconds</strong> to allow bootloader mode to initialize.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li>Checked <strong>Windows Device Manager</strong> to confirm the COM port was detected.</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">At this point, my PC finally recognized the SupraHex as a <strong>USB-to-serial device (Silicon Labs CP210x).</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><strong>Step 2: Installing &amp; Running <code>esptool.py</code></strong></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Since <strong>BitaxeTool alone couldn't erase flash memory</strong>, I installed <strong><code>esptool.py</code></strong>, a Python-based utility for interfacing with ESP32 devices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>🔹 Installed <code>esptool.py</code>:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><code><em>pip install esptool<br></em></code></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">🔹 Erased corrupted firmware:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><code><em>python -m esptool --chip esp32s3 --port COM5 erase_flash</em><br></code></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This fully wiped the flash memory, removing any corrupt firmware files.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://twitter.com/BitcoinVersus_/status/1942746259376534000","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/BitcoinVersus_/status/1942746259376534000
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><strong>Step 3: Re-Flashing the Firmware</strong></h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">With the device now clean, I had to <strong>reinstall the SupraHex firmware using BitaxeTool</strong>:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><code>bitaxetool -p COM5 -f "C:\Users\YourUsername\Downloads\esp-miner-factory-v2.5.1-TCH-All-in-one-702.bin"</code></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:image {"id":10470,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/02/screenshot-2025-02-24-231815-e1740486172145.png?w=1024" alt="" class="wp-image-10470" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Once completed, the terminal confirmed:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><em><code>Leaving...<br>Hard resetting via RTS pin...</code></em></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:image {"id":10475,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2025/02/screenshot-2025-02-24-225519.png?w=395" alt="" class="wp-image-10475" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This meant the firmware successfully flashed onto the device.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><strong>Step 4: Power Cycling &amp; Letting the Device Initialize</strong></h3>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Unplugged</strong> the SupraHex for <strong>15 seconds</strong>.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Reconnected power and USB.</strong></li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Waited ~5–10 minutes</strong> for the first boot sequence.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong>Checked my router’s <a href="https://bitcoinversus.tech/2025/04/10/static-ip-vs-dhcp/">DHCP</a> list</strong> to find the new IP address.</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Finally, the web interface was accessible again, and <a href="https://bitcoinversus.tech/2024/12/07/i-got-my-bitaxe-machine-to-hash-exclusive-review/">the machine <strong>began hashing</strong></a><strong>.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This entire recovery process reinforced how <strong>critical</strong> it is to be comfortable <strong>using the command line for embedded systems troubleshooting.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>Understanding ESP32 microcontroller architecture</strong> helped in recognizing how bootloader mode functions.<br><br><strong>Python-based utilities (<code>esptool.py</code>, <code>bitaxetool</code>)</strong> are key tools for embedded firmware flashing.<br><br><strong>Knowing how to debug COM port issues</strong> is a must when working with UART-based devices.<br><br><strong>Patience is crucial</strong>—some steps require <strong>waiting for initialization</strong> instead of rushing into another fix.<br><br>Additionally, implementing practical steps into your SOP like correspondence with vendor/manufacturer as well as reviewing any documentation on their website is essential for the completion of board recovery.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">For those using the SupraHex or similar embedded mining devices, <strong>firmware recovery is possible, but only if you’re willing to dive deep into the command line.</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The SupraHex is an <strong>incredible</strong> small-scale mining device, but <strong>firmware updates require careful execution.</strong> <br><br>If something goes wrong, knowing how to work with <strong>serial communication, bootloader recovery, and firmware flashing tools</strong> is necessary to bring it back online.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">For anyone struggling with a <strong>bricked SupraHex</strong>, I highly recommend <strong>learning python and the fundamentals of UART <a href="https://bitcoinversus.tech/2025/03/12/serial-communication-and-its-role-in-data-transmission/">serial communication</a>. I also encourage you to look into how to install <a href="https://bitcoinversus.tech/2025/03/03/pip-installs-packages-pip-overview/">python packages</a> like <code>esptool.py</code>, BitaxeTool, and basic <a href="https://bitcoinversus.tech/2024/11/18/command-2-tracert-windows-os/">network troubleshooting</a></strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://twitter.com/BitcoinVersus_/status/1942746259376534000","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/BitcoinVersus_/status/1942746259376534000
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

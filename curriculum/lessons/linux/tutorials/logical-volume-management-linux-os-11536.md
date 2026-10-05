@@ -1,0 +1,103 @@
+---
+title: "Logical Volume Management | Linux OS"
+wordpress_post_id: 11536
+source: BitcoinVersus.tech
+published: 2025-05-16T09:00:00
+modified: 2025-03-30T00:13:33
+live_url: https://bitcoinversus.tech/2025/05/16/logical-volume-management-linux-os/
+track: linux/tutorials
+lesson_number: null
+raw_source: logical-volume-management-linux-os-11536.gutenberg.html
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">To set up logical volume management in Linux, the first step is creating a <strong>physical volume (PV)</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=MeltFN-bXrQ\u0026amp;pp=ygUfbG9naWNhbCB2b2x1bWUgbWFuYWdlbWVudCBsaW51eA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=MeltFN-bXrQ&amp;pp=ygUfbG9naWNhbCB2b2x1bWUgbWFuYWdlbWVudCBsaW51eA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">A physical volume is typically a disk partition (like <code>/dev/sdb1</code>) that is initialized for use by the Logical Volume Manager. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This is done using the <code>pvcreate</code> command, which prepares the partition to be added into a volume group. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">After initializing the PV, you can verify it with <code>pvdisplay</code> to ensure the system recognizes it as an LVM-compatible storage unit. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://youtu.be/N0FHlYX0fyc?si=vcXW9RWWkqC5j1gT","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://youtu.be/N0FHlYX0fyc?si=vcXW9RWWkqC5j1gT
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The physical volume serves as the foundational layer for creating flexible and scalable storage setups.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Once a physical volume is prepared, the next step is to create a <strong>volume group (VG)</strong>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">A volume group is a storage pool made from one or more physical volumes. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Using the command <code>vgcreate my_vg /dev/sdb1</code>, a volume group named <code>my_vg</code> is created using the initialized physical volume. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=JlWiNnuMm_4\u0026amp;pp=ygUfbG9naWNhbCB2b2x1bWUgbWFuYWdlbWVudCBsaW51eA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=JlWiNnuMm_4&amp;pp=ygUfbG9naWNhbCB2b2x1bWUgbWFuYWdlbWVudCBsaW51eA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Volume groups can be expanded later by adding more physical volumes with <code>vgextend</code>, which allows the storage pool to grow dynamically. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This abstraction enables system administrators to manage storage more flexibly, especially in environments where disk usage fluctuates or evolves over time.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=akLeofI5lHE\u0026amp;pp=0gcJCc0AaK0XXGki","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=akLeofI5lHE&amp;pp=0gcJCc0AaK0XXGki
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">With a volume group in place, a <strong>logical volume (LV)</strong> can now be created. Logical volumes are the usable partitions carved from the space within a volume group. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The command <code>lvcreate -L 10G -n my_lv my_vg</code> creates a 10GB logical volume named <code>my_lv</code> from the <code>my_vg</code> volume group. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Logical volumes can be formatted using file systems like <code>ext4</code> or <code>xfs</code>, then mounted and used like traditional partitions. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Their size can be expanded or reduced as needed, making them ideal for systems requiring flexible storage management.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

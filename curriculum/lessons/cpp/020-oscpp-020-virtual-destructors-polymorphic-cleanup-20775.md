@@ -3,7 +3,7 @@ title: "OSC++.020: Virtual Destructors and Polymorphic Cleanup"
 wordpress_post_id: 20775
 source: BitcoinVersus.tech
 published: 2026-10-04T21:08:53
-modified: undefined
+modified: 2026-10-04T21:23:21
 live_url: https://bitcoinversus.tech/2026/10/04/oscpp-020-virtual-destructors-polymorphic-cleanup/
 track: cpp
 lesson_number: 20

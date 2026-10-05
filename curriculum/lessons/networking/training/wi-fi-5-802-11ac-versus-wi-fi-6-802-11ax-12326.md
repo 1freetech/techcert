@@ -1,0 +1,63 @@
+---
+title: "Wi-Fi 5 (802.11ac) Versus Wi-Fi 6 (802.11ax)"
+wordpress_post_id: 12326
+source: BitcoinVersus.tech
+published: 2025-04-10T12:00:00
+modified: 2025-04-09T08:39:21
+live_url: https://bitcoinversus.tech/2025/04/10/wi-fi-5-802-11ac-versus-wi-fi-6-802-11ax/
+track: networking/training
+lesson_number: null
+raw_source: wi-fi-5-802-11ac-versus-wi-fi-6-802-11ax-12326.gutenberg.html
+---
+
+<!-- wp:paragraph {"className":""} -->
+<p><a href="https://bitcoinversus.tech/2025/04/07/solving-wired-and-wireless-network-problems-in-business-and-home-networks/">Wi-Fi 5</a> (802.11ac) and <a href="https://bitcoinversus.tech/2025/03/26/installing-and-configuring-basic-wired-wireless-soho-networks/">Wi-Fi 6</a> (802.11ax) are two prevalent standards that IT professionals <a href="https://www.interfacett.com/training/comptia-a-plus-core-1-exam-220-1101/?utm_source=chatgpt.com">should be familiar with</a>.​</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=7qPYR7g29Gs\u0026amp;pp=ygUQd2lmaSA1IHZzIHdpZmkgNg%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=7qPYR7g29Gs&amp;pp=ygUQd2lmaSA1IHZzIHdpZmkgNg%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>Wi-Fi 5 (802.11ac):</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Wi-Fi 5, introduced in 2013, operates exclusively on the 5 GHz frequency band. It brought significant improvements over its predecessor, 802.11n, by offering higher data rates and enhanced performance. The standard supports channel widths up to 160 MHz and utilizes technologies like Multi-User Multiple Input Multiple Output (MU-MIMO) to serve multiple devices simultaneously. Theoretical maximum data rates can reach up to 3.5 Gbps, though real-world performance is typically lower due to environmental factors and network congestion.​</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>Wi-Fi 6 (802.11ax):</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Wi-Fi 6, released in 2019, operates on both 2.4 GHz and 5 GHz bands, providing greater flexibility and improved performance in various environments. It introduces Orthogonal Frequency Division Multiple Access (OFDMA), allowing multiple devices to share channels more efficiently, reducing latency, and increasing network capacity. Wi-Fi 6 also supports 1024-QAM, enabling higher data rates and improved spectral efficiency. Theoretical maximum speeds can reach up to 9.6 Gbps.​</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>Comparison:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>While both standards aim to enhance wireless networking performance, Wi-Fi 6 offers several advantages over Wi-Fi 5. The inclusion of the 2.4 GHz band in Wi-Fi 6 ensures better performance in environments with obstacles, as lower frequencies penetrate walls more effectively. Technologies like OFDMA and improved MU-MIMO support in Wi-Fi 6 lead to better efficiency, reduced latency, and increased capacity, making it more suitable for dense environments with numerous connected devices. Additionally, Wi-Fi 6 introduces Target Wake Time (TWT), which helps devices conserve battery life by scheduling communication times with the router.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l","type":"rich","providerNameSlug":"bluesky-social"} -->
+<figure class="wp-block-embed is-type-rich is-provider-bluesky-social wp-block-embed-bluesky-social"><div class="wp-block-embed__wrapper">
+https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

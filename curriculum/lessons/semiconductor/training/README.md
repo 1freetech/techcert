@@ -1,12 +1,64 @@
 # semiconductor/training
 
-6 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+58 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
+| — | [Bravais Lattice and Basis in Semiconductor Crystal Structures](./bravais-lattice-and-basis-in-semiconductor-crystal-structures-15092.md) | [Published lesson](https://bitcoinversus.tech/2025/12/19/bravais-lattice-and-basis-in-semiconductor-crystal-structures/) |
+| — | [Energy Bands: Semi-Conductors (Solid State Physics)](./energy-bands-semi-conductors-solid-state-physics-15179.md) | [Published lesson](https://bitcoinversus.tech/2025/12/30/energy-bands-semi-conductors-solid-state-physics/) |
+| — | [Semiconductor Physics: Carrier Statistics](./semiconductor-physics-carrier-statistics-15185.md) | [Published lesson](https://bitcoinversus.tech/2025/12/28/semiconductor-physics-carrier-statistics/) |
+| — | [Semiconductor Fundamentals: Electron and Hole Mobilities](./semiconductor-fundamentals-electron-and-hole-mobilities-15196.md) | [Published lesson](https://bitcoinversus.tech/2025/12/29/semiconductor-fundamentals-electron-and-hole-mobilities/) |
+| — | [Semiconductor Physics: Understanding The Fermi Level](./semiconductor-physics-understanding-the-fermi-level-15202.md) | [Published lesson](https://bitcoinversus.tech/2025/12/27/semiconductor-physics-understanding-the-fermi-level/) |
+| — | [Semiconductor Photon Absorption and Emission](./semiconductor-photon-absorption-and-emission-15209.md) | [Published lesson](https://bitcoinversus.tech/2025/12/31/semiconductor-photon-absorption-and-emission/) |
+| — | [Semiconductor Physics: Resistivity](./semiconductor-physics-resistivity-15215.md) | [Published lesson](https://bitcoinversus.tech/2026/01/01/semiconductor-physics-resistivity/) |
+| — | [Semiconductor Physics: Conductors](./semiconductor-physics-conductors-15223.md) | [Published lesson](https://bitcoinversus.tech/2026/01/02/semiconductor-physics-conductors/) |
+| — | [Semiconductor Fundamentals: insulators](./semiconductor-fundamentals-insulators-15233.md) | [Published lesson](https://bitcoinversus.tech/2026/01/03/semiconductor-fundamentals-insulators/) |
+| — | [Semiconductor Overview](./semiconductor-overview-15240.md) | [Published lesson](https://bitcoinversus.tech/2026/01/04/semiconductor-overview/) |
+| — | [Silicon: The Building Block of Semiconductors](./silicon-element-no-14-15253.md) | [Published lesson](https://bitcoinversus.tech/2026/01/05/silicon-element-no-14/) |
+| — | [P-type Semiconductor](./semiconductor-fundamentals-p-type-semiconductor-15254.md) | [Published lesson](https://bitcoinversus.tech/2026/01/08/semiconductor-fundamentals-p-type-semiconductor/) |
+| — | [N-type Semiconductor Overview](./n-type-semiconductor-overview-15261.md) | [Published lesson](https://bitcoinversus.tech/2026/01/06/n-type-semiconductor-overview/) |
+| — | [Semiconductor Crystals: Intrinsic Semiconductor vs. Extrinsic Semiconductor](./semiconductor-crystals-intrinsic-semiconductor-vs-extrinsic-semiconductor-15280.md) | [Published lesson](https://bitcoinversus.tech/2026/01/09/semiconductor-crystals-intrinsic-semiconductor-vs-extrinsic-semiconductor/) |
+| — | [Semiconductor Physics: Conduction Band](./semiconductor-physics-conduction-band-15284.md) | [Published lesson](https://bitcoinversus.tech/2026/01/10/semiconductor-physics-conduction-band/) |
+| — | [Periodic Table of Semiconductors](./periodic-table-of-semiconductors-15293.md) | [Published lesson](https://bitcoinversus.tech/2026/04/03/periodic-table-of-semiconductors/) |
+| — | [Semiconductor Characterization: The Band Gap](./semiconductor-characterization-the-band-gap-15314.md) | [Published lesson](https://bitcoinversus.tech/2026/01/11/semiconductor-characterization-the-band-gap/) |
+| — | [Semiconductor Characterization: P-N Junction Diode](./semiconductor-characterization-p-n-junction-diode-15318.md) | [Published lesson](https://bitcoinversus.tech/2026/01/13/semiconductor-characterization-p-n-junction-diode/) |
+| — | [Semiconductor Physics: Diode I-V Characteristics](./semiconductor-physics-diode-i-v-characteristics-15320.md) | [Published lesson](https://bitcoinversus.tech/2026/01/12/semiconductor-physics-diode-i-v-characteristics/) |
+| — | [Semiconductor Physics: Oxide Charges](./semiconductor-physics-oxide-charges-15336.md) | [Published lesson](https://bitcoinversus.tech/2026/01/15/semiconductor-physics-oxide-charges/) |
+| — | [Semiconductor Fundamentals: Metal–Oxide–Semiconductor (MOS)](./semiconductor-fundamentals-metal-oxide-semiconductor-mos-15338.md) | [Published lesson](https://bitcoinversus.tech/2026/01/14/semiconductor-fundamentals-metal-oxide-semiconductor-mos/) |
+| — | [Flat Band Capacitance](./flat-band-capacitance-15361.md) | [Published lesson](https://bitcoinversus.tech/2026/01/16/flat-band-capacitance/) |
 | — | [Semiconductor Components: Diode Electrical Characterization](./semiconductor-components-diode-electrical-characterization-15385.md) | [Published lesson](https://bitcoinversus.tech/2026/01/17/semiconductor-components-diode-electrical-characterization/) |
+| — | [Semiconductor Components: Cathode vs Anode](./semiconductor-components-cathode-vs-anode-15386.md) | [Published lesson](https://bitcoinversus.tech/2026/01/18/semiconductor-components-cathode-vs-anode/) |
+| — | [Resistance Vs. Resistivity](./resistance-vs-resistivity-15406.md) | [Published lesson](https://bitcoinversus.tech/2026/01/20/resistance-vs-resistivity/) |
 | — | [Semiconductor Training: 4 Point Probes](./semiconductor-training-4-point-probes-15409.md) | [Published lesson](https://bitcoinversus.tech/2026/01/19/semiconductor-training-4-point-probes/) |
+| — | [Semiconductor Physics: Contact Resistance](./semiconductor-physics-contact-resistance-15419.md) | [Published lesson](https://bitcoinversus.tech/2026/01/21/semiconductor-physics-contact-resistance/) |
+| — | [Semiconductor Physics: Specific Contact Resistivity](./semiconductor-physics-specific-contact-resistivity-15423.md) | [Published lesson](https://bitcoinversus.tech/2026/01/22/semiconductor-physics-specific-contact-resistivity/) |
+| — | [Semiconductor Physics: Transfer Length Method](./semiconductor-physics-transfer-length-method-15460.md) | [Published lesson](https://bitcoinversus.tech/2026/01/26/semiconductor-physics-transfer-length-method/) |
+| — | [Semiconductor Physics: Photovoltaics and Diode I-V curves](./semiconductor-physics-photovoltaics-and-diode-i-v-curves-15512.md) | [Published lesson](https://bitcoinversus.tech/2026/01/27/semiconductor-physics-photovoltaics-and-diode-i-v-curves/) |
+| — | [Semiconductor Physics: Forward bias](./semiconductor-physics-forward-bias-15548.md) | [Published lesson](https://bitcoinversus.tech/2026/02/04/semiconductor-physics-forward-bias/) |
+| — | [Semiconductor Physics: Current Flow in a P-N Junction Diode](./semiconductor-physics-current-flow-in-a-p-n-junction-diode-15585.md) | [Published lesson](https://bitcoinversus.tech/2026/02/08/semiconductor-physics-current-flow-in-a-p-n-junction-diode/) |
+| — | [Semiconductor Physics: Diode Series Resistance](./semiconductor-physics-diode-series-resistance-15586.md) | [Published lesson](https://bitcoinversus.tech/2026/02/01/semiconductor-physics-diode-series-resistance/) |
+| — | [Semiconductor Physics: Ideality Factor in Diodes](./semiconductor-physics-ideality-factor-in-diodes-15594.md) | [Published lesson](https://bitcoinversus.tech/2026/02/02/semiconductor-physics-ideality-factor-in-diodes/) |
+| — | [Semiconductor Chemistry: Trivalent and Pentavalent Elements](./semiconductor-chemistry-trivalent-and-pentavalent-elements-15621.md) | [Published lesson](https://bitcoinversus.tech/2026/02/03/semiconductor-chemistry-trivalent-and-pentavalent-elements/) |
+| — | [Semiconductor Physics: The Annealing Process](./semiconductor-physics-the-annealing-process-15713.md) | [Published lesson](https://bitcoinversus.tech/2026/02/15/semiconductor-physics-the-annealing-process/) |
+| — | [Semiconductor Packaging](./semiconductor-packaging-15752.md) | [Published lesson](https://bitcoinversus.tech/2026/02/17/semiconductor-packaging/) |
+| — | [Metal Oxide Semiconductor Capacitance Voltage (MOS-CV)](./metal-oxide-semiconductor-capacitance-voltage-mos-cv-15811.md) | [Published lesson](https://bitcoinversus.tech/2026/02/22/metal-oxide-semiconductor-capacitance-voltage-mos-cv/) |
+| — | [Extracting Flat-Band Capacitance (CFB)](./extracting-flat-band-capacitance-cfb-15822.md) | [Published lesson](https://bitcoinversus.tech/2026/02/23/extracting-flat-band-capacitance-cfb/) |
+| — | [Oxide Charge Density in Semiconductors](./oxide-charge-density-in-semiconductors-15833.md) | [Published lesson](https://bitcoinversus.tech/2026/02/24/oxide-charge-density-in-semiconductors/) |
+| — | [MOSFET Operating Characteristics](./mosfet-operating-characteristics-15846.md) | [Published lesson](https://bitcoinversus.tech/2026/02/25/mosfet-operating-characteristics/) |
+| — | [The MOSFET Square Law](./the-mosfet-square-law-15855.md) | [Published lesson](https://bitcoinversus.tech/2026/02/26/the-mosfet-square-law/) |
+| — | [Semiconductor Physics: Threshold Voltage](./semiconductor-physics-threshold-voltage-15860.md) | [Published lesson](https://bitcoinversus.tech/2026/02/27/semiconductor-physics-threshold-voltage/) |
+| — | [Understanding Threshold‑Voltage Extraction for RF MOSFETs](./understanding-threshold-voltage-extraction-for-rf-mosfets-15910.md) | [Published lesson](https://bitcoinversus.tech/2026/03/03/understanding-threshold-voltage-extraction-for-rf-mosfets/) |
 | — | [Semiconductor Training: Threshold Voltage](./semiconductor-training-threshold-voltage-15924.md) | [Published lesson](https://bitcoinversus.tech/2026/03/04/semiconductor-training-threshold-voltage/) |
 | — | [Semiconductor Training: Transmission Electron Microscopy (TEM)](./semiconductor-training-transmission-electron-microscopy-tem-15936.md) | [Published lesson](https://bitcoinversus.tech/2025/12/08/semiconductor-training-transmission-electron-microscopy-tem/) |
+| — | [Semiconductor Physics: Solar Cell Roughness Characterization](./semiconductor-physics-solar-cell-roughness-characterization-15992.md) | [Published lesson](https://bitcoinversus.tech/2026/03/14/semiconductor-physics-solar-cell-roughness-characterization/) |
+| — | [Photoluminescence in Semiconductors](./photoluminescence-in-semiconductors-16008.md) | [Published lesson](https://bitcoinversus.tech/2026/04/02/photoluminescence-in-semiconductors/) |
+| — | [Wavelength Dispersive Spectroscopy (WDS) Vs. Energy Dispersive Spectroscopy (EDS)](./wavelength-dispersive-spectroscopy-wds-vs-energy-dispersive-spectroscopy-eds-16019.md) | [Published lesson](https://bitcoinversus.tech/2026/03/16/wavelength-dispersive-spectroscopy-wds-vs-energy-dispersive-spectroscopy-eds/) |
+| — | [Semiconductor Physics: Lattice Atom](./semiconductor-physics-lattice-atom-16026.md) | [Published lesson](https://bitcoinversus.tech/2026/03/18/semiconductor-physics-lattice-atom/) |
+| — | [Substrate: The Foundation of Semiconductors](./substrate-the-foundation-of-semiconductors-16036.md) | [Published lesson](https://bitcoinversus.tech/2026/03/17/substrate-the-foundation-of-semiconductors/) |
+| — | [Semiconductor Packaging Process](./semiconductor-packaging-process-17185.md) | [Published lesson](https://bitcoinversus.tech/2026/08/13/semiconductor-packaging-process/) |
+| — | [The Semiconductor Packaging Flow](./the-semiconductor-packaging-flow-17200.md) | [Published lesson](https://bitcoinversus.tech/2026/08/14/the-semiconductor-packaging-flow/) |
 | — | [Semiconductor Training: Product Burn-In Testing and Electronic Device Reliability](./semiconductor-training-product-burn-in-testing-and-electronic-device-reliability-17209.md) | [Published lesson](https://bitcoinversus.tech/2026/08/17/semiconductor-training-product-burn-in-testing-and-electronic-device-reliability/) |
+| — | [2D Vs. 3D Semiconductor Packaging](./2d-vs-3d-semiconductor-packaging-17252.md) | [Published lesson](https://bitcoinversus.tech/2026/08/21/2d-vs-3d-semiconductor-packaging/) |
+| — | [Homogeneous vs. Heterogeneous Integration for Semiconductors](./homogeneous-vs-heterogeneous-integration-for-semiconductors-17266.md) | [Published lesson](https://bitcoinversus.tech/2026/08/28/homogeneous-vs-heterogeneous-integration-for-semiconductors/) |
+| — | [Field-Programmable Gate Array](./field-programmable-gate-array-17512.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/field-programmable-gate-array/) |
 | — | [Transistor vs. Semiconductor (Electrical Training)](./transistor-vs-semiconductor-electrical-training-17985.md) | [Published lesson](https://bitcoinversus.tech/2026/09/05/transistor-vs-semiconductor-electrical-training/) |

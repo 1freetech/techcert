@@ -1,0 +1,85 @@
+---
+title: "Understanding Email Authentication Protocols: DKIM, SPF, and DMARC"
+wordpress_post_id: 10956
+source: BitcoinVersus.tech
+published: 2025-03-15T01:34:50
+modified: 2025-04-06T18:28:28
+live_url: https://bitcoinversus.tech/2025/03/15/understanding-email-authentication-protocols-dkim-spf-and-dmarc/
+track: networking/training
+lesson_number: null
+raw_source: understanding-email-authentication-protocols-dkim-spf-and-dmarc-10956.gutenberg.html
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>DomainKeys Identified Mail (DKIM)</strong> is an email authentication protocol that enables an organization to digitally sign its outgoing emails. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">DKIM verifies the authenticity and integrity of email messages, ensuring they were not altered in transit. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Q8NUW3CZRvw\u0026amp;pp=ygUYZG1hcmMgZGtpbSBzcGYgZXhwbGFpbmVk","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Q8NUW3CZRvw&amp;pp=ygUYZG1hcmMgZGtpbSBzcGYgZXhwbGFpbmVk
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">By attaching a cryptographic signature, DKIM allows receiving mail servers to validate the sender's domain. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Emails passing DKIM checks increase trustworthiness, reducing the likelihood of spoofed messages reaching recipients' inboxes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>Sender Policy Framework (SPF)</strong> helps prevent email spoofing by specifying which mail servers are authorized to send emails on behalf of a domain. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=8V2nfKLzc84\u0026amp;pp=ygUYZG1hcmMgZGtpbSBzcGYgZXhwbGFpbmVk","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=8V2nfKLzc84&amp;pp=ygUYZG1hcmMgZGtpbSBzcGYgZXhwbGFpbmVk
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">SPF operates by publishing a DNS record listing approved sending servers for a domain. Receiving email servers then check incoming mail against these records, accepting emails from authorized sources and flagging or rejecting unauthorized emails.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Proper implementation of SPF significantly reduces phishing and spam by making it difficult for malicious actors to impersonate legitimate senders.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>Domain-based Message Authentication, Reporting &amp; Conformance (DMARC)</strong> builds upon SPF and DKIM by providing email senders and receivers with a structured policy framework. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">DMARC allows domain owners to specify how receiving mail servers should handle unauthenticated emails, choosing between actions such as quarantine, reject, or none (monitoring only). </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=KO7ecn4itq4\u0026amp;pp=ygUYZG1hcmMgZGtpbSBzcGYgZXhwbGFpbmVk","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=KO7ecn4itq4&amp;pp=ygUYZG1hcmMgZGtpbSBzcGYgZXhwbGFpbmVk
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Additionally, DMARC generates reports detailing authentication results, giving organizations visibility into email deliverability and unauthorized usage of their domains. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Implementation of DMARC enhances email security by creating clear guidelines and accountability for message handling.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

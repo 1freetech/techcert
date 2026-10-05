@@ -1,11 +1,14 @@
-# Linux Command #42 – groupmod (Linux OS)
-
-Published: https://bitcoinversus.tech/2026/10/05/linux-command-42-groupmod/
-WordPress post: 20910
-Track: linux/commands
-Lesson number: 42
-
-## Exact saved Gutenberg
+---
+title: "Linux Command #42 – groupmod (Linux OS)"
+wordpress_post_id: 20910
+source: BitcoinVersus.tech
+published: 2026-10-05T01:15:17
+modified: 2026-10-05T01:20:10
+live_url: https://bitcoinversus.tech/2026/10/05/linux-command-42-groupmod/
+track: linux/commands
+lesson_number: 42
+raw_source: 042-linux-command-42-groupmod-20910.gutenberg.html
+---
 
 <!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong><code>groupmod</code> modifies the name, numeric GID, and selected attributes of an existing local Linux group.</strong></p><!-- /wp:paragraph -->
 

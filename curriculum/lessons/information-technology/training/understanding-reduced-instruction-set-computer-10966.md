@@ -1,0 +1,47 @@
+---
+title: "Understanding Reduced Instruction Set Computer"
+wordpress_post_id: 10966
+source: BitcoinVersus.tech
+published: 2025-03-24T16:44:00
+modified: 2026-09-11T18:35:12
+live_url: https://bitcoinversus.tech/2025/03/24/understanding-reduced-instruction-set-computer/
+track: information-technology/training
+lesson_number: null
+raw_source: understanding-reduced-instruction-set-computer-10966.gutenberg.html
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>RISC</strong>, or <strong>Reduced Instruction Set Computer</strong>, represents a <a href="https://bitcoinversus.tech/2025/03/07/cpu-architecture-and-microarchitecture-explained/">CPU architecture</a> designed with simplified instructions, enabling processors to execute instructions at high speeds with fewer cycles per operation. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=DqZGt-VRQTE\u0026amp;pp=ygUOcmlzYyBleHBsYWluZWQ%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=DqZGt-VRQTE&amp;pp=ygUOcmlzYyBleHBsYWluZWQ%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">According to IBM, RISC architectures streamline instruction processing by reducing complexity, enabling faster and more efficient performance at lower power consumption. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=X4BxUiqWq8E\u0026amp;pp=ygUXQVJNIHByb2Nlc3NvciBleHBsYWluZWQ%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=X4BxUiqWq8E&amp;pp=ygUXQVJNIHByb2Nlc3NvciBleHBsYWluZWQ%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">ARM processors are built on RISC principles, providing greater efficiency compared to the more complex instruction set of traditional CPUs (known as Complex Instruction Set Computing, or CISC).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

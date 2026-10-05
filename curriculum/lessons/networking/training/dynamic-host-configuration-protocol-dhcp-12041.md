@@ -1,0 +1,89 @@
+---
+title: "Dynamic Host Configuration Protocol (DHCP)"
+wordpress_post_id: 12041
+source: BitcoinVersus.tech
+published: 2025-04-10T19:26:00
+modified: 2026-09-10T21:05:06
+live_url: https://bitcoinversus.tech/2025/04/10/dynamic-host-configuration-protocol-dhcp/
+track: networking/training
+lesson_number: null
+raw_source: dynamic-host-configuration-protocol-dhcp-12041.gutenberg.html
+---
+
+<!-- wp:paragraph {"className":""} -->
+<p>The <strong>Dynamic Host Configuration Protocol (DHCP)</strong> is a network service used to automatically assign IP addresses and other configuration information—such as the subnet mask, default gateway, and DNS servers—to client devices on a network. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=S43CFcpOZSI\u0026amp;pp=ygUrRHluYW1pYyBIb3N0IENvbmZpZ3VyYXRpb24gUHJvdG9jb2wgKERIQ1ApIA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=S43CFcpOZSI&amp;pp=ygUrRHluYW1pYyBIb3N0IENvbmZpZ3VyYXRpb24gUHJvdG9jb2wgKERIQ1ApIA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>This removes the need for manual IP configuration and helps avoid conflicts caused by duplicate IPs. DHCP is essential for managing medium to large-scale networks, as it significantly reduces administrative overhead. It operates on a <strong>client-server model</strong> and uses <strong>UDP port 67 (server)</strong> and <strong>UDP port 68 (client)</strong> to facilitate communication between the client requesting an IP and the DHCP server that provides it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=GjfRWN4gWTs\u0026amp;pp=ygUrRHluYW1pYyBIb3N0IENvbmZpZ3VyYXRpb24gUHJvdG9jb2wgKERIQ1ApIA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=GjfRWN4gWTs&amp;pp=ygUrRHluYW1pYyBIb3N0IENvbmZpZ3VyYXRpb24gUHJvdG9jb2wgKERIQ1ApIA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>The DHCP process follows a four-step sequence known as <strong>DORA</strong>:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item {"style":{"typography":{"textTransform":"none"}}} -->
+<li style="text-transform:none"><strong>Discover</strong> – the client broadcasts a message to locate available DHCP servers.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item {"style":{"typography":{"textTransform":"none"}}} -->
+<li style="text-transform:none"><strong>Offer</strong> – the DHCP server responds with an IP address offer and configuration details.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item {"style":{"typography":{"textTransform":"none"}}} -->
+<li style="text-transform:none"><strong>Request</strong> – the client requests to accept the offered IP address.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item {"style":{"typography":{"textTransform":"none"}}} -->
+<li style="text-transform:none"><strong>Acknowledge</strong> – the DHCP server confirms the lease and the client is configured.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>A typical DHCP lease is temporary, and the client must periodically renew it before expiration. DHCP servers can also reserve specific IPs for certain MAC addresses, ensuring that critical devices always receive the same IP address without static configuration—this is known as a <strong>DHCP reservation</strong>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>In troubleshooting, common DHCP-related issues include the assignment of <strong>APIPA addresses (169.254.x.x)</strong> when the client fails to contact a DHCP server, misconfigured scopes, and conflicts with manually assigned IPs. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Understanding DHCP is essential for both wired and wireless network support, and for diagnosing IP addressing problems quickly and accurately.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>AD:</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>Use the code BILLBURTON at check out to Get 5% off Bitaxe Mining Products</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>Limited to one use per customer:</em><a href="https://tinychiphub.com/BILLBURTON"><em>https://tinychiphub.com/BILLBURTON</em></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

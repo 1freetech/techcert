@@ -1,0 +1,49 @@
+---
+title: "OM1 - OM5 (Optical Mode Fiber)"
+wordpress_post_id: 14866
+source: BitcoinVersus.tech
+published: 2025-11-24T05:09:00
+modified: 2025-11-08T07:35:15
+live_url: https://bitcoinversus.tech/2025/11/24/om1-om5-optical-mode-fiber/
+track: fiber-optics/training
+lesson_number: null
+raw_source: om1-om5-optical-mode-fiber-14866.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>OM1 to OM5 refer to standardized categories of <a href="https://bitcoinversus.tech/2025/04/07/fiber-optic-cabling/">multimode optical fiber</a>, each defined by core size, bandwidth capacity, and transmission distance. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=KWJXj2LLJE4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=KWJXj2LLJE4
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>OM1 uses a 62.5 µm core and supports up to 1 Gbps over short distances, while OM2 through OM5 use a 50 µm core and are optimized for higher-speed VCSEL-based transmissions. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>OM3 and OM4 are laser-optimized for 10G, 40G, and 100G Ethernet, with OM4 offering extended reach due to higher effective modal bandwidth. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>OM5, the latest standard, supports short wavelength division multiplexing (SWDM) across multiple wavelengths, enabling parallel transmission and higher aggregate bandwidth. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Jacket colors vary: OM1 and OM2 are typically orange, OM3 and OM4 are aqua or violet, and OM5 is lime green.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

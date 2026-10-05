@@ -1,0 +1,81 @@
+---
+title: "LDAP (Lightweight Directory Access Protocol)"
+wordpress_post_id: 11565
+source: BitcoinVersus.tech
+published: 2025-05-18T08:00:00
+modified: 2025-03-29T23:58:22
+live_url: https://bitcoinversus.tech/2025/05/18/ldap-lightweight-directory-access-protocol/
+track: networking/training
+lesson_number: null
+raw_source: ldap-lightweight-directory-access-protocol-11565.gutenberg.html
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none"><strong>LDAP (Lightweight Directory Access Protocol)</strong> is an open, vendor-neutral protocol used to access and maintain distributed directory information services over an Internet Protocol (IP) network. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">LDAP is widely used for storing and managing information about users, groups, computers, and other resources in a centralized database, known as a directory. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=SK8Yw-CiRHk\u0026amp;pp=ygUKbGRhcCBsaW51eA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=SK8Yw-CiRHk&amp;pp=ygUKbGRhcCBsaW51eA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">The protocol allows clients to connect to directory services, perform searches, and authenticate users or devices. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">LDAP is commonly used in enterprise environments to support centralized authentication, enabling users to use a single username and password to access multiple systems, applications, and services.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=FulJWX_2-kA\u0026amp;pp=ygUKbGRhcCBsaW51eA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=FulJWX_2-kA&amp;pp=ygUKbGRhcCBsaW51eA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">LDAP directories are structured hierarchically, similar to a tree, where data is organized in the form of entries. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Each entry consists of attributes and values, and entries are uniquely identified by a distinguished name (DN). </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">LDAP supports operations such as searching for directory entries, adding new entries, modifying existing ones, and deleting entries. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=5rEA7vRV3VE\u0026amp;t=2s\u0026amp;pp=ygUKbGRhcCBsaW51eA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=5rEA7vRV3VE&amp;t=2s&amp;pp=ygUKbGRhcCBsaW51eA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Popular implementations of LDAP include Microsoft's Active Directory, OpenLDAP, and Red Hat Directory Server. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"","style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Due to its flexibility, LDAP is often integrated into systems for identity management, single sign-on (SSO), and access control.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size"><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

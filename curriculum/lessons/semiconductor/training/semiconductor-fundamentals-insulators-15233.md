@@ -1,0 +1,71 @@
+---
+title: "Semiconductor Fundamentals: insulators"
+wordpress_post_id: 15233
+source: BitcoinVersus.tech
+published: 2026-01-03T06:35:00
+modified: 2025-11-22T17:43:22
+live_url: https://bitcoinversus.tech/2026/01/03/semiconductor-fundamentals-insulators/
+track: semiconductor/training
+lesson_number: null
+raw_source: semiconductor-fundamentals-insulators-15233.gutenberg.html
+---
+
+<!-- wp:paragraph -->
+<p>Insulators are materials that resist the flow of <a href="https://bitcoinversus.tech/2025/09/02/power-supply-units-and-how-they-power-your-build-2/">electric curren</a>t because their electrons are tightly bound to their atoms and cannot move freely. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This high resistivity makes them ideal for preventing unwanted current flow and protecting users from electrical hazards. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=qZjDMQbn3a0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=qZjDMQbn3a0
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Common examples include rubber, glass, porcelain, and plastic, all of which are widely used to coat or encase conductive materials. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=oiKwivoR4dY\u0026amp;pp=ygUhU2VtaWNvbmR1Y3RvciBQaHlzaWNzOiBpbnN1bGF0b3Jz","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=oiKwivoR4dY&amp;pp=ygUhU2VtaWNvbmR1Y3RvciBQaHlzaWNzOiBpbnN1bGF0b3Jz
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Insulators are essential in electrical systems because they ensure that current flows only through designated paths, such as wires, and not through unintended routes that could cause short circuits or shocks. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=9HyKNkXW9W0\u0026amp;pp=ygUhU2VtaWNvbmR1Y3RvciBQaHlzaWNzOiBpbnN1bGF0b3Jz0gcJCQsKAYcqIYzv","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=9HyKNkXW9W0&amp;pp=ygUhU2VtaWNvbmR1Y3RvciBQaHlzaWNzOiBpbnN1bGF0b3Jz0gcJCQsKAYcqIYzv
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Their properties also make them useful in high-voltage applications, where preventing leakage of electricity is critical. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=ethnHSgVbHs\u0026amp;t=16s\u0026amp;pp=ygUhU2VtaWNvbmR1Y3RvciBQaHlzaWNzOiBpbnN1bGF0b3Jz","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=ethnHSgVbHs&amp;t=16s&amp;pp=ygUhU2VtaWNvbmR1Y3RvciBQaHlzaWNzOiBpbnN1bGF0b3Jz
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Interestingly, pure water is an insulator, but when impurities such as salts are present, it becomes conductive. Insulators are therefore indispensable in both everyday applications, such as the plastic casing of appliances, and advanced technologies, such as the ceramic insulators used in power transmission lines.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True.&nbsp;</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>If you would like to support to help further secure the integrity of our research initiatives, please donate here: bc1qrved9tfquym6u3age7xhmnkjs2lq8j9aulperagkuhtuk5w5c35ssfpge8</sup></em></strong></p>
+<!-- /wp:paragraph -->

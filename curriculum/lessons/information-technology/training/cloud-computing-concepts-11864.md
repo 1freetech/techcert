@@ -1,0 +1,113 @@
+---
+title: "Cloud Computing Concepts"
+wordpress_post_id: 11864
+source: BitcoinVersus.tech
+published: 2025-04-03T16:15:00
+modified: 2025-04-02T08:30:56
+live_url: https://bitcoinversus.tech/2025/04/03/cloud-computing-concepts/
+track: information-technology/training
+lesson_number: null
+raw_source: cloud-computing-concepts-11864.gutenberg.html
+---
+
+<!-- wp:paragraph {"className":""} -->
+<p>Cloud computing is the delivery of computing services—including servers, storage, databases, networking, software, analytics, and more—over the internet rather than through local infrastructure. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=5x3JvkntkKA\u0026amp;pp=ygUYQ2xvdWQgQ29tcHV0aW5nIENvbmNlcHRz","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=5x3JvkntkKA&amp;pp=ygUYQ2xvdWQgQ29tcHV0aW5nIENvbmNlcHRz
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>It offers organizations flexibility, scalability, and reduced upfront costs by eliminating the need for physical hardware. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>The most common cloud computing types are <strong>public cloud</strong>, <strong>private cloud</strong>, <strong>hybrid cloud</strong>, and <strong>community cloud</strong>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=ZaA0kNm18pE\u0026amp;pp=ygUYQ2xvdWQgQ29tcHV0aW5nIENvbmNlcHRz","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=ZaA0kNm18pE&amp;pp=ygUYQ2xvdWQgQ29tcHV0aW5nIENvbmNlcHRz
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>A <strong>public cloud</strong> is owned and operated by a third-party provider such as Amazon Web Services (AWS), Microsoft Azure, or Google Cloud, where services are delivered over the internet to multiple organizations simultaneously. <strong>Private clouds</strong>, on the other hand, are dedicated to a single organization, providing greater control and security but often requiring more in-house management. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>Hybrid clouds</strong> combine elements of public and private clouds, enabling businesses to keep sensitive data in-house while leveraging public cloud resources for scalability. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>Community clouds</strong> are shared among organizations with common concerns, such as regulatory compliance or security.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Cloud computing services are often delivered using different models: <strong>Infrastructure as a Service (IaaS)</strong>, <strong>Platform as a Service (PaaS)</strong>, and <strong>Software as a Service (SaaS)</strong>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=36zducUX16w\u0026amp;pp=ygUYQ2xvdWQgQ29tcHV0aW5nIENvbmNlcHRz","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=36zducUX16w&amp;pp=ygUYQ2xvdWQgQ29tcHV0aW5nIENvbmNlcHRz
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>IaaS</strong> provides virtualized computing resources such as virtual machines, storage, and networks over the internet, giving users full control over operating systems and applications (e.g., Amazon EC2). </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>PaaS</strong> offers a managed platform for developers to build, test, and deploy applications without worrying about underlying infrastructure (e.g., Google App Engine, Microsoft Azure App Services). </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>SaaS</strong> delivers fully functional applications over the internet, usually on a subscription basis, such as Google Workspace or Microsoft 365. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=N0SYCyS2xZA\u0026amp;pp=ygUYQ2xvdWQgQ29tcHV0aW5nIENvbmNlcHRz","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=N0SYCyS2xZA&amp;pp=ygUYQ2xvdWQgQ29tcHV0aW5nIENvbmNlcHRz
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Each model has its strengths depending on the user’s needs—SaaS is ideal for end-users seeking ready-to-use applications, PaaS benefits developers who want to focus on coding, and IaaS suits system administrators who need flexibility in managing systems.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Other important concepts in cloud computing include <strong>resource pooling</strong>, <strong>rapid elasticity</strong>, <strong>measured service</strong>, and <strong>on-demand self-service</strong>. <strong>Resource pooling</strong> allows cloud providers to serve multiple customers using a multi-tenant model where resources are dynamically assigned as needed. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=M988_fsOSWo\u0026amp;pp=ygUYQ2xvdWQgQ29tcHV0aW5nIENvbmNlcHRz","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=M988_fsOSWo&amp;pp=ygUYQ2xvdWQgQ29tcHV0aW5nIENvbmNlcHRz
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>Rapid elasticity</strong> ensures that resources can scale up or down quickly in response to demand. <strong>Measured service</strong> means that cloud resource usage is monitored, controlled, and reported for both provider and consumer transparency. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>On-demand self-service</strong> allows users to provision computing resources automatically without requiring human interaction with the provider. Cloud computing has become a cornerstone of modern IT infrastructures, supporting everything from data storage and disaster recovery to software delivery and web hosting.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><em>AD:</em><em><br></em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>Use the code BILLBURTON at check out to Get 5% off Bitaxe Mining Products</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>Limited to one use per customer:</em><a href="https://www.youtube.com/redirect?event=comments&amp;redir_token=QUFFLUhqbWhfb3RoWUt0Sno4YnhsV0t2TTNVcjdPb0hCZ3xBQ3Jtc0tsZjYyU2ViN2c5VnNfTWc3MHo2a0E3WDI3OWZuaEx0Ym1jMDNzTG4yUVdLMzdISkE0aDVid0tKaExCNEJUWjN3R2RjYzJvNGstQnFxMzVKb1dHOEYzOTZYZVVsSkczQWNFVlBVNWlPQU5CQzVNVlVoVQ&amp;q=https%3A%2F%2Ftinychiphub.com%2FBILLBURTON"><em> </em></a><a href="https://tinychiphub.com/BILLBURTON"><em>https://tinychiphub.com/BILLBURTON</em><strong><em><sup><br></sup></em></strong><strong><em><sup><br></sup></em></strong></a><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a><br>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->

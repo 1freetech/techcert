@@ -1,0 +1,245 @@
+---
+title: "OSPython.025: Enums and Named Constants — Safer Choices, States, and Status Codes"
+wordpress_post_id: 20897
+source: BitcoinVersus.tech
+published: 2026-10-05T01:06:54
+modified: 2026-10-05T01:14:21
+live_url: https://bitcoinversus.tech/2026/10/05/ospython-025-enums-named-constants-safer-choices-states-status-codes/
+track: python
+lesson_number: 25
+raw_source: 025-ospython-025-enums-named-constants-safer-choices-states-status-codes-20897.gutenberg.html
+---
+
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>Enums make a Python program more explicit by replacing loose strings, magic numbers, and undocumented status values with named members from a controlled set of choices.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>OSPython.025</strong> continues the Open Source Python sequence after <a href="https://bitcoinversus.tech/2026/10/04/ospython-024-dataclasses-basics/"><strong>OSPython.024: Dataclasses Basics</strong></a>. Dataclasses make structured records easier to define. Enums make the allowed states inside those records easier to read, validate, compare, and maintain.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>This lesson also builds on <a href="https://bitcoinversus.tech/2026/10/03/ospython-023-type-hints-annotations-basics/"><strong>OSPython.023: Type Hints and Annotations Basics</strong></a> and <a href="https://bitcoinversus.tech/2026/10/02/ospython-012-classes-objects/"><strong>OSPython.012: Classes and Objects</strong></a>. An enum is a class-based way to name a closed group of related constants.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The enum idea</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>identify a small fixed set of allowed values → give each value a meaningful name → use those names instead of raw strings or numbers → compare enum members directly → make invalid states easier to notice → document the domain model in code</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Why named constants matter</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Programs often contain values that represent states, roles, modes, directions, error codes, or categories. Without enums, those values are often written as plain strings or integers.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>status = "forwarding"
+role = "switch"
+mode = 3</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The problem is that raw values do not clearly explain the full allowed set. They also make spelling mistakes, inconsistent capitalization, and invalid values harder to detect.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Harvard CS50P: classes as the foundation</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=e4fwY9ZsxPw","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=e4fwY9ZsxPw
+</div><figcaption class="wp-element-caption"><em>Harvard CS50P — Object-Oriented Programming. Provides the class and object foundation that Python enums build on.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Create an Enum class</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Python's standard library provides the <code>enum</code> module. The basic class is <code>Enum</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>from enum import Enum, auto
+
+class PortState(Enum):
+    DISABLED = auto()
+    BLOCKING = auto()
+    FORWARDING = auto()</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Each member is accessed from the enum class:</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>state = PortState.FORWARDING
+print(state.name)
+print(state.value)</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The Python documentation describes <code>Enum</code> as a base class for creating enumerated constants. See <a href="https://docs.python.org/3/library/enum.html"><strong>Python documentation — enum</strong></a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use enum members instead of loose strings</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>if state is PortState.FORWARDING:
+    print("traffic can pass")</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The comparison uses the named enum member. This is clearer than comparing against a string such as <code>"forwarding"</code>, because the code points back to the controlled set of allowed states.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use auto when the number itself is not important</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>auto()</code> lets Python assign values automatically. This is useful when the identity of the member matters more than the specific stored value.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class JobStatus(Enum):
+    QUEUED = auto()
+    RUNNING = auto()
+    FAILED = auto()
+    COMPLETE = auto()</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>If external systems depend on specific stored values, assign those values explicitly instead of using <code>auto()</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">mCoding: Enum, IntEnum, and StrEnum</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=AoTBsBBPtOs","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=AoTBsBBPtOs
+</div><figcaption class="wp-element-caption"><em>mCoding — Enums in Python are simple but powerful. Covers Enum, IntEnum, StrEnum, and common enum design choices.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Explicit values</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Some enums should carry specific values because those values are stored, serialized, logged, or exchanged with other systems.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>class DeviceRole(Enum):
+    ROUTER = "router"
+    SWITCH = "switch"
+    FIREWALL = "firewall"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Now the enum member has both a readable member name and a stable value.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>role = DeviceRole.SWITCH
+print(role.name)   # SWITCH
+print(role.value)  # switch</code></pre><!-- /wp:code -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">StrEnum for string-like members</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Python includes <code>StrEnum</code> for enum members that are also strings. This can be useful for API payloads, configuration records, or logs that need readable string values.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>from enum import StrEnum
+
+class DeviceRole(StrEnum):
+    ROUTER = "router"
+    SWITCH = "switch"
+    FIREWALL = "firewall"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p><code>StrEnum</code> should still be used carefully. The purpose is not to hide that the value is a string; the purpose is to keep a controlled set of string values attached to a named type.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">IntEnum for integer-compatible constants</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>IntEnum</code> creates enum members that are also integers. It is useful when code must interoperate with an existing integer protocol, file format, status code, or hardware register model.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>from enum import IntEnum
+
+class ExitCode(IntEnum):
+    OK = 0
+    CONFIG_ERROR = 2
+    NETWORK_ERROR = 3</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Prefer plain <code>Enum</code> when integer compatibility is not required. Integer comparison can make invalid mixing easier if the design is too loose.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Real Python: building enumerations</h2><!-- /wp:heading -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=l8BKMovPJQY","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=l8BKMovPJQY
+</div><figcaption class="wp-element-caption"><em>Real Python — Python's enum: Start Building Enumerations. Introduces the standard-library enum module and practical enum patterns.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Enums with dataclasses</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Enums combine naturally with dataclasses. A dataclass can hold structured fields, while an enum describes which values are legal for a state or category field.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>from dataclasses import dataclass
+from enum import Enum, StrEnum, auto
+
+class PortState(Enum):
+    DISABLED = auto()
+    BLOCKING = auto()
+    FORWARDING = auto()
+
+class DeviceRole(StrEnum):
+    ROUTER = "router"
+    SWITCH = "switch"
+
+@dataclass(frozen=True)
+class Interface:
+    name: str
+    state: PortState
+    role: DeviceRole
+
+eth0 = Interface(
+    name="eth0",
+    state=PortState.FORWARDING,
+    role=DeviceRole.SWITCH,
+)</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>The result is more expressive than storing <code>"forwarding"</code> and <code>"switch"</code> as unrelated plain strings.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Pattern matching with enums</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Enums can make <code>match</code> statements easier to read because each branch names a specific state.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>def action_for(state: PortState) -&gt; str:
+    match state:
+        case PortState.DISABLED:
+            return "do not forward"
+        case PortState.BLOCKING:
+            return "listen only"
+        case PortState.FORWARDING:
+            return "forward traffic"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>This style is clearest when the enum represents a small domain concept with a known set of choices.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Look up members by name or value</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Enum members can be looked up by member name or by value.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>DeviceRole["SWITCH"]
+DeviceRole("switch")</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>These lookups are useful when parsing external input, but the input should still be validated and errors should be handled explicitly.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Avoid comparing only raw values</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The point of an enum is to make the named member meaningful. Comparing only raw values can weaken that benefit.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code># Prefer this:
+if role is DeviceRole.SWITCH:
+    ...
+
+# Usually avoid this inside domain logic:
+if role.value == "switch":
+    ...</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Raw values are most appropriate at system boundaries such as JSON conversion, command-line output, database storage, and network messages.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">When not to use an enum</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>the allowed values change frequently at runtime;</li><li>the values come from a database table that users can modify;</li><li>the set is large and data-driven rather than code-driven;</li><li>simple booleans already express the state clearly;</li><li>the enum would hide rather than clarify the domain.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Enums are strongest when the set of choices is small, meaningful, and stable enough to be part of the program's model.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common mistakes</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>using strings everywhere even though the allowed choices are fixed;</li><li>using <code>IntEnum</code> when plain <code>Enum</code> would be safer;</li><li>depending on <code>auto()</code> values outside the program;</li><li>serializing enum values without documenting the format;</li><li>mixing enum members from different concepts because their raw values happen to match;</li><li>creating giant enums that should be data instead;</li><li>checking <code>.value</code> everywhere instead of comparing members.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice exercise</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Create a network interface model using one dataclass and two enums.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Create a <code>PortState</code> enum with <code>DISABLED</code>, <code>BLOCKING</code>, and <code>FORWARDING</code>.</li><li>Create a <code>DeviceRole</code> <code>StrEnum</code> with <code>ROUTER</code>, <code>SWITCH</code>, and <code>FIREWALL</code>.</li><li>Create a frozen dataclass named <code>Interface</code> with <code>name</code>, <code>state</code>, and <code>role</code>.</li><li>Write a function that returns a short action string based on <code>PortState</code>.</li><li>Parse the string <code>"switch"</code> into a <code>DeviceRole</code>.</li><li>Explain where enum values should be converted to strings for JSON output.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>What problem does an enum solve?</strong><br>It names a controlled set of related constant values so code is clearer and invalid choices are easier to identify.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>When is auto() appropriate?</strong><br>When the enum member identity matters but the specific stored value does not need to be stable for external systems.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>When should explicit values be assigned?</strong><br>When values are stored, serialized, logged, exchanged with another system, or required by a protocol.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>What is StrEnum useful for?</strong><br>It is useful for controlled string-valued members, especially at boundaries where readable string values are required.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Why prefer plain Enum over IntEnum by default?</strong><br>Plain Enum avoids unnecessary integer compatibility and reduces accidental mixing with unrelated integer values.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>How do enums help dataclasses?</strong><br>They make dataclass state fields more explicit by limiting those fields to named domain choices.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Where should raw enum values usually appear?</strong><br>At boundaries such as JSON, databases, command-line output, configuration files, or network messages.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key takeaway</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>Enums turn informal choices into named program structure.</strong> They reduce magic strings and unexplained numbers, work naturally with dataclasses and type hints, and make states, roles, modes, and status codes easier to read and maintain.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Engineering note: Enum design should preserve stable external formats only when the values are part of a documented interface. Internal enum values may be implementation details, but serialized enum values become compatibility commitments.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Display note: this lesson uses standard Gutenberg paragraphs, headings, lists, code, and media embeds only. No decorative text-box or callout-box layout is used.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech advertisement.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong><em>Editor's Note:</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

@@ -1,0 +1,59 @@
+---
+title: "HTTPS vs HTTP"
+wordpress_post_id: 12934
+source: BitcoinVersus.tech
+published: 2025-05-01T19:11:00
+modified: 2025-12-20T02:45:30
+live_url: https://bitcoinversus.tech/2025/05/01/https-vs-http/
+track: networking/training
+lesson_number: null
+raw_source: https-vs-http-12934.gutenberg.html
+---
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>HTTP (HyperText Transfer Protocol)</strong> is the foundation of data communication on the World Wide Web, enabling browsers and servers to exchange information like webpages, images, and files. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://youtu.be/hExRDVZHhig?si=KwyOoeEKcFsxzar8","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-4-3 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-4-3 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://youtu.be/hExRDVZHhig?si=KwyOoeEKcFsxzar8
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>HTTP operates on <strong>TCP port 80</strong> and transmits data in <strong>plaintext</strong>, making it vulnerable to interception, eavesdropping, and man-in-the-middle attacks. While still used in some internal or legacy systems, HTTP is no longer considered safe for transmitting login credentials, form data, or other sensitive information over the internet.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong><a href="https://bitcoinversus.tech/2025/03/08/understanding-network-ports-and-their-importance-in-the-it-industry/">HTTPS (HyperText Transfer Protocol Secure</a>)</strong> builds on HTTP by encrypting the communication using <strong>SSL/TLS protocols</strong>, operating over <strong>TCP port 443</strong>. HTTPS ensures <strong>data confidentiality, integrity, and authentication</strong> between the client and server. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>It uses <strong>digital certificates</strong> issued by Certificate Authorities (CAs) to validate website identities and establish trust. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Browsers typically display a padlock icon in the address bar to indicate a secure HTTPS connection. In modern networking, HTTPS is the standard for any website handling user data, transactions, or authentication processes. Understanding the security advantages and port usage of HTTP vs HTTPS is essential when configuring firewalls, web servers, or diagnosing access issues.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l","type":"rich","providerNameSlug":"bluesky-social"} -->
+<figure class="wp-block-embed is-type-rich is-provider-bluesky-social wp-block-embed-bluesky-social"><div class="wp-block-embed__wrapper">
+https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,79 @@
+---
+title: "Power Supply Types, Ratings, and Features"
+wordpress_post_id: 11936
+source: BitcoinVersus.tech
+published: 2025-04-09T16:20:00
+modified: 2025-04-03T22:26:33
+live_url: https://bitcoinversus.tech/2025/04/09/power-supply-types-ratings-and-features/
+track: information-technology/training
+lesson_number: null
+raw_source: power-supply-types-ratings-and-features-11936.gutenberg.html
+---
+
+<!-- wp:paragraph {"className":""} -->
+<p><a href="https://bitcoinversus.tech/2024/03/01/computer-muscle-understanding-the-power-supply-unit/">Power supplies</a> are essential hardware components responsible for converting alternating current (AC) from a wall outlet into direct current (DC) usable by internal computer components. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>The most common type is the <strong>ATX power supply</strong>, used in desktops, which typically comes in standard wattage ratings like <strong>400W, 500W, 750W</strong>, and up. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Power supplies vary in size, efficiency, connector types, and modularity. Key specifications include <strong>wattage rating</strong> (total available power), <strong>efficiency certification</strong> (such as 80 PLUS Bronze, Gold, or Platinum), and <strong>voltage rails</strong> (such as +12V, +5V, +3.3V). A good rule of thumb is to select a PSU that exceeds the system’s maximum load to allow room for expansion and long-term reliability.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=5rRM_1Ajnz4\u0026amp;pp=ygU5My43IFN1bW1hcml6ZSBwb3dlciBzdXBwbHkgdHlwZXMgYW5kIGZlYXR1cmVzIChDb21wVElBIEEr","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=5rRM_1Ajnz4&amp;pp=ygU5My43IFN1bW1hcml6ZSBwb3dlciBzdXBwbHkgdHlwZXMgYW5kIGZlYXR1cmVzIChDb21wVElBIEEr
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Power supplies come in three major configurations: <strong>non-modular</strong>, <strong>semi-modular</strong>, and <strong>fully modular</strong>. A <strong>non-modular PSU</strong> has all cables permanently attached, which can lead to cable clutter and limited airflow. <strong>Semi-modular</strong> power supplies have essential cables (like the 24-pin motherboard and 8-pin CPU connectors) hardwired, while others are detachable. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong>Fully modular</strong> units offer maximum flexibility, allowing technicians to connect only the cables needed, reducing clutter and improving airflow and maintenance. Connectors vary by component and include <strong>24-pin ATX</strong> for the motherboard, <strong>4/8-pin EPS</strong> for the CPU, <strong>6/8-pin PCIe</strong> for graphics cards, <strong>SATA power</strong> for drives, and <strong>Molex</strong> for legacy components. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>The presence of the correct connectors and cable lengths is vital when building or upgrading a PC.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Technicians must also consider <strong>form factor compatibility</strong>—a standard ATX PSU won’t fit in an SFF (Small Form Factor) case without adjustments or downsizing to an <strong>SFX PSU</strong>. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=peM6n6rSKwk\u0026amp;pp=ygU5My43IFN1bW1hcml6ZSBwb3dlciBzdXBwbHkgdHlwZXMgYW5kIGZlYXR1cmVzIChDb21wVElBIEEr","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=peM6n6rSKwk&amp;pp=ygU5My43IFN1bW1hcml6ZSBwb3dlciBzdXBwbHkgdHlwZXMgYW5kIGZlYXR1cmVzIChDb21wVElBIEEr
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>The PSU’s <strong>efficiency rating</strong> impacts both power consumption and heat generation; higher ratings indicate better energy use and lower operating costs over time. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Additionally, protection features like <strong>over-voltage protection (OVP)</strong>, <strong>under-voltage protection (UVP)</strong>, <strong>short-circuit protection (SCP)</strong>, and <strong>over-power protection (OPP)</strong> safeguard internal components from electrical damage. When troubleshooting, symptoms of a failing PSU include system instability, random shutdowns, no POST, and burning smells. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><em>AD:</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>Use the code BILLBURTON at check out to Get 5% off Bitaxe Mining Products</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>Limited to one use per customer:</em><a href="https://www.youtube.com/redirect?event=comments&amp;redir_token=QUFFLUhqbWhfb3RoWUt0Sno4YnhsV0t2TTNVcjdPb0hCZ3xBQ3Jtc0tsZjYyU2ViN2c5VnNfTWc3MHo2a0E3WDI3OWZuaEx0Ym1jMDNzTG4yUVdLMzdISkE0aDVid0tKaExCNEJUWjN3R2RjYzJvNGstQnFxMzVKb1dHOEYzOTZYZVVsSkczQWNFVlBVNWlPQU5CQzVNVlVoVQ&amp;q=https%3A%2F%2Ftinychiphub.com%2FBILLBURTON"><em> </em></a><a href="https://tinychiphub.com/BILLBURTON"><em>https://tinychiphub.com/BILLBURTON</em><strong><em><sup><br></sup></em></strong><strong><em><sup><br></sup></em></strong></a><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a><br>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p><strong><em><sup>Need a 3 point template for briefing. Be as short as possible. Be sure to title it.</sup></em></strong></p>
+<!-- /wp:paragraph -->

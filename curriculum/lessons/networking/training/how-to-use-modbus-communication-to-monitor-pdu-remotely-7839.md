@@ -1,0 +1,51 @@
+---
+title: "How to Use Modbus Communication To Monitor PDU Remotely"
+wordpress_post_id: 7839
+source: BitcoinVersus.tech
+published: 2024-11-01T09:59:13
+modified: 2024-11-01T09:59:13
+live_url: https://bitcoinversus.tech/2024/11/01/how-to-use-modbus-communication-to-monitor-pdu-remotely/
+track: networking/training
+lesson_number: null
+raw_source: how-to-use-modbus-communication-to-monitor-pdu-remotely-7839.gutenberg.html
+---
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">To remotely monitor and control individual sockets on a Power Distribution Unit (PDU) using Modbus communication, Modbus-TCP can be employed to access and modify specific registers over a network. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":7846,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/11/screenshot-2024-11-01-093302.png?w=699" alt="" class="wp-image-7846" /><figcaption class="wp-element-caption">Example of modbus communication setup</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Each socket (or outlet) on the PDU is associated with unique register addresses that allow users to read the status (on/off) or control the power state. For instance, in the provided setup, outlet 1 can be managed by reading or writing to register address <code>5001</code>, outlet 2 by address <code>5002</code>, and so on.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">To query the current status of an outlet, the <code>Read Holding Registers</code> (RH) command is used, which retrieves the value stored in the designated register. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":7848,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/11/modbus2.jpg?w=768" alt="" class="wp-image-7848" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This process allows operators to confirm if a socket is active or inactive. Conversely, to change the power state, the <code>Write Single Register</code> (WH) command can be issued, with values such as <code>1</code> to turn an outlet on and <code>0</code> to turn it off. <br><br>For instance, running <code>modbus-cli --unit-id 11 --target rtuovertcp://&lt;PDU_IP&gt;:502 wh:uint16:&lt;register_address&gt; &lt;value&gt;</code> sends a command to toggle the specified outlet’s power state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":7844,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.tech/wp-content/uploads/2024/11/modbus1.jpg?w=768" alt="" class="wp-image-7844" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">When managing multiple outlets, a looping command enables systematic querying of consecutive register addresses. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">This loop approach is helpful for monitoring several outlets in sequence, reducing the need for manual entry for each address. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"style":{"typography":{"textTransform":"none"}}} -->
+<p style="text-transform:none">Overall, Modbus provides a straightforward protocol for remote PDU control, allowing users to efficiently manage power to connected devices in an automated and scalable manner.</p>
+<!-- /wp:paragraph -->

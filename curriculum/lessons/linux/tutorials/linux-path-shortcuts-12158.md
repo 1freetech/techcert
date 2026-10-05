@@ -1,0 +1,83 @@
+---
+title: "Linux Path Shortcuts"
+wordpress_post_id: 12158
+source: BitcoinVersus.tech
+published: 2025-06-10T08:00:00
+modified: 2025-04-07T09:18:15
+live_url: https://bitcoinversus.tech/2025/06/10/linux-path-shortcuts/
+track: linux/tutorials
+lesson_number: null
+raw_source: linux-path-shortcuts-12158.gutenberg.html
+---
+
+<!-- wp:paragraph {"className":""} -->
+<p>In <a href="https://bitcoinversus.tech/2025/04/03/linux-firewall-configuration-and-setup/">Linux</a>, path shortcuts help users move through the file system quickly and efficiently. These symbols are used in the terminal to reference <a href="https://bitcoinversus.tech/2025/03/15/overview-of-linux-file-system-hierarchy-and-home-directories/">common directory locations</a> without typing the full path.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=yW2IkuvM5iA\u0026amp;pp=ygUQbGludXggfiBzaG9ydGN1dA%3D%3D","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=yW2IkuvM5iA&amp;pp=ygUQbGludXggfiBzaG9ydGN1dA%3D%3D
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:embed {"url":"https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l","type":"rich","providerNameSlug":"bluesky-social"} -->
+<figure class="wp-block-embed is-type-rich is-provider-bluesky-social wp-block-embed-bluesky-social"><div class="wp-block-embed__wrapper">
+https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><strong><code>~</code> (Tilde):</strong> Refers to the current user’s home directory. For example, <code>cd ~</code> will take you to <code>/home/username</code>.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong><code>..</code> (Double Dot):</strong> Moves up one directory level. So if you’re in <code>/home/username/Documents</code> and type <code>cd ..</code>, you'll go to <code>/home/username</code>.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong><code>.</code> (Single Dot):</strong> Refers to the current directory. This is useful in scripts or when running executables from the current folder, like <code>./script.sh</code>.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong><code>-</code> (Dash):</strong> Refers to the <strong>previous working directory</strong>. Typing <code>cd -</code> switches you back to where you were last.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong><code>/</code> (Forward Slash):</strong> Represents the <strong>root directory</strong> — the top level of the Linux filesystem. It’s also used to separate directory levels, such as <code>/etc/network</code>.</li>
+<!-- /wp:list-item -->
+
+<!-- wp:list-item -->
+<li><strong><code>~username</code>:</strong> Refers to another user’s home directory, like <code>~alex</code> expands to <code>/home/alex</code> (if you have permission to view it).</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>These shortcuts are essential for navigation, scripting, and system administration. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":""} -->
+<p>Mastering them helps Linux+ candidates work faster and with more precision across different directories.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l","type":"rich","providerNameSlug":"bluesky-social"} -->
+<figure class="wp-block-embed is-type-rich is-provider-bluesky-social wp-block-embed-bluesky-social"><div class="wp-block-embed__wrapper">
+https://bsky.app/profile/bitcoinversus.bsky.social/post/3lfxg2mzcs22l
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/"><strong><em><sup>BitcoinVersus.Tech</sup></em></strong></a><strong><em><sup> Editor's Note:</sup></em></strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please </sup></em></strong><a href="https://www.gofundme.com/f/support-bitcoin-mining-data-centers-for-everyone"><strong><em><sup>donate here</sup></em></strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->

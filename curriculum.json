@@ -62,7 +62,20 @@
       "name": "Open Source C++",
       "acronym": "OSC++",
       "title_format": "OSC++.{number}: {topic}",
-      "status": "active"
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 20,
+        "title": "OSC++.020: Virtual Destructors and Polymorphic Cleanup",
+        "wordpress_post_id": 20775,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/oscpp-020-virtual-destructors-polymorphic-cleanup/",
+        "archive_path": "archive/2026/10/oscpp-020-virtual-destructors-polymorphic-cleanup.md",
+        "verified_repositories": [
+          "1freetech/Bitcoinversus.tech",
+          "1freetech/techcert",
+          "1freetech/opencert.tech"
+        ]
+      },
+      "next_lesson_number": 21
     },
     {
       "subject": "semiconductor_technician",

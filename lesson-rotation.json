@@ -1,24 +1,24 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-05T04:13:21Z",
+  "updated_at": "2026-10-05T04:27:22Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": ["networking","python","linux","windows","electrical_engineering","electrical_technician","cpp","semiconductor_technician","semiconductor_engineer","robotics_technician","robotics_engineer","data_center_technician","data_center_engineer","fiber_optics_technician","fiber_optics_engineer","firmware_technician","firmware_engineer","history_money_technology_bitcoin"],
   "last_completed": {
-    "subject": "firmware_technician",
+    "subject": "firmware_engineer",
     "lesson_number": 2,
-    "title": "OSFTC.002: Serial Console and Boot Logs — UART, Baud Rate, Pinouts, Capture, and Recovery",
-    "wordpress_post_id": 20858,
-    "live_url": "https://bitcoinversus.tech/2026/10/05/osftc-002-serial-console-boot-logs-uart-baud-rate-pinouts-capture-recovery/",
-    "archive_path": "archive/2026/10/osftc-002-serial-console-boot-logs-uart-baud-rate-pinouts-capture-recovery.md",
+    "title": "OSFEC.002: Real-Time Firmware Scheduling — Superloops, RTOS Tasks, Priorities, Preemption, and Timing",
+    "wordpress_post_id": 20874,
+    "live_url": "https://bitcoinversus.tech/2026/10/05/osfec-002-real-time-firmware-scheduling-superloops-rtos-tasks-priorities-preemption-timing/",
+    "archive_path": "archive/2026/10/osfec-002-real-time-firmware-scheduling-superloops-rtos-tasks-priorities-preemption-timing.md",
     "verified_repositories": ["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]
   },
   "next": {
-    "subject": "firmware_engineer",
-    "lesson_number": 2,
-    "title_format": "OSFEC.002: {topic}",
+    "subject": "history_money_technology_bitcoin",
+    "lesson_number": 3,
+    "title_format": "OSHistory.003: {topic}",
     "track_start": false,
-    "previous_lesson": "OSFEC.001"
+    "previous_lesson": "OSHistory.002"
   },
   "new_track_starts": {
     "semiconductor_technician": {"acronym":"OSSTC","lesson_number":3,"title_format":"OSSTC.003: {topic}"},
@@ -30,8 +30,8 @@
     "fiber_optics_technician": {"acronym":"OSFOTC","lesson_number":3,"title_format":"OSFOTC.003: {topic}"},
     "fiber_optics_engineer": {"acronym":"OSFOEC","lesson_number":3,"title_format":"OSFOEC.003: {topic}"},
     "firmware_technician": {"acronym":"OSFTC","lesson_number":3,"title_format":"OSFTC.003: {topic}"},
-    "firmware_engineer": {"acronym":"OSFEC","lesson_number":2,"title_format":"OSFEC.002: {topic}"},
+    "firmware_engineer": {"acronym":"OSFEC","lesson_number":3,"title_format":"OSFEC.003: {topic}"},
     "history_money_technology_bitcoin": {"acronym":"OSHistory","lesson_number":3,"title_format":"OSHistory.003: {topic}"}
   },
-  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.024 is published and the Python track next lesson is OSPython.025. Linux Command #41 is published and the Linux track next lesson is Linux Command #42. Windows Command #31 – net config is published and the Windows track next lesson is Windows Command #32. OSEEC.011 is published and the Electrical Engineering track next lesson is OSEEC.012. OSETC.026 is published and the Electrical Technician track next lesson is OSETC.027. OSC++.020 is published and the C++ track next lesson is OSC++.021. OSSTC.002 is published and the Semiconductor Technician track next lesson is OSSTC.003. OSSEC.002 is published and the Semiconductor Engineer track next lesson is OSSEC.003. OSRTC.002 is published and the Robotics Technician track next lesson is OSRTC.003. OSREC.002 is published and the Robotics Engineer track next lesson is OSREC.003. OSDCTC.002 is published and the Data Center Technician track next lesson is OSDCTC.003. OSDCEC.002 is published and the Data Center Engineer track next lesson is OSDCEC.003. OSFOTC.002 is published and the Fiber Optics Technician track next lesson is OSFOTC.003. OSFOEC.002 is published and the Fiber Optics Engineer track next lesson is OSFOEC.003. OSFTC.002 is published and the Firmware Technician track next lesson is OSFTC.003. The global rotation now advances to OSFEC.002. OSFEC.001 is published and the Firmware Engineer track next lesson is OSFEC.002. OSHistory.002 is published and the History track next lesson is OSHistory.003. OSNTC.014 is published and the Networking technician track next lesson is OSNTC.015."
+  "numbering_note": "Existing Python .020 numbering conflict remains preserved. OSPython.024 is published and the Python track next lesson is OSPython.025. Linux Command #41 is published and the Linux track next lesson is Linux Command #42. Windows Command #31 – net config is published and the Windows track next lesson is Windows Command #32. OSEEC.011 is published and the Electrical Engineering track next lesson is OSEEC.012. OSETC.026 is published and the Electrical Technician track next lesson is OSETC.027. OSC++.020 is published and the C++ track next lesson is OSC++.021. OSSTC.002 is published and the Semiconductor Technician track next lesson is OSSTC.003. OSSEC.002 is published and the Semiconductor Engineer track next lesson is OSSEC.003. OSRTC.002 is published and the Robotics Technician track next lesson is OSRTC.003. OSREC.002 is published and the Robotics Engineer track next lesson is OSREC.003. OSDCTC.002 is published and the Data Center Technician track next lesson is OSDCTC.003. OSDCEC.002 is published and the Data Center Engineer track next lesson is OSDCEC.003. OSFOTC.002 is published and the Fiber Optics Technician track next lesson is OSFOTC.003. OSFOEC.002 is published and the Fiber Optics Engineer track next lesson is OSFOEC.003. OSFTC.002 is published and the Firmware Technician track next lesson is OSFTC.003. OSFEC.002 is published and the Firmware Engineer track next lesson is OSFEC.003. The global rotation now advances to OSHistory.003. OSHistory.002 is published and the History track next lesson is OSHistory.003. OSNTC.014 is published and the Networking technician track next lesson is OSNTC.015."
 }

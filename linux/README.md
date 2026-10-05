@@ -2,7 +2,7 @@
 
 **Track:** Linux OS command line  
 **Status:** active  
-**Current next lesson:** `Linux Command #42`
+**Current next lesson:** `Linux Command #43`
 
 The Linux command track progresses through filesystem work, system inspection, storage, networking, identity, users, groups, permissions, services, and troubleshooting.
 
@@ -16,6 +16,7 @@ The Linux command track progresses through filesystem work, system inspection, s
 - `Linux Command #39 – usermod`
 - `Linux Command #40 – groupadd`
 - [Linux Command #41 – groupdel](command-41-groupdel.md) — WordPress post 20640.
+- [Linux Command #42 – groupmod](../archive/2026/10/linux-command-42-groupmod.md) — WordPress post 20910.
 
 ## Publishing rules
 
@@ -27,4 +28,4 @@ The Linux command track progresses through filesystem work, system inspection, s
 - Link earlier Linux lessons when they materially support the topic.
 - Archive the exact final Gutenberg source to BitcoinVersus, TechCert, and Open CERT.
 
-The next Linux lesson is `Linux Command #42`.
+The next Linux lesson is `Linux Command #43`.

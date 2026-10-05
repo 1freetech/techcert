@@ -60,11 +60,11 @@ sudo find /srv -gid "$old_gid" -print</code></pre><!-- /wp:code -->
 
 <!-- wp:paragraph --><p>Duplicate GIDs can make ownership interpretation ambiguous because multiple group names resolve to the same numeric identity. They should be used only when the identity design explicitly requires them.</p><!-- /wp:paragraph -->
 
-<!-- wp:heading --><h2 class="wp-block-heading">Video 2: Linux group administration</h2><!-- /wp:heading -->
+<!-- wp:heading --><h2 class="wp-block-heading">Video 2: shell permissions and administrative commands</h2><!-- /wp:heading -->
 
-<!-- wp:embed {"url":"https://www.youtube.com/watch?v=hfbmWvtVhsY","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
-https://www.youtube.com/watch?v=hfbmWvtVhsY
-</div><figcaption class="wp-element-caption"><em>ARN Tech Trainings — groupadd, groupmod, GID changes, group renaming, and group administration.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Z56Jmr9Z34Q","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Z56Jmr9Z34Q
+</div><figcaption class="wp-element-caption"><em>MIT Missing Semester — shell commands, ownership permissions, manuals, and sudo provide the foundation for group administration.</em></figcaption></figure><!-- /wp:embed -->
 
 <!-- wp:heading --><h2 class="wp-block-heading">6. Primary-group relationships must be checked</h2><!-- /wp:heading -->
 
@@ -132,11 +132,6 @@ https://www.youtube.com/watch?v=-OzmiIPOTxI
 
 <!-- wp:paragraph --><p><strong><code>groupmod</code> changes an identity that other parts of Linux may already depend on.</strong> Renaming a group is usually less disruptive than changing its GID, but both operations require verification of users, files, services, and identity sources before the change is considered complete.</p><!-- /wp:paragraph -->
 
-<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
-<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
-https://twitter.com/1BitcoinVersus/status/1937006164555993338
-</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech advertisement.</em></figcaption></figure><!-- /wp:embed -->
-<!-- wp:paragraph --><p><strong><em>Editor's Note:</em></strong></p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p><strong><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</em></strong></p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Technical references</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><a href="https://manpages.debian.org/trixie/passwd/groupmod.8.en.html">Debian groupmod manual</a> documents group-name and GID changes. <a href="https://missing.csail.mit.edu/2020/course-shell/">MIT shell lecture notes</a> provide supporting permission and command examples.</p><!-- /wp:paragraph -->

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-05T06:38:00Z",
+  "updated_at": "2026-10-05T15:16:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "electrical_engineering",
-    "lesson_number": 12,
-    "title": "OSEEC.012: Short-Circuit and Fault Analysis — Thevenin Equivalents, Symmetrical Components, and Fault Current",
-    "wordpress_post_id": 20960,
-    "live_url": "https://bitcoinversus.tech/2026/10/05/oseec-012-short-circuit-fault-analysis-thevenin-equivalents-symmetrical-components-fault-current/",
-    "archive_path": "archive/2026/10/oseec-012-short-circuit-fault-analysis-thevenin-equivalents-symmetrical-components-fault-current.md",
+    "subject": "electrical_technician",
+    "lesson_number": 27,
+    "title": "OSETC.027: 4–20 mA Current Loops and Analog Instrument Signals Basics",
+    "wordpress_post_id": 20970,
+    "live_url": "https://bitcoinversus.tech/2026/10/05/osetc-027-4-20ma-current-loops-analog-instrument-signals-basics/",
+    "archive_path": "archive/2026/10/osetc-027-4-20ma-current-loops-analog-instrument-signals-basics.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "electrical_technician",
-    "lesson_number": 27,
-    "title_format": "OSETC.027: {topic}",
+    "subject": "cpp",
+    "lesson_number": 21,
+    "title_format": "OSC++.021: {topic}",
     "track_start": false,
-    "previous_lesson": "OSETC.026"
+    "previous_lesson": "OSC++.020"
   },
   "new_track_starts": {
     "information_technology": {"acronym": "OSITC", "lesson_number": 1, "title_format": "OSITC.001: {topic}"},
@@ -58,6 +58,6 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 3, "title_format": "OSFEC.003: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 4, "title_format": "OSHistory.004: {topic}"}
   },
-  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.026 is published; next OSETC.027. OSC++.020 is published; next OSC++.021. OSSTC.002, OSSEC.002, OSRTC.002, OSREC.002, OSDCTC.002, OSDCEC.002, OSFOTC.002, OSFOEC.002, OSFTC.002, and OSFEC.002 are published; each corresponding track next lesson is .003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSETC.027 after verified OSEEC.012.",
+  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.020 is published; next OSC++.021. OSSTC.002, OSSEC.002, OSRTC.002, OSREC.002, OSDCTC.002, OSDCEC.002, OSFOTC.002, OSFOEC.002, OSFTC.002, and OSFEC.002 are published; each corresponding track next lesson is .003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSC++.021 after verified OSETC.027.",
   "verification_hold": null
 }

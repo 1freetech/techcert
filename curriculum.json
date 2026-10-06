@@ -199,14 +199,15 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 2,
-        "title": "OSREC.002: Robot Jacobians — Velocity Kinematics, Singularities, and Differential Motion",
-        "wordpress_post_id": 20807,
-        "live_url": "https://bitcoinversus.tech/2026/10/04/osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion/",
-        "archive_path": "archive/2026/10/osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion.md",
-        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+        "lesson_number": 3,
+        "title": "OSREC.003: Inverse Kinematics — Analytical Solutions, Numerical Solvers, Pseudoinverses, and Convergence",
+        "wordpress_post_id": 21027,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/osrec-003-inverse-kinematics-analytical-solutions-numerical-solvers-pseudoinverses-convergence/",
+        "archive_path": "archive/2026/10/osrec-003-inverse-kinematics-analytical-solutions-numerical-solvers-pseudoinverses-convergence.md",
+        "source_match_verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"],
+        "verification_status": "verified"
       },
-      "next_lesson_number": 3
+      "next_lesson_number": 4
     },
     {
       "subject": "data_center_technician",

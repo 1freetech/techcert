@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-06T12:55:00Z",
+  "updated_at": "2026-10-06T12:56:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -27,10 +27,10 @@
   "last_completed": {
     "subject": "cpp",
     "lesson_number": 22,
-    "title": "OSC++.022: Move Semantics and Rvalue References — std::move, Move Construction, and Move Assignment",
-    "wordpress_post_id": 21264,
-    "live_url": "https://bitcoinversus.tech/2026/10/06/oscpp-022-move-semantics-rvalue-references-std-move-construction-assignment/",
-    "archive_path": "archive/2026/10/oscpp-022-move-semantics-rvalue-references-std-move-construction-assignment.md",
+    "title": "OSC++.022: Move Semantics — Rvalue References, std::move, Move Constructors, and Move Assignment",
+    "wordpress_post_id": 21261,
+    "live_url": "https://bitcoinversus.tech/2026/10/06/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment/",
+    "archive_path": "archive/2026/10/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",

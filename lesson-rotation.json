@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-06T13:26:40Z",
+  "updated_at": "2026-10-06T19:17:31Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "semiconductor_engineer",
+    "subject": "robotics_technician",
     "lesson_number": 4,
-    "title": "OSSEC.004: Diode Current–Voltage Physics — Minority-Carrier Injection, Shockley Equation, Ideality Factor, and Temperature",
-    "wordpress_post_id": 21276,
-    "live_url": "https://bitcoinversus.tech/2026/10/06/ossec-004-diode-current-voltage-physics-minority-carrier-injection-shockley-equation-ideality-factor-temperature/",
-    "archive_path": "archive/2026/10/ossec-004-diode-current-voltage-physics-minority-carrier-injection-shockley-equation-ideality-factor-temperature.md",
+    "title": "OSRTC.004: End Effectors and Tool Center Point Setup — Grippers, TCP Calibration, Payload, I/O, and Safe Verification",
+    "wordpress_post_id": 21295,
+    "live_url": "https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/",
+    "archive_path": "archive/2026/10/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,16 +38,16 @@
     ]
   },
   "next": {
-    "subject": "robotics_technician",
+    "subject": "robotics_engineer",
     "lesson_number": 4,
-    "title_format": "OSRTC.004: {topic}",
+    "title_format": "OSREC.004: {topic}",
     "track_start": false,
-    "previous_lesson": "OSRTC.003"
+    "previous_lesson": "OSREC.003"
   },
   "new_track_starts": {
     "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 5, "title_format": "OSSTC.005: {topic}"},
     "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 5, "title_format": "OSSEC.005: {topic}"},
-    "robotics_technician": {"acronym": "OSRTC", "lesson_number": 4, "title_format": "OSRTC.004: {topic}"},
+    "robotics_technician": {"acronym": "OSRTC", "lesson_number": 5, "title_format": "OSRTC.005: {topic}"},
     "robotics_engineer": {"acronym": "OSREC", "lesson_number": 4, "title_format": "OSREC.004: {topic}"},
     "data_center_technician": {"acronym": "OSDCTC", "lesson_number": 4, "title_format": "OSDCTC.004: {topic}"},
     "data_center_engineer": {"acronym": "OSDCEC", "lesson_number": 4, "title_format": "OSDCEC.004: {topic}"},
@@ -57,5 +57,5 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 4, "title_format": "OSFEC.004: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 5, "title_format": "OSHistory.005: {topic}"}
   },
-  "numbering_note": "OSPython.026 is published; next OSPython.027. Linux Command #43 is published; next Linux Command #44. Windows Command #33 is published; next Windows Command #34. OSITC.001 is published; next OSITC.002. OSEEC.013 is published; next OSEEC.014. OSETC.028 is published; next OSETC.029. OSC++.022 is published; next OSC++.023. OSSTC.004 is published; next OSSTC.005. OSSEC.004 is published; next OSSEC.005. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.003 is published; next OSFEC.004. OSHistory.004 is published; next OSHistory.005. OSNTC.016 is published; next OSNTC.017. The global rotation advances to OSRTC.004 after verified OSSEC.004."
+  "numbering_note": "OSPython.026 is published; next OSPython.027. Linux Command #43 is published; next Linux Command #44. Windows Command #33 is published; next Windows Command #34. OSITC.001 is published; next OSITC.002. OSEEC.013 is published; next OSEEC.014. OSETC.028 is published; next OSETC.029. OSC++.022 is published; next OSC++.023. OSSTC.004 is published; next OSSTC.005. OSSEC.004 is published; next OSSEC.005. OSRTC.004 is published; next OSRTC.005. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.003 is published; next OSFEC.004. OSHistory.004 is published; next OSHistory.005. OSNTC.016 is published; next OSNTC.017. The global rotation advances to OSREC.004 after verified OSRTC.004."
 }

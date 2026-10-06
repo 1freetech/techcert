@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-06T05:33:00Z",
+  "updated_at": "2026-10-06T03:46:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "history_money_technology_bitcoin",
-    "lesson_number": 4,
-    "title": "OSHistory.004: Early Banking and Ledger Money — Deposits, Banknotes, Checks, and Reserves",
-    "wordpress_post_id": 21162,
-    "live_url": "https://bitcoinversus.tech/2026/10/05/oshistory-004-early-banking-ledger-money-deposits-banknotes-checks-reserves/",
-    "archive_path": "archive/2026/10/oshistory-004-early-banking-ledger-money-deposits-banknotes-checks-reserves.md",
+    "subject": "networking",
+    "lesson_number": 16,
+    "title": "OSNTC.016: IPv6 Addressing and Neighbor Discovery — Prefixes, SLAAC, NDP, Routing, and Transition",
+    "wordpress_post_id": 21169,
+    "live_url": "https://bitcoinversus.tech/2026/10/05/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition/",
+    "archive_path": "archive/2026/10/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "networking",
-    "lesson_number": 16,
-    "title_format": "OSNTC.016: {topic}",
+    "subject": "python",
+    "lesson_number": 26,
+    "title_format": "OSPython.026: {topic}",
     "track_start": false,
-    "previous_lesson": "OSNTC.015"
+    "previous_lesson": "OSPython.025"
   },
   "new_track_starts": {
     "information_technology": {
@@ -106,5 +106,5 @@
       "title_format": "OSHistory.005: {topic}"
     }
   },
-  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.003 is published; next OSFEC.004. OSHistory.004 is published; next OSHistory.005. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSNTC.016 after verified OSHistory.004."
+  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.003 is published; next OSFEC.004. OSHistory.004 is published; next OSHistory.005. OSNTC.016 is published; next OSNTC.017. The global rotation advances to OSPython.026 after verified OSNTC.016."
 }

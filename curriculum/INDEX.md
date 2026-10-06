@@ -2,7 +2,7 @@
 
 OpenCert is the free curriculum. TechCert is the backup repository. Both preserve the same captured published sources.
 
-**544 published lessons, commands, tutorials and technical training modules**, organized into 37 track folders. Exact saved Gutenberg bodies accompany Markdown copies. Original titles and post IDs are preserved.
+**545 published lessons, commands, tutorials and technical training modules**, organized into 37 track folders. Exact saved Gutenberg bodies accompany Markdown copies. Original titles and post IDs are preserved.
 
 | Track | Lessons | Index |
 | --- | ---: | --- |
@@ -22,7 +22,7 @@ OpenCert is the free curriculum. TechCert is the backup repository. Both preserv
 | firmware/engineer | 2 | [Browse](lessons/firmware/engineer/README.md) |
 | firmware/technician | 2 | [Browse](lessons/firmware/technician/README.md) |
 | firmware/tutorials | 15 | [Browse](lessons/firmware/tutorials/README.md) |
-| history-money-technology-bitcoin | 3 | [Browse](lessons/history-money-technology-bitcoin/README.md) |
+| history-money-technology-bitcoin | 4 | [Browse](lessons/history-money-technology-bitcoin/README.md) |
 | information-technology/training | 59 | [Browse](lessons/information-technology/training/README.md) |
 | javascript | 1 | [Browse](lessons/javascript/README.md) |
 | linux/commands | 42 | [Browse](lessons/linux/commands/README.md) |
@@ -62,7 +62,7 @@ No lesson is fabricated for an absent published number.
 
 ## Audit scope
 
-The captured inventory contains 2648 published WordPress posts. 544 educational sources were selected: certificate lessons, commands, tutorials, technical foundations, configuration guides, troubleshooting and repair procedures. News, sports, opinion and employment posts are outside this curriculum archive.
+The captured inventory contains 2648 published WordPress posts. 545 educational sources were selected: certificate lessons, commands, tutorials, technical foundations, configuration guides, troubleshooting and repair procedures. News, sports, opinion and employment posts are outside this curriculum archive.
 
 [Source inventory](source-inventory.json), [coverage manifest](coverage-manifest.json), [asset index](assets/README.md) and [asset manifest](assets/manifest.json) record the source and file coverage. 731 original associated image/file binaries are copied. YouTube/social embeds remain remote references. Playback is outside this archive audit. Archive maintenance does not advance rotation.
 

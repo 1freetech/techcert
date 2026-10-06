@@ -181,14 +181,15 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 2,
-        "title": "OSRTC.002: Teach Pendant Basics — Jogging, Coordinate Frames, Speed, and Safe Manual Positioning",
-        "wordpress_post_id": 20798,
-        "live_url": "https://bitcoinversus.tech/2026/10/04/osrtc-002-teach-pendant-jogging-coordinate-frames-speed-safe-manual-positioning/",
-        "archive_path": "archive/2026/10/osrtc-002-teach-pendant-jogging-coordinate-frames-speed-safe-manual-positioning.md",
-        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+        "lesson_number": 4,
+        "title": "OSRTC.004: End Effectors and Tool Center Point Setup — Grippers, TCP Calibration, Payload, I/O, and Safe Verification",
+        "wordpress_post_id": 21295,
+        "live_url": "https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/",
+        "archive_path": "archive/2026/10/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification.md",
+        "source_match_verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"],
+        "verification_status": "verified"
       },
-      "next_lesson_number": 3
+      "next_lesson_number": 5
     },
     {
       "subject": "robotics_engineer",

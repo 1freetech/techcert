@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-06T00:06:00Z",
+  "updated_at": "2026-10-06T00:22:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "fiber_optics_technician",
+    "subject": "fiber_optics_engineer",
     "lesson_number": 3,
-    "title": "OSFOTC.003: OTDR Field Testing — Launch/Receive Fibers, Range, Pulse Width, Events, Dead Zones, and Fault Location",
-    "wordpress_post_id": 21093,
-    "live_url": "https://bitcoinversus.tech/2026/10/05/osfotc-003-otdr-field-testing-launch-receive-fibers-range-pulse-width-events-dead-zones-fault-location/",
-    "archive_path": "archive/2026/10/osfotc-003-otdr-field-testing-launch-receive-fibers-range-pulse-width-events-dead-zones-fault-location.md",
+    "title": "OSFOEC.003: Optical Transceiver Selection Engineering — Form Factor, Data Rate, Fiber Type, Wavelength, Reach, and Interoperability",
+    "wordpress_post_id": 21099,
+    "live_url": "https://bitcoinversus.tech/2026/10/05/osfoec-003-optical-transceiver-selection-engineering-form-factor-data-rate-fiber-type-wavelength-reach-interoperability/",
+    "archive_path": "archive/2026/10/osfoec-003-optical-transceiver-selection-engineering-form-factor-data-rate-fiber-type-wavelength-reach-interoperability.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "fiber_optics_engineer",
+    "subject": "firmware_technician",
     "lesson_number": 3,
-    "title_format": "OSFOEC.003: {topic}",
+    "title_format": "OSFTC.003: {topic}",
     "track_start": false,
-    "previous_lesson": "OSFOEC.002"
+    "previous_lesson": "OSFTC.002"
   },
   "new_track_starts": {
     "information_technology": {"acronym": "OSITC", "lesson_number": 1, "title_format": "OSITC.001: {topic}"},
@@ -53,11 +53,11 @@
     "data_center_technician": {"acronym": "OSDCTC", "lesson_number": 4, "title_format": "OSDCTC.004: {topic}"},
     "data_center_engineer": {"acronym": "OSDCEC", "lesson_number": 4, "title_format": "OSDCEC.004: {topic}"},
     "fiber_optics_technician": {"acronym": "OSFOTC", "lesson_number": 4, "title_format": "OSFOTC.004: {topic}"},
-    "fiber_optics_engineer": {"acronym": "OSFOEC", "lesson_number": 3, "title_format": "OSFOEC.003: {topic}"},
+    "fiber_optics_engineer": {"acronym": "OSFOEC", "lesson_number": 4, "title_format": "OSFOEC.004: {topic}"},
     "firmware_technician": {"acronym": "OSFTC", "lesson_number": 3, "title_format": "OSFTC.003: {topic}"},
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 3, "title_format": "OSFEC.003: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 4, "title_format": "OSHistory.004: {topic}"}
   },
-  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.002, OSFTC.002, and OSFEC.002 are published; each corresponding track next lesson is .003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSFOEC.003 after verified OSFOTC.003.",
+  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.002 and OSFEC.002 are published; each corresponding track next lesson is .003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSFTC.003 after verified OSFOEC.003.",
   "verification_hold": null
 }

@@ -62,20 +62,17 @@ https://www.youtube.com/watch?v=iwxWuUbizVA
 </div><figcaption class="wp-element-caption"><em>ControllersTech — complete STM32 bootloader firmware update with image metadata, flash programming, CRC32 verification, and safe application start.</em></figcaption></figure><!-- /wp:embed -->
 
 <!-- wp:heading --><h2 class="wp-block-heading">Useful Command Examples</h2><!-- /wp:heading -->
-<!-- wp:code --><pre class="wp-block-code"><code># List DFU devices
+<!-- wp:code --><pre class="wp-block-code"><code># List USB DFU devices
 dfu-util -l
 
-# Flash a DFU image
-dfu-util -D firmware.dfu
-
-# ESP32 family example: inspect chip before writing
+# Identify an ESP32-family target before any change
 esptool --port /dev/ttyUSB0 chip-id
 
-# SPI flash: make a backup first
-flashrom -p ch341a_spi -r backup.bin
+# Confirm the installed OpenOCD tool version
+openocd --version
 
-# SPI flash: write and verify
-flashrom -p ch341a_spi -w firmware.bin -v</code></pre><!-- /wp:code -->
+# Verify the approved firmware file checksum
+sha256sum firmware.bin</code></pre><!-- /wp:code -->
 
 <!-- wp:heading --><h2 class="wp-block-heading">Technician Flashing Checklist</h2><!-- /wp:heading -->
 <!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Identify device model, board revision, microcontroller, and flash part.</li><li>Confirm the approved firmware version and file checksum.</li><li>Back up existing flash or configuration when possible.</li><li>Choose the correct interface: application updater, DFU, UART bootloader, SWD/JTAG, or direct SPI.</li><li>Confirm logic voltage, ground, pinout, reset, and boot-mode straps.</li><li>Record current firmware version and serial/asset information.</li><li>Perform erase/write using the manufacturer-approved tool or documented open-source equivalent.</li><li>Run the tool’s verify/read-back operation.</li><li>Reset or power-cycle according to the procedure.</li><li>Capture the first boot log and confirm the expected firmware version.</li><li>Test critical peripherals and configuration.</li><li>Keep the backup, logs, checksum, tool version, and rollback method with the work record.</li></ol><!-- /wp:list -->

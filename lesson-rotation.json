@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-06T01:42:00Z",
+  "updated_at": "2026-10-06T01:45:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -106,11 +106,5 @@
       "title_format": "OSHistory.004: {topic}"
     }
   },
-  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.002 is published; next OSFEC.003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSFEC.003 after verified OSFTC.003.",
-  "verification_hold": {
-    "subject": "firmware_technician",
-    "lesson_number": 3,
-    "wordpress_post_id": 21118,
-    "reason": "Live WordPress read-back confirms published Gutenberg YouTube embed blocks, but the available rendered-content endpoint exposes linked wrappers rather than iframe playback, so visible/playable embed rendering is not yet independently confirmed. Rotation not advanced."
-  }
+  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.002 is published; next OSFEC.003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSFEC.003 after verified OSFTC.003."
 }

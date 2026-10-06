@@ -306,16 +306,15 @@
       "status": "active",
       "latest_lesson": {
         "lesson_number": 3,
-        "title": "OSFTC.003: JTAG and SWD Debug Interfaces — Debug Probes, Target Connections, Halt/Step, Memory Access, and Recovery",
-        "wordpress_post_id": 21118,
-        "live_url": "https://bitcoinversus.tech/2026/10/05/osftc-003-jtag-swd-debug-interfaces-debug-probes-target-connections-halt-step-memory-access-recovery/",
-        "archive_path": "archive/2026/10/osftc-003-jtag-swd-debug-interfaces-debug-probes-target-connections-halt-step-memory-access-recovery.md",
-        "source_match_verified_repositories": [
+        "title": "OSFTC.003: Firmware Backup and Recovery — Checksums, Golden Images, Rollback, and Validation",
+        "wordpress_post_id": 21113,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation/",
+        "archive_path": "archive/2026/10/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation.md",
+        "verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
-        ],
-        "verification_status": "pending_live_youtube_render_confirmation"
+        ]
       },
       "next_lesson_number": 4
     },

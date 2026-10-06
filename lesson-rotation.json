@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-06T01:50:00Z",
+  "updated_at": "2026-10-06T02:00:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "firmware_technician",
+    "subject": "firmware_engineer",
     "lesson_number": 3,
-    "title": "OSFTC.003: JTAG and SWD Debug Interfaces — Debug Probes, Target Connections, Halt/Step, Memory Access, and Recovery",
-    "wordpress_post_id": 21118,
-    "live_url": "https://bitcoinversus.tech/2026/10/05/osftc-003-jtag-swd-debug-interfaces-debug-probes-target-connections-halt-step-memory-access-recovery/",
-    "archive_path": "archive/2026/10/osftc-003-jtag-swd-debug-interfaces-debug-probes-target-connections-halt-step-memory-access-recovery.md",
+    "title": "OSFEC.003: Hardware Debugging with JTAG, SWD, OpenOCD, and GDB",
+    "wordpress_post_id": 21131,
+    "live_url": "https://bitcoinversus.tech/2026/10/05/osfec-003-hardware-debugging-jtag-swd-openocd-gdb/",
+    "archive_path": "archive/2026/10/osfec-003-hardware-debugging-jtag-swd-openocd-gdb.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "firmware_engineer",
-    "lesson_number": 3,
-    "title_format": "OSFEC.003: {topic}",
+    "subject": "history_money_technology_bitcoin",
+    "lesson_number": 4,
+    "title_format": "OSHistory.004: {topic}",
     "track_start": false,
-    "previous_lesson": "OSFEC.002"
+    "previous_lesson": "OSHistory.003"
   },
   "new_track_starts": {
     "information_technology": {
@@ -106,5 +106,5 @@
       "title_format": "OSHistory.004: {topic}"
     }
   },
-  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.002 is published; next OSFEC.003. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSFEC.003 after verified OSFTC.003."
+  "numbering_note": "OSPython.025 is published; next OSPython.026. Linux Command #42 is published; next Linux Command #43. Windows Command #32 is published; next Windows Command #33. OSITC is a new general information technology certification track; first lesson OSITC.001. OSEEC.012 is published; next OSEEC.013. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.003 is published; next OSFEC.004. OSHistory.003 is published; next OSHistory.004. OSNTC.015 is published; next OSNTC.016. The global rotation advances to OSHistory.004 after verified OSFEC.003."
 }

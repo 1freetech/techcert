@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-06T01:45:00Z",
+  "updated_at": "2026-10-06T01:50:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -27,10 +27,10 @@
   "last_completed": {
     "subject": "firmware_technician",
     "lesson_number": 3,
-    "title": "OSFTC.003: Firmware Backup and Recovery — Checksums, Golden Images, Rollback, and Validation",
-    "wordpress_post_id": 21113,
-    "live_url": "https://bitcoinversus.tech/2026/10/05/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation/",
-    "archive_path": "archive/2026/10/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation.md",
+    "title": "OSFTC.003: JTAG and SWD Debug Interfaces — Debug Probes, Target Connections, Halt/Step, Memory Access, and Recovery",
+    "wordpress_post_id": 21118,
+    "live_url": "https://bitcoinversus.tech/2026/10/05/osftc-003-jtag-swd-debug-interfaces-debug-probes-target-connections-halt-step-memory-access-recovery/",
+    "archive_path": "archive/2026/10/osftc-003-jtag-swd-debug-interfaces-debug-probes-target-connections-halt-step-memory-access-recovery.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",

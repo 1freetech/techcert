@@ -18,9 +18,21 @@ youtube_6: "https://www.youtube.com/watch?v=j7pw3RgtZtc"
 youtube_7: "https://www.youtube.com/watch?v=2p7YpVTufRE"
 youtube_8: "https://www.youtube.com/watch?v=xhyg_3lyYyc"
 youtube_9: "https://www.youtube.com/watch?v=ETAsR1s-HKs"
+youtube_10: "https://www.youtube.com/watch?v=5v93NQFJUrM"
+youtube_11: "https://www.youtube.com/watch?v=btOIDQeMrMg"
+elementary_overview: true
+elementary_conclusion: true
 ---
 
-<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>A PN-junction diode turns the electrostatics from OSSEC.003 into measurable current: forward bias lowers the carrier barrier, injects minority carriers into the quasi-neutral regions, and produces the exponential current–voltage behavior described by the Shockley equation.</strong> This lesson builds directly on <a href="https://bitcoinversus.tech/2026/10/05/ossec-003-pn-junction-electrostatics-depletion-width-built-in-potential-electric-field-junction-capacitance/">OSSEC.003: PN Junction Electrostatics</a>, <a href="https://bitcoinversus.tech/2026/10/04/ossec-002-carrier-transport-drift-diffusion-mobility-recombination/">OSSEC.002: Carrier Transport</a>, and the earlier BitcoinVersus guide to <a href="https://bitcoinversus.tech/2026/02/08/semiconductor-physics-current-flow-in-a-p-n-junction-diode/">current flow in a PN-junction diode</a>.</p><!-- /wp:paragraph -->
+<!-- wp:group {"layout":{"type":"constrained"}} --><div class="wp-block-group"><!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <strong>diode</strong> is a tiny electronic part that makes it much easier for electric current to move in one direction than the other. Inside a common semiconductor diode are two regions of material called <strong>p-type</strong> and <strong>n-type</strong> semiconductor. Where those two regions meet, they form a <strong>PN junction</strong>. That junction behaves like a controllable gate for moving electric charge.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>When voltage is applied in the forward direction, the gate becomes easier for charge carriers to cross, so current rises very quickly. When voltage is applied in the reverse direction, the gate becomes harder to cross and very little current normally flows. The rest of this lesson explains, with engineering equations, why that happens, how temperature changes the behavior, and how engineers describe a real diode using resistance and capacitance as well as current and voltage.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=5v93NQFJUrM","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=5v93NQFJUrM
+</div><figcaption class="wp-element-caption"><em>Prof MAD — How Diodes Actually Work: The PN Junction Explained. A visual introduction to diode directionality, forward and reverse bias, the PN junction, and the diode I–V curve.</em></figcaption></figure><!-- /wp:embed --></div><!-- /wp:group --><!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>A PN-junction diode turns the electrostatics from OSSEC.003 into measurable current: forward bias lowers the carrier barrier, injects minority carriers into the quasi-neutral regions, and produces the exponential current–voltage behavior described by the Shockley equation.</strong> This lesson builds directly on <a href="https://bitcoinversus.tech/2026/10/05/ossec-003-pn-junction-electrostatics-depletion-width-built-in-potential-electric-field-junction-capacitance/">OSSEC.003: PN Junction Electrostatics</a>, <a href="https://bitcoinversus.tech/2026/10/04/ossec-002-carrier-transport-drift-diffusion-mobility-recombination/">OSSEC.002: Carrier Transport</a>, and the earlier BitcoinVersus guide to <a href="https://bitcoinversus.tech/2026/02/08/semiconductor-physics-current-flow-in-a-p-n-junction-diode/">current flow in a PN-junction diode</a>.</p><!-- /wp:paragraph -->
 
 <!-- wp:embed {"url":"https://www.youtube.com/watch?v=0LBo5AxGGkU","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
 https://www.youtube.com/watch?v=0LBo5AxGGkU
@@ -112,7 +124,15 @@ https://www.youtube.com/watch?v=ETAsR1s-HKs
 
 <!-- wp:list --><ul class="wp-block-list"><li>Forward bias injects minority carriers.</li><li>Minority-carrier diffusion and recombination produce the ideal exponential current relation.</li><li><strong>I<sub>S</sub></strong>, <strong>n</strong>, and <strong>V<sub>T</sub></strong> control the shape and scale of the I–V curve.</li><li>Temperature strongly affects diode current.</li><li>Stored charge creates diffusion capacitance.</li><li>The local I–V slope creates dynamic resistance.</li><li>Real circuit models combine semiconductor physics with resistance, capacitance, parasitics, and temperature.</li></ul><!-- /wp:list -->
 
-<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
+<!-- wp:group {"layout":{"type":"constrained"}} --><div class="wp-block-group"><!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>In simple terms, a diode works because the inside of the device creates a tiny electrical boundary that charge carriers must cross. P-type and n-type semiconductor meet at the PN junction, and that junction changes depending on which way voltage is applied. Forward voltage makes the barrier easier to cross, so current can grow quickly. Reverse voltage makes the barrier harder to cross, so the diode mostly blocks current unless the reverse voltage becomes large enough to cause breakdown.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The equations in this lesson are detailed ways of describing that simple idea. The <strong>Shockley equation</strong> tells engineers how fast current rises, the <strong>ideality factor</strong> helps describe how closely a real diode follows the simplest theory, temperature changes how easily charge moves, and the diode’s resistance and capacitance describe how it behaves when signals change over time. A useful mental picture is therefore not just “a one-way switch,” but a tiny semiconductor gate whose behavior depends on voltage, temperature, stored charge, and the physical structure of the material.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=btOIDQeMrMg","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=btOIDQeMrMg
+</div><figcaption class="wp-element-caption"><em>CircuitBread — How Does a Diode Work? The PN Junction. A visual recap of PN-junction formation, the depletion region, barrier potential, and the basic reason a diode controls current direction.</em></figcaption></figure><!-- /wp:embed --></div><!-- /wp:group --><!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
 <!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
 https://twitter.com/1BitcoinVersus/status/1937006164555993338

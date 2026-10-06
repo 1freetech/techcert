@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-06T12:56:00Z",
+  "updated_at": "2026-10-06T13:03:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "cpp",
-    "lesson_number": 22,
-    "title": "OSC++.022: Move Semantics — Rvalue References, std::move, Move Constructors, and Move Assignment",
-    "wordpress_post_id": 21261,
-    "live_url": "https://bitcoinversus.tech/2026/10/06/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment/",
-    "archive_path": "archive/2026/10/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment.md",
+    "subject": "semiconductor_technician",
+    "lesson_number": 4,
+    "title": "OSSTC.004: Semiconductor Gas Delivery Systems — MFCs, Regulators, Valves, Purge, and Interlocks",
+    "wordpress_post_id": 21267,
+    "live_url": "https://bitcoinversus.tech/2026/10/06/osstc-004-semiconductor-gas-delivery-systems-mfc-regulators-valves-purge-interlocks/",
+    "archive_path": "archive/2026/10/osstc-004-semiconductor-gas-delivery-systems-mfc-regulators-valves-purge-interlocks.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,14 +38,14 @@
     ]
   },
   "next": {
-    "subject": "semiconductor_technician",
+    "subject": "semiconductor_engineer",
     "lesson_number": 4,
-    "title_format": "OSSTC.004: {topic}",
+    "title_format": "OSSEC.004: {topic}",
     "track_start": false,
-    "previous_lesson": "OSSTC.003"
+    "previous_lesson": "OSSEC.003"
   },
   "new_track_starts": {
-    "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 4, "title_format": "OSSTC.004: {topic}"},
+    "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 5, "title_format": "OSSTC.005: {topic}"},
     "semiconductor_engineer": {"acronym": "OSSEC", "lesson_number": 4, "title_format": "OSSEC.004: {topic}"},
     "robotics_technician": {"acronym": "OSRTC", "lesson_number": 4, "title_format": "OSRTC.004: {topic}"},
     "robotics_engineer": {"acronym": "OSREC", "lesson_number": 4, "title_format": "OSREC.004: {topic}"},
@@ -57,5 +57,5 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 4, "title_format": "OSFEC.004: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 5, "title_format": "OSHistory.005: {topic}"}
   },
-  "numbering_note": "OSPython.026 is published; next OSPython.027. Linux Command #43 is published; next Linux Command #44. Windows Command #33 is published; next Windows Command #34. OSITC.001 is published; next OSITC.002. OSEEC.013 is published; next OSEEC.014. OSETC.028 is published; next OSETC.029. OSC++.022 is published; next OSC++.023. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.003 is published; next OSFEC.004. OSHistory.004 is published; next OSHistory.005. OSNTC.016 is published; next OSNTC.017. The global rotation advances to OSSTC.004 after verified OSC++.022."
+  "numbering_note": "OSPython.026 is published; next OSPython.027. Linux Command #43 is published; next Linux Command #44. Windows Command #33 is published; next Windows Command #34. OSITC.001 is published; next OSITC.002. OSEEC.013 is published; next OSEEC.014. OSETC.028 is published; next OSETC.029. OSC++.022 is published; next OSC++.023. OSSTC.004 is published; next OSSTC.005. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.003 is published; next OSFEC.004. OSHistory.004 is published; next OSHistory.005. OSNTC.016 is published; next OSNTC.017. The global rotation advances to OSSEC.004 after verified OSSTC.004."
 }

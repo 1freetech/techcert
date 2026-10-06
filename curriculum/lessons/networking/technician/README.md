@@ -1,6 +1,6 @@
 # networking/technician
 
-15 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+16 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -19,3 +19,4 @@
 | 13 | [OSNTC.013: Router Basics](./013-osntc-013-router-basics-20370.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/osntc-013-router-basics/) |
 | 14 | [OSNTC.014: TCP and UDP Transport Basics](./014-osntc-014-tcp-udp-transport-basics-20611.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/osntc-014-tcp-udp-transport-basics/) |
 | 15 | [OSNTC.015: NAT and PAT Basics — Private Addresses, Port Translation, State Tables, and Troubleshooting](./015-osntc-015-nat-pat-basics-private-addresses-port-translation-state-tables-troubleshooting-20887.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/osntc-015-nat-pat-basics-private-addresses-port-translation-state-tables-troubleshooting/) |
+| 16 | [OSNTC.016: IPv6 Addressing and Neighbor Discovery — Prefixes, SLAAC, NDP, Routing, and Transition](../../../../archive/2026/10/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition/) |

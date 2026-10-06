@@ -1,0 +1,122 @@
+---
+title: "OSSEC.004: Diode Current–Voltage Physics — Minority-Carrier Injection, Shockley Equation, Ideality Factor, and Temperature"
+status: published
+wordpress_post_id: 21276
+published: "2026-10-06T09:21:22"
+live_url: "https://bitcoinversus.tech/2026/10/06/ossec-004-diode-current-voltage-physics-minority-carrier-injection-shockley-equation-ideality-factor-temperature/"
+series: "Open Source Semiconductor Engineer Certification"
+subject: semiconductor_engineer
+lesson_number: "004"
+featured_media_id: 21275
+featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ossec-004-diode-iv-cover-1200x630-1.jpg"
+youtube_1: "https://www.youtube.com/watch?v=0LBo5AxGGkU"
+youtube_2: "https://www.youtube.com/watch?v=FXppSJLRceg"
+youtube_3: "https://www.youtube.com/watch?v=slMnfiX2Fwc"
+youtube_4: "https://www.youtube.com/watch?v=kVgFZsnpoQI"
+youtube_5: "https://www.youtube.com/watch?v=BC1E13CKf8g"
+youtube_6: "https://www.youtube.com/watch?v=j7pw3RgtZtc"
+youtube_7: "https://www.youtube.com/watch?v=2p7YpVTufRE"
+youtube_8: "https://www.youtube.com/watch?v=xhyg_3lyYyc"
+youtube_9: "https://www.youtube.com/watch?v=ETAsR1s-HKs"
+---
+
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>A PN-junction diode turns the electrostatics from OSSEC.003 into measurable current: forward bias lowers the carrier barrier, injects minority carriers into the quasi-neutral regions, and produces the exponential current–voltage behavior described by the Shockley equation.</strong> This lesson builds directly on <a href="https://bitcoinversus.tech/2026/10/05/ossec-003-pn-junction-electrostatics-depletion-width-built-in-potential-electric-field-junction-capacitance/">OSSEC.003: PN Junction Electrostatics</a>, <a href="https://bitcoinversus.tech/2026/10/04/ossec-002-carrier-transport-drift-diffusion-mobility-recombination/">OSSEC.002: Carrier Transport</a>, and the earlier BitcoinVersus guide to <a href="https://bitcoinversus.tech/2026/02/08/semiconductor-physics-current-flow-in-a-p-n-junction-diode/">current flow in a PN-junction diode</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=0LBo5AxGGkU","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=0LBo5AxGGkU
+</div><figcaption class="wp-element-caption"><em>Jordan Edmunds Chetty — PN Junction Diode Introduction. Establishes the device-level transition from junction electrostatics to terminal current.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Minority-Carrier Injection Creates Forward Current</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Under forward bias, the external voltage reduces the junction barrier and raises the minority-carrier concentrations at the depletion-region edges. Those excess electrons and holes then diffuse through the quasi-neutral regions and recombine over characteristic diffusion lengths. This is why the <a href="https://bitcoinversus.tech/2026/10/04/ossec-002-carrier-transport-drift-diffusion-mobility-recombination/">drift, diffusion, mobility, and recombination</a> concepts from OSSEC.002 are not optional background—they are the transport engine behind the diode’s forward current.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=FXppSJLRceg","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=FXppSJLRceg
+</div><figcaption class="wp-element-caption"><em>Jordan Edmunds Chetty — PN Junction Diode Forward Bias Current, Part 1. Connects applied forward bias to minority-carrier injection and diffusion current.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The Shockley Equation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>For an idealized PN junction under low-level injection and the usual one-dimensional assumptions, terminal current is approximated by the Shockley diode equation. The exponential term means that once forward bias exceeds a few thermal voltages, relatively small changes in diode voltage can produce very large changes in current. The equation is a compact result of the carrier boundary conditions, continuity equation, diffusion transport, and recombination assumptions—not a standalone empirical rule.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=slMnfiX2Fwc","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=slMnfiX2Fwc
+</div><figcaption class="wp-element-caption"><em>Jordan Edmunds Chetty — PN Junction Diode Forward Bias Current, Part 2. Continues the forward-current derivation and connects carrier transport to the terminal equation.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>I = I<sub>S</sub>[exp(V<sub>D</sub>/(nV<sub>T</sub>)) − 1]</strong></li><li><strong>I</strong>: diode current.</li><li><strong>I<sub>S</sub></strong>: reverse saturation or scale current.</li><li><strong>V<sub>D</sub></strong>: junction voltage.</li><li><strong>V<sub>T</sub> = kT/q</strong>: thermal voltage, about 25.9 mV at 300 K.</li><li><strong>n</strong>: ideality factor.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Reverse Saturation Current Is a Device Parameter</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The scale current <strong>I<sub>S</sub></strong> is set by semiconductor material, junction area, doping, minority-carrier diffusion coefficients, diffusion lengths, lifetime, and temperature. In the ideal long-base model it is proportional to terms such as <strong>qAD<sub>n</sub>n<sub>p0</sub>/L<sub>n</sub></strong> and <strong>qAD<sub>p</sub>p<sub>n0</sub>/L<sub>p</sub></strong>. Because equilibrium minority-carrier concentrations depend strongly on intrinsic carrier concentration, <strong>I<sub>S</sub></strong> is extremely temperature-sensitive and can change by orders of magnitude across a practical operating range.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=kVgFZsnpoQI","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=kVgFZsnpoQI
+</div><figcaption class="wp-element-caption"><em>Jordan Edmunds Chetty — PN Junction Diode Example: Reverse Saturation Current Density. Works through the physical quantities that determine saturation current.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Ideality Factor Explains Non-Ideal Current Slopes</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The ideality factor <strong>n</strong> modifies the exponential slope of the I–V curve and helps identify which transport or recombination mechanism dominates. A diffusion-dominated ideal PN junction is close to <strong>n = 1</strong>; depletion-region Shockley–Read–Hall recombination can push behavior toward <strong>n ≈ 2</strong>. Real measured values can shift with current density because series resistance, high-level injection, tunneling, interface defects, and other mechanisms violate the assumptions of the simplest model.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=BC1E13CKf8g","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=BC1E13CKf8g
+</div><figcaption class="wp-element-caption"><em>Dr Naser Sedghi — Ideality Factor. Explains how ideality factor changes PN-junction diode characteristics and reflects non-ideal transport.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Temperature Changes Both Thermal Voltage and Saturation Current</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Temperature enters the diode equation directly through <strong>V<sub>T</sub> = kT/q</strong> and indirectly through the much stronger temperature dependence of <strong>I<sub>S</sub></strong>. At a fixed forward current, a conventional silicon diode therefore tends to require less forward voltage as temperature rises. That behavior makes a diode useful as a temperature sensor but also creates thermal-design concerns in power electronics, where current crowding and self-heating can reinforce one another unless the circuit and package provide adequate stabilization and heat removal.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=j7pw3RgtZtc","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=j7pw3RgtZtc
+</div><figcaption class="wp-element-caption"><em>Inderjit Singh Dhanjal — Temperature Dependence on Diode I–V Characteristics. Demonstrates how temperature shifts silicon-diode current–voltage behavior and includes an LTspice comparison.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Forward Bias Stores Minority-Carrier Charge</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A forward-biased diode stores excess minority carriers in its quasi-neutral regions. When terminal voltage changes, that stored charge changes, producing <strong>diffusion capacitance</strong>. Unlike depletion capacitance, which is especially important under reverse bias and was introduced in <a href="https://bitcoinversus.tech/2026/10/05/ossec-003-pn-junction-electrostatics-depletion-width-built-in-potential-electric-field-junction-capacitance/">OSSEC.003</a>, diffusion capacitance becomes important when substantial forward current exists and helps explain diode switching delay and reverse-recovery behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=2p7YpVTufRE","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=2p7YpVTufRE
+</div><figcaption class="wp-element-caption"><em>Jordan Edmunds Chetty — Diffusion Capacitance Derivation. Derives charge-storage capacitance from minority-carrier injection under forward bias.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Dynamic Resistance Linearizes the Exponential Curve Locally</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>For a small AC signal riding on a DC operating point, the nonlinear diode can be linearized by taking the local slope of its I–V characteristic. The resulting dynamic or diffusion resistance is approximately <strong>r<sub>d</sub> = nV<sub>T</sub>/I<sub>D</sub></strong> when the forward current is much larger than <strong>I<sub>S</sub></strong>. This is a differential quantity, not the same thing as the large-signal ratio <strong>V/I</strong>, and it changes whenever bias current or temperature changes.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=xhyg_3lyYyc","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=xhyg_3lyYyc
+</div><figcaption class="wp-element-caption"><em>Jordan Edmunds Chetty — Diode Diffusion Resistance Derivation. Derives the diode’s incremental resistance from the exponential current relation.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The Complete Small-Signal Model Combines Resistance and Capacitance</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A practical small-signal diode model can include dynamic resistance, depletion capacitance, diffusion capacitance, and parasitic series or contact resistance. That model is the bridge from semiconductor physics to circuit analysis in rectifiers, detectors, mixers, clamps, sensors, switching networks, and RF systems. Technicians can verify real devices with a correctly configured <a href="https://bitcoinversus.tech/2026/09/29/osetc-002-digital-multimeter-safety-voltage-measurement/">digital multimeter</a>, while engineers can compare bench data against <a href="https://bitcoinversus.tech/2025/02/05/command-4-kicad-linux-os/">KiCad</a> or SPICE-based circuit models and the device manufacturer’s datasheet.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=ETAsR1s-HKs","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=ETAsR1s-HKs
+</div><figcaption class="wp-element-caption"><em>Jordan Edmunds Chetty — Diode Small-Signal Model. Combines diffusion resistance, junction capacitance, diffusion capacitance, and contact resistance into one linearized model.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Worked Engineering Example</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Assume a silicon diode at 300 K with <strong>n = 1.5</strong>, <strong>I<sub>S</sub> = 1 nA</strong>, and <strong>V<sub>D</sub> = 0.60 V</strong>.</li><li>Use <strong>V<sub>T</sub> ≈ 25.9 mV</strong>.</li><li>The exponent is <strong>V<sub>D</sub>/(nV<sub>T</sub>) ≈ 15.44</strong>.</li><li>The idealized diode current is therefore approximately <strong>5.1 mA</strong>.</li><li>The small-signal resistance at that operating point is approximately <strong>r<sub>d</sub> = nV<sub>T</sub>/I ≈ 7.6 Ω</strong>.</li><li>If temperature changes, recalculate both <strong>V<sub>T</sub></strong> and the strongly temperature-dependent <strong>I<sub>S</sub></strong>; do not assume only one term changes.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Engineering Limits of the Shockley Model</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Very low current:</strong> generation-recombination and leakage can dominate.</li><li><strong>Moderate forward current:</strong> the Shockley relation is often most useful.</li><li><strong>High current:</strong> series resistance, conductivity modulation, and high-level injection can dominate.</li><li><strong>Strong reverse bias:</strong> breakdown physics replaces the simple reverse-saturation picture.</li><li><strong>Fast switching:</strong> stored charge and capacitances must be included.</li><li><strong>Small geometry / advanced materials:</strong> tunneling, interface states, quantum effects, self-heating, and field crowding can require more advanced models.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Exercises</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Starting from the Shockley equation, calculate current for <strong>I<sub>S</sub> = 10 pA</strong>, <strong>n = 1</strong>, <strong>T = 300 K</strong>, and <strong>V<sub>D</sub> = 0.65 V</strong>.</li><li>Repeat the calculation for <strong>n = 2</strong> and explain why the current changes.</li><li>Plot <strong>ln(I)</strong> versus <strong>V</strong> for an ideal diode and show how the slope can be used to estimate ideality factor.</li><li>Explain why increasing junction area tends to increase <strong>I<sub>S</sub></strong>.</li><li>Calculate <strong>r<sub>d</sub></strong> at 100 µA, 1 mA, and 10 mA for <strong>n = 1</strong> at 300 K.</li><li>Describe the physical origin of diffusion capacitance.</li><li>Explain why a fixed “0.7 V diode drop” is only an approximation, not a physical law.</li><li>Use a <a href="https://bitcoinversus.tech/2026/09/29/osetc-002-digital-multimeter-safety-voltage-measurement/">digital multimeter</a> diode-test function on a known good silicon diode and compare the measured forward voltage with the exponential model’s qualitative prediction.</li><li>Build a SPICE diode model in <a href="https://bitcoinversus.tech/2025/02/05/command-4-kicad-linux-os/">KiCad</a> or another simulator, sweep diode voltage, and compare the simulated I–V curve against the Shockley equation.</li><li>List three mechanisms that can make an extracted ideality factor vary with current.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check + Answers</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li><strong>What causes the exponential rise in forward current?</strong> Forward bias changes the minority-carrier boundary concentrations exponentially, producing exponentially increasing diffusion current under the ideal assumptions.</li><li><strong>What is thermal voltage?</strong> <strong>V<sub>T</sub> = kT/q</strong>; it is about 25.9 mV at 300 K.</li><li><strong>What does I<sub>S</sub> represent?</strong> The reverse saturation or scale current set by material, geometry, doping, carrier transport, lifetime, and temperature.</li><li><strong>What does ideality factor measure?</strong> It adjusts the exponential slope to represent departures from the ideal diffusion-current model and can reveal dominant recombination or transport mechanisms.</li><li><strong>Why is the diode’s forward voltage temperature-dependent?</strong> Both thermal voltage and especially saturation current change with temperature.</li><li><strong>What is diffusion capacitance?</strong> The incremental charge-storage effect caused by forward-injected minority carriers in the quasi-neutral regions.</li><li><strong>What is dynamic resistance?</strong> The inverse local slope of the diode I–V curve, approximately <strong>nV<sub>T</sub>/I<sub>D</sub></strong> at useful forward bias.</li><li><strong>Why does the Shockley equation fail at high current?</strong> Series resistance, high-level injection, self-heating, and other non-ideal effects can dominate.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Forward bias injects minority carriers.</li><li>Minority-carrier diffusion and recombination produce the ideal exponential current relation.</li><li><strong>I<sub>S</sub></strong>, <strong>n</strong>, and <strong>V<sub>T</sub></strong> control the shape and scale of the I–V curve.</li><li>Temperature strongly affects diode current.</li><li>Stored charge creates diffusion capacitance.</li><li>The local I–V slope creates dynamic resistance.</li><li>Real circuit models combine semiconductor physics with resistance, capacitance, parasitics, and temperature.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech advertisement.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong><em>Editor's Note:</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

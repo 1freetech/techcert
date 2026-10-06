@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-06T12:02:00Z",
+  "updated_at": "2026-10-06T12:10:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "electrical_engineering",
-    "lesson_number": 13,
-    "title": "OSEEC.013: Protective Relaying Fundamentals — CTs, VTs, ANSI Device Numbers, Zones, and Trip Logic",
-    "wordpress_post_id": 21252,
-    "live_url": "https://bitcoinversus.tech/2026/10/06/oseec-013-protective-relaying-fundamentals-cts-vts-ansi-device-numbers-zones-trip-logic/",
-    "archive_path": "archive/2026/10/oseec-013-protective-relaying-fundamentals-cts-vts-ansi-device-numbers-zones-trip-logic.md",
+    "subject": "electrical_technician",
+    "lesson_number": 28,
+    "title": "OSETC.028: 0–10 V Analog Signals and Voltage Input Scaling Basics",
+    "wordpress_post_id": 21257,
+    "live_url": "https://bitcoinversus.tech/2026/10/06/osetc-028-0-10v-analog-signals-voltage-input-scaling-basics/",
+    "archive_path": "archive/2026/10/osetc-028-0-10v-analog-signals-voltage-input-scaling-basics.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "electrical_technician",
-    "lesson_number": 28,
-    "title_format": "OSETC.028: {topic}",
+    "subject": "cpp",
+    "lesson_number": 22,
+    "title_format": "OSC++.022: {topic}",
     "track_start": false,
-    "previous_lesson": "OSETC.027"
+    "previous_lesson": "OSC++.021"
   },
   "new_track_starts": {
     "semiconductor_technician": {"acronym": "OSSTC", "lesson_number": 4, "title_format": "OSSTC.004: {topic}"},
@@ -57,5 +57,5 @@
     "firmware_engineer": {"acronym": "OSFEC", "lesson_number": 4, "title_format": "OSFEC.004: {topic}"},
     "history_money_technology_bitcoin": {"acronym": "OSHistory", "lesson_number": 5, "title_format": "OSHistory.005: {topic}"}
   },
-  "numbering_note": "OSPython.026 is published; next OSPython.027. Linux Command #43 is published; next Linux Command #44. Windows Command #33 is published; next Windows Command #34. OSITC.001 is published; next OSITC.002. OSEEC.013 is published; next OSEEC.014. OSETC.027 is published; next OSETC.028. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.003 is published; next OSFEC.004. OSHistory.004 is published; next OSHistory.005. OSNTC.016 is published; next OSNTC.017. The global rotation advances to OSETC.028 after verified OSEEC.013."
+  "numbering_note": "OSPython.026 is published; next OSPython.027. Linux Command #43 is published; next Linux Command #44. Windows Command #33 is published; next Windows Command #34. OSITC.001 is published; next OSITC.002. OSEEC.013 is published; next OSEEC.014. OSETC.028 is published; next OSETC.029. OSC++.021 is published; next OSC++.022. OSSTC.003 is published; next OSSTC.004. OSSEC.003 is published; next OSSEC.004. OSRTC.003 is published; next OSRTC.004. OSREC.003 is published; next OSREC.004. OSDCTC.003 is published; next OSDCTC.004. OSDCEC.003 is published; next OSDCEC.004. OSFOTC.003 is published; next OSFOTC.004. OSFOEC.003 is published; next OSFOEC.004. OSFTC.003 is published; next OSFTC.004. OSFEC.003 is published; next OSFEC.004. OSHistory.004 is published; next OSHistory.005. OSNTC.016 is published; next OSNTC.017. The global rotation advances to OSC++.022 after verified OSETC.028."
 }

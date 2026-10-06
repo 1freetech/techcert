@@ -15,3 +15,13 @@ Place an `Elementary Conclusion` at the end of the lesson, after the advanced ma
 These sections do not replace the technical lesson. They frame it so a new learner can understand the concept before and after encountering the advanced material.
 
 If the lesson's video policy requires explanatory video support for substantive paragraphs, the elementary sections must follow that rule too. Use directly relevant videos and do not duplicate a video URL already used elsewhere in the same lesson.
+
+## BitcoinVersus Internal Wiki Linking
+
+Treat BitcoinVersus.Tech as an internal technical wiki. Throughout every lesson, naturally hyperlink important technical terms, components, hardware, software, protocols, standards, companies, systems, scientific concepts, and recurring subject keywords to the most specific relevant existing BitcoinVersus.Tech article whenever one exists.
+
+Examples include terms such as `PN junction`, `diode`, `p-type semiconductor`, `n-type semiconductor`, `charge carrier`, `forward bias`, `reverse bias`, `Shockley equation`, `ideality factor`, `resistance`, `capacitance`, `GPU`, `ASIC`, `IPv4`, `RJ45`, `fiber`, `Linux`, `Python`, and similar concepts appropriate to the lesson.
+
+Prefer the best matching BitcoinVersus.Tech article over a generic category page. Prefer a prior explanatory article or lesson over linking a term back to the current page itself. Avoid forced or misleading links, but when a useful internal article exists, key terms should normally be linked on their first meaningful occurrence and again where repetition materially helps navigation. The goal is Wikipedia-like cross-navigation entirely within BitcoinVersus.Tech.
+
+This internal-wiki linking rule applies to the Elementary Overview, the advanced lesson body, worked examples, exercises when useful, knowledge checks, and the Elementary Conclusion.

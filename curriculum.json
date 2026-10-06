@@ -1,1 +1,335 @@
-{"schema_version":1,"description":"Canonical lesson-track registry for the TechCert / BitcoinVersus curriculum.","tracks":[{"subject":"networking","name":"Open Source Networking Technician Certification","acronym":"OSNTC","title_format":"OSNTC.{number}: {topic}","status":"active","latest_lesson":{"lesson_number":16,"title":"OSNTC.016: IPv6 Addressing and Neighbor Discovery — Prefixes, SLAAC, NDP, Routing, and Transition","wordpress_post_id":21169,"live_url":"https://bitcoinversus.tech/2026/10/05/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition/","archive_path":"archive/2026/10/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":17},{"subject":"python","name":"Open Source Python","acronym":"OSPython","title_format":"OSPython.{number}: {topic}","status":"active","latest_lesson":{"lesson_number":26,"title":"OSPython.026: JSON Serialization and Deserialization — Strings, Files, APIs, and Validation","wordpress_post_id":21182,"live_url":"https://bitcoinversus.tech/2026/10/05/ospython-026-json-serialization-deserialization-strings-files-apis-validation/","archive_path":"archive/2026/10/ospython-026-json-serialization-deserialization-strings-files-apis-validation.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":27},{"subject":"linux","name":"Linux Command Lessons","acronym":"Linux Command","title_format":"Linux Command #{number} – {topic} (Linux OS)","status":"active","latest_lesson":{"lesson_number":43,"title":"Linux Command #43 – userdel (Linux OS)","wordpress_post_id":21204,"live_url":"https://bitcoinversus.tech/2026/10/06/linux-command-43-userdel/","archive_path":"archive/2026/10/linux-command-43-userdel.md","source_match_verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"],"verification_status":"verified"},"next_lesson_number":44},{"subject":"windows","name":"Windows Command Lessons","acronym":"Windows Command","title_format":"Windows Command #{number} – {topic} (Windows OS)","status":"active","latest_lesson":{"lesson_number":33,"title":"Windows Command #33 – net start (Windows OS)","wordpress_post_id":21210,"live_url":"https://bitcoinversus.tech/2026/10/06/windows-command-33-net-start/","archive_path":"archive/2026/10/windows-command-33-net-start.md","source_match_verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"],"verification_status":"verified"},"next_lesson_number":34},{"subject":"information_technology","name":"Open-Source Information Technology Certificate","acronym":"OSITC","title_format":"OSITC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":1,"title":"OSITC.001: IT Systems Fundamentals — Hardware, Operating Systems, Networks, and Troubleshooting","wordpress_post_id":21228,"live_url":"https://bitcoinversus.tech/2026/10/06/ositc-001-it-systems-fundamentals-hardware-operating-systems-networks-troubleshooting/","archive_path":"archive/2026/10/ositc-001-it-systems-fundamentals-hardware-operating-systems-networks-troubleshooting.md","source_match_verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"],"verification_status":"verified"},"next_lesson_number":2},{"subject":"electrical_engineering","name":"Open Source Electrical Engineer Certification","acronym":"OSEEC","title_format":"OSEEC.{number}: {topic}","status":"active","latest_lesson":{"lesson_number":13,"title":"OSEEC.013: Protective Relaying Fundamentals — CTs, VTs, ANSI Device Numbers, Zones, and Trip Logic","wordpress_post_id":21252,"live_url":"https://bitcoinversus.tech/2026/10/06/oseec-013-protective-relaying-fundamentals-cts-vts-ansi-device-numbers-zones-trip-logic/","archive_path":"archive/2026/10/oseec-013-protective-relaying-fundamentals-cts-vts-ansi-device-numbers-zones-trip-logic.md","source_match_verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"],"verification_status":"verified"},"next_lesson_number":14},{"subject":"electrical_technician","name":"Open Source Electrical Technician Certification","acronym":"OSETC","title_format":"OSETC.{number}: {topic}","status":"active","latest_lesson":{"lesson_number":28,"title":"OSETC.028: 0–10 V Analog Signals and Voltage Input Scaling Basics","wordpress_post_id":21257,"live_url":"https://bitcoinversus.tech/2026/10/06/osetc-028-0-10v-analog-signals-voltage-input-scaling-basics/","archive_path":"archive/2026/10/osetc-028-0-10v-analog-signals-voltage-input-scaling-basics.md","source_match_verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"],"verification_status":"verified"},"next_lesson_number":29},{"subject":"cpp","name":"Open Source C++","acronym":"OSC++","title_format":"OSC++.{number}: {topic}","status":"active","latest_lesson":{"lesson_number":22,"title":"OSC++.022: Move Semantics — Rvalue References, std::move, Move Constructors, and Move Assignment","wordpress_post_id":21261,"live_url":"https://bitcoinversus.tech/2026/10/06/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment/","archive_path":"archive/2026/10/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment.md","source_match_verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"],"verification_status":"verified"},"next_lesson_number":23},{"subject":"semiconductor_technician","name":"Open Source Semiconductor Technician Certification","acronym":"OSSTC","title_format":"OSSTC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":3,"title":"OSSTC.003: Semiconductor Vacuum Systems — Roughing Pumps, Turbomolecular Pumps, Gauges, and Leak Checks","wordpress_post_id":20980,"live_url":"https://bitcoinversus.tech/2026/10/05/osstc-003-semiconductor-vacuum-systems-roughing-pumps-turbomolecular-pumps-gauges-leak-checks/","archive_path":"archive/2026/10/osstc-003-semiconductor-vacuum-systems-roughing-pumps-turbomolecular-pumps-gauges-leak-checks.md","source_match_verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"],"verification_status":"verified"},"next_lesson_number":4},{"subject":"semiconductor_engineer","name":"Open Source Semiconductor Engineer Certification","acronym":"OSSEC","title_format":"OSSEC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":2,"title":"OSSEC.002: Carrier Transport — Drift, Diffusion, Mobility, and Recombination","wordpress_post_id":20791,"live_url":"https://bitcoinversus.tech/2026/10/04/ossec-002-carrier-transport-drift-diffusion-mobility-recombination/","archive_path":"archive/2026/10/ossec-002-carrier-transport-drift-diffusion-mobility-recombination.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":3},{"subject":"robotics_technician","name":"Open Source Robotics Technician Certification","acronym":"OSRTC","title_format":"OSRTC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":2,"title":"OSRTC.002: Teach Pendant Basics — Jogging, Coordinate Frames, Speed, and Safe Manual Positioning","wordpress_post_id":20798,"live_url":"https://bitcoinversus.tech/2026/10/04/osrtc-002-teach-pendant-jogging-coordinate-frames-speed-safe-manual-positioning/","archive_path":"archive/2026/10/osrtc-002-teach-pendant-jogging-coordinate-frames-speed-safe-manual-positioning.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":3},{"subject":"robotics_engineer","name":"Open Source Robotics Engineer Certification","acronym":"OSREC","title_format":"OSREC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":2,"title":"OSREC.002: Robot Jacobians — Velocity Kinematics, Singularities, and Differential Motion","wordpress_post_id":20807,"live_url":"https://bitcoinversus.tech/2026/10/04/osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion/","archive_path":"archive/2026/10/osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":3},{"subject":"data_center_technician","name":"Open Source Data Center Technician Certification","acronym":"OSDCTC","title_format":"OSDCTC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":2,"title":"OSDCTC.002: Rack Power Distribution — A/B Feeds, Rack PDUs, Dual-Corded Loads, and Load Checks","wordpress_post_id":20811,"live_url":"https://bitcoinversus.tech/2026/10/04/osdctc-002-rack-power-distribution-a-b-feeds-rack-pdus-dual-corded-loads-load-checks/","archive_path":"archive/2026/10/osdctc-002-rack-power-distribution-a-b-feeds-rack-pdus-dual-corded-loads-load-checks.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":3},{"subject":"data_center_engineer","name":"Open Source Data Center Engineer Certification","acronym":"OSDCEC","title_format":"OSDCEC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":2,"title":"OSDCEC.002: Data Center Capacity Planning — IT Load, PUE, Rack Density, and Growth Headroom","wordpress_post_id":20820,"live_url":"https://bitcoinversus.tech/2026/10/04/osdcec-002-data-center-capacity-planning-it-load-pue-rack-density-growth-headroom/","archive_path":"archive/2026/10/osdcec-002-data-center-capacity-planning-it-load-pue-rack-density-growth-headroom.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":3},{"subject":"fiber_optics_technician","name":"Open Source Fiber Optics Technician Certification","acronym":"OSFOTC","title_format":"OSFOTC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":2,"title":"OSFOTC.002: Optical Power Meter Basics — dBm, Wavelength, Reference Levels, and Receive Power","wordpress_post_id":20825,"live_url":"https://bitcoinversus.tech/2026/10/04/osfotc-002-optical-power-meter-basics-dbm-wavelength-reference-levels-receive-power/","archive_path":"archive/2026/10/osfotc-002-optical-power-meter-basics-dbm-wavelength-reference-levels-receive-power.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":3},{"subject":"fiber_optics_engineer","name":"Open Source Fiber Optics Engineer Certification","acronym":"OSFOEC","title_format":"OSFOEC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":2,"title":"OSFOEC.002: Fiber Dispersion Engineering — Modal, Chromatic, PMD, Pulse Broadening, and Reach Limits","wordpress_post_id":20830,"live_url":"https://bitcoinversus.tech/2026/10/04/osfoec-002-fiber-dispersion-engineering-modal-chromatic-pmd-pulse-broadening-reach-limits/","archive_path":"archive/2026/10/osfoec-002-fiber-dispersion-engineering-modal-chromatic-pmd-pulse-broadening-reach-limits.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":3},{"subject":"firmware_technician","name":"Open Source Firmware Technician Certification","acronym":"OSFTC","title_format":"OSFTC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":3,"title":"OSFTC.003: Firmware Backup and Recovery — Checksums, Golden Images, Rollback, and Validation","wordpress_post_id":21113,"live_url":"https://bitcoinversus.tech/2026/10/05/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation/","archive_path":"archive/2026/10/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":4},{"subject":"firmware_engineer","name":"Open Source Firmware Engineer Certification","acronym":"OSFEC","title_format":"OSFEC.{number}: {topic}","starting_lesson_number":1,"status":"active","latest_lesson":{"lesson_number":3,"title":"OSFEC.003: Hardware Debugging with JTAG, SWD, OpenOCD, and GDB","wordpress_post_id":21131,"live_url":"https://bitcoinversus.tech/2026/10/05/osfec-003-hardware-debugging-jtag-swd-openocd-gdb/","archive_path":"archive/2026/10/osfec-003-hardware-debugging-jtag-swd-openocd-gdb.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":4},{"subject":"history_money_technology_bitcoin","name":"History of Money, Technology & Bitcoin","acronym":"OSHistory","title_format":"OSHistory.{number}: {topic}","starting_lesson_number":1,"first_lesson":{"lesson_number":1,"title":"OSHistory.001: The Coincidence of Wants","focus":"Explain the coincidence-of-wants problem in barter and why it creates demand for more generally accepted media of exchange."},"status":"active","latest_lesson":{"lesson_number":4,"title":"OSHistory.004: Early Banking and Ledger Money — Deposits, Banknotes, Checks, and Reserves","wordpress_post_id":21162,"live_url":"https://bitcoinversus.tech/2026/10/05/oshistory-004-early-banking-ledger-money-deposits-banknotes-checks-reserves/","archive_path":"archive/2026/10/oshistory-004-early-banking-ledger-money-deposits-banknotes-checks-reserves.md","verified_repositories":["1freetech/Bitcoinversus.tech","1freetech/techcert","1freetech/opencert.tech"]},"next_lesson_number":5}]}
+{
+  "schema_version": 1,
+  "description": "Canonical lesson-track registry for the TechCert / BitcoinVersus curriculum.",
+  "tracks": [
+    {
+      "subject": "networking",
+      "name": "Open Source Networking Technician Certification",
+      "acronym": "OSNTC",
+      "title_format": "OSNTC.{number}: {topic}",
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 16,
+        "title": "OSNTC.016: IPv6 Addressing and Neighbor Discovery — Prefixes, SLAAC, NDP, Routing, and Transition",
+        "wordpress_post_id": 21169,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition/",
+        "archive_path": "archive/2026/10/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 17
+    },
+    {
+      "subject": "python",
+      "name": "Open Source Python",
+      "acronym": "OSPython",
+      "title_format": "OSPython.{number}: {topic}",
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 26,
+        "title": "OSPython.026: JSON Serialization and Deserialization — Strings, Files, APIs, and Validation",
+        "wordpress_post_id": 21182,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/ospython-026-json-serialization-deserialization-strings-files-apis-validation/",
+        "archive_path": "archive/2026/10/ospython-026-json-serialization-deserialization-strings-files-apis-validation.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 27
+    },
+    {
+      "subject": "linux",
+      "name": "Linux Command Lessons",
+      "acronym": "Linux Command",
+      "title_format": "Linux Command #{number} – {topic} (Linux OS)",
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 43,
+        "title": "Linux Command #43 – userdel (Linux OS)",
+        "wordpress_post_id": 21204,
+        "live_url": "https://bitcoinversus.tech/2026/10/06/linux-command-43-userdel/",
+        "archive_path": "archive/2026/10/linux-command-43-userdel.md",
+        "source_match_verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"],
+        "verification_status": "verified"
+      },
+      "next_lesson_number": 44
+    },
+    {
+      "subject": "windows",
+      "name": "Windows Command Lessons",
+      "acronym": "Windows Command",
+      "title_format": "Windows Command #{number} – {topic} (Windows OS)",
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 33,
+        "title": "Windows Command #33 – net start (Windows OS)",
+        "wordpress_post_id": 21210,
+        "live_url": "https://bitcoinversus.tech/2026/10/06/windows-command-33-net-start/",
+        "archive_path": "archive/2026/10/windows-command-33-net-start.md",
+        "source_match_verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"],
+        "verification_status": "verified"
+      },
+      "next_lesson_number": 34
+    },
+    {
+      "subject": "information_technology",
+      "name": "Open-Source Information Technology Certificate",
+      "acronym": "OSITC",
+      "title_format": "OSITC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 1,
+        "title": "OSITC.001: IT Systems Fundamentals — Hardware, Operating Systems, Networks, and Troubleshooting",
+        "wordpress_post_id": 21228,
+        "live_url": "https://bitcoinversus.tech/2026/10/06/ositc-001-it-systems-fundamentals-hardware-operating-systems-networks-troubleshooting/",
+        "archive_path": "archive/2026/10/ositc-001-it-systems-fundamentals-hardware-operating-systems-networks-troubleshooting.md",
+        "source_match_verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"],
+        "verification_status": "verified"
+      },
+      "next_lesson_number": 2
+    },
+    {
+      "subject": "electrical_engineering",
+      "name": "Open Source Electrical Engineer Certification",
+      "acronym": "OSEEC",
+      "title_format": "OSEEC.{number}: {topic}",
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 13,
+        "title": "OSEEC.013: Protective Relaying Fundamentals — CTs, VTs, ANSI Device Numbers, Zones, and Trip Logic",
+        "wordpress_post_id": 21252,
+        "live_url": "https://bitcoinversus.tech/2026/10/06/oseec-013-protective-relaying-fundamentals-cts-vts-ansi-device-numbers-zones-trip-logic/",
+        "archive_path": "archive/2026/10/oseec-013-protective-relaying-fundamentals-cts-vts-ansi-device-numbers-zones-trip-logic.md",
+        "source_match_verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"],
+        "verification_status": "verified"
+      },
+      "next_lesson_number": 14
+    },
+    {
+      "subject": "electrical_technician",
+      "name": "Open Source Electrical Technician Certification",
+      "acronym": "OSETC",
+      "title_format": "OSETC.{number}: {topic}",
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 28,
+        "title": "OSETC.028: 0–10 V Analog Signals and Voltage Input Scaling Basics",
+        "wordpress_post_id": 21257,
+        "live_url": "https://bitcoinversus.tech/2026/10/06/osetc-028-0-10v-analog-signals-voltage-input-scaling-basics/",
+        "archive_path": "archive/2026/10/osetc-028-0-10v-analog-signals-voltage-input-scaling-basics.md",
+        "source_match_verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"],
+        "verification_status": "verified"
+      },
+      "next_lesson_number": 29
+    },
+    {
+      "subject": "cpp",
+      "name": "Open Source C++",
+      "acronym": "OSC++",
+      "title_format": "OSC++.{number}: {topic}",
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 22,
+        "title": "OSC++.022: Move Semantics — Rvalue References, std::move, Move Constructors, and Move Assignment",
+        "wordpress_post_id": 21261,
+        "live_url": "https://bitcoinversus.tech/2026/10/06/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment/",
+        "archive_path": "archive/2026/10/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment.md",
+        "source_match_verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"],
+        "verification_status": "verified"
+      },
+      "next_lesson_number": 23
+    },
+    {
+      "subject": "semiconductor_technician",
+      "name": "Open Source Semiconductor Technician Certification",
+      "acronym": "OSSTC",
+      "title_format": "OSSTC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 3,
+        "title": "OSSTC.003: Semiconductor Vacuum Systems — Roughing Pumps, Turbomolecular Pumps, Gauges, and Leak Checks",
+        "wordpress_post_id": 20980,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/osstc-003-semiconductor-vacuum-systems-roughing-pumps-turbomolecular-pumps-gauges-leak-checks/",
+        "archive_path": "archive/2026/10/osstc-003-semiconductor-vacuum-systems-roughing-pumps-turbomolecular-pumps-gauges-leak-checks.md",
+        "source_match_verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"],
+        "verification_status": "verified"
+      },
+      "next_lesson_number": 4
+    },
+    {
+      "subject": "semiconductor_engineer",
+      "name": "Open Source Semiconductor Engineer Certification",
+      "acronym": "OSSEC",
+      "title_format": "OSSEC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 4,
+        "title": "OSSEC.004: Diode Current–Voltage Physics — Minority-Carrier Injection, Shockley Equation, Ideality Factor, and Temperature",
+        "wordpress_post_id": 21276,
+        "live_url": "https://bitcoinversus.tech/2026/10/06/ossec-004-diode-current-voltage-physics-minority-carrier-injection-shockley-equation-ideality-factor-temperature/",
+        "archive_path": "archive/2026/10/ossec-004-diode-current-voltage-physics-minority-carrier-injection-shockley-equation-ideality-factor-temperature.md",
+        "source_match_verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"],
+        "verification_status": "verified"
+      },
+      "next_lesson_number": 5
+    },
+    {
+      "subject": "robotics_technician",
+      "name": "Open Source Robotics Technician Certification",
+      "acronym": "OSRTC",
+      "title_format": "OSRTC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 2,
+        "title": "OSRTC.002: Teach Pendant Basics — Jogging, Coordinate Frames, Speed, and Safe Manual Positioning",
+        "wordpress_post_id": 20798,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/osrtc-002-teach-pendant-jogging-coordinate-frames-speed-safe-manual-positioning/",
+        "archive_path": "archive/2026/10/osrtc-002-teach-pendant-jogging-coordinate-frames-speed-safe-manual-positioning.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 3
+    },
+    {
+      "subject": "robotics_engineer",
+      "name": "Open Source Robotics Engineer Certification",
+      "acronym": "OSREC",
+      "title_format": "OSREC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 2,
+        "title": "OSREC.002: Robot Jacobians — Velocity Kinematics, Singularities, and Differential Motion",
+        "wordpress_post_id": 20807,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion/",
+        "archive_path": "archive/2026/10/osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 3
+    },
+    {
+      "subject": "data_center_technician",
+      "name": "Open Source Data Center Technician Certification",
+      "acronym": "OSDCTC",
+      "title_format": "OSDCTC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 2,
+        "title": "OSDCTC.002: Rack Power Distribution — A/B Feeds, Rack PDUs, Dual-Corded Loads, and Load Checks",
+        "wordpress_post_id": 20811,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/osdctc-002-rack-power-distribution-a-b-feeds-rack-pdus-dual-corded-loads-load-checks/",
+        "archive_path": "archive/2026/10/osdctc-002-rack-power-distribution-a-b-feeds-rack-pdus-dual-corded-loads-load-checks.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 3
+    },
+    {
+      "subject": "data_center_engineer",
+      "name": "Open Source Data Center Engineer Certification",
+      "acronym": "OSDCEC",
+      "title_format": "OSDCEC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 2,
+        "title": "OSDCEC.002: Data Center Capacity Planning — IT Load, PUE, Rack Density, and Growth Headroom",
+        "wordpress_post_id": 20820,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/osdcec-002-data-center-capacity-planning-it-load-pue-rack-density-growth-headroom/",
+        "archive_path": "archive/2026/10/osdcec-002-data-center-capacity-planning-it-load-pue-rack-density-growth-headroom.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 3
+    },
+    {
+      "subject": "fiber_optics_technician",
+      "name": "Open Source Fiber Optics Technician Certification",
+      "acronym": "OSFOTC",
+      "title_format": "OSFOTC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 2,
+        "title": "OSFOTC.002: Optical Power Meter Basics — dBm, Wavelength, Reference Levels, and Receive Power",
+        "wordpress_post_id": 20825,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/osfotc-002-optical-power-meter-basics-dbm-wavelength-reference-levels-receive-power/",
+        "archive_path": "archive/2026/10/osfotc-002-optical-power-meter-basics-dbm-wavelength-reference-levels-receive-power.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 3
+    },
+    {
+      "subject": "fiber_optics_engineer",
+      "name": "Open Source Fiber Optics Engineer Certification",
+      "acronym": "OSFOEC",
+      "title_format": "OSFOEC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 2,
+        "title": "OSFOEC.002: Fiber Dispersion Engineering — Modal, Chromatic, PMD, Pulse Broadening, and Reach Limits",
+        "wordpress_post_id": 20830,
+        "live_url": "https://bitcoinversus.tech/2026/10/04/osfoec-002-fiber-dispersion-engineering-modal-chromatic-pmd-pulse-broadening-reach-limits/",
+        "archive_path": "archive/2026/10/osfoec-002-fiber-dispersion-engineering-modal-chromatic-pmd-pulse-broadening-reach-limits.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 3
+    },
+    {
+      "subject": "firmware_technician",
+      "name": "Open Source Firmware Technician Certification",
+      "acronym": "OSFTC",
+      "title_format": "OSFTC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 3,
+        "title": "OSFTC.003: Firmware Backup and Recovery — Checksums, Golden Images, Rollback, and Validation",
+        "wordpress_post_id": 21113,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation/",
+        "archive_path": "archive/2026/10/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 4
+    },
+    {
+      "subject": "firmware_engineer",
+      "name": "Open Source Firmware Engineer Certification",
+      "acronym": "OSFEC",
+      "title_format": "OSFEC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 3,
+        "title": "OSFEC.003: Hardware Debugging with JTAG, SWD, OpenOCD, and GDB",
+        "wordpress_post_id": 21131,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/osfec-003-hardware-debugging-jtag-swd-openocd-gdb/",
+        "archive_path": "archive/2026/10/osfec-003-hardware-debugging-jtag-swd-openocd-gdb.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 4
+    },
+    {
+      "subject": "history_money_technology_bitcoin",
+      "name": "History of Money, Technology & Bitcoin",
+      "acronym": "OSHistory",
+      "title_format": "OSHistory.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "first_lesson": {
+        "lesson_number": 1,
+        "title": "OSHistory.001: The Coincidence of Wants",
+        "focus": "Explain the coincidence-of-wants problem in barter and why it creates demand for more generally accepted media of exchange."
+      },
+      "status": "active",
+      "latest_lesson": {
+        "lesson_number": 4,
+        "title": "OSHistory.004: Early Banking and Ledger Money — Deposits, Banknotes, Checks, and Reserves",
+        "wordpress_post_id": 21162,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/oshistory-004-early-banking-ledger-money-deposits-banknotes-checks-reserves/",
+        "archive_path": "archive/2026/10/oshistory-004-early-banking-ledger-money-deposits-banknotes-checks-reserves.md",
+        "verified_repositories": ["1freetech/Bitcoinversus.tech", "1freetech/techcert", "1freetech/opencert.tech"]
+      },
+      "next_lesson_number": 5
+    }
+  ]
+}

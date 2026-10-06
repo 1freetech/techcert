@@ -91,7 +91,20 @@
       "title_format": "OSITC.{number}: {topic}",
       "starting_lesson_number": 1,
       "status": "active",
-      "next_lesson_number": 1
+      "latest_lesson": {
+        "lesson_number": 1,
+        "title": "OSITC.001: IT Systems Fundamentals — Hardware, Operating Systems, Networks, and Troubleshooting",
+        "wordpress_post_id": 21228,
+        "live_url": "https://bitcoinversus.tech/2026/10/06/ositc-001-it-systems-fundamentals-hardware-operating-systems-networks-troubleshooting/",
+        "archive_path": "archive/2026/10/ositc-001-it-systems-fundamentals-hardware-operating-systems-networks-troubleshooting.md",
+        "source_match_verified_repositories": [
+          "1freetech/Bitcoinversus.tech",
+          "1freetech/techcert",
+          "1freetech/opencert.tech"
+        ],
+        "verification_status": "verified"
+      },
+      "next_lesson_number": 2
     },
     {
       "subject": "electrical_engineering",

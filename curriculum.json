@@ -352,18 +352,18 @@
       },
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 3,
-        "title": "OSHistory.003: Standardized Coinage — Weights, Mints, Seigniorage, and Trust",
-        "wordpress_post_id": 20879,
-        "live_url": "https://bitcoinversus.tech/2026/10/05/oshistory-003-standardized-coinage-weights-mints-seigniorage-trust/",
-        "archive_path": "archive/2026/10/oshistory-003-standardized-coinage-weights-mints-seigniorage-trust.md",
+        "lesson_number": 4,
+        "title": "OSHistory.004: Early Banking and Ledger Money — Deposits, Banknotes, Checks, and Reserves",
+        "wordpress_post_id": 21162,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/oshistory-004-early-banking-ledger-money-deposits-banknotes-checks-reserves/",
+        "archive_path": "archive/2026/10/oshistory-004-early-banking-ledger-money-deposits-banknotes-checks-reserves.md",
         "verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ]
       },
-      "next_lesson_number": 4
+      "next_lesson_number": 5
     }
   ]
 }

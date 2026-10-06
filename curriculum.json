@@ -326,18 +326,18 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 2,
-        "title": "OSFEC.002: Real-Time Firmware Scheduling — Superloops, RTOS Tasks, Priorities, Preemption, and Timing",
-        "wordpress_post_id": 20874,
-        "live_url": "https://bitcoinversus.tech/2026/10/05/osfec-002-real-time-firmware-scheduling-superloops-rtos-tasks-priorities-preemption-timing/",
-        "archive_path": "archive/2026/10/osfec-002-real-time-firmware-scheduling-superloops-rtos-tasks-priorities-preemption-timing.md",
+        "lesson_number": 3,
+        "title": "OSFEC.003: Hardware Debugging with JTAG, SWD, OpenOCD, and GDB",
+        "wordpress_post_id": 21131,
+        "live_url": "https://bitcoinversus.tech/2026/10/05/osfec-003-hardware-debugging-jtag-swd-openocd-gdb/",
+        "archive_path": "archive/2026/10/osfec-003-hardware-debugging-jtag-swd-openocd-gdb.md",
         "verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ]
       },
-      "next_lesson_number": 3
+      "next_lesson_number": 4
     },
     {
       "subject": "history_money_technology_bitcoin",

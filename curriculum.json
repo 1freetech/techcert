@@ -92,11 +92,11 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 1,
-        "title": "OSITC.001: IT Systems Fundamentals — Hardware, Operating Systems, Networks, and Troubleshooting",
-        "wordpress_post_id": 21228,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/ositc-001-it-systems-fundamentals-hardware-operating-systems-networks-troubleshooting/",
-        "archive_path": "archive/2026/10/ositc-001-it-systems-fundamentals-hardware-operating-systems-networks-troubleshooting.md",
+        "lesson_number": 2,
+        "title": "OSITC.002: Storage and File Systems — HDDs, SSDs, Partitions, Volumes, NTFS, ext4, Mounting, and Basic Diagnostics",
+        "wordpress_post_id": 21452,
+        "live_url": "https://bitcoinversus.tech/2026/10/06/ositc-002-storage-file-systems-hdds-ssds-partitions-volumes-ntfs-ext4-mounting-basic-diagnostics/",
+        "archive_path": "archive/2026/10/ositc-002-storage-file-systems-hdds-ssds-partitions-volumes-ntfs-ext4-mounting-basic-diagnostics.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
@@ -104,7 +104,7 @@
         ],
         "verification_status": "verified"
       },
-      "next_lesson_number": 2
+      "next_lesson_number": 3
     },
     {
       "subject": "electrical_engineering",

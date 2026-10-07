@@ -34,8 +34,10 @@ Use these approximate targets unless the subject genuinely requires more or less
 
 ## Lesson Cover Style
 
-Every lesson requires one unique featured cover with an original source size of exactly 1200×630. Do not use the minimalist/minimal-style lesson cover treatment anymore.
+Every lesson requires one unique featured cover with an original source size of exactly 1200×630.
 
-Prefer a visually rich realistic technical scene, realistic technical illustration, or another already accepted expressive style such as realistic color-pencil, comic-book, anime, or detailed dark/neon technical art. A black or dark technical base with neon-green accents remains appropriate, but the image must have a clear, substantial main subject and should not look like a sparse minimalist diagram or generic stock card.
+**BANNED: minimal diagram photos, sparse minimalist diagrams, generic minimal cards, and the old minimal-style lesson cover treatment. Never use them.**
+
+Use a visually rich realistic technical scene, realistic technical illustration, or another already accepted expressive style such as realistic color-pencil, comic-book, anime, or detailed dark/neon technical art. A black or dark technical base with neon-green accents remains appropriate, but the image must have a clear, substantial main subject and real visual depth rather than a sparse diagram.
 
 Use one main subject, make the subject technically relevant to the lesson, avoid watermarks and reused art, and never reuse the featured cover as a body image. Verify the original WordPress media dimensions are exactly 1200×630 before declaring the lesson complete.

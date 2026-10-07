@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "audited_at": "2026-10-07T14:56:55.024Z",
+  "audited_at": "2026-10-07T19:52:04Z",
   "repository_roles": {
     "opencert.tech": "free curriculum",
     "techcert": "backup repository"
   },
-  "source_post_inventory": 2835,
+  "source_post_inventory": 2838,
   "source_inventory_path": "curriculum/source-inventory.json",
-  "published_lessons": 624,
+  "published_lessons": 626,
   "tracks": {
     "applied-ai/training": 3,
     "computer-security": 13,
@@ -39,7 +39,7 @@
     "programming/training": 9,
     "python": 28,
     "python/tutorials": 1,
-    "robotics/engineer": 4,
+    "robotics/engineer": 6,
     "robotics/technician": 5,
     "robotics/training": 1,
     "semiconductor/engineer": 5,
@@ -87,6 +87,14 @@
       "post_ids": [
         20270,
         20271
+      ]
+    },
+    {
+      "track": "robotics/engineer",
+      "number": 5,
+      "post_ids": [
+        21565,
+        21571
       ]
     }
   ],
@@ -8837,6 +8845,34 @@
       "lesson_path": "curriculum/lessons/information-technology/training/computer-hardware-cpu-clock-speed-ghz-ipc-performance-21561.md",
       "raw_path": "curriculum/lessons/information-technology/training/computer-hardware-cpu-clock-speed-ghz-ipc-performance-21561.gutenberg.html",
       "raw_git_blob_sha": "c639f23a03c644b949f5395f40399096ed0e8633"
+    },
+    {
+      "id": 21565,
+      "title": "OSREC.005: Robot Dynamics and Torque Control — Mass Matrices, Gravity, Inverse Dynamics, and Computed Torque",
+      "slug": "osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque",
+      "track": "robotics/engineer",
+      "lesson_number": 5,
+      "live_url": "https://bitcoinversus.tech/2026/10/07/osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque/",
+      "published": "2026-10-07T13:24:23",
+      "modified": "2026-10-07T15:52:04",
+      "featured_media": 21581,
+      "lesson_path": "curriculum/lessons/robotics/engineer/005-osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque-21565.md",
+      "raw_path": "curriculum/lessons/robotics/engineer/005-osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque-21565.gutenberg.html",
+      "raw_git_blob_sha": "af2610e6674be467cc1d7921687e3d4976914fa8"
+    },
+    {
+      "id": 21571,
+      "title": "OSREC.005: Robot Dynamics — Mass Matrix, Coriolis/Centrifugal Terms, Gravity, Inverse Dynamics, and Forward Dynamics",
+      "slug": "osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics",
+      "track": "robotics/engineer",
+      "lesson_number": 5,
+      "live_url": "https://bitcoinversus.tech/2026/10/07/osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics/",
+      "published": "2026-10-07T13:25:32",
+      "modified": "2026-10-07T13:25:32",
+      "featured_media": 21570,
+      "lesson_path": "curriculum/lessons/robotics/engineer/005-osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics-21571.md",
+      "raw_path": "curriculum/lessons/robotics/engineer/005-osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics-21571.gutenberg.html",
+      "raw_git_blob_sha": "07a78abc1c63ca6504c2c0b51aff89b339f26937"
     }
   ],
   "source_archives": [
@@ -10049,11 +10085,21 @@
       "source_path": "archive/2026/10/ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior.md",
       "path": "source-archive/bitcoinversus/archive/2026/10/ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior.md",
       "git_blob_sha": "28fc8c86d6ee364f3c947013e8642207db4a2720"
+    },
+    {
+      "source_path": "archive/2026/10/osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque.md",
+      "path": "source-archive/bitcoinversus/archive/2026/10/osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque.md",
+      "git_blob_sha": "b21cedacd9678d8a5fd13f292f6668b0aa948633"
+    },
+    {
+      "source_path": "archive/2026/10/osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics.md",
+      "path": "source-archive/bitcoinversus/archive/2026/10/osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics.md",
+      "git_blob_sha": "823956d2caaf205f5cb9869fb8d196942829e1cd"
     }
   ],
-  "associated_assets": 816,
+  "associated_assets": 818,
   "asset_manifest_path": "curriculum/assets/manifest.json",
-  "verification_scope": "Captured inventory of 2835 published posts; 624 selected educational sources. Existing source timestamps agree with the prior capture; baseline raw/asset/archive blob hashes were checked on both default branches. Every added or changed file is fetched back and compared with captured text, or base64 for original binaries. Drafts are excluded. Remote video playback, publication quality, and future publications are outside this archive audit. Rotation is unchanged.",
+  "verification_scope": "Captured inventory of 2838 published posts; 626 selected educational sources. Both unique OSREC.005 publications are preserved and the numbering conflict is recorded. Every added or changed file is fetched back and compared with captured text, or base64 for original binaries.",
   "source_revision_gaps": [
     {
       "wordpress_post_id": 21550,

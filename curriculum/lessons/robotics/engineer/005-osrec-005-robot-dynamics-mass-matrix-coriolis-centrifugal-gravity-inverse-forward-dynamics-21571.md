@@ -1,20 +1,13 @@
 ---
-post_id: 21571
-lesson_code: "OSREC.005"
-certification: "Open-Source Robotics Engineer"
-lesson_number: 5
 title: "OSREC.005: Robot Dynamics — Mass Matrix, Coriolis/Centrifugal Terms, Gravity, Inverse Dynamics, and Forward Dynamics"
-status: published
-published: "2026-10-07T13:25:32"
-modified: "2026-10-07T13:25:32"
-live_url: "https://bitcoinversus.tech/2026/10/07/osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics/"
-series: "Open Source Robotics Engineer Certification"
-subject: robotics_engineer
-featured_media_id: 21570
-featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrec005-robot-dynamics-1200x630-1.jpg"
-youtube_1: "https://www.youtube.com/watch?v=1U6y_68CjeY"
-youtube_2: "https://www.youtube.com/watch?v=ZASVKAlegfQ"
-youtube_3: "https://www.youtube.com/watch?v=L8zpJOxDbh4"
+wordpress_post_id: 21571
+source: BitcoinVersus.tech
+published: 2026-10-07T13:25:32
+modified: 2026-10-07T13:25:32
+live_url: https://bitcoinversus.tech/2026/10/07/osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics/
+track: robotics/engineer
+lesson_number: 5
+raw_source: 005-osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics-21571.gutenberg.html
 ---
 
 <!-- wp:paragraph -->

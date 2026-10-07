@@ -2,7 +2,7 @@
 
 OpenCert is the free curriculum. TechCert is the backup repository. Both preserve the same captured published sources.
 
-**625 published lessons, commands, tutorials and technical training modules**, organized into 38 track folders. Exact saved Gutenberg bodies accompany Markdown copies. Original titles and post IDs are preserved.
+**626 published lessons, commands, tutorials and technical training modules**, organized into 38 track folders. Exact saved Gutenberg bodies accompany Markdown copies. Original titles and post IDs are preserved.
 
 | Track | Lessons | Index |
 | --- | ---: | --- |
@@ -36,7 +36,7 @@ OpenCert is the free curriculum. TechCert is the backup repository. Both preserv
 | programming/training | 9 | [Browse](lessons/programming/training/README.md) |
 | python | 28 | [Browse](lessons/python/README.md) |
 | python/tutorials | 1 | [Browse](lessons/python/tutorials/README.md) |
-| robotics/engineer | 5 | [Browse](lessons/robotics/engineer/README.md) |
+| robotics/engineer | 6 | [Browse](lessons/robotics/engineer/README.md) |
 | robotics/technician | 5 | [Browse](lessons/robotics/technician/README.md) |
 | robotics/training | 1 | [Browse](lessons/robotics/training/README.md) |
 | semiconductor/engineer | 5 | [Browse](lessons/semiconductor/engineer/README.md) |
@@ -65,10 +65,12 @@ No lesson is fabricated for an absent published number.
 
 The captured inventory contains 2835 published WordPress posts. 625 educational sources were selected: certificate lessons, commands, tutorials, technical foundations, configuration guides, troubleshooting and repair procedures. News, sports, opinion and employment posts are outside this curriculum archive.
 
-[Source inventory](source-inventory.json), [coverage manifest](coverage-manifest.json), [asset index](assets/README.md) and [asset manifest](assets/manifest.json) record the source and file coverage. 816 original associated image/file binaries are copied. YouTube/social embeds remain remote references. Playback is outside this archive audit. Archive maintenance does not advance rotation.
+[Source inventory](source-inventory.json), [coverage manifest](coverage-manifest.json), [asset index](assets/README.md) and [asset manifest](assets/manifest.json) record the source and file coverage. 818 original associated image/file binaries are copied. YouTube/social embeds remain remote references. Playback is outside this archive audit. Archive maintenance does not advance rotation.
 
 [Historical BitcoinVersus versions](../source-archive/bitcoinversus/README.md) remain available under their original archive paths.
 
 ## Captured revision gaps
 
 OSRTC.005 currently differs from its earlier repaired archive. The published source is preserved in the track folder; earlier Gutenberg and metadata are retained in the historical archive. Publication/video QA remains separate from this source synchronization.
+
+OSREC.005 has two unique published sources (posts 21565 and 21571); both are preserved and the numbering conflict is recorded without deleting unique content.

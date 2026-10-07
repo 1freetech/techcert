@@ -1,0 +1,169 @@
+---
+title: "OSREC.005: Robot Dynamics and Torque Control — Mass Matrices, Gravity, Inverse Dynamics, and Computed Torque"
+wordpress_post_id: 21565
+source: BitcoinVersus.tech
+published: 2026-10-07T13:24:23
+modified: 2026-10-07T15:52:04
+live_url: https://bitcoinversus.tech/2026/10/07/osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque/
+track: robotics/engineer
+lesson_number: 5
+raw_source: 005-osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque-21565.gutenberg.html
+---
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Interpret the rigid-manipulator equation <code>τ = M(q)q̈ + C(q,q̇)q̇ + g(q) + τf</code>.</li><li>Explain how configuration, payload, gravity, velocity, and acceleration change joint effort.</li><li>Distinguish forward dynamics from inverse dynamics.</li><li>Calculate torque for a single rotational joint and implement the model in Python.</li><li>Describe computed-torque control and identify practical limits of model-based control.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Required Foundation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://bitcoinversus.tech/2026/10/04/osrec-001-robot-kinematics-coordinate-frames-forward-inverse-kinematics/">OSREC.001: Robot Kinematics and Coordinate Frames</a></li><li><a href="https://bitcoinversus.tech/2026/10/04/osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion/">OSREC.002: Robot Jacobians</a></li><li><a href="https://bitcoinversus.tech/2026/10/05/osrec-003-inverse-kinematics-analytical-solutions-numerical-solvers-pseudoinverses-convergence/">OSREC.003: Inverse Kinematics</a></li><li><a href="https://bitcoinversus.tech/2026/10/06/osrec-004-robot-trajectory-planning-joint-space-cartesian-paths-time-scaling-velocity-acceleration-jerk/">OSREC.004: Robot Trajectory Planning</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Dynamics From Motion To Torque</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2026/10/04/osrec-001-robot-kinematics-coordinate-frames-forward-inverse-kinematics/">Robot kinematics</a> determines where a mechanism can move; dynamics determines the force or torque required to produce that motion. For independent joint coordinates <code>q</code>, a standard rigid-link model is <code>τ = M(q)q̈ + C(q,q̇)q̇ + g(q) + τf</code>. The vector <code>τ</code> contains actuator effort, <code>M(q)</code> is the configuration-dependent mass matrix, <code>C(q,q̇)q̇</code> contains velocity-dependent Coriolis and centrifugal effects, <code>g(q)</code> is gravity loading, and <code>τf</code> represents friction. Revolute-joint effort is measured in newton-metres; prismatic-joint effort is measured in newtons.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=1U6y_68CjeY","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=1U6y_68CjeY
+</div><figcaption class="wp-element-caption">Northwestern Robotics — Modern Robotics 8.1: Lagrangian Formulation of Dynamics.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Mass Matrix, Gravity, And Payload</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The mass matrix is not a fixed collection of motor inertias: it normally changes with joint configuration and includes off-diagonal coupling terms. A simple point mass <code>m</code> located a distance <code>r</code> from a rotational axis contributes <code>I = mr²</code> to rotational inertia. Moving the same mass farther from the axis therefore increases acceleration torque quadratically, while its gravity moment grows with the lever arm. A valid model must include the mounted <a href="https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/">tool and payload</a>, calibrated <a href="https://bitcoinversus.tech/2026/10/05/osrtc-003-robot-mastering-calibration-zero-position-encoders-reference-marks-recovery/">joint encoders</a>, the relevant <a href="https://bitcoinversus.tech/2026/10/06/robotics-humanoid-actuators-40-60-percent-hardware-cost-supply-chain/">actuator</a> limits, and the losses and ratios of the <a href="https://bitcoinversus.tech/2025/12/22/robotics-drive-systems/">drive system</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=7PFQou5l9do","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=7PFQou5l9do
+</div><figcaption class="wp-element-caption">Northwestern Robotics — Modern Robotics: Understanding the Mass Matrix.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Forward And Inverse Dynamics</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Inverse dynamics starts with <code>q</code>, <code>q̇</code>, and <code>q̈</code> and computes the effort <code>τ</code> required to follow the commanded motion. Forward dynamics starts with the current state and applied effort and solves <code>q̈ = M(q)⁻¹[τ − C(q,q̇)q̇ − g(q) − τf]</code>. Numerical software should solve the linear system rather than explicitly form <code>M⁻¹</code>. The recursive Newton–Euler algorithm evaluates inverse dynamics efficiently along a serial chain, making it suitable for trajectory analysis and real-time control.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=ZASVKAlegfQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=ZASVKAlegfQ
+</div><figcaption class="wp-element-caption">Northwestern Robotics — Modern Robotics 8.3: Newton–Euler Inverse Dynamics.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked Single-Joint Example</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a horizontal rotary link with effective inertia <code>I = 0.24 kg·m²</code>, angular acceleration <code>q̈ = 3.0 rad/s²</code>, viscous coefficient <code>b = 0.08 N·m·s/rad</code>, angular velocity <code>q̇ = 1.5 rad/s</code>, payload mass <code>m = 2.0 kg</code>, centre-of-mass radius <code>r = 0.30 m</code>, and angle <code>q = 30°</code> measured from the horizontal. Using <code>τ = Iq̈ + bq̇ + mgr cos(q)</code>, the inertia term is <code>0.72 N·m</code>, friction is <code>0.12 N·m</code>, gravity is approximately <code>5.10 N·m</code>, and total required torque is approximately <code>5.94 N·m</code>. The result demonstrates why slowing a trajectory reduces acceleration effort but does not remove static gravity demand.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=2rUWVdslaI4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=2rUWVdslaI4
+</div><figcaption class="wp-element-caption">Northwestern Robotics — Modern Robotics 8.2: Dynamics of a Single Rigid Body.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:code -->
+<pre class="wp-block-code" style="white-space:pre-wrap"><code>from math import cos, radians
+
+I = 0.24      # kg·m²
+q_ddot = 3.0  # rad/s²
+b = 0.08      # N·m·s/rad
+q_dot = 1.5   # rad/s
+m = 2.0       # kg
+r = 0.30      # m
+g = 9.81      # m/s²
+q = radians(30)
+
+tau_inertia = I * q_ddot
+tau_friction = b * q_dot
+tau_gravity = m * g * r * cos(q)
+tau_total = tau_inertia + tau_friction + tau_gravity
+
+print(f"Required torque: {tau_total:.2f} N·m")</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Computed-Torque Control</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Computed-torque control uses the dynamics model to cancel predicted nonlinear behavior and impose a simpler tracking-error response. With desired position <code>q<sub>d</sub></code>, desired velocity <code>q̇<sub>d</sub></code>, and desired acceleration <code>q̈<sub>d</sub></code>, define <code>e = q<sub>d</sub> − q</code> and command <code>τ = M(q)[q̈<sub>d</sub> + K<sub>d</sub>ė + K<sub>p</sub>e] + C(q,q̇)q̇ + g(q)</code>. Perfect cancellation is only theoretical: uncertain payloads, friction, backlash, elasticity, sensor noise, delay, saturation, and contact forces create model error. Gain selection must preserve stability and remain inside continuous torque, peak torque, speed, thermal, and braking limits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=MV-xBPP3H2k","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=MV-xBPP3H2k
+</div><figcaption class="wp-element-caption">Northwestern Robotics — Modern Robotics 11.4: Motion Control With Torque or Force Inputs.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Exercises</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Recalculate the worked example with the payload radius increased from <code>0.30 m</code> to <code>0.45 m</code>. Compare the gravity torque and point-mass inertia contribution.</li><li>Set <code>q̈ = 0</code> and <code>q̇ = 0</code>. Calculate the holding torque at <code>q = 0°</code>, <code>45°</code>, and <code>90°</code>.</li><li>Modify the Python example to evaluate angles from <code>0°</code> through <code>180°</code> in <code>15°</code> increments and report the maximum absolute torque.</li><li>For a two-joint model, explain why an off-diagonal mass-matrix term can make joint 1 torque change when only joint 2 acceleration changes.</li><li>Create a validation checklist covering payload data, encoder zero, friction, torque saturation, emergency braking, and temperature limits.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Which dynamics term maps joint acceleration to inertial effort?</li><li>What is the primary difference between forward and inverse dynamics?</li><li>Why can a slower motion still exceed an actuator's continuous torque rating?</li><li>Why should numerical software solve a linear system instead of explicitly calculating <code>M⁻¹</code>?</li><li>Name four effects that can make computed-torque cancellation imperfect.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Answer Key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>The mass matrix <code>M(q)</code>.</li><li>Forward dynamics computes acceleration from state and applied effort; inverse dynamics computes required effort from state and desired acceleration.</li><li>Static gravity torque and repeated thermal loading remain even when acceleration is reduced.</li><li>A direct linear solve is generally more accurate and efficient than constructing an explicit inverse.</li><li>Examples include payload uncertainty, friction, backlash, compliance, sensor noise, delay, saturation, and unmodeled contact forces.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">BitcoinVersus.Tech</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Editor’s Note</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This certificate lesson is an educational treatment of robot dynamics. Equations and software examples use idealized models and are not commissioning instructions for physical machinery.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Support And Donation</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Support independent technical education through the donation options published on BitcoinVersus.Tech.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Disclaimer</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Educational content only. Verify calculations, safety limits, manufacturer documentation, applicable standards, and site procedures before operating or modifying equipment.</p>
+<!-- /wp:paragraph -->

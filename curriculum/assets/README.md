@@ -1,6 +1,6 @@
 # Associated lesson assets
 
-816 original associated image/file assets. Exact original URLs and binary hashes are retained in [the manifest](manifest.json).
+818 original associated image/file assets. Exact original URLs and binary hashes are retained in [the manifest](manifest.json).
 
 | Asset | Lesson post IDs | Original |
 | --- | --- | --- |
@@ -820,3 +820,6 @@
 | [21547-osrtc-005-robot-io-plc-handshakes-colored-pencil-1200x630-1.png](./21547-osrtc-005-robot-io-plc-handshakes-colored-pencil-1200x630-1.png) | 21550 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrtc-005-robot-io-plc-handshakes-colored-pencil-1200x630-1.png) |
 | [21549-cpu-thermal-throttling-1200x630-1.png](./21549-cpu-thermal-throttling-1200x630-1.png) | 21552 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/cpu-thermal-throttling-1200x630-1.png) |
 | [21558-cpu-clock-speed-ipc-1200x630-1.png](./21558-cpu-clock-speed-ipc-1200x630-1.png) | 21561 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/cpu-clock-speed-ipc-1200x630-1.png) |
+
+| [21581-osrec-005-robot-dynamics-torque-control-1200x630-1.jpg](./21581-osrec-005-robot-dynamics-torque-control-1200x630-1.jpg) | 21565 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrec-005-robot-dynamics-torque-control-1200x630-1.jpg) |
+| [21570-osrec005-robot-dynamics-1200x630-1.jpg](./21570-osrec005-robot-dynamics-1200x630-1.jpg) | 21571 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrec005-robot-dynamics-1200x630-1.jpg) |

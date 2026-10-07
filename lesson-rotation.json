@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-07T19:52:04Z",
+  "updated_at": "2026-10-07T19:56:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,85 +25,37 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "robotics_engineer",
+    "subject": "data_center_technician",
     "lesson_number": 5,
-    "title": "OSREC.005: Robot Dynamics and Torque Control — Mass Matrices, Gravity, Inverse Dynamics, and Computed Torque",
-    "wordpress_post_id": 21565,
-    "live_url": "https://bitcoinversus.tech/2026/10/07/osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque/",
-    "archive_path": "archive/2026/10/osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque.md",
+    "title": "OSDCTC.005: Server Hardware Troubleshooting — POST, BMC Logs, DIMMs, Drives, PSUs, and Fault Isolation",
+    "wordpress_post_id": 21584,
+    "live_url": "https://bitcoinversus.tech/2026/10/07/osdctc-005-server-hardware-troubleshooting-post-bmc-logs-dimms-drives-psus-fault-isolation/",
+    "archive_path": "archive/2026/10/osdctc-005-server-hardware-troubleshooting-post-bmc-logs-dimms-drives-psus-fault-isolation.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
       "1freetech/opencert.tech"
-    ],
-    "duplicate_post_ids": [
-      21565,
-      21571
     ]
   },
   "next": {
-    "subject": "data_center_technician",
+    "subject": "data_center_engineer",
     "lesson_number": 5,
-    "title_format": "OSDCTC.005: {topic}",
+    "title_format": "OSDCEC.005: {topic}",
     "track_start": false,
-    "previous_lesson": "OSDCTC.004"
+    "previous_lesson": "OSDCEC.004"
   },
   "new_track_starts": {
-    "semiconductor_technician": {
-      "acronym": "OSSTC",
-      "lesson_number": 5,
-      "title_format": "OSSTC.005: {topic}"
-    },
-    "semiconductor_engineer": {
-      "acronym": "OSSEC",
-      "lesson_number": 5,
-      "title_format": "OSSEC.005: {topic}"
-    },
-    "robotics_technician": {
-      "acronym": "OSRTC",
-      "lesson_number": 5,
-      "title_format": "OSRTC.005: {topic}"
-    },
-    "robotics_engineer": {
-      "acronym": "OSREC",
-      "lesson_number": 5,
-      "title_format": "OSREC.005: {topic}"
-    },
-    "data_center_technician": {
-      "acronym": "OSDCTC",
-      "lesson_number": 5,
-      "title_format": "OSDCTC.005: {topic}"
-    },
-    "data_center_engineer": {
-      "acronym": "OSDCEC",
-      "lesson_number": 5,
-      "title_format": "OSDCEC.005: {topic}"
-    },
-    "fiber_optics_technician": {
-      "acronym": "OSFOTC",
-      "lesson_number": 5,
-      "title_format": "OSFOTC.005: {topic}"
-    },
-    "fiber_optics_engineer": {
-      "acronym": "OSFOEC",
-      "lesson_number": 5,
-      "title_format": "OSFOEC.005: {topic}"
-    },
-    "firmware_technician": {
-      "acronym": "OSFTC",
-      "lesson_number": 5,
-      "title_format": "OSFTC.005: {topic}"
-    },
-    "firmware_engineer": {
-      "acronym": "OSFEC",
-      "lesson_number": 5,
-      "title_format": "OSFEC.005: {topic}"
-    },
-    "history_money_technology_bitcoin": {
-      "acronym": "OSHistory",
-      "lesson_number": 6,
-      "title_format": "OSHistory.006: {topic}"
-    }
+    "semiconductor_technician": {"acronym":"OSSTC","lesson_number":5,"title_format":"OSSTC.005: {topic}"},
+    "semiconductor_engineer": {"acronym":"OSSEC","lesson_number":5,"title_format":"OSSEC.005: {topic}"},
+    "robotics_technician": {"acronym":"OSRTC","lesson_number":5,"title_format":"OSRTC.005: {topic}"},
+    "robotics_engineer": {"acronym":"OSREC","lesson_number":5,"title_format":"OSREC.005: {topic}"},
+    "data_center_technician": {"acronym":"OSDCTC","lesson_number":5,"title_format":"OSDCTC.005: {topic}"},
+    "data_center_engineer": {"acronym":"OSDCEC","lesson_number":5,"title_format":"OSDCEC.005: {topic}"},
+    "fiber_optics_technician": {"acronym":"OSFOTC","lesson_number":5,"title_format":"OSFOTC.005: {topic}"},
+    "fiber_optics_engineer": {"acronym":"OSFOEC","lesson_number":5,"title_format":"OSFOEC.005: {topic}"},
+    "firmware_technician": {"acronym":"OSFTC","lesson_number":5,"title_format":"OSFTC.005: {topic}"},
+    "firmware_engineer": {"acronym":"OSFEC","lesson_number":5,"title_format":"OSFEC.005: {topic}"},
+    "history_money_technology_bitcoin": {"acronym":"OSHistory","lesson_number":6,"title_format":"OSHistory.006: {topic}"}
   },
-  "numbering_note": "OSPython.027 is published; next OSPython.028. Linux Command #44 is published; next Linux Command #45. Windows Command #34 is published; next Windows Command #35. OSITC.002 is published; next OSITC.003. OSEEC.014 is published; next OSEEC.015. OSETC.029 is published; next OSETC.030. OSC++.023 is published; next OSC++.024. OSSTC.005 is published; next OSSTC.006. OSSEC.005 is published; next OSSEC.006. OSRTC.005 is published; next OSRTC.006. OSREC.005 is published; next OSREC.006. OSDCTC.004 is published; next OSDCTC.005. OSDCEC.004 is published; next OSDCEC.005. OSFOTC.004 is published; next OSFOTC.005. OSFOEC.004 is published; next OSFOEC.005. OSFTC.004 is published; next OSFTC.005. OSFEC.004 is published; next OSFEC.005. OSHistory.005 is published; next OSHistory.006. OSNTC.017 is published; next OSNTC.018. The global rotation advances to OSDCTC.005 after verified OSREC.005."
+  "numbering_note": "OSPython.027 is published; next OSPython.028. Linux Command #44 is published; next Linux Command #45. Windows Command #34 is published; next Windows Command #35. OSITC.002 is published; next OSITC.003. OSEEC.014 is published; next OSEEC.015. OSETC.029 is published; next OSETC.030. OSC++.023 is published; next OSC++.024. OSSTC.005 is published; next OSSTC.006. OSSEC.005 is published; next OSSEC.006. OSRTC.005 is published; next OSRTC.006. OSREC.005 is published; next OSREC.006. OSDCTC.005 is published; next OSDCTC.006. OSDCEC.004 is published; next OSDCEC.005. OSFOTC.004 is published; next OSFOTC.005. OSFOEC.004 is published; next OSFOEC.005. OSFTC.004 is published; next OSFTC.005. OSFEC.004 is published; next OSFEC.005. OSHistory.005 is published; next OSHistory.006. OSNTC.017 is published; next OSNTC.018. The global rotation advances to OSDCEC.005 after verified OSDCTC.005."
 }

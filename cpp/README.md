@@ -15,7 +15,7 @@ The C++ track progresses from language foundations through pointers, classes, re
 - `OSC++.020: Virtual Destructors and Polymorphic Cleanup`
 - [OSC++.021: Smart Pointers — unique_ptr, shared_ptr, weak_ptr, and Ownership](../archive/2026/10/oscpp-021-smart-pointers-unique-ptr-shared-ptr-weak-ptr-ownership.md) — WordPress post 20978.
 - [OSC++.022: Move Semantics — Rvalue References, std::move, Move Constructors, and Move Assignment](../archive/2026/10/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment.md) — WordPress post 21261.
-- [OSC++.023: Perfect Forwarding — Forwarding References, std::forward, Reference Collapsing, and Universal Constructors](../archive/2026/10/oscpp-023-perfect-forwarding-forwarding-references-std-forward-reference-collapsing-universal-constructors.md) — WordPress post 21501; seven unique live YouTube iframes, approved colored-pencil 1200×630 cover, elementary overview/conclusion, internal BitcoinVersus wiki links, and three-repository source match verified.
+- [OSC++.023: Perfect Forwarding — Forwarding References, std::forward, Reference Collapsing, and Universal Constructors](../archive/2026/10/oscpp-023-perfect-forwarding-forwarding-references-std-forward-reference-collapsing-universal-constructors.md) — WordPress post 21501; six unique live YouTube iframes, approved colored-pencil 1200×630 cover, elementary overview/conclusion, internal BitcoinVersus wiki links, and three-repository source match verified.
 
 ## Publishing rules
 

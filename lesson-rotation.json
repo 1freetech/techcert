@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-07T19:56:00Z",
+  "updated_at": "2026-10-07T20:38:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "data_center_technician",
+    "subject": "data_center_engineer",
     "lesson_number": 5,
-    "title": "OSDCTC.005: Server Hardware Troubleshooting — POST, BMC Logs, DIMMs, Drives, PSUs, and Fault Isolation",
-    "wordpress_post_id": 21584,
-    "live_url": "https://bitcoinversus.tech/2026/10/07/osdctc-005-server-hardware-troubleshooting-post-bmc-logs-dimms-drives-psus-fault-isolation/",
-    "archive_path": "archive/2026/10/osdctc-005-server-hardware-troubleshooting-post-bmc-logs-dimms-drives-psus-fault-isolation.md",
+    "title": "OSDCEC.005: Data Center Monitoring and Controls — BMS, EPMS, DCIM, SNMP, Modbus, Alarms, and Trending",
+    "wordpress_post_id": 21587,
+    "live_url": "https://bitcoinversus.tech/2026/10/07/osdcec-005-data-center-monitoring-controls-bms-epms-dcim-snmp-modbus-alarms-trending/",
+    "archive_path": "archive/2026/10/osdcec-005-data-center-monitoring-controls-bms-epms-dcim-snmp-modbus-alarms-trending.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "data_center_engineer",
+    "subject": "fiber_optics_technician",
     "lesson_number": 5,
-    "title_format": "OSDCEC.005: {topic}",
+    "title_format": "OSFOTC.005: {topic}",
     "track_start": false,
-    "previous_lesson": "OSDCEC.004"
+    "previous_lesson": "OSFOTC.004"
   },
   "new_track_starts": {
     "semiconductor_technician": {"acronym":"OSSTC","lesson_number":5,"title_format":"OSSTC.005: {topic}"},
@@ -57,5 +57,5 @@
     "firmware_engineer": {"acronym":"OSFEC","lesson_number":5,"title_format":"OSFEC.005: {topic}"},
     "history_money_technology_bitcoin": {"acronym":"OSHistory","lesson_number":6,"title_format":"OSHistory.006: {topic}"}
   },
-  "numbering_note": "OSPython.027 is published; next OSPython.028. Linux Command #44 is published; next Linux Command #45. Windows Command #34 is published; next Windows Command #35. OSITC.002 is published; next OSITC.003. OSEEC.014 is published; next OSEEC.015. OSETC.029 is published; next OSETC.030. OSC++.023 is published; next OSC++.024. OSSTC.005 is published; next OSSTC.006. OSSEC.005 is published; next OSSEC.006. OSRTC.005 is published; next OSRTC.006. OSREC.005 is published; next OSREC.006. OSDCTC.005 is published; next OSDCTC.006. OSDCEC.004 is published; next OSDCEC.005. OSFOTC.004 is published; next OSFOTC.005. OSFOEC.004 is published; next OSFOEC.005. OSFTC.004 is published; next OSFTC.005. OSFEC.004 is published; next OSFEC.005. OSHistory.005 is published; next OSHistory.006. OSNTC.017 is published; next OSNTC.018. The global rotation advances to OSDCEC.005 after verified OSDCTC.005."
+  "numbering_note": "OSPython.027 is published; next OSPython.028. Linux Command #44 is published; next Linux Command #45. Windows Command #34 is published; next Windows Command #35. OSITC.002 is published; next OSITC.003. OSEEC.014 is published; next OSEEC.015. OSETC.029 is published; next OSETC.030. OSC++.023 is published; next OSC++.024. OSSTC.005 is published; next OSSTC.006. OSSEC.005 is published; next OSSEC.006. OSRTC.005 is published; next OSRTC.006. OSREC.005 is published; next OSREC.006. OSDCTC.005 is published; next OSDCTC.006. OSDCEC.005 is published; next OSDCEC.006. OSFOTC.004 is published; next OSFOTC.005. OSFOEC.004 is published; next OSFOEC.005. OSFTC.004 is published; next OSFTC.005. OSFEC.004 is published; next OSFEC.005. OSHistory.005 is published; next OSHistory.006. OSNTC.017 is published; next OSNTC.018. The global rotation advances to OSFOTC.005 after verified OSDCEC.005."
 }

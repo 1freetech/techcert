@@ -8904,6 +8904,1020 @@
       "byte_count": 2131426,
       "sha256": "49853d327af5b3d7660caef48c346d731cb3345ce0430d1466cdf88c2f6ea677",
       "git_blob_sha": "05466d0b83c2f6579112ec34849e00a6f622c6ed"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osstc-005-semiconductor-pneumatic-systems-colored-pencil-1200x630-1.png",
+      "lesson_post_ids": [
+        21521
+      ],
+      "media_id": 21519,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21519-osstc-005-semiconductor-pneumatic-systems-colored-pencil-1200x630-1.png",
+      "byte_count": 608973,
+      "sha256": "f653f7a22c70036b9cc8bc821a09520c8d464669e3b5c920efec35d99dffb227",
+      "git_blob_sha": "c4bd8f0a41d5f1a02f6713b70f6b2784605a4288"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ethernet-mtu-jumbo-frames-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21517
+      ],
+      "media_id": 21516,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21516-ethernet-mtu-jumbo-frames-1200x630-1.jpg",
+      "byte_count": 234524,
+      "sha256": "d1faa5d1ad67a76194274a63f53b3afee3b3e9501f755895aff8ffccbd0c0a2e",
+      "git_blob_sha": "bb37d11580e190a4c0ca6f7053bc6c008e1c7596"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/oscpp-023-perfect-forwarding-colored-pencil-1200x630-1.png",
+      "lesson_post_ids": [
+        21501
+      ],
+      "media_id": 21514,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21514-oscpp-023-perfect-forwarding-colored-pencil-1200x630-1.png",
+      "byte_count": 596018,
+      "sha256": "196ca8d40a2c6e249773173ee7209d3f12f94e41f0e7bb45de18c5b560bc0abe",
+      "git_blob_sha": "cbcb906e6bb7574be37e7e15f323df89b5846e6a"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osetc-029-rtd-thermocouple-colored-pencil-1200x630-1.png",
+      "lesson_post_ids": [
+        21482
+      ],
+      "media_id": 21495,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21495-osetc-029-rtd-thermocouple-colored-pencil-1200x630-1.png",
+      "byte_count": 549813,
+      "sha256": "e0428f0de4bff56539c311ce4463d3e023c7767fd1c5ded8b13a7c44537fd321",
+      "git_blob_sha": "8da7b453e8caf4db193dde535407bbd453217ba3"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoin-asic-wall-efficiency-1200x630-1.png",
+      "lesson_post_ids": [
+        21485
+      ],
+      "media_id": 21483,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21483-bitcoin-asic-wall-efficiency-1200x630-1.png",
+      "byte_count": 482036,
+      "sha256": "fb2cccfe8d5de64630a048cb2e4e16d22039b83f0721d2728450bca524b3d0bf",
+      "git_blob_sha": "c175fdb46354e849fd69690b6d68e9e299a394d6"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ositc-002-storage-file-systems-color-pencil-cover.jpg",
+      "lesson_post_ids": [
+        21452
+      ],
+      "media_id": 21464,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21464-ositc-002-storage-file-systems-color-pencil-cover.jpg",
+      "byte_count": 494533,
+      "sha256": "c695b9d6d36fdfbeeb9721802f7077670edc85991633c0078dff52b0e9a530eb",
+      "git_blob_sha": "06bf58465c2f3474ed578d251fe75c9601640a4c"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/oseec-014-arc-flash-engineering-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21459
+      ],
+      "media_id": 21457,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21457-oseec-014-arc-flash-engineering-cover-1200x630-1.jpg",
+      "byte_count": 300030,
+      "sha256": "e985907b53dced7e22c1c5268cafc6cebcfb309f0a713db79d497e1297e6a204",
+      "git_blob_sha": "020eb5785d2ab51bfa822d83b24c13f456894e54"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/windows-command-34-sc-query-cover.jpg",
+      "lesson_post_ids": [
+        21448
+      ],
+      "media_id": 21446,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21446-windows-command-34-sc-query-cover.jpg",
+      "byte_count": 127849,
+      "sha256": "f443b4755f53410371ad3f45de2a3f13a8b104e62928b21b82b9f6b5cd1e8e70",
+      "git_blob_sha": "ded5b05181f6477570b40d699833e56c3a4a3bc0"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-command-44-chage-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21444
+      ],
+      "media_id": 21441,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21441-linux-command-44-chage-cover-1200x630-1.jpg",
+      "byte_count": 282412,
+      "sha256": "84ff9da925e8ac4fc1e3b90966f826df939525936193f31abcbb1f6ebb8f7144",
+      "git_blob_sha": "97c35993372962310d472a32211aab9fb0c3f43a"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/networking-packet-loss-jitter-cover.jpg",
+      "lesson_post_ids": [
+        21443
+      ],
+      "media_id": 21442,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21442-networking-packet-loss-jitter-cover.jpg",
+      "byte_count": 188117,
+      "sha256": "7144fed9f41480b8b6284cff25e89fd3dd13747a3b21c0746a1cbc741ebd656e",
+      "git_blob_sha": "a12c3392eaccc1343d58fd74112d1deee8d28b72"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/volts-amps-ohms-watts-cover.jpg",
+      "lesson_post_ids": [
+        21438
+      ],
+      "media_id": 21436,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21436-volts-amps-ohms-watts-cover.jpg",
+      "byte_count": 199826,
+      "sha256": "6beae1fc4fa8968798a71e200c92ec952eb60e4015af258548605b1de3f1492d",
+      "git_blob_sha": "2bbc923045fb011c89ca5bac848b5c1801dc5064"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/energy-what-is-substation-cover.jpg",
+      "lesson_post_ids": [
+        21428
+      ],
+      "media_id": 21427,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21427-energy-what-is-substation-cover.jpg",
+      "byte_count": 325463,
+      "sha256": "9257f6372231fe876982b28cfa2c8c2ca543f7811786c42f32c0ab4b671eadfe",
+      "git_blob_sha": "feaab6cff19cf37c7b66e1b3c921f94646193309"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoin-mining-hashprice-cover.jpg",
+      "lesson_post_ids": [
+        21426
+      ],
+      "media_id": 21424,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21424-bitcoin-mining-hashprice-cover.jpg",
+      "byte_count": 293939,
+      "sha256": "5a444fd6933c130258dfa8cd95dbaecd72a1c67a3582e28d74146b8b447b02bb",
+      "git_blob_sha": "bcad0c750fd86dbb1cbe80889395568cf545559b"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ospython-027-http-rest-api-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21419
+      ],
+      "media_id": 21418,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21418-ospython-027-http-rest-api-cover-1200x630-1.jpg",
+      "byte_count": 275526,
+      "sha256": "4be6c8a2e92e6cd74063491e8a437c78d8b4e261b4bcfaaa3e22d4650a7987ff",
+      "git_blob_sha": "92673173e24f6c98391cf0bb889a8dcc9864ce0b"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ai-training-vs-inference-cover.jpg",
+      "lesson_post_ids": [
+        21410
+      ],
+      "media_id": 21407,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21407-ai-training-vs-inference-cover.jpg",
+      "byte_count": 315736,
+      "sha256": "bc3223d9f8282f74c4c3e12947349bfd1601ab3ecf597f95b8c869c6a4f8aee3",
+      "git_blob_sha": "304eda9849263577a83311d3b9ee00408876b7ac"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osntc-017-copper-ethernet-cabling-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21401
+      ],
+      "media_id": 21399,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21399-osntc-017-copper-ethernet-cabling-cover-1200x630-1.jpg",
+      "byte_count": 261140,
+      "sha256": "72f5864dc47fd0e81bb269647636f7d393be5648cb1e03a6cf692a25507c750d",
+      "git_blob_sha": "b110cad8ccae3a3fc9d063a008381b6cceee077d"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/semiconductor-wafer-yield-cover.jpg",
+      "lesson_post_ids": [
+        21400
+      ],
+      "media_id": 21398,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21398-semiconductor-wafer-yield-cover.jpg",
+      "byte_count": 218942,
+      "sha256": "84afae81c50ad12501515a5c2e9da4009b35020b10d197cd4c0c17e27a6c4e74",
+      "git_blob_sha": "def6c03dc75873ac3a97a01c9c878edc74fd51c1"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/oshistory-005-bank-runs-central-banking-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21389
+      ],
+      "media_id": 21387,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21387-oshistory-005-bank-runs-central-banking-cover-1200x630-1.jpg",
+      "byte_count": 325985,
+      "sha256": "008b063e7d4eaa8e6bcc9d3389e08e21dba83c34dea4eb646970a09903a22191",
+      "git_blob_sha": "9af234e7283bcd8509fcead68c21a34938353486"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/networking-top-of-rack-switch-cover.jpg",
+      "lesson_post_ids": [
+        21385
+      ],
+      "media_id": 21383,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21383-networking-top-of-rack-switch-cover.jpg",
+      "byte_count": 245375,
+      "sha256": "13f60980910119539991e26a794dbd14795ad6d9d3daa7f9822635ef2e67be9d",
+      "git_blob_sha": "3b1c4f411e171a4e705714c47a8513ce95edf452"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/energy-power-factor-cover.jpg",
+      "lesson_post_ids": [
+        21382
+      ],
+      "media_id": 21380,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21380-energy-power-factor-cover.jpg",
+      "byte_count": 265570,
+      "sha256": "bc2f2f52b6b6815eb257b7c3a35fde2bab81dc825e2fd93551accd45f2182b93",
+      "git_blob_sha": "57bc8f80beda0b6f8608e95022cc93a6cd6d1438"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/data-center-busway-evergreen-cover.jpg",
+      "lesson_post_ids": [
+        21376
+      ],
+      "media_id": 21375,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21375-data-center-busway-evergreen-cover.jpg",
+      "byte_count": 221722,
+      "sha256": "d0e01434a65f72c23fd4f2f5cfcb367acfec5c3fde57f0fd3eeaa1b9ef08692b",
+      "git_blob_sha": "68553335539ed2159a6871efc988f244580cbc41"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osfec-004-linker-startup-memory-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21374
+      ],
+      "media_id": 21373,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21373-osfec-004-linker-startup-memory-cover-1200x630-1.jpg",
+      "byte_count": 266174,
+      "sha256": "e0e1847490105c6ce56120b9b19099ae6292341e210425702ea94b21c6793dc5",
+      "git_blob_sha": "80b5b3945a0855332a0e9226089d81b5d76454cf"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/evergreen-raid-storage-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21370
+      ],
+      "media_id": 21369,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21369-evergreen-raid-storage-1200x630-1.jpg",
+      "byte_count": 273437,
+      "sha256": "9e8f734d8821c6e690d58ea412236c397730950d7ace277439b9916f4a403888",
+      "git_blob_sha": "89980885368f5e4fe004a4021ed363645223ca53"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/or-nah-smr-data-centers-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21368
+      ],
+      "media_id": 21367,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21367-or-nah-smr-data-centers-1200x630-1.jpg",
+      "byte_count": 404379,
+      "sha256": "64ef9eaa275dddca0683597e2a7ff74b6c0c9e6b436b8821ffe62307c9a68246",
+      "git_blob_sha": "bf75745184099b8437727bab635e56604ffcf4e0"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osftc-004-firmware-flashing-interfaces-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21363
+      ],
+      "media_id": 21362,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21362-osftc-004-firmware-flashing-interfaces-cover-1200x630-1.jpg",
+      "byte_count": 122479,
+      "sha256": "7bb9c63e8531a6709df46a7dfe07ff1cc1534766bdf7a2ded5d87fe52ed53b0f",
+      "git_blob_sha": "2af338e510500fd787bacab5d97ff8bcc2c94dfe"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osfoec-004-nrz-pam4-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21361
+      ],
+      "media_id": 21358,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21358-osfoec-004-nrz-pam4-cover-1200x630-1.jpg",
+      "byte_count": 109760,
+      "sha256": "0b4a6971d3a834544dcd1fc7434d1d8ab10f61a48859fddfa1a68259a92c803d",
+      "git_blob_sha": "d242a120efdb52366030bf1901a9eef4b8b0fb7e"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoin-grid-or-nah-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21355
+      ],
+      "media_id": 21352,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21352-bitcoin-grid-or-nah-1200x630-1.jpg",
+      "byte_count": 328273,
+      "sha256": "bb84b94780a25aab545066a30d1ae7eddf1a8b7c192ef189ab9615536ca07dd2",
+      "git_blob_sha": "c3250267086f97cd0ab5a3bc0d6831a4084123c6"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osfotc-004-fiber-connectors-polarity-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21351
+      ],
+      "media_id": 21349,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21349-osfotc-004-fiber-connectors-polarity-cover-1200x630-1.jpg",
+      "byte_count": 185876,
+      "sha256": "b4b2147615d6480621f77575eeb7a248debfc1c9807bc6a509f8d39affe7b354",
+      "git_blob_sha": "f596ebbd5af560495f3a6f3a3dc6385e4d3092fb"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/easy-tech-motherboard-chipset-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21348
+      ],
+      "media_id": 21346,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21346-easy-tech-motherboard-chipset-1200x630-1.jpg",
+      "byte_count": 343570,
+      "sha256": "287ced6d05231d7d6261e90cb2a7f0f72782f4a3743c5356ca5ec91e550d4118",
+      "git_blob_sha": "e657bf875fc63faea0f9d40922ce7c54a845387c"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/solar-data-center-or-nah-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21347
+      ],
+      "media_id": 21345,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21345-solar-data-center-or-nah-1200x630-1.jpg",
+      "byte_count": 345538,
+      "sha256": "6b00a3ea7e3a632a7306cdf5b8c75b3834f072b7ff61eea62272febf609893a2",
+      "git_blob_sha": "15ea868067bf263be28d48af663a26f0a6b3962d"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osdcec-004-data-center-electrical-distribution-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21344
+      ],
+      "media_id": 21342,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21342-osdcec-004-data-center-electrical-distribution-cover-1200x630-1.jpg",
+      "byte_count": 257276,
+      "sha256": "2a6a5c738d74fb0013a9fc0be88b9f8ffafda9ce7308605956f3cca7f44fbcb4",
+      "git_blob_sha": "7139a283b9925b397dceb7e5d84da8a22da400d5"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/data-center-waste-heat-or-nah-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21343
+      ],
+      "media_id": 21341,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21341-data-center-waste-heat-or-nah-1200x630-1.jpg",
+      "byte_count": 305329,
+      "sha256": "7e3ac4ca556418857c514564bfa0bdefe54ac83ee3ba3daffed65ea02c067269",
+      "git_blob_sha": "d1c4719ea2743e5bdaf7a61046c2749eb2a608d7"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/off-grid-data-center-or-nah-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21338
+      ],
+      "media_id": 21337,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21337-off-grid-data-center-or-nah-1200x630-1.jpg",
+      "byte_count": 359891,
+      "sha256": "eb2340eb41de12664c7637fbf83172aea9a562d70828466184556488586003cc",
+      "git_blob_sha": "9c47edb28d211e6405b960e4fe81d0518140e843"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/or-nah-lightning-energy-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21333
+      ],
+      "media_id": 21332,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21332-or-nah-lightning-energy-1200x630-1.jpg",
+      "byte_count": 266194,
+      "sha256": "3a1c189f39a4b3a0834b847bd4cc0ffae71afd49f9fcff243e6a67ce8bcb278f",
+      "git_blob_sha": "2d6a356dacacb425000013683f707b448239a5b8"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osdctc-004-rack-and-stack-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21329
+      ],
+      "media_id": 21327,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21327-osdctc-004-rack-and-stack-cover-1200x630-1.jpg",
+      "byte_count": 199275,
+      "sha256": "f1d1205a9b21a6c32cc4d490ff85aeb5c16c2670bf6625db533e00dfa3f1841d",
+      "git_blob_sha": "7d409776f1021442568dd0b59a7ebb26e8d2d2a5"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/yellowstone-geothermal-energy-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21326
+      ],
+      "media_id": 21325,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21325-yellowstone-geothermal-energy-1200x630-1.jpg",
+      "byte_count": 317919,
+      "sha256": "a98bcde3a47a13b48239fc33987ed08034b5714a31038312fca311274e31e945",
+      "git_blob_sha": "49ab90dabb1168f0584f1f9f96d70f35622cb6f4"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrec-004-trajectory-planning-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21321
+      ],
+      "media_id": 21319,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21319-osrec-004-trajectory-planning-cover-1200x630-1.jpg",
+      "byte_count": 219013,
+      "sha256": "1423924776e13b0881a89b5543b603febfabc9e820292f8007bbb1c0ae01c1cd",
+      "git_blob_sha": "38f7e283c35717b3bbdabfcc2ced1cf2e132a49a"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/cybersecurity-hacker-hats-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21313
+      ],
+      "media_id": 21312,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21312-cybersecurity-hacker-hats-1200x630-1.jpg",
+      "byte_count": 310823,
+      "sha256": "13ac57132855dcb508d903f68e5953ed02406a25ef9a2308f7bf41f3ce9d488a",
+      "git_blob_sha": "1deaec6dc180048c572547bfe3cbe08ef89273e6"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/cpu-program-execution-cover-1200x630-1.png",
+      "lesson_post_ids": [
+        21309
+      ],
+      "media_id": 21302,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21302-cpu-program-execution-cover-1200x630-1.png",
+      "byte_count": 1033987,
+      "sha256": "7af92a19a19f5e2c8e07f191ea379471b01221ec04572d2abe1ee76652b92e35",
+      "git_blob_sha": "b94e49bf60ef487f8f4e1af9e6c78999be4439da"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrtc-004-end-effectors-tcp-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21295
+      ],
+      "media_id": 21291,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21291-osrtc-004-end-effectors-tcp-cover-1200x630-1.jpg",
+      "byte_count": 210667,
+      "sha256": "28f65e2e20e91e342a204da7a099e40efc4da50349e39f3086e675505d70afd6",
+      "git_blob_sha": "266ac6406e76002907dbedb8f56f254ede55bc9b"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/process-thread-cover-1200x630-1.png",
+      "lesson_post_ids": [
+        21293
+      ],
+      "media_id": 21292,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21292-process-thread-cover-1200x630-1.png",
+      "byte_count": 887188,
+      "sha256": "3878de8f5a4f10116598dcbdbe34215794ea99a1d7ad142f8490b4cd45090223",
+      "git_blob_sha": "d551f65c7c83b596ea6647172c7629de17f5347b"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/browser-web-journey-cover-1200x630-1.png",
+      "lesson_post_ids": [
+        21288
+      ],
+      "media_id": 21287,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21287-browser-web-journey-cover-1200x630-1.png",
+      "byte_count": 978295,
+      "sha256": "fca1c7179fe1e096933749e9eac104f14a2e0d2685874c3e8057db85ef6f1c12",
+      "git_blob_sha": "1883fbd6b20b105ee0ceabcc28338334ac9edde9"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ossec-004-diode-iv-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21276
+      ],
+      "media_id": 21275,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21275-ossec-004-diode-iv-cover-1200x630-1.jpg",
+      "byte_count": 78102,
+      "sha256": "35a0cd0b010c9ce95e6484240e53c9ea5b73d672efd6450511a76ea010878683",
+      "git_blob_sha": "1acc9271badd83aa4c39813e4d7eff4fd615066a"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/device-driver-cover-1200x630-1.png",
+      "lesson_post_ids": [
+        21283
+      ],
+      "media_id": 21282,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21282-device-driver-cover-1200x630-1.png",
+      "byte_count": 866679,
+      "sha256": "fe57601b45144f7d43c7b5f5d11bce3734a2ad7838ccef8fdf86359a75b1d256",
+      "git_blob_sha": "194ad80e4d500fd2d116c88948f0849ae15e59ea"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/pc-power-button-boot-process-1200x630-1.png",
+      "lesson_post_ids": [
+        21270
+      ],
+      "media_id": 21269,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21269-pc-power-button-boot-process-1200x630-1.png",
+      "byte_count": 1062076,
+      "sha256": "21a409d900e269f091f62584aae592ccda1971ffd2e27964ddd0228507c1ce41",
+      "git_blob_sha": "c100e700bbe04c383dda1d1ab429a5aaa4c255c6"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osstc-004-gas-delivery-systems-cover.jpg",
+      "lesson_post_ids": [
+        21267
+      ],
+      "media_id": 21266,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21266-osstc-004-gas-delivery-systems-cover.jpg",
+      "byte_count": 113993,
+      "sha256": "19aff6923d732bf983738ad4f3d416223183fb55edd361298ffe8cba67b65ab0",
+      "git_blob_sha": "ab19c7e99bc597d3bc711ee3a2240ee695dc4a45"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ssd-inside-nand-controller-dram-cache-1200x630-1.png",
+      "lesson_post_ids": [
+        21262
+      ],
+      "media_id": 21260,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21260-ssd-inside-nand-controller-dram-cache-1200x630-1.png",
+      "byte_count": 1048983,
+      "sha256": "27d857d574009291a643beaad685a5fd67f70c117130288d22812fdd731ff6cc",
+      "git_blob_sha": "d4a607055e51755adc855e7d55b59d9affcb76f8"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/oscpp-022-move-semantics-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21261
+      ],
+      "media_id": 21259,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21259-oscpp-022-move-semantics-cover-1200x630-1.jpg",
+      "byte_count": 84526,
+      "sha256": "0258895aefb6a8bed6fc6587ff12903821b355bd5a0c2c59c4328c0b32f1b71d",
+      "git_blob_sha": "f710ae5c42b8f6fb25e316258728ffd5820aaf7c"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osetc-028-0-10v-analog-signals-cover.jpg",
+      "lesson_post_ids": [
+        21257
+      ],
+      "media_id": 21256,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21256-osetc-028-0-10v-analog-signals-cover.jpg",
+      "byte_count": 71215,
+      "sha256": "8b1d8b27104aeb463e3d947ce18b576fb775c81dd0e8c31430d946652af9117a",
+      "git_blob_sha": "5a5d0b1be523c6d8e293849ffc6ca65bc9bdcd68"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/oseec-013-protective-relaying-fundamentals-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21252
+      ],
+      "media_id": 21250,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21250-oseec-013-protective-relaying-fundamentals-cover-1200x630-1.jpg",
+      "byte_count": 199800,
+      "sha256": "5b3ae2eef5fd794ff6163375d1084e9f7e8ff51aa7a48670dc5cd2311e60904b",
+      "git_blob_sha": "566ed368cd574d218483c965f1dff078c64d927b"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/cpu-gpu-npu-easy-tech-read-1200x630-1.png",
+      "lesson_post_ids": [
+        21249
+      ],
+      "media_id": 21246,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21246-cpu-gpu-npu-easy-tech-read-1200x630-1.png",
+      "byte_count": 1111999,
+      "sha256": "e90761291d1a3387b98b1bef9e32a18c9d81838fc0e1e3b77245c882b049b4a9",
+      "git_blob_sha": "4b90e2733a15c26668df37214151ab3f431e8cc4"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/os-itc-001-it-systems-fundamentals-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21228
+      ],
+      "media_id": 21226,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21226-os-itc-001-it-systems-fundamentals-cover-1200x630-1.jpg",
+      "byte_count": 181874,
+      "sha256": "57314da832d30b281d3f7b2721f5c2ace9e576ee090c9ef0cfde43eb4833a1a0",
+      "git_blob_sha": "bb4da21d3fdd0bc56ec0154c26898fedf1a2c849"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/networking-bandwidth-throughput-latency-1200x630-1.png",
+      "lesson_post_ids": [
+        21245
+      ],
+      "media_id": 21242,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21242-networking-bandwidth-throughput-latency-1200x630-1.png",
+      "byte_count": 1036258,
+      "sha256": "ae3b041f2ec41c43892ea7541e092c08fc6c58ea8573a079576b3aa5820bb24c",
+      "git_blob_sha": "6c7ca3699586caab8aa5c0e3171c9bc0357c017a"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/energy-capacity-factor-explained-bitcoinversus-cover.jpg",
+      "lesson_post_ids": [
+        21232
+      ],
+      "media_id": 21230,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21230-energy-capacity-factor-explained-bitcoinversus-cover.jpg",
+      "byte_count": 284182,
+      "sha256": "ac6c41a25992569ffd8c0048d21149d4e8348ffb4fca5bb018c912406b89069f",
+      "git_blob_sha": "2f9a2cf4a2453faf091ed74ca418cbea7388e421"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/capacity-factor-what-100mw-means-1200x630-2.png",
+      "lesson_post_ids": [
+        21229
+      ],
+      "media_id": 21227,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21227-capacity-factor-what-100mw-means-1200x630-2.png",
+      "byte_count": 897436,
+      "sha256": "e053c74569f805000dfb867397be820555aac1791cf8265dbb2a52398c9c0032",
+      "git_blob_sha": "b6d22857427109f22f97386bffc2d5e4b37fe852"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/clean-vs-renewable-energy-bitcoinversus-cover.jpg",
+      "lesson_post_ids": [
+        21222
+      ],
+      "media_id": 21220,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21220-clean-vs-renewable-energy-bitcoinversus-cover.jpg",
+      "byte_count": 321412,
+      "sha256": "98dd07f44954ab6c7b415b0014b39e0aec3004080dc32f225092e2f13cf9e7e6",
+      "git_blob_sha": "a9f7d7419e31a4f3f309d8fb1e44a661d8eb8868"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/stranded-energy-bitcoin-mining-cover-1200x630-1.png",
+      "lesson_post_ids": [
+        21219
+      ],
+      "media_id": 21218,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21218-stranded-energy-bitcoin-mining-cover-1200x630-1.png",
+      "byte_count": 1065285,
+      "sha256": "937d442ef8324ecd1d7830a3f758af8d06a4bf19bf1b380459c18310a6892e3b",
+      "git_blob_sha": "512124118676f99658213b27c1128b48efefe33b"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/windows-command-33-net-start-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21210
+      ],
+      "media_id": 21208,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21208-windows-command-33-net-start-cover-1200x630-1.jpg",
+      "byte_count": 164900,
+      "sha256": "d2e4361ebe1121f267ac9d1e497b1adf69824fdc0d88fb4dff886f44f3f0170d",
+      "git_blob_sha": "4de211ccd81b0598b954d937b933ef8733f11bfe"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-command-43-userdel-cover-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21204
+      ],
+      "media_id": 21203,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21203-linux-command-43-userdel-cover-1200x630-1.jpg",
+      "byte_count": 190289,
+      "sha256": "af3e85ecdd4dba5b8a539db283f280fc37d80fcd185c1754f1b134b7000f0bc8",
+      "git_blob_sha": "9795b2db0917412b0faf58e7633d44a91a656b0c"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ospython-026-json-realistic-cover.png",
+      "lesson_post_ids": [
+        21182
+      ],
+      "media_id": 21189,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21189-ospython-026-json-realistic-cover.png",
+      "byte_count": 645840,
+      "sha256": "c4d2b469d2f57990a989c81a21471e44bdd637110af6af1f46de5cefb0d87cb6",
+      "git_blob_sha": "9ac05a019c9d7a997d4fd1c4025b39cd2898e234"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osntc-016-ipv6-addressing-neighbor-discovery-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21169
+      ],
+      "media_id": 21167,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21167-osntc-016-ipv6-addressing-neighbor-discovery-1200x630-1.jpg",
+      "byte_count": 263796,
+      "sha256": "c50ff240538351bf8f5d759e085a513f95c0aef9e39f97af3c9cc03ef9723d7c",
+      "git_blob_sha": "5e9e7303887ad82e982811d717d5bfb0be8f7b12"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/oshistory-004-early-banking-ledger-money-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21162
+      ],
+      "media_id": 21159,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21159-oshistory-004-early-banking-ledger-money-1200x630-1.jpg",
+      "byte_count": 292096,
+      "sha256": "cf207219e3a7dcd756fdac74245070a77a566121dbb303db96b31314730d480f",
+      "git_blob_sha": "48bd6da60f67800e78db4e189a56631de570d593"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osfec-003-cover-1200x630-1.png",
+      "lesson_post_ids": [
+        21131
+      ],
+      "media_id": 21130,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21130-osfec-003-cover-1200x630-1.png",
+      "byte_count": 1082625,
+      "sha256": "064d754c6322e3e67a82e29ce7ab2904a495db9156b165523943d100b43ea4fd",
+      "git_blob_sha": "bdc40990aae483425b7b005de1118eefb1167279"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/mw-vs-mwh-explained-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21125
+      ],
+      "media_id": 21121,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21121-mw-vs-mwh-explained-1200x630-1.jpg",
+      "byte_count": 296542,
+      "sha256": "95ce463c9632d30f9e274cd78e29d88a7c98e431cbbd47c56cc417457a23377f",
+      "git_blob_sha": "44d67ac1ee6f00ff7c36c916ced08dbd574d72b8"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osftc-003-firmware-backup-recovery-cover.png",
+      "lesson_post_ids": [
+        21113
+      ],
+      "media_id": 21108,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21108-osftc-003-firmware-backup-recovery-cover.png",
+      "byte_count": 900623,
+      "sha256": "c2fb283bedf55a3e53c8961fa67917f492c5b177ee29797c4b9fd2177211a6a9",
+      "git_blob_sha": "dda8b641d20fbfb1401e64726f01fa7324b84a7d"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/behind-the-meter-explained-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21116
+      ],
+      "media_id": 21114,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21114-behind-the-meter-explained-1200x630-1.jpg",
+      "byte_count": 340829,
+      "sha256": "032f45da1a68ab8abcf9c143b1cc8875ba337e70fd1969e532b5370544e7b611",
+      "git_blob_sha": "0d33cb4b2f566f71138b5e026355035a4e05ef34"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osfoec-003-optical-transceiver-selection-cover.png",
+      "lesson_post_ids": [
+        21099
+      ],
+      "media_id": 21095,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21095-osfoec-003-optical-transceiver-selection-cover.png",
+      "byte_count": 899065,
+      "sha256": "eea2b8ba30527b1b4daaaeb7037e14acaca8c662b7f77b2bfed31b7f45925e5c",
+      "git_blob_sha": "1ed684b9c2ea298d2a50c361196e6b1018358a50"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osfotc-003-otdr-field-testing-launch-receive-range-pulse-width-events-fault-location.png",
+      "lesson_post_ids": [
+        21093
+      ],
+      "media_id": 21091,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21091-osfotc-003-otdr-field-testing-launch-receive-range-pulse-width-events-fault-location.png",
+      "byte_count": 398321,
+      "sha256": "f1611d53f897c982d726938ee593540eaa9c9dc873609aace2c45cfa42b7900d",
+      "git_blob_sha": "0a49ae93f939b8c658ba94e57a516f0f3ca8a831"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osdcec-003-data-center-cooling-engineering-airflow-deltat-psychrometrics-liquid-cooling.png",
+      "lesson_post_ids": [
+        21077
+      ],
+      "media_id": 21076,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21076-osdcec-003-data-center-cooling-engineering-airflow-deltat-psychrometrics-liquid-cooling.png",
+      "byte_count": 311492,
+      "sha256": "a303ef7189c530fdad9e84cdcf65a7f49a047cf55361909427c4fe82328dd46a",
+      "git_blob_sha": "a4dae7d421d11142b029adcbe67b47cc80d807f0"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osdctc-003-structured-cabling-patch-panels-t568b-fiber-verification.png",
+      "lesson_post_ids": [
+        21053
+      ],
+      "media_id": 21047,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21047-osdctc-003-structured-cabling-patch-panels-t568b-fiber-verification.png",
+      "byte_count": 288506,
+      "sha256": "c47030dbc15e5c50ac42b8fce5a39c0e82e67e7cdec8bdc696fdcd54b9aae344",
+      "git_blob_sha": "88802075ae894183e4bb097418cdcfce0e7ecadc"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/energy-electric-planes-battery-density-1200x630-1.jpg",
+      "lesson_post_ids": [
+        21042
+      ],
+      "media_id": 21041,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21041-energy-electric-planes-battery-density-1200x630-1.jpg",
+      "byte_count": 188887,
+      "sha256": "3cc61c93938f8d27ef1fdf4127f687fbe3eb0d4cc7dbdf132efa1b456dabd042",
+      "git_blob_sha": "0f428db60203c3aae75f923b52010ecf47cb1d85"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrec-003-inverse-kinematics-target-pose-numerical-solvers.png",
+      "lesson_post_ids": [
+        21027
+      ],
+      "media_id": 21021,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/21021-osrec-003-inverse-kinematics-target-pose-numerical-solvers.png",
+      "byte_count": 240636,
+      "sha256": "15e54a1222de61f32554d6d60167b7c3cae82ada306cf29c294290123c191cd3",
+      "git_blob_sha": "f80dd1fb485dc0137d7a43144e0181d78885248f"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ossec-003-pn-junction-electrostatics-cover.jpg",
+      "lesson_post_ids": [
+        20990
+      ],
+      "media_id": 20988,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/20988-ossec-003-pn-junction-electrostatics-cover.jpg",
+      "byte_count": 324350,
+      "sha256": "958fd39acbf0ee7d34587933e0c8bdec6e948359a8efa174aa4aab9bad141989",
+      "git_blob_sha": "f5bd3535a5d310e19527fdc71619d198a15b963a"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrtc-003-robot-mastering-zero-position-encoders-calibration.png",
+      "lesson_post_ids": [
+        20996
+      ],
+      "media_id": 20995,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/20995-osrtc-003-robot-mastering-zero-position-encoders-calibration.png",
+      "byte_count": 386501,
+      "sha256": "c1e3399a087756a11b4a9fd144096ba3f9e50cfaca489a02b5582ba9536cc01f",
+      "git_blob_sha": "97a08e6ae5e0d43917ffcbddb205147896222e21"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/oscpp-021-smart-pointers-ownership.png",
+      "lesson_post_ids": [
+        20978
+      ],
+      "media_id": 20977,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/20977-oscpp-021-smart-pointers-ownership.png",
+      "byte_count": 748541,
+      "sha256": "1dedd189bc73d5f80b10a25db16e056eb12af525a1355e00144adddfe592e0fb",
+      "git_blob_sha": "6840c3d9e7210a79d7c07bd18477f7e36c9ec611"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osstc-003-semiconductor-vacuum-systems-cover.png",
+      "lesson_post_ids": [
+        20980
+      ],
+      "media_id": 20979,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/20979-osstc-003-semiconductor-vacuum-systems-cover.png",
+      "byte_count": 1055756,
+      "sha256": "8e2499ee072efdbcc122a8606e82f3a8193da4f2dbcc7d1e29086e213e443c7a",
+      "git_blob_sha": "7744ad682a59991217bf51e2d267143196a8d99e"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osetc-027-4-20ma-current-loop-cover.png",
+      "lesson_post_ids": [
+        20970
+      ],
+      "media_id": 20969,
+      "width": 1200,
+      "height": 630,
+      "path": "curriculum/assets/20969-osetc-027-4-20ma-current-loop-cover.png",
+      "byte_count": 1033472,
+      "sha256": "25fd5cdc69acbf2846d393ce80020be7d9becd33a63b9eaecce7337e59c6229a",
+      "git_blob_sha": "ddf5a9a9467ab06c6acf4d9760f6b4eb5a20db5a"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/08/9dc088d0-596a-421a-93af-b0fb4b56480a.png",
+      "lesson_post_ids": [
+        17519
+      ],
+      "media_id": 17525,
+      "width": 1448,
+      "height": 1086,
+      "path": "curriculum/assets/17525-9dc088d0-596a-421a-93af-b0fb4b56480a.png",
+      "byte_count": 2153634,
+      "sha256": "d8c78355a09c0b740b6b487add25a3796ad968f9453b7f5fcade31bdca7747fd",
+      "git_blob_sha": "572438a86b928305f7ca71d21bf2f8e273c6d2f5"
     }
   ],
   "remote_media": "YouTube/social players remain remote references."

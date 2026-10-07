@@ -1,6 +1,6 @@
 # semiconductor/training
 
-58 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+59 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -62,3 +62,4 @@
 | — | [Homogeneous vs. Heterogeneous Integration for Semiconductors](./homogeneous-vs-heterogeneous-integration-for-semiconductors-17266.md) | [Published lesson](https://bitcoinversus.tech/2026/08/28/homogeneous-vs-heterogeneous-integration-for-semiconductors/) |
 | — | [Field-Programmable Gate Array](./field-programmable-gate-array-17512.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/field-programmable-gate-array/) |
 | — | [Transistor vs. Semiconductor (Electrical Training)](./transistor-vs-semiconductor-electrical-training-17985.md) | [Published lesson](https://bitcoinversus.tech/2026/09/05/transistor-vs-semiconductor-electrical-training/) |
+| — | [Semiconductors: What Is Wafer Yield? Why Good Dies Decide Chip Cost](./semiconductors-what-is-wafer-yield-good-dies-chip-cost-21400.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/semiconductors-what-is-wafer-yield-good-dies-chip-cost/) |

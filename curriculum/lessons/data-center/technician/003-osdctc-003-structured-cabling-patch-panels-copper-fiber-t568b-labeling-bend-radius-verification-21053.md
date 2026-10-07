@@ -1,17 +1,13 @@
 ---
 title: "OSDCTC.003: Structured Cabling and Patch Panels — Copper, Fiber, T568B, Labeling, Bend Radius, and Verification"
-status: published
 wordpress_post_id: 21053
-published: "2026-10-05T19:24:50"
-live_url: "https://bitcoinversus.tech/2026/10/05/osdctc-003-structured-cabling-patch-panels-copper-fiber-t568b-labeling-bend-radius-verification/"
-series: "Open Source Data Center Technician Certification"
-subject: data_center_technician
-lesson_number: "003"
-featured_media_id: 21047
-featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osdctc-003-structured-cabling-patch-panels-t568b-fiber-verification.png"
-youtube_1: "https://www.youtube.com/watch?v=lGvucf_XRio"
-youtube_2: "https://www.youtube.com/watch?v=lbz2hNsKeVQ"
-youtube_3: "https://www.youtube.com/watch?v=ifbBDW67w5w"
+source: BitcoinVersus.tech
+published: 2026-10-05T19:24:50
+modified: 2026-10-05T19:24:50
+live_url: https://bitcoinversus.tech/2026/10/05/osdctc-003-structured-cabling-patch-panels-copper-fiber-t568b-labeling-bend-radius-verification/
+track: data-center/technician
+lesson_number: 3
+raw_source: 003-osdctc-003-structured-cabling-patch-panels-copper-fiber-t568b-labeling-bend-radius-verification-21053.gutenberg.html
 ---
 
 <!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>Structured cabling is the physical layer that connects servers, switches, storage, management networks, and out-of-band systems. In a data center, good cabling is not cosmetic: correct termination, labeling, routing, polarity, bend radius, and testing directly affect uptime and troubleshooting speed.</strong></p><!-- /wp:paragraph -->

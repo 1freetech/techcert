@@ -1,0 +1,103 @@
+---
+title: "OSREC.004: Robot Trajectory Planning — Joint Space, Cartesian Paths, Time Scaling, Velocity, Acceleration, and Jerk"
+status: published
+wordpress_post_id: 21321
+published: "2026-10-06T12:44:38"
+live_url: "https://bitcoinversus.tech/2026/10/06/osrec-004-robot-trajectory-planning-joint-space-cartesian-paths-time-scaling-velocity-acceleration-jerk/"
+series: "Open Source Robotics Engineer Certification"
+subject: robotics_engineer
+lesson_number: "004"
+featured_media_id: 21319
+featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrec-004-trajectory-planning-cover-1200x630-1.jpg"
+youtube_1: "https://www.youtube.com/watch?v=1JRMqfEm79c"
+youtube_2: "https://www.youtube.com/watch?v=0ZqeBEa_MWo"
+youtube_3: "https://www.youtube.com/watch?v=sWPpq9-5YOc"
+youtube_4: "https://www.youtube.com/watch?v=DRFA_iwH_HQ"
+youtube_5: "https://www.youtube.com/watch?v=WR2oPxJi-H0"
+youtube_6: "https://www.youtube.com/watch?v=VqfUuh3BgeU"
+youtube_7: "https://www.youtube.com/watch?v=mssxW3VJ1IQ"
+youtube_8: "https://www.youtube.com/watch?v=HrsXu7cxKiM"
+youtube_9: "https://www.youtube.com/watch?v=18mouzWyqRo"
+---
+
+<!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>A robot trajectory is more than a destination. It specifies how an <a href="https://bitcoinversus.tech/2025/12/21/robotics-industrial-robot-types/">industrial robot</a> should move from one configuration to another as time advances, including the path, speed, acceleration, and smoothness of the motion. OSREC.004 continues from <a href="https://bitcoinversus.tech/2026/10/04/osrec-001-robot-kinematics-coordinate-frames-forward-inverse-kinematics/">OSREC.001 kinematics</a>, <a href="https://bitcoinversus.tech/2026/10/04/osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion/">OSREC.002 Jacobians</a>, and <a href="https://bitcoinversus.tech/2026/10/05/osrec-003-inverse-kinematics-analytical-solutions-numerical-solvers-pseudoinverses-convergence/">OSREC.003 inverse kinematics</a> by adding the missing time dimension.</strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=1JRMqfEm79c","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=1JRMqfEm79c
+</div><figcaption class="wp-element-caption"><em>Northwestern Robotics — Modern Robotics, Chapter 9.1/9.2 Part 1. Introduces paths, trajectories, joint-space motion, Cartesian motion, and time scaling.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Path Versus Trajectory</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A <strong>path</strong> describes where the robot goes; a <strong>trajectory</strong> describes where it goes and when it is at each point. A path can be written as <strong>q(s)</strong>, where the path parameter <strong>s</strong> moves from 0 to 1, while time scaling supplies <strong>s(t)</strong>. The executed trajectory is therefore <strong>q(t) = q(s(t))</strong>. By the chain rule, <strong>q̇ = (dq/ds)ṡ</strong> and <strong>q̈ = (d²q/ds²)ṡ² + (dq/ds)s̈</strong>. This separation is important because the same geometric path can be executed slowly, quickly, or with different acceleration profiles without changing its shape.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=0ZqeBEa_MWo","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=0ZqeBEa_MWo
+</div><figcaption class="wp-element-caption"><em>Northwestern Robotics — Modern Robotics, Chapter 9.1/9.2 Part 2. Covers cubic, quintic, trapezoidal, and S-curve time scaling.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Joint-Space and Cartesian Paths Solve Different Problems</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>In <strong>joint-space planning</strong>, each joint angle moves between start and goal values, often making joint limits straightforward to check, but the tool may trace a curved route through the workspace. In <strong>Cartesian planning</strong>, the tool or <a href="https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/">Tool Center Point</a> follows a desired line or pose path in physical space, so <a href="https://bitcoinversus.tech/2026/10/05/osrec-003-inverse-kinematics-analytical-solutions-numerical-solvers-pseudoinverses-convergence/">inverse kinematics</a> must continuously map that path back into joint coordinates. Cartesian motion is useful for welding, dispensing, insertion, machining, and other processes where the end-effector route matters; joint-space motion is often simpler when only the final pose matters.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=sWPpq9-5YOc","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=sWPpq9-5YOc
+</div><figcaption class="wp-element-caption"><em>Northwestern Robotics — Modern Robotics, Chapter 9.3. Demonstrates polynomial trajectories through via points.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Cubic, Quintic, Trapezoidal, and S-Curve Profiles</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>For normalized time <strong>τ = t/T</strong>, a common cubic scaling is <strong>s(τ)=3τ²−2τ³</strong>; it starts and ends with zero velocity, but its acceleration jumps at the endpoints. A quintic scaling, <strong>s(τ)=10τ³−15τ⁴+6τ⁵</strong>, also forces endpoint acceleration to zero. Trapezoidal velocity profiles use constant acceleration, constant velocity, and constant deceleration. S-curves go one step further by shaping <strong>jerk</strong>, the derivative of acceleration, which reduces abrupt changes in force and can improve motion quality in the <a href="https://bitcoinversus.tech/2025/12/22/robotics-drive-systems/">robot drive system</a>. Smoothness therefore has a hierarchy: position → velocity → acceleration → jerk.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=DRFA_iwH_HQ","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=DRFA_iwH_HQ
+</div><figcaption class="wp-element-caption"><em>Northwestern Robotics — Modern Robotics, Chapter 9.4 Part 1. Introduces time-optimal scaling under actuator force and torque limits.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Via Points Shape the Route Without Requiring Stops</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A practical robot rarely moves only from one isolated start pose to one isolated goal. Engineers often define <strong>via points</strong> or waypoints that shape the route around fixtures, align the tool before contact, or enforce process geometry. Polynomial interpolation can connect these points while maintaining continuity in position and velocity. The engineering requirement is not merely to “hit every point,” but to make adjacent segments agree on enough derivatives that the robot does not command an impossible instantaneous change in velocity or acceleration. Via-point timing also matters: squeezing the same geometric path into less time raises required velocity and acceleration.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=WR2oPxJi-H0","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=WR2oPxJi-H0
+</div><figcaption class="wp-element-caption"><em>Northwestern Robotics — Modern Robotics, Chapter 9.4 Part 2. Explains feasible acceleration cones, bang-bang motion, and velocity-limit curves.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Dynamic Limits Turn Geometry Into an Engineering Constraint</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A geometrically valid trajectory may still be dynamically impossible. Joint velocity limits, acceleration limits, motor torque, gearbox loading, payload, gravity, friction, and thermal constraints bound how quickly the robot can follow a path. If <strong>ṡ</strong> becomes too large, available actuator torque may no longer provide an allowable <strong>s̈</strong> that keeps the robot on the commanded path. Time-optimal planning therefore seeks the fastest valid time scaling that remains inside the robot’s dynamic limits, but maximum-throughput motion is not automatically the best production motion because model error, wear, vibration, payload uncertainty, and safety margin still matter.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=VqfUuh3BgeU","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=VqfUuh3BgeU
+</div><figcaption class="wp-element-caption"><em>Northwestern Robotics — Modern Robotics, Chapter 9.4 Part 3. Completes the time-optimal scaling algorithm and discusses its practical limitations.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Planning Software Separates Path Search From Trajectory Execution</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Modern robotics software typically separates several layers: a planner searches for a feasible path, a trajectory generator or time-parameterization stage assigns velocities and accelerations, and a lower-level controller sends commands to the actuators. <a href="https://bitcoinversus.tech/2026/09/27/qualcomm-moves-deeper-into-robotics-with-picknik-deal/">MoveIt</a>, maintained in the ecosystem around PickNik, is a common open-source framework for manipulator motion planning, while <a href="https://bitcoinversus.tech/2026/09/23/nvidia-isaac-ros-5-ai-agents-robotics/">ROS</a> supplies the broader communication and control environment. This layered architecture is useful for debugging because a bad path, bad time parameterization, and bad controller tracking produce different failure signatures.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=mssxW3VJ1IQ","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=mssxW3VJ1IQ
+</div><figcaption class="wp-element-caption"><em>Learn Robotics With ROS — MoveIt C++ motion planning example. Demonstrates generating and executing a custom robot motion plan.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Execution Must Be Verified Against the Real Robot</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>The commanded trajectory is only a reference; the physical robot follows it using feedback from <a href="https://bitcoinversus.tech/2026/10/05/osrtc-003-robot-mastering-calibration-zero-position-encoders-reference-marks-recovery/">encoders</a> and the controller. Engineers should compare commanded and measured position, velocity, and following error; inspect whether velocity or torque limits are clipping the motion; and confirm that the actual <a href="https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/">TCP</a> stays on the intended path. If the plan is smooth but tracking oscillates, the control loop or mechanical system may be the problem. If the controller tracks perfectly but the end effector takes the wrong geometric route, the path or kinematic model is the better suspect.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=HrsXu7cxKiM","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=HrsXu7cxKiM
+</div><figcaption class="wp-element-caption"><em>ROS 2 Joint Trajectory Controller demonstration with a simulated Open Manipulator. Shows trajectory commands reaching the controller layer.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Worked Example: 90° Joint Move in 3 Seconds</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Initial joint angle:</strong> q₀ = 0°</li><li><strong>Final joint angle:</strong> qf = 90°</li><li><strong>Total time:</strong> T = 3 s</li><li><strong>Cubic scaling:</strong> s(τ)=3τ²−2τ³, where τ=t/T</li><li><strong>Trajectory:</strong> q(t)=q₀+(qf−q₀)s(t)</li><li><strong>At t=1.5 s:</strong> τ=0.5, s=0.5, so q=45°</li><li><strong>Peak cubic velocity:</strong> 45°/s at the midpoint</li><li><strong>Endpoint acceleration magnitude:</strong> 60°/s², showing why cubic scaling has a nonzero acceleration step at the endpoints</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Minimal Quintic Generator</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>tau = t / T
+s = 10*tau**3 - 15*tau**4 + 6*tau**5
+q = q0 + (qf - q0) * s</code></pre><!-- /wp:code -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Trajectory Engineering Checklist</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Define the start and goal configurations or poses.</li><li>Choose joint-space, Cartesian, screw, or another appropriate path representation.</li><li>Check reachability, joint limits, singularities, and collision constraints.</li><li>Add via points only when they express a real process or clearance requirement.</li><li>Choose a time-scaling profile appropriate for the required smoothness.</li><li>Verify joint velocity, acceleration, jerk, torque, and payload limits.</li><li>Time-parameterize the path without violating actuator limits.</li><li>Simulate the trajectory before physical execution.</li><li>Run the real robot at reduced speed first.</li><li>Compare commanded and measured joint states and TCP motion.</li><li>Record following error, saturation, vibration, and cycle time.</li><li>Retain safety and reliability margin rather than automatically selecting the mathematical minimum time.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Exercises</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Explain the difference between a path q(s) and a trajectory q(s(t)).</li><li>For the cubic time scaling, differentiate s(τ)=3τ²−2τ³ to obtain normalized velocity and acceleration.</li><li>Compare the endpoint conditions satisfied by cubic and quintic time scaling.</li><li>Explain why a straight line in joint space does not generally produce a straight-line TCP path.</li><li>Design three via points for a robot that must approach a fixture from above.</li><li>Explain why halving move time can sharply increase required acceleration and torque.</li><li>Describe one application where S-curve motion is preferable to a trapezoidal velocity profile.</li><li>Separate a motion-planning failure from a trajectory-tracking failure using observable evidence.</li><li>Explain why time-optimal motion may be undesirable on a real production robot.</li><li>Propose acceptance limits for position error, velocity error, and cycle time during trajectory validation.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check + Answers</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li><strong>What does time scaling do?</strong> It maps time into progress along a geometric path, determining how quickly the path is followed.</li><li><strong>What is jerk?</strong> The time derivative of acceleration.</li><li><strong>Why use quintic instead of cubic scaling?</strong> Quintic scaling can enforce zero velocity and zero acceleration at both endpoints.</li><li><strong>What is a via point?</strong> An intermediate configuration or pose used to shape a trajectory.</li><li><strong>Why can a valid path still be impossible to execute?</strong> Joint velocity, acceleration, torque, collision, singularity, or other dynamic constraints may be violated.</li><li><strong>What does a velocity-limit curve represent in time-optimal scaling?</strong> The maximum feasible path speed at each location under the robot’s dynamic constraints.</li><li><strong>What is the difference between planning and control?</strong> Planning generates a desired path/trajectory; control drives the physical robot to track that reference.</li><li><strong>Why compare commanded and measured trajectories?</strong> The difference exposes tracking errors, saturation, mechanical issues, model mismatch, and controller problems.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Reference Resources</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://modernrobotics.northwestern.edu/chapters/chapter9/">Northwestern University — Modern Robotics, Chapter 9: Trajectory Generation</a></li><li><a href="https://moveit.picknik.ai/main/doc/concepts/trajectory_processing.html">MoveIt — Trajectory Processing documentation</a></li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key Takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong>Inverse kinematics tells a robot which joint configuration can reach a target; trajectory planning tells the robot how to move there over time. Good trajectory engineering separates geometry from timing, chooses the right joint-space or Cartesian representation, controls velocity, acceleration, and jerk, respects actuator and payload limits, and verifies the commanded motion against measured <a href="https://bitcoinversus.tech/2026/10/05/osrtc-003-robot-mastering-calibration-zero-position-encoders-reference-marks-recovery/">encoder</a> feedback. That is the bridge between a mathematically reachable pose and motion that a real robot can execute smoothly, safely, and repeatably.</strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=18mouzWyqRo","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=18mouzWyqRo
+</div><figcaption class="wp-element-caption"><em>MoveIt motion-planning visualization in RViz. A practical recap showing start/goal states, planning, and planned trajectory visualization.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading"><strong><em>BitcoinVersus.Tech</em></strong></h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><em>Advertisement</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"x","responsive":true} --><figure class="wp-block-embed is-type-rich is-provider-x wp-block-embed-x"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech advertisement.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:paragraph --><p><strong><em>Editor's Note:</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our research initiatives, please donate here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</p><!-- /wp:paragraph -->

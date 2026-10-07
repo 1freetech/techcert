@@ -1,6 +1,6 @@
 # networking/technician
 
-16 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+17 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -19,4 +19,5 @@
 | 13 | [OSNTC.013: Router Basics](./013-osntc-013-router-basics-20370.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/osntc-013-router-basics/) |
 | 14 | [OSNTC.014: TCP and UDP Transport Basics](./014-osntc-014-tcp-udp-transport-basics-20611.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/osntc-014-tcp-udp-transport-basics/) |
 | 15 | [OSNTC.015: NAT and PAT Basics — Private Addresses, Port Translation, State Tables, and Troubleshooting](./015-osntc-015-nat-pat-basics-private-addresses-port-translation-state-tables-troubleshooting-20887.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/osntc-015-nat-pat-basics-private-addresses-port-translation-state-tables-troubleshooting/) |
-| 16 | [OSNTC.016: IPv6 Addressing and Neighbor Discovery — Prefixes, SLAAC, NDP, Routing, and Transition](../../../../archive/2026/10/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition/) |
+| 16 | [OSNTC.016: IPv6 Addressing and Neighbor Discovery — Prefixes, SLAAC, NDP, Routing, and Transition](./016-osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition-21169.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition/) |
+| 17 | [OSNTC.017: Copper Ethernet Cabling — RJ45, T568B, Cat5e/Cat6/Cat6A, 100 m Limits, PoE, and Cable Testing](./017-osntc-017-copper-ethernet-cabling-rj45-t568b-cat5e-cat6-cat6a-100m-poe-cable-testing-21401.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/osntc-017-copper-ethernet-cabling-rj45-t568b-cat5e-cat6-cat6a-100m-poe-cable-testing/) |

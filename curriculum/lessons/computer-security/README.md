@@ -1,6 +1,6 @@
 # computer-security
 
-12 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+13 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -16,3 +16,4 @@
 | — | [Kerberos: Network Authenticator](./kerberos-network-authenticator-17355.md) | [Published lesson](https://bitcoinversus.tech/2026/09/11/kerberos-network-authenticator/) |
 | — | [Fortinet ASIC Hardware: Inside the Security Processors Powering FortiGate Firewalls](./fortinet-asic-hardware-inside-the-security-processors-powering-fortigate-firewalls-17501.md) | [Published lesson](https://bitcoinversus.tech/2026/10/01/fortinet-asic-hardware-inside-the-security-processors-powering-fortigate-firewalls/) |
 | — | [How to Protect SSO and API Tokens From Theft](./protect-sso-api-tokens-from-theft-18318.md) | [Published lesson](https://bitcoinversus.tech/2026/09/22/protect-sso-api-tokens-from-theft/) |
+| — | [Computer Security: White Hat vs. Black Hat vs. Gray Hat — What All the Hacker “Hats” Actually Mean](./computer-security-white-hat-black-hat-gray-hat-red-blue-green-purple-hackers-explained-21313.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/computer-security-white-hat-black-hat-gray-hat-red-blue-green-purple-hackers-explained/) |

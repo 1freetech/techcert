@@ -1,6 +1,6 @@
 # electrical/training
 
-19 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+22 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -23,3 +23,6 @@
 | — | [Electrical Technician Training: Bushing Transformers and Their Role in Power Distribution](./electrical-technician-training-bushing-transformers-and-their-role-in-power-distribution-17105.md) | [Published lesson](https://bitcoinversus.tech/2026/08/04/electrical-technician-training-bushing-transformers-and-their-role-in-power-distribution/) |
 | — | [Electrical Schematics: The Language of Electronic Circuits](./electrical-schematics-the-language-of-electronic-circuits-17819.md) | [Published lesson](https://bitcoinversus.tech/2026/08/29/electrical-schematics-the-language-of-electronic-circuits/) |
 | — | [Electrical Engineering: Line-to-Line vs. Line-to-Neutral Voltage](./electrical-engineering-line-to-line-vs-line-to-neutral-voltage-18474.md) | [Published lesson](https://bitcoinversus.tech/2026/09/24/electrical-engineering-line-to-line-vs-line-to-neutral-voltage/) |
+| — | [Energy: What Is Power Factor? Why kW, kVA, and kVAR Are Different](./energy-what-is-power-factor-kw-kva-kvar-21382.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/energy-what-is-power-factor-kw-kva-kvar/) |
+| — | [Energy: What Is an Electrical Substation? How the Grid Changes, Switches, and Protects Power](./energy-what-is-electrical-substation-grid-power-21428.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/energy-what-is-electrical-substation-grid-power/) |
+| — | [Energy: Volts, Amps, Ohms, and Watts Explained — The Easy Guide to Electricity](./energy-volts-amps-ohms-watts-explained-easy-guide-electricity-21438.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/energy-volts-amps-ohms-watts-explained-easy-guide-electricity/) |

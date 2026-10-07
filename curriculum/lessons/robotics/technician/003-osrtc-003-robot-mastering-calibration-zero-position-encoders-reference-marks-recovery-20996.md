@@ -1,17 +1,13 @@
 ---
 title: "OSRTC.003: Robot Mastering and Calibration — Zero Position, Encoders, Reference Marks, and Recovery"
-status: published
 wordpress_post_id: 20996
-published: "2026-10-05T16:04:50"
-live_url: "https://bitcoinversus.tech/2026/10/05/osrtc-003-robot-mastering-calibration-zero-position-encoders-reference-marks-recovery/"
-series: "Open Source Robotics Technician Certification"
-subject: robotics_technician
-lesson_number: "003"
-featured_media_id: 20995
-featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrtc-003-robot-mastering-zero-position-encoders-calibration.png"
-youtube_1: "https://www.youtube.com/watch?v=MSmHBW5NJUw"
-youtube_2: "https://www.youtube.com/watch?v=8FqK1HICy4E"
-youtube_3: "https://www.youtube.com/watch?v=YcbtGuzYJyY"
+source: BitcoinVersus.tech
+published: 2026-10-05T16:04:50
+modified: 2026-10-05T16:04:50
+live_url: https://bitcoinversus.tech/2026/10/05/osrtc-003-robot-mastering-calibration-zero-position-encoders-reference-marks-recovery/
+track: robotics/technician
+lesson_number: 3
+raw_source: 003-osrtc-003-robot-mastering-calibration-zero-position-encoders-reference-marks-recovery-20996.gutenberg.html
 ---
 
 <!-- wp:paragraph {"fontSize":"large"} --><p class="has-large-font-size"><strong>Robot mastering establishes the relationship between each physical joint position and the controller’s internal position reference. A robot can power on, jog, and even execute motion while still being incorrectly mastered; the result can be inaccurate TCP positions, shifted paths, fixture collisions, and unreliable recovery after maintenance.</strong></p><!-- /wp:paragraph -->

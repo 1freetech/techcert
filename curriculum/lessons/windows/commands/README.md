@@ -1,6 +1,6 @@
 # windows/commands
 
-32 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+34 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -36,3 +36,5 @@
 | 30 | [Windows Command #30 – net file (Windows OS)](./030-windows-command-30-net-file-20401.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/windows-command-30-net-file/) |
 | 31 | [Windows Command #31 – net config (Windows OS)](./031-windows-command-31-net-config-20651.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/windows-command-31-net-config/) |
 | 32 | [Windows Command #32 – net statistics (Windows OS)](./032-windows-command-32-net-statistics-20924.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/windows-command-32-net-statistics/) |
+| 33 | [Windows Command #33 – net start (Windows OS)](./033-windows-command-33-net-start-21210.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/windows-command-33-net-start/) |
+| 34 | [Windows Command #34 – sc query (Windows OS)](./034-windows-command-34-sc-query-21448.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/windows-command-34-sc-query/) |

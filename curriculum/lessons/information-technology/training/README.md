@@ -1,6 +1,6 @@
 # information-technology/training
 
-59 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+66 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -63,3 +63,10 @@
 | — | [Cache Memory in Modern Computing](./cache-memory-in-modern-computing-16146.md) | [Published lesson](https://bitcoinversus.tech/2026/03/31/cache-memory-in-modern-computing/) |
 | — | [Installing a CPU and Applying Thermal Interface Material](./installing-a-cpu-and-applying-thermal-interface-material-3-16490.md) | [Published lesson](https://bitcoinversus.tech/2026/04/20/installing-a-cpu-and-applying-thermal-interface-material-3/) |
 | — | [BIOS Versus UEFI](./bios-versus-uefi-2-16520.md) | [Published lesson](https://bitcoinversus.tech/2026/04/30/bios-versus-uefi-2/) |
+| — | [Easy Tech Read: CPU vs. GPU vs. NPU — What’s the Difference?](./easy-tech-read-cpu-vs-gpu-vs-npu-whats-the-difference-21249.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/easy-tech-read-cpu-vs-gpu-vs-npu-whats-the-difference/) |
+| — | [Easy Tech Read: What’s Inside an SSD? NAND, Controller, and DRAM Cache Explained](./easy-tech-read-whats-inside-an-ssd-nand-controller-dram-cache-explained-21262.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/easy-tech-read-whats-inside-an-ssd-nand-controller-dram-cache-explained/) |
+| — | [Easy Tech Read: What Happens When You Press the Power Button on a PC?](./easy-tech-read-what-happens-when-you-press-the-power-button-on-a-pc-21270.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/easy-tech-read-what-happens-when-you-press-the-power-button-on-a-pc/) |
+| — | [Easy Tech Read: What Is a Device Driver? How Hardware Talks to the Operating System](./easy-tech-read-what-is-a-device-driver-how-hardware-talks-to-the-operating-system-21283.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/easy-tech-read-what-is-a-device-driver-how-hardware-talks-to-the-operating-system/) |
+| — | [Easy Tech Read: Process vs. Thread — How Your CPU Runs Multiple Tasks](./easy-tech-read-process-vs-thread-how-your-cpu-runs-multiple-tasks-21293.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/easy-tech-read-process-vs-thread-how-your-cpu-runs-multiple-tasks/) |
+| — | [Easy Tech Read: Motherboard Chipsets Explained](./easy-tech-read-motherboard-chipsets-explained-21348.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/easy-tech-read-motherboard-chipsets-explained/) |
+| — | [Storage: What Is RAID? Striping, Mirroring, Parity, and RAID 0/1/5/6/10 Explained](./storage-what-is-raid-0-1-5-6-10-striping-mirroring-parity-explained-21370.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/storage-what-is-raid-0-1-5-6-10-striping-mirroring-parity-explained/) |

@@ -1,6 +1,6 @@
 # python
 
-27 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+28 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -30,4 +30,5 @@
 | 23 | [OSPython.023: Type Hints and Annotations Basics](./023-ospython-023-type-hints-annotations-basics-20393.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/ospython-023-type-hints-annotations-basics/) |
 | 24 | [OSPython.024: Dataclasses Basics](./024-ospython-024-dataclasses-basics-20627.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/ospython-024-dataclasses-basics/) |
 | 25 | [OSPython.025: Enums and Named Constants — Safer Choices, States, and Status Codes](./025-ospython-025-enums-named-constants-safer-choices-states-status-codes-20897.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/ospython-025-enums-named-constants-safer-choices-states-status-codes/) |
-| 26 | [OSPython.026: JSON Serialization and Deserialization — Strings, Files, APIs, and Validation](../../../archive/2026/10/ospython-026-json-serialization-deserialization-strings-files-apis-validation.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/ospython-026-json-serialization-deserialization-strings-files-apis-validation/) |
+| 26 | [OSPython.026: JSON Serialization and Deserialization — Strings, Files, APIs, and Validation](./026-ospython-026-json-serialization-deserialization-strings-files-apis-validation-21182.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/ospython-026-json-serialization-deserialization-strings-files-apis-validation/) |
+| 27 | [OSPython.027: HTTP Requests and REST APIs — GET, POST, Parameters, Headers, JSON, Status Codes, Timeouts, and Errors](./027-ospython-027-http-requests-rest-apis-get-post-parameters-headers-json-status-codes-timeouts-errors-21419.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/ospython-027-http-requests-rest-apis-get-post-parameters-headers-json-status-codes-timeouts-errors/) |

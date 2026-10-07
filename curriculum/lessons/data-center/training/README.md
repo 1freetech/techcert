@@ -1,6 +1,6 @@
 # data-center/training
 
-5 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+6 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -9,3 +9,4 @@
 | — | [How to Sort Client Names in NSC Miner Management](./how-to-sort-client-names-in-nsc-miner-management-4723.md) | [Published lesson](https://bitcoinversus.tech/2025/01/25/how-to-sort-client-names-in-nsc-miner-management/) |
 | — | [How to Build Your Own Bitcoin Mining Data Center (Bitaxe Edition) + Spread Sheet Included](./how-to-build-your-own-bitcoin-mining-data-center-bitaxe-edition-spread-sheet-included-8160.md) | [Published lesson](https://bitcoinversus.tech/2024/11/11/how-to-build-your-own-bitcoin-mining-data-center-bitaxe-edition-spread-sheet-included/) |
 | — | [Liquid Cooling System Setup Guide](./liquid-cooling-system-setup-guide-13859.md) | [Published lesson](https://bitcoinversus.tech/2025/07/08/liquid-cooling-system-setup-guide/) |
+| — | [Data Centers: What Is Busway? How Overhead Power Rails Feed Modern Racks](./data-centers-what-is-busway-overhead-power-racks-21376.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/data-centers-what-is-busway-overhead-power-racks/) |

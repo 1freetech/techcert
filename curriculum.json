@@ -309,11 +309,11 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 4,
-        "title": "OSFOTC.004: Fiber Connector Types and Polarity — LC, SC, UPC/APC, MPO/MTP, Tx/Rx, and VFL Verification",
-        "wordpress_post_id": 21351,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/osfotc-004-fiber-connector-types-polarity-lc-sc-upc-apc-mpo-mtp-tx-rx-vfl-verification/",
-        "archive_path": "archive/2026/10/osfotc-004-fiber-connector-types-polarity-lc-sc-upc-apc-mpo-mtp-tx-rx-vfl-verification.md",
+        "lesson_number": 5,
+        "title": "OSFOTC.005: Optical Loss Testing Workflow — Inspect, Clean, Reference, Test, Record, and Troubleshoot",
+        "wordpress_post_id": 21594,
+        "live_url": "https://bitcoinversus.tech/2026/10/07/osfotc-005-optical-loss-testing-workflow-inspect-clean-reference-test-record-troubleshoot/",
+        "archive_path": "archive/2026/10/osfotc-005-optical-loss-testing-workflow-inspect-clean-reference-test-record-troubleshoot.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
@@ -321,7 +321,7 @@
         ],
         "verification_status": "verified"
       },
-      "next_lesson_number": 5
+      "next_lesson_number": 6
     },
     {
       "subject": "fiber_optics_engineer",

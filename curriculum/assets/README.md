@@ -1,6 +1,6 @@
 # Associated lesson assets
 
-809 original associated image/file assets. Exact original URLs and binary hashes are retained in [the manifest](manifest.json).
+810 original associated image/file assets. Exact original URLs and binary hashes are retained in [the manifest](manifest.json).
 
 | Asset | Lesson post IDs | Original |
 | --- | --- | --- |
@@ -813,3 +813,4 @@
 | [20979-osstc-003-semiconductor-vacuum-systems-cover.png](./20979-osstc-003-semiconductor-vacuum-systems-cover.png) | 20980 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osstc-003-semiconductor-vacuum-systems-cover.png) |
 | [20969-osetc-027-4-20ma-current-loop-cover.png](./20969-osetc-027-4-20ma-current-loop-cover.png) | 20970 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osetc-027-4-20ma-current-loop-cover.png) |
 | [17525-9dc088d0-596a-421a-93af-b0fb4b56480a.png](./17525-9dc088d0-596a-421a-93af-b0fb4b56480a.png) | 17519 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/08/9dc088d0-596a-421a-93af-b0fb4b56480a.png) |
+| [17530-d8ad9d2a-a52f-4e93-976b-9925a52e7217.png](./17530-d8ad9d2a-a52f-4e93-976b-9925a52e7217.png) | 17523 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/08/d8ad9d2a-a52f-4e93-976b-9925a52e7217.png) |

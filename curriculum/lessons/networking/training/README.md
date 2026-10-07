@@ -1,6 +1,6 @@
 # networking/training
 
-53 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+54 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -52,6 +52,7 @@
 | — | [RDMA Programming: How Direct Memory Access Powers AI and High-Speed Computing](./rdma-programming-how-direct-memory-access-powers-ai-and-high-speed-computing-17230.md) | [Published lesson](https://bitcoinversus.tech/2026/08/19/rdma-programming-how-direct-memory-access-powers-ai-and-high-speed-computing/) |
 | — | [Packet Capture Explained: How Network Engineers Inspect Traffic and Troubleshoot Networks](./packet-capture-explained-how-network-engineers-inspect-traffic-and-troubleshoot-networks-17475.md) | [Published lesson](https://bitcoinversus.tech/2026/09/29/packet-capture-explained-how-network-engineers-inspect-traffic-and-troubleshoot-networks/) |
 | — | [ECMP in Networking](./ecmp-in-networking-17519.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/ecmp-in-networking/) |
+| — | [RIB vs FIB in Networking](./rib-vs-fib-in-networking-17523.md) | [Published lesson](https://bitcoinversus.tech/2026/10/07/rib-vs-fib-in-networking/) |
 | — | [Networking: Bandwidth vs. Throughput vs. Latency — What’s the Difference?](./networking-bandwidth-vs-throughput-vs-latency-whats-the-difference-21245.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/networking-bandwidth-vs-throughput-vs-latency-whats-the-difference/) |
 | — | [Easy Tech Read: What Happens When You Type a Website Into Your Browser?](./easy-tech-read-what-happens-when-you-type-a-website-into-your-browser-21288.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/easy-tech-read-what-happens-when-you-type-a-website-into-your-browser/) |
 | — | [Networking: What Is a Top-of-Rack Switch? Why Data Centers Put Switching Next to Servers](./networking-what-is-top-of-rack-switch-data-center-21385.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/networking-what-is-top-of-rack-switch-data-center/) |

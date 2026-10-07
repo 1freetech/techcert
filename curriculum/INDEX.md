@@ -2,7 +2,7 @@
 
 OpenCert is the free curriculum. TechCert is the backup repository. Both preserve the same captured published sources.
 
-**617 published lessons, commands, tutorials and technical training modules**, organized into 38 track folders. Exact saved Gutenberg bodies accompany Markdown copies. Original titles and post IDs are preserved.
+**618 published lessons, commands, tutorials and technical training modules**, organized into 38 track folders. Exact saved Gutenberg bodies accompany Markdown copies. Original titles and post IDs are preserved.
 
 | Track | Lessons | Index |
 | --- | ---: | --- |
@@ -32,7 +32,7 @@ OpenCert is the free curriculum. TechCert is the backup repository. Both preserv
 | machine/tutorials | 8 | [Browse](lessons/machine/tutorials/README.md) |
 | networking/engineer | 2 | [Browse](lessons/networking/engineer/README.md) |
 | networking/technician | 17 | [Browse](lessons/networking/technician/README.md) |
-| networking/training | 53 | [Browse](lessons/networking/training/README.md) |
+| networking/training | 54 | [Browse](lessons/networking/training/README.md) |
 | programming/training | 9 | [Browse](lessons/programming/training/README.md) |
 | python | 28 | [Browse](lessons/python/README.md) |
 | python/tutorials | 1 | [Browse](lessons/python/tutorials/README.md) |
@@ -63,8 +63,8 @@ No lesson is fabricated for an absent published number.
 
 ## Audit scope
 
-The captured inventory contains 2825 published WordPress posts. 617 educational sources were selected: certificate lessons, commands, tutorials, technical foundations, configuration guides, troubleshooting and repair procedures. News, sports, opinion and employment posts are outside this curriculum archive.
+The captured inventory contains 2826 published WordPress posts. 618 educational sources were selected: certificate lessons, commands, tutorials, technical foundations, configuration guides, troubleshooting and repair procedures. News, sports, opinion and employment posts are outside this curriculum archive.
 
-[Source inventory](source-inventory.json), [coverage manifest](coverage-manifest.json), [asset index](assets/README.md) and [asset manifest](assets/manifest.json) record the source and file coverage. 809 original associated image/file binaries are copied. YouTube/social embeds remain remote references. Playback is outside this archive audit. Archive maintenance does not advance rotation.
+[Source inventory](source-inventory.json), [coverage manifest](coverage-manifest.json), [asset index](assets/README.md) and [asset manifest](assets/manifest.json) record the source and file coverage. 810 original associated image/file binaries are copied. YouTube/social embeds remain remote references. Playback is outside this archive audit. Archive maintenance does not advance rotation.
 
 [Historical BitcoinVersus versions](../source-archive/bitcoinversus/README.md) remain available under their original archive paths.

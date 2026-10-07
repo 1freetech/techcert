@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "audited_at": "2026-10-07T04:31:26.391Z",
+  "audited_at": "2026-10-07T09:58:32.004Z",
   "repository_roles": {
     "opencert.tech": "free curriculum",
     "techcert": "backup repository"
   },
-  "source_post_inventory": 2825,
+  "source_post_inventory": 2826,
   "source_inventory_path": "curriculum/source-inventory.json",
-  "published_lessons": 617,
+  "published_lessons": 618,
   "tracks": {
     "applied-ai/training": 3,
     "computer-security": 13,
@@ -35,7 +35,7 @@
     "machine/tutorials": 8,
     "networking/engineer": 2,
     "networking/technician": 17,
-    "networking/training": 53,
+    "networking/training": 54,
     "programming/training": 9,
     "python": 28,
     "python/tutorials": 1,
@@ -6500,6 +6500,21 @@
       "raw_git_blob_sha": "587f41e0f4d296e64d83c5d9aad93808493a55e5"
     },
     {
+      "id": 17523,
+      "title": "RIB vs FIB in Networking",
+      "slug": "rib-vs-fib-in-networking",
+      "track": "networking/training",
+      "lesson_number": null,
+      "live_url": "https://bitcoinversus.tech/2026/10/07/rib-vs-fib-in-networking/",
+      "published": "2026-10-07T04:20:00",
+      "modified": "2026-09-11T21:59:08",
+      "featured_media": 17530,
+      "lesson_path": "curriculum/lessons/networking/training/rib-vs-fib-in-networking-17523.md",
+      "raw_path": "curriculum/lessons/networking/training/rib-vs-fib-in-networking-17523.gutenberg.html",
+      "raw_git_blob_sha": "25f9b946aeec791e10c3483bb6660936494776b7",
+      "wrapper_sha": "04c3fb779ca4dcad66b9d9fee5cd37770789c3d2"
+    },
+    {
       "id": 21245,
       "title": "Networking: Bandwidth vs. Throughput vs. Latency — What’s the Difference?",
       "slug": "networking-bandwidth-vs-throughput-vs-latency-whats-the-difference",
@@ -9917,7 +9932,7 @@
       "git_blob_sha": "9e3f595016d0f9d7a221966b725d1d8f8de8ecdf"
     }
   ],
-  "associated_assets": 809,
+  "associated_assets": 810,
   "asset_manifest_path": "curriculum/assets/manifest.json",
   "verification_scope": "Captured published Gutenberg is compared to repository Git blob hashes. Every copied file is fetched from each default branch and compared with the captured text or original binary hash. This source audit does not certify remote video playback or future publications."
 }

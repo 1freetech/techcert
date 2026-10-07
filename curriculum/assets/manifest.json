@@ -9918,6 +9918,19 @@
       "byte_count": 2153634,
       "sha256": "d8c78355a09c0b740b6b487add25a3796ad968f9453b7f5fcade31bdca7747fd",
       "git_blob_sha": "572438a86b928305f7ca71d21bf2f8e273c6d2f5"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/08/d8ad9d2a-a52f-4e93-976b-9925a52e7217.png",
+      "path": "curriculum/assets/17530-d8ad9d2a-a52f-4e93-976b-9925a52e7217.png",
+      "media_id": 17530,
+      "lesson_post_ids": [
+        17523
+      ],
+      "width": 1448,
+      "height": 1086,
+      "byte_count": 3050777,
+      "sha256": "7eed46b018b8cc637eec36282ca08120edef6f61b61cabdd76d29fb504d0a8ce",
+      "git_blob_sha": "a1ab02a3bc56689f453f64daa6733e26b53acffa"
     }
   ],
   "remote_media": "YouTube/social players remain remote references."

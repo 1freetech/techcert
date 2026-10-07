@@ -1,6 +1,6 @@
 # robotics/engineer
 
-4 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+5 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -8,3 +8,4 @@
 | 2 | [OSREC.002: Robot Jacobians — Velocity Kinematics, Singularities, and Differential Motion](./002-osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion-20807.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion/) |
 | 3 | [OSREC.003: Inverse Kinematics — Analytical Solutions, Numerical Solvers, Pseudoinverses, and Convergence](./003-osrec-003-inverse-kinematics-analytical-solutions-numerical-solvers-pseudoinverses-convergence-21027.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/osrec-003-inverse-kinematics-analytical-solutions-numerical-solvers-pseudoinverses-convergence/) |
 | 4 | [OSREC.004: Robot Trajectory Planning — Joint Space, Cartesian Paths, Time Scaling, Velocity, Acceleration, and Jerk](./004-osrec-004-robot-trajectory-planning-joint-space-cartesian-paths-time-scaling-velocity-acceleration-jerk-21321.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/osrec-004-robot-trajectory-planning-joint-space-cartesian-paths-time-scaling-velocity-acceleration-jerk/) |
+| 5 | [OSREC.005: Robot Dynamics — Mass Matrix, Coriolis/Centrifugal Terms, Gravity, Inverse Dynamics, and Forward Dynamics](../../../../archive/2026/10/osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics.md) | [Published lesson](https://bitcoinversus.tech/2026/10/07/osrec-005-robot-dynamics-mass-matrix-coriolis-centrifugal-gravity-inverse-forward-dynamics/) |

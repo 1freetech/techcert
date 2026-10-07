@@ -18,13 +18,13 @@ If the lesson's video policy requires explanatory video support for substantive 
 
 ## BitcoinVersus Internal Wiki Linking
 
-Treat BitcoinVersus.Tech as an internal technical wiki. Throughout every lesson, naturally hyperlink important technical terms, components, hardware, software, protocols, standards, companies, systems, scientific concepts, and recurring subject keywords to the most specific relevant existing BitcoinVersus.Tech article whenever one exists.
+Treat BitcoinVersus.Tech as an internal technical wiki. Throughout every lesson, naturally hyperlink important technical terms, components, hardware, software, protocols, standards, companies, systems, scientific concepts, people, organizations, and recurring subject keywords to the most specific relevant existing BitcoinVersus.Tech article whenever one exists.
 
 Examples include terms such as `PN junction`, `diode`, `p-type semiconductor`, `n-type semiconductor`, `charge carrier`, `forward bias`, `reverse bias`, `Shockley equation`, `ideality factor`, `resistance`, `capacitance`, `GPU`, `ASIC`, `IPv4`, `RJ45`, `fiber`, `Linux`, `Python`, and similar concepts appropriate to the lesson.
 
-Prefer the best matching BitcoinVersus.Tech article over a generic category page. Prefer a prior explanatory article or lesson over linking a term back to the current page itself. Avoid forced or misleading links, but when a useful internal article exists, key terms should normally be linked on their first meaningful occurrence and again where repetition materially helps navigation. The goal is Wikipedia-like cross-navigation entirely within BitcoinVersus.Tech.
+There is **no numerical hyperlink limit**. If a meaningful term has a relevant BitcoinVersus.Tech article, lesson, story, or category, hyperlink that term on every meaningful occurrence where the link remains accurate and useful. Prefer the most specific matching BitcoinVersus.Tech page over a generic category page, and prefer a prior explanatory article or lesson over linking a term back to the current page itself. The required result is Wikipedia-like cross-navigation entirely within BitcoinVersus.Tech, not a lightly linked article.
 
-This internal-wiki linking rule applies to the Elementary Overview, the advanced lesson body, worked examples, exercises when useful, knowledge checks, and the Elementary Conclusion.
+This internal-wiki linking rule applies to the Elementary Overview, the advanced lesson body, worked examples, exercises, knowledge checks, reference sections, and the Elementary Conclusion.
 
 ## 999-Lesson Track Scope
 

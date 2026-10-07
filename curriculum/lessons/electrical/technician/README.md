@@ -1,6 +1,6 @@
 # electrical/technician
 
-27 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+29 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -31,3 +31,5 @@
 | 25 | [OSETC.025: Temperature Switches and Thermostat Control Basics](./025-osetc-025-temperature-switches-thermostat-control-basics-20418.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/osetc-025-temperature-switches-thermostat-control-basics/) |
 | 26 | [OSETC.026: Flow Switches and Flow-Proving Basics](./026-osetc-026-flow-switches-flow-proving-basics-20761.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/osetc-026-flow-switches-flow-proving-basics/) |
 | 27 | [OSETC.027: 4–20 mA Current Loops and Analog Instrument Signals Basics](../../../../archive/2026/10/osetc-027-4-20ma-current-loops-analog-instrument-signals-basics.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/osetc-027-4-20ma-current-loops-analog-instrument-signals-basics/) |
+| 28 | [OSETC.028: 0–10 V Analog Signals and Voltage Input Scaling Basics](../../../../archive/2026/10/osetc-028-0-10v-analog-signals-voltage-input-scaling-basics.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/osetc-028-0-10v-analog-signals-voltage-input-scaling-basics/) |
+| 29 | [OSETC.029: RTDs and Thermocouples — Wiring, Cold-Junction Compensation, Signal Scaling, and Field Troubleshooting](../../../../archive/2026/10/osetc-029-rtds-thermocouples-wiring-cold-junction-compensation-signal-scaling-field-troubleshooting.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/osetc-029-rtds-thermocouples-wiring-cold-junction-compensation-signal-scaling-field-troubleshooting/) |

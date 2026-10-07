@@ -2,7 +2,7 @@
 
 **Track:** Open-Source Python  
 **Status:** active  
-**Current next lesson:** `OSPython.027`
+**Current next lesson:** `OSPython.028`
 
 The Python track progresses from core syntax and data structures through functions, files, modules, packages, object-oriented programming, advanced language features, typing, structured data models, serialization, and application boundaries.
 
@@ -18,6 +18,7 @@ The Python track progresses from core syntax and data structures through functio
 - [OSPython.024: Dataclasses Basics](ospython-024-dataclasses-basics.md) — WordPress post 20627.
 - [OSPython.025: Enums and Named Constants — Safer Choices, States, and Status Codes](../archive/2026/10/ospython-025-enums-named-constants-safer-choices-states-status-codes.md) — WordPress post 20897.
 - [OSPython.026: JSON Serialization and Deserialization — Strings, Files, APIs, and Validation](../archive/2026/10/ospython-026-json-serialization-deserialization-strings-files-apis-validation.md) — WordPress post 21182.
+- [OSPython.027: HTTP Requests and REST APIs — GET, POST, Parameters, Headers, JSON, Status Codes, Timeouts, and Errors](../archive/2026/10/ospython-027-http-requests-rest-apis-get-post-parameters-headers-json-status-codes-timeouts-errors.md) — WordPress post 21419.
 
 ## Numbering note
 
@@ -31,4 +32,4 @@ A historical duplicate `.020` numbering conflict remains preserved. Do not renum
 - Link earlier Python lessons when they materially support the topic.
 - Archive the exact final Gutenberg source to BitcoinVersus, TechCert, and Open CERT.
 
-The next Python lesson is `OSPython.027`.
+The next Python lesson is `OSPython.028`.

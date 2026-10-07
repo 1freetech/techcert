@@ -1,6 +1,6 @@
 # machine/tutorials
 
-8 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+9 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -12,3 +12,4 @@
 | — | [Bitcoin ASIC Architecture: Bitmain, Canaan, MicroBT &amp; Bitdeer](./bitcoin-asic-architecture-bitmain-canaan-microbt-bitdeer-17795.md) | [Published lesson](https://bitcoinversus.tech/2026/08/24/bitcoin-asic-architecture-bitmain-canaan-microbt-bitdeer/) |
 | — | [Bitcoin Mining: What Is Hashprice? Why Miners Track Revenue Per PH/s](./bitcoin-mining-what-is-hashprice-revenue-per-phs-21426.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/bitcoin-mining-what-is-hashprice-revenue-per-phs/) |
 | — | [Bitcoin Mining Hardware: Why Nameplate J/TH and Wall J/TH Are Not the Same](./bitcoin-mining-hardware-nameplate-wall-facility-joules-per-terahash-21485.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/bitcoin-mining-hardware-nameplate-wall-facility-joules-per-terahash/) |
+| — | [Bitcoin Mining: What Is a Pool Share? Accepted, Rejected, Stale, and Vardiff Explained](./bitcoin-mining-pool-shares-accepted-rejected-stale-vardiff-21545.md) | [Published source](https://bitcoinversus.tech/2026/10/07/bitcoin-mining-pool-shares-accepted-rejected-stale-vardiff/) |

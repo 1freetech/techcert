@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "audited_at": "2026-10-07T09:58:32.004Z",
+  "audited_at": "2026-10-07T14:56:55.024Z",
   "repository_roles": {
     "opencert.tech": "free curriculum",
     "techcert": "backup repository"
   },
-  "source_post_inventory": 2826,
+  "source_post_inventory": 2835,
   "source_inventory_path": "curriculum/source-inventory.json",
-  "published_lessons": 618,
+  "published_lessons": 624,
   "tracks": {
     "applied-ai/training": 3,
     "computer-security": 13,
@@ -18,7 +18,7 @@
     "electrical/engineer": 16,
     "electrical/technician": 29,
     "electrical/training": 22,
-    "energy/training": 34,
+    "energy/training": 35,
     "fiber-optics/engineer": 4,
     "fiber-optics/technician": 4,
     "fiber-optics/training": 46,
@@ -27,12 +27,12 @@
     "firmware/tutorials": 15,
     "history-money-technology-bitcoin": 5,
     "information-technology/technician": 2,
-    "information-technology/training": 66,
+    "information-technology/training": 68,
     "javascript": 1,
     "linux/commands": 44,
     "linux/filesystem": 14,
     "linux/tutorials": 19,
-    "machine/tutorials": 8,
+    "machine/tutorials": 9,
     "networking/engineer": 2,
     "networking/technician": 17,
     "networking/training": 54,
@@ -40,9 +40,9 @@
     "python": 28,
     "python/tutorials": 1,
     "robotics/engineer": 4,
-    "robotics/technician": 4,
+    "robotics/technician": 5,
     "robotics/training": 1,
-    "semiconductor/engineer": 4,
+    "semiconductor/engineer": 5,
     "semiconductor/technician": 5,
     "semiconductor/training": 59,
     "windows/commands": 34,
@@ -8753,6 +8753,90 @@
       "lesson_path": "curriculum/lessons/windows/tutorials/windows-server-guide-for-it-technicians-and-administrators-17347.md",
       "raw_path": "curriculum/lessons/windows/tutorials/windows-server-guide-for-it-technicians-and-administrators-17347.gutenberg.html",
       "raw_git_blob_sha": "ad655a818f4c24cf1373ba265426094dd6d0eaaf"
+    },
+    {
+      "id": 21537,
+      "title": "OSSEC.005: MOS Capacitor Physics — Accumulation, Depletion, Inversion, Oxide Capacitance, Threshold Voltage, and C–V Behavior",
+      "slug": "ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior",
+      "track": "semiconductor/engineer",
+      "lesson_number": 5,
+      "live_url": "https://bitcoinversus.tech/2026/10/07/ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior/",
+      "published": "2026-10-07T10:03:17",
+      "modified": "2026-10-07T10:03:17",
+      "featured_media": 21535,
+      "lesson_path": "curriculum/lessons/semiconductor/engineer/005-ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior-21537.md",
+      "raw_path": "curriculum/lessons/semiconductor/engineer/005-ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior-21537.gutenberg.html",
+      "raw_git_blob_sha": "28fc8c86d6ee364f3c947013e8642207db4a2720"
+    },
+    {
+      "id": 21550,
+      "title": "OSRTC.005: Robot I/O and PLC Handshakes — Digital Inputs, Outputs, Ready/Busy/Fault Signals, Sensors, Interlocks, and Troubleshooting",
+      "slug": "osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting",
+      "track": "robotics/technician",
+      "lesson_number": 5,
+      "live_url": "https://bitcoinversus.tech/2026/10/07/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting/",
+      "published": "2026-10-07T10:27:41",
+      "modified": "2026-10-07T10:40:54",
+      "featured_media": 21547,
+      "lesson_path": "curriculum/lessons/robotics/technician/005-osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting-21550.md",
+      "raw_path": "curriculum/lessons/robotics/technician/005-osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting-21550.gutenberg.html",
+      "raw_git_blob_sha": "e40097aefddf5711506016444425594d10070738"
+    },
+    {
+      "id": 21540,
+      "title": "Energy: What Is a Demand Charge? Why One Power Spike Can Raise an Electricity Bill",
+      "slug": "energy-what-is-demand-charge-peak-power-electricity-bill",
+      "track": "energy/training",
+      "lesson_number": null,
+      "live_url": "https://bitcoinversus.tech/2026/10/07/energy-what-is-demand-charge-peak-power-electricity-bill/",
+      "published": "2026-10-07T10:08:37",
+      "modified": "2026-10-07T10:08:37",
+      "featured_media": 21539,
+      "lesson_path": "curriculum/lessons/energy/training/energy-what-is-demand-charge-peak-power-electricity-bill-21540.md",
+      "raw_path": "curriculum/lessons/energy/training/energy-what-is-demand-charge-peak-power-electricity-bill-21540.gutenberg.html",
+      "raw_git_blob_sha": "6eb49f6c26b46d868714121654788ba9eae6cc10"
+    },
+    {
+      "id": 21545,
+      "title": "Bitcoin Mining: What Is a Pool Share? Accepted, Rejected, Stale, and Vardiff Explained",
+      "slug": "bitcoin-mining-pool-shares-accepted-rejected-stale-vardiff",
+      "track": "machine/tutorials",
+      "lesson_number": null,
+      "live_url": "https://bitcoinversus.tech/2026/10/07/bitcoin-mining-pool-shares-accepted-rejected-stale-vardiff/",
+      "published": "2026-10-07T10:15:23",
+      "modified": "2026-10-07T10:15:23",
+      "featured_media": 21544,
+      "lesson_path": "curriculum/lessons/machine/tutorials/bitcoin-mining-pool-shares-accepted-rejected-stale-vardiff-21545.md",
+      "raw_path": "curriculum/lessons/machine/tutorials/bitcoin-mining-pool-shares-accepted-rejected-stale-vardiff-21545.gutenberg.html",
+      "raw_git_blob_sha": "67f7b5759cee0ab8e543f827a2b8f69a9069c3f8"
+    },
+    {
+      "id": 21552,
+      "title": "Computer Hardware: What Is Thermal Throttling? Why a Hot CPU Slows Down",
+      "slug": "computer-hardware-cpu-thermal-throttling-heat-performance",
+      "track": "information-technology/training",
+      "lesson_number": null,
+      "live_url": "https://bitcoinversus.tech/2026/10/07/computer-hardware-cpu-thermal-throttling-heat-performance/",
+      "published": "2026-10-07T10:28:04",
+      "modified": "2026-10-07T10:28:55",
+      "featured_media": 21549,
+      "lesson_path": "curriculum/lessons/information-technology/training/computer-hardware-cpu-thermal-throttling-heat-performance-21552.md",
+      "raw_path": "curriculum/lessons/information-technology/training/computer-hardware-cpu-thermal-throttling-heat-performance-21552.gutenberg.html",
+      "raw_git_blob_sha": "444194f93a9f2b548bd09133a8e9b241331e8885"
+    },
+    {
+      "id": 21561,
+      "title": "Computer Hardware: CPU Clock Speed vs. IPC — Why More GHz Does Not Always Mean Faster",
+      "slug": "computer-hardware-cpu-clock-speed-ghz-ipc-performance",
+      "track": "information-technology/training",
+      "lesson_number": null,
+      "live_url": "https://bitcoinversus.tech/2026/10/07/computer-hardware-cpu-clock-speed-ghz-ipc-performance/",
+      "published": "2026-10-07T10:33:18",
+      "modified": "2026-10-07T10:33:18",
+      "featured_media": 21558,
+      "lesson_path": "curriculum/lessons/information-technology/training/computer-hardware-cpu-clock-speed-ghz-ipc-performance-21561.md",
+      "raw_path": "curriculum/lessons/information-technology/training/computer-hardware-cpu-clock-speed-ghz-ipc-performance-21561.gutenberg.html",
+      "raw_git_blob_sha": "c639f23a03c644b949f5395f40399096ed0e8633"
     }
   ],
   "source_archives": [
@@ -9930,9 +10014,53 @@
       "source_path": "archive/2026/10/windows-command-34-sc-query.md",
       "path": "source-archive/bitcoinversus/archive/2026/10/windows-command-34-sc-query.md",
       "git_blob_sha": "9e3f595016d0f9d7a221966b725d1d8f8de8ecdf"
+    },
+    {
+      "source_path": "archive/2024/03/2024-03-02-a-beginners-guide-to-network-topologies.md",
+      "path": "source-archive/bitcoinversus/archive/2024/03/2024-03-02-a-beginners-guide-to-network-topologies.md",
+      "git_blob_sha": "d6f5a026be55cab3e4f097270bc6bdd2e4bf6937"
+    },
+    {
+      "source_path": "archive/2024/06/2024-06-28-how-to-download-applications-via-powershell-a-step-by-step-guide.md",
+      "path": "source-archive/bitcoinversus/archive/2024/06/2024-06-28-how-to-download-applications-via-powershell-a-step-by-step-guide.md",
+      "git_blob_sha": "4e97bccfde2863cc63c3b848cf92777f73aaf6c3"
+    },
+    {
+      "source_path": "archive/2026/09/axeos-fundamentals-bitaxe-telemetry-tuning-guide.md",
+      "path": "source-archive/bitcoinversus/archive/2026/09/axeos-fundamentals-bitaxe-telemetry-tuning-guide.md",
+      "git_blob_sha": "07779a6c577dc40416fdce02e39850c088722478"
+    },
+    {
+      "source_path": "archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.gutenberg.html",
+      "path": "source-archive/bitcoinversus/archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.gutenberg.html",
+      "git_blob_sha": "a0699c4036852b98132d2393fcd4213ae2d32144"
+    },
+    {
+      "source_path": "archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.md",
+      "path": "source-archive/bitcoinversus/archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.md",
+      "git_blob_sha": "e40097aefddf5711506016444425594d10070738"
+    },
+    {
+      "source_path": "archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.metadata.json",
+      "path": "source-archive/bitcoinversus/archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.metadata.json",
+      "git_blob_sha": "6812e5ad1048e7ea4d4bf16a3279d6ea74e9056b"
+    },
+    {
+      "source_path": "archive/2026/10/ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior.md",
+      "path": "source-archive/bitcoinversus/archive/2026/10/ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior.md",
+      "git_blob_sha": "28fc8c86d6ee364f3c947013e8642207db4a2720"
     }
   ],
-  "associated_assets": 810,
+  "associated_assets": 816,
   "asset_manifest_path": "curriculum/assets/manifest.json",
-  "verification_scope": "Captured published Gutenberg is compared to repository Git blob hashes. Every copied file is fetched from each default branch and compared with the captured text or original binary hash. This source audit does not certify remote video playback or future publications."
+  "verification_scope": "Captured inventory of 2835 published posts; 624 selected educational sources. Existing source timestamps agree with the prior capture; baseline raw/asset/archive blob hashes were checked on both default branches. Every added or changed file is fetched back and compared with captured text, or base64 for original binaries. Drafts are excluded. Remote video playback, publication quality, and future publications are outside this archive audit. Rotation is unchanged.",
+  "source_revision_gaps": [
+    {
+      "wordpress_post_id": 21550,
+      "published_modified": "2026-10-07T10:40:54",
+      "published_raw_git_blob_sha": "e40097aefddf5711506016444425594d10070738",
+      "note": "Current published source differs from the previously repaired Gutenberg archive and metadata. Both published and historical versions are preserved; published revision has 7 YouTube embeds and an Advertisement footer. Remote playback is not certified by this audit.",
+      "historical_gutenberg": "source-archive/bitcoinversus/archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.gutenberg.html"
+    }
+  ]
 }

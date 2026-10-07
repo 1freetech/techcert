@@ -1,6 +1,6 @@
 # energy/training
 
-34 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+35 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -38,3 +38,4 @@
 | — | [Can Solar Power Run a Data Center 24/7, or Nah?](./can-solar-power-run-a-data-center-24-7-or-nah-21347.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/can-solar-power-run-a-data-center-24-7-or-nah/) |
 | — | [Can Bitcoin Mining Stabilize the Power Grid, or Nah?](./can-bitcoin-mining-stabilize-the-power-grid-or-nah-21355.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/can-bitcoin-mining-stabilize-the-power-grid-or-nah/) |
 | — | [Can Small Modular Reactors Power Data Centers, or Nah?](./can-small-modular-reactors-power-data-centers-or-nah-21368.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/can-small-modular-reactors-power-data-centers-or-nah/) |
+| — | [Energy: What Is a Demand Charge? Why One Power Spike Can Raise an Electricity Bill](./energy-what-is-demand-charge-peak-power-electricity-bill-21540.md) | [Published source](https://bitcoinversus.tech/2026/10/07/energy-what-is-demand-charge-peak-power-electricity-bill/) |

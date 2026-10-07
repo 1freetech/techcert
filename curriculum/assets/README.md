@@ -1,6 +1,6 @@
 # Associated lesson assets
 
-810 original associated image/file assets. Exact original URLs and binary hashes are retained in [the manifest](manifest.json).
+816 original associated image/file assets. Exact original URLs and binary hashes are retained in [the manifest](manifest.json).
 
 | Asset | Lesson post IDs | Original |
 | --- | --- | --- |
@@ -814,3 +814,9 @@
 | [20969-osetc-027-4-20ma-current-loop-cover.png](./20969-osetc-027-4-20ma-current-loop-cover.png) | 20970 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osetc-027-4-20ma-current-loop-cover.png) |
 | [17525-9dc088d0-596a-421a-93af-b0fb4b56480a.png](./17525-9dc088d0-596a-421a-93af-b0fb4b56480a.png) | 17519 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/08/9dc088d0-596a-421a-93af-b0fb4b56480a.png) |
 | [17530-d8ad9d2a-a52f-4e93-976b-9925a52e7217.png](./17530-d8ad9d2a-a52f-4e93-976b-9925a52e7217.png) | 17523 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/08/d8ad9d2a-a52f-4e93-976b-9925a52e7217.png) |
+| [21535-ossec-005-mos-capacitor-physics-colored-pencil-1200x630-1.png](./21535-ossec-005-mos-capacitor-physics-colored-pencil-1200x630-1.png) | 21537 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ossec-005-mos-capacitor-physics-colored-pencil-1200x630-1.png) |
+| [21539-electrical-demand-charges-peak-power-1200x630-1.png](./21539-electrical-demand-charges-peak-power-1200x630-1.png) | 21540 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/electrical-demand-charges-peak-power-1200x630-1.png) |
+| [21544-bitcoin-mining-pool-shares-1200x630-1.png](./21544-bitcoin-mining-pool-shares-1200x630-1.png) | 21545 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoin-mining-pool-shares-1200x630-1.png) |
+| [21547-osrtc-005-robot-io-plc-handshakes-colored-pencil-1200x630-1.png](./21547-osrtc-005-robot-io-plc-handshakes-colored-pencil-1200x630-1.png) | 21550 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrtc-005-robot-io-plc-handshakes-colored-pencil-1200x630-1.png) |
+| [21549-cpu-thermal-throttling-1200x630-1.png](./21549-cpu-thermal-throttling-1200x630-1.png) | 21552 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/cpu-thermal-throttling-1200x630-1.png) |
+| [21558-cpu-clock-speed-ipc-1200x630-1.png](./21558-cpu-clock-speed-ipc-1200x630-1.png) | 21561 | [Source](https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/cpu-clock-speed-ipc-1200x630-1.png) |

@@ -1,6 +1,6 @@
 # BitcoinVersus historical lesson archives
 
-235 source files retain their original paths. Current published source is indexed in [the curriculum](../../curriculum/INDEX.md).
+242 source files retain their original paths. Current published source is indexed in [the curriculum](../../curriculum/INDEX.md).
 
 - [archive/2026/09/2026-09-25-command-14-ipconfig-windows-os.md](archive/2026/09/2026-09-25-command-14-ipconfig-windows-os.md)
 - [archive/2026/09/2026-09-25-command-27-ip-linux-os.md](archive/2026/09/2026-09-25-command-27-ip-linux-os.md)
@@ -237,3 +237,13 @@
 - [archive/2026/10/windows-command-32-net-statistics.md](archive/2026/10/windows-command-32-net-statistics.md)
 - [archive/2026/10/windows-command-33-net-start.md](archive/2026/10/windows-command-33-net-start.md)
 - [archive/2026/10/windows-command-34-sc-query.md](archive/2026/10/windows-command-34-sc-query.md)
+
+- [archive/2024/03/2024-03-02-a-beginners-guide-to-network-topologies.md](archive/2024/03/2024-03-02-a-beginners-guide-to-network-topologies.md)
+- [archive/2024/06/2024-06-28-how-to-download-applications-via-powershell-a-step-by-step-guide.md](archive/2024/06/2024-06-28-how-to-download-applications-via-powershell-a-step-by-step-guide.md)
+- [archive/2026/09/axeos-fundamentals-bitaxe-telemetry-tuning-guide.md](archive/2026/09/axeos-fundamentals-bitaxe-telemetry-tuning-guide.md)
+- [archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.gutenberg.html](archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.gutenberg.html)
+- [archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.md](archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.md)
+- [archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.metadata.json](archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.metadata.json)
+- [archive/2026/10/ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior.md](archive/2026/10/ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior.md)
+
+Historical versions may differ from the current published source; see the coverage manifest revision gaps.

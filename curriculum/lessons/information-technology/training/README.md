@@ -1,6 +1,6 @@
 # information-technology/training
 
-66 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+68 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -70,3 +70,5 @@
 | — | [Easy Tech Read: Process vs. Thread — How Your CPU Runs Multiple Tasks](./easy-tech-read-process-vs-thread-how-your-cpu-runs-multiple-tasks-21293.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/easy-tech-read-process-vs-thread-how-your-cpu-runs-multiple-tasks/) |
 | — | [Easy Tech Read: Motherboard Chipsets Explained](./easy-tech-read-motherboard-chipsets-explained-21348.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/easy-tech-read-motherboard-chipsets-explained/) |
 | — | [Storage: What Is RAID? Striping, Mirroring, Parity, and RAID 0/1/5/6/10 Explained](./storage-what-is-raid-0-1-5-6-10-striping-mirroring-parity-explained-21370.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/storage-what-is-raid-0-1-5-6-10-striping-mirroring-parity-explained/) |
+| — | [Computer Hardware: What Is Thermal Throttling? Why a Hot CPU Slows Down](./computer-hardware-cpu-thermal-throttling-heat-performance-21552.md) | [Published source](https://bitcoinversus.tech/2026/10/07/computer-hardware-cpu-thermal-throttling-heat-performance/) |
+| — | [Computer Hardware: CPU Clock Speed vs. IPC — Why More GHz Does Not Always Mean Faster](./computer-hardware-cpu-clock-speed-ghz-ipc-performance-21561.md) | [Published source](https://bitcoinversus.tech/2026/10/07/computer-hardware-cpu-clock-speed-ghz-ipc-performance/) |

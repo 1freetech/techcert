@@ -9931,6 +9931,84 @@
       "byte_count": 3050777,
       "sha256": "7eed46b018b8cc637eec36282ca08120edef6f61b61cabdd76d29fb504d0a8ce",
       "git_blob_sha": "a1ab02a3bc56689f453f64daa6733e26b53acffa"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ossec-005-mos-capacitor-physics-colored-pencil-1200x630-1.png",
+      "path": "curriculum/assets/21535-ossec-005-mos-capacitor-physics-colored-pencil-1200x630-1.png",
+      "media_id": 21535,
+      "lesson_post_ids": [
+        21537
+      ],
+      "width": 1200,
+      "height": 630,
+      "byte_count": 422677,
+      "sha256": "9c413cd2ff24f1bf7fb2c5bad65f248e29beb6b966b35d1d51de88e96302319a",
+      "git_blob_sha": "f758d8c3bc6a391d7ae9f1fab0b6d1f338cdd3f0"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/electrical-demand-charges-peak-power-1200x630-1.png",
+      "path": "curriculum/assets/21539-electrical-demand-charges-peak-power-1200x630-1.png",
+      "media_id": 21539,
+      "lesson_post_ids": [
+        21540
+      ],
+      "width": 1200,
+      "height": 630,
+      "byte_count": 500823,
+      "sha256": "350146ed58667f585653b78fa1cdcbcc761350e35153471112c258b012dc85d7",
+      "git_blob_sha": "ad3dbdd4275a7ad804072c8d941e39bb63043f9c"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoin-mining-pool-shares-1200x630-1.png",
+      "path": "curriculum/assets/21544-bitcoin-mining-pool-shares-1200x630-1.png",
+      "media_id": 21544,
+      "lesson_post_ids": [
+        21545
+      ],
+      "width": 1200,
+      "height": 630,
+      "byte_count": 579341,
+      "sha256": "0d6ccbd4d5d0e945f4a92eaf04d39ec8dcfe53c27c4c860c28d2ab367cc6ebf4",
+      "git_blob_sha": "af5f43c54b4e5e2c99c3cdbd6bf1f3c82ff25da9"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrtc-005-robot-io-plc-handshakes-colored-pencil-1200x630-1.png",
+      "path": "curriculum/assets/21547-osrtc-005-robot-io-plc-handshakes-colored-pencil-1200x630-1.png",
+      "media_id": 21547,
+      "lesson_post_ids": [
+        21550
+      ],
+      "width": 1200,
+      "height": 630,
+      "byte_count": 624879,
+      "sha256": "eb0ff66a563f9ab487b3259ed2ce3813c703d174da23e8c3135420be838bf11a",
+      "git_blob_sha": "3b99b4e708ac348fdd96a79c71c951c1d2660b2c"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/cpu-thermal-throttling-1200x630-1.png",
+      "path": "curriculum/assets/21549-cpu-thermal-throttling-1200x630-1.png",
+      "media_id": 21549,
+      "lesson_post_ids": [
+        21552
+      ],
+      "width": 1200,
+      "height": 630,
+      "byte_count": 486365,
+      "sha256": "76fde41e37d44c55568bc2c2eb14e9bcc201523f7a08a857ec9289c65e73df1c",
+      "git_blob_sha": "4f793bb92b95fdc026d8539bd1d01fc8e8073058"
+    },
+    {
+      "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/cpu-clock-speed-ipc-1200x630-1.png",
+      "path": "curriculum/assets/21558-cpu-clock-speed-ipc-1200x630-1.png",
+      "media_id": 21558,
+      "lesson_post_ids": [
+        21561
+      ],
+      "width": 1200,
+      "height": 630,
+      "byte_count": 403681,
+      "sha256": "9cb9aa498911add2733801be6fe28db5717ff446c5709f67618f254b2609b403",
+      "git_blob_sha": "1064e219899acc0547a05c8f150f7934261c0fed"
     }
   ],
   "remote_media": "YouTube/social players remain remote references."

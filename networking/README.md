@@ -2,9 +2,9 @@
 
 - **OSNTC**: Open-Source Networking Technician Certification. Introductory device addressing, configuration, verification, and troubleshooting lessons use this pathway.
 - **OSNEC**: Open-Source Networking Engineer Certification. Engineering lessons use an independent sequence and engineering scope.
-- Lesson titles use independent three-digit numbering such as `OSNTC.014: Title` and `OSNEC.002: Title`.
+- Lesson titles use independent three-digit numbering such as `OSNTC.017: Title` and `OSNEC.002: Title`.
 
-**Current next technician lesson:** `OSNTC.015`
+**Current next technician lesson:** `OSNTC.018`
 
 ## Published technician lessons
 
@@ -24,6 +24,9 @@
 | OSNTC.012 | Network Switch Basics | [Lesson](osntc-012-network-switch-basics.md) |
 | OSNTC.013 | Router Basics | [Lesson](osntc-013-router-basics.md) |
 | OSNTC.014 | TCP and UDP Transport Basics | [Lesson](osntc-014-tcp-udp-transport-basics.md) |
+| OSNTC.015 | NAT and PAT Basics — Private Addresses, Port Translation, State Tables, and Troubleshooting | [Archive](../archive/2026/10/osntc-015-nat-pat-basics-private-addresses-port-translation-state-tables-troubleshooting.md) |
+| OSNTC.016 | IPv6 Addressing and Neighbor Discovery — Prefixes, SLAAC, NDP, Routing, and Transition | [Archive](../archive/2026/10/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition.md) |
+| OSNTC.017 | Copper Ethernet Cabling — RJ45, T568B, Cat5e/Cat6/Cat6A, 100 m Limits, PoE, and Cable Testing | [Archive](../archive/2026/10/osntc-017-copper-ethernet-cabling-rj45-t568b-cat5e-cat6-cat6a-100m-poe-cable-testing.md) |
 
 ## Published engineer lessons
 
@@ -35,10 +38,11 @@
 ## Publishing rules
 
 - Check live WordPress and GitHub numbering before every publication.
+- Follow `LESSON_AUTHORING_STANDARDS.md`, including modular 999-lesson sizing, elementary overview/conclusion, BitcoinVersus internal-wiki links, and non-minimal realistic/approved cover styles.
 - Use a unique relevant featured cover and keep it out of the lesson body.
-- Include three relevant YouTube instructional embeds.
+- Verify relevant instructional YouTube embeds on the live page.
 - Link prior lessons in the networking module when they directly support the concept.
 - Write lessons as formal instruction/lecture material rather than author-to-reader conversation.
-- Archive every published lesson to `1freetech/Bitcoinversus.tech/archive/YYYY/MM/` and maintain the Open CERT mirror.
+- Archive every published lesson to `1freetech/Bitcoinversus.tech/archive/YYYY/MM/` and maintain the TechCert and Open CERT mirrors.
 
-OSNTC.014 was published October 4, 2026 as WordPress post 20611. The technician track continues with OSNTC.015.
+OSNTC.017 was published October 6, 2026 as WordPress post 21401. The technician track continues with OSNTC.018.

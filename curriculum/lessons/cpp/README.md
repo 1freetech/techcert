@@ -1,6 +1,6 @@
 # cpp
 
-20 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
+23 published lessons and training modules. Historical numbering is preserved; post IDs distinguish duplicate numbers.
 
 | Number | Lesson | Source |
 | --- | --- | --- |
@@ -24,3 +24,6 @@
 | 18 | [OSC++.018: Virtual Functions and Polymorphism Basics](./018-oscpp-018-virtual-functions-polymorphism-basics-20249.md) | [Published lesson](https://bitcoinversus.tech/2026/10/03/oscpp-018-virtual-functions-polymorphism-basics/) |
 | 19 | [OSC++.019: Pure Virtual Functions and Abstract Classes Basics](./019-oscpp-019-pure-virtual-functions-abstract-classes-basics-20425.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/oscpp-019-pure-virtual-functions-abstract-classes-basics/) |
 | 20 | [OSC++.020: Virtual Destructors and Polymorphic Cleanup](./020-oscpp-020-virtual-destructors-polymorphic-cleanup-20775.md) | [Published lesson](https://bitcoinversus.tech/2026/10/04/oscpp-020-virtual-destructors-polymorphic-cleanup/) |
+| 21 | [OSC++.021: Smart Pointers — unique_ptr, shared_ptr, weak_ptr, and Ownership](../../../../archive/2026/10/oscpp-021-smart-pointers-unique-ptr-shared-ptr-weak-ptr-ownership.md) | [Published lesson](https://bitcoinversus.tech/2026/10/05/oscpp-021-smart-pointers-unique-ptr-shared-ptr-weak-ptr-ownership/) |
+| 22 | [OSC++.022: Move Semantics — Rvalue References, std::move, Move Constructors, and Move Assignment](../../../../archive/2026/10/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment/) |
+| 23 | [OSC++.023: Perfect Forwarding — Forwarding References, std::forward, Reference Collapsing, and Universal Constructors](../../../../archive/2026/10/oscpp-023-perfect-forwarding-forwarding-references-std-forward-reference-collapsing-universal-constructors.md) | [Published lesson](https://bitcoinversus.tech/2026/10/06/oscpp-023-perfect-forwarding-forwarding-references-std-forward-reference-collapsing-universal-constructors/) |

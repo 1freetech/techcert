@@ -3,7 +3,7 @@
   "title": "OSRTC.005: Robot I/O and PLC Handshakes — Digital Inputs, Outputs, Ready/Busy/Fault Signals, Sensors, Interlocks, and Troubleshooting",
   "live_url": "https://bitcoinversus.tech/2026/10/07/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting/",
   "status": "publish",
-  "modified": "2026-10-07T10:29:35",
+  "modified": "2026-10-07T10:32:49",
   "featured_media": 21551,
   "cover_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrtc-005-robot-digital-io-cover-1200x630-1.jpg",
   "cover_dimensions": [
@@ -13,7 +13,8 @@
   "verification": {
     "saved_gutenberg_exact": true,
     "youtube_embed_count": 3,
-    "youtube_playback": "pending: players stalled; browser transport disconnected",
-    "rotation_advanced": false
+    "youtube_playback": "pending: all three live embedded players buffer at 0:00 after Play",
+    "rotation_advanced": false,
+    "code_example_tests_passed": true
   }
 }

@@ -29,18 +29,18 @@
       "title_format": "OSPython.{number}: {topic}",
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 27,
-        "title": "OSPython.027: HTTP Requests and REST APIs — GET, POST, Parameters, Headers, JSON, Status Codes, Timeouts, and Errors",
-        "wordpress_post_id": 21419,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/ospython-027-http-requests-rest-apis-get-post-parameters-headers-json-status-codes-timeouts-errors/",
-        "archive_path": "archive/2026/10/ospython-027-http-requests-rest-apis-get-post-parameters-headers-json-status-codes-timeouts-errors.md",
+        "lesson_number": 31,
+        "title": "OSPython.031: Time-Based Log Rotation with TimedRotatingFileHandler",
+        "wordpress_post_id": 21992,
+        "live_url": "https://bitcoinversus.tech/2026/10/08/ospython-031-time-based-log-rotation-timedrotatingfilehandler/",
+        "archive_path": "archive/2026/10/ospython-031-time-based-log-rotation-timedrotatingfilehandler.md",
         "verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ]
       },
-      "next_lesson_number": 28
+      "next_lesson_number": 32
     },
     {
       "subject": "linux",
@@ -49,19 +49,19 @@
       "title_format": "Linux Command #{number} – {topic} (Linux OS)",
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 44,
-        "title": "Linux Command #44 – chage (Linux OS)",
-        "wordpress_post_id": 21444,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/linux-command-44-chage/",
-        "archive_path": "archive/2026/10/linux-command-44-chage.md",
+        "lesson_number": 46,
+        "title": "Linux Command #46 – gpasswd (Linux OS)",
+        "wordpress_post_id": 21684,
+        "live_url": "https://bitcoinversus.tech/2026/10/07/linux-command-46-gpasswd/",
+        "archive_path": "archive/2026/10/linux-command-46-gpasswd.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ],
-        "verification_status": "verified"
+        "verification_status": "verified from live WordPress sequence"
       },
-      "next_lesson_number": 45
+      "next_lesson_number": 47
     },
     {
       "subject": "windows",

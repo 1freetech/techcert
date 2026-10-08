@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-08T02:24:52Z",
+  "updated_at": "2026-10-08T02:42:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "fiber_optics_engineer",
+    "subject": "firmware_technician",
     "lesson_number": 5,
-    "title": "OSFOEC.005: DWDM Channel Planning — ITU-T Frequency Grid, Fixed vs Flexible Slots, Channel Spacing, Mux/Demux, and Guard Bands",
-    "wordpress_post_id": 21746,
-    "live_url": "https://bitcoinversus.tech/2026/10/07/osfoec-005-dwdm-channel-planning-itu-frequency-grid-fixed-flexible-slots-channel-spacing-mux-demux-guard-bands/",
-    "archive_path": "archive/2026/10/osfoec-005-dwdm-channel-planning-itu-frequency-grid-fixed-flexible-slots-channel-spacing-mux-demux-guard-bands.md",
+    "title": "OSFTC.005: Watchdog Timers and Reset Loops — Timeouts, Feeding, Reset Causes, and Firmware Troubleshooting",
+    "wordpress_post_id": 21757,
+    "live_url": "https://bitcoinversus.tech/2026/10/07/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting/",
+    "archive_path": "archive/2026/10/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "firmware_technician",
+    "subject": "firmware_engineer",
     "lesson_number": 5,
-    "title_format": "OSFTC.005: {topic}",
+    "title_format": "OSFEC.005: {topic}",
     "track_start": false,
-    "previous_lesson": "OSFTC.004"
+    "previous_lesson": "OSFEC.004"
   },
   "new_track_starts": {
     "semiconductor_technician": {
@@ -87,8 +87,8 @@
     },
     "firmware_technician": {
       "acronym": "OSFTC",
-      "lesson_number": 5,
-      "title_format": "OSFTC.005: {topic}"
+      "lesson_number": 6,
+      "title_format": "OSFTC.006: {topic}"
     },
     "firmware_engineer": {
       "acronym": "OSFEC",
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.006: {topic}"
     }
   },
-  "numbering_note": "OSPython.027 is published; next OSPython.028. Linux Command #44 is published; next Linux Command #45. Windows Command #34 is published; next Windows Command #35. OSITC.002 is published; next OSITC.003. OSEEC.014 is published; next OSEEC.015. OSETC.029 is published; next OSETC.030. OSC++.023 is published; next OSC++.024. OSSTC.005 is published; next OSSTC.006. OSSEC.005 is published; next OSSEC.006. OSRTC.005 is published; next OSRTC.006. OSREC.005 is published; next OSREC.006. OSDCTC.005 is published; next OSDCTC.006. OSDCEC.005 is published; next OSDCEC.006. OSFOTC.005 is published; next OSFOTC.006. OSFOEC.005 is published; next OSFOEC.006. OSFTC.004 is published; next OSFTC.005. OSFEC.004 is published; next OSFEC.005. OSHistory.005 is published; next OSHistory.006. OSNTC.018 is published; next OSNTC.019. The global rotation advances to OSFTC.005 after verified OSFOEC.005."
+  "numbering_note": "OSPython.027 is published; next OSPython.028. Linux Command #44 is published; next Linux Command #45. Windows Command #34 is published; next Windows Command #35. OSITC.002 is published; next OSITC.003. OSEEC.014 is published; next OSEEC.015. OSETC.029 is published; next OSETC.030. OSC++.023 is published; next OSC++.024. OSSTC.005 is published; next OSSTC.006. OSSEC.005 is published; next OSSEC.006. OSRTC.005 is published; next OSRTC.006. OSREC.005 is published; next OSREC.006. OSDCTC.005 is published; next OSDCTC.006. OSDCEC.005 is published; next OSDCEC.006. OSFOTC.005 is published; next OSFOTC.006. OSFOEC.005 is published; next OSFOEC.006. OSFTC.005 is published; next OSFTC.006. OSFEC.004 is published; next OSFEC.005. OSHistory.005 is published; next OSHistory.006. OSNTC.018 is published; next OSNTC.019. The global rotation advances to OSFEC.005 after verified OSFTC.005."
 }

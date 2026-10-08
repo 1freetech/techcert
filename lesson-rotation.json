@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-08T16:43:00Z",
+  "updated_at": "2026-10-08T17:05:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "networking",
-    "lesson_number": 19,
-    "title": "OSNTC.019: Spanning Tree Protocol (STP) — Loops, Root Bridge, BPDUs, Port Roles, and RSTP",
-    "wordpress_post_id": 21981,
-    "live_url": "https://bitcoinversus.tech/2026/10/08/osntc-019-spanning-tree-protocol-stp-loops-root-bridge-bpdus-port-roles-rstp/",
-    "archive_path": "archive/2026/10/osntc-019-spanning-tree-protocol-stp-loops-root-bridge-bpdus-port-roles-rstp.md",
+    "subject": "python",
+    "lesson_number": 31,
+    "title": "OSPython.031: Time-Based Log Rotation with TimedRotatingFileHandler",
+    "wordpress_post_id": 21992,
+    "live_url": "https://bitcoinversus.tech/2026/10/08/ospython-031-time-based-log-rotation-timedrotatingfilehandler/",
+    "archive_path": "archive/2026/10/ospython-031-time-based-log-rotation-timedrotatingfilehandler.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "python",
-    "lesson_number": 31,
-    "title_format": "OSPython.031: {topic}",
+    "subject": "linux",
+    "lesson_number": 47,
+    "title_format": "Linux Command #47 – {topic} (Linux OS)",
     "track_start": false,
-    "previous_lesson": "OSPython.030"
+    "previous_lesson": "Linux Command #46"
   },
   "new_track_starts": {
     "semiconductor_technician": {
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.007: {topic}"
     }
   },
-  "numbering_note": "Current verified next lesson is OSPython.031 after OSNTC.019. Live WordPress was checked: OSPython.030 is the latest Python lesson and no OSPython.031 was present at advancement time."
+  "numbering_note": "Current verified next lesson is Linux Command #47 after OSPython.031. Live WordPress was checked: Linux Command #46 – gpasswd is the latest Linux command lesson and no Linux Command #47 was present at advancement time."
 }

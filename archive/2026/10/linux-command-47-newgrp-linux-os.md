@@ -22,10 +22,6 @@ https://www.youtube.com/watch?v=Fwg3ZBlqw2o
 </div><figcaption class="wp-element-caption"><em>MichaelsTechTutorials — Linux groups, <code>gpasswd</code>, and <code>newgrp</code>, including how <code>newgrp</code> changes the active GID used by the shell.</em></figcaption></figure>
 <!-- /wp:embed -->
 
-<!-- wp:image {"id":22008,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-newgrp-terminal-groups.jpg?w=1024" alt="Realistic computer terminal representing Linux user and group management commands." class="wp-image-22008" /><figcaption class="wp-element-caption"><em><code>newgrp</code> changes the active group for a shell session; it does not replace permanent account-management commands. Photo via Unsplash.</em></figcaption></figure>
-<!-- /wp:image -->
-
 <!-- wp:heading -->
 <h2 class="wp-block-heading"><strong>Use newgrp - for a Login-Like Environment</strong></h2>
 <!-- /wp:heading -->
@@ -111,7 +107,7 @@ https://www.reddit.com/r/linuxquestions/comments/k6zz3j/
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Featured image: realistic Linux terminal photograph via Unsplash, cropped to exactly 1200×630. Body image: separate realistic terminal photograph via Unsplash. Technical reference: current shadow-utils <code>newgrp(1)</code> and POSIX <code>newgrp</code> documentation. Every YouTube embed is distinct and directly relevant to Linux groups or <code>newgrp</code>; the Reddit embed is directly about primary versus supplementary group behavior.</p>
+<p>Featured image: directly relevant Linux <code>newgrp</code> reference artwork showing the exact command/topic, 1200×630. No body image is used because the available generic terminal photograph did not specifically demonstrate <code>newgrp</code>. Technical reference: current shadow-utils <code>newgrp(1)</code> and POSIX <code>newgrp</code> documentation. Every YouTube embed is distinct and directly relevant to Linux groups or <code>newgrp</code>; the Reddit embed is directly about primary versus supplementary group behavior.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

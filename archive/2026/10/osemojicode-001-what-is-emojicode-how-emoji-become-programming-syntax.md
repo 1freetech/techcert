@@ -6,8 +6,8 @@
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=dIe9SlnzJ8s</div><figcaption class="wp-element-caption"><em>A practical overview of the Emojicode programming language and how emoji tokens map to executable program structure.</em></figcaption></figure>
 <!-- /wp:embed -->
 
-<!-- wp:image {"id":22170,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osemojicode001-program-structure-1200x700-1.jpg?w=1024" alt="Diagram mapping Emojicode entry point, block delimiters, output symbol, and string syntax to ordinary program structure" class="wp-image-22170" /><figcaption class="wp-element-caption"><em>Emojicode uses emoji tokens for familiar programming concepts such as an entry point, block boundaries, output, and strings.</em></figcaption></figure>
+<!-- wp:image {"id":22182,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osemojicode001-body-fixed-1200x700-1.jpg?w=1024" alt="Dark neon-green infographic explaining entry point, block, output, string, and close-block roles in Emojicode" class="wp-image-22182" /><figcaption class="wp-element-caption"><em>Emojicode uses visual tokens for familiar programming concepts such as program start, blocks, output, and strings.</em></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:heading -->

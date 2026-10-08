@@ -353,11 +353,11 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 4,
-        "title": "OSFTC.004: Firmware Flashing Interfaces — USB DFU, SWD/JTAG, SPI Programmers, Bootloader Modes, and Write Verification",
-        "wordpress_post_id": 21363,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/osftc-004-firmware-flashing-interfaces-usb-dfu-swd-jtag-spi-programmers-bootloader-modes-write-verification/",
-        "archive_path": "archive/2026/10/osftc-004-firmware-flashing-interfaces-usb-dfu-swd-jtag-spi-programmers-bootloader-modes-write-verification.md",
+        "lesson_number": 5,
+        "title": "OSFTC.005: Watchdog Timers and Reset Loops — Timeouts, Feeding, Reset Causes, and Firmware Troubleshooting",
+        "wordpress_post_id": 21757,
+        "live_url": "https://bitcoinversus.tech/2026/10/07/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting/",
+        "archive_path": "archive/2026/10/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
@@ -365,7 +365,7 @@
         ],
         "verification_status": "verified"
       },
-      "next_lesson_number": 5
+      "next_lesson_number": 6
     },
     {
       "subject": "firmware_engineer",

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-08T16:26:00Z",
+  "updated_at": "2026-10-08T16:43:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "history_money_technology_bitcoin",
-    "lesson_number": 6,
-    "title": "OSHistory.006: The Gold Standard — Convertibility, Parity, Reserves, and Redemption",
-    "wordpress_post_id": 21958,
-    "live_url": "https://bitcoinversus.tech/2026/10/08/oshistory-006-gold-standard-convertibility-parity-reserves-redemption/",
-    "archive_path": "archive/2026/10/oshistory-006-gold-standard-convertibility-parity-reserves-redemption.md",
+    "subject": "networking",
+    "lesson_number": 19,
+    "title": "OSNTC.019: Spanning Tree Protocol (STP) — Loops, Root Bridge, BPDUs, Port Roles, and RSTP",
+    "wordpress_post_id": 21981,
+    "live_url": "https://bitcoinversus.tech/2026/10/08/osntc-019-spanning-tree-protocol-stp-loops-root-bridge-bpdus-port-roles-rstp/",
+    "archive_path": "archive/2026/10/osntc-019-spanning-tree-protocol-stp-loops-root-bridge-bpdus-port-roles-rstp.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "networking",
-    "lesson_number": 19,
-    "title_format": "OSNTC.019: {topic}",
+    "subject": "python",
+    "lesson_number": 31,
+    "title_format": "OSPython.031: {topic}",
     "track_start": false,
-    "previous_lesson": "OSNTC.018"
+    "previous_lesson": "OSPython.030"
   },
   "new_track_starts": {
     "semiconductor_technician": {
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.007: {topic}"
     }
   },
-  "numbering_note": "Current verified next numbers include OSNTC.019 after OSHistory.006. The global rotation has completed the history_money_technology_bitcoin step and wraps to networking. Live WordPress was checked and no OSNTC.019 was present at advancement time."
+  "numbering_note": "Current verified next lesson is OSPython.031 after OSNTC.019. Live WordPress was checked: OSPython.030 is the latest Python lesson and no OSPython.031 was present at advancement time."
 }

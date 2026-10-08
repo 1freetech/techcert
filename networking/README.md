@@ -2,9 +2,9 @@
 
 - **OSNTC**: Open-Source Networking Technician Certification. Introductory device addressing, configuration, verification, and troubleshooting lessons use this pathway.
 - **OSNEC**: Open-Source Networking Engineer Certification. Engineering lessons use an independent sequence and engineering scope.
-- Lesson titles use independent three-digit numbering such as `OSNTC.017: Title` and `OSNEC.002: Title`.
+- Lesson titles use independent three-digit numbering such as `OSNTC.018: Title` and `OSNEC.002: Title`.
 
-**Current next technician lesson:** `OSNTC.018`
+**Current next technician lesson:** `OSNTC.019`
 
 ## Published technician lessons
 
@@ -27,6 +27,7 @@
 | OSNTC.015 | NAT and PAT Basics — Private Addresses, Port Translation, State Tables, and Troubleshooting | [Archive](../archive/2026/10/osntc-015-nat-pat-basics-private-addresses-port-translation-state-tables-troubleshooting.md) |
 | OSNTC.016 | IPv6 Addressing and Neighbor Discovery — Prefixes, SLAAC, NDP, Routing, and Transition | [Archive](../archive/2026/10/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition.md) |
 | OSNTC.017 | Copper Ethernet Cabling — RJ45, T568B, Cat5e/Cat6/Cat6A, 100 m Limits, PoE, and Cable Testing | [Archive](../archive/2026/10/osntc-017-copper-ethernet-cabling-rj45-t568b-cat5e-cat6-cat6a-100m-poe-cable-testing.md) |
+| OSNTC.018 | Ethernet Link Negotiation — Speed, Duplex, Auto-Negotiation, Link LEDs, and Interface Errors | [Archive](../archive/2026/10/osntc-018-ethernet-link-negotiation-speed-duplex-auto-negotiation-link-leds-interface-errors.md) |
 
 ## Published engineer lessons
 
@@ -45,4 +46,4 @@
 - Write lessons as formal instruction/lecture material rather than author-to-reader conversation.
 - Archive every published lesson to `1freetech/Bitcoinversus.tech/archive/YYYY/MM/` and maintain the TechCert and Open CERT mirrors.
 
-OSNTC.017 was published October 6, 2026 as WordPress post 21401. The technician track continues with OSNTC.018.
+OSNTC.018 was published October 7, 2026 as WordPress post 21726. The technician track continues with OSNTC.019.

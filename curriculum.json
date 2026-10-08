@@ -9,18 +9,18 @@
       "title_format": "OSNTC.{number}: {topic}",
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 18,
-        "title": "OSNTC.018: Ethernet Link Negotiation — Speed, Duplex, Auto-Negotiation, Link LEDs, and Interface Errors",
-        "wordpress_post_id": 21726,
-        "live_url": "https://bitcoinversus.tech/2026/10/07/osntc-018-ethernet-link-negotiation-speed-duplex-auto-negotiation-link-leds-interface-errors/",
-        "archive_path": "archive/2026/10/osntc-018-ethernet-link-negotiation-speed-duplex-auto-negotiation-link-leds-interface-errors.md",
+        "lesson_number": 19,
+        "title": "OSNTC.019: Spanning Tree Protocol (STP) — Loops, Root Bridge, BPDUs, Port Roles, and RSTP",
+        "wordpress_post_id": 21981,
+        "live_url": "https://bitcoinversus.tech/2026/10/08/osntc-019-spanning-tree-protocol-stp-loops-root-bridge-bpdus-port-roles-rstp/",
+        "archive_path": "archive/2026/10/osntc-019-spanning-tree-protocol-stp-loops-root-bridge-bpdus-port-roles-rstp.md",
         "verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ]
       },
-      "next_lesson_number": 19
+      "next_lesson_number": 20
     },
     {
       "subject": "python",
@@ -402,11 +402,11 @@
       },
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 5,
-        "title": "OSHistory.005: Bank Runs and the Rise of Central Banking — Panics, Clearinghouses, Lender of Last Resort, and Elastic Currency",
-        "wordpress_post_id": 21389,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/oshistory-005-bank-runs-rise-central-banking-panics-clearinghouses-lender-last-resort-elastic-currency/",
-        "archive_path": "archive/2026/10/oshistory-005-bank-runs-rise-central-banking-panics-clearinghouses-lender-last-resort-elastic-currency.md",
+        "lesson_number": 6,
+        "title": "OSHistory.006: The Gold Standard — Convertibility, Parity, Reserves, and Redemption",
+        "wordpress_post_id": 21958,
+        "live_url": "https://bitcoinversus.tech/2026/10/08/oshistory-006-gold-standard-convertibility-parity-reserves-redemption/",
+        "archive_path": "archive/2026/10/oshistory-006-gold-standard-convertibility-parity-reserves-redemption.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
@@ -414,7 +414,7 @@
         ],
         "verification_status": "verified"
       },
-      "next_lesson_number": 6
+      "next_lesson_number": 7
     }
   ]
 }

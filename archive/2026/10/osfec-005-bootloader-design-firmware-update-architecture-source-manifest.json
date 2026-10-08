@@ -1,0 +1,24 @@
+{
+  "title": "OSFEC.005: Bootloader Design and Firmware Update Architecture — Image Validation, A/B Slots, Rollback, Versioning, and Recovery",
+  "wordpress_post_id": 21893,
+  "live_url": "https://bitcoinversus.tech/2026/10/08/osfec-005-bootloader-design-firmware-update-architecture-image-validation-ab-slots-rollback-versioning-recovery/",
+  "featured_media_id": 21888,
+  "featured_image_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osfec-005-bootloader-firmware-update-cover-1200x630-1.jpg",
+  "featured_image_dimensions": "1200x630",
+  "source_encoding": "base64",
+  "source_parts": [
+    "archive/2026/10/osfec-005-bootloader-design-firmware-update-architecture-source.b64.part1",
+    "archive/2026/10/osfec-005-bootloader-design-firmware-update-architecture-source.b64.part2",
+    "archive/2026/10/osfec-005-bootloader-design-firmware-update-architecture-source.b64.part3",
+    "archive/2026/10/osfec-005-bootloader-design-firmware-update-architecture-source.b64.part4"
+  ],
+  "part_blob_sha1": [
+    "c5204a157fb341a5361e77ea2b3aa7d9984d2345",
+    "4716074a3da4264db87d2dc36a7455ffc7f91cc1",
+    "fa51f6a6ca67c7d20a843905e21097215866595c",
+    "3a9c9c65bdb0c279f63fc941fbb904103bf151d0"
+  ],
+  "decoded_bytes": 25953,
+  "decoded_sha256": "92223374411ca3bc6e34cf158f1b95ce7b3cabc0176e3a9b81c04030219d260c",
+  "reconstruction": "Concatenate source_parts in numeric order with no separators, then Base64-decode. The decoded bytes are the exact final Gutenberg source read back from WordPress after publication."
+}

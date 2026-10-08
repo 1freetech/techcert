@@ -331,11 +331,11 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 4,
-        "title": "OSFOEC.004: High-Speed Optical Signaling — NRZ, PAM4, Symbol Rate, Eye Diagrams, BER, and FEC",
-        "wordpress_post_id": 21361,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/osfoec-004-high-speed-optical-signaling-nrz-pam4-symbol-rate-eye-diagrams-ber-fec/",
-        "archive_path": "archive/2026/10/osfoec-004-high-speed-optical-signaling-nrz-pam4-symbol-rate-eye-diagrams-ber-fec.md",
+        "lesson_number": 5,
+        "title": "OSFOEC.005: DWDM Channel Planning — ITU-T Frequency Grid, Fixed vs Flexible Slots, Channel Spacing, Mux/Demux, and Guard Bands",
+        "wordpress_post_id": 21746,
+        "live_url": "https://bitcoinversus.tech/2026/10/07/osfoec-005-dwdm-channel-planning-itu-frequency-grid-fixed-flexible-slots-channel-spacing-mux-demux-guard-bands/",
+        "archive_path": "archive/2026/10/osfoec-005-dwdm-channel-planning-itu-frequency-grid-fixed-flexible-slots-channel-spacing-mux-demux-guard-bands.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
@@ -343,7 +343,7 @@
         ],
         "verification_status": "verified"
       },
-      "next_lesson_number": 5
+      "next_lesson_number": 6
     },
     {
       "subject": "firmware_technician",

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "subject": "leadership",
+  "name": "Open Source Leadership Technical Certification",
+  "acronym": "OSLTC",
+  "title_format": "OSLTC.{number} — {topic}",
+  "status": "active",
+  "latest_lesson": {
+    "lesson_number": 1,
+    "title": "OSLTC.001 — How to Lead With Positive Reinforcement",
+    "wordpress_post_id": 22070,
+    "live_url": "https://bitcoinversus.tech/2026/10/08/osltc-001-how-to-lead-with-positive-reinforcement/",
+    "archive_path": "archive/2026/10/osltc-001-how-to-lead-with-positive-reinforcement.md"
+  },
+  "next_lesson_number": 2
+}

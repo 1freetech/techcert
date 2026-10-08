@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-08T02:42:00Z",
+  "updated_at": "2026-10-08T15:06:09Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -26,11 +26,11 @@
   ],
   "last_completed": {
     "subject": "firmware_technician",
-    "lesson_number": 5,
-    "title": "OSFTC.005: Watchdog Timers and Reset Loops — Timeouts, Feeding, Reset Causes, and Firmware Troubleshooting",
-    "wordpress_post_id": 21757,
-    "live_url": "https://bitcoinversus.tech/2026/10/07/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting/",
-    "archive_path": "archive/2026/10/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting.md",
+    "lesson_number": 6,
+    "title": "OSFTC.006: Hardware/Firmware Compatibility — Board Revisions, Device IDs, Bootloaders, Peripherals, and Field Validation",
+    "wordpress_post_id": 21908,
+    "live_url": "https://bitcoinversus.tech/2026/10/08/osftc-006-hardware-firmware-compatibility-board-revisions-device-ids-bootloaders-peripherals-field-validation/",
+    "archive_path": "archive/2026/10/osftc-006-hardware-firmware-compatibility-board-revisions-device-ids-bootloaders-peripherals-field-validation.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -39,61 +39,61 @@
   },
   "next": {
     "subject": "firmware_engineer",
-    "lesson_number": 5,
-    "title_format": "OSFEC.005: {topic}",
+    "lesson_number": 6,
+    "title_format": "OSFEC.006: {topic}",
     "track_start": false,
-    "previous_lesson": "OSFEC.004"
+    "previous_lesson": "OSFEC.005"
   },
   "new_track_starts": {
     "semiconductor_technician": {
       "acronym": "OSSTC",
-      "lesson_number": 5,
-      "title_format": "OSSTC.005: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSSTC.007: {topic}"
     },
     "semiconductor_engineer": {
       "acronym": "OSSEC",
-      "lesson_number": 5,
-      "title_format": "OSSEC.005: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSSEC.007: {topic}"
     },
     "robotics_technician": {
       "acronym": "OSRTC",
-      "lesson_number": 5,
-      "title_format": "OSRTC.005: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSRTC.007: {topic}"
     },
     "robotics_engineer": {
       "acronym": "OSREC",
-      "lesson_number": 5,
-      "title_format": "OSREC.005: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSREC.007: {topic}"
     },
     "data_center_technician": {
       "acronym": "OSDCTC",
-      "lesson_number": 5,
-      "title_format": "OSDCTC.005: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSDCTC.007: {topic}"
     },
     "data_center_engineer": {
       "acronym": "OSDCEC",
-      "lesson_number": 5,
-      "title_format": "OSDCEC.005: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSDCEC.007: {topic}"
     },
     "fiber_optics_technician": {
       "acronym": "OSFOTC",
-      "lesson_number": 5,
-      "title_format": "OSFOTC.005: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSFOTC.007: {topic}"
     },
     "fiber_optics_engineer": {
       "acronym": "OSFOEC",
-      "lesson_number": 6,
-      "title_format": "OSFOEC.006: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSFOEC.007: {topic}"
     },
     "firmware_technician": {
       "acronym": "OSFTC",
-      "lesson_number": 6,
-      "title_format": "OSFTC.006: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSFTC.007: {topic}"
     },
     "firmware_engineer": {
       "acronym": "OSFEC",
-      "lesson_number": 5,
-      "title_format": "OSFEC.005: {topic}"
+      "lesson_number": 6,
+      "title_format": "OSFEC.006: {topic}"
     },
     "history_money_technology_bitcoin": {
       "acronym": "OSHistory",
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.006: {topic}"
     }
   },
-  "numbering_note": "OSPython.027 is published; next OSPython.028. Linux Command #44 is published; next Linux Command #45. Windows Command #34 is published; next Windows Command #35. OSITC.002 is published; next OSITC.003. OSEEC.014 is published; next OSEEC.015. OSETC.029 is published; next OSETC.030. OSC++.023 is published; next OSC++.024. OSSTC.005 is published; next OSSTC.006. OSSEC.005 is published; next OSSEC.006. OSRTC.005 is published; next OSRTC.006. OSREC.005 is published; next OSREC.006. OSDCTC.005 is published; next OSDCTC.006. OSDCEC.005 is published; next OSDCEC.006. OSFOTC.005 is published; next OSFOTC.006. OSFOEC.005 is published; next OSFOEC.006. OSFTC.005 is published; next OSFTC.006. OSFEC.004 is published; next OSFEC.005. OSHistory.005 is published; next OSHistory.006. OSNTC.018 is published; next OSNTC.019. The global rotation advances to OSFEC.005 after verified OSFTC.005."
+  "numbering_note": "Current verified next numbers: OSNTC.019; OSPython.031; Linux Command #47; Windows Command #36; OSITC.003; OSEEC.016; OSETC.031; OSC++.025; OSSTC.007; OSSEC.007; OSRTC.007; OSREC.007; OSDCTC.007; OSDCEC.007; OSFOTC.007; OSFOEC.007; OSFTC.007; OSFEC.006; OSHistory.006. The global rotation advances to OSFEC.006 after verified OSFTC.006."
 }

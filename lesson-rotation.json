@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-08T17:05:00Z",
+  "updated_at": "2026-10-08T17:34:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "python",
-    "lesson_number": 31,
-    "title": "OSPython.031: Time-Based Log Rotation with TimedRotatingFileHandler",
-    "wordpress_post_id": 21992,
-    "live_url": "https://bitcoinversus.tech/2026/10/08/ospython-031-time-based-log-rotation-timedrotatingfilehandler/",
-    "archive_path": "archive/2026/10/ospython-031-time-based-log-rotation-timedrotatingfilehandler.md",
+    "subject": "linux",
+    "lesson_number": 47,
+    "title": "Linux Command #47 – newgrp (Linux OS)",
+    "wordpress_post_id": 22009,
+    "live_url": "https://bitcoinversus.tech/2026/10/08/linux-command-47-newgrp-linux-os/",
+    "archive_path": "archive/2026/10/linux-command-47-newgrp-linux-os.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "linux",
-    "lesson_number": 47,
-    "title_format": "Linux Command #47 – {topic} (Linux OS)",
+    "subject": "windows",
+    "lesson_number": 36,
+    "title_format": "Windows Command #36 – {topic} (Windows OS)",
     "track_start": false,
-    "previous_lesson": "Linux Command #46"
+    "previous_lesson": "Windows Command #35"
   },
   "new_track_starts": {
     "semiconductor_technician": {
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.007: {topic}"
     }
   },
-  "numbering_note": "Current verified next lesson is Linux Command #47 after OSPython.031. Live WordPress was checked: Linux Command #46 – gpasswd is the latest Linux command lesson and no Linux Command #47 was present at advancement time."
+  "numbering_note": "Current verified next lesson is Windows Command #36 after Linux Command #47. Live WordPress was checked: Windows Command #35 sc start is the latest Windows command and no Windows Command #36 was present at advancement time."
 }

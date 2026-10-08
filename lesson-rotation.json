@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-08T17:34:00Z",
+  "updated_at": "2026-10-08T17:50:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "linux",
-    "lesson_number": 47,
-    "title": "Linux Command #47 – newgrp (Linux OS)",
-    "wordpress_post_id": 22009,
-    "live_url": "https://bitcoinversus.tech/2026/10/08/linux-command-47-newgrp-linux-os/",
-    "archive_path": "archive/2026/10/linux-command-47-newgrp-linux-os.md",
+    "subject": "windows",
+    "lesson_number": 36,
+    "title": "Windows Command #36 – sc stop (Windows OS)",
+    "wordpress_post_id": 22023,
+    "live_url": "https://bitcoinversus.tech/2026/10/08/windows-command-36-sc-stop-windows-os/",
+    "archive_path": "archive/2026/10/windows-command-36-sc-stop-windows-os.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "windows",
-    "lesson_number": 36,
-    "title_format": "Windows Command #36 – {topic} (Windows OS)",
+    "subject": "information_technology",
+    "lesson_number": 3,
+    "title_format": "OSITC.003: {topic}",
     "track_start": false,
-    "previous_lesson": "Windows Command #35"
+    "previous_lesson": "OSITC.002"
   },
   "new_track_starts": {
     "semiconductor_technician": {
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.007: {topic}"
     }
   },
-  "numbering_note": "Current verified next lesson is Windows Command #36 after Linux Command #47. Live WordPress was checked: Windows Command #35 sc start is the latest Windows command and no Windows Command #36 was present at advancement time."
+  "numbering_note": "Current verified next lesson is OSITC.003 after Windows Command #36. Live WordPress was checked: OSITC.002 is the latest Information Technology lesson and no OSITC.003 was present at advancement time."
 }

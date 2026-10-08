@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-08T18:11:00Z",
+  "updated_at": "2026-10-08T18:26:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "information_technology",
-    "lesson_number": 3,
-    "title": "OSITC.003: Windows Process Troubleshooting — Task Manager, PIDs, CPU, Memory, and Process Explorer",
-    "wordpress_post_id": 22039,
-    "live_url": "https://bitcoinversus.tech/2026/10/08/ositc-003-windows-process-troubleshooting-task-manager-pid-process-explorer/",
-    "archive_path": "archive/2026/10/ositc-003-windows-process-troubleshooting-task-manager-pid-process-explorer.md",
+    "subject": "electrical_engineering",
+    "lesson_number": 16,
+    "title": "OSEEC.016: Power Factor Correction Engineering — Capacitor Banks, kVAR Sizing, Automatic Steps, and Harmonic Detuning",
+    "wordpress_post_id": 22051,
+    "live_url": "https://bitcoinversus.tech/2026/10/08/oseec-016-power-factor-correction-capacitor-banks-kvar-harmonic-detuning/",
+    "archive_path": "archive/2026/10/oseec-016-power-factor-correction-capacitor-banks-kvar-harmonic-detuning.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "electrical_engineering",
-    "lesson_number": 16,
-    "title_format": "OSEEC.016: {topic}",
+    "subject": "electrical_technician",
+    "lesson_number": 31,
+    "title_format": "OSETC.031: {topic}",
     "track_start": false,
-    "previous_lesson": "OSEEC.015"
+    "previous_lesson": "OSETC.030"
   },
   "new_track_starts": {
     "semiconductor_technician": {
@@ -101,5 +101,5 @@
       "title_format": "OSHistory.007: {topic}"
     }
   },
-  "numbering_note": "Current verified next lesson is OSEEC.016 after OSITC.003. Live WordPress was checked: OSEEC.015 Power Quality Engineering is the latest Electrical Engineering lesson and no OSEEC.016 was present at advancement time."
+  "numbering_note": "Current verified next lesson is OSETC.031 after OSEEC.016. Live WordPress was checked: OSETC.030 Process Transmitter Calibration is the latest Electrical Technician lesson."
 }

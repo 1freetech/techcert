@@ -3,7 +3,7 @@
 **Rotation key:** `fiber_optics_engineer`  
 **Status:** active  
 **Starting lesson:** `OSFOEC.001`  
-**Current next lesson:** `OSFOEC.005`
+**Current next lesson:** `OSFOEC.006`
 
 Engineering-level fiber lessons covering optical budgets, chromatic/modal dispersion, transceiver selection, wavelength systems, DWDM/CWDM, coherent optics, FEC, link design, reflectance, nonlinear effects, high-speed Ethernet optics, and plant architecture.
 
@@ -15,5 +15,6 @@ Use filenames in the form `lesson-001-<topic-slug>.md`. Engineer lessons focus o
 - [OSFOEC.002 — Fiber Dispersion Engineering: Modal, Chromatic, PMD, Pulse Broadening, and Reach Limits](../../archive/2026/10/osfoec-002-fiber-dispersion-engineering-modal-chromatic-pmd-pulse-broadening-reach-limits.md) — WordPress post 20830.
 - [OSFOEC.003 — Optical Transceiver Selection Engineering: Form Factor, Data Rate, Fiber Type, Wavelength, Reach, and Interoperability](../../archive/2026/10/osfoec-003-optical-transceiver-selection-engineering-form-factor-data-rate-fiber-type-wavelength-reach-interoperability.md) — WordPress post 21099.
 - [OSFOEC.004 — High-Speed Optical Signaling: NRZ, PAM4, Symbol Rate, Eye Diagrams, BER, and FEC](../../archive/2026/10/osfoec-004-high-speed-optical-signaling-nrz-pam4-symbol-rate-eye-diagrams-ber-fec.md) — WordPress post 21361.
+- [OSFOEC.005 — DWDM Channel Planning: ITU-T Frequency Grid, Fixed vs Flexible Slots, Channel Spacing, Mux/Demux, and Guard Bands](../../archive/2026/10/osfoec-005-dwdm-channel-planning-itu-frequency-grid-fixed-flexible-slots-channel-spacing-mux-demux-guard-bands.md) — WordPress post 21746.
 
-**Next OSFOEC lesson number:** `OSFOEC.005`
+**Next OSFOEC lesson number:** `OSFOEC.006`

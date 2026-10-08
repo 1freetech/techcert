@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-08T15:06:09Z",
+  "updated_at": "2026-10-08T16:26:00Z",
   "rotation_expanded_on": "2026-10-04",
   "curriculum_registry": "curriculum.json",
   "rotation": [
@@ -25,12 +25,12 @@
     "history_money_technology_bitcoin"
   ],
   "last_completed": {
-    "subject": "firmware_technician",
+    "subject": "history_money_technology_bitcoin",
     "lesson_number": 6,
-    "title": "OSFTC.006: Hardware/Firmware Compatibility — Board Revisions, Device IDs, Bootloaders, Peripherals, and Field Validation",
-    "wordpress_post_id": 21908,
-    "live_url": "https://bitcoinversus.tech/2026/10/08/osftc-006-hardware-firmware-compatibility-board-revisions-device-ids-bootloaders-peripherals-field-validation/",
-    "archive_path": "archive/2026/10/osftc-006-hardware-firmware-compatibility-board-revisions-device-ids-bootloaders-peripherals-field-validation.md",
+    "title": "OSHistory.006: The Gold Standard — Convertibility, Parity, Reserves, and Redemption",
+    "wordpress_post_id": 21958,
+    "live_url": "https://bitcoinversus.tech/2026/10/08/oshistory-006-gold-standard-convertibility-parity-reserves-redemption/",
+    "archive_path": "archive/2026/10/oshistory-006-gold-standard-convertibility-parity-reserves-redemption.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -38,11 +38,11 @@
     ]
   },
   "next": {
-    "subject": "firmware_engineer",
-    "lesson_number": 6,
-    "title_format": "OSFEC.006: {topic}",
+    "subject": "networking",
+    "lesson_number": 19,
+    "title_format": "OSNTC.019: {topic}",
     "track_start": false,
-    "previous_lesson": "OSFEC.005"
+    "previous_lesson": "OSNTC.018"
   },
   "new_track_starts": {
     "semiconductor_technician": {
@@ -92,14 +92,14 @@
     },
     "firmware_engineer": {
       "acronym": "OSFEC",
-      "lesson_number": 6,
-      "title_format": "OSFEC.006: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSFEC.007: {topic}"
     },
     "history_money_technology_bitcoin": {
       "acronym": "OSHistory",
-      "lesson_number": 6,
-      "title_format": "OSHistory.006: {topic}"
+      "lesson_number": 7,
+      "title_format": "OSHistory.007: {topic}"
     }
   },
-  "numbering_note": "Current verified next numbers: OSNTC.019; OSPython.031; Linux Command #47; Windows Command #36; OSITC.003; OSEEC.016; OSETC.031; OSC++.025; OSSTC.007; OSSEC.007; OSRTC.007; OSREC.007; OSDCTC.007; OSDCEC.007; OSFOTC.007; OSFOEC.007; OSFTC.007; OSFEC.006; OSHistory.006. The global rotation advances to OSFEC.006 after verified OSFTC.006."
+  "numbering_note": "Current verified next numbers include OSNTC.019 after OSHistory.006. The global rotation has completed the history_money_technology_bitcoin step and wraps to networking. Live WordPress was checked and no OSNTC.019 was present at advancement time."
 }

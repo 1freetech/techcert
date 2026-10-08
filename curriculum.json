@@ -9,18 +9,18 @@
       "title_format": "OSNTC.{number}: {topic}",
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 17,
-        "title": "OSNTC.017: Copper Ethernet Cabling — RJ45, T568B, Cat5e/Cat6/Cat6A, 100 m Limits, PoE, and Cable Testing",
-        "wordpress_post_id": 21401,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/osntc-017-copper-ethernet-cabling-rj45-t568b-cat5e-cat6-cat6a-100m-poe-cable-testing/",
-        "archive_path": "archive/2026/10/osntc-017-copper-ethernet-cabling-rj45-t568b-cat5e-cat6-cat6a-100m-poe-cable-testing.md",
+        "lesson_number": 18,
+        "title": "OSNTC.018: Ethernet Link Negotiation — Speed, Duplex, Auto-Negotiation, Link LEDs, and Interface Errors",
+        "wordpress_post_id": 21726,
+        "live_url": "https://bitcoinversus.tech/2026/10/07/osntc-018-ethernet-link-negotiation-speed-duplex-auto-negotiation-link-leds-interface-errors/",
+        "archive_path": "archive/2026/10/osntc-018-ethernet-link-negotiation-speed-duplex-auto-negotiation-link-leds-interface-errors.md",
         "verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ]
       },
-      "next_lesson_number": 18
+      "next_lesson_number": 19
     },
     {
       "subject": "python",

@@ -3,7 +3,7 @@ title: "OSRust.002: Variables — let, mut, Constants, Shadowing, Scope, and Typ
 status: published
 wordpress_post_id: 22663
 published: "2026-10-09T11:15:24"
-modified: "2026-10-09T11:24:38"
+modified: "2026-10-09T12:53:36"
 live_url: "https://bitcoinversus.tech/2026/10/09/osrust-002-variables-let-mut-constants-shadowing-scope-type-inference/"
 series: "Open Source Rust"
 subject: rust
@@ -16,12 +16,13 @@ body_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/
 body_image_dimensions: "1200x675"
 youtube_1: "https://www.youtube.com/watch?v=bfEMiPjEUVk"
 youtube_2: "https://www.youtube.com/watch?v=6Ag0MZUlvBE"
+youtube_3: "https://www.youtube.com/watch?v=xYgfW8cIbMA"
 social_1: "https://www.reddit.com/r/rust/comments/1se1f2j/using_mut_vs_shadowing_when_to_use_which/"
 seo_title: "OSRust.002: Rust Variables, mut, Constants, Shadowing & Scope"
 seo_description: "Learn Rust variables from the ground up: let, mut, constants, shadowing, scope, type inference, examples, exercises, and compiler-guided troubleshooting."
 no_text_boxes: true
 diagram_artwork: false
-youtube_minimum_met: 2
+youtube_minimum_met: 3
 ---
 
 <!-- wp:paragraph -->
@@ -257,6 +258,12 @@ https://www.reddit.com/r/rust/comments/1se1f2j/using_mut_vs_shadowing_when_to_us
 <!-- wp:paragraph -->
 <p>For now, read the annotation syntax as <code>name: type</code>. The next Rust lesson will slow down and study Rust's core data types directly rather than trying to teach the entire type system here.</p>
 <!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=xYgfW8cIbMA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=xYgfW8cIbMA
+</div><figcaption class="wp-element-caption"><em>Tech With Tim — “Rust Tutorial #3: Variables, Constants and Shadowing.” A focused walkthrough of immutable and mutable bindings, constants, scope, and shadowing.</em></figcaption></figure>
+<!-- /wp:embed -->
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">9. Multiple Bindings And Destructuring</h2>

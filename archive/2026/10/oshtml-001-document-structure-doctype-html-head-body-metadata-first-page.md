@@ -3,7 +3,7 @@ title: "OSHTML.001: Document Structure — DOCTYPE, html, head, body, Metadata, 
 status: published
 wordpress_post_id: 22761
 published: "2026-10-09T17:43:17"
-modified: "2026-10-09T17:46:59"
+modified: "2026-10-09T18:08:10"
 live_url: "https://bitcoinversus.tech/2026/10/09/oshtml-001-document-structure-doctype-html-head-body-metadata-first-page/"
 series: "Open Source HTML"
 subject: html
@@ -16,7 +16,7 @@ body_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/
 body_image_dimensions: "1200x675"
 youtube_1: "https://www.youtube.com/watch?v=UB1O30fR-EE"
 youtube_2: "https://www.youtube.com/watch?v=a_iQb1lnAEQ"
-youtube_3: "https://www.youtube.com/watch?v=G3e-cpL7ofc"
+youtube_3: "https://www.youtube.com/watch?v=Ny1g1eQHnCI"
 social_1: "https://www.reddit.com/r/HTML/comments/1l9pk0n/"
 seo_title: "OSHTML.001: Document Structure — DOCTYPE, head, body & First Page"
 seo_description: "Learn HTML document structure from the beginning: DOCTYPE, html, head, body, UTF-8 metadata, title, headings, paragraphs, nesting, DOM inspection, and validation."
@@ -80,19 +80,9 @@ https://www.youtube.com/watch?v=UB1O30fR-EE
 <p>Create a plain-text file named <code>index.html</code> and start with this structure:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-  &lt;head&gt;
-    &lt;meta charset="utf-8"&gt;
-    &lt;title&gt;My First Page&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Hello, web!&lt;/h1&gt;
-    &lt;p&gt;This is my first HTML document.&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>&lt;!doctype html&gt;</code><br><code>&lt;html lang="en"&gt;</code><br><code>&lt;head&gt;</code><br><code>&lt;meta charset="utf-8"&gt;</code><br><code>&lt;title&gt;My First Page&lt;/title&gt;</code><br><code>&lt;/head&gt;</code><br><code>&lt;body&gt;</code><br><code>&lt;h1&gt;Hello, web!&lt;/h1&gt;</code><br><code>&lt;p&gt;This is my first HTML document.&lt;/p&gt;</code><br><code>&lt;/body&gt;</code><br><code>&lt;/html&gt;</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>Save the file and open it in a browser. You should see the heading and paragraph in the page itself. The title should appear in the browser tab or window interface. This single file already contains the major structural ideas used by much larger HTML documents.</p>
@@ -110,9 +100,9 @@ https://www.youtube.com/watch?v=UB1O30fR-EE
 <p>The first line is:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;!doctype html&gt;</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>&lt;!doctype html&gt;</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>The document type declaration tells modern browsers to process the page using standards mode. It is not an HTML element and it does not have a closing tag. In modern HTML, the short declaration above is the normal form.</p>
@@ -130,9 +120,9 @@ https://www.youtube.com/watch?v=UB1O30fR-EE
 <p>The <code>&lt;html&gt;</code> element is the root element of the document. In the example it begins with:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;html lang="en"&gt;</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>&lt;html lang="en"&gt;</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>The <code>lang</code> attribute identifies the document language. That information helps browsers, accessibility software, translation systems, search engines, and other tools interpret the content correctly. The root element contains the document's <code>head</code> and <code>body</code>.</p>
@@ -152,12 +142,9 @@ https://www.youtube.com/watch?v=a_iQb1lnAEQ
 <p>The <code>&lt;head&gt;</code> section contains information about the document rather than the main visible page content. A minimal head often contains character encoding and a title:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;head&gt;
-  &lt;meta charset="utf-8"&gt;
-  &lt;title&gt;My First Page&lt;/title&gt;
-&lt;/head&gt;</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>&lt;head&gt;</code><br><code>&lt;meta charset="utf-8"&gt;</code><br><code>&lt;title&gt;My First Page&lt;/title&gt;</code><br><code>&lt;/head&gt;</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p><code>&lt;meta charset="utf-8"&gt;</code> declares the character encoding. UTF-8 can represent an enormous range of writing systems and symbols and is the standard choice for modern web pages. Place the character declaration early so the browser knows how to decode the document correctly.</p>
@@ -175,12 +162,9 @@ https://www.youtube.com/watch?v=a_iQb1lnAEQ
 <p>The <code>&lt;body&gt;</code> contains the document content intended to appear as part of the page: headings, paragraphs, links, images, lists, forms, sections, tables, and many other elements.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;body&gt;
-  &lt;h1&gt;Hello, web!&lt;/h1&gt;
-  &lt;p&gt;This is my first HTML document.&lt;/p&gt;
-&lt;/body&gt;</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>&lt;body&gt;</code><br><code>&lt;h1&gt;Hello, web!&lt;/h1&gt;</code><br><code>&lt;p&gt;This is my first HTML document.&lt;/p&gt;</code><br><code>&lt;/body&gt;</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>A recent beginner discussion in the HTML community demonstrates why this distinction matters: content placed in the wrong structural location may not behave as expected, while moving visible content into the body restores the intended document structure.</p>
@@ -200,9 +184,9 @@ https://www.reddit.com/r/HTML/comments/1l9pk0n/
 <p>Many HTML elements have an opening tag, content, and a closing tag:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>Here, <code>&lt;p&gt;</code> opens the paragraph element, the text is its content, and <code>&lt;/p&gt;</code> closes it. Some elements do not wrap content and therefore do not use a closing tag in the same way. The character-encoding <code>meta</code> element is one example.</p>
@@ -216,14 +200,9 @@ https://www.reddit.com/r/HTML/comments/1l9pk0n/
 <p>HTML elements can contain other elements. This is called nesting. Proper nesting produces parent, child, and sibling relationships that form a tree-like document structure.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;body&gt;
-  &lt;main&gt;
-    &lt;h1&gt;My Page&lt;/h1&gt;
-    &lt;p&gt;Welcome.&lt;/p&gt;
-  &lt;/main&gt;
-&lt;/body&gt;</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>&lt;body&gt;</code><br><code>&lt;main&gt;</code><br><code>&lt;h1&gt;My Page&lt;/h1&gt;</code><br><code>&lt;p&gt;Welcome.&lt;/p&gt;</code><br><code>&lt;/main&gt;</code><br><code>&lt;/body&gt;</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>In this example, <code>body</code> contains <code>main</code>. The <code>main</code> element contains both the heading and paragraph. The heading and paragraph are siblings because they share the same parent.</p>
@@ -233,10 +212,10 @@ https://www.reddit.com/r/HTML/comments/1l9pk0n/
 <p>Indentation is not what creates the relationship—the tags do—but indentation makes the relationship much easier for humans to see. Keep closing tags aligned with the opening structure while you learn.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:embed {"url":"https://www.youtube.com/watch?v=G3e-cpL7ofc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Ny1g1eQHnCI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-https://www.youtube.com/watch?v=G3e-cpL7ofc
-</div><figcaption class="wp-element-caption"><em>SuperSimpleDev — “HTML &amp; CSS Full Course — Beginner to Pro.” The early lessons cover HTML basics and later revisit the complete HTML document structure in a project workflow.</em></figcaption></figure>
+https://www.youtube.com/watch?v=Ny1g1eQHnCI
+</div><figcaption class="wp-element-caption"><em>Giraffe Academy — “Introduction | HTML | Tutorial 1.” A focused beginner introduction to HTML and the structure of web pages.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:heading -->
@@ -247,11 +226,9 @@ https://www.youtube.com/watch?v=G3e-cpL7ofc
 <p>HTML provides heading levels from <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>. These levels communicate document hierarchy. They should not be chosen merely because one looks visually larger than another. Styling belongs to CSS; HTML heading levels describe structure.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;h1&gt;Main Page Topic&lt;/h1&gt;
-&lt;h2&gt;First Major Section&lt;/h2&gt;
-&lt;h3&gt;A Subsection&lt;/h3&gt;</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>&lt;h1&gt;Main Page Topic&lt;/h1&gt;</code><br><code>&lt;h2&gt;First Major Section&lt;/h2&gt;</code><br><code>&lt;h3&gt;A Subsection&lt;/h3&gt;</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>For a beginner page, start with one clear page-level heading and organize later sections beneath it. Semantic hierarchy helps readers, accessibility tools, search systems, and future maintainers understand the page.</p>
@@ -265,9 +242,9 @@ https://www.youtube.com/watch?v=G3e-cpL7ofc
 <p>The <code>&lt;p&gt;</code> element represents a paragraph of text:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;p&gt;HTML describes the structure of this content.&lt;/p&gt;</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>&lt;p&gt;HTML describes the structure of this content.&lt;/p&gt;</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>Do not use repeated line breaks or empty paragraphs merely to create visual spacing. Later CSS lessons will teach presentation and spacing. The HTML should first describe what the content <em>is</em>.</p>
@@ -346,7 +323,7 @@ https://www.youtube.com/watch?v=G3e-cpL7ofc
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The featured image is an original 1200×630 BitcoinVersus.Tech color-pencil illustration created specifically for OSHTML.001 and is not reused in the body. The lesson uses a separate original 1200×675 photograph. The three YouTube videos use responsive native Gutenberg 16:9 embed blocks, and the social item uses a responsive native Gutenberg embed. Ordinary lesson prose is not placed inside bordered, shaded, card, callout, panel, or fixed-width text boxes.</p>
+<p>The featured image is an original 1200×630 BitcoinVersus.Tech color-pencil illustration created specifically for OSHTML.001 and is not reused in the body. The lesson uses a separate original 1200×675 photograph. The three YouTube videos use responsive native Gutenberg 16:9 embed blocks, and the social item uses a responsive native Gutenberg embed. <strong>No text boxes are used anywhere in this lesson.</strong></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

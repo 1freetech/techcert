@@ -1,9 +1,9 @@
 ---
-title: "OSCSharp.001: .NET SDK and Compiler — Install, Verify, Create, Build, Run, and Understand the C# Toolchain"
+title: "OSC#.001: .NET SDK and Compiler — Install, Verify, Create, Build, Run, and Understand the C# Toolchain"
 status: published
 wordpress_post_id: 22626
 published: "2026-10-09T10:39:14"
-modified: "2026-10-09T10:39:14"
+modified: "2026-10-09T11:03:21"
 live_url: "https://bitcoinversus.tech/2026/10/09/oscsharp-001-dotnet-sdk-compiler-install-verify-create-build-run-csharp-toolchain/"
 series: "Open Source C#"
 subject: csharp
@@ -18,7 +18,7 @@ youtube_1: "https://www.youtube.com/watch?v=Fn28yINqNfo"
 youtube_2: "https://www.youtube.com/watch?v=HFLALzkcjLM"
 youtube_3: "https://www.youtube.com/watch?v=98MizuB7i-w"
 social_1: "https://www.reddit.com/r/dotnet/comments/10msnrd/"
-seo_title: "OSCSharp.001: .NET SDK and Compiler — C# Toolchain Basics"
+seo_title: "OSC#.001: .NET SDK and Compiler — C# Toolchain Basics"
 seo_description: "Learn the C# toolchain from the beginning: .NET SDK, dotnet CLI, project creation, dotnet build, dotnet run, Roslyn, IL, runtime execution, and troubleshooting."
 no_text_boxes: true
 youtube_minimum_met: 3
@@ -261,7 +261,7 @@ https://www.reddit.com/r/dotnet/comments/10msnrd/
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The featured image is an original 1200×630 BitcoinVersus.Tech cover created specifically for OSCSharp.001 and is not reused in the body. The lesson uses a separate original 1200×675 instructional build-pipeline diagram. The three YouTube videos use responsive native Gutenberg 16:9 embed blocks, and the social item uses a responsive native Gutenberg embed. Ordinary lesson prose is not placed inside bordered, shaded, card, callout, panel, or fixed-width text boxes.</p>
+<p>The featured image is an original 1200×630 BitcoinVersus.Tech cover created specifically for OSC#.001 and is not reused in the body. The lesson uses a separate original 1200×675 instructional build-pipeline diagram. The three YouTube videos use responsive native Gutenberg 16:9 embed blocks, and the social item uses a responsive native Gutenberg embed. Ordinary lesson prose is not placed inside bordered, shaded, card, callout, panel, or fixed-width text boxes.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

@@ -10,10 +10,10 @@ certification: OSJava
 pathway: java
 lesson_number: "001"
 lesson_topic: "What Is Java? — Source Code, Bytecode, the JVM, JDK, and Your First Program"
-featured_media_id: 22396
-featured_media: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osjava001-cover-1200x630-1.jpg"
+featured_media_id: 22401
+featured_media: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osjava001-cover-1200x630-2.jpg"
 featured_media_dimensions: "1200x630"
-body_media_id: 22397
+body_media_id: 22402
 body_media_dimensions: "1200x700"
 seo_title: "OSJava.001: What Is Java? JVM, JDK, Bytecode & First Program"
 seo_description: "Learn Java fundamentals: .java source files, javac, .class bytecode, the JVM, the JDK, java launcher, portability, and your first Hello Java program."
@@ -35,8 +35,8 @@ seo_description: "Learn Java fundamentals: .java source files, javac, .class byt
 <ul class="wp-block-list"><li>What Java is.</li><li>What a <code>.java</code> source file is.</li><li>What <code>javac</code> does.</li><li>What Java bytecode and a <code>.class</code> file are.</li><li>What the JVM does.</li><li>What the JDK provides.</li><li>How to compile and run a first Java program.</li></ul>
 <!-- /wp:list -->
 
-<!-- wp:image {"id":22397,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osjava001-java-pipeline-1200x700-1.jpg?w=1024" alt="Diagram showing Java source compiled by javac into bytecode and executed by the Java Virtual Machine" class="wp-image-22397" /><figcaption class="wp-element-caption"><em>Java source in a .java file is compiled by javac into .class bytecode, which a JVM executes on the host system.</em></figcaption></figure>
+<!-- wp:image {"id":22402,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osjava001-jvm-flow-1200x700-1.jpg?w=1024" alt="Diagram showing Hello.java compiled by javac into Hello.class bytecode and executed by the JVM" class="wp-image-22402" /><figcaption class="wp-element-caption"><em>Java source is compiled by javac into bytecode class files, which the JVM loads and executes.</em></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:heading -->
@@ -135,8 +135,8 @@ seo_description: "Learn Java fundamentals: .java source files, javac, .class byt
 <p>The JVM is a different idea from a full hardware-style <a href="https://bitcoinversus.tech/2026/10/08/it-what-is-virtual-machine-vm-how-it-works/">virtual machine</a> that emulates or virtualizes an entire computer. A JVM is primarily a process virtual machine designed to execute Java bytecode and provide the Java runtime model.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:embed {"url":"https://twitter.com/java/status/983337736869261314","type":"rich","providerNameSlug":"twitter","responsive":true} -->
-<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">https://twitter.com/java/status/983337736869261314</div><figcaption class="wp-element-caption"><em>The official Java account points to class loading, one of the JVM mechanisms used to locate and load classes before their code can execute.</em></figcaption></figure>
+<!-- wp:embed {"url":"https://www.linkedin.com/posts/pedroalvesdev_java-jvm-jdk-activity-7503173305663877122-f3YE","type":"rich","providerNameSlug":"linkedin","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-linkedin wp-block-embed-linkedin"><div class="wp-block-embed__wrapper">https://www.linkedin.com/posts/pedroalvesdev_java-jvm-jdk-activity-7503173305663877122-f3YE</div><figcaption class="wp-element-caption"><em>A directly relevant Java overview of the JVM, JDK, runtime environment, bytecode, and the portability model.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:heading -->
@@ -277,7 +277,7 @@ javac -version</code></pre>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The featured artwork is a unique 1200×630 color-pencil technical illustration created specifically for OSJava.001 and is not reused inside the lesson. The separate 1200×700 body diagram explains the Java source → compiler → bytecode → JVM flow. Neon green is limited to the small <code>bitcoinversus.tech</code> tag.</p>
+<p>The featured artwork is a unique 1200×630 technical editorial illustration created specifically for OSJava.001 and is not reused inside the lesson. The separate 1200×700 body diagram explains the Java source → <code>javac</code> → bytecode → JVM flow. Neon green is limited to the small <code>bitcoinversus.tech</code> tag at bottom-left.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

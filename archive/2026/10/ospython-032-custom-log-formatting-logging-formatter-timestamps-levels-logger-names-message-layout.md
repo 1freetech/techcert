@@ -10,10 +10,10 @@ certification: OSPython
 pathway: python
 lesson_number: "032"
 lesson_topic: "Custom Log Formatting with logging.Formatter"
-featured_media_id: 22286
-featured_media: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ospython032-cover-1200x630-1.jpg"
+featured_media_id: 22299
+featured_media: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ospython032-cover-1200x630-2.jpg"
 featured_media_dimensions: "1200x630"
-body_media_id: 22289
+body_media_id: 22300
 body_media_dimensions: "1200x700"
 seo_title: "OSPython.032: Custom Log Formatting with logging.Formatter"
 seo_description: "Learn Python logging.Formatter: format strings, timestamps, log levels, logger names, datefmt, style options, handler attachment, and troubleshooting."
@@ -27,8 +27,8 @@ seo_description: "Learn Python logging.Formatter: format strings, timestamps, lo
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=b4Ms4wxJuPg</div><figcaption class="wp-element-caption"><em>A focused Python logging tutorial covering loggers, handlers, and formatters.</em></figcaption></figure>
 <!-- /wp:embed -->
 
-<!-- wp:image {"id":22289,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ospython032-formatter-body-1200x700-1.jpg?w=1024" alt="Technical diagram showing a Python LogRecord flowing through logging.Formatter into a final formatted log line" class="wp-image-22289" /><figcaption class="wp-element-caption"><em>A logging.Formatter chooses which LogRecord fields appear, how time is rendered, and how the final log line is structured.</em></figcaption></figure>
+<!-- wp:image {"id":22300,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ospython032-formatter-body-1200x700-2.jpg?w=1024" alt="Diagram showing a Python LogRecord passing through logging.Formatter to become readable log output" class="wp-image-22300" /><figcaption class="wp-element-caption"><em>A Formatter controls presentation: it turns LogRecord fields such as time, level, logger name, and message into the final text emitted by a handler.</em></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:heading -->
@@ -219,7 +219,7 @@ logging.info("Application started")
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The featured artwork is a unique 1200×630 wordless color-pencil-style technical cover created specifically for OSPython.032 and is not reused inside the lesson body. Neon green is used only for the small <code>bitcoinversus.tech</code> tag at bottom-left. The separate 1200×700 body diagram teaches the LogRecord → Formatter → final output flow.</p>
+<p>The featured artwork is a unique 1200×630 realistic programming scene created specifically for OSPython.032 and is not reused inside the lesson body. The separate 1200×700 body diagram teaches the LogRecord → Formatter → final output flow. Neon green is used only for the small <code>bitcoinversus.tech</code> tag at bottom-left.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

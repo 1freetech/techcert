@@ -3,7 +3,7 @@ title: "OSLTC.003 — Leadership Through Listening: Active Listening, Adaptive F
 status: published
 wordpress_post_id: 22598
 published: "2026-10-09T10:08:51"
-modified: "2026-10-09T10:08:51"
+modified: "2026-10-09T10:23:17"
 live_url: "https://bitcoinversus.tech/2026/10/09/osltc-003-leadership-through-listening-active-listening-adaptive-feedback-responding-to-what-you-hear/"
 series: "Open Source Leadership Technical Certification"
 subject: leadership
@@ -22,8 +22,6 @@ seo_title: "OSLTC.003 — Leadership Through Listening"
 seo_description: "Learn leadership through listening: active listening, adaptive feedback, communication preferences, responding to what people say, and building trust through action."
 no_text_boxes: true
 youtube_minimum_met: 3
-media_language: English
-english_media_required: true
 ---
 
 <!-- wp:heading -->
@@ -61,11 +59,11 @@ english_media_required: true
 <!-- wp:embed {"url":"https://www.youtube.com/watch?v=_V6a0BnGjlI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
 https://www.youtube.com/watch?v=_V6a0BnGjlI
-</div><figcaption class="wp-element-caption"><em>David Burkus — “Active Listening For Leaders.” This English lesson introduces a practical listening framework built around receiving, engaging, aligning, and learning more.</em></figcaption></figure>
+</div><figcaption class="wp-element-caption"><em>David Burkus — “Active Listening For Leaders.” This lesson introduces a practical listening framework built around receiving, engaging, aligning, and learning more.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:image {"id":22595,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osltc-003-leadership-listening-body.jpg" alt="A diverse industrial-office team practicing leadership through listening beside an English whiteboard showing Listen, Ask, Adapt, Respond, and Build Trust." class="wp-image-22595" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech instructional image: effective listening becomes leadership when the leader listens, asks, adapts, responds, and builds trust from what was actually heard.</em></figcaption></figure>
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osltc-003-leadership-listening-body.jpg" alt="A diverse industrial-office team practicing leadership through listening beside a whiteboard showing Listen, Ask, Adapt, Respond, and Build Trust." class="wp-image-22595" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech instructional image: effective listening becomes leadership when the leader listens, asks, adapts, responds, and builds trust from what was actually heard.</em></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:heading -->
@@ -83,7 +81,7 @@ https://www.youtube.com/watch?v=_V6a0BnGjlI
 <!-- wp:embed {"url":"https://www.youtube.com/watch?v=cSohjlYQI2A","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
 https://www.youtube.com/watch?v=cSohjlYQI2A
-</div><figcaption class="wp-element-caption"><em>TED — Julian Treasure, “5 Ways to Listen Better.” An English talk on conscious listening and practical ways to rebuild attention to other people and the surrounding environment.</em></figcaption></figure>
+</div><figcaption class="wp-element-caption"><em>TED — Julian Treasure, “5 Ways to Listen Better.” A talk on conscious listening and practical ways to rebuild attention to other people and the surrounding environment.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:heading -->
@@ -105,7 +103,7 @@ https://www.youtube.com/watch?v=cSohjlYQI2A
 <!-- wp:embed {"url":"https://www.reddit.com/r/Leadership/comments/1x0lwfm/two_people_quit_after_feedback_calls_so_i_changed/","type":"rich","providerNameSlug":"reddit","responsive":true} -->
 <figure class="wp-block-embed is-type-rich is-provider-reddit wp-block-embed-reddit"><div class="wp-block-embed__wrapper">
 https://www.reddit.com/r/Leadership/comments/1x0lwfm/two_people_quit_after_feedback_calls_so_i_changed/
-</div><figcaption class="wp-element-caption"><em>English r/Leadership discussion: after two employees left following poor feedback conversations, a leader reviewed the calls and changed the management approach. The post also notes that different people reacted very differently to the same delivery.</em></figcaption></figure>
+</div><figcaption class="wp-element-caption"><em>r/Leadership discussion: after two employees left following poor feedback conversations, a leader reviewed the calls and changed the management approach. The post also notes that different people reacted very differently to the same delivery.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:heading -->
@@ -139,7 +137,7 @@ https://www.reddit.com/r/Leadership/comments/1x0lwfm/two_people_quit_after_feedb
 <!-- wp:embed {"url":"https://www.youtube.com/watch?v=DqOBi8M1eSY","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
 https://www.youtube.com/watch?v=DqOBi8M1eSY
-</div><figcaption class="wp-element-caption"><em>Gordon Tredgold — “How Active Listening Makes You a Better Leader.” An English leadership lesson emphasizing listening to understand, stronger connection, rapport, and communication with a team.</em></figcaption></figure>
+</div><figcaption class="wp-element-caption"><em>Gordon Tredgold — “How Active Listening Makes You a Better Leader.” A leadership lesson emphasizing listening to understand, stronger connection, rapport, and communication with a team.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:heading -->
@@ -215,7 +213,7 @@ https://www.youtube.com/watch?v=DqOBi8M1eSY
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The featured image is an original 1200×630 BitcoinVersus.Tech leadership cover created specifically for OSLTC.003 and is not reused in the body. The lesson uses a separate original 1200×675 English instructional image. All three YouTube videos, all captions, the social-media embed, and all instructional media are English-language. The YouTube videos use responsive native Gutenberg 16:9 embed blocks. Ordinary lesson prose is not placed inside bordered, shaded, card, callout, panel, or fixed-width text boxes.</p>
+<p>The featured image is an original 1200×630 BitcoinVersus.Tech leadership cover created specifically for OSLTC.003 and is not reused in the body. The lesson uses a separate original 1200×675 instructional image. The YouTube videos use responsive native Gutenberg 16:9 embed blocks. Ordinary lesson prose is not placed inside bordered, shaded, card, callout, panel, or fixed-width text boxes.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

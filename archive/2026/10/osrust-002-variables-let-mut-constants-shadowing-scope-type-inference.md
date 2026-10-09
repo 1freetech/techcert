@@ -3,17 +3,17 @@ title: "OSRust.002: Variables — let, mut, Constants, Shadowing, Scope, and Typ
 status: published
 wordpress_post_id: 22663
 published: "2026-10-09T11:15:24"
-modified: "2026-10-09T11:15:24"
+modified: "2026-10-09T11:24:38"
 live_url: "https://bitcoinversus.tech/2026/10/09/osrust-002-variables-let-mut-constants-shadowing-scope-type-inference/"
 series: "Open Source Rust"
 subject: rust
 lesson_number: "002"
-featured_media_id: 22658
-featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/a_modern_office_co_working_tech_workspace_scene_p.png"
-featured_image_dimensions: "1730x909"
-body_media_id: 22660
-body_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/a_cinematic_realistic_high_resolution_tech_it_wo.png"
-body_image_dimensions: "1733x907"
+featured_media_id: 22672
+featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrust-002-variables-cover-1200x630-1.jpg"
+featured_image_dimensions: "1200x630"
+body_media_id: 22673
+body_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrust-002-variables-body-1200x675-1.jpg"
+body_image_dimensions: "1200x675"
 youtube_1: "https://www.youtube.com/watch?v=bfEMiPjEUVk"
 youtube_2: "https://www.youtube.com/watch?v=6Ag0MZUlvBE"
 social_1: "https://www.reddit.com/r/rust/comments/1se1f2j/using_mut_vs_shadowing_when_to_use_which/"
@@ -192,8 +192,8 @@ https://www.reddit.com/r/rust/comments/1se1f2j/using_mut_vs_shadowing_when_to_us
 <p>The difference is semantic, not merely stylistic. Mutation says, “this binding changes.” Shadowing says, “this is a new binding, and from this point forward this name refers to the new value.”</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:image {"id":22660,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/a_cinematic_realistic_high_resolution_tech_it_wo.png?w=1024" alt="A diverse software team examining source code together on a large monitor during a programming lab." class="wp-image-22660" /><figcaption class="wp-element-caption"><em>A Rust variables lab is easier to debug when the compiler output and the exact binding being changed are examined together.</em></figcaption></figure>
+<!-- wp:image {"id":22673,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osrust-002-variables-body-1200x675-1.jpg?w=1024" alt="A diverse software team examining source code together on a large monitor during a programming lab." class="wp-image-22673" /><figcaption class="wp-element-caption"><em>A Rust variables lab is easier to debug when the compiler output and the exact binding being changed are examined together.</em></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:heading -->

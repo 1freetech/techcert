@@ -10,11 +10,11 @@ lesson_number: "049"
 featured_media_id: 22457
 featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-command-49-chown-cover.jpg"
 featured_image_dimensions: "1200x630"
-body_media_id: 22458
-body_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-command-49-chown-body.jpg"
-body_image_dimensions: "1200x800"
+body_media_id: 22479
+body_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-command-49-chown-terminal-body.png"
+body_image_dimensions: "1600x900"
 youtube_1: "https://www.youtube.com/watch?v=Y-NrJkcNb6U"
-social_1: "https://twitter.com/sysxplore/status/1700958206552580223"
+social_1: "https://twitter.com/linuxopsys/status/1655678933046624256"
 seo_title: "Linux Command #49 — chown (Linux OS)"
 seo_description: "Learn Linux chown: change file owners and groups, verify with ls and stat, use -R safely, copy ownership with --reference, and avoid symlink mistakes."
 no_text_boxes: true
@@ -28,8 +28,8 @@ no_text_boxes: true
 <p>This lesson stays focused on <code>chown</code>: its ownership syntax, safe verification, recursive operation, reference copying, guarded changes, and symbolic-link behavior. For the broader model of read, write, and execute bits, review <a href="https://bitcoinversus.tech/2025/03/15/linux-file-permissions-and-ownership/">Linux File Permissions and Ownership</a>.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:image {"id":22458,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-command-49-chown-body.jpg?w=1024" alt="A Linux workstation with a laptop, keyboard, and mouse on a desk." class="wp-image-22458" /><figcaption class="wp-element-caption"><em>A Linux workstation. Ownership metadata is part of how Linux decides which user and group control a file. CC0 source: Wikimedia Commons; this body image is separate from the featured cover.</em></figcaption></figure>
+<!-- wp:image {"id":22479,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/linux-command-49-chown-terminal-body.png?w=1024" alt="Linux terminal example showing file ownership changing from root root to alice developers using chown." class="wp-image-22479" /><figcaption class="wp-element-caption"><em>Illustrative terminal example: <code>chown</code> changes the recorded user and group ownership, while <code>ls -l</code> and <code>stat</code> verify the result. This body image is original to this lesson and is separate from the featured cover.</em></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:heading -->
@@ -136,8 +136,8 @@ ls -l report.txt</code></pre>
 <p>In that example, the owner can read and write, the group can read, and others have no permission. The names <code>alice</code> and <code>developers</code> identify ownership; the characters <code>rw-r-----</code> describe permission.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:embed {"url":"https://twitter.com/sysxplore/status/1700958206552580223","type":"rich","providerNameSlug":"twitter","responsive":true} -->
-<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">https://twitter.com/sysxplore/status/1700958206552580223</div><figcaption class="wp-element-caption"><em>A directly relevant Linux file-permissions reference. It reinforces the distinction between ownership—the subject changed with <code>chown</code>—and the permission bits evaluated for owner, group, and others.</em></figcaption></figure>
+<!-- wp:embed {"url":"https://twitter.com/linuxopsys/status/1655678933046624256","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">https://twitter.com/linuxopsys/status/1655678933046624256</div><figcaption class="wp-element-caption"><em>Linuxopsys on file access: Linux combines permissions, attributes, and ownership. That ownership layer is exactly what <code>chown</code> changes.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:heading -->
@@ -314,7 +314,7 @@ stat /var/www/example</code></pre>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The featured image is a unique 1200×630 realistic-photo lesson cover derived from a CC0 Wikimedia Commons photograph and is not reused in the body. The body uses a different CC0 photograph. The lesson uses responsive native Gutenberg paragraphs, headings, lists, code, image, YouTube, and social-embed blocks only; no ordinary lesson prose is placed inside bordered, shaded, fixed-width, callout, card, or panel-style text boxes.</p>
+<p>The featured image is a unique 1200×630 realistic-photo lesson cover and is not reused in the body. The body uses a separate original command-specific terminal illustration showing <code>chown</code>, <code>ls -l</code>, and <code>stat</code>. The lesson uses responsive native Gutenberg paragraphs, headings, lists, code, image, YouTube, and Twitter embed blocks only; no ordinary lesson prose is placed inside bordered, shaded, fixed-width, callout, card, or panel-style text boxes.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

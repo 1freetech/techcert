@@ -3,7 +3,7 @@ title: "OSHTML.001: Document Structure — DOCTYPE, html, head, body, Metadata, 
 status: published
 wordpress_post_id: 22761
 published: "2026-10-09T17:43:17"
-modified: "2026-10-09T17:43:17"
+modified: "2026-10-09T17:46:59"
 live_url: "https://bitcoinversus.tech/2026/10/09/oshtml-001-document-structure-doctype-html-head-body-metadata-first-page/"
 series: "Open Source HTML"
 subject: html
@@ -338,7 +338,7 @@ https://www.youtube.com/watch?v=G3e-cpL7ofc
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>The next canonical HTML lesson is <strong>OSHTML.002: Text Elements</strong>, where the track can focus on headings, paragraphs, emphasis, strong importance, quotations, code text, and other text-level markup in more detail.</p>
+<p>The next canonical HTML lesson is <strong>OSHTML.002: Elements</strong>, where the track will focus on how HTML elements are formed, how start tags and end tags work, which elements are void elements, how elements nest, and how element choice gives structure and meaning to a document.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":4} -->

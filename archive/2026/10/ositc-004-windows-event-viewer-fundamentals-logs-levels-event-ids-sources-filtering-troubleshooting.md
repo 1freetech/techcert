@@ -7,14 +7,14 @@ live_url: "https://bitcoinversus.tech/2026/10/09/ositc-004-windows-event-viewer-
 series: "Open-Source Information Technology Certificate"
 subject: information_technology
 lesson_number: "004"
-featured_media_id: 22523
-featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ositc-004-event-viewer-cover.jpg"
+featured_media_id: 22531
+featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ositc-004-event-viewer-original-cover.jpg"
 featured_image_dimensions: "1200x630"
 body_media_id: 22524
 body_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ositc-004-event-viewer-body.png"
 body_image_dimensions: "568x213"
 youtube_1: "https://www.youtube.com/watch?v=08WZXnicLBo"
-social_1: "https://www.reddit.com/r/sysadmin/comments/1t3e84z/how_to_setup_logs_for_windows/"
+social_1: "https://twitter.com/69297945/status/1811330391409582405"
 seo_title: "OSITC.004: Windows Event Viewer Fundamentals"
 seo_description: "Learn Windows Event Viewer fundamentals: logs, levels, Event IDs, sources, filtering, timelines, and Get-WinEvent for practical IT troubleshooting."
 no_text_boxes: true
@@ -48,8 +48,10 @@ no_text_boxes: true
 <pre class="wp-block-code"><code>eventvwr.msc</code></pre>
 <!-- /wp:code -->
 
-<!-- wp:embed {"url":"https://www.youtube.com/watch?v=08WZXnicLBo","type":"video","providerNameSlug":"youtube","responsive":true} -->
-<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=08WZXnicLBo</div><figcaption class="wp-element-caption"><em>Tech In Moments — Windows Event Viewer tutorial covering the interface, event levels, filtering, Event IDs, sources, and practical troubleshooting.</em></figcaption></figure>
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=08WZXnicLBo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=08WZXnicLBo
+</div><figcaption class="wp-element-caption"><em>Tech In Moments — Windows Event Viewer tutorial covering the interface, event levels, filtering, Event IDs, sources, and practical troubleshooting.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:heading -->
@@ -113,8 +115,10 @@ Message: ...</code></pre>
 <ol class="wp-block-list"><li>Ask when the problem happened.</li><li>Open the most relevant log.</li><li>Filter to a few minutes before and after the reported time.</li><li>Start with Critical, Error, and Warning if the symptom is a failure.</li><li>Look for providers that match the affected component.</li><li>Read the full General and Details information for promising events.</li><li>Compare neighboring events to build a sequence.</li></ol>
 <!-- /wp:list -->
 
-<!-- wp:embed {"url":"https://www.reddit.com/r/sysadmin/comments/1t3e84z/how_to_setup_logs_for_windows/","type":"rich","providerNameSlug":"reddit","responsive":true} -->
-<figure class="wp-block-embed is-type-rich is-provider-reddit wp-block-embed-reddit"><div class="wp-block-embed__wrapper">https://www.reddit.com/r/sysadmin/comments/1t3e84z/how_to_setup_logs_for_windows/</div><figcaption class="wp-element-caption"><em>A directly relevant r/sysadmin discussion about starting with Windows logs. Administrators repeatedly point beginners toward Event Viewer, filtering, useful Event IDs, System/Security logs, and intentional log collection instead of reading everything.</em></figcaption></figure>
+<!-- wp:embed {"url":"https://twitter.com/69297945/status/1811330391409582405","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/69297945/status/1811330391409582405
+</div><figcaption class="wp-element-caption"><em>Guy Leech demonstrates a practical PowerShell <code>Get-WinEvent -FilterHashtable</code> query against the Windows Security log—directly reinforcing the filtering technique taught in this lesson.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:heading -->
@@ -209,7 +213,7 @@ Message: ...</code></pre>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The featured image is a unique 1200×630 realistic-photo cover derived from a Rubin Observatory/NSF/AURA image licensed CC BY 4.0 and is not reused in the body. The body uses a separate Microsoft Learn Event Viewer screenshot. The lesson uses responsive native Gutenberg paragraphs, headings, lists, code, image, YouTube, and Reddit embed blocks only; ordinary lesson prose is not placed inside bordered, shaded, card, callout, panel, or fixed-width text boxes.</p>
+<p>The featured image is an original 1200×630 BitcoinVersus.Tech lesson cover created specifically for OSITC.004 and is not reused in the body. The body uses a separate Microsoft Learn Event Viewer screenshot. The YouTube section uses a native responsive Gutenberg 16:9 YouTube embed block with the canonical watch URL. The lesson otherwise uses standard Gutenberg paragraphs, headings, lists, code, image, and social-embed blocks only; ordinary lesson prose is never placed inside bordered, shaded, card, callout, panel, or fixed-width text boxes.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

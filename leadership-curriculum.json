@@ -6,11 +6,18 @@
   "title_format": "OSLTC.{number} — {topic}",
   "status": "active",
   "latest_lesson": {
-    "lesson_number": 1,
-    "title": "OSLTC.001 — How to Lead With Positive Reinforcement",
-    "wordpress_post_id": 22070,
-    "live_url": "https://bitcoinversus.tech/2026/10/08/osltc-001-how-to-lead-with-positive-reinforcement/",
-    "archive_path": "archive/2026/10/osltc-001-how-to-lead-with-positive-reinforcement.md"
+    "lesson_number": 2,
+    "title": "OSLTC.002 — How to Set Clear Expectations",
+    "wordpress_post_id": 22250,
+    "live_url": "https://bitcoinversus.tech/2026/10/08/osltc-002-how-to-set-clear-expectations/",
+    "archive_path": "archive/2026/10/osltc-002-how-to-set-clear-expectations.md",
+    "verification_status": "published_and_archived",
+    "verified_repositories": [
+      "1freetech/Bitcoinversus.tech",
+      "1freetech/techcert",
+      "1freetech/opencert.tech"
+    ]
   },
-  "next_lesson_number": 2
+  "next_lesson_number": 3,
+  "next_lesson_title": "OSLTC.003 — How to Give Corrective Feedback Without Making It Personal"
 }

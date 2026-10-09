@@ -10,8 +10,8 @@ certification: OSJava
 pathway: java
 lesson_number: "001"
 lesson_topic: "What Is Java? — Source Code, Bytecode, the JVM, JDK, and Your First Program"
-featured_media_id: 22401
-featured_media: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osjava001-cover-1200x630-2.jpg"
+featured_media_id: 22413
+featured_media: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/osjava001-cover-premium-1200x630-1.jpg"
 featured_media_dimensions: "1200x630"
 body_media_id: 22402
 body_media_dimensions: "1200x700"
@@ -135,8 +135,8 @@ seo_description: "Learn Java fundamentals: .java source files, javac, .class byt
 <p>The JVM is a different idea from a full hardware-style <a href="https://bitcoinversus.tech/2026/10/08/it-what-is-virtual-machine-vm-how-it-works/">virtual machine</a> that emulates or virtualizes an entire computer. A JVM is primarily a process virtual machine designed to execute Java bytecode and provide the Java runtime model.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:embed {"url":"https://www.linkedin.com/posts/pedroalvesdev_java-jvm-jdk-activity-7503173305663877122-f3YE","type":"rich","providerNameSlug":"linkedin","responsive":true} -->
-<figure class="wp-block-embed is-type-rich is-provider-linkedin wp-block-embed-linkedin"><div class="wp-block-embed__wrapper">https://www.linkedin.com/posts/pedroalvesdev_java-jvm-jdk-activity-7503173305663877122-f3YE</div><figcaption class="wp-element-caption"><em>A directly relevant Java overview of the JVM, JDK, runtime environment, bytecode, and the portability model.</em></figcaption></figure>
+<!-- wp:embed {"url":"https://twitter.com/JavaAtMicrosoft/status/1511138560321142793","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">https://twitter.com/JavaAtMicrosoft/status/1511138560321142793</div><figcaption class="wp-element-caption"><em>Microsoft’s Java team highlights OpenJDK portability work across processor architectures, reinforcing Java’s cross-platform runtime model.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:heading -->
@@ -277,7 +277,7 @@ javac -version</code></pre>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The featured artwork is a unique 1200×630 technical editorial illustration created specifically for OSJava.001 and is not reused inside the lesson. The separate 1200×700 body diagram explains the Java source → <code>javac</code> → bytecode → JVM flow. Neon green is limited to the small <code>bitcoinversus.tech</code> tag at bottom-left.</p>
+<p>The featured artwork is a unique 1200×630 photorealistic editorial Java programming scene created specifically for OSJava.001 and is not reused inside the lesson. The separate 1200×700 body diagram explains the Java source → <code>javac</code> → bytecode → JVM flow. Neon green is limited to the small <code>bitcoinversus.tech</code> tag at bottom-left.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

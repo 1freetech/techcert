@@ -2,16 +2,26 @@
 title: "OSSQL.001: Relational Databases and Tables"
 status: published
 wordpress_post_id: 22722
+published: "2026-10-09T13:00:49"
+modified: "2026-10-09T13:02:40"
 live_url: "https://bitcoinversus.tech/2026/10/09/ossql-001-relational-databases-and-tables/"
+series: "Open Source SQL"
+subject: sql
+lesson_number: "001"
 featured_media_id: 22716
+featured_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ossql-001-feature-1200x630-1.jpg"
+featured_image_dimensions: "1200x630"
 body_media_id: 22717
-seo_title: "OSSQL.001: Relational Databases and Tables"
-seo_description: "Learn relational databases and SQL tables from the ground up: databases, rows, columns, data types, table structure, CREATE TABLE, examples, exercises, and answers."
+body_image_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/ossql-001-body-1200x675-1.jpg"
+body_image_dimensions: "1200x675"
 youtube_1: "https://www.youtube.com/watch?v=vHYeChEf2lA"
 youtube_2: "https://www.youtube.com/watch?v=HXV3zeQKqGY"
+youtube_3: "https://www.youtube.com/watch?v=OqjJjpjDRLc"
 social_1: "https://twitter.com/tursodatabase/status/2106054567125532976"
-primary_reference_1: "https://www.postgresql.org/docs/current/tutorial-sql.html"
-primary_reference_2: "https://www.postgresql.org/docs/current/ddl-basics.html"
+seo_title: "OSSQL.001: Relational Databases and Tables"
+seo_description: "Learn relational databases and SQL tables from the ground up: databases, rows, columns, data types, table structure, CREATE TABLE, examples, exercises, and answers."
+no_text_boxes: true
+youtube_minimum_met: 3
 archive_format: "final Gutenberg source"
 ---
 
@@ -166,7 +176,11 @@ https://www.youtube.com/watch?v=HXV3zeQKqGY
 <p>Modern services may hide much of the database administration behind APIs and managed platforms. BitcoinVersus.Tech's <a href="https://bitcoinversus.tech/2026/10/08/it-what-is-an-api-application-programming-interface/">API explainer</a> is useful background because many applications talk to a backend service, which then reads and writes database tables on the application's behalf.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:heading {"level":2} -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=OqjJjpjDRLc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=OqjJjpjDRLc
+</div><figcaption class="wp-element-caption"><em>IBM Technology — “What is a Relational Database?” A focused explanation of how relational databases organize structured data in tables and connect related information for querying.</em></figcaption></figure>
+<!-- /wp:embed --><!-- wp:heading {"level":2} -->
 <h2 class="wp-block-heading">7. Row Order Is Not Guaranteed</h2>
 <!-- /wp:heading -->
 

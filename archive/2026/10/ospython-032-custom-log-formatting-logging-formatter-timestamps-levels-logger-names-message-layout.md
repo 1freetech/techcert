@@ -47,9 +47,9 @@ seo_description: "Learn Python logging.Formatter: format strings, timestamps, lo
 <p>A logger creates a <code>LogRecord</code>. A handler decides where that record goes, such as the terminal or a file. The formatter decides how that accepted record looks when the handler emits it.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:quote -->
-<blockquote class="wp-block-quote"><p><strong>Formatter = presentation.</strong> It does not decide the event’s severity and it does not choose the destination.</p></blockquote>
-<!-- /wp:quote -->
+<!-- wp:paragraph -->
+<p><strong>Formatter means presentation.</strong> It does not decide the event’s severity, and it does not choose the destination.</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:embed {"url":"https://www.youtube.com/watch?v=b4Ms4wxJuPg","type":"video","providerNameSlug":"youtube","responsive":true} -->
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=b4Ms4wxJuPg</div><figcaption class="wp-element-caption"><em>Teclado’s Python logging tutorial explains the relationship between loggers, handlers, and formatters.</em></figcaption></figure>

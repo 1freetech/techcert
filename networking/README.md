@@ -2,9 +2,9 @@
 
 - **OSNTC**: Open-Source Networking Technician Certification. Introductory device addressing, configuration, verification, and troubleshooting lessons use this pathway.
 - **OSNEC**: Open-Source Networking Engineer Certification. Engineering lessons use an independent sequence and engineering scope.
-- Lesson titles use independent three-digit numbering such as `OSNTC.018: Title` and `OSNEC.002: Title`.
+- Lesson titles use independent three-digit numbering such as `OSNTC.023: Title` and `OSNEC.002: Title`.
 
-**Current next technician lesson:** `OSNTC.023`
+**Current next technician lesson:** `OSNTC.024`
 
 ## Published technician lessons
 
@@ -31,7 +31,8 @@
 | OSNTC.019 | Spanning Tree Protocol (STP) — Loops, Root Bridge, BPDUs, Port Roles, and RSTP | [Live](https://bitcoinversus.tech/2026/10/08/osntc-019-spanning-tree-protocol-stp-loops-root-bridge-bpdus-port-roles-rstp/) |
 | OSNTC.020 | Link Aggregation and LACP — EtherChannel, Port Channels, Member Links, Load Balancing, and Failure Recovery | [Live](https://bitcoinversus.tech/2026/10/08/osntc-020-link-aggregation-lacp-etherchannel-port-channels-member-links-load-balancing-failure-recovery/) |
 | OSNTC.021 | Troubleshooting Switch Ports — Link Status, Errors, VLANs, and Verification | [Live](https://bitcoinversus.tech/2026/10/09/osntc-021-troubleshooting-switch-ports-link-status-errors-vlans/) |
-| OSNTC.022 | 802.1Q VLAN Trunking — Tagged Frames, Access Ports, Trunk Ports, Native VLANs, Allowed VLANs, and Verification | [Archive](../archive/2026/10/osntc-022-802-1q-vlan-trunking-tagged-frames-access-trunk-native-allowed-vlans-verification.md) |
+| OSNTC.022 | VLAN Trunking and 802.1Q — Tagged Frames, Native VLANs, Allowed VLANs, and Verification | [Archive](../archive/2026/10/osntc-022-vlan-trunking-802-1q-tagged-frames-native-vlans-allowed-vlans-verification.md) |
+| OSNTC.023 | Inter-VLAN Routing — Router-on-a-Stick, Layer 3 Switches, SVIs, Default Gateways, and Verification | [Archive](../archive/2026/10/osntc-023-inter-vlan-routing-router-on-a-stick-layer-3-switches-svis-default-gateways-verification.md) |
 
 ## Published engineer lessons
 
@@ -50,4 +51,4 @@
 - Write lessons as formal instruction/lecture material rather than author-to-reader conversation.
 - Archive every published lesson to `1freetech/Bitcoinversus.tech/archive/YYYY/MM/` and maintain the TechCert and Open CERT mirrors.
 
-OSNTC.022 was published October 9, 2026 as WordPress post 22894. The technician track continues with OSNTC.023.
+OSNTC.023 was published October 9, 2026 as WordPress post 22894. The technician track continues with OSNTC.024.

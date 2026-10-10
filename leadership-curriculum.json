@@ -6,11 +6,12 @@
   "title_format": "OSLTC.{number} — {topic}",
   "status": "active",
   "latest_lesson": {
-    "lesson_number": 3,
-    "title": "OSLTC.003 — Leadership Through Listening: Active Listening, Adaptive Feedback, and Responding to What You Hear",
-    "wordpress_post_id": 22598,
-    "live_url": "https://bitcoinversus.tech/2026/10/09/osltc-003-leadership-through-listening-active-listening-adaptive-feedback-responding-to-what-you-hear/",
-    "archive_path": "archive/2026/10/osltc-003-leadership-through-listening-active-listening-adaptive-feedback-responding-to-what-you-hear.md",
+    "lesson_number": 4,
+    "title": "OSLTC.004 — How to Give Corrective Feedback Without Making It Personal",
+    "wordpress_post_id": 23311,
+    "live_url": "https://bitcoinversus.tech/2026/10/10/osltc-004-how-to-give-corrective-feedback-without-making-it-personal/",
+    "archive_path": "archive/2026/10/osltc-004-how-to-give-corrective-feedback-without-making-it-personal.md",
+    "archive_blob_sha": "4b6648236b783c8210e8a273894528ed7183dfc7",
     "verification_status": "published_and_archived",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
@@ -18,6 +19,6 @@
       "1freetech/opencert.tech"
     ]
   },
-  "next_lesson_number": 4,
-  "next_lesson_title": "OSLTC.004 — How to Give Corrective Feedback Without Making It Personal"
+  "next_lesson_number": 5,
+  "next_lesson_title": null
 }

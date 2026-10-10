@@ -17,7 +17,9 @@
 <!-- wp:paragraph --><p>Only the DNS message reaches this handler. In an application with multiple handlers, a separate handler may still process the storage message. Use <a href='https://docs.python.org/3/library/logging.html#filter-objects'>Python's logging filter documentation</a> for precise behavior, including newer Python versions where filters may return a replacement LogRecord.</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Filters versus severity levels</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>A handler level such as WARNING selects messages based on severity; a custom filter can inspect logger names, attributes, or message metadata. Filters are not a substitute for protecting secrets: avoid logging passwords, access tokens, or private data in the first place. Keep filtering deterministic and lightweight because it runs on the logging path.</p><!-- /wp:paragraph -->
-<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jxmzY9soFXg","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=jxmzY9soFXg</div></figure><!-- /wp:embed -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=jxmzY9soFXg]
+<!-- /wp:shortcode -->
 <!-- wp:paragraph --><p><em>Corey Schafer's advanced Python logging tutorial demonstrates named loggers, handlers, and formatters—the components to which custom filters are attached.</em></p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Lab</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>Create two named loggers and one stream handler. First, emit INFO and WARNING records without a custom filter. Next, attach NetworkOnly to the handler and repeat. Add a second handler without the filter to compare their output. Record which messages appear, and explain why. To extend the exercise, allow only records with an explicitly added component attribute.</p><!-- /wp:paragraph -->

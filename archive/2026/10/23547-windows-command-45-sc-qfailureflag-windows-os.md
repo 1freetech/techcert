@@ -1,0 +1,54 @@
+---
+post_id: 23547
+title: "Windows Command #45 – sc qfailureflag (Windows OS)"
+live_url: "https://bitcoinversus.tech/2026/10/11/windows-command-45-sc-qfailureflag-windows-os/"
+slug: "windows-command-45-sc-qfailureflag-windows-os"
+featured_media_id: 23545
+featured_media_url: "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/windows-command-45-qfailureflag-cover-1200x630-1.jpg"
+status: publish
+content_hash: "d0488d7880aec3a8bc5e879c90d7b110b8b3c195"
+---
+
+<!-- wp:paragraph --><p><strong><code>sc.exe qfailureflag</code> reads whether a Windows service is configured to run its recovery actions for qualifying non-crash failures.</strong> It is the read-only companion to <a href="https://bitcoinversus.tech/2026/10/10/windows-command-44-sc-failureflag-windows-os/">Windows Command #44 – sc failureflag</a>, which changes that setting.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>What qfailureflag tells you</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Windows services can have recovery actions such as restarting the service, running a command, or rebooting the computer after a failure. The <code>failureflag</code> setting controls whether those actions can also run when a service reports <code>SERVICE_STOPPED</code> with a nonzero Win32 exit code instead of simply crashing. <code>qfailureflag</code> lets you inspect that flag without changing it.</p><!-- /wp:paragraph -->
+<!-- wp:image {"id":23546,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/windows-services-console-qfailureflag-body.png?w=820" alt="Windows Services management console listing local services, status, startup type, and logon accounts." class="wp-image-23546" /><figcaption class="wp-element-caption"><em>Windows Services management console. Source: STRONTIC technical documentation.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:heading --><h2>Basic syntax</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Use <code>sc.exe qfailureflag SERVICE_NAME</code>. Replace <code>SERVICE_NAME</code> with the actual service name, not the friendly display name shown to users. For example:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>sc.exe qfailureflag DemoService</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>A successful query typically reports the service failure-actions flag as either <code>TRUE</code> or <code>FALSE</code>. A result of <code>TRUE</code> means qualifying non-crash failures are eligible to trigger the service's configured recovery actions. <code>FALSE</code> means those recovery actions are limited to the normal crash-style failure condition.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=G2v-dEagPxQ","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">[youtube https://www.youtube.com/watch?v=G2v-dEagPxQ]</div><figcaption class="wp-element-caption"><em>Mossé Cyber Security Institute explains Windows services, Service Control Manager, service states, startup behavior, and management tools.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2>TRUE does not mean recovery actions exist</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>This distinction is essential. <code>qfailureflag</code> reads only the flag that expands which failures can trigger recovery. It does not prove that restart, command, or reboot actions have been configured. Use <code>sc.exe qfailure SERVICE_NAME</code> to inspect the actual recovery policy.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>A service can therefore report <code>TRUE</code> for <code>qfailureflag</code> while still having no useful recovery action configured. Conversely, a service can have recovery actions but report <code>FALSE</code>, meaning those actions apply only to the narrower failure condition.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>Read the recovery configuration beside the flag</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>sc.exe qfailure DemoService
+sc.exe qfailureflag DemoService</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Running both commands gives you the full picture. <code>qfailure</code> shows actions, delay values, reset period, command, and reboot message when configured. <code>qfailureflag</code> shows whether non-crash failures are also eligible to trigger those actions.</p><!-- /wp:paragraph -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=aZPTIBbLjXA","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">[youtube https://www.youtube.com/watch?v=aZPTIBbLjXA]</div><figcaption class="wp-element-caption"><em>This overview explains the Windows Service Control Manager, the subsystem queried by <code>sc.exe</code>.</em></figcaption></figure><!-- /wp:embed -->
+<!-- wp:heading --><h2>Example interpretation</h2><!-- /wp:heading -->
+<!-- wp:code --><pre class="wp-block-code"><code>[SC] QueryServiceConfig2 SUCCESS
+FAILURE_ACTIONS_ON_NONCRASH_FAILURES: TRUE</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>This output means Windows will consider qualifying non-crash service failures for the recovery actions already configured on that service. It does not tell you what those actions are. Query them separately with <code>sc.exe qfailure SERVICE_NAME</code>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>Query a remote computer</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><code>sc.exe</code> can target another Windows computer when your account has the required remote Service Control Manager permissions and network access:</p><!-- /wp:paragraph -->
+<!-- wp:code --><pre class="wp-block-code"><code>sc.exe \\SERVER01 qfailureflag DemoService</code></pre><!-- /wp:code -->
+<!-- wp:paragraph --><p>Remote queries can fail because of firewall rules, RPC connectivity, service-control permissions, or administrative policy. An access-denied result is not evidence that the service lacks a failure flag; it means the query itself was not authorized.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>Common mistakes</h2><!-- /wp:heading -->
+<!-- wp:list --><ul><li><strong>Using the display name:</strong> <code>sc.exe</code> normally expects the service name.</li><li><strong>Assuming TRUE means restart:</strong> the flag does not define the recovery action.</li><li><strong>Skipping qfailure:</strong> always inspect the actual configured recovery actions too.</li><li><strong>Confusing query with configuration:</strong> <code>qfailureflag</code> is read-only; <code>failureflag</code> changes the setting.</li><li><strong>Testing a critical service:</strong> learn with a disposable or noncritical service rather than production infrastructure.</li></ul><!-- /wp:list -->
+<!-- wp:heading --><h2>Practice lab</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol><li>Choose a noncritical service that you are authorized to inspect.</li><li>Find its service name in <code>services.msc</code> or with <code>sc.exe query</code>.</li><li>Run <code>sc.exe qfailure SERVICE_NAME</code> and record the recovery actions.</li><li>Run <code>sc.exe qfailureflag SERVICE_NAME</code> and record whether the flag is TRUE or FALSE.</li><li>Explain in one sentence what the flag changes and what it does not change.</li><li>If you previously completed Windows Command #44 on a disposable service, compare the before-and-after query output.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2>Knowledge check</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol><li>What does <code>sc.exe qfailureflag</code> read?</li><li>Does a TRUE result prove that restart actions are configured?</li><li>Which command reads the service's actual recovery actions?</li><li>Which command changes the failure-actions flag?</li><li>Why can a remote query return Access Denied?</li><li>Should you use the service name or display name?</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2>Answer guide</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol><li>Whether configured recovery actions can also run for qualifying non-crash failures.</li><li>No. It only reports the flag.</li><li><code>sc.exe qfailure SERVICE_NAME</code>.</li><li><code>sc.exe failureflag SERVICE_NAME flag= 0</code> or <code>flag= 1</code>.</li><li>The account may lack Service Control Manager permissions, or RPC/firewall policy may block remote access.</li><li>The service name.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2>Key takeaway</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><strong><code>sc.exe qfailureflag</code> answers one focused question: are this service's configured recovery actions eligible to run for qualifying non-crash failures?</strong> Pair it with <code>sc.exe qfailure</code> so you know both the trigger scope and the actual actions.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2>References</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Primary references: <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/sc-qfailureflag">Microsoft Learn — sc.exe qfailureflag</a>, <a href="https://learn.microsoft.com/en-us/windows/win32/services/configuring-a-service-using-sc">Microsoft Learn — Configuring a Service Using SC</a>, and <a href="https://learn.microsoft.com/en-us/windows/win32/api/winsvc/ns-winsvc-service_failure_actions_flag">Microsoft Learn — SERVICE_FAILURE_ACTIONS_FLAG</a>.</p><!-- /wp:paragraph -->
+<!-- wp:separator --><hr class="wp-block-separator has-alpha-channel-opacity" /><!-- /wp:separator -->
+<!-- wp:paragraph --><p><strong>Advertisement</strong></p><!-- /wp:paragraph -->
+<!-- wp:shortcode -->[tweet https://twitter.com/1BitcoinVersus/status/1937006164555993338]<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><strong><em><sup>BitcoinVersus.Tech Editor's Note:</sup></em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong><em><sup>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our independent technical education work, please donate Bitcoin here: 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</sup></em></strong></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><em>BitcoinVersus.tech is not a financial advisor. This lesson is for informational and educational purposes.</em></p><!-- /wp:paragraph -->

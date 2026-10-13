@@ -76,11 +76,9 @@ status: publish
 <p>A classic three-wire control circuit uses a normally closed <strong>Stop</strong> device, a momentary normally open <strong>Start</strong> device, a contactor coil, and a normally open auxiliary contact wired in parallel with the Start input. Schneider Electric calls this auxiliary contact a <strong>holding circuit interlock</strong>: once the coil energizes, the auxiliary contact closes and maintains the coil circuit after the momentary Start input is released.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>L1 ──[ STOP NC ]──┬──[ START NO ]────( M )── L2
-                  │
-                  └──[ M AUX NO ]─────┘</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><strong>Seal-in path:</strong> Control power flows through the normally closed Stop contact. Pressing the normally open Start contact energizes contactor coil M. Once M energizes, its normally open auxiliary contact closes in parallel with the Start contact, so the coil stays energized after Start is released. Pressing Stop opens the series path and drops out M.</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>Pressing Start energizes coil <code>M</code>. The main contacts close and the motor receives power. At the same time, the <code>M</code> auxiliary contact closes. Releasing Start does not stop the motor because the auxiliary path now keeps the coil energized. Pressing Stop opens the series control path, the coil de-energizes, both main and auxiliary contacts return to normal, and the motor disconnects.</p>
@@ -130,13 +128,9 @@ status: publish
 <p>This architecture creates a serious hazard: if both contactors close at the same time, the crossed phase connections can create a phase-to-phase short circuit. Good reversing-starter engineering therefore uses both <strong>electrical interlocking</strong> and <strong>mechanical interlocking</strong> when the equipment is designed for it.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>Forward coil path:
-STOP ── FWD COMMAND ── REV AUX NC ── (F)
-
-Reverse coil path:
-STOP ── REV COMMAND ── FWD AUX NC ── (R)</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><strong>Forward path:</strong> Stop must remain closed, the Forward command must be present, and the Reverse contactor’s normally closed auxiliary interlock must remain closed before coil F can energize. <strong>Reverse path:</strong> Stop must remain closed, the Reverse command must be present, and the Forward contactor’s normally closed auxiliary interlock must remain closed before coil R can energize.</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>The electrical interlock uses a normally closed auxiliary contact from each contactor in series with the opposing coil. If Forward is energized, its normally closed auxiliary contact in the Reverse coil circuit opens. The mechanical interlock provides a second physical layer that prevents both contactor mechanisms from fully closing together.</p>

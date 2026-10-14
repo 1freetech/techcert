@@ -63,14 +63,14 @@ https://www.youtube.com/watch?v=t1nsij8k3l8
 <p><strong>Optical signal-to-noise ratio</strong> compares signal power with optical noise power in a defined reference bandwidth. In amplified DWDM systems, amplifier spontaneous-emission noise accumulates across spans. A receiver can therefore have adequate total optical power while the useful signal is buried in enough noise to reduce margin.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jXY_HOathz8","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=WLbnS4O8maw","type":"video","providerNameSlug":"youtube","responsive":true} -->
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
-https://www.youtube.com/watch?v=jXY_HOathz8
+https://www.youtube.com/watch?v=WLbnS4O8maw
 </div></figure>
 <!-- /wp:embed -->
 
 <!-- wp:paragraph -->
-<p><em>EXFO explains why OSNR is a key DWDM performance measurement and why optical power by itself is not enough.</em></p>
+<p><em>VIAVI Solutions demonstrates how OSNR is generated and measured in optical test equipment, reinforcing why optical power alone does not describe signal quality.</em></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

@@ -1,0 +1,351 @@
+<!-- wp:paragraph -->
+<p><strong>A firmware update should prove two things before a device trusts it: the image has not changed, and the image came from an authorized signer.</strong> A checksum can detect accidental corruption, but a cryptographic signature can also establish authenticity when the verification key is anchored in a trusted boot path.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/13/osftc-010-firmware-crash-logs-fault-recovery/"><strong>OSFTC.010: Firmware Crash Logs and Fault Recovery</strong></a>. OSFTC.010 focused on evidence after firmware fails. OSFTC.011 moves earlier in the lifecycle: preventing unauthorized or obsolete firmware from becoming trusted code in the first place.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=fR-N6K5GmKQ]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>The Zephyr Project demonstrates MCUboot image signing and the basic secure-update trust model.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine a controller receives a new firmware file over USB, Ethernet, Wi-Fi, Bluetooth, CAN, or a service laptop. The device should not execute that file merely because its filename, version label, or checksum looks correct. A secure update design adds a trusted verification step before new code becomes active.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A typical design hashes the firmware image, signs that hash with a protected private key during the release process, and stores the matching public verification key in a protected bootloader, immutable boot stage, secure element, one-time-programmable region, or another hardware-rooted trust mechanism. At boot or update time, the device verifies the signature before allowing the image to execute.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Distinguish hashes, checksums, digital signatures, encryption, and secure boot.</li><li>Explain the difference between firmware integrity and firmware authenticity.</li><li>Describe a root of trust and chain of trust.</li><li>Identify the technician-visible parts of a signed firmware image and secure update workflow.</li><li>Explain A/B image slots, test boots, image confirmation, and automatic rollback.</li><li>Explain anti-rollback and security counters.</li><li>Recognize why private signing keys must remain outside deployed devices.</li><li>Verify firmware version, signature state, slot state, boot reason, and rollback behavior after an update.</li><li>Troubleshoot common secure-boot and signed-update failures without bypassing security controls.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Checksum Is Not the Same as Signature</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A checksum or cryptographic hash answers an integrity question: <strong>did these bytes change?</strong> If one bit changes, the calculated value should change. That is useful for detecting corrupted downloads and damaged flash.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A digital signature adds an authenticity question: <strong>was this image authorized by the holder of the trusted private key?</strong> In a public-key system, the release organization signs with a private key. The device verifies with the corresponding public key. The private key should not be present in production firmware or ordinary technician toolkits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This distinction matters because an attacker who can replace both an image and its ordinary checksum can still make the checksum match. A properly implemented signature is different because the attacker should not possess the release-signing private key.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Integrity, Authenticity, and Confidentiality</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Integrity:</strong> the firmware has not been modified unexpectedly.</li><li><strong>Authenticity:</strong> the firmware was approved by an authorized signing identity.</li><li><strong>Confidentiality:</strong> unauthorized parties cannot read the firmware contents.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Signing and encryption solve different problems. A signed image can be fully readable while still being protected against unauthorized modification. An encrypted image can hide its contents but still require a separate authenticity mechanism. Do not treat encryption alone as proof that firmware is trusted.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Root of Trust</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Secure boot only works if the first verifier can itself be trusted. That starting point is commonly called a <strong>root of trust</strong>. Depending on the platform, it may be ROM code inside the microcontroller, immutable boot code, a public-key hash stored in OTP fuses, a hardware security engine, a secure element, or a protected first-stage bootloader.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Each trusted stage verifies the next stage before transferring control. That creates a <strong>chain of trust</strong>. If an attacker can replace the first verifier or replace its trusted public key without authorization, later signature checks can be bypassed. Technicians therefore need to know which parts of the boot chain are mutable and which are hardware-protected.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>NIST SP 800-193 organizes firmware resiliency around three broad capabilities: <strong>protect</strong> firmware from unauthorized changes, <strong>detect</strong> unauthorized changes, and <strong>recover</strong> securely when corruption or attack occurs. Its authenticated-update guidance specifically relies on digital signatures for firmware-update authenticity and integrity.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=FwWhPn5glwQ]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>The Linux Foundation presentation shows secure and encrypted Zephyr boot using MCUboot, hardware-backed keys, OTP storage, and TrustZone-capable devices.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How a Signed Firmware Image Is Built</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>The release build produces the firmware binary or hexadecimal image.</li><li>A cryptographic hash is calculated over the defined signed region.</li><li>The release system signs that hash with an authorized private key.</li><li>Image metadata may add version, security counter, image size, hardware identifier, dependency information, or other protected fields.</li><li>The signed image is distributed through the approved update channel.</li><li>The device or bootloader calculates its own hash and verifies the signature using the trusted public key.</li><li>The image is rejected if verification fails.</li><li>If verification passes, update policy then checks version, hardware compatibility, slot state, rollback rules, and other conditions before boot.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">MCUboot as a Practical Example</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>MCUboot is a widely used secure bootloader for 32-bit microcontrollers and is integrated with Zephyr and other embedded platforms. Its current documentation recommends using <code>imgtool</code> for key and image operations. MCUboot supports RSA, ECDSA, and Ed25519 signing configurations depending on build options.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A development workflow can generate a signing key with a command such as:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>./scripts/imgtool.py keygen -k image_sign.pem -t ecdsa-p256</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The exact production process should normally move the private key into controlled release infrastructure, ideally using an HSM or equivalent protected signing service rather than leaving production signing keys on ordinary developer workstations. The device needs verification material such as the public key or its trusted hash, not the private signing key.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Public Key on Device, Private Key Off Device</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This is one of the most important field concepts. The <strong>private key signs releases</strong>. The <strong>public key verifies releases</strong>. A technician should not copy a production private key into a programmer, service laptop, device filesystem, firmware repository, or removable media used in normal field service.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If a production signing private key is exposed, an unauthorized party may be able to create firmware that looks legitimately signed. That is a release-security incident, not merely a lost password. Key rotation, revocation, device trust-anchor updates, and fleet remediation may then be required.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A/B Firmware Slots</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Many resilient update systems divide flash into two application regions. <strong>Slot A</strong> contains the running image. <strong>Slot B</strong> receives the candidate update. The bootloader can verify the inactive image before switching execution to it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This design reduces the chance that an interrupted write destroys the only bootable application. It also supports controlled rollback if the new image verifies cryptographically but fails operationally after boot.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This connects directly to <a href="https://bitcoinversus.tech/2026/10/05/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation/"><strong>OSFTC.003: Firmware Backup and Recovery</strong></a>. Backup and rollback preserve availability; signatures and secure boot add authorization to that recovery path.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Test Boot, Confirm, or Revert</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>MCUboot supports update modes in which a new image is booted on a trial basis. The application performs self-tests and then marks the image as confirmed. If the candidate does not confirm successfully, the bootloader can revert to the previously working image on a later reset.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A secure signature cannot prove that the application is bug-free. It only proves that the image is the one authorized by the signer and has not been modified. Runtime health checks are still required. Useful confirmation criteria can include successful initialization, storage mount, network bring-up, sensor communication, watchdog operation, required peripheral discovery, and critical service startup.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Anti-Rollback Protection</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A correctly signed older release may still contain a known vulnerability. <strong>Anti-rollback</strong> prevents a device from accepting an image older than the permitted security state even when that older image has a valid signature.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>MCUboot documents both version-based downgrade prevention and security-counter approaches. A hardware-backed security counter can be stored in trusted nonvolatile storage and compared with the signed image’s protected security value. The new image must meet the platform’s monotonic policy before it can become active.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[embed]https://www.reddit.com/r/embedded/comments/1w0d2n4/otp_antirollback_counter_issue/[/embed]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>A recent embedded-systems discussion illustrates the field reality of anti-rollback counters stored in one-time-programmable memory. Community discussion is useful context, but the actual device policy must come from the silicon vendor and product security design.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why Version Number Alone Can Be Weak</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A version string stored only in ordinary writable flash may be altered by compromised software. Stronger anti-rollback designs anchor the accepted security state in a protected counter, OTP field, secure element, trusted execution environment, or other storage that unauthorized application code cannot simply reset.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Technicians should distinguish a user-facing software version such as <code>3.4.1</code> from a security counter. A maintenance release may intentionally reuse a product-family versioning pattern while still incrementing the security counter because a vulnerability has been fixed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Secure Boot Does Not Mean the Same Thing as Encrypted Boot</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Secure boot is fundamentally about deciding which code is trusted to execute. Encryption hides firmware contents. Some systems do both, but technicians should verify which controls are actually enabled. A device can enforce signed firmware without encrypting the image, and it can encrypt an image without establishing a trustworthy chain of execution unless authentication is also enforced.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=cbOuo-wL2Ms]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Microchip demonstrates secure boot using a hardware secure element to verify signed microcontroller firmware against protected trust material.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Hardware Security Elements</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A secure element can store trust material and perform cryptographic operations in hardware designed to resist extraction or tampering. For example, Microchip’s ATECC608-family secure-boot workflow uses a protected public-key or digest configuration so the host microcontroller can validate signed firmware without storing sensitive trust state in ordinary writable memory.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A secure element is not automatically required on every product. Some microcontrollers already provide ROM secure boot, OTP key hashes, protected flash regions, hardware security engines, TrustZone, or vendor-specific secure lifecycle states. The correct architecture depends on the threat model, silicon features, manufacturing process, service requirements, and cost.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Key Rotation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Long-lived products need a way to replace signing authority without disabling secure boot. A safe key-rotation design may trust multiple verification keys temporarily, use a higher-level root key to authorize subordinate keys, or deliver a signed trust-store update through the existing chain of trust.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Do not overwrite the only trusted public key casually. If the update fails halfway through or the new key was provisioned incorrectly, the device may reject all future legitimate releases. Key migration should have a documented recovery path and should be tested on sacrificial hardware before fleet deployment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Debug Ports Become Part of the Security Boundary</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>SWD, JTAG, UART boot modes, ROM download modes, external flash programmers, test pads, and recovery straps can provide legitimate service access. They can also bypass a security architecture if they permit unauthorized rewriting of the bootloader or trust anchors.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This does not mean technicians should disable every recovery path blindly. It means debug and recovery states must follow the product’s lifecycle design. Some devices permanently lock debug access; others allow authenticated debug, service-unlock certificates, physical-presence recovery, or factory-only provisioning modes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/10/06/osftc-004-firmware-flashing-interfaces-usb-dfu-swd-jtag-spi-programmers-bootloader-modes-write-verification/"><strong>OSFTC.004: Firmware Flashing Interfaces</strong></a> before using a programmer on a secured device. A programming method that works on an unsecured development board may intentionally fail on production hardware.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Field Verification After a Secure Update</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Confirm the exact hardware model and board revision.</li><li>Record the currently active firmware version and security state.</li><li>Verify the update file came from the approved distribution source.</li><li>Verify the expected hash or release manifest when the service procedure provides one.</li><li>Confirm the update package is signed for the correct product and hardware family.</li><li>Record which image slot is active before the update.</li><li>Perform the update through the approved interface and power conditions.</li><li>Capture bootloader and serial logs where available.</li><li>Confirm signature verification succeeded and the expected version booted.</li><li>Verify application self-tests and required peripherals.</li><li>Confirm the image was marked permanent or confirmed only after health checks pass.</li><li>Reboot again to prove the device does not unexpectedly revert.</li><li>Check the rollback/security counter state when exposed by service tooling.</li><li>Verify that an older unauthorized image is rejected during a controlled lab test, not on an uncontrolled production device.</li><li>Attach logs, version data, and final state to the service record.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common Secure-Update Failure Patterns</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Image rejected immediately:</strong> wrong signing key, damaged package, wrong product ID, unsupported algorithm, malformed header, or corrupt metadata.</li><li><strong>Image verifies but will not install:</strong> insufficient slot size, incompatible flash layout, hardware-revision mismatch, dependency failure, or anti-rollback policy.</li><li><strong>New image boots once then old image returns:</strong> test image was never confirmed, health check failed, watchdog reset occurred, or the bootloader intentionally reverted.</li><li><strong>Device reports rollback violation:</strong> candidate security counter or protected version is below the accepted value.</li><li><strong>Development image works but production image fails:</strong> development and production bootloaders may trust different signing keys or lifecycle states.</li><li><strong>Programmer cannot attach:</strong> debug may be intentionally locked by production security configuration.</li><li><strong>Signature verification fails after transfer:</strong> investigate file truncation, transport corruption, metadata modification, wrong image offset, or unexpected post-sign processing.</li><li><strong>Bootloader accepts image but application later crashes:</strong> cryptographic authenticity passed; troubleshoot runtime behavior using <a href="https://bitcoinversus.tech/2026/10/13/osftc-010-firmware-crash-logs-fault-recovery/"><strong>OSFTC.010</strong></a>.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Do Not Bypass the Signature Check to “Make It Work”</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A signature failure is evidence. Rebuilding a bootloader with verification disabled, erasing trust anchors, or forcing an unsigned image onto production hardware may destroy both security and diagnostic evidence. If the device rejects an image, first prove the image identity, hardware target, signing chain, metadata, counter state, and flash layout.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If a sanctioned recovery procedure requires a local programmer or physical-presence mode, record why it is authorized and what security state must be restored afterward. Recovery should return the device to a trusted state, not permanently lower its protections.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Technician Troubleshooting Sequence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Identify exact device, board revision, bootloader version, and currently active image.</li><li>Capture serial or boot logs before retrying.</li><li>Verify the release file and manifest against the approved source.</li><li>Confirm whether the device expects development, production, or rotated signing keys.</li><li>Check image header, product identifier, version, and security counter.</li><li>Verify slot sizes and flash offsets.</li><li>Confirm the update was not altered after signing.</li><li>Check whether the candidate image is in test, permanent, pending, or rejected state.</li><li>Review reset cause and watchdog history using <a href="https://bitcoinversus.tech/2026/10/07/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting/"><strong>OSFTC.005</strong></a>.</li><li>If external flash is involved, verify the device and image region using <a href="https://bitcoinversus.tech/2026/10/10/osftc-007-spi-nor-flash-diagnostics-identification-backups-protection-verification/"><strong>OSFTC.007</strong></a>.</li><li>Use only the documented recovery path.</li><li>After recovery, prove secure verification is active again.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Hands-On Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use a development board configured with MCUboot or an equivalent training bootloader. Build two signed firmware images with different versions. Install the first image, then stage the second image into the update slot. Capture the boot log showing image verification and slot selection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Perform a test boot of the new image without confirming it and reset the board to observe rollback behavior. Repeat the update and allow the application to confirm itself after a successful self-test. Finally, modify one byte in a copy of the signed image and document the bootloader’s rejection. Do not perform this experiment on production equipment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For an advanced lab, enable downgrade prevention and attempt to stage a validly signed image whose security counter is below the accepted value. Record the exact rejection reason and explain why a correct signature does not override anti-rollback policy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>What is the difference between a checksum and a digital signature?</li><li>Which key should remain protected by the firmware publisher: private or public?</li><li>What is a root of trust?</li><li>Why can a validly signed old image still be rejected?</li><li>What problem do A/B firmware slots solve?</li><li>Why does a test boot need an image-confirmation step?</li><li>Does encryption by itself prove firmware authenticity?</li><li>Why can a signature-valid image still crash after boot?</li><li>Why should a technician capture boot logs before forcing recovery?</li><li>What does an anti-rollback security counter protect against?</li><li>Why can a production debugger refuse to connect even when the same tool works on a development board?</li><li>What should happen to secure-boot protections after an authorized recovery?</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Answers</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>A checksum or hash detects changed data; a digital signature also proves authorization by a trusted signing key when the verification chain is secure.</li><li>The private signing key.</li><li>The protected starting point that anchors trust for later boot stages or firmware images.</li><li>Anti-rollback policy may reject firmware whose protected version or security counter is below the device’s accepted security state.</li><li>They allow a new image to be written separately from the working image, improving power-loss resilience and enabling rollback.</li><li>So the device can revert automatically if the new application cannot prove it is healthy.</li><li>No. Encryption provides confidentiality; authenticity requires a trusted authentication mechanism such as a digital signature or MAC under an appropriate trust design.</li><li>The signature proves origin and integrity, not application correctness.</li><li>Logs preserve the reason the trusted boot process rejected or reverted the image.</li><li>Downgrading to an older signed release that may contain known vulnerabilities.</li><li>Production lifecycle configuration may lock or authenticate SWD/JTAG and other debug access.</li><li>The device should return to its intended trusted production state with verification protections active.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The simplest secure-update model is: <strong>sign with the private key, verify with a protected public trust anchor, refuse unauthorized images, refuse prohibited downgrades, and keep a known-good recovery path.</strong> A technician’s job is to verify that every stage still behaves as designed after flashing, recovery, hardware replacement, or field service.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Previous Related Lessons</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://bitcoinversus.tech/2026/10/13/osftc-010-firmware-crash-logs-fault-recovery/"><strong>OSFTC.010: Firmware Crash Logs and Fault Recovery</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/10/osftc-007-spi-nor-flash-diagnostics-identification-backups-protection-verification/"><strong>OSFTC.007: SPI NOR Flash Diagnostics</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/07/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting/"><strong>OSFTC.005: Watchdog Timers and Reset Loops</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/06/osftc-004-firmware-flashing-interfaces-usb-dfu-swd-jtag-spi-programmers-bootloader-modes-write-verification/"><strong>OSFTC.004: Firmware Flashing Interfaces</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/05/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation/"><strong>OSFTC.003: Firmware Backup and Recovery</strong></a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://docs.mcuboot.com/">MCUboot — Secure Boot for 32-bit Microcontrollers</a></li><li><a href="https://docs.mcuboot.com/imgtool.html">MCUboot — imgtool Key and Image Management</a></li><li><a href="https://docs.mcuboot.com/design.html">MCUboot — Boot Design, Revert, and Downgrade Prevention</a></li><li><a href="https://csrc.nist.gov/pubs/sp/800/193/final">NIST SP 800-193 — Platform Firmware Resiliency Guidelines</a></li><li><a href="https://academy.nordicsemi.com/courses/nrf54l-series-express-course/lessons/lesson-4-security-features/topic/secure-boot-and-secure-attestation/">Nordic Developer Academy — Secure Boot and Secure Attestation</a></li><li><a href="https://academy.nordicsemi.com/?nds_version_content=nrf-connect-sdk-intermediate-lesson-9-mcuboot-and-relevant-libraries-v2-9-0-v2-7-0">Nordic Developer Academy — MCUboot and DFU Libraries</a></li><li><a href="https://www.microchip.com/en-us/about/media-center/videos/cbOuo-wL2Ms">Microchip — Secure Boot With ATECC608A</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><em><strong>BitcoinVersus.Tech Editor's Note:</strong><br>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate using the QR code provided</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Bitcoin donation QR code for 5,000 sats." class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For best QR-code scanning results, please scan this donation code from a desktop or larger screen. Mobile screens may prevent camera recognition.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech provides technical education and analysis for informational purposes only.</em></p>
+<!-- /wp:paragraph -->

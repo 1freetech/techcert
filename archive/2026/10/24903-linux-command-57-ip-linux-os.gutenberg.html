@@ -1,0 +1,251 @@
+<!-- wp:paragraph -->
+<p><strong>The <code>ip</code> command is the central Linux networking tool for inspecting and changing interfaces, addresses, routes, and neighbor tables.</strong> It belongs to the <a href="https://man7.org/linux/man-pages/man8/ip.8.html"><strong>iproute2</strong></a> toolset and replaces many tasks that older administrators performed with <code>ifconfig</code>, <code>route</code>, and <code>arp</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/13/linux-command-56-ethtool-linux-os/"><strong>Linux Command #56 – ethtool</strong></a>. <code>ethtool</code> looks closely at the physical and driver-level behavior of a <a href="https://bitcoinversus.tech/2026/10/07/networking-what-is-nic-network-interface-card-servers-asic-miners/"><strong>network interface card</strong></a>. The <code>ip</code> command moves one layer outward and shows how the Linux kernel sees the interface, its <a href="https://bitcoinversus.tech/2026/09/27/open-source-networking-lesson-1-ip-address/"><strong>IP addresses</strong></a>, its <a href="https://bitcoinversus.tech/2026/09/30/networking-lesson-003-default-gateway/"><strong>default gateway</strong></a>, its routes, and the neighboring hosts it has learned.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=HKNjF0rl8GY]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This English-language tutorial walks through <code>ip addr</code>, <code>ip link</code>, <code>ip route</code>, <code>ip neigh</code>, and related troubleshooting commands.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why the ip Command Matters</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A Linux host can have multiple physical interfaces, virtual interfaces, bridges, VLAN interfaces, loopback interfaces, tunnels, and container networking devices at the same time. Each interface can have multiple IPv4 and IPv6 addresses, different routing rules, and different neighbor entries. The <code>ip</code> command provides one consistent interface for reading and changing that kernel networking state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The upstream manual defines <code>ip</code> as a tool to show or manipulate routing, network devices, interfaces, and tunnels. Common objects include <strong>address</strong>, <strong>link</strong>, <strong>route</strong>, <strong>neighbor</strong>, <strong>rule</strong>, <strong>netns</strong>, and <strong>tunnel</strong>. For technician work, the most important starting points are <code>ip addr</code>, <code>ip link</code>, <code>ip route</code>, and <code>ip neigh</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Identify Linux network interfaces and their administrative state.</li><li>Read IPv4 and IPv6 addresses with <code>ip addr</code>.</li><li>Use brief output to quickly inventory a host.</li><li>Read the routing table and identify the default route.</li><li>Use <code>ip route get</code> to see which path Linux will choose for a destination.</li><li>Read the neighbor table and interpret common neighbor states.</li><li>Distinguish link state, address state, route state, and DNS state.</li><li>Recognize when an <code>ip</code> change is temporary and may disappear after reboot.</li><li>Use read-only commands first before modifying a production host.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Start With ip -br addr</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a fast host inventory, run <code>ip -br addr</code>. The <code>-br</code> option requests brief output. The upstream manual documents brief mode for address, link, and neighbor views. A technician can quickly see interface names, whether the interfaces are up or down, and the addresses assigned to each one.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This is often the fastest answer to the question “What addresses does this Linux server currently have?” It is also useful when the machine has predictable interface names such as <code>enp1s0</code>, <code>ens192</code>, or <code>eno1</code> rather than the older <code>eth0</code> style.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">ip addr Shows Address State</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>ip addr</code> shows protocol addresses assigned to interfaces. You may see an IPv4 address such as <code>192.168.10.24/24</code>, an IPv6 link-local address beginning with <code>fe80::</code>, and one or more globally usable IPv6 addresses. Review <a href="https://bitcoinversus.tech/2026/10/05/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition/"><strong>IPv6 addressing and Neighbor Discovery</strong></a> when interpreting multiple IPv6 addresses on one interface.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The prefix length after the slash is part of the address. For IPv4, <code>/24</code> means the first 24 bits define the network prefix. That connects directly to the earlier lesson on <a href="https://bitcoinversus.tech/2026/09/30/open-source-networking-lesson-2-subnet-mask/"><strong>subnet masks</strong></a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If a client receives an address dynamically, the output may include a <code>dynamic</code> flag. That can support a <a href="https://bitcoinversus.tech/2026/10/10/osntc-025-dhcp-troubleshooting-dora-apipa-relay-agents-ip-helper-address-and-packet-capture/"><strong>DHCP troubleshooting</strong></a> investigation, although the <code>ip</code> command by itself does not replace the lease manager, NetworkManager, systemd-networkd, or other configuration service that owns the persistent settings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">ip link Shows the Device Layer</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>ip link</code> focuses on the network-device layer. It shows interfaces, MAC addresses, MTU values, queue state, and flags such as <code>UP</code>, <code>LOWER_UP</code>, and <code>NO-CARRIER</code>. These clues help separate a physical-link problem from an IP-address problem.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If an interface is administratively up but has no usable carrier, compare the result with <a href="https://bitcoinversus.tech/2026/10/13/linux-command-56-ethtool-linux-os/"><strong>ethtool</strong></a> and the networking lesson on <a href="https://bitcoinversus.tech/2026/10/07/osntc-018-ethernet-link-negotiation-speed-duplex-auto-negotiation-link-leds-interface-errors/"><strong>Ethernet link negotiation</strong></a>. <code>ip link</code> tells you what the kernel believes about the interface state; <code>ethtool</code> can expose negotiated speed, duplex, driver details, and NIC statistics.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=Kf4j_84cwNY]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This English-language walkthrough demonstrates <code>ip addr</code>, brief output, <code>ip link</code>, interface up/down operations, routes, neighbors, and temporary address changes.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read-Only First, Changes Second</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On a production server, begin with read-only commands. Commands such as <code>ip addr</code>, <code>ip link</code>, <code>ip route</code>, and <code>ip neigh</code> are safe inspection tools. Commands using verbs such as <code>add</code>, <code>del</code>, <code>replace</code>, or <code>set</code> change kernel networking state and can immediately disconnect a remote session.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For example, <code>sudo ip link set dev enp1s0 down</code> administratively disables that interface. Running it over SSH through that same interface can terminate your connection. The same caution applies to removing an address or replacing a default route.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">ip route Shows How Linux Reaches Other Networks</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>ip route</code> displays the routing table. A typical host may have a <strong>default route</strong> through a router plus one or more directly connected routes created automatically for local subnets. The lesson on <a href="https://bitcoinversus.tech/2026/10/10/osntc-024-static-routing-and-routing-tables-next-hops-default-routes-longest-prefix-match-and-verification/"><strong>static routing and longest-prefix match</strong></a> explains how routers and hosts choose among competing routes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A line such as <code>default via 192.168.10.1 dev enp1s0</code> means destinations without a more specific matching route normally leave through <code>enp1s0</code> and use <code>192.168.10.1</code> as the next-hop router.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">ip route get Is an Excellent Troubleshooting Tool</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>ip route get DESTINATION</code> asks the kernel which route it would select for a specific destination. On multihomed systems, VPN-connected machines, containers, and servers with multiple addresses, this is often more useful than simply reading the entire table.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The result can show the selected next hop, output interface, and source address. That makes it valuable when a server reaches the internet through the wrong interface, chooses an unexpected source address, or returns traffic through a different path than expected.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">ip neigh Replaces the Old ARP View</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>ip neigh</code> shows the kernel’s neighbor table. For IPv4, this includes the information traditionally associated with the <a href="https://bitcoinversus.tech/2026/10/02/osntc-009-arp-basics/"><strong>ARP table</strong></a>: an IP address, the corresponding link-layer address, the interface, and a neighbor state. For IPv6, the same framework supports <a href="https://bitcoinversus.tech/2026/10/05/osntc-016-ipv6-addressing-neighbor-discovery-prefixes-slaac-ndp-routing-transition/"><strong>Neighbor Discovery</strong></a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Common states include <code>REACHABLE</code>, <code>STALE</code>, <code>DELAY</code>, <code>PROBE</code>, <code>INCOMPLETE</code>, and <code>FAILED</code>. A failed neighbor entry can point to a local Layer 2 problem, incorrect VLAN placement, an unavailable target, or filtering that prevents address resolution.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=AerpaSifPZc]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This English-language Linux tip focuses on <code>ip neigh</code> and explains how the modern neighbor table relates IP addresses to local link-layer addresses.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Statistics With ip -s link</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>ip -s link</code> adds interface statistics such as received and transmitted packets, bytes, drops, errors, and other counters. These numbers can help identify a local interface that is accumulating errors or dropping traffic.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Do not interpret counters in isolation. A nonzero error total accumulated over months may be less important than a counter rising rapidly during the current incident. Compare timestamps, traffic volume, switch-side counters, and <a href="https://bitcoinversus.tech/2026/10/13/linux-command-56-ethtool-linux-os/"><strong>ethtool statistics</strong></a> before deciding which layer is actually failing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Useful Display Options</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><code>ip -br addr</code> — compact interface and address summary.</li><li><code>ip -br link</code> — compact link-state summary.</li><li><code>ip -c addr</code> — colorized output in a terminal.</li><li><code>ip -4 addr</code> — show IPv4 address information.</li><li><code>ip -6 addr</code> — show IPv6 address information.</li><li><code>ip -s link</code> — show interface statistics.</li><li><code>ip -j addr</code> — output address data as JSON for scripts or automation.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The JSON output option is especially useful when building reliable automation. Parsing human-oriented terminal text with fragile regular expressions is usually less robust than consuming structured output.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Temporary Changes vs. Persistent Configuration</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <code>ip</code> command changes the kernel’s current networking state. On many Linux distributions, a manual address or route added with <code>ip</code> does <strong>not</strong> automatically become persistent across reboot. Persistent networking may be managed by NetworkManager, systemd-networkd, Netplan, distribution-specific configuration files, a cloud-init system, or an orchestration platform.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>That distinction matters during troubleshooting. A temporary command can be useful for a controlled test, but a successful temporary fix is not complete until the persistent configuration is corrected in the system that owns it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[embed]https://www.reddit.com/r/linuxadmin/comments/1wjlii4/what_is_the_actual_difference_between_using/[/embed]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This English-language Linux administration discussion explores how the <code>ip</code> command relates to the kernel’s rtnetlink interface. Community discussion is practical context; the upstream iproute2 manual remains the primary technical reference.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Practical Troubleshooting Sequence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Run <code>ip -br link</code> and confirm the expected interface exists.</li><li>Run <code>ip -br addr</code> and confirm the expected IPv4 and IPv6 addresses.</li><li>Check <code>ip route</code> for the default route and connected networks.</li><li>Use <code>ip route get DESTINATION</code> to see the kernel’s actual path choice.</li><li>Check <code>ip neigh</code> when a same-subnet host or gateway cannot be reached.</li><li>Use <code>ip -s link</code> for interface errors and drops.</li><li>Compare physical-link evidence with <code>ethtool</code>.</li><li>Use <a href="https://bitcoinversus.tech/2026/10/02/osntc-010-icmp-ping-basics/"><strong>ping and ICMP</strong></a> only after confirming local interface, address, and route state.</li><li>Use <a href="https://bitcoinversus.tech/2026/10/10/what-is-traceroute/"><strong>traceroute</strong></a> or related path tools when the local route is correct but remote reachability still fails.</li><li>Check <a href="https://bitcoinversus.tech/2026/10/10/osntc-026-dns-troubleshooting-resolver-settings-nslookup-dig-nxdomain-servfail-packet-capture/"><strong>DNS</strong></a> only after proving basic IP connectivity.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common Failure Patterns</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Interface exists but is DOWN:</strong> investigate administrative state, service ownership, or intentional shutdown.</li><li><strong>Interface is UP but has no expected address:</strong> investigate DHCP, static configuration, NetworkManager, systemd-networkd, Netplan, or the owning service.</li><li><strong>Address is correct but there is no default route:</strong> remote networks may be unreachable even though local subnet traffic works.</li><li><strong>Default route exists but uses the wrong interface:</strong> inspect metrics, policy routing, VPN state, and competing routes.</li><li><strong>Gateway address exists but neighbor state is FAILED:</strong> investigate Layer 2 reachability, VLAN assignment, switching, or gateway availability.</li><li><strong>Packets leave through an unexpected source address:</strong> use <code>ip route get</code> to verify the kernel’s route and source-address selection.</li><li><strong>Manual fix disappears after reboot:</strong> update the persistent network configuration rather than relying on a one-time <code>ip</code> command.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Hands-On Exercise</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On a Linux system you control, run <code>ip -br link</code>, <code>ip -br addr</code>, <code>ip route</code>, and <code>ip neigh</code>. Record the active interface name, MAC address, IPv4 address, IPv6 address, default gateway, and at least one neighbor entry.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Next, choose a permitted remote IP address and run <code>ip route get DESTINATION</code>. Record the output interface, next hop if present, and selected source address. Finish by running <code>ip -s link</code> and noting whether any receive or transmit error counters are increasing. Do not add, remove, or replace addresses or routes during this exercise.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>What package provides the Linux <code>ip</code> command?</li><li>What does <code>ip -br addr</code> show?</li><li>What is the difference between <code>ip link</code> and <code>ip addr</code>?</li><li>Which command shows the routing table?</li><li>Why is <code>ip route get</code> useful?</li><li>What information does <code>ip neigh</code> expose?</li><li>What does a <code>FAILED</code> neighbor entry suggest?</li><li>What does <code>ip -s link</code> add to normal link output?</li><li>Why should you avoid casually running <code>ip link set ... down</code> over SSH?</li><li>Why can an address added with <code>ip addr add</code> disappear after reboot?</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Answers</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>The iproute2 toolset.</li><li>A compact summary of interfaces and their assigned addresses.</li><li><code>ip link</code> focuses on network-device state; <code>ip addr</code> focuses on protocol addresses assigned to interfaces.</li><li><code>ip route</code>.</li><li>It shows which route, interface, next hop, and often source address the kernel would select for a particular destination.</li><li>Bindings between network-layer addresses and link-layer neighbors, including neighbor reachability state.</li><li>The kernel could not successfully resolve or reach that neighbor using the normal local-link process.</li><li>Receive/transmit counters and interface statistics such as packets, drops, and errors.</li><li>Because disabling the interface carrying the SSH session can immediately disconnect the administrator.</li><li>Because <code>ip</code> changes current kernel state; persistence is usually owned by a separate network configuration system.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://man7.org/linux/man-pages/man8/ip.8.html">ip(8) — Linux manual page</a></li><li><a href="https://man7.org/linux/man-pages/man8/ip-link.8.html">ip-link(8) — Linux manual page</a></li><li><a href="https://www.man7.org/linux/man-pages/man8/ip-neighbour.8.html">ip-neighbour(8) — Linux manual page</a></li><li><a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/networking_guide/sec-configuring_ip_networking_with_ip_commands">Red Hat — Configuring IP Networking with ip Commands</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><em><strong>BitcoinVersus.Tech Editor's Note:</strong><br>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate using the QR code provided</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Bitcoin donation QR code for 5,000 sats." class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For best QR-code scanning results, please scan this donation code from a desktop or larger screen. Mobile screens may prevent camera recognition.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech provides technical education and analysis for informational purposes only.</em></p>
+<!-- /wp:paragraph -->

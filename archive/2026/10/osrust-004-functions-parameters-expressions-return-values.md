@@ -163,7 +163,7 @@ https://www.youtube.com/watch?v=c5j2K3WVhf4
 <!-- /wp:embed -->
 
 <!-- wp:paragraph -->
-<p><em>This Rust By Example walkthrough focuses on expressions, blocks, and the semicolon rule that determines whether a block yields a useful value or <code>()</code>.</em></p>
+<p><em>This Rust By Example walkthrough focuses on expressions, blocks, and the semicolon rule that determines whether a block yields a useful value or <code>()</code>.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->

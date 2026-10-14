@@ -1,0 +1,299 @@
+<!-- wp:paragraph -->
+<p><strong>Asyncio logging is not mainly about making the logging API itself asynchronous.</strong> The core engineering problem is preventing slow log handlers—especially file and network handlers—from blocking Python’s <a href="https://docs.python.org/3/library/asyncio-eventloop.html"><strong>asyncio event loop</strong></a>. A healthy design lets coroutines create <a href="https://docs.python.org/3/library/logging.html#logrecord-objects"><strong>LogRecord</strong></a> objects quickly, then moves potentially blocking log output away from the event-loop thread.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/13/ospython-039-logging-with-processpoolexecutor/"><strong>OSPython.039: Logging with ProcessPoolExecutor</strong></a>. That lesson dealt with multiple processes. OSPython.040 focuses on <a href="https://docs.python.org/3/library/asyncio.html"><strong>asyncio</strong></a>, where many concurrent tasks often share one event-loop thread and therefore must avoid blocking operations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=oAkLSJNr5zY]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Corey Schafer explains Python asyncio, including coroutines, tasks, the event loop, and why blocking operations interfere with asynchronous concurrency.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An <a href="https://docs.python.org/3/library/asyncio-task.html"><strong>asyncio Task</strong></a> runs until it reaches an operation that yields control with <code>await</code>. The event loop can then run another task. This cooperative model works well only when code avoids long synchronous pauses. A normal logging call looks small, but a handler may write to disk, send data over a socket, flush a stream, rotate a file, or perform formatting work before returning.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Python’s current <a href="https://docs.python.org/3/howto/logging-cookbook.html"><strong>Logging Cookbook</strong></a> specifically warns that file and network handlers can create problems in asynchronous applications because they may block the event loop. It recommends the queue-based approach already introduced in <a href="https://bitcoinversus.tech/2026/10/11/ospython-037-queuehandler-queuelistener-non-blocking-logging-background-queues/"><strong>OSPython.037: QueueHandler and QueueListener</strong></a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain why synchronous handlers can block an asyncio event loop.</li><li>Use <a href="https://docs.python.org/3/library/logging.handlers.html#queuehandler"><strong>QueueHandler</strong></a> and <a href="https://docs.python.org/3/library/logging.handlers.html#queuelistener"><strong>QueueListener</strong></a> to move blocking output off the event-loop thread.</li><li>Add task, request, or correlation context to asynchronous log records.</li><li>Capture exceptions from awaited coroutines and background tasks.</li><li>Understand the difference between task cancellation and ordinary application errors.</li><li>Shut down queues and listeners without silently losing final log messages.</li><li>Recognize when logging volume or formatting work itself becomes a performance problem.</li><li>Build an evidence-based logging configuration for production asyncio services.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Event Loop Must Stay Responsive</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <strong>event loop</strong> schedules ready callbacks and tasks. If one task performs a blocking operation for 200 milliseconds, other ready tasks may wait behind it even though they are logically independent. This is why <code>time.sleep()</code> is harmful inside coroutine code while <code>await asyncio.sleep()</code> cooperates with the scheduler.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Logging can create the same pattern. A <a href="https://bitcoinversus.tech/2026/10/07/ospython-029-logging-to-files-with-filehandler/"><strong>FileHandler</strong></a>, network handler, or custom handler may perform blocking I/O. The call to <code>logger.info()</code> is synchronous from the coroutine’s perspective, so the coroutine cannot yield until the handler finishes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">QueueHandler Separates Log Creation From Log Output</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <a href="https://bitcoinversus.tech/2026/10/11/ospython-037-queuehandler-queuelistener-non-blocking-logging-background-queues/"><strong>QueueHandler</strong></a> places a log record onto a queue instead of writing the final output itself. A <strong>QueueListener</strong> runs separately, removes records from that queue, and passes them to real output handlers such as console, file, rotating-file, or network handlers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The important boundary is architectural: the event-loop thread should do as little logging work as practical, while the listener thread performs slower handler work. Python’s documentation explicitly recommends this pattern when asynchronous code is present so blocking handler work occurs in the QueueListener thread rather than in the event loop.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=ui6klXJNAXA]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This logging lesson focuses directly on QueueHandler and QueueListener, including why slow synchronous handlers can become application bottlenecks.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Minimal Async-Safe Architecture</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Create a standard thread-safe <code>queue.Queue</code>.</li><li>Attach <code>logging.handlers.QueueHandler</code> to the application logger or root logger.</li><li>Create the real destination handler, such as <code>StreamHandler</code> or <code>FileHandler</code>.</li><li>Create a <code>QueueListener</code> using the queue and destination handler.</li><li>Start the listener before the asyncio workload begins.</li><li>Run the application with <code>asyncio.run()</code>.</li><li>During shutdown, wait for important tasks to complete or cancel them deliberately.</li><li>Stop the QueueListener so queued records can finish processing.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Python 3.14 added context-manager support to <code>QueueListener</code>, allowing it to start when entering a <code>with</code> block and stop when leaving the block. The older explicit <code>start()</code> and <code>stop()</code> methods remain important to understand because many deployed Python versions and existing applications still use them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Do Not Replace QueueHandler With asyncio.Queue</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An <a href="https://docs.python.org/3/library/asyncio-queue.html"><strong>asyncio.Queue</strong></a> is designed for coordination among asyncio tasks and is not thread-safe. <code>logging.handlers.QueueHandler</code> expects a queue-like object with synchronous queue methods such as <code>put_nowait()</code>. For the standard QueueHandler/QueueListener design, use the queue type expected by the logging implementation, typically <code>queue.Queue</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This distinction matters because the listener normally runs in a separate thread. The queue is the bridge between synchronous logging calls made by event-loop tasks and the listener thread that performs output.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Add Context So Concurrent Tasks Can Be Distinguished</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Concurrency makes logs harder to read because events from different tasks are interleaved. A useful record should identify which request, job, device, user operation, or task produced it. The techniques from <a href="https://bitcoinversus.tech/2026/10/10/ospython-034-contextual-logging-with-loggeradapter-and-extra/"><strong>OSPython.034: Contextual Logging with LoggerAdapter and extra</strong></a> still apply.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For example, a web service may add <code>request_id</code>, <code>client_ip</code>, or <code>route</code>. A data-collection service may add <code>device_id</code>, <code>site</code>, or <code>poll_cycle</code>. A worker may add a job identifier. The objective is to make one task’s records traceable even when hundreds of other tasks are logging at the same time.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Context Variables Work Well With Asyncio</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Python’s <a href="https://docs.python.org/3/library/contextvars.html"><strong>contextvars</strong></a> module is designed for context-local state and works naturally with asyncio tasks. A <code>ContextVar</code> can carry a request or correlation identifier through an asynchronous call chain without forcing every function to pass that identifier manually as an argument.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A logging filter or adapter can read the current ContextVar and add it to each LogRecord. This creates task-aware logs while preserving the standard <a href="https://bitcoinversus.tech/2026/10/07/ospython-028-python-logging-basics/"><strong>Python logging</strong></a> API.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Task Names Are Useful Diagnostic Metadata</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Modern asyncio lets developers assign names to tasks. Inside coroutine code, <code>asyncio.current_task()</code> can identify the currently running task, and <code>Task.get_name()</code> returns its name. Descriptive task names such as <code>poll-rack-12</code> or <code>client-session-42</code> can make logs easier to correlate during failures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Task names are supplemental context, not a replacement for durable identifiers. A request ID or job ID may be more useful across process restarts or distributed services.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exceptions From Awaited Coroutines</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>When an awaited coroutine raises an exception, normal Python exception handling applies. Catch only errors you can handle meaningfully, and use <a href="https://bitcoinversus.tech/2026/10/10/ospython-035-logging-exceptions-exc-info-tracebacks-stack-info/"><strong>logging.exception()</strong></a> or <code>exc_info=True</code> when a traceback is needed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Avoid catching <code>Exception</code> around huge sections of the event loop simply to keep the program alive. Broad catches can hide programming errors and produce misleading “successful” task completion. Log the failure at the layer that owns recovery or escalation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Background Tasks Need Explicit Failure Handling</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A task created with <code>asyncio.create_task()</code> may run independently of the coroutine that created it. If its exception is never awaited or retrieved, asyncio can report that a task exception was never retrieved. Production designs should keep references to important tasks, await them through structured coordination such as <code>TaskGroup</code>, or attach carefully designed completion handling.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The log should identify the task, operation, and failure context. Recording only “Task failed” without the traceback or correlation ID makes post-incident analysis unnecessarily difficult.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=TUBL6rDSNvM]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This asyncio tutorial explains the event loop, coroutines, tasks, scheduling, and common blocking mistakes that matter when designing asynchronous logging.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Cancellation Is Not the Same as an Error</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Async applications commonly cancel tasks during shutdown, timeout handling, failover, or request termination. <code>asyncio.CancelledError</code> represents cancellation semantics and should generally be allowed to propagate after any required cleanup. Treating every cancellation as an ERROR-level incident can flood logs during normal shutdown.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Choose log levels based on operational meaning. A planned task cancellation during deployment may be DEBUG or INFO. A timeout that violates an availability objective may be WARNING or ERROR. Logging level should communicate severity, not merely exception type.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Graceful Shutdown Must Include the Logging Pipeline</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An async service often shuts down in stages: stop accepting new work, signal long-running tasks, await or cancel remaining tasks, close clients and sockets, then finish logging. If the process exits before the queue listener drains pending records, the final failure or shutdown messages can disappear.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For this reason, stopping the <strong>QueueListener</strong> is part of application lifecycle management. The final shutdown path should be deterministic and should not depend on the interpreter abruptly terminating background threads.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">dictConfig Can Configure Queue-Based Logging</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The configuration techniques from <a href="https://bitcoinversus.tech/2026/10/11/ospython-036-logging-configuration-dictconfig-handlers-formatters-loggers-json/"><strong>OSPython.036: Logging Configuration with dictConfig</strong></a> extend to queue-based designs. Python’s <a href="https://docs.python.org/3/library/logging.config.html"><strong>logging.config</strong></a> documentation describes direct QueueHandler/QueueListener configuration support added in Python 3.12.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This matters in production because logging topology can be changed without scattering handler construction throughout application code. A central configuration can define formatter behavior, output destinations, handler levels, and the queue/listener relationship.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Structured Logs Help Async Systems</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Async services frequently process many similar operations concurrently. Structured fields make those operations easier to filter and aggregate. Useful fields can include timestamp, level, logger name, task name, request ID, operation, duration, destination, status code, exception type, and retry count.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The formatting principles from <a href="https://bitcoinversus.tech/2026/10/08/ospython-032-custom-log-formatting-logging-formatter-timestamps-levels-logger-names-message-layout/"><strong>OSPython.032</strong></a> and the contextual fields from OSPython.034 become more valuable as concurrency increases.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Measure Before Optimizing</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Not every asyncio application needs an elaborate logging pipeline. A low-volume command-line tool writing occasional console messages may never experience measurable logging delay. A high-throughput server writing JSON records to disk or across a network may behave very differently.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Measure event-loop latency, application response times, queue depth, logging throughput, and handler latency before making performance claims. The goal is to remove actual blocking risk without adding unnecessary complexity.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[embed]https://www.reddit.com/r/learnpython/comments/15q1gmd/[/embed]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This community discussion asks how to handle file logging in asyncio applications without blocking the event loop. It illustrates the exact design concern addressed by queue-based logging; community comments are practical context, not a replacement for Python documentation or measurement.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common Failure Patterns</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Event loop periodically stalls:</strong> investigate synchronous file, socket, DNS, database, or custom logging handlers running in the loop thread.</li><li><strong>Logs from many tasks are impossible to correlate:</strong> add request IDs, job IDs, task names, or ContextVar-based metadata.</li><li><strong>Final shutdown messages disappear:</strong> verify task shutdown order and ensure the QueueListener is stopped cleanly.</li><li><strong>Background task failures appear only as asyncio warnings:</strong> retain and await important tasks or use structured task groups.</li><li><strong>Logging itself consumes excessive CPU:</strong> inspect formatter cost, stack traces, JSON serialization, filters, and excessive DEBUG volume.</li><li><strong>Queue grows continuously:</strong> the listener or downstream handler cannot keep up with record production; reduce volume, improve handler throughput, or change the logging architecture.</li><li><strong>Duplicate messages appear:</strong> check logger propagation and duplicate handlers, using the principles from <a href="https://bitcoinversus.tech/2026/10/07/ospython-028-python-logging-basics/"><strong>logging hierarchy</strong></a>.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Hands-On Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Create a small asyncio program with three named tasks. Each task should log when it starts, before and after an <code>await asyncio.sleep()</code>, and when it completes. First configure a normal console handler and observe the interleaving of records.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Next, replace the direct output handler on the application logger with a <strong>QueueHandler</strong>. Create a <strong>QueueListener</strong> that owns the console handler. Run the same workload and confirm that log records still contain the originating task context while output work is handled away from the event loop.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Add a ContextVar called <code>request_id</code> and populate it differently for each task. Add the value to each LogRecord using a filter or adapter. Finally, make one task raise a controlled exception, log the traceback, then test graceful cancellation and shutdown. Verify that the last queued log message appears before the process exits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Why can a normal logging handler block an asyncio application?</li><li>What is the purpose of QueueHandler?</li><li>What is the purpose of QueueListener?</li><li>Why is <code>queue.Queue</code> normally used instead of <code>asyncio.Queue</code> with the standard QueueListener pattern?</li><li>What problem do request IDs or task names solve?</li><li>Why are ContextVars useful in asyncio logging?</li><li>What should happen to important background tasks created with <code>asyncio.create_task()</code>?</li><li>Why should task cancellation not automatically be logged as an application error?</li><li>What can happen if the process exits before QueueListener is stopped?</li><li>When did Python add direct dictConfig support for QueueHandler/QueueListener configuration?</li><li>What Python version added QueueListener context-manager support?</li><li>Why should logging performance be measured rather than assumed?</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Answers</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Because handlers can perform synchronous file, network, formatting, or flushing work before the logging call returns, preventing the event loop from scheduling other tasks during that time.</li><li>To place LogRecord objects onto a queue quickly instead of performing slow final output in the calling thread.</li><li>To consume queued LogRecord objects and pass them to real destination handlers, normally from a separate listener thread.</li><li>Because the standard logging queue/listener design crosses thread boundaries and expects synchronous queue methods; asyncio.Queue is intended for event-loop task coordination and is not thread-safe.</li><li>They let operators distinguish records produced by different concurrent operations.</li><li>ContextVars carry task-local context through asynchronous call chains without requiring every function to pass the value explicitly.</li><li>They should be retained and awaited, coordinated through structures such as TaskGroup, or otherwise have their completion and exceptions deliberately handled.</li><li>Cancellation may be normal control flow during shutdown, timeout handling, or request termination.</li><li>Queued records may never reach their destination handler, causing final diagnostics to be lost.</li><li>Python 3.12.</li><li>Python 3.14.</li><li>Because logging volume, handler speed, storage, hardware, and application workload vary; optimization should target observed bottlenecks.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Previous Related Lessons</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://bitcoinversus.tech/2026/10/13/ospython-039-logging-with-processpoolexecutor/"><strong>OSPython.039: Logging with ProcessPoolExecutor</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/12/ospython-038-multiprocessing-logging/"><strong>OSPython.038: Multiprocessing Logging</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/11/ospython-037-queuehandler-queuelistener-non-blocking-logging-background-queues/"><strong>OSPython.037: QueueHandler and QueueListener</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/11/ospython-036-logging-configuration-dictconfig-handlers-formatters-loggers-json/"><strong>OSPython.036: Logging Configuration with dictConfig</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/10/ospython-035-logging-exceptions-exc-info-tracebacks-stack-info/"><strong>OSPython.035: Logging Exceptions</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/10/ospython-034-contextual-logging-with-loggeradapter-and-extra/"><strong>OSPython.034: Contextual Logging</strong></a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://docs.python.org/3/library/asyncio.html">Python Documentation — asyncio</a></li><li><a href="https://docs.python.org/3/library/logging.handlers.html#queuehandler">Python Documentation — QueueHandler</a></li><li><a href="https://docs.python.org/3/library/logging.handlers.html#queuelistener">Python Documentation — QueueListener</a></li><li><a href="https://docs.python.org/3/howto/logging-cookbook.html">Python Documentation — Logging Cookbook</a></li><li><a href="https://docs.python.org/3/library/logging.config.html">Python Documentation — logging.config</a></li><li><a href="https://docs.python.org/3/library/contextvars.html">Python Documentation — contextvars</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><em><strong>BitcoinVersus.Tech Editor's Note:</strong><br>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate using the QR code provided</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Bitcoin donation QR code for 5,000 sats." class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For best QR-code scanning results, please scan this donation code from a desktop or larger screen. Mobile screens may prevent camera recognition.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech provides technical education and analysis for informational purposes only.</em></p>
+<!-- /wp:paragraph -->

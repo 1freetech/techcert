@@ -1,0 +1,303 @@
+<!-- wp:paragraph -->
+<p><strong>Windows network troubleshooting is the process of proving, one layer at a time, where communication stops.</strong> A technician should be able to distinguish a bad <a href="https://bitcoinversus.tech/2026/10/07/networking-what-is-nic-network-interface-card-servers-asic-miners/">network interface card (NIC)</a> from an incorrect IP configuration, a failed <a href="https://bitcoinversus.tech/2026/10/10/osntc-025-dhcp-troubleshooting-dora-apipa-relay-agents-ip-helper-address-and-packet-capture/">DHCP</a> lease, an unreachable <a href="https://bitcoinversus.tech/2026/10/03/osntc-013-router-basics/">default gateway</a>, broken <a href="https://bitcoinversus.tech/2026/10/10/osntc-026-dns-troubleshooting-resolver-settings-nslookup-dig-nxdomain-servfail-packet-capture/">DNS</a>, a blocked port, or a remote service problem.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/12/ositc-007-windows-file-sharing-network-permissions/"><strong>OSITC.007: Windows File Sharing and Network Permissions</strong></a>. File sharing depends on working addressing, name resolution, routing, transport protocols, ports, and service availability. OSITC.008 builds the diagnostic workflow needed to prove those dependencies before changing permissions or reinstalling software.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=FOaw5aPO0ZI]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Professor Messer demonstrates the Windows network command line, including ipconfig, ping, netstat, nslookup, tracert, pathping, and related troubleshooting tools.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Do not begin by resetting the entire network stack. First identify what still works. A PC that can reach its gateway but cannot resolve a hostname has a different fault from a PC with no valid address at all. A system that can resolve a server name but cannot open TCP port 443 has a different fault from one that cannot route to the server.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The fastest troubleshooting process moves from local to remote and from simple to specific: verify the physical interface, inspect the IP configuration, test the local TCP/IP stack, test the gateway, test an external IP address, test <a href="https://bitcoinversus.tech/2026/10/10/why-dns-can-stay-wrong-after-website-moves-ttl-cache-flushdns/">name resolution</a>, test the route, then test the actual application port or service.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Read Windows IPv4 and IPv6 configuration with <code>ipconfig</code>.</li><li>Recognize valid DHCP addressing, static addressing, APIPA, subnet masks, gateways, and DNS servers.</li><li>Use <a href="https://bitcoinversus.tech/2026/10/13/what-is-icmp/">ICMP</a> and <a href="https://bitcoinversus.tech/2026/10/02/osntc-010-icmp-ping-basics/">ping</a> without treating a failed ping as proof that a host is down.</li><li>Use <code>tracert</code> and routing information to identify path problems.</li><li>Use <code>nslookup</code> to isolate DNS failures.</li><li>Use <code>netstat</code> and PowerShell port tests to inspect connections and listeners.</li><li>Separate Layer 1, Layer 2, Layer 3, DNS, transport, firewall, and application faults.</li><li>Capture evidence before performing resets or destructive changes.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Start With the Physical Interface</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Before interpreting commands, confirm that the <a href="https://bitcoinversus.tech/2026/10/03/osntc-011-network-interface-card-nic-basics/">NIC</a> is enabled and connected. For wired Ethernet, check the patch cable, switch port, link LEDs, and negotiated speed. <a href="https://bitcoinversus.tech/2026/10/07/osntc-018-ethernet-link-negotiation-speed-duplex-auto-negotiation-link-leds-interface-errors/">Ethernet link negotiation</a> can fail or fall back to an unexpected speed even when Windows reports that an adapter exists.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For Wi-Fi, verify association to the intended SSID and confirm that the device is not connected to a local wireless network with no upstream Internet access. The distinction matters because <a href="https://bitcoinversus.tech/2026/10/10/why-wifi-can-work-without-internet/">Wi-Fi can work without Internet connectivity</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read the Configuration Before Changing It</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Run <code>ipconfig /all</code> and record the adapter name, physical address, DHCP state, IPv4 address, subnet mask, IPv6 addresses, default gateway, DHCP server, DNS servers, and DNS suffix. Microsoft’s <a href="https://learn.microsoft.com/windows-server/networking/dns/troubleshoot/troubleshoot-dns-client">DNS client troubleshooting guidance</a> begins by checking these values because a name-resolution symptom can actually originate from a bad IP configuration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A normal dynamically configured client should receive an address that belongs to the intended subnet. An address in the <strong>169.254.0.0/16</strong> range usually indicates <strong>Automatic Private IP Addressing (APIPA)</strong>, meaning Windows did not receive a usable DHCP lease. Do not immediately blame DNS when the client never received a valid gateway or DNS server.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If a DHCP lease is suspect, compare the client with a known-good machine on the same network. Use <code>ipconfig /release</code> and <code>ipconfig /renew</code> only after you have captured the original configuration. A failed renewal can provide useful evidence about the DHCP path that would be lost if the technician resets several subsystems at once.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Know the Addresses You Are Testing</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://bitcoinversus.tech/2026/10/10/why-127-0-0-1-is-localhost-what-loopback-actually-does/">loopback address</a> <code>127.0.0.1</code> represents the local IPv4 host stack. Your assigned interface address represents the local NIC configuration. The default gateway is the router that forwards traffic toward other networks. A public IP address tests reachability beyond the local network. A hostname adds DNS to the test.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This gives the technician a useful progression: local stack → local interface → local gateway → remote IP → remote hostname → application port.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Ping Tests Reachability, Not the Whole Application</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Microsoft documents <a href="https://learn.microsoft.com/windows-server/administration/windows-commands/ping"><code>ping</code></a> as an IP-level connectivity tool based on ICMP echo requests and replies. A successful ping proves that a particular ICMP exchange worked. It does not prove that DNS, HTTPS, SMB, RDP, or another application protocol is healthy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A failed ping also does not prove that the target is offline. Firewalls and security devices frequently block or rate-limit ICMP while still allowing application traffic. Treat ping as one measurement, not a universal verdict.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><code>ping 127.0.0.1</code> checks the local IPv4 stack.</li><li><code>ping &lt;local-IP&gt;</code> checks the configured local address.</li><li><code>ping &lt;gateway-IP&gt;</code> tests reachability to the first router.</li><li><code>ping &lt;remote-IP&gt;</code> tests IP reachability without requiring DNS.</li><li><code>ping &lt;hostname&gt;</code> adds hostname resolution to the test.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=AimCNTzDlVo]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This command-line troubleshooting demonstration uses ping, tracert, ipconfig, and nslookup to isolate common Windows network failures.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Separate DNS From Raw IP Connectivity</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>One of the most useful comparisons is an IP test versus a hostname test. If a client can reach a known remote IP address but cannot reach a hostname, investigate <a href="https://bitcoinversus.tech/2026/10/10/osntc-026-dns-troubleshooting-resolver-settings-nslookup-dig-nxdomain-servfail-packet-capture/">DNS troubleshooting</a> rather than rebuilding the NIC.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Microsoft’s <a href="https://learn.microsoft.com/windows-server/administration/windows-commands/nslookup"><code>nslookup</code></a> queries DNS infrastructure directly. Run <code>nslookup hostname</code> to see which DNS server answers and which records are returned. You can also query a specific resolver by adding its IP address after the hostname.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Use <code>ipconfig /displaydns</code> to inspect the Windows DNS resolver cache. If a stale or negative cached result is confirmed, <code>ipconfig /flushdns</code> clears that cache. Do not use flushdns as a reflex when the real problem is a missing DNS record, unreachable DNS server, incorrect suffix, or blocked DNS traffic.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Trace the Path With tracert</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://learn.microsoft.com/windows-server/administration/windows-commands/tracert"><code>tracert</code></a> sends packets with progressively increasing <a href="https://bitcoinversus.tech/2026/10/13/what-is-icmp/">IP Time To Live (TTL)</a> values so intermediate routers can reveal the path toward a destination. It is useful when the local gateway is reachable but the remote network is not.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An asterisk in a trace does not automatically mean the path is broken. Some routers do not return the ICMP messages that tracert expects. A later hop may still respond. Look for the point where the behavior changes and compare with a known-good source before declaring a router failed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Use <code>tracert /d &lt;target&gt;</code> when you want to avoid reverse-DNS lookups and return the route faster. Use <code>pathping</code> when you need longer sampling of latency and packet loss across intermediate hops.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Check the Routing Table</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Windows must have a route for the destination. Use <code>route print</code> or <code>netstat -r</code> to inspect the routing table. The default route is normally represented as <code>0.0.0.0/0</code> for IPv4 and points toward the system’s preferred gateway.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A system with multiple NICs, VPN adapters, virtual switches, or manually added routes may send traffic through the wrong interface. This is especially important on systems that use <a href="https://bitcoinversus.tech/2026/10/10/what-is-a-vpn/">VPNs</a>, <a href="https://bitcoinversus.tech/2026/10/08/it-what-is-virtual-machine-vm-how-it-works/">virtual machines</a>, or several physical network adapters.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Use netstat to See Connections and Listeners</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Microsoft’s <a href="https://learn.microsoft.com/windows-server/administration/windows-commands/netstat"><code>netstat</code></a> can display active TCP connections, listening ports, routing information, and protocol statistics. <code>netstat -ano</code> is especially useful because it shows addresses, connection state, and process IDs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A service can fail locally even when the network is healthy. If an application is supposed to listen on TCP port 443 but no local process is listening, the problem may be the service itself rather than the route or firewall. This is where network troubleshooting connects back to <a href="https://bitcoinversus.tech/2026/10/10/ositc-005-windows-services-fundamentals-service-control-manager-startup-types-dependencies-services-msc-and-verification/">Windows services</a> and <a href="https://bitcoinversus.tech/2026/10/08/ositc-003-windows-process-troubleshooting-task-manager-pid-process-explorer/">process troubleshooting</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Test the Actual TCP Port</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>ICMP reachability is not the same as application reachability. In PowerShell, <code>Test-NetConnection server.example.com -Port 443</code> tests whether a TCP connection can be established to the specified host and port. Use the port that matches the actual service: HTTPS, RDP, SMB, SSH, database traffic, or another application.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If ping works but the TCP-port test fails, investigate the Windows Firewall, upstream firewall rules, service state, listening address, <a href="https://bitcoinversus.tech/2026/10/04/osntc-014-tcp-udp-transport-basics/">TCP/UDP transport</a>, NAT policy, or the destination application. If the port test succeeds but the application still fails, move higher in the stack toward authentication, TLS, application configuration, or permissions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=M4yzxOAtn7k]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This networking tutorial reviews ipconfig, ping, tracert, nslookup, and netstat as a connected Windows troubleshooting toolkit.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">ARP Helps With Local-Segment Problems</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On an Ethernet LAN, Windows uses <a href="https://bitcoinversus.tech/2026/10/02/osntc-009-arp-basics/">Address Resolution Protocol (ARP)</a> to map an IPv4 address to a local MAC address. Use <code>arp -a</code> to view cached mappings. A missing or incorrect ARP entry can support investigation of duplicate IP addresses, VLAN problems, unreachable local hosts, or unexpected Layer 2 behavior.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Do not clear the ARP cache before recording it when duplicate addressing or spoofing is suspected. The existing table may contain the evidence that identifies the wrong device.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Do Not Confuse NAT With Local Addressing</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A Windows endpoint usually holds a private address while a router or firewall performs <a href="https://bitcoinversus.tech/2026/10/11/osntc-027-nat-pat-private-public-static-dynamic-overload-verification/">NAT or PAT</a> at the network edge. A failure reaching the Internet can therefore originate after the Windows host, even when its local address and gateway are correct.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If many clients fail at the same time, look for a shared fault domain: switch, VLAN, gateway, firewall, WAN circuit, DNS resolver, DHCP server, or upstream provider. If only one machine fails, focus more heavily on its adapter, configuration, routes, firewall, local services, or software stack.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[embed]https://www.reddit.com/r/sysadmin/comments/p5b8tb/[/embed]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This sysadmin discussion illustrates a common troubleshooting principle: test in a deliberate order and remember that ICMP can be blocked even when the real application path is usable. Community advice is practical context, not a replacement for Microsoft documentation or site procedures.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Repeatable Windows Network Workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Record the user symptom, destination, application, exact time, and whether other users are affected.</li><li>Verify the NIC is enabled and physically linked or associated to Wi-Fi.</li><li>Run <code>ipconfig /all</code> and save the addressing, gateway, DHCP, DNS, and suffix information.</li><li>Check for APIPA, wrong subnet, wrong gateway, duplicate address symptoms, or missing DNS servers.</li><li>Test the local stack and local interface.</li><li>Test the default gateway by IP address.</li><li>Test a known remote IP address without DNS.</li><li>Test a hostname and compare the result with the raw-IP test.</li><li>Use <code>nslookup</code> to query the configured DNS path directly.</li><li>Use <code>tracert</code> and <code>route print</code> if the destination is on another network.</li><li>Use <code>netstat -ano</code> to inspect active connections or expected local listeners.</li><li>Use <code>Test-NetConnection</code> against the application’s real TCP port.</li><li>Check local and upstream firewall policy only after identifying which protocol and port are failing.</li><li>Correlate with <a href="https://bitcoinversus.tech/2026/10/09/ositc-004-windows-event-viewer-fundamentals-logs-levels-event-ids-sources-filtering-troubleshooting/">Windows Event Viewer</a>, service state, and application logs.</li><li>Change one variable at a time and record the result.</li><li>After repair, repeat the original failing test and update the ticket with the confirmed root cause.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Symptom-to-Layer Examples</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>No link light and adapter disconnected:</strong> cable, switch port, NIC, or physical interface.</li><li><strong>169.254.x.x address:</strong> DHCP path, DHCP server, VLAN, or local interface configuration.</li><li><strong>Can reach gateway but not remote IP:</strong> routing, firewall, NAT, WAN, or upstream path.</li><li><strong>Can reach remote IP but not hostname:</strong> DNS server, DNS record, suffix, cache, or resolver path.</li><li><strong>Hostname resolves but application port fails:</strong> firewall, transport path, listener, service, or application state.</li><li><strong>Port connects but login or share access fails:</strong> authentication, permissions, certificates, or application logic.</li><li><strong>Only one application fails while others work:</strong> application-specific proxy, firewall, TLS, service, or configuration problem.</li><li><strong>Many devices fail simultaneously:</strong> shared switch, gateway, DNS, DHCP, firewall, ISP, or infrastructure failure.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Commands Should Produce Evidence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A technician should never run commands only because they appear on a checklist. Each command should answer a question. <code>ipconfig /all</code> asks, “What configuration did Windows receive?” <code>ping</code> asks, “Can this ICMP exchange complete?” <code>nslookup</code> asks, “Can this DNS query be answered?” <code>tracert</code> asks, “What path is visible toward the destination?” <code>netstat</code> asks, “What connections or listeners exist?” <code>Test-NetConnection</code> asks, “Can this TCP port be reached?”</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This evidence-first approach prevents random resets from hiding the original fault and makes escalation to a network engineer, server administrator, security team, ISP, or application owner much more useful.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Hands-On Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On a Windows training system, capture <code>ipconfig /all</code>, identify the active adapter, note the assigned IPv4 address, subnet mask, gateway, DNS servers, and DHCP state, then test the local gateway. Next test a known remote IP address and a hostname. Use <code>nslookup</code> on the same hostname, run <code>tracert</code> to the destination, inspect <code>route print</code>, and review <code>netstat -ano</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Then use <code>Test-NetConnection</code> against a known service and document the results. With authorization, create one controlled fault such as assigning an incorrect DNS server or disconnecting the test network cable. Predict which tests should fail, perform the sequence, restore the correct configuration, and verify the original working state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>What information does <code>ipconfig /all</code> provide that plain <code>ipconfig</code> may not show?</li><li>What does an IPv4 address in 169.254.0.0/16 usually indicate?</li><li>Why does a failed ping not prove that a server is offline?</li><li>If a public IP works but a hostname fails, which subsystem should you investigate first?</li><li>What does <code>nslookup</code> test?</li><li>What does <code>tracert</code> reveal?</li><li>Why can asterisks appear in tracert even when the final destination is reachable?</li><li>What does <code>netstat -ano</code> add to basic netstat output?</li><li>Why is <code>Test-NetConnection -Port</code> often more useful than ping for application troubleshooting?</li><li>What does <code>arp -a</code> display?</li><li>Why should a technician record the original configuration before resetting network settings?</li><li>If a TCP port is reachable but SMB access is denied, should you keep troubleshooting basic IP routing?</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Answers</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>It includes detailed adapter data such as DHCP state, physical address, DNS servers, lease information, DNS suffixes, and more complete IPv4/IPv6 configuration.</li><li>The client usually failed to obtain a usable DHCP lease and assigned itself an APIPA address.</li><li>ICMP can be blocked or rate-limited while other protocols remain available.</li><li>DNS and hostname-resolution configuration.</li><li>Whether a DNS server can answer a requested name or record query.</li><li>The visible routed path toward a destination using increasing TTL values.</li><li>Some routers do not return the ICMP Time Exceeded messages that tracert expects.</li><li>It includes numerical addresses and the process ID associated with connections or listeners.</li><li>It tests the actual TCP port used by an application rather than only ICMP reachability.</li><li>The IPv4-to-MAC address mappings currently stored in the ARP cache.</li><li>The original state may contain the evidence needed to determine root cause and compare before/after behavior.</li><li>No. Basic routing has already been substantially proven; investigate SMB service, authentication, permissions, firewall policy, or application-specific configuration.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Windows network troubleshooting becomes easier when every test answers a specific question. Verify the interface, read the configuration, test the gateway, separate IP reachability from DNS, inspect the route, test the actual port, and only then change settings. The goal is not to run every command. The goal is to prove exactly where a working path becomes a failing one.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Previous Related Lessons</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://bitcoinversus.tech/2026/10/12/ositc-007-windows-file-sharing-network-permissions/"><strong>OSITC.007: Windows File Sharing and Network Permissions</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/12/ositc-006-windows-users-groups-permissions/"><strong>OSITC.006: Windows Users, Groups, and Permissions</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/10/ositc-005-windows-services-fundamentals-service-control-manager-startup-types-dependencies-services-msc-and-verification/"><strong>OSITC.005: Windows Services Fundamentals</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/09/ositc-004-windows-event-viewer-fundamentals-logs-levels-event-ids-sources-filtering-troubleshooting/"><strong>OSITC.004: Windows Event Viewer Fundamentals</strong></a></li><li><a href="https://bitcoinversus.tech/2026/10/08/ositc-003-windows-process-troubleshooting-task-manager-pid-process-explorer/"><strong>OSITC.003: Windows Process Troubleshooting</strong></a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://learn.microsoft.com/windows-server/networking/dns/troubleshoot/troubleshoot-dns-client">Microsoft Learn — Troubleshooting DNS Clients</a></li><li><a href="https://learn.microsoft.com/windows-server/administration/windows-commands/ping">Microsoft Learn — ping</a></li><li><a href="https://learn.microsoft.com/windows-server/administration/windows-commands/tracert">Microsoft Learn — tracert</a></li><li><a href="https://learn.microsoft.com/windows-server/administration/windows-commands/nslookup">Microsoft Learn — nslookup</a></li><li><a href="https://learn.microsoft.com/windows-server/administration/windows-commands/netstat">Microsoft Learn — netstat</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><em><strong>BitcoinVersus.Tech Editor's Note:</strong><br>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate using the QR code provided</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Bitcoin donation QR code for 5,000 sats." class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For best QR-code scanning results, please scan this donation code from a desktop or larger screen. Mobile screens may prevent camera recognition.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech provides technical education and analysis for informational purposes only.</em></p>
+<!-- /wp:paragraph -->

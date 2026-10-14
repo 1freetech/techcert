@@ -1,0 +1,212 @@
+<!-- wp:paragraph -->
+<p><strong><code>nmcli</code> is the command-line interface for <a href="https://www.networkmanager.dev/docs/api/latest/"><strong>NetworkManager</strong></a>, the Linux service that manages network devices and connection profiles.</strong> Unlike the lower-level <a href="https://bitcoinversus.tech/2026/09/25/command-27-ip-linux-os/"><strong><code>ip</code> command</strong></a>, which inspects and changes kernel networking state directly, <code>nmcli</code> works through NetworkManager and can create persistent profiles that survive reboot.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/13/linux-command-56-ethtool-linux-os/"><strong>Linux Command #56 – ethtool</strong></a>. <code>ethtool</code> focuses on the physical and driver side of an <a href="https://bitcoinversus.tech/2026/10/07/osntc-018-ethernet-link-negotiation-speed-duplex-auto-negotiation-link-leds-interface-errors/"><strong>Ethernet interface</strong></a>; <code>nmcli</code> focuses on the managed connection profile, addressing, routes, DNS, Wi-Fi, and activation state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=ml5RjqXkJ8M]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Red Hat Enterprise Linux demonstrates why nmcli is useful for persistent network configuration and automation.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>NetworkManager separates a <strong>device</strong> from a <strong>connection profile</strong>. A device is the actual interface, such as <code>enp1s0</code> or <code>wlan0</code>. A connection profile is the saved configuration that NetworkManager can apply to that device. A single interface can have multiple profiles—for example, a DHCP profile and a static-IP profile—but only the appropriate profile is active at a given time.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The official NetworkManager manual describes <code>nmcli</code> as a tool for reporting network status and for creating, displaying, editing, deleting, activating, and deactivating connections. It is especially useful on servers, headless systems, and terminals where no graphical network tool is available.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Start Read-Only</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Before changing a production host, inspect its state:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nmcli general status
+nmcli device status
+nmcli connection show
+nmcli connection show --active</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p><code>nmcli device status</code> shows the devices NetworkManager sees, their type, state, and active connection. <code>nmcli connection show</code> lists saved profiles. This distinction is important: a profile can exist even when it is not currently active.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Inspect One Interface</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>To inspect a specific <a href="https://bitcoinversus.tech/2026/10/07/networking-what-is-nic-network-interface-card-servers-asic-miners/"><strong>network interface card</strong></a>:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nmcli device show enp1s0</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The output can include hardware address, state, current IPv4 and IPv6 addresses, default gateway, DNS servers, routes, and other properties. Compare that with <code>ip addr</code> and <code>ip route</code> when you need to distinguish NetworkManager’s intended configuration from the kernel’s current state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Inspect a Saved Connection Profile</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nmcli connection show "Wired connection 1"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>This displays the stored settings for that profile. NetworkManager’s current documentation describes connection profiles as persistent network configurations that are applied to devices when activated.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Activate and Deactivate a Connection</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo nmcli connection up "Wired connection 1"
+sudo nmcli connection down "Wired connection 1"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Use these cautiously on remote systems. Bringing down the profile that carries your <a href="https://bitcoinversus.tech/2026/10/10/what-is-an-ssh-key-why-safer-than-password/"><strong>SSH</strong></a> session can immediately disconnect you.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=hSYi3Ch-rLs]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Learn with Imran Afzal demonstrates NetworkManager, nmcli, connection profiles, static addressing, and related RHEL networking workflows in English.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Configure DHCP</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>To configure a profile for automatic <a href="https://bitcoinversus.tech/2026/10/10/osntc-025-dhcp-troubleshooting-dora-apipa-relay-agents-ip-helper-address-and-packet-capture/"><strong>DHCP</strong></a> addressing:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo nmcli connection modify "Wired connection 1" ipv4.method auto
+sudo nmcli connection up "Wired connection 1"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>After activation, verify the assigned address, gateway, lease behavior, and DNS information rather than assuming the command succeeded merely because it returned without an error.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Configure a Static IPv4 Address</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo nmcli connection modify "Wired connection 1" \
+  ipv4.method manual \
+  ipv4.addresses 192.0.2.50/24 \
+  ipv4.gateway 192.0.2.1 \
+  ipv4.dns "192.0.2.53 1.1.1.1"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Then activate the profile:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo nmcli connection up "Wired connection 1"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Replace the documentation-only example addresses with values appropriate to your network. Before changing a remote server, verify the <a href="https://bitcoinversus.tech/2026/10/11/osdctc-008-server-network-configuration-validation/"><strong>server network configuration</strong></a>, switch <a href="https://bitcoinversus.tech/2026/10/09/osntc-022-vlan-trunking-802-1q-tagged-frames-native-vlans-allowed-vlans-verification/"><strong>VLAN</strong></a>, subnet, gateway, DNS server, and rollback plan.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">DNS Management</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>nmcli</code> can persist <a href="https://bitcoinversus.tech/2026/10/10/osntc-026-dns-troubleshooting-resolver-settings-nslookup-dig-nxdomain-servfail-packet-capture/"><strong>DNS</strong></a> servers inside a NetworkManager profile:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>sudo nmcli connection modify "Wired connection 1" ipv4.dns "192.0.2.53 192.0.2.54"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>NetworkManager may integrate with <code>systemd-resolved</code>, <code>dnsmasq</code>, or distribution-specific resolver handling. Do not assume that manually editing <code>/etc/resolv.conf</code> is persistent when NetworkManager owns resolver configuration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Wi-Fi From the Terminal</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nmcli radio wifi
+nmcli device wifi list
+sudo nmcli device wifi connect "SSID_NAME" password "PASSWORD"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Do not expose real credentials in screenshots, shell history, documentation, or tickets. The official manual also provides <code>--ask</code> for interactive prompting when required credentials are missing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Terse Output for Scripts</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For automation, <code>nmcli -t</code> provides terse output intended for machine processing. The documentation also recommends using the <code>C</code> locale when scripts depend on stable English output:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>LC_ALL=C nmcli -t -f DEVICE,STATE device status</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>This matters because normal <code>nmcli</code> output can be localized. Scripts that parse translated human-readable output can fail unexpectedly on another host.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Monitor NetworkManager Changes</h2><!-- /wp:heading -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nmcli monitor
+nmcli device monitor enp1s0
+nmcli connection monitor "Wired connection 1"</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Monitoring is useful when an interface repeatedly drops, reconnects, changes addresses, or switches profiles. Pair it with <a href="https://bitcoinversus.tech/2026/10/13/linux-command-56-ethtool-linux-os/"><strong><code>ethtool</code></strong></a> for physical-link evidence and with <a href="https://bitcoinversus.tech/2026/10/08/what-is-systemd-how-linux-starts-stops-and-watches-background-services/"><strong>systemd</strong></a> logs when NetworkManager itself appears unstable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=-5EJ-l_YmmA]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This English nmcli tutorial covers devices, connections, static IP addressing, DNS, NetworkManager, and common administrative workflows.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">nmcli vs. ip</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://bitcoinversus.tech/2026/09/25/command-27-ip-linux-os/"><strong><code>ip</code></strong></a> utility from iproute2 works directly with current kernel networking state. <code>nmcli</code> controls NetworkManager and its persistent profiles. A temporary <code>ip address add</code> change may disappear after reboot or after NetworkManager reapplies its own configuration, while a properly modified NetworkManager profile can persist.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This is why technicians should know which component owns the interface before changing it. On a NetworkManager-managed server, mixing manual <code>ip</code> changes with persistent NetworkManager profiles can create confusing differences between intended state and running state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[embed]https://www.reddit.com/r/redhat/comments/1kcah2m/should_i_learn_networkmanager_should_i_disable_it/[/embed]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>A Red Hat community discussion illustrates why modern administrators still learn NetworkManager and nmcli, especially for persistent configuration and automation. Community comments are practical experience, not a substitute for distribution documentation.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common Failure Patterns</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Device shows unmanaged:</strong> NetworkManager may be configured not to manage that interface, another network service may own it, or distribution policy may exclude it.</li><li><strong>Profile exists but is not active:</strong> inspect <code>nmcli connection show --active</code> and device state.</li><li><strong>Static address appears correct but traffic fails:</strong> verify prefix, gateway, VLAN, route, DNS, and duplicate-address conditions.</li><li><strong>Changes disappear after reboot:</strong> confirm you modified the persistent connection profile rather than only runtime kernel state.</li><li><strong>Remote session drops after a change:</strong> the active profile may have been deactivated or replaced. Use console access and a rollback plan for risky changes.</li><li><strong>DNS behaves differently from the profile:</strong> inspect resolver integration and whether another service is modifying DNS state.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Hands-On Exercise</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On a Linux system you control, run <code>nmcli general status</code>, <code>nmcli device status</code>, <code>nmcli connection show</code>, and <code>nmcli connection show --active</code>. Identify the active interface and the profile currently attached to it. Then run <code>nmcli device show INTERFACE</code> and record the IPv4 address, gateway, and DNS servers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If you have a disposable lab interface or virtual machine, clone or create a test profile and practice switching between DHCP and a static documentation-range address. Do not perform the configuration-changing portion on a production or remotely administered interface.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>What service does <code>nmcli</code> control?</li><li>What is the difference between a network device and a connection profile?</li><li>Which command lists active profiles?</li><li>Why can a temporary <code>ip</code> command differ from the persistent NetworkManager configuration?</li><li>Which <code>nmcli</code> command displays detailed information for one device?</li><li>What does <code>ipv4.method auto</code> normally request?</li><li>Why is changing an active remote-management profile risky?</li><li>Why is <code>nmcli -t</code> useful in scripts?</li><li>Why can manual edits to <code>/etc/resolv.conf</code> disappear?</li><li>What command can watch NetworkManager activity in real time?</li></ol><!-- /wp:list -->
+
+<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Answers</h3><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>NetworkManager.</li><li>The device is the interface itself; the profile is the saved configuration that NetworkManager can apply to it.</li><li><code>nmcli connection show --active</code>.</li><li>Because <code>ip</code> can change current kernel state without changing the persistent NetworkManager profile.</li><li><code>nmcli device show INTERFACE</code>.</li><li>Automatic IPv4 configuration, commonly through DHCP.</li><li>Deactivating or replacing it can immediately sever SSH or other remote access.</li><li>It provides terse output intended for machine parsing.</li><li>NetworkManager or another resolver-management service may regenerate it.</li><li><code>nmcli monitor</code>.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Primary References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://www.networkmanager.dev/docs/api/latest/nmcli.html">NetworkManager — nmcli Reference Manual</a></li><li><a href="https://networkmanager.dev/docs/api/latest/">NetworkManager Reference Manual</a></li><li><a href="https://www.networkmanager.dev/docs/api/latest/nm-settings-nmcli.html">NetworkManager — nm-settings-nmcli</a></li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><em><strong>BitcoinVersus.Tech Editor's Note:</strong><br>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate using the QR code provided</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Bitcoin donation QR code for 5,000 sats." class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For best QR-code scanning results, please scan this donation code from a desktop or larger screen. Mobile screens may prevent camera recognition.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech provides technical education and analysis for informational purposes only.</em></p><!-- /wp:paragraph -->

@@ -1,0 +1,323 @@
+<!-- wp:paragraph -->
+<p><strong>Concurrency becomes an engineering problem the moment two execution contexts can touch the same state.</strong> In embedded firmware, those contexts may be <a href="https://bitcoinversus.tech/2026/10/05/osfec-002-real-time-firmware-scheduling-superloops-rtos-tasks-priorities-preemption-timing/"><strong>RTOS tasks</strong></a>, interrupt handlers, DMA completion callbacks, timer callbacks, or work queues. Correct firmware must decide who owns data, how execution contexts communicate, how long blocking is allowed, and what happens when timing assumptions fail.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/13/osfec-010-fault-handling-post-mortem-architecture/"><strong>OSFEC.010: Fault Handling and Post-Mortem Architecture</strong></a>. OSFEC.010 focused on preserving evidence after failure. OSFEC.011 moves earlier in the design cycle and addresses one of the largest sources of difficult embedded failures: shared state, race conditions, deadlocks, priority inversion, missed signals, and incorrect handoff between tasks and interrupts.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=pHJ3lxOoWeI]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>DigiKey introduces RTOS queues and shows why message passing is often safer than sharing writable global data between tasks.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A scheduler can switch between tasks at almost any legal scheduling point. An <a href="https://bitcoinversus.tech/2026/10/04/osfec-001-microcontroller-architecture-memory-maps-registers-interrupts/"><strong>interrupt</strong></a> can preempt a task. <a href="https://bitcoinversus.tech/2026/10/08/osfec-006-direct-memory-access-dma-moving-data-without-stalling-the-cpu/"><strong>DMA</strong></a> can modify memory while the CPU is doing something else. On a multicore system, two processors may truly execute at the same time. If two contexts read and write the same object without a defined synchronization rule, the result may depend on timing rather than logic.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Synchronization primitives exist to make timing relationships explicit. A <a href="https://docs.zephyrproject.org/latest/kernel/services/data_passing/message_queues.html"><strong>message queue</strong></a> moves data between contexts. A <a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/semaphores.html"><strong>semaphore</strong></a> signals that an event or resource count is available. A <a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/mutexes.html"><strong>mutex</strong></a> gives one thread exclusive ownership of a shared resource. A critical section temporarily prevents unsafe interleaving around a very small operation. These mechanisms are related, but they are not interchangeable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain race conditions, atomicity, mutual exclusion, signaling, and message passing.</li><li>Choose between queues, semaphores, mutexes, critical sections, atomics, and task notifications.</li><li>Design safe communication between interrupt service routines and tasks.</li><li>Explain priority inversion and the purpose of priority inheritance.</li><li>Recognize deadlock, starvation, livelock, queue overflow, and missed-wakeup failure modes.</li><li>Keep critical sections short enough to preserve real-time behavior.</li><li>Protect shared hardware such as <a href="https://bitcoinversus.tech/2026/10/10/osfec-007-i2c-bus-engineering-addressing-pull-ups-clock-stretching-recovery-firmware-diagnostics/"><strong>I²C</strong></a>, <a href="https://bitcoinversus.tech/2026/10/11/osfec-008-spi-bus-engineering/"><strong>SPI</strong></a>, and <a href="https://bitcoinversus.tech/2026/10/12/osfec-009-can-bus-engineering/"><strong>CAN</strong></a> without creating new timing faults.</li><li>Instrument concurrency failures with traces, counters, assertions, and debugger evidence.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Race Conditions</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>race condition</strong> occurs when program correctness depends on the order or timing of concurrent operations. Consider two tasks incrementing the same counter. An increment may require a load from memory, arithmetic in a register, then a store back to memory. If both tasks read the same old value before either writes the new value, one increment can disappear.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The important concept is <strong>atomicity</strong>. An operation is atomic when other execution contexts cannot observe it halfway completed. Some processor instructions are naturally atomic for aligned machine words; larger data structures and multi-step hardware transactions usually are not. The firmware engineer must know which operations are guaranteed by the processor, compiler, RTOS, and memory model rather than assuming that one line of C executes as one indivisible action.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prefer Ownership Before Adding Locks</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The cleanest synchronization primitive is often architecture. If one task exclusively owns a peripheral or data structure, other tasks do not need to lock it directly. They send commands through a queue and receive results through another queue, notification, or callback. This <strong>single-owner pattern</strong> reduces the number of places that can corrupt shared state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For example, instead of allowing five tasks to directly configure the same <a href="https://bitcoinversus.tech/2026/10/10/osfec-007-i2c-bus-engineering-addressing-pull-ups-clock-stretching-recovery-firmware-diagnostics/"><strong>I²C controller</strong></a>, one bus-manager task can own the controller. Clients submit transaction requests. The bus task serializes them, applies timeouts, handles bus recovery, and returns completion status. The architecture converts uncontrolled shared-hardware access into explicit message passing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Queues: Move Data Instead of Sharing It</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <a href="https://docs.zephyrproject.org/latest/kernel/services/data_passing/message_queues.html"><strong>queue</strong></a> stores messages until a receiving context consumes them. FreeRTOS and Zephyr both provide queue-like kernel objects for inter-task communication. Queues are powerful because the producer and consumer do not need to execute at the same instant, and the message itself establishes a clear handoff boundary.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A queue should have a defined message type, bounded depth, timeout policy, and overflow behavior. If a sensor task can generate 1,000 messages per second while the consumer can process only 500, synchronization is not the real problem; the design has a throughput mismatch. Decide whether to block the producer, drop the newest item, drop the oldest item, aggregate samples, or treat overflow as a fault.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For large buffers, copying every byte through a queue may be inefficient. One common pattern is to place fixed-size buffer descriptors or indexes in the queue while a buffer pool controls ownership of the underlying memory. That pattern becomes especially useful when <a href="https://bitcoinversus.tech/2026/10/08/osfec-006-direct-memory-access-dma-moving-data-without-stalling-the-cpu/"><strong>DMA</strong></a> fills receive buffers asynchronously.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Mutexes: Protect Ownership of a Shared Resource</h2>
+<!-- /wp:heading -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=I55auRpbiTs]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>DigiKey demonstrates mutual exclusion and a race condition using a FreeRTOS mutex.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/mutexes.html"><strong>mutex</strong></a> is an ownership lock. One task locks it, uses the protected resource, then unlocks it. Other tasks attempting to lock the same mutex either wait, time out, or fail immediately according to the API and timeout policy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Use a mutex when multiple tasks truly must access one shared resource. Common examples include a shared file system, a bus driver, a logging backend, a configuration structure, or a hardware peripheral that does not support simultaneous transactions. Keep the protected region as small as practical. Acquire the lock, copy or update the necessary state, then release it before performing unrelated computation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A mutex is normally a task-level primitive. Zephyr explicitly documents that its mutex objects are not designed for interrupt service routines. An ISR cannot safely block waiting for a task that may itself require the ISR or scheduler to make progress.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Semaphores: Signal Events or Count Resources</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/semaphores.html"><strong>semaphore</strong></a> is better understood as a counter with blocking semantics than as ownership. A binary semaphore has a maximum count of one and is commonly used for signaling. A counting semaphore can represent several identical resources or accumulated events.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The distinction matters. A mutex normally has an owner and may implement priority inheritance. A semaphore can be given by one context and taken by another. FreeRTOS documentation specifically distinguishes binary semaphores used for synchronization from mutexes used for mutual exclusion.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A typical ISR-to-task design is: the interrupt handler captures the minimum required hardware status, clears the interrupt source, gives a semaphore or task notification, then exits. A normal task wakes and performs the longer operation. This keeps interrupt latency low and moves blocking work back into schedulable task context.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Interrupt-to-Task Handoff</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An <a href="https://bitcoinversus.tech/2026/10/04/osfec-001-microcontroller-architecture-memory-maps-registers-interrupts/"><strong>interrupt service routine</strong></a> should avoid operations that can sleep, allocate unpredictably, hold a mutex, print large logs, or wait for another context. RTOSes typically provide ISR-safe variants of queue, semaphore, or notification APIs because entering the scheduler from interrupt context requires special handling.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>When using <a href="https://bitcoinversus.tech/2026/10/08/osfec-006-direct-memory-access-dma-moving-data-without-stalling-the-cpu/"><strong>DMA</strong></a>, the DMA-complete ISR may place a buffer descriptor into a queue and wake a processing task. The processing task owns that buffer until it explicitly returns it to the free pool. This ownership rule prevents the DMA engine from overwriting memory while software is still consuming it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Critical Sections</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>critical section</strong> is a deliberately short region where preemption, interrupts, or competing CPU access is restricted so shared state can be updated consistently. Critical sections are useful for a handful of instructions. They are dangerous when expanded into millisecond-scale work because they increase interrupt latency and damage real-time response.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>On an SMP system, disabling interrupts on one CPU does not stop another CPU. A true multiprocessor design may require an atomic primitive or <a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/spinlocks.html"><strong>spinlock</strong></a>. Zephyr recommends spinlocks only for brief critical sections and higher-level primitives such as mutexes and semaphores when blocking is acceptable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Priority Inversion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=C2xKhxROmhA]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>DigiKey explains bounded and unbounded priority inversion and demonstrates priority inheritance.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Priority inversion</strong> occurs when a high-priority task is blocked by a lower-priority task that owns a required resource. The severe form appears when a medium-priority task repeatedly preempts the low-priority owner. The high-priority task cannot run because it needs the lock; the low-priority task cannot finish because the medium-priority task keeps preempting it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Many RTOS mutex implementations use <strong>priority inheritance</strong>: the low-priority mutex owner temporarily inherits the priority of the highest-priority waiter so it can finish the protected work and release the resource. Current FreeRTOS documentation describes mutexes as including priority inheritance, while binary semaphores do not. Zephyr likewise implements priority inheritance for mutexes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.reddit.com/r/embedded/comments/1x2lt5d/mars_pathfinder_priority_inversion_bug_what/","type":"rich","providerNameSlug":"reddit","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-reddit wp-block-embed-reddit"><div class="wp-block-embed__wrapper">https://www.reddit.com/r/embedded/comments/1x2lt5d/mars_pathfinder_priority_inversion_bug_what/</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>A recent embedded-systems discussion revisits the Mars Pathfinder priority-inversion incident and why priority inheritance became a classic real-time systems lesson. Community discussion is supplementary; RTOS behavior should be confirmed against the actual kernel documentation.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Deadlock</h2>
+<!-- /wp:heading -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=hRsWi4HIENc]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>DigiKey demonstrates deadlock and starvation using the dining-philosophers concurrency problem.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <strong>deadlock</strong> occurs when contexts wait forever for one another. The classic firmware case uses two locks. Task A owns Mutex 1 and waits for Mutex 2. Task B owns Mutex 2 and waits for Mutex 1. Neither can continue, so neither can release what the other needs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A practical prevention rule is to define a global lock order. If every task must acquire Bus Lock before Filesystem Lock, no task may acquire them in the reverse order. Additional defenses include lock timeouts, avoiding nested locks, using one owner task for complex resources, and instrumenting lock-acquisition failures instead of waiting forever.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Starvation and Livelock</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Starvation</strong> means a task remains ready or repeatedly waits for a resource but rarely receives enough execution time or access to make progress. A poorly designed high-priority polling task can starve background work even without any deadlock.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Livelock</strong> is different: tasks continue executing and changing state, but their reactions prevent useful progress. Two state machines that repeatedly back off and retry in perfect synchronization can consume CPU indefinitely without completing the transaction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Shared Bus Example</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Assume a high-priority sensor task and a low-priority temperature task both need one <a href="https://bitcoinversus.tech/2026/10/10/osfec-007-i2c-bus-engineering-addressing-pull-ups-clock-stretching-recovery-firmware-diagnostics/"><strong>I²C bus</strong></a>. A medium-priority telemetry task does not use the bus. If the low-priority task takes the bus mutex just before the high-priority task becomes ready, the high-priority task blocks. Without priority inheritance, the medium-priority telemetry task may preempt the low-priority task, indirectly delaying the highest-priority work.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The immediate fix may be a mutex with priority inheritance. The stronger architectural fix may be an I²C owner task receiving transactions through a queue. Which design is better depends on required latency, bus traffic, driver API, memory budget, failure recovery, and how many clients share the peripheral.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Concurrency Around SPI and CAN</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An <a href="https://bitcoinversus.tech/2026/10/11/osfec-008-spi-bus-engineering/"><strong>SPI controller</strong></a> may serve several chip-select devices that require different clock modes and frequencies. Protect the controller configuration and complete transaction as one logical operation so another task cannot change mode halfway through a transfer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <a href="https://bitcoinversus.tech/2026/10/12/osfec-009-can-bus-engineering/"><strong>CAN</strong></a> driver often has separate transmit queues, receive FIFOs, interrupt callbacks, and application tasks. The concurrency design must define which context owns each buffer and how bus errors, retries, and queue saturation propagate to application logic.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Watchdogs Are Not a Synchronization Strategy</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <a href="https://bitcoinversus.tech/2026/10/07/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting/"><strong>watchdog timer</strong></a> can recover a system that stops making progress, but it does not make unsafe concurrency correct. If a deadlock resets the device every twenty seconds, the watchdog has exposed the symptom while the firmware still contains the defect.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Design the watchdog so its health decision depends on meaningful task progress rather than one timer callback blindly feeding it. A supervisory task can require periodic heartbeats or progress counters from critical tasks before refreshing the hardware watchdog.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Instrument the Scheduler, Not Just the Application</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Concurrency faults are easier to diagnose when the firmware records task state, high-water stack usage, queue depth, maximum queue depth, failed queue sends, mutex timeouts, semaphore wait times, ISR counts, scheduler latency, and watchdog progress. Feed this evidence into the <a href="https://bitcoinversus.tech/2026/10/13/osfec-010-fault-handling-post-mortem-architecture/"><strong>post-mortem architecture</strong></a> rather than relying only on a generic crash code.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Use <a href="https://bitcoinversus.tech/2026/10/05/osfec-003-hardware-debugging-jtag-swd-openocd-gdb/"><strong>JTAG, SWD, OpenOCD, and GDB</strong></a> to inspect blocked task stacks, mutex owners, queue state, and scheduler objects when the target can be halted without destroying the failure. Use the <a href="https://bitcoinversus.tech/2026/10/05/osftc-002-serial-console-boot-logs-uart-baud-rate-pinouts-capture-recovery/"><strong>serial console</strong></a> or trace transport when halting changes timing too much.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Bootloaders Need Concurrency Discipline Too</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <a href="https://bitcoinversus.tech/2026/10/08/osfec-005-bootloader-design-firmware-update-architecture-image-validation-ab-slots-rollback-versioning-recovery/"><strong>bootloader</strong></a> often runs before the full RTOS, but firmware-update code may execute later under an RTOS while networking, storage, power monitoring, and flash drivers are active. Flash erase/write operations can block buses, disable interrupts, or conflict with execute-in-place behavior. Treat update state, flash ownership, image metadata, and reset sequencing as concurrency-sensitive resources.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Engineering Rules</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Prefer one clear owner for complex mutable resources.</li><li>Pass messages instead of sharing writable globals when practical.</li><li>Use mutexes for ownership and mutual exclusion.</li><li>Use semaphores or task notifications primarily for signaling.</li><li>Keep interrupt handlers short and never make them wait on task-owned resources.</li><li>Keep critical sections extremely short.</li><li>Define queue depth and overflow behavior explicitly.</li><li>Define lock ordering before multiple locks are introduced.</li><li>Use timeouts where an infinite wait would hide a failure.</li><li>Measure worst-case lock hold time, not just average time.</li><li>Account for priority inversion when tasks of different priorities share resources.</li><li>Log synchronization failures into the crash and post-mortem system.</li><li>Test timing under load, not only on an idle bench.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Hands-On Engineering Exercise</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Build three RTOS tasks on a development board. Task A periodically samples a sensor at high priority. Task B prints status at medium priority. Task C reads a second device on the same I²C bus at low priority. First protect the bus with a plain binary semaphore and deliberately hold the resource long enough to observe scheduling behavior. Record when Task A becomes ready, when it blocks, and how long Task C takes to release the bus.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Then replace the synchronization mechanism with the RTOS mutex implementation and observe whether priority inheritance changes Task C's effective priority. Finally, redesign the system so one I²C manager task owns the bus and Tasks A and C submit transactions through a queue. Compare latency, code complexity, timeout handling, and observability across the three architectures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>What makes a race condition different from an ordinary logic bug?</li><li>When is a queue preferable to a shared global variable?</li><li>What is the primary semantic difference between a mutex and a binary semaphore?</li><li>Why should a normal task-level mutex not be taken from an ISR?</li><li>What is priority inversion?</li><li>What problem does priority inheritance address?</li><li>How can two mutexes create a deadlock?</li><li>Why should critical sections be short?</li><li>What does queue overflow reveal about system design?</li><li>Why is a watchdog reset not a complete solution to deadlock?</li><li>How can DMA create a buffer-ownership race?</li><li>What evidence should be captured when investigating an RTOS concurrency failure?</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Answers</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Its result depends on the timing or ordering of concurrent execution rather than only on deterministic program logic.</li><li>When data can be transferred by ownership or copy between tasks instead of being modified simultaneously.</li><li>A mutex has ownership semantics and commonly supports priority inheritance; a semaphore is a signaling or counting primitive and may be given by a different context than the one that takes it.</li><li>Because an ISR must not block waiting for a task, and many RTOS mutex APIs are not interrupt-safe.</li><li>A high-priority task is indirectly delayed by a lower-priority task that owns a resource it needs.</li><li>It temporarily raises the priority of a mutex owner so it can finish and release the blocking resource.</li><li>Task A can hold Lock 1 while waiting for Lock 2 as Task B holds Lock 2 while waiting for Lock 1.</li><li>Long critical sections increase interrupt latency and reduce schedulability.</li><li>The producer can create work faster than the consumer or architecture can absorb it under at least some operating conditions.</li><li>The watchdog can restore execution but does not remove the synchronization defect that caused the deadlock.</li><li>Software can begin reading a buffer while DMA still owns or overwrites it unless ownership transfer is explicit.</li><li>Task states, lock owners, wait durations, queue depths, overflow counts, ISR activity, stack state, timestamps, scheduler traces, and crash/post-mortem records.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Reliable concurrent firmware depends less on adding locks everywhere and more on making ownership explicit. Use queues to transfer data, semaphores to signal, mutexes to protect shared ownership, critical sections only for tiny atomic operations, and ISR-safe mechanisms for interrupt handoff. Then verify the design under real timing pressure with traces and fault evidence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/mutexes.html">Zephyr Project — Mutexes</a></li><li><a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/semaphores.html">Zephyr Project — Semaphores</a></li><li><a href="https://docs.zephyrproject.org/latest/kernel/services/data_passing/message_queues.html">Zephyr Project — Message Queues</a></li><li><a href="https://docs.zephyrproject.org/latest/kernel/services/synchronization/spinlocks.html">Zephyr Project — Spinlocks</a></li><li><a href="https://sources.freertos.org/Documentation/02-Kernel/02-Kernel-features/02-Queues-mutexes-and-semaphores/02-Binary-semaphores">FreeRTOS — Binary Semaphores and Mutex Behavior</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><em><strong>BitcoinVersus.Tech Editor's Note:</strong><br>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate using the QR code provided</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Bitcoin donation QR code for 5,000 sats." class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For best QR-code scanning results, please scan this donation code from a desktop or larger screen. Mobile screens may prevent camera recognition.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech provides technical education and analysis for informational purposes only.</em></p>
+<!-- /wp:paragraph -->

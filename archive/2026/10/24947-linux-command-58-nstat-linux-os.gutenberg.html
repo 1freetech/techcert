@@ -1,0 +1,245 @@
+<!-- wp:paragraph -->
+<p><strong>nstat</strong> is a Linux network-statistics command from the <strong>iproute2</strong> toolset. It reads kernel networking counters and helps technicians answer questions such as: Are TCP retransmissions increasing? Are ICMP errors accumulating? Is the host seeing failed connection attempts? Did a network fault begin before or after a configuration change?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/14/linux-command-57-nmcli-linux-os/"><strong>Linux Command #57 – nmcli</strong></a>. <code>nmcli</code> manages <a href="https://bitcoinversus.tech/2026/10/11/osdctc-008-server-network-configuration-validation/"><strong>NetworkManager connections and interfaces</strong></a>; <code>nstat</code> looks deeper into the Linux kernel's accumulated <a href="https://bitcoinversus.tech/2026/10/08/what-is-network-socket-ip-address-port-tcp-udp/"><strong>TCP/IP</strong></a> statistics.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=0GFRpEOJUKM]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>KeepItTechie demonstrates Linux network-statistics troubleshooting with <code>ss</code>, another modern iproute2 tool. <code>ss</code> shows sockets and sessions, while <code>nstat</code> shows kernel protocol counters.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What nstat Reads</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://man7.org/linux/man-pages/man8/nstat.8.html"><strong>nstat manual</strong></a> describes the command as a tool for monitoring kernel SNMP counters and network-interface statistics. The counters come from the Linux networking stack and include groups such as IP, IPv6, <a href="https://bitcoinversus.tech/2026/10/13/what-is-icmp/"><strong>ICMP</strong></a>, TCP, UDP, and extended TCP statistics.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Unlike a packet capture, <code>nstat</code> does not show every frame or packet. It gives you counters: totals or changes in events the kernel has already observed. That makes it lightweight and useful for baselining a server before and after a suspected network event.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Start With a Read-Only Snapshot</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The simplest command is:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nstat</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>By default, <code>nstat</code> normally shows counters that changed since the previous invocation. The output can include names such as <code>TcpRetransSegs</code>, <code>TcpExtTCPTimeouts</code>, <code>IpInReceives</code>, <code>UdpInDatagrams</code>, or ICMP-related counters depending on what changed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This behavior is important: the first reading and the next reading are not necessarily equivalent to a simple lifetime total. <code>nstat</code> maintains history so technicians can focus on increments.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Show Absolute Counter Values</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use <code>-a</code> when you want absolute values instead of changes:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nstat -a</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>This is useful when recording a baseline before maintenance. Capture the absolute state, perform the controlled test, then compare later values to see which kernel counters moved.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Filter to the Counters You Need</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>nstat</code> accepts counter-name patterns. For example:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nstat 'Tcp*'
+nstat 'Udp*'
+nstat 'Icmp*'
+nstat '*Retrans*'</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The manual documents case-insensitive wildcard matching with <code>*</code> and <code>?</code>. Filtering is often better than dumping everything because it keeps the troubleshooting question narrow.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">TCP Retransmissions</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>TCP retransmission</strong> counters are among the most useful signals on a Linux host. A retransmission occurs when TCP sends data again because the original segment was not acknowledged as expected. A rising <code>TcpRetransSegs</code> value can be associated with packet loss, congestion, damaged links, queue drops, bad wireless conditions, overloaded devices, or a broken return path.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Do not treat one retransmission as proof of a failing network. TCP is designed to recover from loss. The useful question is whether retransmissions are increasing materially during the same period users report poor performance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Pair <code>nstat</code> with <a href="https://bitcoinversus.tech/2026/10/13/linux-command-56-ethtool-linux-os/"><strong>ethtool</strong></a> when you suspect physical or NIC-level faults. <code>ethtool -S</code> can expose interface and driver counters, while <code>nstat</code> exposes protocol-stack counters. Together they help separate Layer 1/2 symptoms from Layer 3/4 symptoms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=W9ylAkICFQE]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This English iproute2 overview explains the family of Linux networking tools that includes commands such as <code>ip</code>, <code>ss</code>, traffic-control utilities, and <code>nstat</code>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">ICMP Counters</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://bitcoinversus.tech/2026/10/13/what-is-icmp/"><strong>ICMP</strong></a> is used for network-control and diagnostic messages. Filtering with <code>nstat 'Icmp*'</code> can reveal changes in echo requests, unreachable messages, redirects, time-exceeded messages, and other ICMP events depending on kernel support and traffic.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>These counters can add context to <a href="https://bitcoinversus.tech/2026/10/10/what-is-traceroute/"><strong>traceroute</strong></a> and ping testing. A failed ping alone does not identify the root cause, but a simultaneous rise in ICMP unreachable or error counters can provide stronger evidence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">UDP Counters</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>UDP does not establish a TCP-style session or retransmit lost application data automatically. <code>nstat 'Udp*'</code> can help reveal datagrams received, datagrams sent, packets delivered to no listening application, and receive errors.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This can be useful when troubleshooting <a href="https://bitcoinversus.tech/2026/10/10/osntc-026-dns-troubleshooting-resolver-settings-nslookup-dig-nxdomain-servfail-packet-capture/"><strong>DNS</strong></a>, monitoring traffic, telemetry, or other UDP-based services. The counter only tells you that an event occurred; use a packet capture or application log when you need packet contents or transaction details.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Show Zero Counters</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>By default, zero-valued counters may be omitted. Use:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nstat -z</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>This is useful when building a checklist and you need to confirm that a specific counter exists even when its value is zero.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Reset nstat History</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <code>-r</code> option resets nstat's stored history:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nstat -r</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Use this carefully when collecting evidence. Resetting nstat history does <strong>not</strong> reset the Linux kernel's underlying lifetime network counters; it resets the history nstat uses to calculate its change-oriented output.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Do Not Update the History</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use <code>-s</code> or <code>--noupdate</code> to display counters without updating nstat's history state:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nstat -s</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>This can be valuable when another troubleshooting script depends on the next normal nstat reading representing the full accumulated change.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">JSON Output for Automation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>nstat</code> can emit JSON:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>nstat -j
+nstat -j -p</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The <code>-p</code> option pretty-prints JSON when used with <code>-j</code>. Structured output is much safer for automation than trying to parse changing columns of human-readable text.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A monitoring script can collect selected counters before and after a network event, store the JSON, then compare retransmissions, timeouts, UDP receive errors, or ICMP failures programmatically.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=wWyL6DdHYBc]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This English Linux networking tutorial covers the modern iproute2 command family and provides context for why contemporary Linux troubleshooting relies on iproute2 tools instead of only legacy net-tools.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">nstat vs. ss vs. ethtool vs. nmcli</h2><!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>nstat:</strong> kernel protocol counters and changes over time.</li><li><strong>ss:</strong> sockets, listening ports, TCP states, and active connections.</li><li><strong>ethtool:</strong> NIC link negotiation, driver information, hardware statistics, and offload settings.</li><li><strong>nmcli:</strong> NetworkManager devices, profiles, IP configuration, Wi-Fi, and persistent connection settings.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>No single command replaces the others. A strong Linux technician moves between layers instead of forcing every problem into one tool.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[embed]https://www.reddit.com/r/linuxquestions/comments/mqiyw9/[/embed]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>This Linux community discussion shows a common troubleshooting need: finding interface and protocol statistics when older <code>netstat</code> workflows do not match modern Linux tooling. Community advice is practical experience, not a substitute for the man page or distribution documentation.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practical Troubleshooting Workflow</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Record the symptom and exact time.</li><li>Confirm interface and connection state with <a href="https://bitcoinversus.tech/2026/10/14/linux-command-57-nmcli-linux-os/"><code>nmcli</code></a>.</li><li>Check speed, duplex, link, and NIC counters with <a href="https://bitcoinversus.tech/2026/10/13/linux-command-56-ethtool-linux-os/"><code>ethtool</code></a>.</li><li>Run <code>nstat -a</code> and save the baseline.</li><li>Filter the protocol family relevant to the symptom, such as <code>nstat 'Tcp*'</code>.</li><li>Reproduce the problem in a controlled way.</li><li>Run nstat again and identify which counters changed.</li><li>Use <code>ss</code>, logs, traceroute, or packet capture to investigate the counters that moved.</li><li>Make one controlled change.</li><li>Repeat the same measurement and compare the result.</li><li>Document the before-and-after evidence.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common Mistakes</h2><!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Reading one large number as proof of a current failure:</strong> lifetime counters can be old. Measure changes during the incident.</li><li><strong>Resetting history before saving a baseline:</strong> this destroys useful comparison state.</li><li><strong>Assuming retransmissions always mean bad cabling:</strong> congestion, wireless loss, remote systems, queue drops, and return-path problems can also cause them.</li><li><strong>Using nstat as a packet analyzer:</strong> it exposes counters, not packet payloads.</li><li><strong>Ignoring the physical layer:</strong> pair protocol counters with ethtool and switch-port evidence.</li><li><strong>Changing several settings at once:</strong> you lose the ability to identify which change improved or worsened the counters.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Hands-On Exercise</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On a Linux system you control, run <code>nstat -a</code> and save the output. Then run <code>nstat 'Tcp*'</code> and identify <code>TcpRetransSegs</code> if present. Generate ordinary network traffic by opening several websites or transferring a test file. Run the same command again and record which counters changed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Next run <code>nstat -j -p 'Tcp*'</code> and save the JSON output. Compare the human-readable and JSON forms. Do not intentionally create packet loss or change production network settings for this exercise.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>What type of information does nstat display?</li><li>What is the difference between normal nstat output and <code>nstat -a</code>?</li><li>What does <code>nstat 'Tcp*'</code> do?</li><li>Why can <code>TcpRetransSegs</code> be useful?</li><li>Does a retransmission automatically prove the Ethernet cable is bad?</li><li>What does <code>nstat -r</code> reset?</li><li>Does <code>nstat -r</code> reset the kernel's lifetime TCP/IP counters?</li><li>Which option produces JSON?</li><li>Why would you use nstat with ethtool?</li><li>When would a packet capture be more useful than nstat?</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Answers</h3><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Kernel network protocol and related statistics counters.</li><li>Normal output emphasizes changes since previous use; <code>-a</code> displays absolute values.</li><li>It filters output to counter names matching the TCP pattern.</li><li>It shows TCP segments that had to be retransmitted and can help identify loss or transport instability.</li><li>No. Many network conditions can cause retransmissions.</li><li>The history nstat uses to calculate incremental output.</li><li>No. It resets nstat history, not the underlying kernel lifetime counters.</li><li><code>-j</code>.</li><li>nstat shows protocol-stack behavior while ethtool can show link, NIC, driver, and hardware-level evidence.</li><li>When you need packet-by-packet details, headers, timing, conversations, or payload-level evidence.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Primary References</h2><!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://man7.org/linux/man-pages/man8/nstat.8.html">Linux man-pages — nstat(8)</a></li><li><a href="https://man7.org/linux/man-pages/man8/ip.8.html">Linux man-pages — iproute2 ip(8)</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><em><strong>BitcoinVersus.Tech Editor's Note:</strong><br>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate using the QR code provided</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Bitcoin donation QR code for 5,000 sats." class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For best QR-code scanning results, please scan this donation code from a desktop or larger screen. Mobile screens may prevent camera recognition.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech provides technical education and analysis for informational purposes only.</em></p>
+<!-- /wp:paragraph -->

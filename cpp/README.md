@@ -3,9 +3,9 @@
 **Track:** Open Source C++  
 **Acronym:** OSC++  
 **Status:** active  
-**Current next lesson:** `OSC++.024`
+**Current next lesson:** `OSC++.033`
 
-The C++ track progresses from language foundations through pointers, classes, resource lifetime, inheritance, polymorphism, modern ownership patterns, move semantics, and forwarding.
+The C++ track progresses from language foundations through pointers, classes, resource lifetime, inheritance, polymorphism, modern ownership patterns, move semantics, forwarding, vocabulary types, callable wrappers, and modern generic programming.
 
 ## Recent published lessons
 
@@ -15,7 +15,8 @@ The C++ track progresses from language foundations through pointers, classes, re
 - `OSC++.020: Virtual Destructors and Polymorphic Cleanup`
 - [OSC++.021: Smart Pointers — unique_ptr, shared_ptr, weak_ptr, and Ownership](../archive/2026/10/oscpp-021-smart-pointers-unique-ptr-shared-ptr-weak-ptr-ownership.md) — WordPress post 20978.
 - [OSC++.022: Move Semantics — Rvalue References, std::move, Move Constructors, and Move Assignment](../archive/2026/10/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment.md) — WordPress post 21261.
-- [OSC++.023: Perfect Forwarding — Forwarding References, std::forward, Reference Collapsing, and Universal Constructors](../archive/2026/10/oscpp-023-perfect-forwarding-forwarding-references-std-forward-reference-collapsing-universal-constructors.md) — WordPress post 21501; six unique live YouTube iframes, approved colored-pencil 1200×630 cover, elementary overview/conclusion, internal BitcoinVersus wiki links, and three-repository source match verified.
+- [OSC++.023: Perfect Forwarding — Forwarding References, std::forward, Reference Collapsing, and Universal Constructors](../archive/2026/10/oscpp-023-perfect-forwarding-forwarding-references-std-forward-reference-collapsing-universal-constructors.md) — WordPress post 21501.
+- [OSC++.032: std::function and Callable Objects — Functions, Lambdas, Functors, Type Erasure, and Invocation](../archive/2026/10/25908-oscpp-032-std-function-callable-objects-functions-lambdas-functors-type-erasure-invocation.md) — WordPress post 25908; live anchor navigation, callable comparison table, native expandable answer key, three verified C++ Weekly video iframes, and exact three-repository source match verified.
 
 ## Publishing rules
 
@@ -27,4 +28,4 @@ The C++ track progresses from language foundations through pointers, classes, re
 - Always hyperlink hardware components, software items, technical keywords, and relevant companies/terms to useful prior BitcoinVersus lessons/stories/categories whenever available; there is no internal-link cap.
 - Archive the exact final saved Gutenberg source to BitcoinVersus, TechCert, and Open CERT and read all three back before advancing rotation.
 
-The next C++ lesson is `OSC++.024`.
+The next C++ lesson is `OSC++.033`.

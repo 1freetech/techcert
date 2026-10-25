@@ -1,6 +1,6 @@
 {
   "schema_version": 8,
-  "updated_at": "2026-10-25T04:43:37.371Z",
+  "updated_at": "2026-10-25T04:54:18.408Z",
   "rotation": [
     "data_center_technician",
     "data_center_engineer",
@@ -50,13 +50,13 @@
     ]
   },
   "next": {
-    "subject": "robotics_technician",
+    "subject": "robotics_engineer",
     "lesson_number": 12,
-    "title_format": "OSRTC.012: {topic}",
+    "title_format": "OSREC.012: {topic}",
     "expected_topic": null,
-    "resolution_note": "Reconcile exact topic and duplicate status against live WordPress and all three archives before publishing. OSRTC.011 is the latest existing track lesson."
+    "resolution_note": "Resolve exact topic and duplicate status against live WordPress and three archives before publishing. OSREC.011 Whole-Body Control and Hierarchical Quadratic Programming is the latest live track lesson."
   },
-  "next_after_current": "robotics_engineer",
+  "next_after_current": "data_center_technician",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -164,11 +164,11 @@
     },
     "robotics_technician": {
       "acronym": "OSRTC",
-      "next_lesson_number": 12
+      "next_lesson_number": 13
     },
     "robotics_engineer": {
       "acronym": "OSREC",
-      "next_lesson_number": 10
+      "next_lesson_number": 12
     },
     "leadership": {
       "acronym": "OSLTC",
@@ -176,13 +176,13 @@
     }
   },
   "last_published": {
-    "subject": "semiconductor_engineer",
-    "lesson_number": 11,
-    "title": "OSSEC.011: Backside Power Delivery and IR Drop",
-    "wordpress_post_id": 26345,
-    "live_url": "https://bitcoinversus.tech/2026/10/25/ossec-011-backside-power-delivery-ir-drop/",
-    "archive_path": "archive/2026/10/26345-ossec-011-backside-power-delivery-ir-drop.md",
-    "archive_blob_sha": "da50b75b4b686d5f9fb569c139878f4946e2bf6a",
+    "subject": "robotics_technician",
+    "lesson_number": 12,
+    "title": "OSRTC.012: Robot Dress-Pack Inspection — Cable Routing, Bend Radius, and Wear",
+    "wordpress_post_id": 26354,
+    "live_url": "https://bitcoinversus.tech/2026/10/25/osrtc-012-robot-dress-pack-inspection-cable-routing-bend-radius-wear/",
+    "archive_path": "archive/2026/10/26354-osrtc-012-robot-dress-pack-inspection-cable-routing-bend-radius-wear.md",
+    "archive_blob_sha": "317035ec147075d7217fd2513725978d3e1117e4",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
@@ -191,14 +191,35 @@
     "qa_status": "open",
     "youtube_playback_verified": false
   },
-  "pending_publication_qa": {
-    "wordpress_post_id": 26345,
-    "live_url": "https://bitcoinversus.tech/2026/10/25/ossec-011-backside-power-delivery-ir-drop/",
-    "unresolved": [
-      "Actual YouTube playback has not been verified in QA browser."
-    ],
-    "featured_cover_verified": true,
-    "archive_source_verified": true,
-    "note": "Published on the user's renewed instruction after the playback limitation was disclosed. last_completed was not advanced to imply a full QA pass."
+  "pending_publication_qa": [
+    {
+      "wordpress_post_id": 26345,
+      "live_url": "https://bitcoinversus.tech/2026/10/25/ossec-011-backside-power-delivery-ir-drop/",
+      "unresolved": [
+        "Actual YouTube playback has not been verified in QA browser."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Published on the user's renewed instruction after the playback limitation was disclosed. last_completed was not advanced to imply a full QA pass."
+    },
+    {
+      "wordpress_post_id": 26354,
+      "live_url": "https://bitcoinversus.tech/2026/10/25/osrtc-012-robot-dress-pack-inspection-cable-routing-bend-radius-wear/",
+      "unresolved": [
+        "Genuine YouTube playback remains unverified in QA browser.",
+        "Mobile viewport rendering has not been directly verified."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Publication and rendering are not a full playback/mobile QA pass."
+    }
+  ],
+  "featured_image_rotation": {
+    "last_post_id": 26354,
+    "last_style": "anime editorial artwork",
+    "next_style": "wordless comic",
+    "last_featured_person": "Latina woman",
+    "previous_featured_person": "Asian man",
+    "next_person_note": "Rotate to another featured-person demographic naturally; do not repeat the previous cover's featured person."
   }
 }

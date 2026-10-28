@@ -1,6 +1,6 @@
 {
   "schema_version": 8,
-  "updated_at": "2026-10-25T04:54:18.408Z",
+  "updated_at": "2026-10-28",
   "rotation": [
     "data_center_technician",
     "data_center_engineer",
@@ -9,6 +9,8 @@
     "firmware_technician",
     "firmware_engineer",
     "history_money_technology_bitcoin",
+    "history_of_engineering",
+    "history_materials_science",
     "information_technology",
     "c",
     "rust",
@@ -17,6 +19,7 @@
     "javascript",
     "html",
     "php",
+    "solidity",
     "sql",
     "bash",
     "powershell",
@@ -28,13 +31,15 @@
     "windows",
     "electrical_engineering",
     "electrical_technician",
+    "pcb_engineering",
     "cpp",
     "semiconductor_technician",
     "semiconductor_engineer",
+    "hashboard_repair",
     "robotics_technician",
     "robotics_engineer"
   ],
-  "rotation_policy": "Before publishing, reconcile the candidate against live WordPress and the archives. Skip duplicates. Verify required media, archive the final Gutenberg source identically to BitcoinVersus, TechCert, and OpenCert, then advance the rotation.",
+  "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
     "subject": "powershell",
     "lesson_number": 3,
@@ -50,13 +55,13 @@
     ]
   },
   "next": {
-    "subject": "robotics_engineer",
-    "lesson_number": 12,
-    "title_format": "OSREC.012: {topic}",
+    "subject": "windows",
+    "lesson_number": 51,
+    "title_format": "Windows Command #51 – {topic} (Windows OS)",
     "expected_topic": null,
-    "resolution_note": "Resolve exact topic and duplicate status against live WordPress and three archives before publishing. OSREC.011 Whole-Body Control and Hierarchical Quadratic Programming is the latest live track lesson."
+    "resolution_note": "Next regular subject after Linux Command #65 systemd-analyze (post 26865), following OSNTC.036 and OSPython.043; verify exact topic and numbering against live WordPress and all three archives."
   },
-  "next_after_current": "data_center_technician",
+  "next_after_current": "electrical_engineering",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -132,15 +137,15 @@
     },
     "python": {
       "acronym": "OSPython",
-      "next_lesson_number": 40
+      "next_lesson_number": 44
     },
     "linux": {
       "acronym": "Linux Command",
-      "next_lesson_number": 56
+      "next_lesson_number": 66
     },
     "windows": {
       "acronym": "Windows Command",
-      "next_lesson_number": 49
+      "next_lesson_number": 51
     },
     "electrical_engineering": {
       "acronym": "OSEEC",
@@ -173,22 +178,46 @@
     "leadership": {
       "acronym": "OSLTC",
       "next_lesson_number": 5
+    },
+    "network_technician": {
+      "acronym": "OSNTC",
+      "next_lesson_number": 37
+    },
+    "solidity": {
+      "acronym": "OSSolidity",
+      "next_lesson_number": 2
+    },
+    "pcb_engineering": {
+      "acronym": "OSPCB",
+      "next_lesson_number": 4
+    },
+    "hashboard_repair": {
+      "acronym": "OSHRE",
+      "next_lesson_number": 3
+    },
+    "history_of_engineering": {
+      "acronym": "OSHE",
+      "next_lesson_number": 4
+    },
+    "history_materials_science": {
+      "acronym": "OSHMS",
+      "next_lesson_number": 1
     }
   },
   "last_published": {
-    "subject": "robotics_technician",
-    "lesson_number": 12,
-    "title": "OSRTC.012: Robot Dress-Pack Inspection — Cable Routing, Bend Radius, and Wear",
-    "wordpress_post_id": 26354,
-    "live_url": "https://bitcoinversus.tech/2026/10/25/osrtc-012-robot-dress-pack-inspection-cable-routing-bend-radius-wear/",
-    "archive_path": "archive/2026/10/26354-osrtc-012-robot-dress-pack-inspection-cable-routing-bend-radius-wear.md",
-    "archive_blob_sha": "317035ec147075d7217fd2513725978d3e1117e4",
+    "subject": "linux",
+    "lesson_number": 65,
+    "title": "Linux Command #65 – systemd-analyze (Linux OS)",
+    "wordpress_post_id": 26865,
+    "live_url": "https://bitcoinversus.tech/2026/10/28/linux-command-65-systemd-analyze-linux-os/",
+    "archive_path": "archive/2026/10/26865-linux-command-65-systemd-analyze-linux-os.md",
+    "archive_blob_sha": "83289a64fe507ae3e1ddb40b71c8d6b2bae830c5",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
       "1freetech/opencert.tech"
     ],
-    "qa_status": "open",
+    "qa_status": "published—live visual and playback QA pending",
     "youtube_playback_verified": false
   },
   "pending_publication_qa": [
@@ -212,14 +241,25 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "Publication and rendering are not a full playback/mobile QA pass."
+    },
+    {
+      "wordpress_post_id": 26865,
+      "live_url": "https://bitcoinversus.tech/2026/10/28/linux-command-65-systemd-analyze-linux-os/",
+      "unresolved": [
+        "Independent desktop/mobile screenshot inspection not performed.",
+        "Actual YouTube playback not tested."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Two native Youtube player iframes confirmed in WordPress rendered view, but iframe presence is not playback verification."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 26354,
-    "last_style": "anime editorial artwork",
-    "next_style": "wordless comic",
+    "last_post_id": 26865,
+    "last_style": "realistic photo/anime blend",
+    "next_style": "split-screen editorial diptych",
     "last_featured_person": "Latina woman",
     "previous_featured_person": "Asian man",
-    "next_person_note": "Rotate to another featured-person demographic naturally; do not repeat the previous cover's featured person."
+    "next_person_note": "Diversify subject naturally and keep the subject-specific detailed editorial treatment."
   }
 }

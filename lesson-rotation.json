@@ -59,7 +59,9 @@
     "lesson_number": 51,
     "title_format": "Windows Command #51 – {topic} (Windows OS)",
     "expected_topic": null,
-    "resolution_note": "Live WordPress checked October 28, 2026: Windows Command #50 was the latest; #51 not yet published. Select a nonduplicate concept, verify model/technical sources, and apply live media QA."
+    "resolution_note": "Live WordPress checked October 28, 2026: Windows Command #50 was the latest; #51 not yet published. Select a nonduplicate concept, verify model/technical sources, and apply live media QA.",
+    "public_title_format": "{topic}",
+    "internal_tracking_title_format": "Windows Command #51 – {topic} (Windows OS)"
   },
   "next_after_current": "electrical_engineering",
   "track_state": {
@@ -281,5 +283,17 @@
       "status": "active; specialist series alongside main rotation"
     }
   },
-  "reconciliation_note": "Main rotation pointer and Linux/Windows/specialty next numbers refreshed against live WordPress October 28, 2026. Other track_state entries are historical and must be verified against live WordPress at their next turn; do not assume those cached numbers are current. last_completed intentionally remains unchanged while live screenshot/playback QA is pending."
+  "reconciliation_note": "Main rotation pointer and Linux/Windows/specialty next numbers refreshed against live WordPress October 28, 2026. Other track_state entries are historical and must be verified against live WordPress at their next turn; do not assume those cached numbers are current. last_completed intentionally remains unchanged while live screenshot/playback QA is pending. Reader-visible titles and section headings now unnumbered; the numeric course slot continues only as internal catalog metadata.",
+  "public_lesson_presentation": {
+    "effective_date": "2026-10-28",
+    "style": "textbook / wiki / encyclopedia / dictionary",
+    "visible_title_format": "{topic}",
+    "numbered_public_title": false,
+    "numbered_section_headings": false,
+    "keep_track_and_sequence_identifiers_internal": true,
+    "numbering_exception": "Only intrinsic ordered procedures, source-defined rankings and standardized technical numbering; not chapter/lesson decoration",
+    "scope": "All new lessons in the main and specialty rotations, including OSHRE and OSPCB",
+    "supersedes": "Older requirements to show course identifier/lesson number in title or heading",
+    "historical_posts": "Leave existing public titles unchanged unless separately requested"
+  }
 }

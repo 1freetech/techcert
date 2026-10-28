@@ -1,5 +1,11 @@
 # TechCert Lesson Authoring Standards
 
+## Authoritative Lesson Presentation Standard — October 28, 2026
+
+**All newly published educational lessons use a textbook / wiki / encyclopedia / dictionary style, always. Never display sequential lesson numbering in public lesson headlines, section headings, or prose as a navigation device.** Use concept-first, descriptive titles (for example, `Hashboard Signal Chains — Clock, Command, and Return Paths`, not `OSHRE.002: ...` or `Lesson 2: ...`). Section headings must be descriptive topics such as `Signal Path Basics`, `Electrical Characteristics`, `History`, `Failure Modes`, `Examples`, and `References`, **not** `1. Signal Path Basics` or `Chapter 2`. Write cohesive reference prose with accurate definitions, cross-linked terminology, specifications, documented examples, relevant media and citations. Retain exercises or knowledge checks as appropriate but do not frame the article as a sequential numbered lecture. Number items only where genuine ordered procedures, ranked data, or a technical standard requires an order, never for decorative article structure.
+
+**Keep unique course-track IDs and existing 000–999 slots privately in publishing metadata, curriculum registries and archive records** to preserve deduplication, progression, and existing course references; do not renumber historical lessons or erase old identifiers. The internal tracking identifier must not be the reader-facing title. This October 28 instruction overrides any older rule requiring visible `OSXXX.NNN`, `Linux Command #NN`, `Windows Command #NN`, or numbered lesson headings. Do not retroactively change already-published articles unless separately requested. All existing independent media, cover, sourcing, hyperlink, QA, and archival requirements still apply.
+
 ## Elementary Framing For Complex Lessons
 
 Every complex or advanced technical lesson must include two plain-language framing sections in addition to the full technical material.

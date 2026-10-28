@@ -10,9 +10,8 @@ in_story_media_count: 2
 in_story_youtube_video_ids: [fBKc2wh3ZIQ, _XEDgeWo3ms]
 footer_donation_qr_id: 24043
 category_ids: [5812, 34922710, 2509703]
-qa_status: "published — live independent browser screenshot/playback QA pending"
-qa_note: "WordPress posts.get edit verified published source and featured media. WordPress posts.get view returned two rendered YouTube iframe players. No independent video playback or desktop/mobile screenshot inspection was performed. Every claim of verification limited to checks actually completed."
-rotation_notes: "Main technical rotation resumed after OSNTC.036 and OSPython.043; OSHRE.000–002 are specialty interludes. Next regular subject: Windows Command; expected #51, subject to live duplicate check."
+qa_status: "published — live visual/playback QA pending"
+qa_evidence: "WordPress read-back confirms published status, 1200x630 featured-media ID 26859, two canonical native Gutenberg YouTube blocks, two provider-rendered YouTube iframe players, footer QR, and seven contextual internal hyperlinks. Independent desktop/mobile browser screenshots and actual playback have not been verified."
 ---
 
 <!-- wp:paragraph --><p><strong>Linux Command #65 — <code>systemd-analyze</code> (Linux OS).</strong> When a Linux workstation or server takes longer than expected to boot, guessing which service is responsible can waste time and create risk. The <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-analyze.html"><code>systemd-analyze</code> utility</a> reports startup timing and helps explain which units affected the boot sequence. This focused command lesson follows <a href="https://bitcoinversus.tech/2026/10/27/linux-command-64-localectl-linux-os/">Linux Command #64 — <code>localectl</code></a> and concentrates on <strong>read-only boot-time diagnosis</strong>. It does not instruct learners to disable system services.</p><!-- /wp:paragraph -->

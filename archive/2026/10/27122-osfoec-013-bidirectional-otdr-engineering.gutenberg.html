@@ -1,0 +1,169 @@
+<!-- wp:paragraph -->
+<p><strong>OSFOEC.013 — Bidirectional OTDR Engineering.</strong> An optical time-domain reflectometer can report an apparent gain at a passive fiber splice even though the splice contains no amplifier. It can also exaggerate the loss at the same joint when measured from the other end. This is a measurement artifact, not a violation of optical physics. Engineers resolve it by pairing correctly acquired A-to-B and B-to-A traces and evaluating each event in both directions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The topic follows <a href="https://bitcoinversus.tech/2026/10/27/osfoec-012-optical-reflectance-return-loss-engineering/">optical reflectance and return loss engineering</a>. It extends the <a href="https://bitcoinversus.tech/2026/10/05/osfotc-003-otdr-field-testing-launch-receive-fibers-range-pulse-width-events-dead-zones-fault-location/">field OTDR testing lesson</a> from operating an instrument to interpreting its measurement uncertainty, identifying misleading events and accepting an installed fiber route on defensible evidence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">How an OTDR measures a fiber</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An OTDR launches short optical pulses into a fiber and samples the light returning to its receiver. Distributed <strong>Rayleigh backscatter</strong> creates the sloping baseline of a trace; localized reflections from some connectors or open ends can produce peaks; a splice or other loss event can produce a step in the measured backscatter level. The instrument converts pulse travel time into distance using the configured group refractive index and analyzes the returned signal to estimate attenuation, location, event loss and reflectance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The signal seen by the OTDR is not simply the forward power received by a transceiver. Its amplitude also depends on the backscattering properties of the fiber on each side of an event, the measurement wavelength and the instrument settings. The <a href="https://www.foa.org/tech/ref/testing/OTDR/OTDR.html">Fiber Optic Association’s OTDR reference</a> explains why a trace is an invaluable diagnostic record but must be interpreted with knowledge of how the instrument creates it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Why a splice can appear to gain light</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>At a joint between two fibers, the optical <strong>mode-field diameter</strong> and Rayleigh backscatter coefficient may differ. An OTDR viewing the joint from one end can detect a higher backscatter level beyond the splice and report a negative event loss, commonly called a <em>gainer</em>. From the other end, the same joint can appear to have excessive positive loss—a <em>loser</em>. The underlying splice has not generated light; the instrument's backscatter-based estimate has been biased by the changed fiber properties.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://www.exfo.com/contentassets/3d776ed03c01451d8e1d0cdb83370c4b/exfo_anote385_understanding-mitigating-otdr-gainers_en.pdf">EXFO’s technical note on OTDR gainers</a> describes this behavior when standard singlemode and bend-insensitive fibers, or different manufacturing batches, are joined. A gainer is a reason to investigate the trace and perform bidirectional analysis, not a reason to declare a fiber magically amplifying or to cut out a satisfactory splice. <a href="https://blog.viavisolutions.com/2023/02/06/why-perform-bi-dir-fiber-testing/">VIAVI’s bidirectional testing guidance</a> reaches the same practical conclusion.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Reading the trace before accepting the numbers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An engineering review distinguishes continuous attenuation from discrete events and checks whether the selected pulse width can resolve nearby features. Shorter pulses can separate closely spaced events but often reduce available dynamic range. Longer pulses can improve reach and signal-to-noise ratio while broadening reflective events and increasing dead-zone limitations. The launch and receive fibers should be appropriate to the link and long enough to characterize the first and last connections under the chosen settings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=M-ON1utfZ6s","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=M-ON1utfZ6s
+</div><figcaption class="wp-element-caption"><em>EXFO Tube — What You Need to Know About OTDR Trace Analysis and Interpretation (manufacturer training, 2022).</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>An apparent event can also be shaped by receiver saturation, insufficient averaging, incorrect refractive-index settings or a noisy end-of-fiber region. Compare the trace with splice records and cable-route documentation before assigning a cause. The <a href="https://foa.org/tech/ref/quickstart/OTDR.html">FOA OTDR testing quickstart</a> covers the role of launch and receive fibers, while <a href="https://bitcoinversus.tech/2026/10/04/osfoec-002-fiber-dispersion-engineering-modal-chromatic-pmd-pulse-broadening-reach-limits/">fiber dispersion engineering</a> addresses a separate class of impairment that an ordinary loss trace does not quantify.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Bidirectional event-loss analysis</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The measurement is made from both ends of the <strong>same identified fiber</strong>, under comparable test conditions. For an event correctly matched between the two directions, the bidirectional estimate is the arithmetic mean of the signed loss readings in decibels: <strong>L<sub>bi</sub> = (L<sub>A→B</sub> + L<sub>B→A</sub>)/2</strong>. This technique cancels much of the directional error caused by unequal backscatter coefficients at a splice. It does not correct every OTDR error, and it cannot rescue traces acquired with unsuitable settings or mismatched fiber identities.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Consider the example in <a href="https://www.exfo.com/contentassets/3d776ed03c01451d8e1d0cdb83370c4b/exfo_anote385_understanding-mitigating-otdr-gainers_en.pdf">EXFO’s application note</a>: one direction shows <strong>−0.25 dB</strong> for a splice and the opposite direction shows <strong>+0.35 dB</strong>. The averaged event loss is <strong>[−0.25 + 0.35]/2 = +0.05 dB</strong>. The negative result is an apparent gain, and the positive result exaggerates the loss; the reconciled value is 0.05 dB under the conditions assumed by the measurement. These two signed event measurements must refer to the same physical joint.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Bidirectional analysis is especially useful where singlemode fiber types or batches change along a route. Engineers should retain both original traces alongside the averaged result rather than replacing the evidence with a single pass/fail label. A splice can fail because of real insertion loss even when its one-way trace happens to look benign.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Planning a reliable A-to-B and B-to-A test</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Define the route endpoints, fiber ID, core count, wavelengths, event thresholds, acceptance criteria and recording format before dispatch. Ensure both locations can be accessed under an approved maintenance plan. Clean and inspect connection interfaces; confirm any circuit is safe and authorized for the test source before injecting OTDR light. The <a href="https://bitcoinversus.tech/2026/10/29/osfotc-014-live-fiber-identification-signal-detection-optical-tones-non-disruptive-tracing/">live-fiber identification lesson</a> explains why seeing no signal is not the same as confirming a fiber is safe to disconnect or test.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Record each acquisition with its direction, near and far endpoints, fiber identifier, launch/receive cable details, wavelength, pulse width, measurement range, averaging settings, group index, instrument model, calibration status, date and operator. When testing both directions, keep the settings meaningfully comparable and verify that the event distances are mirrored relative to the same route length. Check that the two traces are not inadvertently from different fibers, different test wavelengths or opposite ends of a different optical path.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=5FTfpgvQ08A","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=5FTfpgvQ08A
+</div><figcaption class="wp-element-caption"><em>VIAVI Product Training — How to Perform Bidirectional OTDR Testing with FiberCompletePRO (official training, 2023).</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Automated platforms may coordinate dual-ended testing or pair directional files during post-processing. <a href="https://www.exfo.com/contentassets/20a4ff4141294f5998dd2f708350519f/exfo_anote392_bidirectional-otdr-testing-comparing-methodologies_v1_en.pdf">EXFO’s comparison of bidirectional methodologies</a> details loopback, managed asynchronous and synchronous two-ended approaches. Automation can shorten the workflow, but the operator still owns circuit identity, test configuration and the validity of the acceptance criteria.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Reconciling events and documenting acceptance</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Event matching requires more than comparing event-table row numbers. A splice 3.2 km from endpoint A should appear near the corresponding mirrored distance from B, after accounting for the measured route length and the reference setup. If the reverse trace lacks a recognizable event, examine pulse width, dead zones, noise, fiber characteristics and file pairing before averaging. Do not manufacture a numerical result for an unmatched event.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A good acceptance package includes native trace files, direction-labeled results, the correlated event table, wavelengths, optical loss measurements, reference conditions, instrument details and the as-built route. <a href="https://apps.exfo.com/en/exfo-apps/software/fastreporter-3/">EXFO FastReporter documentation</a> identifies support for OTDR bidirectional batch analysis and native measurement formats. The <a href="https://bitcoinversus.tech/2026/10/12/osfotc-009-fiber-optic-link-testing-certification/">fiber link testing and certification lesson</a> explains how insertion-loss acceptance and OTDR characterization serve complementary purposes. An optical loss test set measures end-to-end insertion loss under its reference method; the OTDR locates and characterizes events. The two are not substitutes for each other.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Finally, compare the results with the specified optical link budget and system performance limits, not a generic universal pass threshold. The <a href="https://bitcoinversus.tech/2026/10/04/osfoec-001-optical-link-budget-engineering-db-power-loss-design-margin/">optical link-budget lesson</a> covers attenuation and engineering margin. If the operating circuit also has transceiver power, bit-error or alarm anomalies, correlate them with the <a href="https://bitcoinversus.tech/2026/10/13/osfoec-010-optical-performance-monitoring-telemetry/">optical performance telemetry</a> rather than attributing every service problem to a splice.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Practical interpretation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Suppose a six-kilometer singlemode route has an apparent −0.18 dB event near a splice enclosure on its A-to-B trace. The B-to-A trace shows +0.32 dB at the mirrored distance. After verifying that both traces describe the same fiber, wavelength and physical splice, the bidirectional event estimate is <strong>(−0.18 + 0.32)/2 = 0.07 dB</strong>. This illustrative result is compatible with a low-loss joint but is not itself a pass verdict: the project-specific limit, trace quality, launch/receive treatment and independent link-loss test still govern acceptance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>By contrast, if both directions show a large positive loss at the same location, the event deserves further inspection, subject to the appropriate maintenance and outage controls. If one trace shows a strong reflection and the other does not, first rule out dead zones, reference-cable geometry and event-matching errors. Never splice or disconnect a production fiber based solely on an automated event label.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Why can a passive splice display negative event loss on an OTDR trace? What physical property makes the error direction-dependent? What is the averaged loss if one end reads −0.30 dB and the opposite end reads +0.50 dB? Why should an engineer retain both raw traces when issuing an acceptance report?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Review:</strong> A negative loss can result from a change in Rayleigh backscatter rather than true amplification; mode-field and backscatter differences bias the directional reading. The paired estimate is <strong>0.10 dB</strong>. Original traces preserve the evidence needed to verify event correlation, settings, uncertainty and later troubleshooting.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">References and related learning</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary technical reading: <a href="https://www.foa.org/tech/ref/testing/OTDR/OTDR.html">Fiber Optic Association — OTDRs</a>; <a href="https://www.exfo.com/contentassets/3d776ed03c01451d8e1d0cdb83370c4b/exfo_anote385_understanding-mitigating-otdr-gainers_en.pdf">EXFO — Understanding and Mitigating OTDR Gainers</a>; <a href="https://blog.viavisolutions.com/2023/02/06/why-perform-bi-dir-fiber-testing/">VIAVI — Why Perform Bi-Directional Fiber Testing?</a>; <a href="https://www.exfo.com/contentassets/20a4ff4141294f5998dd2f708350519f/exfo_anote392_bidirectional-otdr-testing-comparing-methodologies_v1_en.pdf">EXFO — Comparing Bidirectional Test Methodologies</a>; and the <a href="https://www.exfo.com/contentassets/ba72337aa0224f8cb154c9325881dfec/user_guide_otdr_english_19001.pdf">EXFO OTDR user guide</a> for instrument parameters. Always defer to the actual installed cable, interface requirements, test standards and manufacturer procedures for a real network.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">BitcoinVersus.Tech</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><em>Independent technology education and reporting from BitcoinVersus.Tech.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Follow <a href="https://twitter.com/1BitcoinVersus/status/1937006164555993338">BitcoinVersus.Tech on X</a> for technology reporting and original research.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate <strong>5,000 sats</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>For best results, display the QR on a laptop or larger screen and scan it with a compatible wallet on another device. Confirm the destination before sending: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original Bitcoin donation QR code" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

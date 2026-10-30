@@ -68,38 +68,9 @@ https://www.youtube.com/watch?v=jxmzY9soFXg
 <p>The following self-contained example uses an <code>io.StringIO</code> stream as a stand-in for a file or console. The buffer holds the first two records until an <code>ERROR</code> arrives. Its capacity of five is large enough that these messages do not trigger a capacity flush first. The program removes and closes its temporary handler at the end, avoiding unexpected side effects in subsequent tests.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>import io
-import logging
-from logging.handlers import MemoryHandler
-
-output = io.StringIO()
-destination = logging.StreamHandler(output)
-destination.setFormatter(logging.Formatter("%(levelname)s %(message)s"))
-
-logger = logging.getLogger("sensor.demo")
-logger.setLevel(logging.DEBUG)
-logger.propagate = False
-
-buffer = MemoryHandler(
-    capacity=5,
-    flushLevel=logging.ERROR,
-    target=destination,
-    flushOnClose=False,
-)
-logger.addHandler(buffer)
-
-logger.debug("Starting sensor read")
-logger.info("Retrying connection")
-print("Before:", repr(output.getvalue()))
-
-logger.error("Sensor unavailable")
-print("After:", repr(output.getvalue()))
-
-logger.removeHandler(buffer)
-buffer.close()
-destination.close()</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><strong>Runnable Python example:</strong> The complete self-contained <a href="https://github.com/1freetech/techcert/blob/main/examples/python/ospython-044-memoryhandler-buffered-logging.py">OSPython.044 MemoryHandler script</a> demonstrates buffering diagnostic records with <code>io.StringIO</code>, <code>capacity=5</code>, and <code>flushLevel=logging.ERROR</code>. Two ordinary messages remain in memory until an error causes all three records to be delivered to the destination. The script uses only Python's standard library and can be saved and executed with <code>python3</code>.</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>The first output is <code>Before: ''</code>. After <code>logger.error("Sensor unavailable")</code>, the string contains <code>DEBUG Starting sensor read</code>, <code>INFO Retrying connection</code> and <code>ERROR Sensor unavailable</code>. The example was executed with Python's standard library to check this sequence. It is an instructional simulation, not an assertion that any real sensor failed.</p>

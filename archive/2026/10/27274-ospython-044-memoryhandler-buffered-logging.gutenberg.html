@@ -1,0 +1,240 @@
+<!-- wp:paragraph -->
+<p>Python's <strong>logging.handlers.MemoryHandler</strong> is a handler that temporarily holds diagnostic records in memory before forwarding them to another logging handler. It can preserve low-level debug context during routine operations and emit that context when an error occurs. Instead of flooding an application's normal output with every successful step, an engineer can configure a bounded in-memory buffer and inspect the messages leading up to an error.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This lesson continues <a href="https://bitcoinversus.tech/2026/10/27/ospython-043-correlation-ids-contextvars-request-logging/">correlation IDs in Python logging</a> and builds on <a href="https://bitcoinversus.tech/2026/10/07/ospython-028-python-logging-basics/">Python logging basics</a>, <a href="https://bitcoinversus.tech/2026/10/08/ospython-032-custom-log-formatting-logging-formatter-timestamps-levels-logger-names-message-layout/">custom log formatting</a> and <a href="https://bitcoinversus.tech/2026/10/10/ospython-035-logging-exceptions-exc-info-tracebacks-stack-info/">exception traceback logging</a>. Earlier topics describe how to create records and connect related events; buffered logging changes <em>when</em> eligible records reach their final destination.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine writing short notes while checking a machine. Most of the time everything works, so the notes are not important enough to print. If the machine fails, however, those notes help explain what happened immediately before the failure. A memory buffer works like a small notebook inside a program. The program collects diagnostic messages and sends them to a log file or console when a rule tells it to.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The notebook has limited room. When it fills, the messages may be sent out even if nothing has failed. If the program loses power or crashes before the messages are saved somewhere durable, the notes may disappear. Buffered logging is useful for investigating problems, but it is not a replacement for permanent records.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Loggers, handlers and destinations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>logger</strong> creates a log record with a severity, timestamp and message. A <strong>handler</strong> decides what to do with the record. A formatter controls its displayed representation, while a filter can reject or modify records. A typical handler writes immediately to a stream or file. A <code>MemoryHandler</code> first stores the records in a list and later sends them to its configured target handler.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The distinction matters because a logger's severity threshold determines which records are created and passed for handling. A logger configured at <code>INFO</code> will normally discard <code>DEBUG</code> calls before a buffer sees them. To retain the diagnostic context needed when a problem occurs, configure the logger and buffering handler so the required messages are eligible, while observing the organization's <a href="https://bitcoinversus.tech/2026/10/18/ospython-041-logging-secrets-safely-redaction-filters-and-credential-protection/">secret-redaction and credential protection</a> policy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">What makes MemoryHandler flush</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://docs.python.org/3/library/logging.handlers.html#memoryhandler">official Python MemoryHandler reference</a> documents its constructor: <code>MemoryHandler(capacity, flushLevel=logging.ERROR, target=None, flushOnClose=True)</code>. The <code>capacity</code> is a count of stored records, not a number of bytes. The handler normally flushes when it reaches this capacity or receives a record at or above the configured <code>flushLevel</code>. Its default flush severity is <code>ERROR</code>. A flush forwards buffered records to the target handler in their buffered order and clears the buffer after delivery.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This distinction is central to the lesson: <strong>MemoryHandler does not guarantee that successful operations stay silent</strong>. A sufficiently busy operation can fill the buffer and flush it without an error. Conversely, a program that terminates abnormally can lose unflushed records. <code>flushOnClose=False</code> prevents the usual close-time flush, but it does not stop automatic capacity- or severity-triggered flushing. <code>flushOnClose</code> was added to this handler in Python 3.6.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Video: how Python handlers route logging records</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Corey Schafer's tutorial explains loggers, handlers, formatters and propagation. Those concepts are prerequisites for following the example below: the memory buffer is itself a handler, and its target is a second handler that writes the output. The video provides the general logging architecture rather than a dedicated demonstration of <code>MemoryHandler</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jxmzY9soFXg","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=jxmzY9soFXg
+</div><figcaption class="wp-element-caption"><em>Corey Schafer — Python Tutorial: Logging Advanced, explaining handlers, formatters and logger propagation (2017).</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>An application may have other handlers attached to the same logger or to its ancestors. If records propagate to a root handler, they can appear immediately even while <code>MemoryHandler</code> holds a separate copy. The example deliberately sets <code>logger.propagate = False</code> to make the buffering effect visible without duplicate output. In production, choose propagation and other handlers deliberately rather than indiscriminately clearing shared application logging configuration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">A complete example: release context when an error occurs</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following self-contained example uses an <code>io.StringIO</code> stream as a stand-in for a file or console. The buffer holds the first two records until an <code>ERROR</code> arrives. Its capacity of five is large enough that these messages do not trigger a capacity flush first. The program removes and closes its temporary handler at the end, avoiding unexpected side effects in subsequent tests.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>import io
+import logging
+from logging.handlers import MemoryHandler
+
+output = io.StringIO()
+destination = logging.StreamHandler(output)
+destination.setFormatter(logging.Formatter("%(levelname)s %(message)s"))
+
+logger = logging.getLogger("sensor.demo")
+logger.setLevel(logging.DEBUG)
+logger.propagate = False
+
+buffer = MemoryHandler(
+    capacity=5,
+    flushLevel=logging.ERROR,
+    target=destination,
+    flushOnClose=False,
+)
+logger.addHandler(buffer)
+
+logger.debug("Starting sensor read")
+logger.info("Retrying connection")
+print("Before:", repr(output.getvalue()))
+
+logger.error("Sensor unavailable")
+print("After:", repr(output.getvalue()))
+
+logger.removeHandler(buffer)
+buffer.close()
+destination.close()</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The first output is <code>Before: ''</code>. After <code>logger.error("Sensor unavailable")</code>, the string contains <code>DEBUG Starting sensor read</code>, <code>INFO Retrying connection</code> and <code>ERROR Sensor unavailable</code>. The example was executed with Python's standard library to check this sequence. It is an instructional simulation, not an assertion that any real sensor failed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For real applications, the destination can be a <a href="https://bitcoinversus.tech/2026/10/07/ospython-029-logging-to-files-with-filehandler/">FileHandler</a> or an approved central logging pipeline. The target still needs appropriate permissions, encoding, formatting, retention and failure handling. Buffering delays delivery, but it does not guarantee delivery if the destination becomes unavailable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Video: handler levels and filters</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A second overview from Timnology covers the relationship between logger levels, handler levels, filters, hierarchy and dictionary configuration. Those distinctions help explain why a buffered record may be absent from the intended sink even though the application issued a logging call. As with any logging tutorial, adapt the sample to the actual logger hierarchy and runtime version.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=A3FkYRN9qog","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=A3FkYRN9qog
+</div><figcaption class="wp-element-caption"><em>Timnology — Python Logging: Master the Module in Under 10 Minutes; handlers, levels, filters and configuration (2024).</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">The difference between buffering and asynchronous logging</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>MemoryHandler's buffering mechanism is not the same as asynchronous background delivery. When a flush occurs, it forwards records to its target as part of the logging call. If the target performs slow disk or network I/O, the call that causes the flush can also be delayed. By contrast, <a href="https://bitcoinversus.tech/2026/10/11/ospython-037-queuehandler-queuelistener-non-blocking-logging-background-queues/">QueueHandler and QueueListener</a> place records on a queue for a listener to process, subject to their own buffering, shutdown and loss considerations. The two techniques solve different problems and can be combined only with careful lifecycle and performance testing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://bitcoinversus.tech/2026/10/14/ospython-040-asyncio-logging/">asyncio logging</a> and <a href="https://bitcoinversus.tech/2026/10/12/ospython-038-multiprocessing-logging/">multiprocessing logging</a> lessons explain additional concurrency issues. An ordinary in-memory handler buffer is local to its process, and separate worker processes do not automatically share the same records. A production design should not treat one process's memory as a durable, globally ordered event stream.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Choosing capacity and flush rules</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Capacity is a trade-off between context and memory consumption. For example, setting <code>capacity=50</code> means a maximum of approximately 50 buffered <em>records</em> before a capacity-triggered flush, not 50 kilobytes. Individual records can include varying message sizes, arguments and exceptions. A larger buffer preserves more context but can consume more memory, particularly when many instances are created.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The severity rule is similarly workload-specific. An application might flush on <code>ERROR</code> to capture pre-failure context, while another might use <code>CRITICAL</code> to suppress output until a severe event. That decision should not weaken mandatory security audit logging. Required financial transactions, access events, safety alarms and regulated records may demand durable delivery independent of the diagnostic buffer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Conditional output is not identical to severity-triggered output</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://docs.python.org/3/howto/logging-cookbook.html#buffering-logging-messages-and-outputting-them-conditionally">Python Logging Cookbook</a> presents a pattern for buffering diagnostic messages and conditionally releasing them around a function. Such a design can attach a temporary buffer, run an operation, flush when a specified condition occurs, and clean up afterward. An implementation that aims to <em>discard all successful diagnostic context</em> must also account for capacity-triggered flushes, which standard <code>MemoryHandler</code> performs automatically. This may require a deliberately customized strategy, not simply setting the flush severity above every routine log call.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Use try/finally or a carefully designed context manager for handler cleanup. A missing cleanup step can leave the same handler attached to a long-lived logger and leak records into unrelated requests. Applications with <a href="https://bitcoinversus.tech/2026/10/27/ospython-043-correlation-ids-contextvars-request-logging/">request correlation IDs</a> should also ensure they do not mix buffered records from independent operations when sharing a handler across threads or tasks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Common failure patterns</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An engineer investigating missing logs should verify the logger's effective level, handler attachment, active filters, propagation, capacity, flush severity and target. If records appear twice, check for a target already attached to the same logger tree. If messages disappear at shutdown, inspect when <code>close()</code> was called and whether the process exited normally. If debugging causes unexpected latency, profile the target handler's I/O at the moment the buffer flushes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Records can include sensitive data even when they remain briefly in memory. A buffering handler does not protect secrets or sanitize strings. Apply <a href="https://bitcoinversus.tech/2026/10/09/ospython-033-logging-filters-select-records-custom-rules/">logging filters</a> and <a href="https://bitcoinversus.tech/2026/10/18/ospython-041-logging-secrets-safely-redaction-filters-and-credential-protection/">credential redaction</a> before sending logs to destinations that should not receive them. Confirm the relevant formatter and filter behavior for the chosen handler architecture, rather than assuming every filtering stage executes in the same order.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Worked example: a data-center telemetry collector</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a Python service that polls a networked environmental sensor. Each poll generates low-level diagnostics such as attempt number, response delay and parsed values. During healthy operation, continuously printing each diagnostic can obscure the few incidents that need attention. An engineer configures a small <code>MemoryHandler</code> to retain selected debug messages and flush on an <code>ERROR</code> from the device-read routine. If the third attempt fails, the emitted record sequence describes the preceding retries.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If the buffer fills before the error, some earlier context is released first. That is a normal feature of the built-in handler and should be anticipated in the service's log-volume design. The collector should also record the sensor ID or task ID safely, using principles from <a href="https://bitcoinversus.tech/2026/10/10/ospython-034-contextual-logging-with-loggeradapter-and-extra/">LoggerAdapter context</a> and <a href="https://bitcoinversus.tech/2026/10/27/ospython-043-correlation-ids-contextvars-request-logging/">correlation identifiers</a>, so an operator can distinguish simultaneous devices. Long-running services require normal log rotation and retention policies regardless of the in-memory buffer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>What is the difference between a logger and a handler? Does <code>capacity=20</code> mean 20 bytes or 20 records? Can a capacity-triggered flush happen without an error? Can an unflushed in-memory record survive an unexpected process failure? Why might records appear twice even while a MemoryHandler is buffering? When would <a href="https://bitcoinversus.tech/2026/10/11/ospython-037-queuehandler-queuelistener-non-blocking-logging-background-queues/">queue-based logging</a> be more appropriate than MemoryHandler alone?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Answers:</strong> The logger creates and routes records; a handler processes them. Capacity counts records. A full buffer flushes regardless of severity. Memory-held records are not durable. Duplicate output can result from additional handlers or logger propagation. A queue and listener help decouple normal logging calls from slow output sinks, although they also need shutdown and data-loss planning.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Buffered logging is a way for a program to remember diagnostic clues temporarily. Those clues become useful when something goes wrong, because the final error alone may not explain the steps that led to it. <code>MemoryHandler</code> lets Python hold records and send them to a chosen destination when a rule is met.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The important limits are that the buffer can fill up before an error, the stored messages are not permanent, and sending them can still take time. Reliable systems combine buffering with good log formatting, appropriate privacy protections, durable storage when needed, and clear testing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">References and further reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary references: <a href="https://docs.python.org/3/library/logging.handlers.html#memoryhandler">Python Standard Library — logging.handlers.MemoryHandler</a> and <a href="https://docs.python.org/3/howto/logging-cookbook.html#buffering-logging-messages-and-outputting-them-conditionally">Python Logging Cookbook — Buffering logging messages and outputting them conditionally</a>. The related lessons on <a href="https://bitcoinversus.tech/2026/10/11/ospython-037-queuehandler-queuelistener-non-blocking-logging-background-queues/">background queue logging</a>, <a href="https://bitcoinversus.tech/2026/10/11/ospython-036-logging-configuration-dictconfig-handlers-formatters-loggers-json/">dictConfig</a>, <a href="https://bitcoinversus.tech/2026/10/13/ospython-039-logging-with-processpoolexecutor/">ProcessPoolExecutor logging</a>, and <a href="https://bitcoinversus.tech/2026/10/27/ospython-042-capturing-python-warnings-in-application-logs/">capturing Python warnings</a> describe adjacent use cases and limitations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">BitcoinVersus.Tech</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech publishes independent technology education and technical reporting.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>BitcoinVersus.Tech Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate <strong>5,000 sats</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>For best results, display the QR code on a laptop or larger screen and scan it using a compatible Bitcoin wallet on a second device. Verify the address before sending: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original donation QR code" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

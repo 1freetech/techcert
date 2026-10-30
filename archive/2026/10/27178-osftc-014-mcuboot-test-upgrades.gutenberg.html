@@ -1,0 +1,221 @@
+<!-- wp:paragraph -->
+<p><strong>OSFTC.014 — MCUboot Test Upgrades, Image Confirmation and Recovery Validation.</strong> A firmware update is not finished when a new image first starts running. On systems that support a trial upgrade, the new firmware may remain provisional until it confirms successful operation. If it crashes, resets or fails to confirm, a properly configured bootloader can restore the previous application. A technician must distinguish a successful file transfer, a successful boot, an image-confirmation event and a verified recovery. They are separate milestones.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/27/osftc-013-firmware-image-integrity-hash-signature-verification/">OSFTC.013 on firmware image integrity</a> and extends the earlier <a href="https://bitcoinversus.tech/2026/10/05/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation/">firmware backup and recovery</a> and <a href="https://bitcoinversus.tech/2026/10/14/osftc-011-firmware-update-security/">update security</a> lessons. It uses the open-source MCUboot and Zephyr/MCUmgr ecosystem as a concrete example; exact menus, slot layouts, supported rollback modes and commands differ across hardware and firmware configurations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">What a trial firmware upgrade does</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In a dual-slot MCUboot configuration, the device normally has a primary image slot containing the running application and a secondary slot used to stage an upgrade. After a compatible, appropriately signed update has been uploaded, the update system can request a <strong>test</strong> upgrade. On reboot, MCUboot starts the candidate firmware. If the image remains unconfirmed, the bootloader's next compatible restart can revert to the prior image. The capability depends on the configured boot mode and retention of a usable previous image—not merely the existence of two named flash partitions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>MCUboot's <a href="https://github.com/mcu-tools/mcuboot/blob/main/docs/design.md">design documentation</a> distinguishes <em>test</em>, <em>permanent</em> and <em>revert</em> swap types. The <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__mcuboot__api.html">Zephyr MCUboot image-control API</a> exposes functions to request an upgrade, query confirmation and confirm a running image. Some other configurations, including overwrite-only updating, do not preserve a straightforward automatic rollback path. Never assume automatic revert is present without inspecting the actual firmware build and device instructions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Why signed firmware is not the same as healthy firmware</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A signature helps the bootloader decide whether an image is authentic under the configured trust keys and whether its protected bytes have been altered. It does not prove that the application can initialize a sensor, communicate on its network, load valid persistent settings or complete its normal duties. The update may verify cryptographically and then fail during the operating-system startup or peripheral initialization stage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://bitcoinversus.tech/2026/10/27/osftc-013-firmware-image-integrity-hash-signature-verification/">image-integrity lesson</a> explains hashes, signed images and hardware compatibility. In the trial-upgrade model, <strong>confirmation</strong> represents a second decision: the newly running software reports that it is suitable to retain, ideally after whatever health checks the product requires. Confirmation itself can be automatic application behavior or an authorized management action, depending on the software and release policy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Image states and what the technician should observe</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An image-management client can report whether firmware is <strong>active</strong>, <strong>pending</strong>, <strong>confirmed</strong> or <strong>permanent</strong>. Those terms describe bootloader image state; they do not independently establish that the whole product passed its operational acceptance test. The <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__mcumgr__img__mgmt.html">Zephyr image-management API reference</a> documents these flags, while the <a href="https://docs.zephyrproject.org/latest/samples/subsys/mgmt/mcumgr/smp_svr/README.html">MCUmgr SMP server sample</a> describes how clients list, test and confirm upgrade images.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A normal trial sequence often looks like this in plain language: the old image is active and confirmed; a valid candidate is staged; the candidate is marked pending for test; the device restarts; the new image runs but remains unconfirmed; health checks are performed; the application or authorized operator confirms it; and a further controlled restart proves the confirmed version persists. If the image is not confirmed and the configured revert mechanism works, the next restart should restore the prior application.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Video: how MCUboot moves images</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following developer presentation explains the MCUboot <em>swap-scratch</em> algorithm. Nordic Semiconductor's <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-9-bootloaders-and-dfu-fota/topic/device-firmware-update-dfu-essentials/">DFU curriculum</a> links to this demonstration as background for how a bootloader preserves a prior image during a trial update. It is useful for understanding why storage layout and interrupted-swap recovery matter.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=KFgK3TRDNR4","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=KFgK3TRDNR4
+</div><figcaption class="wp-element-caption"><em>David Brown — MCUboot swap-scratch algorithm, linked by Nordic Developer Academy.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>A technician does not need to redesign the swap engine, but must know which behavior the actual device uses. An interrupted transfer, failed signature check, failed image swap, application crash and successful revert are distinct failure states. Record the point of failure before deciding whether to retry an upgrade, revert using the supported mechanism, or escalate for engineering review.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">How test, permanent and revert differ</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Test:</strong> the next boot attempts the candidate application without immediately establishing it as the durable version. Under the configured rollback mechanism, a subsequent boot reverts unless the image is confirmed. <strong>Permanent:</strong> an update is selected for continuing use without the same unconfirmed trial window. <strong>Revert:</strong> MCUboot returns to a previously retained image after an unconfirmed test. These terms refer to MCUboot behavior; another bootloader may use different names and safeguards.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In Zephyr, <code>boot_request_upgrade(BOOT_UPGRADE_TEST)</code> requests a test upgrade when that API and configuration apply. The application may call <code>boot_is_img_confirmed()</code> to check current state and <code>boot_write_img_confirmed()</code> to mark the currently running image confirmed. These are application APIs, <strong>not commands for a technician to type into an arbitrary device</strong>. Field work should use the device's supported management interface and approved release instructions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Confirmation should follow meaningful application health checks—not merely the passage of a few milliseconds after reset. Tests might include critical peripheral initialization, expected service availability, application version, persistent configuration loading, network attachment, watchdog stability and any product-specific safety conditions. On a live or safety-critical system, testing and resets must occur only in an authorized maintenance environment or change window.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Video: the MCUboot swap-move process</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The second developer presentation covers the <em>swap-move</em> approach, in which the bootloader uses a different flash movement strategy. Understanding this distinction prevents technicians from assuming that a scratch-area layout, memory-size limit or recovery procedure applies identically to every MCUboot build. This video is also referenced by <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-9-bootloaders-and-dfu-fota/topic/device-firmware-update-dfu-essentials/">Nordic's firmware-update course</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=TNvUHJ_NSo8","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=TNvUHJ_NSo8
+</div><figcaption class="wp-element-caption"><em>David Brown — The Swap-Move Algorithm in MCUboot, referenced by Nordic Developer Academy.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>The swap mechanism is relevant to recovery planning because some strategies require extra flash space, sufficient sector geometry or a particular placement of image trailers. Exact capacity and wear behavior depend on the selected algorithm and hardware. Read the actual flash partition map and build manifest; do not infer them from another development board.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Read-only verification before changing firmware</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Before approving an update on a device, gather its model, hardware revision, bootloader version, active firmware version, candidate version, image hashes and available recovery interface. Record whether an earlier working image remains available and whether trial rollback is supported by the device's current boot configuration. Consult <a href="https://bitcoinversus.tech/2026/10/04/osftc-001-firmware-images-safe-flashing-bootloaders-recovery-basics/">firmware recovery basics</a> and the <a href="https://bitcoinversus.tech/2026/10/06/osftc-004-firmware-flashing-interfaces-usb-dfu-swd-jtag-spi-programmers-bootloader-modes-write-verification/">flashing-interface lesson</a> before using any programming port.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Use the authorized management console's read-only image-list operation, when supported, to identify active, pending and confirmed states. Record the current application version and compare the device's reported hardware ID with the release manifest. On supported MCUmgr-enabled targets, a client can retrieve image metadata without immediately altering image state. Do not press test, confirm, erase or reset while merely auditing an unknown production unit.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Testing the unconfirmed upgrade</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In a dedicated test device or approved change window, the planned release process first uploads and verifies the candidate according to the product instructions, requests a trial boot and collects a timestamped startup record. Check the version reported by the application rather than relying only on the file name. Establish that critical functions operate normally and that the firmware has not already self-confirmed prematurely.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>One important limitation is that a device which reboots because of a watchdog may revert automatically <em>only if</em> its update mechanism is designed and configured for that behavior. Some systems have no rollback state; others confirm immediately or use a different boot policy. The <a href="https://bitcoinversus.tech/2026/10/07/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting/">watchdog and reset-loop lesson</a> shows why the reset reason must be captured along with the firmware version. A reboot alone is not evidence that a recovery mechanism was tested.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>After health checks, the candidate can be confirmed by the approved mechanism. The technician then verifies that the reported state is confirmed and that the same version remains active through the specified follow-up restart. Record any abnormal device reboot, configuration reset, missing peripheral or change in version as a failure requiring diagnosis—not a success that can be dismissed because the flashing tool printed “done.”</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Proving the rollback path</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A controlled revert test belongs on a test bench or under an explicitly approved maintenance procedure. The negative test must avoid creating a safety hazard or disconnecting production services. In a compatible test configuration, a candidate is staged for trial, deliberately left unconfirmed under the prescribed test plan, and the device is reset to observe whether the expected prior image returns. Success requires proving the known-good version is active, the relevant functions work, and the event log records the expected sequence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A failed revert may indicate a permanently selected image, invalid previous slot, corrupted trailer, unsupported boot mode, inadequate partition sizing or an unexpected reset path. Preserve the logs and build identifiers. Do not repeatedly issue recovery or erase commands on production equipment: escalation is preferable to destroying the last available image or configuration. <a href="https://bitcoinversus.tech/2026/10/13/osftc-010-firmware-crash-logs-fault-recovery/">Firmware Crash Logs and Fault Recovery</a> gives the incident documentation needed when a rollback fails.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">When serial recovery is different from automatic rollback</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>MCUboot serial recovery is a separate service mechanism: on supported builds, the bootloader enters a management mode and accepts a replacement image over an approved transport. It can help when the running application is unavailable, but it requires configuration and a physically or logically accessible entry path. <a href="https://nrfconnectdocs.nordicsemi.com/ncs/latest/nrf/app_dev/bootloaders_dfu/mcuboot_serial_recovery.html">Nordic's serial-recovery documentation</a> explains a device-specific workflow using MCUmgr. A technician must not assume an enabled recovery port, command set or image-slot mapping across different vendors.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Serial recovery is not proof that automatic rollback worked. A device requiring manual reflash after a bad candidate did not demonstrate an autonomous test-and-revert sequence. Both methods can be legitimate maintenance capabilities, but they have different recovery-time, operator-access and outage implications.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Worked example: a network sensor that fails its trial</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A hypothetical field sensor is running version <strong>1.8.2</strong> with that image confirmed. A signed and compatible <strong>1.9.0</strong> candidate is uploaded into its secondary slot and selected for a test boot. The device starts 1.9.0 but loses its network interface during application initialization. The image remains unconfirmed. After an authorized reset, a correctly configured MCUboot swap-based rollback restores 1.8.2, and the sensor resumes reporting. The event log now contains evidence that the candidate booted, failed a service check and reverted.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The technician records the last successful boot stage, both image versions and hashes, swap/confirmation state before and after, reset cause, service failure and recovery confirmation. The result is a <strong>failed upgrade with successful rollback</strong>—not a successful release. If 1.9.0 was accidentally confirmed before the failure, this specific test might not revert as expected; the corrective action belongs to the product's authorized recovery plan.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Service record and acceptance</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A complete firmware maintenance handoff identifies the exact device and board revision; source and target versions; trusted release package and verification results; whether the update was test or permanent; image-state snapshots; critical health checks; reset history; successful or unsuccessful confirmation; and final operating version. Preserve raw logs with timestamps and note any recovery intervention. Do not write credentials, private signing keys or confidential device secrets into a broadly shared ticket.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The most useful technician question is not simply “Did the new firmware boot?” It is “Which image is active now, is that image confirmed, did the intended functions pass, and can the device recover according to its documented design?” The accompanying <a href="https://bitcoinversus.tech/2026/10/08/osfec-005-bootloader-design-firmware-update-architecture-image-validation-ab-slots-rollback-versioning-recovery/">bootloader engineering lesson</a> develops the architecture of A/B images and recovery, while OSFTC.014 concentrates on the operational evidence that makes a firmware service action auditable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>What is the difference between a successfully verified image and an operationally healthy image? Why can a test upgrade revert after the next reboot? Which two checks distinguish a successful confirmation from a first successful boot? Why is recovery by manually uploading an image different from an automatic revert? What evidence would you preserve if a previously working application could not be restored?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Review:</strong> Cryptographic validation checks authenticity and integrity, not runtime health. A supported trial upgrade remains provisional until confirmation. Verify both image state and functional operation after a restart. Manual recovery requires an intervention, while automatic revert follows the configured boot-state mechanism. Preserve image identifiers, state flags, reset cause, logs, device details and the last known-good release.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">References and further reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary technical references include <a href="https://github.com/mcu-tools/mcuboot/blob/main/docs/design.md">MCUboot design</a>, <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__mcuboot__api.html">Zephyr MCUboot image control</a>, <a href="https://docs.zephyrproject.org/latest/samples/subsys/mgmt/mcumgr/smp_svr/README.html">Zephyr MCUmgr SMP Server</a>, <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__mcumgr__img__mgmt.html">Zephyr image-management states</a>, <a href="https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-9-bootloaders-and-dfu-fota/topic/mcuboot-mcumgr-and-dfu-target/">Nordic Developer Academy on MCUboot and MCUmgr</a> and <a href="https://nrfconnectdocs.nordicsemi.com/ncs/latest/nrf/app_dev/bootloaders_dfu/mcuboot_serial_recovery.html">Nordic serial recovery</a>. Follow your actual product documentation and maintenance authorization before performing a firmware update.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">BitcoinVersus.Tech</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Read more at BitcoinVersus.Tech and follow <a href="https://twitter.com/1BitcoinVersus/status/1937006164555993338">the site's technology reporting on X</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://twitter.com/1BitcoinVersus/status/1937006164555993338","type":"rich","providerNameSlug":"twitter","responsive":true} -->
+<figure class="wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter"><div class="wp-block-embed__wrapper">
+https://twitter.com/1BitcoinVersus/status/1937006164555993338
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate <strong>5,000 sats</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>For best results, display the QR code on a laptop or larger screen and scan it with a compatible Bitcoin wallet on a second device. Confirm the destination address: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech Bitcoin donation QR code" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

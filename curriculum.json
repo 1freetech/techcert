@@ -287,19 +287,19 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 4,
-        "title": "OSDCEC.004: Data Center Electrical Power Path — Utility, Switchgear, ATS, Generators, UPS, PDUs, and A/B Feeds",
-        "wordpress_post_id": 21344,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/osdcec-004-data-center-electrical-power-path-utility-switchgear-ats-generators-ups-pdus-ab-feeds/",
-        "archive_path": "archive/2026/10/osdcec-004-data-center-electrical-power-path-utility-switchgear-ats-generators-ups-pdus-ab-feeds.md",
+        "lesson_number": 15,
+        "title": "OSDCEC.015: Data Center Protective Device Coordination — Fault Current, Trip Curves and Selectivity",
+        "wordpress_post_id": 27635,
+        "live_url": "https://bitcoinversus.tech/2026/10/31/osdcec-015-data-center-protective-device-coordination-trip-curves-selectivity/",
+        "archive_path": "archive/2026/10/osdcec-015-data-center-protective-device-coordination-trip-curves-selectivity.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ],
-        "verification_status": "verified"
+        "verification_status": "published and source read back; new 1200x630 featured cover with rotated older Asian male engineer; 2 native YouTube blocks and 2 rendered iframes; exact three-repository archives; browser playback and visual desktop/mobile QA not independently confirmed"
       },
-      "next_lesson_number": 5
+      "next_lesson_number": 16
     },
     {
       "subject": "fiber_optics_technician",

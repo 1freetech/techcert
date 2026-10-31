@@ -1,0 +1,99 @@
+<!-- wp:paragraph --><p><strong>Robot conveyor tracking</strong> is a control technique that allows an industrial robot to identify and interact with a workpiece while the conveyor carrying that workpiece continues to move. Rather than assuming a target remains fixed, the robot controller uses encoder movement, sensor-trigger information, and a defined coordinate frame to estimate the target's current location. Conveyor tracking supports packaging, assembly, sorting and machine tending, but it depends on accurate position data and controlled workcell timing. This lesson follows <a href="https://bitcoinversus.tech/2026/10/29/osrtc-015-robotic-tool-changer-inspection-lock-sensors-docking-utility-couplers/">robotic tool-changer inspection</a> and extends <a href="https://bitcoinversus.tech/2026/10/12/osrtc-008-robot-vision-calibration-troubleshooting/">robot vision calibration</a>, <a href="https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/">tool center point setup</a>, and <a href="https://bitcoinversus.tech/2026/10/07/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting/">PLC signal handshakes</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Imagine a box moving along a conveyor belt. If a robot moves to the place where the box was a moment ago, it will miss. A conveyor encoder helps the robot keep track of how far the belt has moved, while a sensor or camera identifies the box. The controller combines those measurements so the robot can meet the moving box at the right place and time.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>This does not mean the robot guesses where the box is. It uses measured motion and a carefully taught conveyor direction. Errors in the encoder, detection signal or coordinate frame can cause the gripper to arrive too early, too late or to one side. The technician's task is to understand the evidence before an authorized engineer changes the system.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">System Components and Signal Path</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A conveyor-tracking cell normally includes a conveyor drive, motion encoder, photoelectric part-detect sensor or vision system, a robot controller with the required tracking option, a defined conveyor or tracking frame, a calibrated <a href="https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/">tool center point (TCP)</a>, and an end effector. The tracking controller relates a detection event to an encoder count. Subsequent counts update the object's estimated position while the robot plans a synchronized motion.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For systems using an incremental quadrature encoder, channels A and B change with shaft rotation and may allow direction detection. Controller configuration determines whether it counts one, two or four transitions per pulse cycle; a counts-per-revolution specification cannot be compared directly with displayed counts without knowing that decoding mode and any gearbox or measuring-wheel ratio. A sensor-trigger timestamp may also be necessary to relate the detected part to the encoder position at the instant of detection.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The <a href="https://knowledge.motoman.com/hc/en-us/articles/4408233115159-Conveyor-Tracking-Setup">Yaskawa Motoman setup guide</a> documents the relationship between the encoder interface, part-detection switch, conveyor coordinate frame and condition file. It emphasizes the correct TCP, direction of travel and measured encoder resolution. <a href="https://www.fanucamerica.com/products/software/robot/line-tracking">FANUC's Line Tracking</a> product explains the corresponding linear and circular conveyor-tracking applications.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Manufacturer Video: Conveyor Tracking in a Robot Simulator</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Yaskawa's official MotoSim example illustrates how detected conveyor movement is associated with a tracking job. Watch the position of the target relative to the moving belt, and distinguish the part sensor's detection event from the encoder's continuing measurement of travel.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=PD\u002d\u002dZRJ-T_k","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=PD--ZRJ-T_k
+</div><figcaption class="wp-element-caption"><em>Yaskawa Motoman — Conveyor Tracking Setup example using MotoSim. Official manufacturer training video linked from the conveyor-tracking setup guide.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Encoder Resolution and Position Calculation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A technician can describe conveyor encoder resolution as <strong>counts per unit of linear travel</strong>. If an authorized calibration trace records two count readings C<sub>1</sub> and C<sub>2</sub> separated by a measured conveyor displacement L, then <strong>R = (C<sub>2</sub> − C<sub>1</sub>)/L</strong> gives signed counts per millimeter when L is measured in millimeters. The inverse gives millimeters per count. The direction sign must match the system's documented coordinate convention; magnitude alone cannot detect a reversed encoder.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For example, if the encoder rises from 8,000 to 20,000 counts while a tracked point moves 600 mm, the recorded scale is <strong>20 counts/mm</strong>. If it then advances 3,000 counts, the estimated additional travel is <strong>150 mm</strong>. This assumes the same count-decoding setting, correct mechanical coupling, no belt slip, and a valid reading interval. The numbers are hypothetical and should never be entered as actual controller settings without a qualified calibration procedure.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A slipping encoder wheel can cause count changes that do not match part movement. A wrong sign, scale or frame can cause an apparent tracking drift even when the robot's own servo axes are healthy. The <a href="https://knowledge.motoman.com/hc/en-us/articles/4408233115159-Conveyor-Tracking-Setup">Yaskawa calculation procedure</a> uses measured displacement and count readings to determine resolution and then checks the result with an authorized tracking job.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Tracking Frames and Coordinate Geometry</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <strong>tracking frame</strong> defines the origin and axes used to describe conveyor motion relative to the robot. For a straight conveyor, a controller may use one axis of the taught frame to represent belt travel. If that axis is misaligned with the actual conveyor direction, a target can progressively drift sideways as tracking distance increases. A valid encoder count does not correct an incorrectly oriented frame.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The robot's <a href="https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/">TCP calibration</a> must also match the installed gripper or tool. An incorrect TCP produces a spatial error independent of conveyor tracking. This distinction matters after <a href="https://bitcoinversus.tech/2026/10/29/osrtc-015-robotic-tool-changer-inspection-lock-sensors-docking-utility-couplers/">automatic tool changes</a>, when an otherwise correct tracking frame may be paired with the wrong tool definition. The technician should verify IDs and stored calibration status rather than attempting live frame reteaching.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Sensor Triggers, Timestamping and Latency</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A part-detect photoeye often establishes a reference event: the controller records the encoder position when the object crosses the sensor, then updates the estimated part position as the belt moves. A vision camera can supply object position or orientation, but its acquisition and processing times must be accounted for. If the target is detected late, the robot may pursue an outdated location.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For constant conveyor velocity, a simple latency-displacement approximation is <strong>d = v × t</strong>. At 200 mm/s, a 40 ms delay corresponds to <strong>8 mm of motion</strong>. This is an illustration of timing sensitivity, not a command to apply an 8 mm correction. Some controllers timestamp events, compensate latency internally and support conveyor acceleration; an extra manual offset could double-count a built-in correction.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>When troubleshooting, compare sensor event time, encoder count at trigger, vision result age, conveyor-speed history and the controller's queue or tracking state. A sporadic missed pick may reflect missed triggering, delayed vision processing or an object outside the tracking window—not necessarily encoder failure.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Simulation Video: FANUC Line Tracking</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The second video demonstrates FANUC line-tracking behavior in ROBOGUIDE, offering a different manufacturer's implementation. Compare its treatment of sensor detection, conveyor motion and moving target positions with the Yaskawa example. Simulation helps visualize sequence and geometry without changing an active workcell, but must not be mistaken for validation of real-world safety or calibration.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=zuiprAVikro","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=zuiprAVikro
+</div><figcaption class="wp-element-caption"><em>Jithin T Sunny — FANUC Robot Line Tracking Complete Tutorial in ROBOGUIDE. Educational simulation showing conveyor tracking and synchronized robot motion.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">How Tracking Faults Appear</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <strong>consistent fore-aft offset</strong> relative to the conveyor may indicate trigger position, event latency, TCP or taught pickup offset. An <strong>error that grows with conveyor travel</strong> points toward encoder scale, missed pulses, mechanical slip or frame-direction error. A <strong>lateral offset that grows over travel</strong> can suggest a tracking-frame direction problem. <strong>Intermittent lost targets</strong> require review of photoeye reliability, encoder continuity, camera detections, object spacing, queue capacity and tracking windows.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A stopped conveyor with an encoder that continues to register counts suggests investigating encoder noise, wrong wiring, coupled drive movement or interpretation of the display. Conversely, a moving conveyor with unchanging counts suggests loss of measurement or an incorrect signal source. The <a href="https://knowledge.motoman.com/hc/en-us/articles/4408233115159-Conveyor-Tracking-Setup">Motoman setup guidance</a> and <a href="https://www.abb.com/global/en/areas/robotics/products/equipment/conveyor-tracking-module">ABB conveyor tracking documentation</a> both establish why valid encoder and sensor interfaces matter to synchronized motion.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Read-Only Diagnostic Procedure</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Record the robot model and controller software, active tracking option, conveyor ID, recipe or program name, workobject/frame ID and tool number before comparing measurements.</li><li>From approved diagnostics, collect synchronized encoder counts, detected-object events, conveyor velocity, vision timestamps, controller alarms and robot tracking status.</li><li>Compare measured conveyor travel with the reported encoder count change; confirm the configured count mode and physical measurement reference before calculating resolution.</li><li>Inspect whether the tracking error is fixed, grows in the direction of motion, grows laterally, or appears only after speed transitions or missed sensor events.</li><li>Escalate suspected sensor, encoder, frame, TCP or timing defects with the evidence to qualified maintenance and controls engineers; verify corrections only under an approved validation plan.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Practical Exercise</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>In an offline training worksheet, a conveyor sensor detects a part at count 45,000. The encoder later reads 49,800. If the scale is known to be 24 counts per millimeter, the estimated part displacement is <strong>(49,800 − 45,000)/24 = 200 mm</strong>. Now imagine the real conveyor moved only 190 mm. The disagreement is 10 mm, but the data alone cannot tell whether the encoder scale, mechanical coupling, detection event or distance measurement is wrong. List which independent measurements would separate these possibilities without adjusting the controller.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Workcell Safety and Intervention Limits</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Conveyor tracking combines independently hazardous motion of both the robot and conveyor. Personnel must never enter a safeguarded cell, interrupt guarding, bypass safety-related inputs, grasp moving products or retune tracking while automatic operation continues. A protective stop does not automatically mean all energy sources are isolated. Follow <a href="https://www.osha.gov/robotics">OSHA robotics safety guidance</a>, applicable <a href="https://www.osha.gov/control-hazardous-energy">hazardous-energy-control requirements</a>, the robot manufacturer's instructions, and the site-specific lockout, access and restart procedures. Maintenance verification of encoder wiring or mechanical coupling belongs to qualified personnel after the appropriate isolation and residual-energy checks.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>What different information does a part-detect sensor provide compared with a conveyor encoder?</li><li>A conveyor moves 600 mm while the encoder changes by 12,000 counts. What is the resolution in counts/mm?</li><li>Why can two controllers show different counts per revolution for the same quadrature encoder?</li><li>What fault categories can cause tracking error to increase as the conveyor travels?</li><li>Why is a 40 ms timestamp delay important at 200 mm/s, and why should an operator not simply enter an 8 mm offset?</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answers:</strong> The sensor establishes when an object crosses a reference location; the encoder measures subsequent conveyor motion. Resolution is 20 counts/mm. Different edge-counting modes, gearing and configuration can change displayed counts. Scale error, missing pulses, slip and frame direction can create distance-dependent drift. A 40 ms delay corresponds to 8 mm at the stated speed, but a controller may compensate internally and a manual offset can introduce additional error.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A robot can pick up a moving product when it knows where the product started and how far it has traveled. The sensor marks the starting moment, the encoder measures conveyor motion, and the tracking frame explains the belt's direction. Accurate timing and a calibrated gripper help the robot meet the product in motion.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>If a pick misses, technicians should examine those measurements together. A wrong distance scale, missed sensor signal or misaligned frame can produce similar symptoms. Careful diagnosis protects the equipment and keeps people outside the danger area while authorized specialists make and verify changes.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Primary References and Further Study</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Manufacturer sources: <a href="https://knowledge.motoman.com/hc/en-us/articles/4408233115159-Conveyor-Tracking-Setup">Yaskawa Motoman: Conveyor Tracking Setup</a>, <a href="https://www.fanucamerica.com/products/software/robot/line-tracking">FANUC America: Line Tracking</a>, and <a href="https://www.abb.com/global/en/areas/robotics/products/equipment/conveyor-tracking-module">ABB: Conveyor Tracking Module</a>. Related BitcoinVersus.Tech lessons include <a href="https://bitcoinversus.tech/2026/10/12/osrtc-008-robot-vision-calibration-troubleshooting/">robot vision calibration</a>, <a href="https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/">TCP setup</a>, <a href="https://bitcoinversus.tech/2026/10/07/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting/">robot I/O and PLC handshakes</a>, <a href="https://bitcoinversus.tech/2026/10/08/osrtc-006-robot-alarm-fault-recovery-servo-encoder-overtravel-protective-stop-troubleshooting/">robot fault recovery</a> and <a href="https://bitcoinversus.tech/2026/10/29/osrtc-015-robotic-tool-changer-inspection-lock-sensors-docking-utility-couplers/">tool-changer inspection</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>BitcoinVersus.Tech Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our independent technical education and research, please scan the original QR code below to donate <strong>5,000 sats</strong> (best results on a laptop or larger screen).</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech Bitcoin donation QR code for 5,000 satoshis" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>To donate with a mobile wallet, display the QR code on a laptop or larger screen and scan it from your phone. Verify the recipient Bitcoin address before sending.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p><!-- /wp:paragraph -->

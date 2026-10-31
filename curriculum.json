@@ -243,19 +243,19 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 5,
-        "title": "OSREC.005: Robot Dynamics and Torque Control — Mass Matrices, Gravity, Inverse Dynamics, and Computed Torque",
-        "wordpress_post_id": 21565,
-        "live_url": "https://bitcoinversus.tech/2026/10/07/osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque/",
-        "archive_path": "archive/2026/10/osrec-005-robot-dynamics-torque-control-mass-matrices-gravity-inverse-dynamics-computed-torque.md",
+        "lesson_number": 13,
+        "title": "OSREC.013: Robot State Estimation — Kalman Filters, Sensor Fusion and Uncertainty",
+        "wordpress_post_id": 27585,
+        "live_url": "https://bitcoinversus.tech/2026/10/31/osrec-013-robot-state-estimation-kalman-filters-sensor-fusion-uncertainty/",
+        "archive_path": "archive/2026/10/osrec-013-robot-state-estimation-kalman-filters-sensor-fusion-uncertainty.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ],
-        "verification_status": "verified; duplicate lesson number 5 preserved as post 21571"
+        "verification_status": "published; read-back confirmed 2 native Gutenberg YouTube embeds and 2 rendered YouTube iframes, 1200x630 cover, required footer; exact three-repository source archives; browser playback and desktop/mobile visual verification unverified"
       },
-      "next_lesson_number": 6
+      "next_lesson_number": 14
     },
     {
       "subject": "data_center_technician",

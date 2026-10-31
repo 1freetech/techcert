@@ -38,12 +38,12 @@ https://www.youtube.com/watch?v=1fOA85xtYxs
 
 <!-- wp:paragraph --><p>A metrology system's apparent precision is not a complete accuracy guarantee. Target asymmetry, film stack changes, illumination, resist development, etch effects and tool-specific bias can shift the measurement. Engineers therefore assess repeatability, reproducibility, total measurement uncertainty, and the difference between after-develop inspection and later process states. <a href="https://www.asml.com/en/technology/lithography-principles/measuring-accuracy">ASML's optical metrology explanation</a> describes its diffraction-based YieldStar approach to evaluating overlay and focus, while a <a href="https://doi.org/10.1088/2051-672x/4/2/023001">peer-reviewed review of optical wafer metrology</a> explains alignment sensors, leveling sensors and scatterometers.</p><!-- /wp:paragraph -->
 
-<!-- wp:paragraph --><p>The next video surveys overlay marks, measurement models and the distinction between scanner alignment and overlay metrology. It is a detailed educational treatment rather than a manufacturer-specific operating instruction.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>The replacement video is <strong>Branch Education’s EUV lithography walkthrough</strong>, created in collaboration with ASML. Its <strong>wafer-alignment section begins at 32:27</strong> and shows how a lithography system positions the wafer for accurate layer registration. This is a scanner-alignment demonstration rather than a full tutorial on optical overlay targets; the preceding <a href="https://www.asml.com/en/technology/lithography-principles/measuring-accuracy">ASML metrology reference</a> provides the complementary explanation of diffraction-based overlay measurements.</p><!-- /wp:paragraph -->
 
-<!-- wp:embed {"url":"https://www.youtube.com/watch?v=AmKUNuN-ugE","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=B2482h_TNwg","type":"video","providerNameSlug":"youtube","responsive":true} -->
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
-https://www.youtube.com/watch?v=AmKUNuN-ugE
-</div><figcaption class="wp-element-caption"><em>SemiSlides — Photolithography Part 3: Alignment &amp; Overlay. See the sections on overlay vectors, metrology targets and correction models.</em></figcaption></figure>
+https://www.youtube.com/watch?v=B2482h_TNwg
+</div><figcaption class="wp-element-caption"><em>Branch Education, with ASML — The $200M Machine that Prints Microchips: The EUV Photolithography System. Wafer-alignment section at 32:27.</em></figcaption></figure>
 <!-- /wp:embed -->
 
 <!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Wafer Maps, Sampling and Statistical Control</h2><!-- /wp:heading -->

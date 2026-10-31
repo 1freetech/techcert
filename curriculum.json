@@ -177,19 +177,19 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 5,
-        "title": "OSSTC.005: Semiconductor Pneumatic Systems — CDA, Regulators, Solenoid Valves, Cylinders, Sensors, and Troubleshooting",
-        "wordpress_post_id": 21521,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/osstc-005-semiconductor-pneumatic-systems-cda-regulators-solenoid-valves-cylinders-sensors-troubleshooting/",
-        "archive_path": "archive/2026/10/osstc-005-semiconductor-pneumatic-systems-cda-regulators-solenoid-valves-cylinders-sensors-troubleshooting.md",
+        "lesson_number": 15,
+        "title": "OSSTC.015: Chamber Pressure Control — Vacuum Gauges, Throttle Valves, and Pumpdown Diagnostics",
+        "wordpress_post_id": 27535,
+        "live_url": "https://bitcoinversus.tech/2026/10/31/osstc-015-chamber-pressure-control-vacuum-gauges-throttle-valves-pumpdown/",
+        "archive_path": "archive/2026/10/osstc-015-chamber-pressure-control-vacuum-gauges-throttle-valves-pumpdown.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ],
-        "verification_status": "verified"
+        "verification_status": "published; exact GitHub archives verified; live visual/playback QA unverified"
       },
-      "next_lesson_number": 6
+      "next_lesson_number": 16
     },
     {
       "subject": "semiconductor_engineer",

@@ -221,19 +221,19 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 5,
-        "title": "OSRTC.005: Robot I/O and PLC Handshakes — Digital Inputs, Outputs, Ready/Busy/Fault Signals, Sensors, Interlocks, and Troubleshooting",
-        "wordpress_post_id": 21550,
-        "live_url": "https://bitcoinversus.tech/2026/10/07/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting/",
-        "archive_path": "archive/2026/10/osrtc-005-robot-io-plc-handshakes-digital-inputs-outputs-ready-busy-fault-signals-sensors-interlocks-troubleshooting.md",
+        "lesson_number": 16,
+        "title": "OSRTC.016: Robot Conveyor Tracking — Encoder Pulses, Sensor Triggers, Tracking Frames and Diagnostics",
+        "wordpress_post_id": 27572,
+        "live_url": "https://bitcoinversus.tech/2026/10/31/osrtc-016-robot-conveyor-tracking-encoders-sensors-tracking-frames/",
+        "archive_path": "archive/2026/10/osrtc-016-robot-conveyor-tracking-encoders-sensors-tracking-frames.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ],
-        "verification_status": "published_source_archived; video and footer QA unresolved"
+        "verification_status": "WordPress published and source-read-back verified; exact 3-repository archives; two YouTube iframe renders and 1200x630 featured cover verified; browser playback and desktop/mobile visual QA not verified"
       },
-      "next_lesson_number": 6
+      "next_lesson_number": 17
     },
     {
       "subject": "robotics_engineer",

@@ -265,19 +265,19 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 4,
-        "title": "OSDCTC.004: Server Rack-and-Stack — Rail Kits, U Positions, Airflow, Power, Network, and Verification",
-        "wordpress_post_id": 21329,
-        "live_url": "https://bitcoinversus.tech/2026/10/06/osdctc-004-server-rack-and-stack-rail-kits-u-positions-airflow-power-network-verification/",
-        "archive_path": "archive/2026/10/osdctc-004-server-rack-and-stack-rail-kits-u-positions-airflow-power-network-verification.md",
+        "lesson_number": 16,
+        "title": "OSDCTC.016: Liquid-Cooling Monitoring — CDU Telemetry, Leak Detection and Supply/Return Temperatures",
+        "wordpress_post_id": 27601,
+        "live_url": "https://bitcoinversus.tech/2026/10/31/osdctc-016-liquid-cooling-monitoring-cdu-telemetry-leak-detection/",
+        "archive_path": "archive/2026/10/osdctc-016-liquid-cooling-monitoring-cdu-telemetry-leak-detection.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ],
-        "verification_status": "verified"
+        "verification_status": "published; original featured cover 1200x630 verified; two Gutenberg YouTube embeds and two iframe renders confirmed; exact source archived across three repositories; actual playback and desktop/mobile visual QA not verified"
       },
-      "next_lesson_number": 5
+      "next_lesson_number": 17
     },
     {
       "subject": "data_center_engineer",

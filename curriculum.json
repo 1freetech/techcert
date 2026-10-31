@@ -309,19 +309,19 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 5,
-        "title": "OSFOTC.005: Optical Loss Testing Workflow — Inspect, Clean, Reference, Test, Record, and Troubleshoot",
-        "wordpress_post_id": 21594,
-        "live_url": "https://bitcoinversus.tech/2026/10/07/osfotc-005-optical-loss-testing-workflow-inspect-clean-reference-test-record-troubleshoot/",
-        "archive_path": "archive/2026/10/osfotc-005-optical-loss-testing-workflow-inspect-clean-reference-test-record-troubleshoot.md",
+        "lesson_number": 15,
+        "title": "OSFOTC.015: Passive Optical Splitter Field Testing — PON Power, Loss Budgets and OTDR Limits",
+        "wordpress_post_id": 27657,
+        "live_url": "https://bitcoinversus.tech/2026/10/31/osfotc-015-passive-optical-splitter-field-testing-pon-power-otdr/",
+        "archive_path": "archive/2026/10/osfotc-015-passive-optical-splitter-field-testing-pon-power-otdr.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ],
-        "verification_status": "verified"
+        "verification_status": "published, read-back 2 native YouTube embeds and 2 rendered iframes, featured cover 1200x630; original QR, editor's note and disclaimer verified; exact source archives verified in three GitHub repositories; actual playback and desktop/mobile visual QA unverified"
       },
-      "next_lesson_number": 6
+      "next_lesson_number": 16
     },
     {
       "subject": "fiber_optics_engineer",

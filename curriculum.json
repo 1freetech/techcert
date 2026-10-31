@@ -199,19 +199,19 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 5,
-        "title": "OSSEC.005: MOS Capacitor Physics — Accumulation, Depletion, Inversion, Oxide Capacitance, Threshold Voltage, and C–V Behavior",
-        "wordpress_post_id": 21537,
-        "live_url": "https://bitcoinversus.tech/2026/10/07/ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior/",
-        "archive_path": "archive/2026/10/ossec-005-mos-capacitor-physics-accumulation-depletion-inversion-oxide-capacitance-threshold-voltage-cv-behavior.md",
+        "lesson_number": 14,
+        "title": "OSSEC.014: Lithography Overlay Engineering — Alignment, Error Vectors, Metrology and Correction",
+        "wordpress_post_id": 27553,
+        "live_url": "https://bitcoinversus.tech/2026/10/31/ossec-014-lithography-overlay-engineering-alignment-metrology-correction/",
+        "archive_path": "archive/2026/10/ossec-014-lithography-overlay-engineering-alignment-metrology-correction.md",
         "source_match_verified_repositories": [
           "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
           "1freetech/opencert.tech"
         ],
-        "verification_status": "verified"
+        "verification_status": "published and three exact GitHub source archives verified; two native YouTube iframe renders and cover verified; playback and visual desktop/mobile QA not verified"
       },
-      "next_lesson_number": 6
+      "next_lesson_number": 15
     },
     {
       "subject": "robotics_technician",

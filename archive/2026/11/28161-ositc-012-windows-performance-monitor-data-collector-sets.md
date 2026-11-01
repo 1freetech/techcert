@@ -13,19 +13,21 @@ featured_style: "wordless comic editorial artwork"
 featured_person: "Fictional Pacific Islander adult male IT engineer, 30s-40s"
 in_story_media_count: 4
 in_story_media:
-  - "YouTube SxlsDOddBXI: Darien's Tips Performance Monitor counters and collector set walkthrough (2026)"
-  - "WordPress image 28154: original conceptual performance time-series diagram"
-  - "WordPress image 28155: original conceptual data collection and report workflow"
-  - "YouTube XQjs7KW43Uk: David Dalton Windows Performance Monitor counters, collector sets and alerts (2025)"
+  - "YouTube nPe2cYWmc5k: source-verified tutorial, rendered in published WordPress HTML"
+  - "YouTube SxlsDOddBXI: source-verified tutorial, rendered in published WordPress HTML"
+  - "YouTube nOHaSlk_LNI: source-verified tutorial, rendered in published WordPress HTML"
+  - "YouTube XQjs7KW43Uk: source-verified tutorial, rendered in published WordPress HTML"
 video_embed_method: "WordPress core/shortcode [youtube canonical YouTube URL]"
-video_render_qa: "Two real YouTube iframe src URLs returned by published WordPress posts.get context=view, captions immediately after their blocks. This checks rendered HTML, NOT actual player playback."
+video_embed_qa: "Updated 2026-11-01, 4 distinct iframe players verified in published WordPress HTML; reader-device playback untested."
 code_qa: "Pre-publication logman counter argument double-backslash defect discovered and repaired via post-sections.update; post-publication correct single-slash counter paths verified."
 internal_links_count: 9
 original_sources: ["https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/troubleshoot-performance-problems-in-windows", "https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor", "https://learn.microsoft.com/en-us/windows/win32/perfctrs/performance-counters-tools", "https://learn.microsoft.com/en-us/windows/win32/perfctrs/collecting-performance-data"]
-qa_status: "WordPress published title and SEO, two iframe video players, two image blocks with captions, 1200x630 featured cover, 9 internal links, Microsoft sources, unchanged Editor's Note, original QR and disclaimer. Independent public-page fetch inaccessible; actual playback and desktop/mobile screenshots unverified."
+qa_status: "Media correction on 2026-11-01: 4 distinct video iframes confirmed, all concept images removed, featured cover and donation QR retained. Public browser screenshots and playback not independently tested."
 next_main_subject: "c"
 plain_unboxed_code_examples_count: 1
 november_1_2026_layout_repair: "Converted 1 previously boxed Gutenberg code blocks into transparent borderless no-shadow semantic preformatted code blocks, preserving all code text, videos, diagrams, source citations and approved footer; WordPress published view readback passed."
+conceptual_in_body_images_count: 0
+november_2026_concept_image_replacement: "Removed original concept images 28154, 28155 and replaced with relevant YouTube tutorials nPe2cYWmc5k, SxlsDOddBXI, nOHaSlk_LNI, XQjs7KW43Uk. New player rendering and captions verified."
 ---
 
 <!-- wp:paragraph --><p><strong>Windows Performance Monitor (PerfMon)</strong> is an operating-system tool for collecting numerical performance counters and viewing them as live or recorded time series. Rather than simply asking “is the computer slow right now?”, PerfMon lets an IT technician measure how CPU, memory, storage and networking conditions change over seconds, minutes or hours. <strong>Data Collector Sets</strong> preserve measurements for later comparison, turning an intermittent complaint into time-stamped evidence.</p><!-- /wp:paragraph -->
@@ -42,7 +44,13 @@ november_1_2026_layout_repair: "Converted 1 previously boxed Gutenberg code bloc
 
 <!-- wp:paragraph --><p>A typical path looks like <code>\Processor(_Total)\% Processor Time</code>. The <code>Processor</code> object includes the <code>_Total</code> instance, while <code>% Processor Time</code> is the counter. Instances available on one PC might not appear on another. Counter names can differ by Windows language, installed roles and device drivers. Always enumerate the real target system before assuming a path exists.</p><!-- /wp:paragraph -->
 
-<!-- wp:image {"id":28154,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/performance-monitoring-e28094-from-counters-to-baseline-time-series-e28094-conceptual-illustration.png" alt="Original conceptual graphic of CPU, memory, storage and network counter time series being collected and saved for investigation" class="wp-image-28154" /><figcaption class="wp-element-caption"><em>Original conceptual illustration of Windows counter collection over time. The curves are <strong>synthetic</strong>, not live operating-system measurements or a Microsoft interface screenshot.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=nPe2cYWmc5k]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Video: HomeLabNow — Windows Server 2025 Performance Monitor Step by Step (2026). Demonstrates CPU, memory, disk and network counters and reports.</em></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:heading --><h2 class="wp-block-heading">What a baseline means</h2><!-- /wp:heading -->
 
@@ -86,7 +94,13 @@ logman stop OSITC012_Diag</code></pre>
 
 <!-- wp:paragraph --><p>This example writes to <code>C:\PerfLogs</code>. On devices where the folder or a counter is inaccessible, use the approved path and the appropriate rights rather than weakening directory permissions. The selected sample interval is 15 seconds, but it can miss brief sub-second latency spikes; tighter capture or a different diagnostic tool may be needed. Microsoft's <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/troubleshoot-performance-problems-in-windows">scenario guide</a> documents <code>logman.exe</code> create, start and stop operations and offers a larger set of counters for authorized support captures.</p><!-- /wp:paragraph -->
 
-<!-- wp:image {"id":28155,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/windows-data-collector-sets-capture-and-review-workflow-e28094-editorial-concept.png" alt="Conceptual illustration of performance counter telemetry being written into a log file before review in a historical report" class="wp-image-28155" /><figcaption class="wp-element-caption"><em>Original illustrative flow of <strong>collect → store → analyze</strong>. It does not depict an actual Data Collector Set screen, customer log, or measured Windows performance.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=nOHaSlk_LNI]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Video: CBT Nuggets — How to Use Data Collection Sets in Windows Perfmon (2014). Shows creating and reading a Data Collector Set; interface version is historical.</em></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>Prefer bounded logs to unlimited background collection: log files can accumulate and can expose application names, user activity, host identifiers and usage patterns. Store diagnostics according to retention rules, avoid personal folders and credentials in shared report packages, and remove temporary collectors when a troubleshooting ticket is closed.</p><!-- /wp:paragraph -->
 

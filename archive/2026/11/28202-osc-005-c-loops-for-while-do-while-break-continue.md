@@ -14,19 +14,21 @@ featured_style: "photo/anime blend"
 featured_person: "Fictional adult multiracial woman C programmer aged 35–45"
 in_story_media_count: 4
 in_story_media:
-  - "WordPress 28191: original for-loop control-flow diagram"
-  - "YouTube KJgsSFOSQv0: freeCodeCamp.org C Programming Tutorial for Beginners (2018), while and for chapters"
-  - "WordPress 28192: original while vs do-while flowchart"
-  - "YouTube 87SH2Cn0s9A: Bro Code C Programming Full Course (2021), loops and break/continue chapters"
+  - "YouTube Bz4MxDeEM6k: source-verified tutorial, rendered in published WordPress HTML"
+  - "YouTube KJgsSFOSQv0: source-verified tutorial, rendered in published WordPress HTML"
+  - "YouTube 8TZE6FedtTw: source-verified tutorial, rendered in published WordPress HTML"
+  - "YouTube 87SH2Cn0s9A: source-verified tutorial, rendered in published WordPress HTML"
 video_embed_method: "WordPress native YouTube shortcode blocks with canonical watch URLs"
-video_render_qa: "Both video IDs confirmed as genuine YouTube iframe srcs in WordPress published HTML, with captions immediately after videos. No independent playback test."
+video_embed_qa: "Updated 2026-11-01, 4 distinct iframe players verified in published WordPress HTML; reader-device playback untested."
 code_qa: "The complete standalone example compiled with gcc -std=c11 -Wall -Wextra -Wpedantic; stdout exactly matched lesson's expected output. Additional snippets structurally reviewed; not all independently compiled."
 internal_link_count: 9
 original_sources: ["https://en.cppreference.com/w/c/language/for", "https://en.cppreference.com/w/c/language/while", "https://en.cppreference.com/w/c/language/do", "https://en.cppreference.com/w/c/language/break", "https://en.cppreference.com/w/c/language/continue", "https://learn.microsoft.com/en-us/cpp/c-language/statements-c"]
-qa_status: "Published WordPress edit and rendered readback verified both video iframes, captions, diagrams, 8 code blocks, title and SEO ID, 1200x630 cover, original Editor's Note, QR, disclaimer and retired footer absent. Independent public-device playback, mobile/desktop visual QA and cover anatomy not confirmed."
+qa_status: "Media correction on 2026-11-01: 4 distinct video iframes confirmed, all concept images removed, featured cover and donation QR retained. Public browser screenshots and playback not independently tested."
 next_main_subject: "rust"
 plain_unboxed_code_examples_count: 8
 november_1_2026_layout_repair: "Converted 8 previously boxed Gutenberg code blocks into transparent borderless no-shadow semantic preformatted code blocks, preserving all code text, videos, diagrams, source citations and approved footer; WordPress published view readback passed."
+conceptual_in_body_images_count: 0
+november_2026_concept_image_replacement: "Removed original concept images 28191, 28192 and replaced with relevant YouTube tutorials Bz4MxDeEM6k, KJgsSFOSQv0, 8TZE6FedtTw, 87SH2Cn0s9A. New player rendering and captions verified."
 ---
 
 <!-- wp:paragraph --><p><strong>A loop</strong> is a C-language control structure that repeats a statement or compound block while a condition allows execution. The standard C constructs are <code>for</code>, <code>while</code> and <code>do-while</code>. Each can express repetition, but they differ in initialization placement, test timing, update behavior and what happens when a loop body must be interrupted.</p><!-- /wp:paragraph -->
@@ -58,7 +60,13 @@ november_1_2026_layout_repair: "Converted 8 previously boxed Gutenberg code bloc
 
 <!-- wp:paragraph --><p>The loop executes exactly five times because it starts at zero and stops once <code>i &lt; 5</code> is false. The declaration <code>int i = 0</code> inside the initialization clause requires C99 or later; in that form, the name <code>i</code> has the loop's scope rather than leaking into subsequent statements. This is an example of an <strong>exclusive upper bound</strong>. To produce 1 through 5 inclusive, start at one and compare <code>i &lt;= 5</code>.</p><!-- /wp:paragraph -->
 
-<!-- wp:image {"id":28191,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/c-for-loop-control-flow-e28094-wordless-technical-diagram.png" alt="Original wordless for-loop flowchart depicting initialization, pretest condition, body, update and a termination path" class="wp-image-28191" /><figcaption class="wp-element-caption"><em>Original conceptual flowchart of a <code>for</code> loop. Arrows illustrate initialization, testing, body, update and exit; not actual machine code or a compiler-generated control-flow graph.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=Bz4MxDeEM6k]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Video: Caleb Curry — C Programming All-in-One Tutorial Series (2019). For loops begin at 6:58:22; the video also covers while, do-while, break and continue.</em></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>For a known collection length, use a counter and a bounds condition rather than a sentinel that might never appear. Large indexes may be represented with <code>size_t</code>, which is designed for object sizes, but even that type is not immune to wraparound if incremented beyond its maximum. Prefer conditions that respect the actual array length and avoid unbounded arithmetic.</p><!-- /wp:paragraph -->
 
@@ -100,7 +108,13 @@ do {
 /* Prints Attempt 1, then Attempt 2. */</code></pre>
 <!-- /wp:html -->
 
-<!-- wp:image {"id":28192,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/c-while-versus-do-while-e28094-wordless-flow-comparison.png" alt="Wordless two-column flowchart comparing a while loop that tests before its body with a do while loop that tests after the body" class="wp-image-28192" /><figcaption class="wp-element-caption"><em>Original conceptual comparison: the left path tests <em>before</em> the body (<code>while</code>), while the right performs the body <em>before</em> testing (<code>do-while</code>). Neither drawing depicts actual execution measurements.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=8TZE6FedtTw]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Video: ProgrammingKnowledge — C Loops: for, while and do-while (2021). Distinct visual demonstration of pre-test and post-test loops.</em></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>Choose <code>do-while</code> only when executing the body once is legitimate and safe. It is not a shortcut for checking whether an array contains data; a do-while body that indexes an empty array could access invalid memory before the condition can prevent it. See <a href="https://learn.microsoft.com/en-us/cpp/c-language/do-while-statement-c">Microsoft's C-specific do-while documentation</a>.</p><!-- /wp:paragraph -->
 

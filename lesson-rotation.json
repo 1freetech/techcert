@@ -139,10 +139,11 @@
     },
     "java": {
       "acronym": "OSJava",
-      "next_lesson_number": 5,
-      "last_published_lesson_number": 4,
-      "last_wordpress_post_id": 28319,
-      "source_resolution": "OSJava.004 published and tested with Java 21 on November 1. Next Java track lesson is OSJava.005; complete rotation advances to JavaScript."
+      "next_lesson_number": 6,
+      "last_published_lesson_number": 5,
+      "last_wordpress_post_id": 28323,
+      "source_resolution": "OSJava.004 Control Flow (WP 28319) remained canonical after simultaneous publication collision; OSJava.005 Strings (WP 28323) renumbered and archived identically to 3 repositories on Nov 1. Next Java .006. Main rotation remains JavaScript .004.",
+      "last_published_title": "OSJava.005: Java Strings — Literals, Immutability, equals(), length(), and substring()"
     },
     "javascript": {
       "acronym": "OSJavaScript",
@@ -281,25 +282,22 @@
   },
   "last_published": {
     "subject": "java",
-    "lesson_number": 4,
-    "title": "OSJava.004: Control Flow — if, switch, for, while, do-while, break, and continue",
-    "public_title": "OSJava.004: Control Flow — if, switch, for, while, do-while, break, and continue",
-    "wordpress_post_id": 28319,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/osjava-004-control-flow-if-switch-for-while-do-while-break-continue/",
-    "archive_path": "archive/2026/11/28319-osjava-004-control-flow-if-switch-for-while-do-while-break-continue.md",
+    "lesson_number": 5,
+    "title": "OSJava.005: Java Strings — Literals, Immutability, equals(), length(), and substring()",
+    "wordpress_post_id": 28323,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/osjava-005-java-strings-literals-immutability-equals-length-substring/",
+    "archive_path": "archive/2026/11/28323-osjava-005-java-strings-literals-immutability-equals-length-substring.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "Published WordPress view/edit confirms three native YouTube iframes, eight transparent line-wrapping code/output examples, five internal links, user-supplied painting actually used as featured image at exactly 1200x630, approved lesson footer. The complete Main.java source compiled and ran under OpenJDK 21.0.12.1. Public browser playback/mobile visual checks unverified.",
+    "qa_status": "OSJava.005 published after separate OSJava.004 Control Flow publication; duplicate lesson number repaired. WordPress saved and rendered checks show three native YouTube iframes, 1200x630 cover media 28317, unboxed code and footer. StringLab compiled and ran using Java 21.0.12.1. GitHub sources byte-identical in three repositories. Actual YouTube playback and independent mobile screenshot QA unverified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
     "compiled_code_verified": true,
-    "compiler_version": "OpenJDK 21.0.12.1",
-    "user_supplied_featured_cover": true,
-    "featured_media_id": 28314
+    "compiler_version": "javac 21.0.12.1"
   },
   "pending_publication_qa": [
     {
@@ -467,17 +465,28 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "User-supplied cover media 28314 verified 1200×630. Three YouTube iFrames WordPress-rendered; eight unboxed code/output examples verified; five contextual links; Main.java compiled and executed OpenJDK21; all three GitHub archives synced."
+    },
+    {
+      "wordpress_post_id": 28323,
+      "live_url": "https://bitcoinversus.tech/2026/11/01/osjava-005-java-strings-literals-immutability-equals-length-substring/",
+      "unresolved": [
+        "Actual YouTube playback of all three distinct video embeds not independently tested.",
+        "Desktop/mobile screenshots and cover anatomy not visually inspected."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Post .005 corrected from duplicate .004 number, three rendered YouTube iframes with captions, compiled Java and exact 3 repository source readback."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 28319,
-    "last_style": "user-supplied painterly editorial illustration",
-    "next_style": "realistic editorial photo",
-    "last_featured_person": "actual user-selected illustration of Black woman programmer, seated at two vintage computer monitors",
-    "previous_featured_person": "fictional East Asian adult male Rust systems programmer age 30s–40s",
-    "next_person_note": "Pending normal 12-slot rotation position 3: South Asian male adult in his 20s–30s (user-selected OSJava.004 image was a one-post exception; preserve alternating roster).",
-    "last_cover_media_id": 28314,
-    "last_cover_note": "User-supplied picture explicitly praised and requested to be used; original image uploaded and 1200×630 cropped version attached to published Java lesson. No new cover image was generated. Demographic/style sequence was not consumed by this exception."
+    "last_post_id": 28323,
+    "last_style": "realistic editorial photo",
+    "next_style": "anime editorial artwork",
+    "last_featured_person": "Fictional adult South Asian male Java engineer, late 20s, roster position 3",
+    "previous_featured_person": "User-selected Black woman programming painting attached to OSJava.004 (exception outside standard rotation)",
+    "next_person_note": "Next cover roster position 4: adult woman; keep alternating male/female subject order.",
+    "last_cover_media_id": 28317,
+    "last_cover_note": "1200x630 Java Strings code-relevant realistic editorial cover, no text overlays; independent image-anatomy screenshot not verified."
   },
   "specialty_track_state": {
     "oshre": {

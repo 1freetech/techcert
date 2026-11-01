@@ -2,7 +2,7 @@
 lesson_id: OSHRE.003
 track: "Open-Source Hashboard Repair Engineering"
 level: "Super-Fundamentals"
-title: "Diagnosing Missing ASIC Chips on a Hashboard"
+title: "OSHRE.003: Diagnosing Missing ASIC Chips on a Hashboard"
 post_id: 27838
 url: "https://bitcoinversus.tech/2026/11/01/hashboard-missing-asic-chip-diagnostics-test-fixtures-fault-localization/"
 published_date: "2026-11-01"

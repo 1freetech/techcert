@@ -48,36 +48,35 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "java",
+    "subject": "javascript",
     "lesson_number": 4,
-    "title": "OSJava.004: Control Flow — if, switch, for, while, do-while, break, and continue",
-    "public_title": "OSJava.004: Control Flow — if, switch, for, while, do-while, break, and continue",
-    "wordpress_post_id": 28319,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/osjava-004-control-flow-if-switch-for-while-do-while-break-continue/",
-    "archive_path": "archive/2026/11/28319-osjava-004-control-flow-if-switch-for-while-do-while-break-continue.md",
+    "title": "OSJavaScript.004: Operators, Expressions, and Type Coercion — ==, ===, ??, and ?.",
+    "public_title": "OSJavaScript.004: Operators, Expressions, and Type Coercion — ==, ===, ??, and ?.",
+    "wordpress_post_id": 28367,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining/",
+    "archive_path": "archive/2026/11/28367-osjavascript-004-operators-expressions-type-coercion.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "All Java code and output text boxes removed on Nov 1, 2026. OSJava.004: 8 unboxed, line-preserving examples; OSJava.005: 6. Inline code backgrounds, borders, padding and shadows suppressed. WP saved and rendered HTML verifies zero <pre> and zero wp-block-code; three YouTube iframe embeds, covers and footer retained. Exact revised Gutenberg body synced to BitcoinVersus, OpenCert and TechCert. Independent mobile screenshots and actual video playback unverified.",
+    "qa_status": "Published WordPress confirmed 3 distinct YouTube iframes with captions, 7 plain borderless line-wrapping code examples, 6 contextual internal links, 1200x630 JavaScript code-specific anime cover, exact approved lesson footer. Node.js v22.16.0 syntax and output checks passed. External browser playback and mobile screenshot not independently verified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
     "compiled_code_verified": true,
-    "compiler_version": "OpenJDK 21.0.12.1",
-    "user_supplied_featured_cover": true,
-    "featured_media_id": 28314
+    "runtime_version": "Node.js v22.16.0",
+    "featured_media_id": 28363
   },
   "next": {
-    "subject": "javascript",
+    "subject": "html",
     "lesson_number": 4,
-    "title_format": "OSJavaScript.004: {topic}",
-    "public_title_format": "OSJavaScript.004: {topic}",
-    "expected_topic": "Next distinct JavaScript lesson after OSJavaScript.003 Variables and Constants: operators, expressions and type coercion; verify content against complete inventory and publication history before writing.",
-    "resolution_note": "43-subject full rotation advances Java → JavaScript after WordPress published OSJava.004 and identical archive files were created in BitcoinVersus, OpenCert and TechCert; OSJavaScript.004 absent from live WordPress search on 2026-11-01."
+    "title_format": "OSHTML.004: {topic}",
+    "public_title_format": "OSHTML.004: {topic}",
+    "expected_topic": "Next distinct HTML lesson after OSHTML.003 Attributes. Select lesson #4 using complete curriculum and confirm nonduplication before authoring.",
+    "resolution_note": "After OSJavaScript.004 confirmed published and archived across all 3 repositories, complete 43-subject rotation advances to HTML. WordPress confirms OSHTML.003 already exists, OSHTML.004 is next track slot."
   },
-  "next_after_current": "html",
+  "next_after_current": "php",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -147,7 +146,10 @@
     },
     "javascript": {
       "acronym": "OSJavaScript",
-      "next_lesson_number": 4
+      "next_lesson_number": 5,
+      "last_published_lesson_number": 4,
+      "last_wordpress_post_id": 28367,
+      "source_resolution": "OSJavaScript.004 operators and coercion published November 1, Node syntax/output verified; next JavaScript lesson OSJavaScript.005; overall next subject HTML."
     },
     "html": {
       "acronym": "OSHTML",
@@ -281,23 +283,25 @@
     }
   },
   "last_published": {
-    "subject": "java",
-    "lesson_number": 5,
-    "title": "OSJava.005: Java Strings — Literals, Immutability, equals(), length(), and substring()",
-    "wordpress_post_id": 28323,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/osjava-005-java-strings-literals-immutability-equals-length-substring/",
-    "archive_path": "archive/2026/11/28323-osjava-005-java-strings-literals-immutability-equals-length-substring.md",
+    "subject": "javascript",
+    "lesson_number": 4,
+    "title": "OSJavaScript.004: Operators, Expressions, and Type Coercion — ==, ===, ??, and ?.",
+    "public_title": "OSJavaScript.004: Operators, Expressions, and Type Coercion — ==, ===, ??, and ?.",
+    "wordpress_post_id": 28367,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining/",
+    "archive_path": "archive/2026/11/28367-osjavascript-004-operators-expressions-type-coercion.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "All Java code and output text boxes removed on Nov 1, 2026. OSJava.004: 8 unboxed, line-preserving examples; OSJava.005: 6. Inline code backgrounds, borders, padding and shadows suppressed. WP saved and rendered HTML verifies zero <pre> and zero wp-block-code; three YouTube iframe embeds, covers and footer retained. Exact revised Gutenberg body synced to BitcoinVersus, OpenCert and TechCert. Independent mobile screenshots and actual video playback unverified.",
+    "qa_status": "Published WordPress confirmed 3 distinct YouTube iframes with captions, 7 plain borderless line-wrapping code examples, 6 contextual internal links, 1200x630 JavaScript code-specific anime cover, exact approved lesson footer. Node.js v22.16.0 syntax and output checks passed. External browser playback and mobile screenshot not independently verified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
     "compiled_code_verified": true,
-    "compiler_version": "javac 21.0.12.1"
+    "runtime_version": "Node.js v22.16.0",
+    "featured_media_id": 28363
   },
   "pending_publication_qa": [
     {
@@ -482,17 +486,28 @@
       "unboxed_code_qa": true,
       "decorative_text_boxes_present": false,
       "code_rendering": "Unboxed paragraphs with white-space:pre-wrap monospace spans; transparent inline code (no border, padding or background)."
+    },
+    {
+      "wordpress_post_id": 28367,
+      "live_url": "https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining/",
+      "unresolved": [
+        "External browser test of actual playback for three distinct YouTube players not performed because public-page fetch failed.",
+        "Desktop/mobile responsive screenshots unavailable."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Saved Gutenberg and WordPress-rendered HTML both show three native YouTube iframe players with captions; 7 plain code examples; 6 contextual internal links; 1200×630 cover; Node.js sample tested. No bare video URL fallback."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 28323,
-    "last_style": "realistic editorial photo",
-    "next_style": "anime editorial artwork",
-    "last_featured_person": "Fictional adult South Asian male Java engineer, late 20s, roster position 3",
-    "previous_featured_person": "User-selected Black woman programming painting attached to OSJava.004 (exception outside standard rotation)",
-    "next_person_note": "Next cover roster position 4: adult woman; keep alternating male/female subject order.",
-    "last_cover_media_id": 28317,
-    "last_cover_note": "1200x630 Java Strings code-relevant realistic editorial cover, no text overlays; independent image-anatomy screenshot not verified."
+    "last_post_id": 28367,
+    "last_style": "anime editorial artwork",
+    "next_style": "wordless comic",
+    "last_featured_person": "fictional adult woman JavaScript programmer working with real operator code, roster slot 4",
+    "previous_featured_person": "fictional adult South Asian male Java engineer, slot 3",
+    "next_person_note": "Slot 5: adult male professional, maintaining alternating male/female pattern; create code-relevant cover.",
+    "last_cover_media_id": 28363,
+    "last_cover_note": "Original code-centric 1200x630 anime illustration, clearly depicting strict equality, nullish coalescing and optional chaining on programming monitor; no headline overlay."
   },
   "specialty_track_state": {
     "oshre": {

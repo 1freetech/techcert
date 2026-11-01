@@ -30,10 +30,11 @@ primary_sources:
   - "https://doc.rust-lang.org/error_codes/E0515.html"
 qa_status: "Published WordPress raw/rendered readback confirms both YouTube iframes, two technical figures, title/SEO curriculum ID, 1200x630 cover, 5 internal links, no decorative text boxes, original editor note QR and disclaimer. Independent mobile/desktop page screenshots, device playback, visual anatomy check and Rust compiler execution unavailable."
 next_rust_lesson_id: "OSRust.007"
----
 plain_unboxed_code_examples_count: 10
 november_1_2026_layout_repair: "Replaced former Gutenberg code boxes with 10 plain transparent no-border preformatted HTML examples, retaining code content, media, source links and footer; published WordPress readback verified."
 november_1_2026_cover_repair: "Featured image changed from WordPress media 28222 to 28304; refreshed story-specific Rust ownership/borrowing concept; new cover 1200x630, alt text present. Actual independent image-anatomy and browser screenshot review not available."
+---
+
 <!-- wp:paragraph --><p>Rust's <strong>ownership system</strong> governs who is responsible for a value and how other parts of a program may access it. It is a foundation for memory safety without a mandatory tracing garbage collector. The compiler checks how ownership moves, how references borrow data, and whether accesses can overlap safely; it rejects many programs that could otherwise use invalid pointers or cause unsynchronized mutations.</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>This lesson follows <a href="https://bitcoinversus.tech/2026/10/14/osrust-005-control-flow-if-loop-while-for-break-continue/">OSRust.005: Control Flow</a>, the earlier <a href="https://bitcoinversus.tech/2026/10/14/osrust-004-functions-parameters-expressions-return-values/">functions and return values</a> lesson, and <a href="https://bitcoinversus.tech/2026/10/09/osrust-002-variables-let-mut-constants-shadowing-scope-type-inference/">variables, scope and mutability</a>. The two previously published OSRust.005 articles share an identifier and both cover control flow; this new lesson takes the next distinct topic instead of repeating those articles.</p><!-- /wp:paragraph -->

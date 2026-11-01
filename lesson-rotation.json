@@ -54,19 +54,19 @@
     "public_title": "OSJavaScript.004: Operators, Expressions, and Type Coercion — ==, ===, ??, and ?.",
     "wordpress_post_id": 28367,
     "live_url": "https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining/",
-    "archive_path": "archive/2026/11/28367-osjavascript-004-operators-expressions-type-coercion.md",
+    "archive_path": "archive/2026/11/28367-osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "Published WordPress confirmed 3 distinct YouTube iframes with captions, 7 plain borderless line-wrapping code examples, 6 contextual internal links, 1200x630 JavaScript code-specific anime cover, exact approved lesson footer. Node.js v22.16.0 syntax and output checks passed. External browser playback and mobile screenshot not independently verified.",
+    "qa_status": "Final Nov 1 repair: WordPress published save/view HTML confirms 3 native YouTube iframe players with immediate captions; unverified Bro Code equality ID replaced by Web Dev Simplified C5ZVC4HHgIg; 7 pre/code boxes replaced by transparent unboxed line-preserving examples and 77 inline code tags restyled; correct subject-only 1200x630 featured cover #28379, 5,000-sat QR, footer. Canonical Gutenberg body is byte-identical across BitcoinVersus, OpenCert and TechCert. Actual device video playback and responsive screenshots remain unverified; Node.js v22.16.0 program tested in separate publication pipeline. Draft companion #28365 is not a published OSJavaScript.004.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
     "compiled_code_verified": true,
     "runtime_version": "Node.js v22.16.0",
-    "featured_media_id": 28363
+    "featured_media_id": 28379
   },
   "next": {
     "subject": "html",
@@ -289,13 +289,13 @@
     "public_title": "OSJavaScript.004: Operators, Expressions, and Type Coercion — ==, ===, ??, and ?.",
     "wordpress_post_id": 28367,
     "live_url": "https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining/",
-    "archive_path": "archive/2026/11/28367-osjavascript-004-operators-expressions-type-coercion.md",
+    "archive_path": "archive/2026/11/28367-osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "Published WordPress confirmed 3 distinct YouTube iframes with captions, 7 plain borderless line-wrapping code examples, 6 contextual internal links, 1200x630 JavaScript code-specific anime cover, exact approved lesson footer. Node.js v22.16.0 syntax and output checks passed. External browser playback and mobile screenshot not independently verified. Cover refreshed Nov 1 to subject-only anime technical illustration (28379), old 28363 superseded; canonical post is 28367, duplicate competing OSJavaScript.004 post 28365 returned to draft.",
+    "qa_status": "Final Nov 1 repair: WordPress published save/view HTML confirms 3 native YouTube iframe players with immediate captions; unverified Bro Code equality ID replaced by Web Dev Simplified C5ZVC4HHgIg; 7 pre/code boxes replaced by transparent unboxed line-preserving examples and 77 inline code tags restyled; correct subject-only 1200x630 featured cover #28379, 5,000-sat QR, footer. Canonical Gutenberg body is byte-identical across BitcoinVersus, OpenCert and TechCert. Actual device video playback and responsive screenshots remain unverified; Node.js v22.16.0 program tested in separate publication pipeline. Draft companion #28365 is not a published OSJavaScript.004.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
@@ -491,12 +491,14 @@
       "wordpress_post_id": 28367,
       "live_url": "https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining/",
       "unresolved": [
-        "External browser test of actual playback for three distinct YouTube players not performed because public-page fetch failed.",
-        "Desktop/mobile responsive screenshots unavailable."
+        "Actual YouTube iframe playback not independently checked on user device or browser.",
+        "Independent desktop/mobile screenshot visual inspection not performed."
       ],
       "featured_cover_verified": true,
       "archive_source_verified": true,
-      "note": "Saved Gutenberg and WordPress-rendered HTML both show three native YouTube iframe players with captions; 7 plain code examples; 6 contextual internal links; 1200×630 cover; Node.js sample tested. No bare video URL fallback."
+      "note": "Final Nov 1 repair: WordPress published save/view HTML confirms 3 native YouTube iframe players with immediate captions; unverified Bro Code equality ID replaced by Web Dev Simplified C5ZVC4HHgIg; 7 pre/code boxes replaced by transparent unboxed line-preserving examples and 77 inline code tags restyled; correct subject-only 1200x630 featured cover #28379, 5,000-sat QR, footer. Canonical Gutenberg body is byte-identical across BitcoinVersus, OpenCert and TechCert. Actual device video playback and responsive screenshots remain unverified; Node.js v22.16.0 program tested in separate publication pipeline. Draft companion #28365 is not a published OSJavaScript.004.",
+      "unboxed_code_qa": true,
+      "decorative_text_boxes_present": false
     }
   ],
   "featured_image_rotation": {
@@ -696,5 +698,26 @@
       }
     ],
     "note": "Historical logs remain audit history only; this policy governs all future publications."
+  },
+  "javascript_004_embed_repair_2026_11_01": {
+    "canonical_wordpress_post_id": 28367,
+    "original_duplicate_post_id": 28365,
+    "duplicate_post_status": "draft (not a published lesson)",
+    "video_ids": [
+      "GKJh3vdat8A",
+      "C5ZVC4HHgIg",
+      "v2tJ3nzXh8I"
+    ],
+    "live_player_iframes_verified": 3,
+    "captioned_embeds": 3,
+    "unboxed_code_examples": 7,
+    "archive_path": "archive/2026/11/28367-osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining.md",
+    "verified_repositories": [
+      "1freetech/Bitcoinversus.tech",
+      "1freetech/techcert",
+      "1freetech/opencert.tech"
+    ],
+    "actual_playback_verified": false,
+    "mobile_view_verified": false
   }
 }

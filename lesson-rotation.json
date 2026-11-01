@@ -202,9 +202,10 @@
     },
     "hashboard_repair": {
       "acronym": "OSHRE",
-      "next_lesson_number": 5,
-      "last_published_lesson_number": 4,
-      "last_wordpress_post_id": 27857
+      "next_lesson_number": 6,
+      "last_published_lesson_number": 5,
+      "last_wordpress_post_id": 27871,
+      "photo_uniqueness_required": true
     },
     "history_of_engineering": {
       "acronym": "OSHE",
@@ -245,19 +246,19 @@
   },
   "last_published": {
     "subject": "hashboard_repair",
-    "lesson_number": 4,
-    "title": "OSHRE.004: Hashboard Temperature Sensors and Thermal Protection",
-    "public_title": "OSHRE.004: Hashboard Temperature Sensors and Thermal Protection",
-    "wordpress_post_id": 27857,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/oshre-004-hashboard-temperature-sensors-thermal-protection-lm75a-i2c/",
-    "archive_path": "archive/2026/11/27857-oshre-004-hashboard-temperature-sensors-thermal-protection.md",
-    "archive_blob_sha": "55ac3af76e79484ebdd5d812236e86f779ca2707",
+    "lesson_number": 5,
+    "title": "OSHRE.005: Hashboard Cable, Connector, and Contact Faults",
+    "public_title": "OSHRE.005: Hashboard Cable, Connector, and Contact Faults",
+    "wordpress_post_id": 27871,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/oshre-005-hashboard-cable-connectors-contact-faults/",
+    "archive_path": "archive/2026/11/27871-oshre-005-hashboard-cable-connectors-contact-faults.md",
+    "archive_blob_sha": "44087a4d933c0825d2fdaed0441df10b1e1d8208",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "published — WordPress raw and rendered HTML confirms 2 correct YouTube iframe players and 2 licensed in-story photographs; actual playback and desktop/mobile screenshots not independently tested.",
+    "qa_status": "published — WordPress rendered HTML confirms 2 distinct YouTube iframe players, three newly sourced authentic board photos, attribution, 1200×630 cover, QR and Editor's Note. Independent actual playback and mobile/desktop screenshots not tested.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false
@@ -327,23 +328,35 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "Published WordPress HTML shows both distinct YouTube iframe players with immediate captions, licensed real ASIC photos, QR and correct 1200x630 cover. Full visual/playback checks pending."
+    },
+    {
+      "wordpress_post_id": 27871,
+      "live_url": "https://bitcoinversus.tech/2026/11/01/oshre-005-hashboard-cable-connectors-contact-faults/",
+      "unresolved": [
+        "Actual playback of two YouTube videos not independently tested in a browser.",
+        "Desktop/mobile screenshot visual QA not performed; independent public web fetch inaccessible."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Two distinct rendered iframe YouTube players and three first-use licensed real hashboard photos (27864,27862,27861) verified in WordPress. No repetition of OSHRE.000–.004 photo IDs."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 27857,
-    "last_style": "wordless comic",
-    "next_style": "photo/anime blend",
-    "last_featured_person": "fictional white adult woman electronics/hashboard repair engineer aged 50s–60s",
-    "previous_featured_person": "fictional Middle Eastern/North African male hashboard engineer aged 40s–50s",
-    "next_person_note": "Continue approved 12-slot alternate male/female lesson cover roster: next slot adult Black man aged 50s–60s; next art style photo/anime blend."
+    "last_post_id": 27871,
+    "last_style": "photo/anime blend",
+    "next_style": "split-screen diptych",
+    "last_featured_person": "fictional Black adult male mining-hardware repair engineer aged 50s–60s",
+    "previous_featured_person": "fictional White adult woman electronics repair engineer aged 50s–60s",
+    "next_person_note": "Next lesson cover uses split-screen diptych with an Indigenous adult female engineer in her 30s–40s, continuing approved 12-slot alternating roster."
   },
   "specialty_track_state": {
     "oshre": {
       "acronym": "OSHRE",
-      "next_lesson_number": 5,
-      "status": "active; specialist series alongside main rotation; OSHRE.004 published November 1, 2026",
-      "last_published_lesson_number": 4,
-      "last_wordpress_post_id": 27857
+      "next_lesson_number": 6,
+      "status": "active; specialist hashboard repair series, OSHRE.005 published November 1, 2026",
+      "last_published_lesson_number": 5,
+      "last_wordpress_post_id": 27871,
+      "photo_uniqueness_required": true
     },
     "ospcb": {
       "acronym": "OSPCB",
@@ -356,7 +369,7 @@
       "status": "active; specialist series alongside main rotation"
     }
   },
-  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending. November 1, 2026 correction: curriculum IDs are required at the beginning of reader-facing lesson and SEO titles. Published OSHRE.003 WordPress post 27838 title and SEO title corrected; Gutenberg media, permalink and cover unchanged. This supersedes the ID-free October 28 title rule, not the unnumbered lesson-section style. November 1, 2026: Hashboard Repair OSHRE.004 (post 27857) published, archived in all three repos; course pointer advanced to OSHRE.005. Featured wordless comic adult female, next photo/anime blend adult Black male. Main rotation stays at OSHistory.016. Two YouTube iframe players rendered; browser playback and screenshots not independently verified.",
+  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending. November 1, 2026 correction: curriculum IDs are required at the beginning of reader-facing lesson and SEO titles. Published OSHRE.003 WordPress post 27838 title and SEO title corrected; Gutenberg media, permalink and cover unchanged. This supersedes the ID-free October 28 title rule, not the unnumbered lesson-section style. November 1, 2026: Hashboard Repair OSHRE.004 (post 27857) published, archived in all three repos; course pointer advanced to OSHRE.005. Featured wordless comic adult female, next photo/anime blend adult Black male. Main rotation stays at OSHistory.016. Two YouTube iframe players rendered; browser playback and screenshots not independently verified. November 1, 2026: OSHRE.005 (post 27871) published with three NEW board photographs, distinct from all prior OSHRE lessons, and two video players; archives verified in three repos. OSHRE pointer advanced to .006. Photo rotation policy added; main rotation pointer retained at OSHistory.016; next cover split-screen diptych with Indigenous female professional. Independent browser/playback QA pending.",
   "public_lesson_presentation": {
     "effective_date": "2026-11-01",
     "style": "textbook / wiki / encyclopedia / dictionary",
@@ -370,5 +383,74 @@
     "historical_posts": "Apply to future publications and any current article the user explicitly asks to correct; no automatic mass-renaming.",
     "curriculum_id_required_in_public_title": true,
     "curriculum_id_and_sequential_number_required_in_seo_title": true
+  },
+  "hashboard_repair_photo_rotation": {
+    "effective_date": "2026-11-01",
+    "start_lesson": "OSHRE.005",
+    "require_new_genuine_hashboard_photos": true,
+    "target_distinct_photos_per_lesson": 2,
+    "no_photo_reuse_across_oshre": true,
+    "validate_original_source_url_and_actual_visual_identity": true,
+    "require_creator_license_model_attribution": true,
+    "exclude_featured_cover_and_donation_qr": true,
+    "lessons": {
+      "OSHRE.000": {
+        "wordpress_post_id": 26769,
+        "in_story_photo_ids": [
+          26765,
+          21674,
+          21686
+        ]
+      },
+      "OSHRE.001": {
+        "wordpress_post_id": 26788,
+        "in_story_photo_ids": [
+          23660
+        ]
+      },
+      "OSHRE.002": {
+        "wordpress_post_id": 26845,
+        "in_story_photo_ids": [
+          21674
+        ]
+      },
+      "OSHRE.003": {
+        "wordpress_post_id": 27838,
+        "in_story_photo_ids": [
+          21674,
+          21686
+        ]
+      },
+      "OSHRE.004": {
+        "wordpress_post_id": 27857,
+        "in_story_photo_ids": [
+          21686,
+          21674
+        ]
+      },
+      "OSHRE.005": {
+        "wordpress_post_id": 27871,
+        "in_story_photo_ids": [
+          27864,
+          27862,
+          27861
+        ],
+        "source_urls": [
+          "https://en.bitcoin.it/wiki/File:Avalon2-modular-top-side.jpg",
+          "https://en.bitcoin.it/wiki/File:Avlaon2-modular-fan-connector.jpg",
+          "https://commons.wikimedia.org/wiki/File:Плата_для_майнинга.jpg"
+        ]
+      }
+    },
+    "known_used_photo_ids": [
+      26765,
+      21674,
+      21686,
+      23660,
+      27864,
+      27862,
+      27861
+    ],
+    "next": "OSHRE.006 — source new genuine photos, never reusing any known_used_photo_ids or underlying originals."
   }
 }

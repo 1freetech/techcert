@@ -7,13 +7,14 @@ post_id: 27838
 url: "https://bitcoinversus.tech/2026/11/01/hashboard-missing-asic-chip-diagnostics-test-fixtures-fault-localization/"
 published_date: "2026-11-01"
 wordpress_category_ids: [57414501, 792778074, 284207, 2509703]
-featured_media_id: 27836
+featured_media_id: 27845
 featured_image_dimensions: "1200x630"
-featured_art_style: "Realistic editorial photograph (AI-generated scene, not documentary)"
+featured_art_style: "Anime editorial artwork"
+featured_person: "Fictional Middle Eastern/North African adult male hashboard engineer, aged 40s-50s"
 in_story_media_count: 4
 in_story_media: ["21674: real BM1387B ASIC photo, CC BY 4.0", "s7Fy8r3uNXc: ZEUS MINING universal tester video", "21686: real board-level maintenance photo, CC BY-SA 2.0", "j2MEHNfxMcU: D-Central Antminer 19-series repair video"]
 video_embed_method: "Gutenberg core/shortcode; [youtube https://www.youtube.com/watch?v=VIDEO_ID]"
-quality_assurance: "Published WordPress raw and rendered read-back: both YouTube iframe players present with correct IDs and adjacent captions, two licensed in-body photographs, original donation QR, exact approved Editor's Note, 1200x630 cover. Actual browser/player playback and mobile screenshot untested."
+quality_assurance: "WordPress published raw/rendered read-back confirms two YouTube iframe players with correct IDs and adjacent captions; two licensed real in-body photos; original QR; verbatim approved Editor's Note; 1200x630 featured cover. Independent browser playback and mobile screenshot untested; public web fetch inaccessible."
 next_lesson: OSHRE.004
 ---
 

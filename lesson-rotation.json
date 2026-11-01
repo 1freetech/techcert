@@ -62,14 +62,14 @@
     ]
   },
   "next": {
-    "subject": "rust",
-    "lesson_number": 6,
-    "title_format": "OSRust.006: {topic}",
-    "public_title_format": "OSRust.006: {topic}",
-    "expected_topic": "Advance Rust after OSRust.005 control-flow coverage; verify title and content uniqueness and both duplicate published .005 lessons before publishing.",
-    "resolution_note": "Main rotation advanced after OSC.005 publication. OSRust.005 is already published in two posts, so next unique ID is OSRust.006."
+    "subject": "go",
+    "lesson_number": 4,
+    "title_format": "OSGo.004: {topic}",
+    "public_title_format": "OSGo.004: {topic}",
+    "expected_topic": "Next unique Go programming subject after OSGo.003 operators and expressions; verify OSGo.004 not published and topic nonduplicate before creation.",
+    "resolution_note": "Main rotation advanced after OSRust.006 publication. OSGo.003 last published, WordPress post 25314; OSGo.004 next."
   },
-  "next_after_current": "go",
+  "next_after_current": "java",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -117,14 +117,17 @@
     },
     "rust": {
       "acronym": "OSRust",
-      "next_lesson_number": 6,
-      "last_published_lesson_number": 5,
-      "last_wordpress_post_id": 25249,
+      "next_lesson_number": 7,
+      "last_published_lesson_number": 6,
+      "last_wordpress_post_id": 28228,
       "source_resolution": "Live WordPress checked 2026-11-01: OSRust.005 already published twice October 14, posts 25228 and 25249. Do not reuse ID .005. Next is OSRust.006; prior duplicate remains for deliberate separate editorial reconciliation."
     },
     "go": {
       "acronym": "OSGo",
-      "next_lesson_number": 4
+      "next_lesson_number": 4,
+      "last_published_lesson_number": 3,
+      "last_wordpress_post_id": 25314,
+      "source_resolution": "Go published lessons OSGo.001 to OSGo.003 verified WordPress November 1 2026. No OSGo.004 published."
     },
     "java": {
       "acronym": "OSJava",
@@ -266,22 +269,23 @@
     }
   },
   "last_published": {
-    "subject": "c",
-    "lesson_number": 5,
-    "title": "OSC.005: C Loops — for, while, do-while, break, and continue",
-    "public_title": "OSC.005: C Loops — for, while, do-while, break, and continue",
-    "wordpress_post_id": 28202,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/osc-005-c-loops-for-while-do-while-break-continue/",
-    "archive_path": "archive/2026/11/28202-osc-005-c-loops-for-while-do-while-break-continue.md",
+    "subject": "rust",
+    "lesson_number": 6,
+    "title": "OSRust.006: Ownership, Moves, and Borrowing — References and Memory Safety",
+    "public_title": "OSRust.006: Ownership, Moves, and Borrowing — References and Memory Safety",
+    "wordpress_post_id": 28228,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/osrust-006-ownership-moves-borrowing-references-memory-safety/",
+    "archive_path": "archive/2026/11/28228-osrust-006-ownership-moves-borrowing-references.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "Published WordPress edit/view confirms two real YouTube iframe players with immediate captions, two original technical loop diagrams, eight code blocks and verified gcc C11 full example output, nine internal links, 1200x630 cover, original QR/footer. Actual player playback and independent desktop/mobile visual QA not verified.",
+    "qa_status": "Published WordPress edit/view confirms two real distinct YouTube iframe players with captions immediately after them, two original memory ownership/borrow diagrams, ten code/output blocks and five internal links, 1200x630 split-screen featured cover, no decorative text boxes, required footer. Rust executable compilation not performed (rustc unavailable); external reader device playback and mobile/desktop screenshots not independently verified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
-    "mobile_render_verified": false
+    "mobile_render_verified": false,
+    "compiled_code_verified": false
   },
   "pending_publication_qa": [
     {
@@ -414,15 +418,28 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "Two WordPress-rendered YouTube iframe players with captions, two source-created technical diagrams, full C example verified using gcc C11; nine internal links."
+    },
+    {
+      "wordpress_post_id": 28228,
+      "live_url": "https://bitcoinversus.tech/2026/11/01/osrust-006-ownership-moves-borrowing-references-memory-safety/",
+      "unresolved": [
+        "Actual YouTube playback on reader device not independently tested.",
+        "Desktop/mobile public-page screenshot and featured cover anatomy not visually inspected.",
+        "The complete Rust examples were not compiled due rustc unavailable; syntax reviewed against official Rust documentation."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "decorative_text_boxes_present": false,
+      "note": "Two distinct WordPress rendered YouTube iframe players with captions, original ownership and borrow-rule diagrams, 10 native code blocks, 5 internal links, 1200x630 diptych cover."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 28202,
-    "last_style": "photo/anime blend",
-    "next_style": "split-screen diptych",
-    "last_featured_person": "fictional multiracial adult woman C programmer aged 35–45",
-    "previous_featured_person": "fictional Pacific Islander adult male IT infrastructure engineer aged 30s–40s",
-    "next_person_note": "Complete 12-slot roster at multiracial adult woman. Restart with slot 1: adult East Asian man aged 30s–40s, next art style split-screen diptych."
+    "last_post_id": 28228,
+    "last_style": "split-screen diptych",
+    "next_style": "renaissance/oil painting",
+    "last_featured_person": "fictional East Asian adult male systems programmer aged 30s–40s",
+    "previous_featured_person": "fictional multiracial adult woman C programmer aged 35–45",
+    "next_person_note": "Next 12-slot roster position 2: Black adult woman age 20s–30s; required male/female alternation. Next approved art style Renaissance/oil painting."
   },
   "specialty_track_state": {
     "oshre": {
@@ -446,7 +463,7 @@
       "last_wordpress_post_id": 26921
     }
   },
-  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending. November 1, 2026 correction: curriculum IDs are required at the beginning of reader-facing lesson and SEO titles. Published OSHRE.003 WordPress post 27838 title and SEO title corrected; Gutenberg media, permalink and cover unchanged. This supersedes the ID-free October 28 title rule, not the unnumbered lesson-section style. November 1, 2026: Hashboard Repair OSHRE.004 (post 27857) published, archived in all three repos; course pointer advanced to OSHRE.005. Featured wordless comic adult female, next photo/anime blend adult Black male. Main rotation stays at OSHistory.016. Two YouTube iframe players rendered; browser playback and screenshots not independently verified. November 1, 2026: OSHRE.005 (post 27871) published with three NEW board photographs, distinct from all prior OSHRE lessons, and two video players; archives verified in three repos. OSHRE pointer advanced to .006. Photo rotation policy added; main rotation pointer retained at OSHistory.016; next cover split-screen diptych with Indigenous female professional. Independent browser/playback QA pending. November 1, 2026: Main rotation published OSHistory.016 (post 27887), centered on the 1575-1577 Castilian credit freeze and documented bank failures; the 1557 refinancing interpretation is disputed by 2026 Cambridge research. All three GitHub archives verified. Next main lesson OSHE.004; specialty OSHRE stays at .006. Hashboard photo uniqueness ledger remains unchanged and mandatory. Current cover split-screen diptych; next realistic photo. Video playback and desktop/mobile screenshot QA not independently tested. November 1, 2026: OSHE.004 Meidum Pyramid engineering published as WordPress 27944, archived in all three repositories, 2 YouTube iframe embeds and 3 authentic licensed site photographs verified in WordPress rendering, 1200x630 realistic editorial cover. Next main rotation OSHMS.001, next OSHE.005. Hashboard Repair photo originality rule and its no-reuse ledger preserved. Independent video playback and mobile screenshots still pending. November 1, 2026: OSHMS.001 (post 28058) published and archived; 43 active subjects, 20 coding catalog subjects, 38 historical curriculum folders and 626 indexed lesson entries accounted for separately. Missing OSNEC state repaired to next .005; OSITC pointer reconciled to .012; main next OSITC.012. Cover rotation anime Southeast Asian female -> wordless comic Pacific Islander male. Public browser/playback QA outstanding. November 1, 2026: Published OSITC.012 (post 28161) with two render-verified videos, two technical diagrams, correctly escaped logman examples and 1200x630 wordless comic cover. Main next OSC.005; fixed stale OSC.004 pointer because published OSC.004 post 25107 exists. All 43 active subjects, all 20 coding tracks, historical 38 folders/626 index entries retained unchanged. Independent video playback and public-page screenshots pending. November 1, 2026: OSC.005 (post 28202) published and archived across three repos; GCC C11 loop example ran with expected output, both native YouTube iframes rendered. Main next OSRust.006 rather than stale .005, because two published Rust .005 posts (25228 and 25249) exist and must not be overwritten. Photo/anime cover woman -> next split-screen diptych East Asian man. Preserved all 43 active subjects and legacy 626 indexed lessons.",
+  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending. November 1, 2026 correction: curriculum IDs are required at the beginning of reader-facing lesson and SEO titles. Published OSHRE.003 WordPress post 27838 title and SEO title corrected; Gutenberg media, permalink and cover unchanged. This supersedes the ID-free October 28 title rule, not the unnumbered lesson-section style. November 1, 2026: Hashboard Repair OSHRE.004 (post 27857) published, archived in all three repos; course pointer advanced to OSHRE.005. Featured wordless comic adult female, next photo/anime blend adult Black male. Main rotation stays at OSHistory.016. Two YouTube iframe players rendered; browser playback and screenshots not independently verified. November 1, 2026: OSHRE.005 (post 27871) published with three NEW board photographs, distinct from all prior OSHRE lessons, and two video players; archives verified in three repos. OSHRE pointer advanced to .006. Photo rotation policy added; main rotation pointer retained at OSHistory.016; next cover split-screen diptych with Indigenous female professional. Independent browser/playback QA pending. November 1, 2026: Main rotation published OSHistory.016 (post 27887), centered on the 1575-1577 Castilian credit freeze and documented bank failures; the 1557 refinancing interpretation is disputed by 2026 Cambridge research. All three GitHub archives verified. Next main lesson OSHE.004; specialty OSHRE stays at .006. Hashboard photo uniqueness ledger remains unchanged and mandatory. Current cover split-screen diptych; next realistic photo. Video playback and desktop/mobile screenshot QA not independently tested. November 1, 2026: OSHE.004 Meidum Pyramid engineering published as WordPress 27944, archived in all three repositories, 2 YouTube iframe embeds and 3 authentic licensed site photographs verified in WordPress rendering, 1200x630 realistic editorial cover. Next main rotation OSHMS.001, next OSHE.005. Hashboard Repair photo originality rule and its no-reuse ledger preserved. Independent video playback and mobile screenshots still pending. November 1, 2026: OSHMS.001 (post 28058) published and archived; 43 active subjects, 20 coding catalog subjects, 38 historical curriculum folders and 626 indexed lesson entries accounted for separately. Missing OSNEC state repaired to next .005; OSITC pointer reconciled to .012; main next OSITC.012. Cover rotation anime Southeast Asian female -> wordless comic Pacific Islander male. Public browser/playback QA outstanding. November 1, 2026: Published OSITC.012 (post 28161) with two render-verified videos, two technical diagrams, correctly escaped logman examples and 1200x630 wordless comic cover. Main next OSC.005; fixed stale OSC.004 pointer because published OSC.004 post 25107 exists. All 43 active subjects, all 20 coding tracks, historical 38 folders/626 index entries retained unchanged. Independent video playback and public-page screenshots pending. November 1, 2026: OSC.005 (post 28202) published and archived across three repos; GCC C11 loop example ran with expected output, both native YouTube iframes rendered. Main next OSRust.006 rather than stale .005, because two published Rust .005 posts (25228 and 25249) exist and must not be overwritten. Photo/anime cover woman -> next split-screen diptych East Asian man. Preserved all 43 active subjects and legacy 626 indexed lessons. November 1, 2026: OSRust.006 (WordPress 28228) published, verified and archived in 3 repos. Two rendered YouTube iframe embeds, two original diagrams, ten code blocks, 5 internal links, 1200×630 diptych cover, no decorative boxes. Compilation and live playback/device screenshots not independently verified. Main next OSGo.004 following WordPress OSGo.003 post 25314. Next art Renaissance/oil painting, Black female professional age 20s–30s. All 43 active subjects and coding/historical inventories preserved.",
   "public_lesson_presentation": {
     "effective_date": "2026-11-01",
     "style": "textbook / wiki / encyclopedia / dictionary",

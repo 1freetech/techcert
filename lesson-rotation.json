@@ -48,28 +48,28 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "powershell",
-    "lesson_number": 3,
-    "title": "OSPowerShell.003: The Pipeline — Object Flow, Filtering, Sorting, and Parameter Binding",
-    "wordpress_post_id": 26062,
-    "live_url": "https://bitcoinversus.tech/2026/10/19/ospowershell-003-the-pipeline-object-flow-filtering-sorting-parameter-binding/",
-    "archive_path": "archive/2026/10/26062-ospowershell-003-the-pipeline-object-flow-filtering-sorting-parameter-binding.md",
-    "archive_blob_sha": "351d416ecc1d655de4c5eead9e646272052a8bc3",
+    "subject": "go",
+    "lesson_number": 4,
+    "title": "OSGo.004: Control Flow — if, switch, for, range, break, and continue",
+    "wordpress_post_id": 28259,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/osgo-004-control-flow-if-switch-for-range-break-continue/",
+    "archive_path": "archive/2026/11/28259-osgo-004-control-flow-if-switch-for-range-break-continue.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/techcert",
       "1freetech/opencert.tech"
-    ]
+    ],
+    "qa_status": "Published and raw/rendered WordPress HTML confirmed 3 YouTube iframes, 2 original diagrams, 6 code blocks, 6 internal links, Go mini-lab compiled with Go 1.23.2, 1200x630 cover. External reader-device playback and mobile/desktop screenshots remain unverified."
   },
   "next": {
-    "subject": "go",
+    "subject": "java",
     "lesson_number": 4,
-    "title_format": "OSGo.004: {topic}",
-    "public_title_format": "OSGo.004: {topic}",
-    "expected_topic": "Next unique Go programming subject after OSGo.003 operators and expressions; verify OSGo.004 not published and topic nonduplicate before creation.",
-    "resolution_note": "Main rotation advanced after OSRust.006 publication. OSGo.003 last published, WordPress post 25314; OSGo.004 next."
+    "title_format": "OSJava.004: {topic}",
+    "public_title_format": "OSJava.004: {topic}",
+    "expected_topic": "Next unique Java programming subject after OSJava.003 Expressions, Statements, and Blocks; verify new topic and that OSJava.004 remains unpublished.",
+    "resolution_note": "Main full-inventory rotation advanced after OSGo.004 publication and archive in all 3 repositories; WordPress search found OSJava.003 live and OSJava.004 unpublished on 2026-11-01."
   },
-  "next_after_current": "java",
+  "next_after_current": "javascript",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -124,10 +124,10 @@
     },
     "go": {
       "acronym": "OSGo",
-      "next_lesson_number": 4,
-      "last_published_lesson_number": 3,
-      "last_wordpress_post_id": 25314,
-      "source_resolution": "Go published lessons OSGo.001 to OSGo.003 verified WordPress November 1 2026. No OSGo.004 published."
+      "next_lesson_number": 5,
+      "last_published_lesson_number": 4,
+      "last_wordpress_post_id": 28259,
+      "source_resolution": "Go OSGo.004 control flow published and compiled 2026-11-01. Next Go track lesson OSGo.005; general rotation advances to Java."
     },
     "java": {
       "acronym": "OSJava",
@@ -269,23 +269,24 @@
     }
   },
   "last_published": {
-    "subject": "rust",
-    "lesson_number": 6,
-    "title": "OSRust.006: Ownership, Moves, and Borrowing — References and Memory Safety",
-    "public_title": "OSRust.006: Ownership, Moves, and Borrowing — References and Memory Safety",
-    "wordpress_post_id": 28228,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/osrust-006-ownership-moves-borrowing-references-memory-safety/",
-    "archive_path": "archive/2026/11/28228-osrust-006-ownership-moves-borrowing-references.md",
+    "subject": "go",
+    "lesson_number": 4,
+    "title": "OSGo.004: Control Flow — if, switch, for, range, break, and continue",
+    "public_title": "OSGo.004: Control Flow — if, switch, for, range, break, and continue",
+    "wordpress_post_id": 28259,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/osgo-004-control-flow-if-switch-for-range-break-continue/",
+    "archive_path": "archive/2026/11/28259-osgo-004-control-flow-if-switch-for-range-break-continue.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "Published WordPress edit/view confirms two real distinct YouTube iframe players with captions immediately after them, two original memory ownership/borrow diagrams, ten code/output blocks and five internal links, 1200x630 split-screen featured cover, no decorative text boxes, required footer. Rust executable compilation not performed (rustc unavailable); external reader device playback and mobile/desktop screenshots not independently verified.",
+    "qa_status": "Published WordPress view/edit confirms all five in-body media, three YouTube players, six native code blocks, six internal links, 1200x630 cover, exact approved lesson footer. Embed link-only defect fixed before publishing; browser playback/mobile QA not independently confirmed.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
-    "compiled_code_verified": false
+    "compiled_code_verified": true,
+    "compiler_version": "go1.23.2"
   },
   "pending_publication_qa": [
     {
@@ -431,15 +432,26 @@
       "archive_source_verified": true,
       "decorative_text_boxes_present": false,
       "note": "Two distinct WordPress rendered YouTube iframe players with captions, original ownership and borrow-rule diagrams, 10 native code blocks, 5 internal links, 1200x630 diptych cover."
+    },
+    {
+      "wordpress_post_id": 28259,
+      "live_url": "https://bitcoinversus.tech/2026/11/01/osgo-004-control-flow-if-switch-for-range-break-continue/",
+      "unresolved": [
+        "Actual YouTube playback not independently tested in user-device browser.",
+        "Independent desktop/mobile viewport screenshots not captured."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Three distinct YouTube iframes and original Go flow diagrams verified in published WordPress HTML. Initial bare-link embed rendering fixed before publication by restoring newlines inside embed wrappers; six code blocks, six links; main.go compiled Go1.23.2."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 28228,
-    "last_style": "split-screen diptych",
-    "next_style": "renaissance/oil painting",
-    "last_featured_person": "fictional East Asian adult male systems programmer aged 30s–40s",
-    "previous_featured_person": "fictional multiracial adult woman C programmer aged 35–45",
-    "next_person_note": "Next 12-slot roster position 2: Black adult woman age 20s–30s; required male/female alternation. Next approved art style Renaissance/oil painting."
+    "last_post_id": 28259,
+    "last_style": "renaissance/oil painting",
+    "next_style": "realistic editorial photo",
+    "last_featured_person": "fictional adult Black woman Go programmer age 20s–30s",
+    "previous_featured_person": "fictional East Asian adult male Rust systems programmer age 30s–40s",
+    "next_person_note": "Next 12-slot roster position 3: South Asian adult man aged 20s–30s; maintain strict male/female alternation."
   },
   "specialty_track_state": {
     "oshre": {

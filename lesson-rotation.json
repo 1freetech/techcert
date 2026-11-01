@@ -59,7 +59,7 @@
       "1freetech/techcert",
       "1freetech/opencert.tech"
     ],
-    "qa_status": "Published and raw/rendered WordPress HTML confirmed 3 YouTube iframes, 2 original diagrams, 6 code blocks, 6 internal links, Go mini-lab compiled with Go 1.23.2, 1200x630 cover. External reader-device playback and mobile/desktop screenshots remain unverified."
+    "qa_status": "OSGo.004 published and repaired November 1: replaced six boxed code blocks with six transparent, borderless, line-wrapping code examples (now plain HTML pre/code); inline monospace snippets are unboxed. New code-relevant 1200×630 Renaissance illustration featured media 28281. Published HTML still shows three separate YouTube iframe players, two technical diagrams, six internal links, lesson footer; Go sample previously compiled under 1.23.2. Browser playback and responsive screenshots independently unverified."
   },
   "next": {
     "subject": "java",
@@ -281,7 +281,7 @@
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "Published WordPress view/edit confirms all five in-body media, three YouTube players, six native code blocks, six internal links, 1200x630 cover, exact approved lesson footer. Embed link-only defect fixed before publishing; browser playback/mobile QA not independently confirmed.",
+    "qa_status": "OSGo.004 published and repaired November 1: replaced six boxed code blocks with six transparent, borderless, line-wrapping code examples (now plain HTML pre/code); inline monospace snippets are unboxed. New code-relevant 1200×630 Renaissance illustration featured media 28281. Published HTML still shows three separate YouTube iframe players, two technical diagrams, six internal links, lesson footer; Go sample previously compiled under 1.23.2. Browser playback and responsive screenshots independently unverified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
@@ -442,7 +442,7 @@
       ],
       "featured_cover_verified": true,
       "archive_source_verified": true,
-      "note": "Three distinct YouTube iframes and original Go flow diagrams verified in published WordPress HTML. Initial bare-link embed rendering fixed before publication by restoring newlines inside embed wrappers; six code blocks, six links; main.go compiled Go1.23.2."
+      "note": "WordPress published view/edit verified 3 YouTube iframes, 2 diagrams, six unboxed and line-wrapping code examples, new 1200x630 Go control-flow cover media 28281, six internal links, and original QR/footer. User-requested repair archived identically to 3 repositories. Browser playback and responsive visual verification remain pending."
     }
   ],
   "featured_image_rotation": {
@@ -451,7 +451,9 @@
     "next_style": "realistic editorial photo",
     "last_featured_person": "fictional adult Black woman Go programmer age 20s–30s",
     "previous_featured_person": "fictional East Asian adult male Rust systems programmer age 30s–40s",
-    "next_person_note": "Next 12-slot roster position 3: South Asian adult man aged 20s–30s; maintain strict male/female alternation."
+    "next_person_note": "Next 12-slot roster position 3: South Asian adult man aged 20s–30s; maintain strict male/female alternation.",
+    "last_cover_media_id": 28281,
+    "last_cover_note": "Updated to explicitly depict Go if/switch/for-range, continue and break on monitor with accompanying decision flowchart; approved renaissance/oil painting and roster position 2 retained."
   },
   "specialty_track_state": {
     "oshre": {

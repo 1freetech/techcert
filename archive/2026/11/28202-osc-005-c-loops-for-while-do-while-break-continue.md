@@ -25,6 +25,8 @@ internal_link_count: 9
 original_sources: ["https://en.cppreference.com/w/c/language/for", "https://en.cppreference.com/w/c/language/while", "https://en.cppreference.com/w/c/language/do", "https://en.cppreference.com/w/c/language/break", "https://en.cppreference.com/w/c/language/continue", "https://learn.microsoft.com/en-us/cpp/c-language/statements-c"]
 qa_status: "Published WordPress edit and rendered readback verified both video iframes, captions, diagrams, 8 code blocks, title and SEO ID, 1200x630 cover, original Editor's Note, QR, disclaimer and retired footer absent. Independent public-device playback, mobile/desktop visual QA and cover anatomy not confirmed."
 next_main_subject: "rust"
+plain_unboxed_code_examples_count: 8
+november_1_2026_layout_repair: "Converted 8 previously boxed Gutenberg code blocks into transparent borderless no-shadow semantic preformatted code blocks, preserving all code text, videos, diagrams, source citations and approved footer; WordPress published view readback passed."
 ---
 
 <!-- wp:paragraph --><p><strong>A loop</strong> is a C-language control structure that repeats a statement or compound block while a condition allows execution. The standard C constructs are <code>for</code>, <code>while</code> and <code>do-while</code>. Each can express repetition, but they differ in initialization placement, test timing, update behavior and what happens when a loop body must be interrupted.</p><!-- /wp:paragraph -->
@@ -47,10 +49,12 @@ next_main_subject: "rust"
 
 <!-- wp:paragraph --><p>The <code>for</code> statement groups three expressions or clauses: <code>for (initialization; condition; update)</code>. Initialization runs once, the condition is checked before each body execution, and the update expression runs after the body. A <code>continue</code> within a <code>for</code> loop proceeds to the update expression before the next condition test. <a href="https://en.cppreference.com/w/c/language/for">The C reference for <code>for</code></a> specifies this sequence.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>for (int i = 0; i &lt; 5; ++i) {
+<!-- wp:html -->
+<pre aria-label="Code or console output example" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">for (int i = 0; i &lt; 5; ++i) {
     printf("%d\n", i);
 }
-/* Prints 0, 1, 2, 3, 4 — NOT 5. */</code></pre><!-- /wp:code -->
+/* Prints 0, 1, 2, 3, 4 — NOT 5. */</code></pre>
+<!-- /wp:html -->
 
 <!-- wp:paragraph --><p>The loop executes exactly five times because it starts at zero and stops once <code>i &lt; 5</code> is false. The declaration <code>int i = 0</code> inside the initialization clause requires C99 or later; in that form, the name <code>i</code> has the loop's scope rather than leaking into subsequent statements. This is an example of an <strong>exclusive upper bound</strong>. To produce 1 through 5 inclusive, start at one and compare <code>i &lt;= 5</code>.</p><!-- /wp:paragraph -->
 
@@ -72,12 +76,14 @@ next_main_subject: "rust"
 
 <!-- wp:paragraph --><p>A <code>while</code> loop evaluates its condition before the first iteration and before every subsequent iteration. If the condition is initially false, the body is skipped entirely. The change that can end the loop is usually written inside the body, unlike the explicit update clause of a common <code>for</code> loop.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>int remaining = 3;
+<!-- wp:html -->
+<pre aria-label="Code or console output example" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">int remaining = 3;
 while (remaining &gt; 0) {
     printf("%d\n", remaining);
     --remaining;
 }
-/* Prints 3, 2, 1. */</code></pre><!-- /wp:code -->
+/* Prints 3, 2, 1. */</code></pre>
+<!-- /wp:html -->
 
 <!-- wp:paragraph --><p>In this example the decrement is essential. Omitting <code>--remaining</code> causes the controlling expression to stay true. A <code>while</code> loop is often appropriate when the number of iterations is not known in advance, such as reading valid input until it ends: <code>while (scanf("%d", &amp;value) == 1)</code>. That condition stops if the next conversion fails or input reaches end-of-file; it does not magically fix malformed input. The <a href="https://en.cppreference.com/w/c/language/while">C <code>while</code> reference</a> documents the pre-test behavior.</p><!-- /wp:paragraph -->
 
@@ -85,12 +91,14 @@ while (remaining &gt; 0) {
 
 <!-- wp:paragraph --><p><code>do { statement; } while (condition);</code> executes its body before the condition is tested. It therefore performs one iteration even when the condition evaluates false at the first test. Notice the required semicolon after <code>while (condition)</code>. This form suits an interaction that must happen once before a decision about repetition, such as displaying a menu or requesting an initial sample.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>int attempts = 0;
+<!-- wp:html -->
+<pre aria-label="Code or console output example" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">int attempts = 0;
 do {
     ++attempts;
     printf("Attempt %d\n", attempts);
 } while (attempts &lt; 2);
-/* Prints Attempt 1, then Attempt 2. */</code></pre><!-- /wp:code -->
+/* Prints Attempt 1, then Attempt 2. */</code></pre>
+<!-- /wp:html -->
 
 <!-- wp:image {"id":28192,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/c-while-versus-do-while-e28094-wordless-flow-comparison.png" alt="Wordless two-column flowchart comparing a while loop that tests before its body with a do while loop that tests after the body" class="wp-image-28192" /><figcaption class="wp-element-caption"><em>Original conceptual comparison: the left path tests <em>before</em> the body (<code>while</code>), while the right performs the body <em>before</em> testing (<code>do-while</code>). Neither drawing depicts actual execution measurements.</em></figcaption></figure><!-- /wp:image -->
 
@@ -100,7 +108,8 @@ do {
 
 <!-- wp:paragraph --><p><code>break</code> immediately terminates the nearest enclosing <code>for</code>, <code>while</code>, <code>do-while</code> or <code>switch</code>; execution continues after that construct. <code>continue</code> does <em>not</em> exit the loop: it skips the rest of the current loop body and proceeds to the next iteration. In a <code>for</code> loop, it evaluates the update expression; in a <code>while</code> or <code>do-while</code> loop, it proceeds toward the controlling condition. Neither automatically exits multiple enclosing loops. See the C reference for <a href="https://en.cppreference.com/w/c/language/break"><code>break</code></a> and <a href="https://learn.microsoft.com/en-us/cpp/c-language/continue-statement-c"><code>continue</code></a>.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>for (int i = 0; i &lt; 8; ++i) {
+<!-- wp:html -->
+<pre aria-label="Code or console output example" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">for (int i = 0; i &lt; 8; ++i) {
     if (i == 3) {
         continue;  /* Skip just 3; the ++i update still runs. */
     }
@@ -109,7 +118,8 @@ do {
     }
     printf("%d\n", i);
 }
-/* Prints 0, 1, 2, 4, 5. */</code></pre><!-- /wp:code -->
+/* Prints 0, 1, 2, 4, 5. */</code></pre>
+<!-- /wp:html -->
 
 <!-- wp:paragraph --><p>Beware the common bug <code>while (i &lt; limit) { if (skip) continue; ++i; }</code>: when <code>skip</code> stays true, the increment never happens and the loop can become infinite. In a <code>while</code> loop, update any required state before <code>continue</code>, or restructure the loop so the update cannot be bypassed.</p><!-- /wp:paragraph -->
 
@@ -127,7 +137,8 @@ do {
 
 <!-- wp:paragraph --><p>The following standalone example combines the basic constructions without accessing external hardware, allocating memory dynamically or requiring network access. It should compile with a conforming C11 compiler. Start with the <a href="https://bitcoinversus.tech/2026/10/09/osc-001-c-compiler-toolchain-gcc-preprocessing-compilation-assembly-linking-first-build/">OSC.001 C compiler and toolchain lesson</a> if you need help installing GCC or Clang.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>#include &lt;stdio.h&gt;
+<!-- wp:html -->
+<pre aria-label="Code or console output example" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">#include &lt;stdio.h&gt;
 
 int main(void)
 {
@@ -158,11 +169,13 @@ int main(void)
     }
 
     return 0;
-}</code></pre><!-- /wp:code -->
+}</code></pre>
+<!-- /wp:html -->
 
 <!-- wp:paragraph --><p>Expected standard output, with the values printed in order:</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>Iteration 0
+<!-- wp:html -->
+<pre aria-label="Code or console output example" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">Iteration 0
 Iteration 1
 Iteration 2
 Iteration 3
@@ -176,7 +189,8 @@ Value 0
 Value 1
 Value 2
 Value 4
-Value 5</code></pre><!-- /wp:code -->
+Value 5</code></pre>
+<!-- /wp:html -->
 
 <!-- wp:paragraph --><p>Save as <code>loops.c</code>, then compile with <code>gcc -std=c11 -Wall -Wextra -Wpedantic -O0 -g loops.c -o loops</code> and run <code>./loops</code> on a Unix-like environment (or <code>loops.exe</code> from a suitable Windows shell). Compiler flags request C11 syntax and common warnings; they do not prove a program is free of all bugs. The logic is portable, but compiler invocation and terminal commands vary.</p><!-- /wp:paragraph -->
 
@@ -184,7 +198,8 @@ Value 5</code></pre><!-- /wp:code -->
 
 <!-- wp:paragraph --><p>A technician might receive a <em>fixed-length</em> list of nonnegative sensor readings, with <code>-1</code> indicating missing data. The following C program ignores missing values using <code>continue</code> and stops at the first hypothetical alert threshold using <code>break</code>. It illustrates bounded array iteration only: it is <strong>not</strong> a real thermal safety controller, and 60 is a made-up teaching threshold, not an acceptable temperature for any ASIC or device.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>#include &lt;stdio.h&gt;
+<!-- wp:html -->
+<pre aria-label="Code or console output example" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">#include &lt;stdio.h&gt;
 #include &lt;stddef.h&gt;
 
 int main(void)
@@ -206,7 +221,8 @@ int main(void)
         printf("Sample %zu: %d\n", i, value);
     }
     return 0;
-}</code></pre><!-- /wp:code -->
+}</code></pre>
+<!-- /wp:html -->
 
 <!-- wp:paragraph --><p>The output is <code>Sample 0: 42</code>, <code>Sample 1: 47</code> and <code>Alert at sample 3: 64</code>. Sample 2 is skipped, and sample 4 is never examined because the loop exits at sample 3. The <code>sizeof</code> expression computes the element count only because <code>sensor_readings</code> is an actual array in this scope; the same expression would not yield the array length after it decays to a pointer in a function parameter.</p><!-- /wp:paragraph -->
 
@@ -216,14 +232,16 @@ int main(void)
 
 <!-- wp:paragraph --><p>A <strong>nested loop</strong> runs one loop body that itself contains another loop. For example, a five-by-four grid can be traversed with an outer row loop and an inner column loop; the inner body executes 20 times if each outer row makes four complete inner iterations. With input-dependent loop bounds, the number of iterations grows as the product of those bounds. Nested loops can be correct but unnecessarily expensive when used over large datasets. A <code>break</code> inside the inner loop only exits that inner loop; the outer loop continues unless additional state or control logic ends it.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>for (int row = 0; row &lt; 2; ++row) {
+<!-- wp:html -->
+<pre aria-label="Code or console output example" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">for (int row = 0; row &lt; 2; ++row) {
     for (int col = 0; col &lt; 3; ++col) {
         printf("(%d,%d) ", row, col);
     }
     putchar('\n');
 }
 /* (0,0) (0,1) (0,2)
-   (1,0) (1,1) (1,2) */</code></pre><!-- /wp:code -->
+   (1,0) (1,1) (1,2) */</code></pre>
+<!-- /wp:html -->
 
 <!-- wp:paragraph --><p>When diagnosing an apparent hang, inspect the condition, every relevant state update, early-continue paths and whether an external event is required for progress. A counter approaching its integer limits can also cause unwanted behavior: signed integer overflow is undefined in C, while unsigned arithmetic wraps modulo its range. Choose types and bounds deliberately and avoid increments that must overflow to reach a stopping condition.</p><!-- /wp:paragraph -->
 

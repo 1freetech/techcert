@@ -202,9 +202,9 @@
     },
     "hashboard_repair": {
       "acronym": "OSHRE",
-      "next_lesson_number": 4,
-      "last_published_lesson_number": 3,
-      "last_wordpress_post_id": 27838
+      "next_lesson_number": 5,
+      "last_published_lesson_number": 4,
+      "last_wordpress_post_id": 27857
     },
     "history_of_engineering": {
       "acronym": "OSHE",
@@ -245,22 +245,22 @@
   },
   "last_published": {
     "subject": "hashboard_repair",
-    "lesson_number": 3,
-    "title": "OSHRE.003: Diagnosing Missing ASIC Chips on a Hashboard",
-    "wordpress_post_id": 27838,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/hashboard-missing-asic-chip-diagnostics-test-fixtures-fault-localization/",
-    "archive_path": "archive/2026/11/27838-oshre-003-diagnosing-missing-asic-chips-on-a-hashboard.md",
-    "archive_blob_sha": "4572709cc817e419f2429df91e1f8e5ebc9a54fe",
+    "lesson_number": 4,
+    "title": "OSHRE.004: Hashboard Temperature Sensors and Thermal Protection",
+    "public_title": "OSHRE.004: Hashboard Temperature Sensors and Thermal Protection",
+    "wordpress_post_id": 27857,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/oshre-004-hashboard-temperature-sensors-thermal-protection-lm75a-i2c/",
+    "archive_path": "archive/2026/11/27857-oshre-004-hashboard-temperature-sensors-thermal-protection.md",
+    "archive_blob_sha": "55ac3af76e79484ebdd5d812236e86f779ca2707",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "published — WordPress rendered HTML confirms 2 distinct YouTube players and 2 real in-story images, but actual playback and desktop/mobile browser tests remain pending",
+    "qa_status": "published — WordPress raw and rendered HTML confirms 2 correct YouTube iframe players and 2 licensed in-story photographs; actual playback and desktop/mobile screenshots not independently tested.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
-    "mobile_render_verified": false,
-    "public_title": "OSHRE.003: Diagnosing Missing ASIC Chips on a Hashboard"
+    "mobile_render_verified": false
   },
   "pending_publication_qa": [
     {
@@ -316,23 +316,34 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "Two rendered YouTube iframe players with exact IDs, two licensed hardware images and corrected 1200x630 anime featured image verified in WordPress, not a substitute for real playback."
+    },
+    {
+      "wordpress_post_id": 27857,
+      "live_url": "https://bitcoinversus.tech/2026/11/01/oshre-004-hashboard-temperature-sensors-thermal-protection-lm75a-i2c/",
+      "unresolved": [
+        "Actual YouTube playback has not been independently verified on a live browser or device.",
+        "Desktop/mobile screenshot visual QA not performed."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Published WordPress HTML shows both distinct YouTube iframe players with immediate captions, licensed real ASIC photos, QR and correct 1200x630 cover. Full visual/playback checks pending."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 27838,
-    "last_style": "anime editorial artwork",
-    "next_style": "wordless comic",
-    "last_featured_person": "fictional Middle Eastern/North African male hashboard repair engineer aged 40s–50s",
-    "previous_featured_person": "fictional Latina female embedded firmware engineer aged 40s–50s",
-    "next_person_note": "Next adult professional female, white woman aged 50s–60s, continuing the 12-slot alternating male/female roster; next cover style: wordless comic."
+    "last_post_id": 27857,
+    "last_style": "wordless comic",
+    "next_style": "photo/anime blend",
+    "last_featured_person": "fictional white adult woman electronics/hashboard repair engineer aged 50s–60s",
+    "previous_featured_person": "fictional Middle Eastern/North African male hashboard engineer aged 40s–50s",
+    "next_person_note": "Continue approved 12-slot alternate male/female lesson cover roster: next slot adult Black man aged 50s–60s; next art style photo/anime blend."
   },
   "specialty_track_state": {
     "oshre": {
       "acronym": "OSHRE",
-      "next_lesson_number": 4,
-      "status": "active; specialist series alongside main rotation; OSHRE.003 published November 1, 2026",
-      "last_published_lesson_number": 3,
-      "last_wordpress_post_id": 27838
+      "next_lesson_number": 5,
+      "status": "active; specialist series alongside main rotation; OSHRE.004 published November 1, 2026",
+      "last_published_lesson_number": 4,
+      "last_wordpress_post_id": 27857
     },
     "ospcb": {
       "acronym": "OSPCB",
@@ -345,7 +356,7 @@
       "status": "active; specialist series alongside main rotation"
     }
   },
-  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending. November 1, 2026 correction: curriculum IDs are required at the beginning of reader-facing lesson and SEO titles. Published OSHRE.003 WordPress post 27838 title and SEO title corrected; Gutenberg media, permalink and cover unchanged. This supersedes the ID-free October 28 title rule, not the unnumbered lesson-section style.",
+  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending. November 1, 2026 correction: curriculum IDs are required at the beginning of reader-facing lesson and SEO titles. Published OSHRE.003 WordPress post 27838 title and SEO title corrected; Gutenberg media, permalink and cover unchanged. This supersedes the ID-free October 28 title rule, not the unnumbered lesson-section style. November 1, 2026: Hashboard Repair OSHRE.004 (post 27857) published, archived in all three repos; course pointer advanced to OSHRE.005. Featured wordless comic adult female, next photo/anime blend adult Black male. Main rotation stays at OSHistory.016. Two YouTube iframe players rendered; browser playback and screenshots not independently verified.",
   "public_lesson_presentation": {
     "effective_date": "2026-11-01",
     "style": "textbook / wiki / encyclopedia / dictionary",

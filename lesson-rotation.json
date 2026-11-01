@@ -48,28 +48,36 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "go",
-    "lesson_number": 4,
-    "title": "OSGo.004: Control Flow — if, switch, for, range, break, and continue",
-    "wordpress_post_id": 28259,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/osgo-004-control-flow-if-switch-for-range-break-continue/",
-    "archive_path": "archive/2026/11/28259-osgo-004-control-flow-if-switch-for-range-break-continue.md",
-    "verified_repositories": [
-      "1freetech/Bitcoinversus.tech",
-      "1freetech/techcert",
-      "1freetech/opencert.tech"
-    ],
-    "qa_status": "OSGo.004 published and repaired November 1: replaced six boxed code blocks with six transparent, borderless, line-wrapping code examples (now plain HTML pre/code); inline monospace snippets are unboxed. New code-relevant 1200×630 Renaissance illustration featured media 28281. Published HTML still shows three separate YouTube iframe players, two technical diagrams, six internal links, lesson footer; Go sample previously compiled under 1.23.2. Browser playback and responsive screenshots independently unverified."
-  },
-  "next": {
     "subject": "java",
     "lesson_number": 4,
-    "title_format": "OSJava.004: {topic}",
-    "public_title_format": "OSJava.004: {topic}",
-    "expected_topic": "Next unique Java programming subject after OSJava.003 Expressions, Statements, and Blocks; verify new topic and that OSJava.004 remains unpublished.",
-    "resolution_note": "Main full-inventory rotation advanced after OSGo.004 publication and archive in all 3 repositories; WordPress search found OSJava.003 live and OSJava.004 unpublished on 2026-11-01."
+    "title": "OSJava.004: Control Flow — if, switch, for, while, do-while, break, and continue",
+    "public_title": "OSJava.004: Control Flow — if, switch, for, while, do-while, break, and continue",
+    "wordpress_post_id": 28319,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/osjava-004-control-flow-if-switch-for-while-do-while-break-continue/",
+    "archive_path": "archive/2026/11/28319-osjava-004-control-flow-if-switch-for-while-do-while-break-continue.md",
+    "verified_repositories": [
+      "1freetech/Bitcoinversus.tech",
+      "1freetech/opencert.tech",
+      "1freetech/techcert"
+    ],
+    "qa_status": "Published WordPress view/edit confirms three native YouTube iframes, eight transparent line-wrapping code/output examples, five internal links, user-supplied painting actually used as featured image at exactly 1200x630, approved lesson footer. The complete Main.java source compiled and ran under OpenJDK 21.0.12.1. Public browser playback/mobile visual checks unverified.",
+    "youtube_embed_rendered": true,
+    "youtube_playback_verified": false,
+    "mobile_render_verified": false,
+    "compiled_code_verified": true,
+    "compiler_version": "OpenJDK 21.0.12.1",
+    "user_supplied_featured_cover": true,
+    "featured_media_id": 28314
   },
-  "next_after_current": "javascript",
+  "next": {
+    "subject": "javascript",
+    "lesson_number": 4,
+    "title_format": "OSJavaScript.004: {topic}",
+    "public_title_format": "OSJavaScript.004: {topic}",
+    "expected_topic": "Next distinct JavaScript lesson after OSJavaScript.003 Variables and Constants: operators, expressions and type coercion; verify content against complete inventory and publication history before writing.",
+    "resolution_note": "43-subject full rotation advances Java → JavaScript after WordPress published OSJava.004 and identical archive files were created in BitcoinVersus, OpenCert and TechCert; OSJavaScript.004 absent from live WordPress search on 2026-11-01."
+  },
+  "next_after_current": "html",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -131,7 +139,10 @@
     },
     "java": {
       "acronym": "OSJava",
-      "next_lesson_number": 4
+      "next_lesson_number": 5,
+      "last_published_lesson_number": 4,
+      "last_wordpress_post_id": 28319,
+      "source_resolution": "OSJava.004 published and tested with Java 21 on November 1. Next Java track lesson is OSJava.005; complete rotation advances to JavaScript."
     },
     "javascript": {
       "acronym": "OSJavaScript",
@@ -269,24 +280,26 @@
     }
   },
   "last_published": {
-    "subject": "go",
+    "subject": "java",
     "lesson_number": 4,
-    "title": "OSGo.004: Control Flow — if, switch, for, range, break, and continue",
-    "public_title": "OSGo.004: Control Flow — if, switch, for, range, break, and continue",
-    "wordpress_post_id": 28259,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/osgo-004-control-flow-if-switch-for-range-break-continue/",
-    "archive_path": "archive/2026/11/28259-osgo-004-control-flow-if-switch-for-range-break-continue.md",
+    "title": "OSJava.004: Control Flow — if, switch, for, while, do-while, break, and continue",
+    "public_title": "OSJava.004: Control Flow — if, switch, for, while, do-while, break, and continue",
+    "wordpress_post_id": 28319,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/osjava-004-control-flow-if-switch-for-while-do-while-break-continue/",
+    "archive_path": "archive/2026/11/28319-osjava-004-control-flow-if-switch-for-while-do-while-break-continue.md",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "OSGo.004 published and repaired November 1: replaced six boxed code blocks with six transparent, borderless, line-wrapping code examples (now plain HTML pre/code); inline monospace snippets are unboxed. New code-relevant 1200×630 Renaissance illustration featured media 28281. Published HTML still shows three separate YouTube iframe players, two technical diagrams, six internal links, lesson footer; Go sample previously compiled under 1.23.2. Browser playback and responsive screenshots independently unverified.",
+    "qa_status": "Published WordPress view/edit confirms three native YouTube iframes, eight transparent line-wrapping code/output examples, five internal links, user-supplied painting actually used as featured image at exactly 1200x630, approved lesson footer. The complete Main.java source compiled and ran under OpenJDK 21.0.12.1. Public browser playback/mobile visual checks unverified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
     "compiled_code_verified": true,
-    "compiler_version": "go1.23.2"
+    "compiler_version": "OpenJDK 21.0.12.1",
+    "user_supplied_featured_cover": true,
+    "featured_media_id": 28314
   },
   "pending_publication_qa": [
     {
@@ -443,17 +456,28 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "WordPress published view/edit verified 3 YouTube iframes, 2 diagrams, six unboxed and line-wrapping code examples, new 1200x630 Go control-flow cover media 28281, six internal links, and original QR/footer. User-requested repair archived identically to 3 repositories. Browser playback and responsive visual verification remain pending."
+    },
+    {
+      "wordpress_post_id": 28319,
+      "live_url": "https://bitcoinversus.tech/2026/11/01/osjava-004-control-flow-if-switch-for-while-do-while-break-continue/",
+      "unresolved": [
+        "Independent in-browser playback for 3 native YouTube video players remains unverified.",
+        "Desktop and mobile screenshots and cross-device layout unverified."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "User-supplied cover media 28314 verified 1200×630. Three YouTube iFrames WordPress-rendered; eight unboxed code/output examples verified; five contextual links; Main.java compiled and executed OpenJDK21; all three GitHub archives synced."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 28259,
-    "last_style": "renaissance/oil painting",
+    "last_post_id": 28319,
+    "last_style": "user-supplied painterly editorial illustration",
     "next_style": "realistic editorial photo",
-    "last_featured_person": "fictional adult Black woman Go programmer age 20s–30s",
+    "last_featured_person": "actual user-selected illustration of Black woman programmer, seated at two vintage computer monitors",
     "previous_featured_person": "fictional East Asian adult male Rust systems programmer age 30s–40s",
-    "next_person_note": "Next 12-slot roster position 3: South Asian adult man aged 20s–30s; maintain strict male/female alternation.",
-    "last_cover_media_id": 28281,
-    "last_cover_note": "Updated to explicitly depict Go if/switch/for-range, continue and break on monitor with accompanying decision flowchart; approved renaissance/oil painting and roster position 2 retained."
+    "next_person_note": "Pending normal 12-slot rotation position 3: South Asian male adult in his 20s–30s (user-selected OSJava.004 image was a one-post exception; preserve alternating roster).",
+    "last_cover_media_id": 28314,
+    "last_cover_note": "User-supplied picture explicitly praised and requested to be used; original image uploaded and 1200×630 cropped version attached to published Java lesson. No new cover image was generated. Demographic/style sequence was not consumed by this exception."
   },
   "specialty_track_state": {
     "oshre": {

@@ -13,12 +13,12 @@ featured_style: "renaissance/oil painting"
 featured_person: "Fictional adult Black woman programmer, age 20s–30s, roster position 2"
 in_story_media_count: 5
 in_story_media:
-  - "WordPress 28255: original Go if/else condition branching diagram"
-  - "YouTube QgBYnz6I7p4: Tech With Tim Go if/else"
-  - "YouTube siOPdXdQImg: Tech With Tim Go switch"
-  - "WordPress 28256: original Go for/range slice index/value diagram"
-  - "YouTube jZ-llP_yKNo: Tech With Tim Go for loops"
-youtube_embed_qa: "WordPress published view HTML contains three distinct native YouTube iframe players with immediate captions; initial links-only rendering fixed by adding newlines inside embed wrappers and retested."
+  - "YouTube yyUHQIec83I: validated relevant published video player"
+  - "YouTube QgBYnz6I7p4: validated relevant published video player"
+  - "YouTube siOPdXdQImg: validated relevant published video player"
+  - "YouTube XCZWyN9ZbEQ: validated relevant published video player"
+  - "YouTube jZ-llP_yKNo: validated relevant published video player"
+video_embed_qa: "Updated 2026-11-01: 5 distinct players confirmed in WordPress rendered HTML; actual reader-device playback unverified."
 youtube_playback_verified: false
 mobile_render_verified: false
 code_blocks_count: 0
@@ -31,12 +31,14 @@ primary_sources:
   - "https://go.dev/ref/spec"
   - "https://go.dev/tour/flowcontrol/1"
   - "https://go.dev/tour/flowcontrol/9"
-qa_status: "OSGo.004 published. User-requested correction applied November 1: all six code examples now plain transparent borderless and line-wrapping, with inline code spans unboxed; featured cover replaced with 1200x630 code-centric Renaissance art (media 28281). Three YouTube iframe players, two diagrams, six internal links, original footer retained. Independent public browser playback and responsive visual screenshots unverified."
+qa_status: "Updated 2026-11-01: WordPress published view confirms 5 real YouTube iframe players, all removed concept images absent, original footer retained. Actual device playback/screenshots unverified."
 repair_note_2026_11_01: "Removed decorative code text boxes and replaced cover with Go if/switch/for-range/continue/break visualization; monitored WordPress published render and preserved working media."
 next_go_lesson_id: "OSGo.005"
 next_main_rotation_subject: "java"
 november_1_2026_layout_repair: "Replaced former Gutenberg code boxes with 6 plain transparent no-border preformatted HTML examples, retaining code content, media, source links and footer; published WordPress readback verified."
 november_1_2026_cover_repair: "Featured image changed from WordPress media 28254 to 28305; refreshed story-specific Go branching/iteration concept; new cover 1200x630, alt text present. Actual independent image-anatomy and browser screenshot review not available."
+conceptual_in_body_images_count: 0
+november_2026_concept_image_replacement: "Removed WordPress conceptual image media 28255, 28256; replaced with distinct relevant YouTube videos yyUHQIec83I, QgBYnz6I7p4, siOPdXdQImg, XCZWyN9ZbEQ, jZ-llP_yKNo. Retained featured cover and QR; verified WordPress iframe rendering and captions. Original old-media QA metadata is superseded."
 ---
 
 <!-- wp:paragraph --><p>Go programs do more than evaluate expressions: they <strong>make decisions, repeat work, and exit loops deliberately</strong>. <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">if</code>, <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">switch</code>, and <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">for</code> control which statements run. Go uses one loop keyword, <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">for</code>, rather than separate <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">while</code> or <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">do-while</code> statements. Its <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">range</code> clause iterates over collections, while <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">break</code> and <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">continue</code> alter loop execution.</p><!-- /wp:paragraph -->
@@ -62,7 +64,13 @@ if temperature &gt;= 85 {
 
 <!-- wp:paragraph --><p>The first comparison is false because 76 is below 85. The second is true because 76 is at least 70, so the output is <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">CHECK COOLING</code>. The <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">else</code> branch is skipped. A semicolon can introduce a short setup statement: <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">if value := 76; value &gt;= 70 { ... }</code>. That variable is scoped to the <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">if</code> statement and any attached <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">else</code> branches.</p><!-- /wp:paragraph -->
 
-<!-- wp:image {"id":28255,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osgo-004-if-else-branching-flowchart.png" alt="Flowchart showing Go if else if else branches for a temperature of 76°C and the matching CHECK COOLING output" class="wp-image-28255" /><figcaption class="wp-element-caption"><em>Original OSGo.004 decision diagram. At 76°C, the STOP condition fails and the CHECK COOLING condition succeeds.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=yyUHQIec83I]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Video: TechWorld with Nana — Golang Tutorial for Beginners (2021). Go conditionals at 1:24:24, switch at 1:54:02, and loops at 1:11:12.</em></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>In a real service, such decisions might determine whether a server fan alert is raised, a sensor reading is logged, or a task proceeds. Use clearly defined thresholds and never assume example values are safe production limits.</p><!-- /wp:paragraph -->
 
@@ -129,7 +137,13 @@ for index, value := range readings {
 // 1 75
 // 2 92</code></pre><!-- /wp:html -->
 
-<!-- wp:image {"id":28256,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osgo-004-range-slice-index-value-diagram.png" alt="Diagram showing Go range over slice readings 40 75 92 with indices 0 1 2 and copies of element values" class="wp-image-28256" /><figcaption class="wp-element-caption"><em>Original OSGo.004 range diagram. Slice indices increase from zero; ranging over a map does not guarantee an iteration order.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=XCZWyN9ZbEQ]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Video: TechWorld with Nana — Full Golang Tutorial, Build a TodoList App (2024). Hands-on slice iteration and for loops from 36:36 and 44:20.</em></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">continue</code> skips the remainder of the current loop body and starts the next iteration. <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">break</code> exits the innermost enclosing <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">for</code>, <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">switch</code>, or <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">select</code>. In nested loops, a labeled <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">break Outer</code> can explicitly exit a named outer loop. For a string, <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">range</code> produces byte offsets and Unicode code points; for maps, iteration order is unspecified.</p><!-- /wp:paragraph -->
 

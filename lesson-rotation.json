@@ -62,15 +62,14 @@
     ]
   },
   "next": {
-    "subject": "history_materials_science",
-    "lesson_number": 1,
-    "title_format": "OSHMS.001: {topic}",
-    "expected_topic": "Advance chronological History of Materials Science after OSHMS.000 The First Engineered Materials. Verify against WordPress and GitHub archives. Use the next historically grounded materials innovation without duplicate subject matter.",
-    "resolution_note": "WordPress checked November 1, 2026: OSHMS.000 published October 18 (post 26018) and no OSHMS.001 published or draft found. OSHE.004 published November 1, 2026.",
-    "public_title_format": "OSHMS.001: {topic}",
-    "internal_tracking_title_format": "OSHMS.001: {topic}"
+    "subject": "information_technology",
+    "lesson_number": 12,
+    "title_format": "OSITC.012: {topic}",
+    "public_title_format": "OSITC.012: {topic}",
+    "expected_topic": "Advance after OSITC.011 Windows Resource Monitor; verify next unique information-technology lesson across WordPress and GitHub before publication, avoid existing system/Windows troubleshooting duplicates.",
+    "resolution_note": "Live WordPress checked 2026-11-01 OSITC.011 last published October 28; previous track_state.next 8 was stale."
   },
-  "next_after_current": "information_technology",
+  "next_after_current": "c",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -105,7 +104,9 @@
     },
     "information_technology": {
       "acronym": "OSITC",
-      "next_lesson_number": 8
+      "next_lesson_number": 12,
+      "last_published_lesson_number": 11,
+      "last_wordpress_post_id": 26921
     },
     "c": {
       "acronym": "OSC",
@@ -218,7 +219,9 @@
     },
     "history_materials_science": {
       "acronym": "OSHMS",
-      "next_lesson_number": 1
+      "next_lesson_number": 2,
+      "last_published_lesson_number": 1,
+      "last_wordpress_post_id": 28058
     },
     "csharp": {
       "acronym": "OSC#",
@@ -247,23 +250,30 @@
     "zig": {
       "acronym": "OSZig",
       "next_lesson_number": 1
+    },
+    "network_engineer": {
+      "acronym": "OSNEC",
+      "next_lesson_number": 5,
+      "last_published_lesson_number": 4,
+      "last_wordpress_post_id": 23504,
+      "status": "active; repaired missing state from 2026-10-11 published OSNEC.004"
     }
   },
   "last_published": {
-    "subject": "history_of_engineering",
-    "lesson_number": 4,
-    "title": "OSHE.004: The Meidum Pyramid — From Stepped Core to True Pyramid",
-    "public_title": "OSHE.004: The Meidum Pyramid — From Stepped Core to True Pyramid",
-    "wordpress_post_id": 27944,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/oshe-004-meidum-pyramid-stepped-core-true-pyramid-sneferu-engineering/",
-    "archive_path": "archive/2026/11/27944-oshe-004-meidum-pyramid-stepped-core-true-pyramid.md",
-    "archive_blob_sha": "499afabf3ef87d006ed90dcfd2a57b61527b39f2",
+    "subject": "history_materials_science",
+    "lesson_number": 1,
+    "title": "OSHMS.001: The First Pottery Vessels — Xianrendong and Early East Asian Ceramics",
+    "public_title": "OSHMS.001: The First Pottery Vessels — Xianrendong and Early East Asian Ceramics",
+    "wordpress_post_id": 28058,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/oshms-001-first-pottery-vessels-xianrendong-east-asian-ceramics/",
+    "archive_path": "archive/2026/11/28058-oshms-001-first-pottery-vessels-xianrendong-east-asian-ceramics.md",
+    "archive_blob_sha": "b6e128dccca7745faf841b2942ee5e407f7d1e34",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "published; WordPress rendered HTML confirms two distinct YouTube player iframes with captions and three real licensed Meidum photographs with captions, correct curriculum ID, SEO, featured 1200x630 cover and footer. Actual video playback/browser screenshots have not been independently tested.",
+    "qa_status": "published; WordPress rendered HTML confirms exact one YouTube iframe, two separately licensed comparative pottery photos with historically accurate captions, current title and 1200x630 anime cover, footer. Independent playback/device viewport screenshots not tested.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false
@@ -366,15 +376,26 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "WordPress edit+rendered HTML confirmed two distinct video iframes, 3 real licensed exterior/passage/chamber photographs with full captions, original QR and 1200x630 featured cover. Browser/device playback is a separate check."
+    },
+    {
+      "wordpress_post_id": 28058,
+      "live_url": "https://bitcoinversus.tech/2026/11/01/oshms-001-first-pottery-vessels-xianrendong-east-asian-ceramics/",
+      "unresolved": [
+        "Actual YouTube playback not independently tested.",
+        "Desktop/mobile screenshot visual QA not independently performed."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "One original Dan Davis History player and two licensed later-comparative Jomon/Yangshao images rendered; caption explicitly notes objects not from Xianrendong; contested 20k-year date explained."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 27944,
-    "last_style": "realistic editorial photo",
-    "next_style": "anime editorial artwork",
-    "last_featured_person": "fictional White adult male archaeological engineer aged 30s–40s",
-    "previous_featured_person": "fictional Indigenous adult woman archival historian aged 30s–40s",
-    "next_person_note": "Next fictional adult Southeast Asian woman materials scientist aged 20s–30s, following alternating 12-slot roster. Next cover style: anime editorial artwork."
+    "last_post_id": 28058,
+    "last_style": "anime editorial artwork",
+    "next_style": "wordless comic",
+    "last_featured_person": "fictional Southeast Asian adult female archaeologist and materials scientist aged 20s–30s",
+    "previous_featured_person": "fictional White adult male archaeological engineer aged 30s–40s",
+    "next_person_note": "Next adult male Pacific Islander professional aged 30s–40s in the alternating 12-slot roster; next approved art style wordless comic."
   },
   "specialty_track_state": {
     "oshre": {
@@ -392,11 +413,13 @@
     },
     "ositc": {
       "acronym": "OSITC",
-      "next_lesson_number": 11,
-      "status": "active; specialist series alongside main rotation"
+      "next_lesson_number": 12,
+      "status": "active; WordPress verified OSITC.011 published October 28, 2026",
+      "last_published_lesson_number": 11,
+      "last_wordpress_post_id": 26921
     }
   },
-  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending. November 1, 2026 correction: curriculum IDs are required at the beginning of reader-facing lesson and SEO titles. Published OSHRE.003 WordPress post 27838 title and SEO title corrected; Gutenberg media, permalink and cover unchanged. This supersedes the ID-free October 28 title rule, not the unnumbered lesson-section style. November 1, 2026: Hashboard Repair OSHRE.004 (post 27857) published, archived in all three repos; course pointer advanced to OSHRE.005. Featured wordless comic adult female, next photo/anime blend adult Black male. Main rotation stays at OSHistory.016. Two YouTube iframe players rendered; browser playback and screenshots not independently verified. November 1, 2026: OSHRE.005 (post 27871) published with three NEW board photographs, distinct from all prior OSHRE lessons, and two video players; archives verified in three repos. OSHRE pointer advanced to .006. Photo rotation policy added; main rotation pointer retained at OSHistory.016; next cover split-screen diptych with Indigenous female professional. Independent browser/playback QA pending. November 1, 2026: Main rotation published OSHistory.016 (post 27887), centered on the 1575-1577 Castilian credit freeze and documented bank failures; the 1557 refinancing interpretation is disputed by 2026 Cambridge research. All three GitHub archives verified. Next main lesson OSHE.004; specialty OSHRE stays at .006. Hashboard photo uniqueness ledger remains unchanged and mandatory. Current cover split-screen diptych; next realistic photo. Video playback and desktop/mobile screenshot QA not independently tested. November 1, 2026: OSHE.004 Meidum Pyramid engineering published as WordPress 27944, archived in all three repositories, 2 YouTube iframe embeds and 3 authentic licensed site photographs verified in WordPress rendering, 1200x630 realistic editorial cover. Next main rotation OSHMS.001, next OSHE.005. Hashboard Repair photo originality rule and its no-reuse ledger preserved. Independent video playback and mobile screenshots still pending.",
+  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending. November 1, 2026 correction: curriculum IDs are required at the beginning of reader-facing lesson and SEO titles. Published OSHRE.003 WordPress post 27838 title and SEO title corrected; Gutenberg media, permalink and cover unchanged. This supersedes the ID-free October 28 title rule, not the unnumbered lesson-section style. November 1, 2026: Hashboard Repair OSHRE.004 (post 27857) published, archived in all three repos; course pointer advanced to OSHRE.005. Featured wordless comic adult female, next photo/anime blend adult Black male. Main rotation stays at OSHistory.016. Two YouTube iframe players rendered; browser playback and screenshots not independently verified. November 1, 2026: OSHRE.005 (post 27871) published with three NEW board photographs, distinct from all prior OSHRE lessons, and two video players; archives verified in three repos. OSHRE pointer advanced to .006. Photo rotation policy added; main rotation pointer retained at OSHistory.016; next cover split-screen diptych with Indigenous female professional. Independent browser/playback QA pending. November 1, 2026: Main rotation published OSHistory.016 (post 27887), centered on the 1575-1577 Castilian credit freeze and documented bank failures; the 1557 refinancing interpretation is disputed by 2026 Cambridge research. All three GitHub archives verified. Next main lesson OSHE.004; specialty OSHRE stays at .006. Hashboard photo uniqueness ledger remains unchanged and mandatory. Current cover split-screen diptych; next realistic photo. Video playback and desktop/mobile screenshot QA not independently tested. November 1, 2026: OSHE.004 Meidum Pyramid engineering published as WordPress 27944, archived in all three repositories, 2 YouTube iframe embeds and 3 authentic licensed site photographs verified in WordPress rendering, 1200x630 realistic editorial cover. Next main rotation OSHMS.001, next OSHE.005. Hashboard Repair photo originality rule and its no-reuse ledger preserved. Independent video playback and mobile screenshots still pending. November 1, 2026: OSHMS.001 (post 28058) published and archived; 43 active subjects, 20 coding catalog subjects, 38 historical curriculum folders and 626 indexed lesson entries accounted for separately. Missing OSNEC state repaired to next .005; OSITC pointer reconciled to .012; main next OSITC.012. Cover rotation anime Southeast Asian female -> wordless comic Pacific Islander male. Public browser/playback QA outstanding.",
   "public_lesson_presentation": {
     "effective_date": "2026-11-01",
     "style": "textbook / wiki / encyclopedia / dictionary",
@@ -479,5 +502,22 @@
       27861
     ],
     "next": "OSHRE.006 — source new genuine photos, never reusing any known_used_photo_ids or underlying originals."
+  },
+  "full_inventory_audit": {
+    "date": "2026-11-01",
+    "active_rotation_subjects": 43,
+    "active_track_state_entries": 43,
+    "historical_index_folders": 38,
+    "historical_index_lesson_entries": 626,
+    "coding_catalog_tracks": 20,
+    "coding_catalog_existing": 2,
+    "coding_catalog_new": 18,
+    "coding_subjects_missing_from_rotation": [],
+    "nonstandard_deferred_labels": [
+      "C+",
+      "Zig++"
+    ],
+    "pending_archives_not_auto_renumbered": true,
+    "notes": "The 38 historic index folders and 626 listed lesson entries remain preserved. Main rotation includes all 20 coding catalog tracks. network_engineer state repaired using OSNEC.004 published record. No automatic enumeration of all 626 individual posts is claimed."
   }
 }

@@ -7,7 +7,7 @@ title: "OSGo.004: Control Flow — if, switch, for, range, break, and continue"
 permalink: "https://bitcoinversus.tech/2026/11/01/osgo-004-control-flow-if-switch-for-range-break-continue/"
 published_date: "2026-11-01"
 wordpress_category_ids: [44329, 5812, 6]
-featured_media_id: 28281
+featured_media_id: 28305
 featured_dimensions: "1200x630"
 featured_style: "renaissance/oil painting"
 featured_person: "Fictional adult Black woman programmer, age 20s–30s, roster position 2"
@@ -36,7 +36,8 @@ repair_note_2026_11_01: "Removed decorative code text boxes and replaced cover w
 next_go_lesson_id: "OSGo.005"
 next_main_rotation_subject: "java"
 ---
-
+november_1_2026_layout_repair: "Replaced former Gutenberg code boxes with 6 plain transparent no-border preformatted HTML examples, retaining code content, media, source links and footer; published WordPress readback verified."
+november_1_2026_cover_repair: "Featured image changed from WordPress media 28254 to 28305; refreshed story-specific Go branching/iteration concept; new cover 1200x630, alt text present. Actual independent image-anatomy and browser screenshot review not available."
 <!-- wp:paragraph --><p>Go programs do more than evaluate expressions: they <strong>make decisions, repeat work, and exit loops deliberately</strong>. <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">if</code>, <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">switch</code>, and <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">for</code> control which statements run. Go uses one loop keyword, <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">for</code>, rather than separate <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">while</code> or <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">do-while</code> statements. Its <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">range</code> clause iterates over collections, while <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">break</code> and <code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace">continue</code> alter loop execution.</p><!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>This is <strong>OSGo.004</strong> in the complete Open CERT programming rotation. It follows <a href="https://bitcoinversus.tech/2026/10/14/osgo-003-operators-expressions-arithmetic-comparison-logic-assignment-bitwise/">OSGo.003: Operators and Expressions</a>, which supplied the comparison and logical expressions used here. If the syntax is unfamiliar, review <a href="https://bitcoinversus.tech/2026/10/10/osgo-002-variables-constants-zero-values-and-basic-types-var-int-float64-bool-string-byte-and-rune/">OSGo.002: Variables and Basic Types</a> or <a href="https://bitcoinversus.tech/2026/10/08/osgo-001-what-is-go-packages-toolchain-go-run-go-build-first-program/">OSGo.001: The Go Toolchain</a> first.</p><!-- /wp:paragraph -->

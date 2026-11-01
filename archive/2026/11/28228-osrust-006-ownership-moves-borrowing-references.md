@@ -13,11 +13,11 @@ featured_style: "split-screen diptych"
 featured_person: "Fictional adult East Asian male systems programmer aged 30s-40s"
 in_story_media_count: 4
 in_story_media:
-  - "WordPress 28219: original Rust String ownership move conceptual diagram"
-  - "YouTube VFIOSWy93H0: Let's Get Rusty, Understanding Ownership in Rust (2021)"
-  - "WordPress 28220: original shared/mutable borrowing conceptual diagram"
-  - "YouTube 79phqVpE7cU: Gary Explains, Rust What is Ownership and Borrowing? (2020)"
-youtube_embed_qa: "WordPress published rendered HTML contains two actual YouTube iframe players with immediate following video captions. Actual reader-device playback not separately verified."
+  - "YouTube yqtLkbYK0Rw: validated relevant published video player"
+  - "YouTube VFIOSWy93H0: validated relevant published video player"
+  - "YouTube OyzeR8_aGWU: validated relevant published video player"
+  - "YouTube 79phqVpE7cU: validated relevant published video player"
+video_embed_qa: "Updated 2026-11-01: 4 distinct players confirmed in WordPress rendered HTML; actual reader-device playback unverified."
 code_blocks_count: 0
 code_qa: "Examples structurally reviewed against official Rust Book semantics. rustc toolchain unavailable in execution environment; do NOT claim compiled/runnable test completed."
 internal_link_count: 5
@@ -28,11 +28,13 @@ primary_sources:
   - "https://doc.rust-lang.org/error_codes/E0382.html"
   - "https://doc.rust-lang.org/error_codes/E0502.html"
   - "https://doc.rust-lang.org/error_codes/E0515.html"
-qa_status: "Published WordPress raw/rendered readback confirms both YouTube iframes, two technical figures, title/SEO curriculum ID, 1200x630 cover, 5 internal links, no decorative text boxes, original editor note QR and disclaimer. Independent mobile/desktop page screenshots, device playback, visual anatomy check and Rust compiler execution unavailable."
+qa_status: "Updated 2026-11-01: WordPress published view confirms 4 real YouTube iframe players, all removed concept images absent, original footer retained. Actual device playback/screenshots unverified."
 next_rust_lesson_id: "OSRust.007"
 plain_unboxed_code_examples_count: 10
 november_1_2026_layout_repair: "Replaced former Gutenberg code boxes with 10 plain transparent no-border preformatted HTML examples, retaining code content, media, source links and footer; published WordPress readback verified."
 november_1_2026_cover_repair: "Featured image changed from WordPress media 28222 to 28304; refreshed story-specific Rust ownership/borrowing concept; new cover 1200x630, alt text present. Actual independent image-anatomy and browser screenshot review not available."
+conceptual_in_body_images_count: 0
+november_2026_concept_image_replacement: "Removed WordPress conceptual image media 28219, 28220; replaced with distinct relevant YouTube videos yqtLkbYK0Rw, VFIOSWy93H0, OyzeR8_aGWU, 79phqVpE7cU. Retained featured cover and QR; verified WordPress iframe rendering and captions. Original old-media QA metadata is superseded."
 ---
 
 <!-- wp:paragraph --><p>Rust's <strong>ownership system</strong> governs who is responsible for a value and how other parts of a program may access it. It is a foundation for memory safety without a mandatory tracing garbage collector. The compiler checks how ownership moves, how references borrow data, and whether accesses can overlap safely; it rejects many programs that could otherwise use invalid pointers or cause unsynchronized mutations.</p><!-- /wp:paragraph -->
@@ -65,7 +67,13 @@ november_1_2026_cover_repair: "Featured image changed from WordPress media 28222
 }</code></pre>
 <!-- /wp:html -->
 
-<!-- wp:image {"id":28219,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/rust-string-move-and-ownership-transfer-e28094-diagram.png" alt="Original conceptual diagram showing one owner transferring ownership of a String's heap allocation to a new binding without copying the allocation" class="wp-image-28219" /><figcaption class="wp-element-caption"><em>Original wordless conceptual diagram: a <code>String</code> move transfers control of the existing allocation. It is not a memory dump or an exact compiler implementation diagram.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=yqtLkbYK0Rw]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Video: Learning Podcasts — Rust Ownership and Move Semantics Explained (2026). Demonstrates ownership transfer, Copy, Clone and move-related compiler errors.</em></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p><code>u32</code>, <code>bool</code> and many other simple types implement the <code>Copy</code> trait. An assignment of a <code>Copy</code> value makes a separate copy and leaves the source usable. Rust does not permit types requiring custom <code>Drop</code> behavior to also implement <code>Copy</code>. Whether an operation is copying or moving is determined by the type's traits, not just by a variable's visual spelling.</p><!-- /wp:paragraph -->
 
@@ -128,7 +136,13 @@ fn main() {
 }</code></pre>
 <!-- /wp:html -->
 
-<!-- wp:image {"id":28220,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/rust-shared-and-mutable-borrowing-rules-e28094-diagram.png" alt="Wordless educational diagram showing multiple shared Rust borrows, one exclusive mutable borrow and conflicting borrows being rejected" class="wp-image-28220" /><figcaption class="wp-element-caption"><em>Original conceptual illustration of safe borrowing rules: multiple shared readers or an exclusive mutable borrow, without conflicting overlap. The drawing is explanatory, not an official borrow-checker trace.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=OyzeR8_aGWU]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Video: DigiKey — Intro to Embedded Rust, Part 4: Ownership and Borrowing (2026). Practical demonstration of immutable and mutable borrows, lifetimes and non-overlapping mutable slices.</em></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph --><p>A conflicting program like the one below is rejected when the immutable borrow remains active across a mutable borrow. It is intentionally invalid: <code>E0502</code> reports borrowing as mutable while already borrowed as immutable. Separately, creating two simultaneously active mutable borrows can produce <code>E0499</code>. The point is to reorganize accesses into safe phases, not automatically clone every string.</p><!-- /wp:paragraph -->
 

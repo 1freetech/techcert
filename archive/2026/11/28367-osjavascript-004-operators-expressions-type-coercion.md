@@ -7,11 +7,10 @@ title: "OSJavaScript.004: Operators, Expressions, and Type Coercion — ==, ===,
 permalink: "https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining/"
 published_date: "2026-11-01"
 categories: [44329, 5812, 6]
-featured_media_id: 28363
+featured_media_id: 28379
 featured_image_dimensions: "1200x630"
-featured_style: "anime editorial"
-featured_person: "fictional adult woman JavaScript developer; rotation slot 4"
-featured_image_source: "Original generated artwork, uploaded and exactly cropped, prominently depicting real JavaScript operator concepts on monitor; no headline overlay"
+featured_style: "anime technical editorial artwork"
+featured_image_source: "Original subject-only editorial art; technical concept illustrated directly; no human figures."
 in_story_media_count: 3
 youtube_embeds:
   - "GKJh3vdat8A: Web Dev Simplified — JavaScript type coercion"
@@ -33,6 +32,8 @@ next_javascript_lesson_id: "OSJavaScript.005"
 next_main_rotation_subject: "html"
 next_main_rotation_lesson_number: 4
 qa_status: "Published WordPress readback: three distinct videos rendered as iframes, seven code examples transparent unboxed and wrapping, six internal links, 1200×630 cover, correct editorial footer. Public page cannot be independently fetched; actual player playback and responsive browser layout unverified."
+featured_subject: "JavaScript numeric and string operands, expression evaluation and equality logic, no people"
+cover_revision_2026_11_01_subject_only: "Supersedes featured media 28363 with 28379; 1200×630 WordPress published attachment verified. Renaissance category and people imagery removed per explicit user edit; visual pixel inspection and public responsive screenshot access remain unverified."
 ---
 
 <!-- wp:heading --><h2 class="wp-block-heading">JavaScript Operators: What a Value Actually Means</h2><!-- /wp:heading -->

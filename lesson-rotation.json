@@ -67,7 +67,7 @@
     "title_format": "OSHistory.016: {topic}",
     "expected_topic": "History of Money lesson must center on a verifiable bank or market crash in the historical era following the Medici Bank collapse of 1494; check live posts before drafting.",
     "resolution_note": "Live WordPress verified November 1, 2026: OSHistory.015 (Medici Bank collapse, 1494) published October 29; OSHistory.016 not yet published. This pointer follows confirmed OSFEC.014 on November 1. Seven registered programming tracks were added to the full rotation so none are omitted.",
-    "public_title_format": "{topic}",
+    "public_title_format": "OSHistory.016: {topic}",
     "internal_tracking_title_format": "OSHistory.016: {topic}"
   },
   "next_after_current": "history_of_engineering",
@@ -246,7 +246,7 @@
   "last_published": {
     "subject": "hashboard_repair",
     "lesson_number": 3,
-    "title": "Diagnosing Missing ASIC Chips on a Hashboard",
+    "title": "OSHRE.003: Diagnosing Missing ASIC Chips on a Hashboard",
     "wordpress_post_id": 27838,
     "live_url": "https://bitcoinversus.tech/2026/11/01/hashboard-missing-asic-chip-diagnostics-test-fixtures-fault-localization/",
     "archive_path": "archive/2026/11/27838-oshre-003-diagnosing-missing-asic-chips-on-a-hashboard.md",
@@ -259,7 +259,8 @@
     "qa_status": "published — WordPress rendered HTML confirms 2 distinct YouTube players and 2 real in-story images, but actual playback and desktop/mobile browser tests remain pending",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
-    "mobile_render_verified": false
+    "mobile_render_verified": false,
+    "public_title": "OSHRE.003: Diagnosing Missing ASIC Chips on a Hashboard"
   },
   "pending_publication_qa": [
     {
@@ -344,17 +345,19 @@
       "status": "active; specialist series alongside main rotation"
     }
   },
-  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending.",
+  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending. November 1, 2026 correction: curriculum IDs are required at the beginning of reader-facing lesson and SEO titles. Published OSHRE.003 WordPress post 27838 title and SEO title corrected; Gutenberg media, permalink and cover unchanged. This supersedes the ID-free October 28 title rule, not the unnumbered lesson-section style.",
   "public_lesson_presentation": {
-    "effective_date": "2026-10-28",
+    "effective_date": "2026-11-01",
     "style": "textbook / wiki / encyclopedia / dictionary",
-    "visible_title_format": "{topic}",
-    "numbered_public_title": false,
+    "visible_title_format": "{curriculum_id}: {topic}",
+    "numbered_public_title": true,
     "numbered_section_headings": false,
-    "keep_track_and_sequence_identifiers_internal": true,
-    "numbering_exception": "Only intrinsic ordered procedures, source-defined rankings and standardized technical numbering; not chapter/lesson decoration",
+    "keep_track_and_sequence_identifiers_internal": false,
+    "numbering_exception": "Curriculum ID and sequence must appear in public title; body section numbering only for necessary ordered procedures, actual rankings or technical standard numbers.",
     "scope": "All new lessons in the main and specialty rotations, including OSHRE and OSPCB",
-    "supersedes": "Older requirements to show course identifier/lesson number in title or heading",
-    "historical_posts": "Leave existing public titles unchanged unless separately requested"
+    "supersedes": "October 28, 2026 rule that omitted curriculum ID from public lesson title; retains textbook-style unnumbered section headings.",
+    "historical_posts": "Apply to future publications and any current article the user explicitly asks to correct; no automatic mass-renaming.",
+    "curriculum_id_required_in_public_title": true,
+    "curriculum_id_and_sequential_number_required_in_seo_title": true
   }
 }

@@ -202,7 +202,9 @@
     },
     "hashboard_repair": {
       "acronym": "OSHRE",
-      "next_lesson_number": 3
+      "next_lesson_number": 4,
+      "last_published_lesson_number": 3,
+      "last_wordpress_post_id": 27838
     },
     "history_of_engineering": {
       "acronym": "OSHE",
@@ -242,19 +244,19 @@
     }
   },
   "last_published": {
-    "subject": "firmware_engineer",
-    "lesson_number": 14,
-    "title": "Memory Protection Units and Fault Containment in Embedded Firmware",
-    "wordpress_post_id": 27837,
-    "live_url": "https://bitcoinversus.tech/2026/11/01/osfec-014-memory-protection-units-fault-containment-embedded-firmware/",
-    "archive_path": "archive/2026/11/27837-osfec-014-mpu-fault-containment-embedded-firmware.md",
-    "archive_blob_sha": "ead298287da3cfb8c7103bd1412a8c93b96ec552",
+    "subject": "hashboard_repair",
+    "lesson_number": 3,
+    "title": "Diagnosing Missing ASIC Chips on a Hashboard",
+    "wordpress_post_id": 27838,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/hashboard-missing-asic-chip-diagnostics-test-fixtures-fault-localization/",
+    "archive_path": "archive/2026/11/27838-oshre-003-diagnosing-missing-asic-chips-on-a-hashboard.md",
+    "archive_blob_sha": "4572709cc817e419f2429df91e1f8e5ebc9a54fe",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "published — WordPress rendered HTML confirms 2 YouTube players and 3 in-story images, actual video playback and desktop/mobile browser screenshots not independently tested",
+    "qa_status": "published — WordPress rendered HTML confirms 2 distinct YouTube players and 2 real in-story images, but actual playback and desktop/mobile browser tests remain pending",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false
@@ -302,21 +304,34 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "Both distinct YouTube iframe embeds and three credited photos confirmed by published WordPress rendered HTML, not a complete playback test."
+    },
+    {
+      "wordpress_post_id": 27838,
+      "live_url": "https://bitcoinversus.tech/2026/11/01/hashboard-missing-asic-chip-diagnostics-test-fixtures-fault-localization/",
+      "unresolved": [
+        "Actual YouTube playback not independently tested in browser or device.",
+        "Desktop/mobile screenshot visual QA not performed; public webpage fetch inaccessible."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Two rendered YouTube iframe players with exact IDs, two licensed hardware images and corrected 1200x630 anime featured image verified in WordPress, not a substitute for real playback."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 27837,
-    "last_style": "realistic editorial photo",
-    "next_style": "anime editorial artwork",
-    "last_featured_person": "fictional Latina female embedded firmware engineer aged 40s–50s",
-    "previous_featured_person": "South Asian male firmware technician in 1200x630 split-screen diptych (OSFTC.015)",
-    "next_person_note": "Continue the approved 12-slot adult lesson cover roster: alternate male/female, next adult man, and rotate accepted cover art style."
+    "last_post_id": 27838,
+    "last_style": "anime editorial artwork",
+    "next_style": "wordless comic",
+    "last_featured_person": "fictional Middle Eastern/North African male hashboard repair engineer aged 40s–50s",
+    "previous_featured_person": "fictional Latina female embedded firmware engineer aged 40s–50s",
+    "next_person_note": "Next adult professional female, white woman aged 50s–60s, continuing the 12-slot alternating male/female roster; next cover style: wordless comic."
   },
   "specialty_track_state": {
     "oshre": {
       "acronym": "OSHRE",
-      "next_lesson_number": 3,
-      "status": "active; specialist series alongside main rotation"
+      "next_lesson_number": 4,
+      "status": "active; specialist series alongside main rotation; OSHRE.003 published November 1, 2026",
+      "last_published_lesson_number": 3,
+      "last_wordpress_post_id": 27838
     },
     "ospcb": {
       "acronym": "OSPCB",
@@ -329,7 +344,7 @@
       "status": "active; specialist series alongside main rotation"
     }
   },
-  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks.",
+  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending.",
   "public_lesson_presentation": {
     "effective_date": "2026-10-28",
     "style": "textbook / wiki / encyclopedia / dictionary",

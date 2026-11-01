@@ -24,6 +24,8 @@ internal_links_count: 9
 original_sources: ["https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/troubleshoot-performance-problems-in-windows", "https://learn.microsoft.com/en-us/troubleshoot/windows-server/support-tools/troubleshoot-issues-performance-monitor", "https://learn.microsoft.com/en-us/windows/win32/perfctrs/performance-counters-tools", "https://learn.microsoft.com/en-us/windows/win32/perfctrs/collecting-performance-data"]
 qa_status: "WordPress published title and SEO, two iframe video players, two image blocks with captions, 1200x630 featured cover, 9 internal links, Microsoft sources, unchanged Editor's Note, original QR and disclaimer. Independent public-page fetch inaccessible; actual playback and desktop/mobile screenshots unverified."
 next_main_subject: "c"
+plain_unboxed_code_examples_count: 1
+november_1_2026_layout_repair: "Converted 1 previously boxed Gutenberg code blocks into transparent borderless no-shadow semantic preformatted code blocks, preserving all code text, videos, diagrams, source citations and approved footer; WordPress published view readback passed."
 ---
 
 <!-- wp:paragraph --><p><strong>Windows Performance Monitor (PerfMon)</strong> is an operating-system tool for collecting numerical performance counters and viewing them as live or recorded time series. Rather than simply asking “is the computer slow right now?”, PerfMon lets an IT technician measure how CPU, memory, storage and networking conditions change over seconds, minutes or hours. <strong>Data Collector Sets</strong> preserve measurements for later comparison, turning an intermittent complaint into time-stamped evidence.</p><!-- /wp:paragraph -->
@@ -74,11 +76,13 @@ next_main_subject: "c"
 
 <!-- wp:paragraph --><p>An authorized administrator can use the graphical wizard for a straightforward capture. For a controlled Windows Server or Windows workstation lab, the <code>logman</code> command also creates a counter Data Collector Set. The following is an <strong>illustrative, deliberately small</strong> collection that records CPU utilization, available memory and disk latency at 15-second intervals. Confirm counter names and permissions on your own machine, use a writable directory, and stop the collector after the test.</p><!-- /wp:paragraph -->
 
-<!-- wp:code --><pre class="wp-block-code"><code>logman create counter OSITC012_Diag -o "C:\PerfLogs\OSITC012_Diag.blg" -f bin -si 00:00:15 -c "\Processor(_Total)\% Processor Time" "\Memory\Available MBytes" "\PhysicalDisk(_Total)\Avg. Disk sec/Read"
+<!-- wp:html -->
+<pre aria-label="Code or console output example" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">logman create counter OSITC012_Diag -o "C:\PerfLogs\OSITC012_Diag.blg" -f bin -si 00:00:15 -c "\Processor(_Total)\% Processor Time" "\Memory\Available MBytes" "\PhysicalDisk(_Total)\Avg. Disk sec/Read"
 logman start OSITC012_Diag
 
 REM Reproduce the approved workload, then stop collection:
-logman stop OSITC012_Diag</code></pre><!-- /wp:code -->
+logman stop OSITC012_Diag</code></pre>
+<!-- /wp:html -->
 
 <!-- wp:paragraph --><p>This example writes to <code>C:\PerfLogs</code>. On devices where the folder or a counter is inaccessible, use the approved path and the appropriate rights rather than weakening directory permissions. The selected sample interval is 15 seconds, but it can miss brief sub-second latency spikes; tighter capture or a different diagnostic tool may be needed. Microsoft's <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/troubleshoot-performance-problems-in-windows">scenario guide</a> documents <code>logman.exe</code> create, start and stop operations and offers a larger set of counters for authorized support captures.</p><!-- /wp:paragraph -->
 

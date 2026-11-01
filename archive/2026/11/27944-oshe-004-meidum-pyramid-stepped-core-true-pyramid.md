@@ -22,7 +22,7 @@ video_embeds:
 technical_scope: "Meidum E1 E2 E3 construction phases, masonry orientation and casing, stone corbelled load relief, gradual rubble evidence and limits of sudden-collapse hypothesis"
 qa_status: "WordPress published edit and rendered HTML verified 2 distinct YouTube iframe players with immediate captions, three authentic captioned CC photographs, unique 1200x630 featured image, Gutenberg table, correct SEO and lesson ID, original QR and approved Editor's Note/disclaimer. Actual device playback and desktop/mobile browser screenshots not independently tested."
 next_main_track: "history_materials_science"
-next_main_lesson: "OSHMS.??? determine from live curriculum registry before setting new numbering"
+next_main_lesson: "OSHMS.001"
 ---
 
 <!-- wp:paragraph --><p>The <strong>Meidum Pyramid</strong>, in Egypt's Beni Suef governorate, preserves a major transition in structural engineering: builders enlarged a stepped royal pyramid and later attempted to give it the continuous slopes of a <strong>true pyramid</strong>. The monument is generally associated with <strong>King Sneferu</strong>, the first ruler of Egypt's Fourth Dynasty (approximately the 26th century BCE). Its distinctive truncated core and surrounding rubble reveal an architectural project that was changed repeatedly, though the surviving ruins do not establish that it collapsed in a single construction accident.</p><!-- /wp:paragraph -->

@@ -60,7 +60,7 @@
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "Published WordPress view/edit confirms three native YouTube iframes, eight transparent line-wrapping code/output examples, five internal links, user-supplied painting actually used as featured image at exactly 1200x630, approved lesson footer. The complete Main.java source compiled and ran under OpenJDK 21.0.12.1. Public browser playback/mobile visual checks unverified.",
+    "qa_status": "All Java code and output text boxes removed on Nov 1, 2026. OSJava.004: 8 unboxed, line-preserving examples; OSJava.005: 6. Inline code backgrounds, borders, padding and shadows suppressed. WP saved and rendered HTML verifies zero <pre> and zero wp-block-code; three YouTube iframe embeds, covers and footer retained. Exact revised Gutenberg body synced to BitcoinVersus, OpenCert and TechCert. Independent mobile screenshots and actual video playback unverified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
@@ -292,7 +292,7 @@
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "OSJava.005 published after separate OSJava.004 Control Flow publication; duplicate lesson number repaired. WordPress saved and rendered checks show three native YouTube iframes, 1200x630 cover media 28317, unboxed code and footer. StringLab compiled and ran using Java 21.0.12.1. GitHub sources byte-identical in three repositories. Actual YouTube playback and independent mobile screenshot QA unverified.",
+    "qa_status": "All Java code and output text boxes removed on Nov 1, 2026. OSJava.004: 8 unboxed, line-preserving examples; OSJava.005: 6. Inline code backgrounds, borders, padding and shadows suppressed. WP saved and rendered HTML verifies zero <pre> and zero wp-block-code; three YouTube iframe embeds, covers and footer retained. Exact revised Gutenberg body synced to BitcoinVersus, OpenCert and TechCert. Independent mobile screenshots and actual video playback unverified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
@@ -464,7 +464,10 @@
       ],
       "featured_cover_verified": true,
       "archive_source_verified": true,
-      "note": "User-supplied cover media 28314 verified 1200×630. Three YouTube iFrames WordPress-rendered; eight unboxed code/output examples verified; five contextual links; Main.java compiled and executed OpenJDK21; all three GitHub archives synced."
+      "note": "User-supplied cover media 28314 verified 1200×630. Three YouTube iFrames WordPress-rendered; eight unboxed code/output examples verified; five contextual links; Main.java compiled and executed OpenJDK21; all three GitHub archives synced. Code-box removal verified in WordPress edit/view, source archived identically in all 3 repositories.",
+      "unboxed_code_qa": true,
+      "decorative_text_boxes_present": false,
+      "code_rendering": "Unboxed paragraphs with white-space:pre-wrap monospace spans; transparent inline code (no border, padding or background)."
     },
     {
       "wordpress_post_id": 28323,
@@ -475,7 +478,10 @@
       ],
       "featured_cover_verified": true,
       "archive_source_verified": true,
-      "note": "Post .005 corrected from duplicate .004 number, three rendered YouTube iframes with captions, compiled Java and exact 3 repository source readback."
+      "note": "Post .005 corrected from duplicate .004 number, three rendered YouTube iframes with captions, compiled Java and exact 3 repository source readback. Code-box removal verified in WordPress edit/view, source archived identically in all 3 repositories.",
+      "unboxed_code_qa": true,
+      "decorative_text_boxes_present": false,
+      "code_rendering": "Unboxed paragraphs with white-space:pre-wrap monospace spans; transparent inline code (no border, padding or background)."
     }
   ],
   "featured_image_rotation": {
@@ -610,5 +616,21 @@
     ],
     "pending_archives_not_auto_renumbered": true,
     "notes": "The 38 historic index folders and 626 listed lesson entries remain preserved. Main rotation includes all 20 coding catalog tracks. network_engineer state repaired using OSNEC.004 published record. No automatic enumeration of all 626 individual posts is claimed."
+  },
+  "java_code_layout_repair_2026_11_01": {
+    "wordpress_posts": [
+      28319,
+      28323
+    ],
+    "unboxed_examples": {
+      "OSJava004": 8,
+      "OSJava005": 6
+    },
+    "inline_code_terms_restyled": {
+      "OSJava004": 71,
+      "OSJava005": 73
+    },
+    "verified": "WordPress rendered and edit markup; no pre tag; all 3 repository archives byte-identical per post.",
+    "limits": "No independent responsive screenshot or actual video playback test."
   }
 }

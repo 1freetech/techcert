@@ -1,6 +1,6 @@
 {
   "schema_version": 8,
-  "updated_at": "2026-10-28",
+  "updated_at": "2026-11-01",
   "rotation": [
     "data_center_technician",
     "data_center_engineer",
@@ -23,6 +23,13 @@
     "sql",
     "bash",
     "powershell",
+    "csharp",
+    "css",
+    "chef",
+    "shakespeare",
+    "dotnet",
+    "emojicode",
+    "zig",
     "leadership",
     "network_technician",
     "network_engineer",
@@ -55,15 +62,15 @@
     ]
   },
   "next": {
-    "subject": "windows",
-    "lesson_number": 51,
-    "title_format": "Windows Command #51 – {topic} (Windows OS)",
-    "expected_topic": null,
-    "resolution_note": "Live WordPress checked October 28, 2026: Windows Command #50 was the latest; #51 not yet published. Select a nonduplicate concept, verify model/technical sources, and apply live media QA.",
+    "subject": "history_money_technology_bitcoin",
+    "lesson_number": 16,
+    "title_format": "OSHistory.016: {topic}",
+    "expected_topic": "History of Money lesson must center on a verifiable bank or market crash in the historical era following the Medici Bank collapse of 1494; check live posts before drafting.",
+    "resolution_note": "Live WordPress verified November 1, 2026: OSHistory.015 (Medici Bank collapse, 1494) published October 29; OSHistory.016 not yet published. This pointer follows confirmed OSFEC.014 on November 1. Seven registered programming tracks were added to the full rotation so none are omitted.",
     "public_title_format": "{topic}",
-    "internal_tracking_title_format": "Windows Command #51 – {topic} (Windows OS)"
+    "internal_tracking_title_format": "OSHistory.016: {topic}"
   },
-  "next_after_current": "electrical_engineering",
+  "next_after_current": "history_of_engineering",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -79,19 +86,19 @@
     },
     "fiber_optics_engineer": {
       "acronym": "OSFOEC",
-      "next_lesson_number": 12
+      "next_lesson_number": 14
     },
     "firmware_technician": {
       "acronym": "OSFTC",
-      "next_lesson_number": 11
+      "next_lesson_number": 16
     },
     "firmware_engineer": {
       "acronym": "OSFEC",
-      "next_lesson_number": 11
+      "next_lesson_number": 15
     },
     "history_money_technology_bitcoin": {
       "acronym": "OSHistory",
-      "next_lesson_number": 12
+      "next_lesson_number": 16
     },
     "information_technology": {
       "acronym": "OSITC",
@@ -204,22 +211,50 @@
     "history_materials_science": {
       "acronym": "OSHMS",
       "next_lesson_number": 1
+    },
+    "csharp": {
+      "acronym": "OSC#",
+      "next_lesson_number": 1
+    },
+    "css": {
+      "acronym": "OSCSS",
+      "next_lesson_number": 1
+    },
+    "chef": {
+      "acronym": "OSChef",
+      "next_lesson_number": 1
+    },
+    "shakespeare": {
+      "acronym": "OSShakespeare",
+      "next_lesson_number": 1
+    },
+    "dotnet": {
+      "acronym": "OSDotNet",
+      "next_lesson_number": 1
+    },
+    "emojicode": {
+      "acronym": "OSEmojicode",
+      "next_lesson_number": 1
+    },
+    "zig": {
+      "acronym": "OSZig",
+      "next_lesson_number": 1
     }
   },
   "last_published": {
-    "subject": "linux",
-    "lesson_number": 65,
-    "title": "Linux Command #65 – systemd-analyze (Linux OS)",
-    "wordpress_post_id": 26865,
-    "live_url": "https://bitcoinversus.tech/2026/10/28/linux-command-65-systemd-analyze-linux-os/",
-    "archive_path": "archive/2026/10/26865-linux-command-65-systemd-analyze-linux-os.md",
-    "archive_blob_sha": "0cdc5ddf01f19bdc4d0baa0ae61d45c397e3ff94",
+    "subject": "firmware_engineer",
+    "lesson_number": 14,
+    "title": "Memory Protection Units and Fault Containment in Embedded Firmware",
+    "wordpress_post_id": 27837,
+    "live_url": "https://bitcoinversus.tech/2026/11/01/osfec-014-memory-protection-units-fault-containment-embedded-firmware/",
+    "archive_path": "archive/2026/11/27837-osfec-014-mpu-fault-containment-embedded-firmware.md",
+    "archive_blob_sha": "ead298287da3cfb8c7103bd1412a8c93b96ec552",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
-      "1freetech/techcert",
-      "1freetech/opencert.tech"
+      "1freetech/opencert.tech",
+      "1freetech/techcert"
     ],
-    "qa_status": "published — browser screenshots and actual YouTube playback pending",
+    "qa_status": "published — WordPress rendered HTML confirms 2 YouTube players and 3 in-story images, actual video playback and desktop/mobile browser screenshots not independently tested",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false
@@ -256,15 +291,26 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "Two native Youtube player iframes confirmed in WordPress rendered view, but iframe presence is not playback verification."
+    },
+    {
+      "wordpress_post_id": 27837,
+      "live_url": "https://bitcoinversus.tech/2026/11/01/osfec-014-memory-protection-units-fault-containment-embedded-firmware/",
+      "unresolved": [
+        "Independent mobile/desktop screenshot inspection not performed.",
+        "Actual YouTube video playback not tested on user-device/browser."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Both distinct YouTube iframe embeds and three credited photos confirmed by published WordPress rendered HTML, not a complete playback test."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 26865,
-    "last_style": "realistic photo/anime blend",
-    "next_style": "split-screen editorial diptych",
-    "last_featured_person": "illustrated adult man with glasses",
-    "previous_featured_person": "Asian man",
-    "next_person_note": "Rotate depiction and subject appropriately to the Windows lesson; maintain rich story-specific imagery without unsupported stereotypes."
+    "last_post_id": 27837,
+    "last_style": "realistic editorial photo",
+    "next_style": "anime editorial artwork",
+    "last_featured_person": "fictional Latina female embedded firmware engineer aged 40s–50s",
+    "previous_featured_person": "South Asian male firmware technician in 1200x630 split-screen diptych (OSFTC.015)",
+    "next_person_note": "Continue the approved 12-slot adult lesson cover roster: alternate male/female, next adult man, and rotate accepted cover art style."
   },
   "specialty_track_state": {
     "oshre": {
@@ -283,7 +329,7 @@
       "status": "active; specialist series alongside main rotation"
     }
   },
-  "reconciliation_note": "Main rotation pointer and Linux/Windows/specialty next numbers refreshed against live WordPress October 28, 2026. Other track_state entries are historical and must be verified against live WordPress at their next turn; do not assume those cached numbers are current. last_completed intentionally remains unchanged while live screenshot/playback QA is pending. Reader-visible titles and section headings now unnumbered; the numeric course slot continues only as internal catalog metadata.",
+  "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks.",
   "public_lesson_presentation": {
     "effective_date": "2026-10-28",
     "style": "textbook / wiki / encyclopedia / dictionary",

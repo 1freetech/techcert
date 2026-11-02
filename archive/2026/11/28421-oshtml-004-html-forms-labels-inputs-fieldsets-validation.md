@@ -8,10 +8,10 @@ title: "OSHTML.004: HTML Forms — Labels, Inputs, Fieldsets, Submission, and Va
 permalink: "https://bitcoinversus.tech/2026/11/01/oshtml-004-html-forms-labels-inputs-fieldsets-submission-validation/"
 published_date: "2026-11-01"
 wordpress_categories: [44329, 5812, 2509703, 6]
-featured_media_id: 28420
+featured_media_id: 28423
 featured_dimensions: "1200x630"
 featured_style: "wordless comic technical artwork"
-featured_subject: "HTML form controls, grouped radio choices, browser validation and secure submission flow; NO people"
+featured_subject: "Wordless three-panel illustration of HTML form markup, accessible controls, browser validation and submission toward a server; no humans or text overlay"
 in_story_media_count: 2
 in_story_media:
   - "YouTube frAGrGN00OA, Dave Gray: HTML Forms and Inputs (2022)"
@@ -27,8 +27,12 @@ primary_sources:
   - "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_forms"
   - "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation"
   - "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/How_to_structure_a_web_form"
-qa_status: "Published WordPress edit/view readback: 2 true YouTube iframe players with direct captions, 5 borderless code examples, no conceptual images apart from original QR, no decorative boxes, relevant 1200x630 wordless comic cover, 4 internal links, approved footer. Independent device playback/mobile screenshots/pixel-level cover inspection unavailable."
+qa_status: "Repaired cover on 2026-11-01: live WordPress post 28421 featured media 28423, verified 1200x630 and alt. Published view retains two YouTube player iframes and immediate captions, five borderless code examples, no decorative boxes, four internal links and original donation QR. Reader-device playback and mobile screenshots not independently verified."
 next_main_subject: "php"
+cover_repair_previous_media_id: 28420
+cover_repair_new_media_id: 28423
+cover_repair_file: "oshtml004-html-forms-validation-workflow-cover-revised-1200x630-1.jpg"
+cover_repair_note: "New topic-specific wordless technical comic uses three panels: HTML markup, web form controls and validation, then submission to a server. A 1200x630 image generated and visually reviewed prior to WordPress upload; WordPress metadata and published featured media checked."
 ---
 
 <!-- wp:paragraph --><p>An <strong>HTML form</strong> collects information through browser controls such as text fields, radio buttons, checkboxes and menus. The <code>&lt;form&gt;</code> element specifies where and how that information is submitted. Building a usable form requires more than choosing an <code>&lt;input&gt;</code> type: labels, grouping, keyboard access, validation and server handling all matter. This lesson constructs and explains a complete, accessible contact form using standards-based HTML.</p><!-- /wp:paragraph -->

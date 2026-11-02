@@ -5,7 +5,7 @@ title: "OSJavaScript.004: Operators, Expressions, and Type Coercion"
 permalink: "https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality/"
 published_date: "2026-11-01"
 track: "Open Source JavaScript Programming"
-featured_media_id: 28361
+featured_media_id: 28379
 featured_dimensions: "1200x630"
 featured_style: "anime editorial artwork"
 featured_subject: "Fictional adult woman JavaScript developer comparing two typed values in browser development tools"
@@ -21,6 +21,11 @@ internal_links_count: 5
 code_validation: "Main console example and parseReading telemetry example ran under Node.js v22.16.0 with expected output."
 primary_sources: ["https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence"]
 qa_limitations: "Independent public-page screenshots and reader-device YouTube playback unverified."
+publication_status: "draft"
+canonical_publication: false
+superseded_by_post_id: 28367
+superseded_by_permalink: "https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining/"
+archival_note: "This alternate draft was temporarily published during concurrent editing, then returned to draft to avoid a duplicate OSJavaScript.004. Do not present its old permalink as a live story."
 ---
 
 <!-- wp:paragraph --><p><strong>OSJavaScript.004</strong> introduces expressions, operators and the type conversions that occur while JavaScript evaluates them. Operators combine values, compare data and control short-circuit evaluation. Because JavaScript can convert types automatically in some operations but not others, a program that appears mathematically simple can produce a string or a surprising Boolean instead of the intended number.</p><!-- /wp:paragraph -->

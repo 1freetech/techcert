@@ -564,9 +564,9 @@
     "human_subject_policy": "No people at all in new covers: no faces, hands, silhouettes, bodies, human figures or anthropomorphic stand-ins.",
     "subject_first_requirement": "Depict the actual work, material, hardware, software behavior, mechanism, data or event; no generic desktop/portrait.",
     "former_demographic_rotation": "retired by explicit user directive November 1, 2026",
-    "last_cover_media_id": 28573,
-    "last_cover_note": "OSSQL.005 SQL pagination subject-only technical image, original WordPress AI generated then cropped to exact 1200x630 and uploaded as featured #28573.",
-    "last_cover_status": "WP media dimensions and feature attachment verified; actual pixels and mobile presentation not independently inspected.",
+    "last_cover_media_id": 28592,
+    "last_cover_note": "OSSQL.005 #28578 professional-cover correction on Nov 2: prior #28573 replaced with photorealistic SQL LIMIT/OFFSET workspace and pagination monitors, original #28591, 1200x630 featured media #28592. Latest submitted Content Engineer v5.0 permits adult professional subjects; no global style sequence changed in this corrective edit.",
+    "last_cover_status": "Post editor and rendered readbacks verify featured_media #28592 and media dimensions 1200x630; three native YouTube iframes and footer remained intact; independent live-site screenshot pixels/video playback unverified.",
     "next_person_note": "People prohibited on new covers. Use relevant technical split-screen diptych without humans for OSSolidity.002."
   },
   "specialty_track_state": {

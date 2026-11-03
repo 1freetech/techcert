@@ -1,0 +1,207 @@
+<!-- wp:paragraph -->
+<p><strong>SQL <code>LIMIT</code> and <code>OFFSET</code></strong> let an application retrieve a small, ordered window from a larger query result. <code>LIMIT</code> sets the maximum number of returned rows; <code>OFFSET</code> skips a specified number of preceding rows. This super-fundamental lesson follows <a href="https://bitcoinversus.tech/2026/10/15/ossql-004-order-by-sorting-rows-asc-desc-multiple-columns-null-placement/">OSSQL.004: ORDER BY</a> and demonstrates page-based results using a fictional Bitcoin-mining equipment table.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Define <code>LIMIT</code>, <code>OFFSET</code>, and pagination using precise terminology.</li><li>Return the first, second and third page of a sorted dataset.</li><li>Calculate offsets with a page number and page size.</li><li>Explain why nonunique ordering and changing data can alter pages.</li><li>Recognize the cost of very large offsets and when to research keyset pagination.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Earlier lessons introduced <a href="https://bitcoinversus.tech/2026/10/09/ossql-001-relational-databases-and-tables/">relational tables</a>, <a href="https://bitcoinversus.tech/2026/10/09/ossql-002-select-choosing-columns-reading-rows-select-star-from/">SELECT and FROM</a>, and <a href="https://bitcoinversus.tech/2026/10/10/ossql-003-where-filtering-rows-conditions-and-or-not/">WHERE conditions</a>. Those operations identify rows. Pagination determines which <em>portion</em> of those selected rows the user sees. The official <a href="https://www.postgresql.org/docs/18/queries-limit.html">PostgreSQL 18 reference</a> requires a predictable <code>ORDER BY</code> when a consistent subset matters.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=f_E9KlLukBc","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=f_E9KlLukBc
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>Alex The Analyst demonstrates <code>ORDER BY</code>, <code>LIMIT</code> and <code>OFFSET</code> using PostgreSQL. Source: instructor's original July 2026 lesson.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">LIMIT: Return no more than N rows</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A basic query uses <code>SELECT ... FROM ... ORDER BY ... LIMIT 3</code>. It returns at most three rows from the sorted result. If only two rows exist, it returns two, not an error. A missing <code>ORDER BY</code> is not equivalent to “sort by insertion order”: SQL does not promise a natural row order.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="SQL code and training output" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">SELECT miner_id, model, hashrate_th
+FROM miners
+ORDER BY hashrate_th DESC, miner_id ASC
+LIMIT 3;</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The example sorts by the highest hypothetical terahashes-per-second first, breaking equal-hashrate ties with the unique <code>miner_id</code>. That final key makes the sorting total for the unchanged table. <code>DESC</code> and <code>ASC</code> were introduced in the preceding lesson.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">OFFSET: Skip rows before returning a page</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>OFFSET 3</code> discards the first three ordered rows before returning up to the requested limit. Unlike page numbering in a user interface, the offset is zero-based: the first row is reached with <code>OFFSET 0</code>. Use the form <code>LIMIT n OFFSET m</code> rather than SQLite's confusing comma-style shorthand, where the positions reverse.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=gVmuTTKURAc","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=gVmuTTKURAc
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>Thapa Technical explains sorting and page-based query results with PostgreSQL <code>LIMIT</code> and <code>OFFSET</code> in a June 2026 tutorial.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reproducible training lab: eight fictional miners</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following dataset is entirely fabricated for education; the labels are not commercial models and the hashrate values are not manufacturer claims. Copy the complete <code>CREATE TABLE</code> and <code>INSERT</code> statements into a new local SQLite database, then run the page queries. The script uses only elementary SQLite-compatible syntax.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="SQL table creation and illustrative data insertion" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">-- Fictional training data, NOT manufacturer specifications
+CREATE TABLE miners (
+    miner_id INTEGER PRIMARY KEY,
+    model TEXT NOT NULL,
+    hashrate_th INTEGER NOT NULL
+);
+
+INSERT INTO miners (miner_id, model, hashrate_th) VALUES
+(101, 'Training A', 140),
+(102, 'Training B', 188),
+(103, 'Training C', 220),
+(104, 'Training D', 100),
+(105, 'Training E', 188),
+(106, 'Training F', 270),
+(107, 'Training G', 140),
+(108, 'Training H', 335);</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>For a page size of three, use the same two-column sort in every query. A unique final key avoids ambiguity when two records have the same hashrate.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="SQL code and training output" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">SELECT miner_id, model, hashrate_th
+FROM miners
+ORDER BY hashrate_th DESC, miner_id ASC
+LIMIT 3 OFFSET 0;</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<pre aria-label="SQL code and training output" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">SELECT miner_id, model, hashrate_th
+FROM miners
+ORDER BY hashrate_th DESC, miner_id ASC
+LIMIT 3 OFFSET 3;</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<pre aria-label="SQL code and training output" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">SELECT miner_id, model, hashrate_th
+FROM miners
+ORDER BY hashrate_th DESC, miner_id ASC
+LIMIT 3 OFFSET 6;</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>I executed this exact training dataset with Python's SQLite 3.46.1 engine. The observed ordered IDs were:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Tested output for the three paginated queries" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">Page 1: 108, 106, 103
+Page 2: 102, 105, 101
+Page 3: 107, 104
+Page 4: (no rows)</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The third page contains only two records because only eight records exist. A hypothetical fourth page yields no rows. This is ordinary pagination behavior, not an error.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Page-number math</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Applications often show page 1, page 2 and page 3 while SQL uses zero-based offsets. For positive page number <code>p</code> and page size <code>n</code>, calculate <strong>OFFSET = (p − 1) × n</strong>. When <code>n = 3</code>, the offsets are 0, 3 and 6. In production software, validate the supplied values and bind them as parameters rather than concatenate untrusted input into SQL text.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Pagination offset calculation" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">page_size = 3
+page = 2
+offset = (page - 1) * page_size
+# offset = 3
+# SQL: LIMIT 3 OFFSET 3</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>A server might compute the offset inside a typed <a href="https://bitcoinversus.tech/2026/11/01/osphp-005-functions-parameters-return-values-scope-type-declarations/">PHP function</a> or a Python request handler. The database receives a prepared statement with values for the page limit and offset. That separation prevents request parameters from being interpreted as SQL commands.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=WOhZ7JsBj5s","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=WOhZ7JsBj5s
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>iNeuron Intelligence's SQL tutorial explains result limiting, skipped rows and their use in application pagination (January 2024).</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting changing pages</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Suppose a new high-hashrate row is inserted between fetching page 1 and page 2. Even with a fully deterministic <code>ORDER BY</code>, the row positions have now shifted, so one previously seen row might reappear or another might be missed. Stable ordering solves ties within a fixed dataset; it does not freeze the underlying table. For consistent historical reporting, use a suitable snapshot strategy. For large sequential feeds, keyset pagination may be preferable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://www.sqlite.org/rowvalue.html">SQLite's row-value documentation</a> explains that deep offsets can require work proportional to skipped rows. PostgreSQL also warns that skipped rows must be computed. <code>LIMIT 20 OFFSET 500000</code> does not guarantee an inexpensive database seek. Indexes and query plans still matter, much as they do in <a href="https://bitcoinversus.tech/2026/11/01/what-is-numa-linux-server-memory-locality-cpu-node-numactl-explained/">memory-sensitive infrastructure</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>What does <code>LIMIT 3</code> guarantee, and what does it not guarantee?</li><li>Why does <code>OFFSET 3</code> return the fourth ordered row first?</li><li>For page 5 with a page size of 10, what offset should you use?</li><li>Why include <code>miner_id</code> after <code>hashrate_th</code> in <code>ORDER BY</code>?</li><li>Does a total sort order prevent changing pages when new rows are inserted?</li><li>Why might a query with a very large offset become slow?</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>1. It caps output at three rows but does not determine which rows without sorting. 2. It skips the first three rows. 3. <code>OFFSET 40</code>. 4. It resolves ties with a unique key. 5. No: inserts or deletes between requests can shift positions. 6. The database still processes the preceding rows, and a different pagination method may be more efficient.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary references and next lesson</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Read <a href="https://www.postgresql.org/docs/18/queries-limit.html">PostgreSQL 18: LIMIT and OFFSET</a>, <a href="https://www.sqlite.org/lang_select.html">SQLite SELECT/LIMIT</a>, <a href="https://www.sqlite.org/rowvalue.html">SQLite scrolling-window examples</a>, and <a href="https://learn.microsoft.com/en-us/training/azure-databases/postgresql/basic-sql-limit-offset-order-by/">Microsoft Learn's PostgreSQL pagination module</a>. The next lesson in the full curriculum rotation is Bash; the next SQL-specific lesson will be selected after comparing SQL sequence and existing published material.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original Bitcoin donation QR code for a 5,000 satoshi donation" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open this lesson on a larger screen and use a compatible Bitcoin wallet to scan the original QR code. Verify the address before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

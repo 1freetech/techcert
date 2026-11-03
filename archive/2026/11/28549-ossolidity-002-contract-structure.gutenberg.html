@@ -1,0 +1,150 @@
+<!-- wp:paragraph -->
+<p><strong>Solidity contract structure</strong> is the arrangement of a source file, its version directive, contract declaration, stored values and executable functions. Following <a href="https://bitcoinversus.tech/2026/10/08/ossolidity-001-evm-smart-contracts/">OSSolidity.001: EVM and Smart Contracts</a>, this beginner lesson moves from the <a href="https://bitcoinversus.tech/2026/10/08/it-what-is-virtual-machine-vm-how-it-works/">virtual-machine concept</a> to a small source file you can inspect in Remix. The objective is understanding the parts, not deploying real-money applications.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Recognize the SPDX comment and compiler version pragma.</li><li>Locate the contract body, state variable and function bodies.</li><li>Compile and inspect a simple contract in a local Remix VM.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=AAubEOgE5p8","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=AAubEOgE5p8
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>UX Alchemy explains SPDX, <code>pragma solidity</code> and the contract declaration. Focused contract-structure tutorial, published December 2025.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Source-file header: SPDX and pragma</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://docs.soliditylang.org/en/v0.8.38/layout-of-source-files.html">official Solidity language reference</a> recommends an SPDX license identifier near the beginning of every source file. <code>// SPDX-License-Identifier: MIT</code> states a common permissive license for the source; it does not make an unsafe contract trustworthy. The declaration is a comment, not an executable EVM command. License choice must reflect the author's actual rights.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Next, <code>pragma solidity ^0.8.20;</code> declares compatible compiler versions: at least 0.8.20 but below 0.9.0. The caret does not freeze a specific compiler binary. Solidity 0.8.38 was released in October 2026, so selecting that version in a suitable teaching environment satisfies this example. For reproducible production builds, document the exact compiler release and settings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=nPLqdGNW_4U","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=nPLqdGNW_4U
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>The Techzeen demonstrates writing, compiling and interacting with a first Solidity smart contract in Remix (October 2025).</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Contract members and state</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <code>contract Counter { ... }</code> declaration groups a program's members inside braces. Solidity contracts resemble classes, but after deployment their behavior is executed under Ethereum's rules. The <a href="https://docs.soliditylang.org/en/v0.8.38/structure-of-a-contract.html">language specification</a> describes members such as state variables and functions; more advanced events, inheritance, structs and modifiers belong in later lessons.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The line <code>uint256 public count = 0;</code> declares a 256-bit unsigned integer stored as contract state. <code>public</code> causes the compiler to generate a <code>count()</code> getter. It does not make the value confidential: blockchain data is generally observable. The location and visibility rules are different from familiar local variables in ordinary <a href="https://bitcoinversus.tech/2026/09/30/assembly-to-kotlin-programming-languages-changed-computing/">compiled programming languages</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A function has a name, parentheses and a body. <code>increment()</code> modifies state and therefore normally requires a transaction. <code>readCount()</code> is marked <code>view</code> because it reads state without changing it. Calling the <code>public</code> getter can read the same value; the additional function makes the difference between declarations explicit.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Working example: Counter.sol</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Copy the complete teaching contract into a file named <code>Counter.sol</code>. Its SPDX comment, compiler pragma, contract header, state variable and two functions are intentionally short. The code is an educational counter, not a secure production authorization system.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Solidity source code" tabindex="0" style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;margin:1.2em 0;line-height:1.55;white-space:pre-wrap;max-width:100%;color:inherit"><code style="background:transparent;border:0;box-shadow:none;padding:0;border-radius:0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:inherit">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Counter {
+    uint256 public count = 0;
+
+    function increment() public {
+        count = count + 1;
+    }
+
+    function readCount() public view returns (uint256) {
+        return count;
+    }
+}</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Local Remix exercise</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Open the official <a href="https://remix.ethereum.org">Remix IDE</a>, choose a compiler compatible with the pragma, then compile. In the Deploy &amp; Run panel select the local Remix VM environment rather than a public chain. Deploy <code>Counter</code>, inspect <code>count</code> and <code>readCount</code>, call <code>increment</code>, and read both values again. Expected results are zero initially and one after the first successful increment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=E3KM1c7xeJM","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=E3KM1c7xeJM
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>Eric Tech walks through Remix and Solidity variables, functions and visibility; the tutorial includes topics beyond this beginner lesson (June 2024).</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>What is the role of an SPDX comment, and what does it not guarantee?</li><li>Does <code>^0.8.20</code> lock the compiler to 0.8.20?</li><li>Which statement declares persistent contract state?</li><li>Why is <code>increment</code> different from <code>readCount</code>?</li><li>Who can invoke <code>increment</code> in this teaching contract?</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Answers and safety notes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>SPDX describes a source license, not contract safety. The caret allows compatible 0.8.x releases. <code>uint256 public count</code> is the state declaration. <code>increment</code> writes, while <code>readCount</code> reads. Without access-control checks, any caller can invoke <code>increment</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The important security boundary is easy to miss: anyone able to call <code>increment()</code> can update this example's counter. A <code>public</code> state variable has an auto-generated reader, not an automatic access-control rule for unrelated methods. Do not send funds, store secrets or copy this toy contract into a real financial product. Related <a href="https://bitcoinversus.tech/2023/10/15/bitvm-enables-smart-contracts-on-bitcoin/">Bitcoin smart-contract research</a> uses different execution assumptions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Language syntax and network design should remain separate: the same contract may be compiled for compatible <a href="https://bitcoinversus.tech/2024/10/17/sony-launches-ethereum-layer-2-blockchain-soneium/">Ethereum Layer-2 environments</a>, but deployment configuration, transaction fees and security assumptions vary. Later lessons will address parameter types, visibility, persistent versus temporary data, contract calls and safe testing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">References and next topic</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For references, use the Solidity documentation's <a href="https://docs.soliditylang.org/en/v0.8.38/layout-of-source-files.html">source-file layout</a> and <a href="https://docs.soliditylang.org/en/v0.8.38/structure-of-a-contract.html">contract structure</a> pages, the <a href="https://remix-ide.readthedocs.io/en/latest/run.html">official Remix deployment guide</a>, and the <a href="https://www.soliditylang.org/blog/2026/10/22/solidity-0.8.38-release-announcement/">October 2026 compiler release notes</a>. <a href="https://bitcoinversus.tech/2026/10/08/what-is-open-source-software-sharing-code-build-better-technology/">Open-source licensing</a> is a useful companion topic.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Next in the full curriculum rotation:</strong> SQL. The next Solidity-track installment will introduce elementary data types and function parameters, without skipping or renumbering any subject.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original Bitcoin donation QR code for 5,000 sats" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open this lesson on a laptop or larger screen and scan the original QR image using a compatible Bitcoin wallet. Verify the receiving address before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

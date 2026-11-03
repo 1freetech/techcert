@@ -1,0 +1,223 @@
+<!-- wp:paragraph -->
+<p>A <strong>loop</strong> is a Bash control structure that repeats commands. It can visit a list of filenames, count a series of attempts, or keep checking a condition until a result changes. Linux administrators use loops to review many files and automate repeatable checks without typing the same command for every item. The governing reference is the <a href="https://www.gnu.org/software/bash/manual/html_node/Looping-Constructs.html">GNU Bash manual’s looping-constructs section</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine inspecting every shelf in a room. You could write one instruction for each shelf, or write a single instruction that means “inspect the next shelf until there are no shelves left.” A shell loop works the same way. A <code>for</code> loop usually walks through a group of items; a <code>while</code> loop continues while a test succeeds; and an <code>until</code> loop continues until a test succeeds. They all need a sensible reason to stop.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>By the end of this reference, you should be able to select the correct loop, predict its stopping condition, use <code>break</code> and <code>continue</code>, process paths containing spaces, and read a text file one line at a time. Review <a href="https://bitcoinversus.tech/2026/10/09/osbash-001-shell-script-basics-bash-shebang-chmod-first-script/">shell and script fundamentals</a>, <a href="https://bitcoinversus.tech/2026/10/15/osbash-003-variables-expansion-assignment-parameter-expansion-quoting-environment-command-substitution/">Bash variables and quoting</a>, and <a href="https://bitcoinversus.tech/2026/10/18/osbash-004-conditional-tests-if-then-else-fi-and/">conditional tests and exit statuses</a> first. The examples use Bash rather than a generic POSIX <code>sh</code> shell.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The for Loop: Repeating a Command for Each Item</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A list-style <code>for</code> loop assigns each item to a variable, then runs its body once for that item. The item list is determined before the body begins. Quoting <code>"$zone"</code> protects the value if it contains spaces or wildcard characters. The surrounding <code>do</code> and <code>done</code> keywords mark the repeated commands.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>for zone in east west central; do
+  printf 'Inspecting %s\n' &quot;$zone&quot;
+done</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The example prints three lines, one per region. Bash also provides an arithmetic form suitable for counters: <code>for (( i=1; i&lt;=3; i++ ))</code>. The counter form is convenient for a known number of repetitions; list iteration is usually clearer for filenames, hosts, or user-supplied arguments. When passing script arguments through a loop, use <code>for item in "$@"</code>, not <code>for item in $*</code>, to keep each argument intact.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=HvzI7c3eK5k","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=HvzI7c3eK5k
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>Learn Linux TV demonstrates Bash for-loop syntax and repeating commands for multiple items, including a practical automation example.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Safe File Iteration and Paths With Spaces</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A glob such as <code>*.log</code> can identify matching files, but a pattern that matches nothing ordinarily stays literal in Bash. The following guard skips that case and avoids acting on non-regular files. Because the directory and filename variable are quoted, a name such as <code>night shift.log</code> stays one filename. Review <a href="https://bitcoinversus.tech/2026/10/10/osbash-002-commands-paths-pwd-ls-cd-absolute-relative-paths-path/">command lookup and filesystem paths</a> when adapting it to another directory.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>log_dir=&quot;$HOME/logs&quot;
+for file in &quot;$log_dir&quot;/*.log; do
+  [[ -f &quot;$file&quot; ]] || continue
+  printf 'Log file: %s\n' &quot;${file##*/}&quot;
+done</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>This script only lists matching names; it does not delete, rename, or rewrite files. Before applying a loop to production systems, confirm its target directory and permissions. File ownership and <a href="https://bitcoinversus.tech/2026/10/11/linux-command-53-setfacl-linux-os/">access-control lists</a> may affect what can be read even when a path is visible.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The while Loop: Repeat While a Test Succeeds</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <code>while</code> loop evaluates its condition before each iteration. In the common <code>[[ ... ]]</code> form, exit status zero means the test succeeded. When the condition stops succeeding, Bash leaves the loop. The body must change the relevant state if termination depends on that state; otherwise a loop can run indefinitely.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>attempt=1
+while (( attempt &lt;= 3 )); do
+  printf 'Attempt %d\n' &quot;$attempt&quot;
+  attempt=$((attempt + 1))
+done</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The output is <code>Attempt 1</code>, <code>Attempt 2</code>, then <code>Attempt 3</code>. Incrementing the counter with assignment works predictably even when a script enables <code>set -e</code>. A standalone <code>((counter++))</code> can return a nonzero status when its evaluated old value is zero, which may unexpectedly stop such scripts.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=R0tTsdQ_9Vw","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=R0tTsdQ_9Vw
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>Learn Linux TV walks through Bash while-loop conditions, repetition and practical refinements in a Linux terminal.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The until Loop: Repeat Until Success</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An <code>until</code> loop reverses the condition logic of <code>while</code>. It repeats while its test is unsuccessful and stops once the test succeeds. That is useful for bounded retry logic, provided retries have a fixed limit or a timeout. The example below demonstrates the condition without touching a network or production service.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>ready=0
+until (( ready == 3 )); do
+  printf 'Waiting: %d\n' &quot;$ready&quot;
+  ready=$((ready + 1))
+done
+printf 'Ready: %d\n' &quot;$ready&quot;</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The counter reaches three, the <code>until</code> condition succeeds, and the loop stops. A real service-readiness check should also handle persistent failure, use appropriate delays, and distinguish a healthy response from merely receiving any output. This is especially useful when inspecting <a href="https://bitcoinversus.tech/2026/10/28/linux-command-65-systemd-analyze-linux-os/">Linux service startup behavior</a> during maintenance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=TtcFEyKLCzY","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=TtcFEyKLCzY
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>Shawn Powers compares for, while and until loops in Bash and explains when each repetition structure is appropriate.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Break, Continue, and Loop Control</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <code>break</code> builtin leaves the nearest enclosing loop immediately. The <code>continue</code> builtin skips the rest of the current pass and returns to the next iteration or condition check. In nested loops, Bash can also accept a numeric level, but that should be used with care because it changes which loop receives control.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>for number in 1 2 3 4 5; do
+  if (( number == 2 )); then
+    continue
+  fi
+  if (( number == 5 )); then
+    break
+  fi
+  printf '%d\n' &quot;$number&quot;
+done</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>This prints 1, 3, and 4. It skips two and stops before printing five. Avoid hiding complex failure handling behind many nested <code>break</code> statements; a clear function with a return status is often easier to test and maintain.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reading Files Line by Line</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For text input, prefer <code>while IFS= read -r line</code> over <code>for word in $(cat file)</code>. The latter splits content on whitespace and can change literal text. Setting <code>IFS=</code> preserves leading and trailing spaces; <code>-r</code> prevents backslash interpretation. The extra condition below preserves a final nonempty line even when the source file lacks a trailing newline.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>input_file=&quot;$HOME/hosts.txt&quot;
+while IFS= read -r line || [[ -n $line ]]; do
+  printf 'Entry: %s\n' &quot;$line&quot;
+done &lt; &quot;$input_file&quot;</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Redirecting the file into the loop keeps the loop in the current shell, so counters set inside its body remain available afterward. By contrast, sending data through a pipeline into <code>while read</code> may run the loop body in a subshell; whether variables survive depends on execution context and Bash options. Always test scripts against empty files, filenames with spaces, and missing inputs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting and Common Failures</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>If a loop never stops, inspect the test and verify that the body changes its controlling variable. If a filename breaks into separate words, look for missing quotation marks or command substitution used to construct a list. If a glob is processed literally, check whether the directory exists and whether any files match. If a loop exits prematurely under <code>set -e</code>, examine arithmetic command statuses and other failures rather than assuming the final command printed an error.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>To inspect syntax without running commands, use <code>bash -n script.sh</code>. For trace output, use <code>bash -x script.sh</code> in a safe environment; traces may reveal secrets embedded in variables or arguments. For additional static warnings, consult <a href="https://www.shellcheck.net/">ShellCheck</a>. None of these checks establishes that a script is safe for production; review the actions and scope separately.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Exercises and Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Create a disposable directory containing two <code>.log</code> files, one with a space in its name, and adapt the file loop to print their basenames. Next, modify the attempt counter so the <code>while</code> loop runs exactly five times. Then change the <code>until</code> example to stop when a counter reaches two. Finally, use <code>break</code> to exit when an item equals <code>stop</code> and <code>continue</code> to ignore <code>skip</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Check your understanding: Which loop most directly walks through existing arguments? Which one continues while the test returns zero? What does <code>until</code> do when the test first succeeds? Why is <code>"$@"</code> important for filenames or phrases containing spaces? The answers are: list-style <code>for</code>; <code>while</code>; it stops; and it preserves the boundaries of individual arguments.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The authoritative syntax and exit-status rules are in the <a href="https://www.gnu.org/software/bash/manual/html_node/Looping-Constructs.html">GNU Bash Reference Manual: Looping Constructs</a>. For a broader treatment of word splitting and quoting, see <a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Expansions.html">Shell Expansions</a> and <a href="https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html">Bourne Shell Builtins</a>. These references describe actual language behavior rather than a particular instructor’s preferred style.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A Bash loop is a reusable instruction for doing the same kind of work more than once. Use <code>for</code> when you already have items to visit, <code>while</code> when work should continue while something is true, and <code>until</code> when work should continue until something becomes true. The most important habit is to know what makes the loop stop and to protect the names and values it handles.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original Bitcoin donation QR code for a 5,000 satoshi donation" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open this lesson on a larger screen and use a compatible Bitcoin wallet to scan the original QR code. Verify the address before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

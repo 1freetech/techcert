@@ -48,35 +48,36 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "sql",
+    "subject": "bash",
     "lesson_number": 5,
-    "title": "OSSQL.005: LIMIT and OFFSET — Paginating Ordered Query Results",
-    "public_title": "OSSQL.005: LIMIT and OFFSET — Paginating Ordered Query Results",
-    "wordpress_post_id": 28578,
-    "live_url": "https://bitcoinversus.tech/2026/11/02/ossql-005-limit-offset-sql-pagination-order-by-pages/",
-    "archive_path": "archive/2026/11/28578-ossql-005-limit-offset-pagination.gutenberg.html",
+    "track_id": "OSBash.005",
+    "title": "OSBash.005: Bash Loops — for, while, until, break, continue, and Safe Iteration",
+    "public_title": "Bash Loops — for, while, until, break, continue, and Safe Iteration",
+    "wordpress_post_id": 28650,
+    "live_url": "https://bitcoinversus.tech/2026/11/02/bash-loops-for-while-until-break-continue-safe-file-iteration/",
+    "archive_path": "archive/2026/11/28650-osbash-005-bash-loops-for-while-until-break-continue.gutenberg.html",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "WordPress post status publish in saved and rendered view; three native YouTube embeds transformed into three distinct iframes; six prior WordPress internal targets published; one subject-only 1200x630 featured #28573 and original QR 24043; seven transparent unboxed code blocks; SQLite 3.46.1 live sample queries tested. Actual YouTube playback, cover pixel inspection and mobile screenshots not independently verified.",
+    "publication_status": "published",
+    "verification_status": "published_unverified",
+    "qa_status": "WordPress status publish; saved Gutenberg retains 3 native YouTube provider blocks; WordPress rendered all 3 as separate YouTube iframes. 1179 words, 6 in-domain links, 6 code samples; Bash examples executed locally. Featured #28638 exactly 1200x630, licensed Unsplash photo fallback rather than expected anime artwork. Actual YouTube playback, live public-page visual inspection, cover pixels and mobile screenshots not independently verified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
-    "compiled_code_verified": false,
-    "sqlite_queries_executed": true,
-    "sqlite_version": "3.46.1",
-    "featured_media_id": 28573
+    "bash_code_examples_executed": true,
+    "featured_media_id": 28638
   },
   "next": {
-    "subject": "bash",
-    "lesson_number": 5,
-    "title_format": "OSBash.005: {topic}",
-    "public_title_format": "OSBash.005: {topic}",
-    "resolution_note": "After verified WordPress OSSQL.005 #28578 and Gutenberg archive in 3 repos, full 43-track rotation advances from SQL to Bash."
+    "subject": "powershell",
+    "lesson_number": 4,
+    "title_format": "OSPowerShell.004: {topic}",
+    "public_title_format": "{topic}",
+    "resolution_note": "Confirmed WordPress OSBash.005 #28650 publication and identical source archived in three repos. Next rotation subject is PowerShell. QA remains pending for Bash playback/mobile; publication state advances independently."
   },
-  "next_after_current": "powershell",
+  "next_after_current": "csharp",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -173,7 +174,11 @@
     },
     "bash": {
       "acronym": "OSBash",
-      "next_lesson_number": 5
+      "next_lesson_number": 6,
+      "last_published_lesson_number": 5,
+      "last_wordpress_post_id": 28650,
+      "last_published_title": "Bash Loops — for, while, until, break, continue, and Safe Iteration",
+      "source_resolution": "OSBash.004 WP 26059 is predecessor; OSBash.005 WP 28650 published and identical Gutenberg archived across three repos on November 2, 2026."
     },
     "powershell": {
       "acronym": "OSPowerShell",
@@ -294,26 +299,27 @@
     }
   },
   "last_published": {
-    "subject": "sql",
+    "subject": "bash",
     "lesson_number": 5,
-    "title": "OSSQL.005: LIMIT and OFFSET — Paginating Ordered Query Results",
-    "public_title": "OSSQL.005: LIMIT and OFFSET — Paginating Ordered Query Results",
-    "wordpress_post_id": 28578,
-    "live_url": "https://bitcoinversus.tech/2026/11/02/ossql-005-limit-offset-sql-pagination-order-by-pages/",
-    "archive_path": "archive/2026/11/28578-ossql-005-limit-offset-pagination.gutenberg.html",
+    "track_id": "OSBash.005",
+    "title": "OSBash.005: Bash Loops — for, while, until, break, continue, and Safe Iteration",
+    "public_title": "Bash Loops — for, while, until, break, continue, and Safe Iteration",
+    "wordpress_post_id": 28650,
+    "live_url": "https://bitcoinversus.tech/2026/11/02/bash-loops-for-while-until-break-continue-safe-file-iteration/",
+    "archive_path": "archive/2026/11/28650-osbash-005-bash-loops-for-while-until-break-continue.gutenberg.html",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "qa_status": "WordPress post status publish in saved and rendered view; three native YouTube embeds transformed into three distinct iframes; six prior WordPress internal targets published; one subject-only 1200x630 featured #28573 and original QR 24043; seven transparent unboxed code blocks; SQLite 3.46.1 live sample queries tested. Actual YouTube playback, cover pixel inspection and mobile screenshots not independently verified.",
+    "publication_status": "published",
+    "verification_status": "published_unverified",
+    "qa_status": "WordPress status publish; saved Gutenberg retains 3 native YouTube provider blocks; WordPress rendered all 3 as separate YouTube iframes. 1179 words, 6 in-domain links, 6 code samples; Bash examples executed locally. Featured #28638 exactly 1200x630, licensed Unsplash photo fallback rather than expected anime artwork. Actual YouTube playback, live public-page visual inspection, cover pixels and mobile screenshots not independently verified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
-    "compiled_code_verified": false,
-    "sqlite_queries_executed": true,
-    "sqlite_version": "3.46.1",
-    "featured_media_id": 28573
+    "bash_code_examples_executed": true,
+    "featured_media_id": 28638
   },
   "pending_publication_qa": [
     {
@@ -542,6 +548,18 @@
         "Actual YouTube playback not separately tested on reader device.",
         "Independent public desktop/mobile screenshots not captured."
       ]
+    },
+    {
+      "wordpress_post_id": 28650,
+      "live_url": "https://bitcoinversus.tech/2026/11/02/bash-loops-for-while-until-break-continue-safe-file-iteration/",
+      "unresolved": [
+        "Actual YouTube playback has not been verified on device.",
+        "Independent desktop/mobile screenshots and cover pixel crop not inspected.",
+        "Expected anime editorial cover style could not be produced; sourced photograph used instead."
+      ],
+      "featured_cover_verified": "dimensions 1200x630 and WordPress attachment verified; visual inspection unavailable",
+      "archive_source_verified": true,
+      "note": "Publication confirmed, media iframe rendering confirmed; fully verified status withheld. Cover-style rotation remains due for anime."
     }
   ],
   "featured_image_rotation": {
@@ -567,7 +585,15 @@
     "last_cover_media_id": 28592,
     "last_cover_note": "OSSQL.005 #28578 professional-cover correction on Nov 2: prior #28573 replaced with photorealistic SQL LIMIT/OFFSET workspace and pagination monitors, original #28591, 1200x630 featured media #28592. Latest submitted Content Engineer v5.0 permits adult professional subjects; no global style sequence changed in this corrective edit.",
     "last_cover_status": "Post editor and rendered readbacks verify featured_media #28592 and media dimensions 1200x630; three native YouTube iframes and footer remained intact; independent live-site screenshot pixels/video playback unverified.",
-    "next_person_note": "People prohibited on new covers. Use relevant technical split-screen diptych without humans for OSSolidity.002."
+    "next_person_note": "People prohibited on new covers. Use relevant technical split-screen diptych without humans for OSSolidity.002.",
+    "latest_exception_note": {
+      "post_id": 28650,
+      "used_style": "licensed technical/editorial photo",
+      "expected_style": "anime technical editorial artwork",
+      "status": "unresolved_style_deviation",
+      "reason": "Image generation unavailable; published with a licensed technical photo of a code-and-terminal workstation, 1200x630.",
+      "last_completed_style_does_not_advance": true
+    }
   },
   "specialty_track_state": {
     "oshre": {
@@ -593,18 +619,18 @@
   },
   "reconciliation_note": "November 1, 2026: WordPress live checked OSFEC.014 published (post 27837), OSFTC.015 published (post 27772), OSHistory.015 published (post 27240), and OSFOEC.014 remains user-skipped/unpublished; 7 active coding subjects from coding-curriculum.json added to rotation (now 43). Other legacy track_state counts are historical and MUST be verified live before next publication. last_completed remains historical because independent screenshot/playback QA is pending; latest published state is tracked in last_published. The 38 historical archive curriculum folders in curriculum/INDEX.md are preserved separately; the main rotation covers active tracks. November 1, 2026: OSHRE.003 (post 27838) published with two videos and two real photos, rotated anime/MENA male cover; OSHRE next is .004. Main sequence next History of Money .016 unchanged. Playback/browser screenshot QA pending. November 1, 2026 correction: curriculum IDs are required at the beginning of reader-facing lesson and SEO titles. Published OSHRE.003 WordPress post 27838 title and SEO title corrected; Gutenberg media, permalink and cover unchanged. This supersedes the ID-free October 28 title rule, not the unnumbered lesson-section style. November 1, 2026: Hashboard Repair OSHRE.004 (post 27857) published, archived in all three repos; course pointer advanced to OSHRE.005. Featured wordless comic adult female, next photo/anime blend adult Black male. Main rotation stays at OSHistory.016. Two YouTube iframe players rendered; browser playback and screenshots not independently verified. November 1, 2026: OSHRE.005 (post 27871) published with three NEW board photographs, distinct from all prior OSHRE lessons, and two video players; archives verified in three repos. OSHRE pointer advanced to .006. Photo rotation policy added; main rotation pointer retained at OSHistory.016; next cover split-screen diptych with Indigenous female professional. Independent browser/playback QA pending. November 1, 2026: Main rotation published OSHistory.016 (post 27887), centered on the 1575-1577 Castilian credit freeze and documented bank failures; the 1557 refinancing interpretation is disputed by 2026 Cambridge research. All three GitHub archives verified. Next main lesson OSHE.004; specialty OSHRE stays at .006. Hashboard photo uniqueness ledger remains unchanged and mandatory. Current cover split-screen diptych; next realistic photo. Video playback and desktop/mobile screenshot QA not independently tested. November 1, 2026: OSHE.004 Meidum Pyramid engineering published as WordPress 27944, archived in all three repositories, 2 YouTube iframe embeds and 3 authentic licensed site photographs verified in WordPress rendering, 1200x630 realistic editorial cover. Next main rotation OSHMS.001, next OSHE.005. Hashboard Repair photo originality rule and its no-reuse ledger preserved. Independent video playback and mobile screenshots still pending. November 1, 2026: OSHMS.001 (post 28058) published and archived; 43 active subjects, 20 coding catalog subjects, 38 historical curriculum folders and 626 indexed lesson entries accounted for separately. Missing OSNEC state repaired to next .005; OSITC pointer reconciled to .012; main next OSITC.012. Cover rotation anime Southeast Asian female -> wordless comic Pacific Islander male. Public browser/playback QA outstanding. November 1, 2026: Published OSITC.012 (post 28161) with two render-verified videos, two technical diagrams, correctly escaped logman examples and 1200x630 wordless comic cover. Main next OSC.005; fixed stale OSC.004 pointer because published OSC.004 post 25107 exists. All 43 active subjects, all 20 coding tracks, historical 38 folders/626 index entries retained unchanged. Independent video playback and public-page screenshots pending. November 1, 2026: OSC.005 (post 28202) published and archived across three repos; GCC C11 loop example ran with expected output, both native YouTube iframes rendered. Main next OSRust.006 rather than stale .005, because two published Rust .005 posts (25228 and 25249) exist and must not be overwritten. Photo/anime cover woman -> next split-screen diptych East Asian man. Preserved all 43 active subjects and legacy 626 indexed lessons. November 1, 2026: OSRust.006 (WordPress 28228) published, verified and archived in 3 repos. Two rendered YouTube iframe embeds, two original diagrams, ten code blocks, 5 internal links, 1200×630 diptych cover, no decorative boxes. Compilation and live playback/device screenshots not independently verified. Main next OSGo.004 following WordPress OSGo.003 post 25314. Next art Renaissance/oil painting, Black female professional age 20s–30s. All 43 active subjects and coding/historical inventories preserved. November 1, 2026 user cover correction: remove Renaissance/oil-painting accepted sixth style and retire all people demographics for covers. Five accepted subject-only styles remain; no humans in future covers. OSGo.004 cover changed to 28378 (wordless comic) and canonical OSJavaScript.004 (post 28367) changed to 28379 (anime). Duplicate OSJavaScript.004 28365 preserved only as draft; HTML next lesson pointer unchanged. Historical prior-style references are audit only and superseded. November 1, 2026: OSHTML.004 (WP 28421) published, verified, and archived in BitcoinVersus/OpenCert/TechCert. Two rendered source-verified YouTube tutorials, five unboxed HTML source examples, four internal links, no conceptual in-body graphics, 1200×630 no-human wordless comic cover, original QR and footer preserved. Backend sample route not actual endpoint. Main next OSPHP.005 after verified OSPHP.004 post 25689. 43 active subjects remain all tracked. November 1, 2026: OSHTML.004 cover repair: replaced featured media 28420 with 28423 (1200x630 comic showing form markup, accessible controls, browser validation and server submission). WordPress post 28421 published edit/view and GitHub three-way archives verified. No change to 43-subject rotation. November 1, 2026: OSPHP.005 (post 28458) published with three source-verified PHP tutorials as native YouTube iframe embeds, captions, nine borderless PHP code blocks, seven contextual links, PHP 8.4.24 main example passed syntax and output QA, subject-specific 1200x630 no-human photo/anime cover #28452, original footer and donation QR. Three GitHub repositories archived. Next OSSolidity.002 based on verified existing OSSolidity.001 post 22233; all 43 active subjects retained.",
   "public_lesson_presentation": {
-    "effective_date": "2026-11-01",
+    "effective_date": "2026-11-02",
     "style": "textbook / wiki / encyclopedia / dictionary",
-    "visible_title_format": "{curriculum_id}: {topic}",
-    "numbered_public_title": true,
+    "visible_title_format": "{topic}",
+    "numbered_public_title": false,
     "numbered_section_headings": false,
-    "keep_track_and_sequence_identifiers_internal": false,
+    "keep_track_and_sequence_identifiers_internal": true,
     "numbering_exception": "Curriculum ID and sequence must appear in public title; body section numbering only for necessary ordered procedures, actual rankings or technical standard numbers.",
     "scope": "All new lessons in the main and specialty rotations, including OSHRE and OSPCB",
-    "supersedes": "October 28, 2026 rule that omitted curriculum ID from public lesson title; retains textbook-style unnumbered section headings.",
+    "supersedes": "User's Content Engineer v5.1 on November 2 explicitly requests unnumbered reader-facing lesson titles; use internal ID for track/archives.",
     "historical_posts": "Apply to future publications and any current article the user explicitly asks to correct; no automatic mass-renaming.",
-    "curriculum_id_required_in_public_title": true,
-    "curriculum_id_and_sequential_number_required_in_seo_title": true
+    "curriculum_id_required_in_public_title": false,
+    "curriculum_id_and_sequential_number_required_in_seo_title": false
   },
   "hashboard_repair_photo_rotation": {
     "effective_date": "2026-11-01",
@@ -763,5 +789,28 @@
     ],
     "actual_playback_verified": false,
     "mobile_view_verified": false
-  }
+  },
+  "learning_events_2026_11_02_osbash005": [
+    {
+      "kind": "verified_lesson",
+      "rank": 1,
+      "observation": "Core/embed YouTube markup was preserved and rendered to three provider iframe elements in WordPress readback.",
+      "prevention_check": "Confirm iframe count and exact provider video IDs after each save.",
+      "verification_status": "passed"
+    },
+    {
+      "kind": "proposed_hypothesis",
+      "rank": 2,
+      "observation": "Cover generation was unavailable and source photo was used instead of anime slot.",
+      "prevention_check": "Provision a working unique approved-style art source before next lesson; verify pixels, crop, and license or generation provenance.",
+      "verification_status": "unverified"
+    },
+    {
+      "kind": "proposed_hypothesis",
+      "rank": 3,
+      "observation": "No independent playback/mobile-browser testing available for this run.",
+      "prevention_check": "Add a real-browser player and responsive screenshot gate before marking published_verified.",
+      "verification_status": "unverified"
+    }
+  ]
 }

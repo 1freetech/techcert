@@ -48,38 +48,40 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "chef",
-    "lesson_number": 1,
-    "track_id": "OSChefInfra.001",
-    "title": "OSChefInfra.001: Chef Infra Architecture — Workstation, Cookbooks, Nodes, and Convergence",
-    "public_title": "Chef Infra Architecture — Workstation, Cookbooks, Nodes, and Convergence",
-    "wordpress_post_id": 29537,
-    "live_url": "https://bitcoinversus.tech/2026/11/05/oschefinfra-001-chef-infra-architecture-workstation-cookbooks-nodes-convergence/",
-    "archive_path": "archive/2026/11/29537-oschefinfra-001-chef-infra-architecture-workstation-cookbooks-nodes-convergence.gutenberg.html",
+    "subject": "shakespeare",
+    "lesson_number": 2,
+    "track_id": "OSShakespeare.002",
+    "title": "OSShakespeare.002: Characters and Variables — Values, Dialogue, and Stage Addressing",
+    "public_title": "Characters and Variables — Values, Dialogue, and Stage Addressing",
+    "wordpress_post_id": 29571,
+    "live_url": "https://bitcoinversus.tech/2026/11/05/osshakespeare-002-characters-variables-values-dialogue-stage-addressing/",
+    "archive_path": "archive/2026/11/29571-osshakespeare-002-characters-variables-values-dialogue-stage-addressing.gutenberg.html",
     "publication_status": "published",
     "verification_status": "published_unverified",
-    "qa_status": "WordPress published with 2 YouTube iframes, original diagram #29533, 1200x630 featured #29532, 6 contextual internal links, approved footer and original 5,000-sat donation QR; saved Gutenberg source byte-identical in three repositories. Actual playback and mobile test not independently verified.",
+    "qa_status": "WordPress status publish, featured cover #29563 original 1200x630, two original in-body diagrams #29564 and #29565, nine contextual internal links, 13 unboxed inline code sample lines, canonical donation QR and footer. Native YouTube block originally link-only; shortcode fallback rendered one correct YouTube iframe. Actual video playback, mobile-browser review and interpreter execution not independently verified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
     "code_examples_executed": false,
-    "featured_media_id": 29532,
-    "body_illustration_id": 29533,
+    "featured_media_id": 29563,
+    "body_illustration_ids": [
+      29564,
+      29565
+    ],
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
-    ],
-    "github_archive_blob_sha": "fecd0ff8190acbbaa552a48dd044d8fdddbb2224"
+    ]
   },
   "next": {
-    "subject": "shakespeare",
-    "lesson_number": 2,
-    "title_format": "OSShakespeare.002: {topic}",
-    "public_title_format": "OSShakespeare.002: {topic}",
-    "resolution_note": "Chef Infra #29537 published under OSChefInfra.001 due to pre-existing OSChef.001–.003 esolang ID collision; Shakespeare.001 exists as published WordPress post #22100, so next is Shakespeare.002."
+    "subject": "dotnet",
+    "lesson_number": 3,
+    "title_format": "OSDotNet.003: {topic}",
+    "public_title_format": "OSDotNet.003: {topic}",
+    "resolution_note": "Shakespeare.002 WordPress #29571 published and canonical Gutenberg archived in all three repos. DotNet.001 #22122 and DotNet.002 #22150 were already published Oct 8, 2026; next distinct entry is OSDotNet.003."
   },
-  "next_after_current": "dotnet",
+  "next_after_current": "emojicode",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -303,13 +305,18 @@
     },
     "shakespeare": {
       "acronym": "OSShakespeare",
-      "next_lesson_number": 2,
-      "last_published_lesson_number": 1,
-      "last_wordpress_post_id": 22100
+      "next_lesson_number": 3,
+      "last_published_lesson_number": 2,
+      "last_wordpress_post_id": 29571,
+      "last_published_title": "OSShakespeare.002: Characters and Variables — Values, Dialogue, and Stage Addressing",
+      "verification_status": "published_unverified"
     },
     "dotnet": {
       "acronym": "OSDotNet",
-      "next_lesson_number": 1
+      "next_lesson_number": 3,
+      "last_published_lesson_number": 2,
+      "last_wordpress_post_id": 22150,
+      "source_resolution": "WordPress has OSDotNet.001 #22122 and OSDotNet.002 #22150 published Oct 8, 2026; stale 001 pointer reconciled."
     },
     "emojicode": {
       "acronym": "OSEmojicode",

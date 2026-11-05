@@ -1,0 +1,243 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives and prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Emojicode is a compiled, strongly typed programming language that expresses many operations with emoji. In <a href="https://bitcoinversus.tech/2026/10/08/osemojicode-001-what-is-emojicode-how-emoji-become-programming-syntax/">OSEmojicode.001</a>, learners explored the program entry point and basic syntax. The next step is understanding how programs remember values. By the end of the lesson, learners should distinguish constants from mutable variables, name the major built-in value types, read assignment direction, and explain variable scope. A working Emojicode 1.0 beta 2 compiler is recommended for the laboratory exercise but not required to understand the examples.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The simplest idea behind a variable</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A variable is a name associated with a value. A program may need to remember the number of devices in a rack, the name of a computer, or whether a task has finished. The name makes the value accessible to later instructions. Emojicode uses ordinary text for variable names and emoji to signal much of the surrounding grammar. Although the source looks different from C# or PowerShell, the underlying concept is the same.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In Emojicode, the arrow <code>➡️</code> points from a value on the left to its name on the right. The official language documentation demonstrates constant assignment using a number and a string. Read each statement aloud as ‘store the value in the named variable’:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.96em;white-space:pre-wrap;line-height:1.55;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.5em !important"><code style="font-family:inherit;white-space:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">31 ➡️ daysInDecember
+🔤Earth🔤 ➡️ thirdPlanet</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The first declaration creates a constant holding the integer 31. The second creates a constant holding text. The compiler can infer each type from its initial value. Unlike a text label in an illustration, the name is later used as a real expression. Variable names cannot contain spaces or emojis, and cannot begin with a number. They may nevertheless use punctuation permitted by the documented grammar.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=grmVLN4_Ztg","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=grmVLN4_Ztg
+</div><figcaption class="wp-element-caption"><em>Codecademy, “World Emoji Day Celebration!” (July 17, 2020). The video features an Emojicode course demonstration and a discussion with language creator Theo B. Weidmann. Training material predates the present lesson and is not footage of a new software release.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Constants protect an assigned value</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A constant variable cannot be reassigned after its initial declaration. Use one for a value that should stay stable throughout the relevant scope. Constants reduce accidental state changes and make a program easier to reason about. The example below preserves the first number and prints it through a string interpolation expression:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.96em;white-space:pre-wrap;line-height:1.55;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.5em !important"><code style="font-family:inherit;white-space:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">🏁 🍇
+  31 ➡️ daysInDecember
+  😀 🔤Days: 🧲daysInDecember🧲🔤❗️
+🍉</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The expected displayed message is ‘Days: 31’. The 🏁 block is the entry point, 🍇 opens it, and 🍉 closes it. The 🧲 markers tell the string literal to evaluate the enclosed expression. A later attempt to assign another number to the same constant name would produce a compiler error rather than quietly changing the stored value.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Mutable variables can change</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Some values genuinely change while a program runs: a counter increases, a sensor reading updates, or a job transitions between states. Emojicode marks a mutable declaration with <code>🖍🆕</code>. An existing mutable variable is assigned with <code>➡️ 🖍</code> or updated through operator assignment. The compiler uses the initial value to infer the variable's type unless the programmer explicitly declares one:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.96em;white-space:pre-wrap;line-height:1.55;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.5em !important"><code style="font-family:inherit;white-space:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">0 ➡️ 🖍🆕 counter
+counter ⬅️➕ 1
+counter ⬅️➕ 5</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The initial counter is zero. The first operator assignment adds one, and the second adds five, leaving six. The <code>⬅️➕</code> combination means add the expression and store the result in the existing mutable variable. The official reference also provides <code>➗</code> and other operators; details of their behavior belong in later arithmetic lessons. The distinction here is mutability, not the mathematical operation itself.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The basic types and their roles</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Emojicode is strongly typed: each value has a type, and the compiler checks whether an operation is compatible with that type. The built-in <code>🔢</code> type represents a signed 64-bit integer. <code>💯</code> represents a real-number type, <code>💧</code> a small signed byte, <code>🔡</code> a string, and <code>👌</code> a Boolean. Boolean literals are written using <code>👍</code> for true and <code>👎</code> for false. The following constants demonstrate automatic type inference:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.96em;white-space:pre-wrap;line-height:1.55;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.5em !important"><code style="font-family:inherit;white-space:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">12 ➡️ devices
+3.5 ➡️ average
+🔤rack-A7🔤 ➡️ label
+👍 ➡️ active</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The number 12 naturally produces an integer variable, 3.5 a real number, a pair of 🔤 delimiters a string, and 👍 a Boolean. Type inference does not mean the language is dynamically typed: the compiler determines types before running the generated program. A string cannot be used as an arbitrary replacement for an integer in numeric arithmetic.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Declaring a type before assigning a value</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An explicit declaration is helpful when a value is not ready yet. The <code>🖍🆕</code> marker can introduce a mutable variable followed by its declared type. The variable must receive a compatible value before the program reads it. For example, a string named <code>catName</code> can be declared, assigned, and then printed:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.96em;white-space:pre-wrap;line-height:1.55;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.5em !important"><code style="font-family:inherit;white-space:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">🏁 🍇
+  🖍🆕 catName 🔡
+  🔤Kitty🔤 ➡️ 🖍 catName
+  😀 catName❗️
+🍉</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A compiled version is expected to display ‘Kitty’. Trying to read <code>catName</code> before assignment produces a compile-time error in the language's definite-assignment rules. Type constraints also prevent the programmer from assigning arbitrary incompatible objects simply because the same variable name is available.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":29637,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osemojicode-002-variable-types-diagram.png?w=1024" alt="Visual comparison of a constant keeping its initial value and a mutable variable changing value" class="wp-image-29637" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert illustration contrasting a constant assignment with an updatable counter. The drawing explains the concept; it is not a screenshot of executed code.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Operator assignment and controlled change</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The operator-assignment syntax combines a left-pointing assignment emoji with an arithmetic operator. The value of the mutable variable is read, the operation is applied, and its result is stored back in the same variable. For a counter initialized to zero, the following short sequence increments the value and then adds another five:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.96em;white-space:pre-wrap;line-height:1.55;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.5em !important"><code style="font-family:inherit;white-space:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">0 ➡️ 🖍🆕 counter
+counter ⬅️➕ 1
+counter ⬅️➕ 5</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The final value is six. The statement does not introduce another variable each time; it changes the existing one. The same conceptual difference appears in <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-002-csharp-variables-built-in-types-var-const/">C# variables</a> and <a href="https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/">PowerShell variables</a>, though the punctuation and typing rules are different.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Where variables remain visible</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Every block between 🍇 and 🍉 establishes a scope. Variables introduced inside a block are available within that scope and are not automatically accessible once execution leaves it. The compiler also applies scope rules around classes and value types. Scope prevents a temporary value in one part of a program from accidentally becoming a global name.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For comparison, <a href="https://bitcoinversus.tech/2026/10/15/osjavascript-003-variables-constants-let-const-var-reassignment-scope-temporal-dead-zone/">JavaScript's block scope</a> and <a href="https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/">C# string variables</a> illustrate how different languages balance declarations and lifetime. Do not assume that a variable name in one Emojicode function can be referenced from another without an appropriate parameter, field, or other explicit relationship.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical lab — record a small workload</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Create a UTF-8 source file named <code>values.emojic</code> with the following complete program. The example combines a constant rack name, a mutable numeric counter, an operator update and string interpolation. It makes no file modifications and requires no network connection when running:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.96em;white-space:pre-wrap;line-height:1.55;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.5em !important"><code style="font-family:inherit;white-space:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">🏁 🍇
+  🔤rack-A7🔤 ➡️ rack
+  0 ➡️ 🖍🆕 completed
+  completed ⬅️➕ 1
+  completed ⬅️➕ 5
+  😀 🔤🧲rack🧲: 🧲completed🧲 jobs🔤❗️
+🍉</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The program is expected to print <code>rack-A7: 6 jobs</code>. The name remains constant while the counter changes from zero to one and then six. String interpolation incorporates both names into one displayed message. The syntax was reviewed against the official Emojicode 1.0 beta 2 reference; execution and compiler acceptance have not been independently confirmed in the publishing environment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If a compatible Emojicode compiler is installed, open a terminal in the folder containing the file. The official guide documents compilation with <code>emojicodec</code>, which creates a native executable. On macOS or Linux, the basic commands are:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.96em;white-space:pre-wrap;line-height:1.55;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.5em !important"><code style="font-family:inherit;white-space:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">emojicodec values.emojic
+./values</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Windows executable naming and invocation may differ, and an installed compiler may require platform-specific setup. Use the official installation instructions rather than copying an unverified executable from an unknown mirror. The language project currently presents documentation for Emojicode 1.0 beta 2; compiler distributions and third-party tutorials from older revisions may use different syntax.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting and safe diagnostics</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>When the compiler reports an unexpected type, inspect the original variable's declaration and the value being assigned. A numeric variable cannot freely become text. If the compiler reports an unknown name, check whether the name was declared, whether its case and spelling match, and whether the program is still inside the defining scope. If it reports an invalid name, remove any spaces or emoji from the variable identifier.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a mutable variable, include <code>🖍</code> in the proper assignment form. Omitting it can cause the compiler to interpret the statement as an attempt to create or overwrite a constant. A variable explicitly declared without a value must be assigned before being read. Preserve UTF-8 encoding and the exact emoji characters: visually similar symbols and variation selectors can have distinct Unicode encodings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice exercises and knowledge-check answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Modify the constant rack name to <code>rack-B2</code> while preserving the counter. Predict the displayed message before compiling. Then change the second increment from five to three. The expected numeric result becomes four. Finally, introduce a Boolean constant using <code>👍 ➡️ active</code> and explain why it is not interchangeable with a text label.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>What does <code>➡️</code> indicate? It sends a value toward the named variable. What is different about <code>🖍🆕</code>? It creates a mutable variable rather than a constant. What does <code>⬅️➕</code> do? It adds a value and writes the new result to a mutable variable. What type do 🔤 delimiters produce? A string, represented by <code>🔡</code>. When does a block's variable lifetime end? When execution leaves its defining scope unless the program explicitly transfers the value through another mechanism.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Authoritative documentation and next lesson</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The official <a href="https://www.emojicode.org/docs/reference/variables">Variables and Assignment</a> reference documents constant and mutable declarations, operator assignment and scope. The <a href="https://www.emojicode.org/docs/reference/literals">Literals</a> reference defines number and Boolean literals. The <a href="https://www.emojicode.org/docs/reference/types">Types and Namespaces</a> guide explains type inference and built-in types. The <a href="https://www.emojicode.org/docs/guides/compile-and-run">Compile and Run</a> tutorial documents the source-file and compiler workflow. For structured practice, Codecademy's <a href="https://www.codecademy.com/learn/learn-emojicode">Emojicode course</a> includes exercises on variables and basic types.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The next Emojicode lesson can extend the same foundation into conditional logic. Branching requires a Boolean expression, making an accurate understanding of values, types and state essential before introducing control-flow syntax.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A constant preserves a value, while a mutable variable can be updated. Emojicode makes that distinction visible through assignment emojis and confirms type compatibility through its compiler. Reading code becomes easier by tracing the value, the arrow, the variable name, and the relevant scope. The practical exercise combines those pieces into a small report without relying on decorative code containers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> The syntax and type descriptions were checked against the official Emojicode 1.0 beta 2 reference. Example output follows documented language rules, but the program was not compiled or executed in the publication environment. The cover and variable-flow diagram are original conceptual artwork, not screenshots of running Emojicode.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech donation QR code for 5,000 satoshis" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open the lesson on a separate display and use a compatible Bitcoin wallet to scan the original QR code. Verify the destination before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

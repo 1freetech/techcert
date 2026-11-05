@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "wordpress_post_id": 29638,
+  "track_id": "OSEmojicode.002",
+  "title": "OSEmojicode.002: Variables and Types — Constants, Mutation, and Scope",
+  "wordpress_status": "publish",
+  "public_url": "https://bitcoinversus.tech/2026/11/05/osemojicode-002-variables-types-constants-mutation-scope/",
+  "date": "2026-11-05T18:19:20",
+  "archive_path": "archive/2026/11/29638-osemojicode-002-variables-types-constants-mutation-scope.gutenberg.html",
+  "source_archive_blob_sha": "c1c22376f3791581c18c877eba7d09622b122c35",
+  "source_archives_byte_exact": true,
+  "curriculum": {
+    "subject": "emojicode",
+    "level": "super-fundamentals",
+    "sequence": 2,
+    "prerequisite_post_id": 22172,
+    "duplicate_check": "published OSEmojicode.001 and draft OSEmojicode.001 found; OSEmojicode.002 absent until current post creation"
+  },
+  "primary_references": [
+    "https://www.emojicode.org/docs/reference/variables",
+    "https://www.emojicode.org/docs/reference/types",
+    "https://www.emojicode.org/docs/reference/literals",
+    "https://www.emojicode.org/docs/reference/basics",
+    "https://www.emojicode.org/docs/guides/compile-and-run",
+    "https://www.codecademy.com/learn/learn-emojicode"
+  ],
+  "video": {
+    "id": "grmVLN4_Ztg",
+    "url": "https://www.youtube.com/watch?v=grmVLN4_Ztg",
+    "title": "World Emoji Day Celebration!",
+    "channel": "Codecademy",
+    "date": "2020-07-17",
+    "creator_interview": "Theo B. Weidmann",
+    "availability_checked": true,
+    "embeddability_checked_by_wp_render": true,
+    "rendered_iframe": true,
+    "actual_playback_verified": false
+  },
+  "media": {
+    "featured_cover": {
+      "id": 29636,
+      "width": 1200,
+      "height": 630,
+      "original_conceptual": true
+    },
+    "body_diagram": {
+      "id": 29637,
+      "width": 1200,
+      "height": 675,
+      "original_conceptual": true
+    },
+    "in_body_media_distinct": 2
+  },
+  "presentation": {
+    "unboxed_code_examples": 8,
+    "wordpress_native_boxed_code_blocks": 0,
+    "plain_explanatory_paragraph_then_code": true,
+    "internal_link_count": 5,
+    "editor_note_and_original_qr_correct_order": true,
+    "qr_asset_id": 24043,
+    "volunteer_disclaimer_present": true,
+    "financial_disclaimer_present": true
+  },
+  "tests": {
+    "source_review": "official Emojicode 1.0 beta 2 syntax",
+    "emojicode_compiler_available": false,
+    "compiled_source": false,
+    "runtime_output_verified": false,
+    "wordpress_rendered_iframe": true,
+    "desktop_visual_pixels_inspected": false,
+    "mobile_visual_pixels_inspected": false,
+    "qr_scannability_tested": false
+  },
+  "status": "published_unverified",
+  "open_checks": [
+    "Run executable examples using verified Emojicode compiler",
+    "Actually test YouTube playback",
+    "Inspect live page on desktop and mobile for wrapping and visual overflow",
+    "Verify original donation QR can be scanned"
+  ],
+  "next_step": "Inspect on mobile; execute the original values.emojic example with official compiler and record exact output. Do not mark verified before tests."
+}

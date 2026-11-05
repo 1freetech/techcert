@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "wordpress_post_id": 29647,
+  "track_id": "OSZig.002",
+  "published_title": "OSZig.002: Zig Variables and Types — const, var, and Mutability",
+  "site_url": "https://bitcoinversus.tech/2026/11/05/oszig-002-variables-types-const-var-mutability/",
+  "status": "publish",
+  "date": "2026-11-05T18:43:50",
+  "git_archives_repositories": [
+    "1freetech/Bitcoinversus.tech",
+    "1freetech/opencert.tech",
+    "1freetech/techcert"
+  ],
+  "archive_path": "archive/2026/11/29647-oszig-002-variables-types-const-var-mutability.gutenberg.html",
+  "archive_blob_sha": "8652611600f538eaa8116a43bb7edb2d6e8b7c42",
+  "archive_source_exact_three_way": true,
+  "curriculum": {
+    "subject": "zig",
+    "sequence": 2,
+    "prerequisite_post_id": 22207,
+    "level": "super-fundamentals",
+    "source_version": "Zig 0.17.1"
+  },
+  "references": [
+    "https://ziglang.org/documentation/0.17.1/",
+    "https://ziglang.org/download/",
+    "https://ziglang.org/news/0.17.1-released/",
+    "https://ziglang.org/learn/"
+  ],
+  "media": {
+    "featured_media_id": 29650,
+    "featured_dimensions": [
+      1200,
+      630
+    ],
+    "featured_illustration_original": true,
+    "in_body_videos": [
+      {
+        "id": "LaS8V7P-duQ",
+        "title": "Variables in Zig",
+        "channel": "Pokelego Dev",
+        "date": "2026-02-11",
+        "saved_native_youtube_block": true,
+        "actual_playback_verified": false,
+        "live_player_render_verified": false
+      },
+      {
+        "id": "Hp4zvZf6K0g",
+        "title": "Zig Master: var and const",
+        "channel": "Dude the Builder",
+        "date": "2024-05-03",
+        "saved_native_youtube_block": true,
+        "actual_playback_verified": false,
+        "live_player_render_verified": false
+      }
+    ],
+    "in_body_video_total": 2,
+    "original_donation_qr_media_id": 24043
+  },
+  "writing_and_code": {
+    "approx_words": 2030,
+    "internal_links": 5,
+    "plain_explanatory_paragraph_followed_by_code": true,
+    "unboxed_code_examples": 11,
+    "boxed_gutenberg_code_blocks": 0,
+    "editors_note_order_verified": true,
+    "qr_order_verified": true,
+    "volunteer_disclaimer_present": true
+  },
+  "tests": {
+    "zig_compiler_installed": false,
+    "zig_runtime_examples_executed": false,
+    "official_reference_reviewed": true,
+    "wordpress_saved_source_read_back": true,
+    "WordPress_view_response_contains_raw_source_not_rendered_iframes": true,
+    "actual_iframe_render_unverified": true,
+    "actual_player_playback_unverified": true,
+    "desktop_screenshot_capture_ready": true,
+    "mobile_screenshot_capture_ready": true,
+    "mobile_screenshot_pixels_inspected": false,
+    "qr_scannability_tested": false
+  },
+  "open_qa": [
+    "Run Zig 0.17.1 sample and zig test counter_test.zig in an execution environment with verified compiler",
+    "Verify both YouTube videos play within live WordPress post",
+    "Inspect generated desktop and mobile screenshot pixels for readability and overflow",
+    "Confirm original Bitcoin QR asset is scannable"
+  ],
+  "publication_qa_status": "published_unverified",
+  "learning": "Respect the colon-ending instructional paragraph followed by plain unboxed code. Never equate saved YouTube URL to playback. Cite exact Zig stable version; Zig 0.17.1 released November 2026."
+}

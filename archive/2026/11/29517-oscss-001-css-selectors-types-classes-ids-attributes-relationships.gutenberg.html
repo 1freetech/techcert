@@ -29,15 +29,15 @@ https://www.youtube.com/watch?v=QgxkYbGr2II
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>A CSS ruleset begins with a selector, followed by a declaration block enclosed in braces. Each declaration contains a property and a value separated by a colon. Browsers match the selector against the document, then consider those declarations alongside other applicable rules.</p>
+<p>A CSS ruleset begins with a selector, followed by a declaration block enclosed in braces. Each declaration contains a property and a value separated by a colon. Browsers match the selector against the document, then consider those declarations alongside other applicable rules. Here is the basic rule:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>p {
+<!-- wp:html -->
+<pre style="background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.4em !important;max-width:100%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.94em;line-height:1.55;white-space:pre-wrap;color:inherit"><code style="background:transparent !important;border:0 !important;padding:0 !important;box-shadow:none !important;color:inherit;white-space:inherit">p {
   color: navy;
   line-height: 1.5;
 }</code></pre>
-<!-- /wp:code -->
+<!-- /wp:html -->
 
 <!-- wp:paragraph -->
 <p>Here <code>p</code> is a type selector. The properties <code>color</code> and <code>line-height</code> control the text color and line spacing. If no paragraph matches, the rule is still valid but changes nothing visible. When multiple rules affect the same property, the CSS cascade determines which declaration wins; the next lesson develops the full ordering rules.</p>
@@ -48,11 +48,11 @@ https://www.youtube.com/watch?v=QgxkYbGr2II
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>A <strong>type selector</strong> names an HTML element such as <code>p</code>, <code>h2</code>, or <code>button</code>. A <strong>class selector</strong> begins with a period and matches an element's <code>class</code> attribute. A class can be shared by many elements. An <strong>ID selector</strong> begins with a number sign and matches the <code>id</code> attribute. IDs should be unique within a well-formed HTML document.</p>
+<p>A <strong>type selector</strong> names an HTML element such as <code>p</code>, <code>h2</code>, or <code>button</code>. A <strong>class selector</strong> begins with a period and matches an element's <code>class</code> attribute. A class can be shared by many elements. An <strong>ID selector</strong> begins with a number sign and matches the <code>id</code> attribute. IDs should be unique within a well-formed HTML document. Use these simple type, class, and ID selector examples:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>/* All paragraphs */
+<!-- wp:html -->
+<pre style="background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.4em !important;max-width:100%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.94em;line-height:1.55;white-space:pre-wrap;color:inherit"><code style="background:transparent !important;border:0 !important;padding:0 !important;box-shadow:none !important;color:inherit;white-space:inherit">/* All paragraphs */
 p { color: #344054; }
 
 /* Every element carrying class="notice" */
@@ -63,7 +63,7 @@ p { color: #344054; }
 
 /* Paragraphs also carrying the notice class */
 p.notice { text-decoration: underline; }</code></pre>
-<!-- /wp:code -->
+<!-- /wp:html -->
 
 <!-- wp:paragraph -->
 <p>Classes describe reusable roles such as notices and status messages. Document-unique IDs work well for anchors and label associations, but excessive ID styling can make future overrides harder. A compound selector such as <code>p.notice</code> matches only an element meeting both conditions.</p>
@@ -74,17 +74,17 @@ p.notice { text-decoration: underline; }</code></pre>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>An attribute selector uses brackets to match the presence of an HTML attribute or a particular value. For example, <code>[data-role]</code> matches any element carrying that attribute, while <code>[data-role="example"]</code> matches the specified value. Case matching depends on the attribute definition, and an optional <code>i</code> flag requests ASCII case-insensitive value matching.</p>
+<p>An attribute selector uses brackets to match the presence of an HTML attribute or a particular value. For example, <code>[data-role]</code> matches any element carrying that attribute, while <code>[data-role="example"]</code> matches the specified value. Case matching depends on the attribute definition, and an optional <code>i</code> flag requests ASCII case-insensitive value matching. The following CSS applies attribute selectors and a selector list:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>input[required] { border-color: #d97706; }
+<!-- wp:html -->
+<pre style="background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.4em !important;max-width:100%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.94em;line-height:1.55;white-space:pre-wrap;color:inherit"><code style="background:transparent !important;border:0 !important;padding:0 !important;box-shadow:none !important;color:inherit;white-space:inherit">input[required] { border-color: #d97706; }
 button[type="submit"] { font-weight: 700; }
 [data-role="example"] { outline: 1px solid teal; }
 
 /* Commas combine independent selectors. */
 h1, h2, h3 { font-family: system-ui, sans-serif; }</code></pre>
-<!-- /wp:code -->
+<!-- /wp:html -->
 
 <!-- wp:paragraph -->
 <p>Attribute selection is often useful when styling <a href="https://bitcoinversus.tech/2026/11/01/oshtml-004-html-forms-labels-inputs-fieldsets-submission-validation/">HTML forms</a>. A selector can select a form field, but CSS cannot replace an actual HTML label, a keyboard-accessible interaction, or a visible focus indicator. Keep semantic HTML intact. A selector list separated by commas independently matches any listed selector; in an ordinary selector list, one invalid selector can invalidate the entire list.</p>
@@ -95,15 +95,15 @@ h1, h2, h3 { font-family: system-ui, sans-serif; }</code></pre>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Combinators express relationships between HTML elements. A space means descendant, so <code>main p</code> selects paragraphs anywhere inside <code>main</code>, including those nested several levels down. A greater-than sign means direct child: <code>main &gt; p</code> selects only paragraphs whose immediate parent is <code>main</code>. A plus sign selects the next sibling, while a tilde selects later siblings sharing the same parent.</p>
+<p>Combinators express relationships between HTML elements. A space means descendant, so <code>main p</code> selects paragraphs anywhere inside <code>main</code>, including those nested several levels down. A greater-than sign means direct child: <code>main &gt; p</code> selects only paragraphs whose immediate parent is <code>main</code>. A plus sign selects the next sibling, while a tilde selects later siblings sharing the same parent. Compare the relationship selectors directly:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>main p { color: #334155; }       /* Any descendant p */
+<!-- wp:html -->
+<pre style="background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.4em !important;max-width:100%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.94em;line-height:1.55;white-space:pre-wrap;color:inherit"><code style="background:transparent !important;border:0 !important;padding:0 !important;box-shadow:none !important;color:inherit;white-space:inherit">main p { color: #334155; }       /* Any descendant p */
 main &gt; p { margin-top: 1rem; }   /* Direct child p */
 h2 + p { font-style: italic; }   /* Adjacent sibling p */
 h2 ~ p { line-height: 1.5; }   /* Later siblings p */</code></pre>
-<!-- /wp:code -->
+<!-- /wp:html -->
 
 <!-- wp:paragraph -->
 <p>CSS relationships follow the HTML document tree, not visual proximity on a screen. Understanding structure prevents accidental global styling and makes a stylesheet easier to maintain. Pseudo-classes such as <code>:hover</code>, <code>:focus-visible</code>, and <code>:checked</code> select elements in particular states; detailed state selectors are covered in a later lesson.</p>
@@ -136,11 +136,11 @@ https://www.youtube.com/watch?v=l1mER1bV0N0
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Save the following document as <code>index.html</code>. The <code>link</code> element connects a stylesheet named <code>styles.css</code>. Keep four paragraph elements and preserve their nesting, because moving a paragraph changes the selector match counts.</p>
+<p>Save the following document as <code>index.html</code>. The <code>link</code> element connects a stylesheet named <code>styles.css</code>. Keep four paragraph elements and preserve their nesting, because moving a paragraph changes the selector match counts. The complete HTML for the lab is:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>&lt;!DOCTYPE html&gt;
+<!-- wp:html -->
+<pre style="background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.4em !important;max-width:100%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.94em;line-height:1.55;white-space:pre-wrap;color:inherit"><code style="background:transparent !important;border:0 !important;padding:0 !important;box-shadow:none !important;color:inherit;white-space:inherit">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
   &lt;meta charset="utf-8"&gt;
@@ -156,19 +156,19 @@ https://www.youtube.com/watch?v=l1mER1bV0N0
   &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-<!-- /wp:code -->
+<!-- /wp:html -->
 
 <!-- wp:paragraph -->
-<p>Now save the CSS declarations below into <code>styles.css</code>. The rules are intentionally short enough to test by inspection. The selector <code>section p</code> affects only paragraphs nested in a section. The class and ID declarations affect one of the paragraphs each.</p>
+<p>Now save the CSS declarations below into <code>styles.css</code>. The rules are intentionally short enough to test by inspection. The selector <code>section p</code> affects only paragraphs nested in a section. The class and ID declarations affect one of the paragraphs each. The matching stylesheet is:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>p { color: #344054; }
+<!-- wp:html -->
+<pre style="background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.4em !important;max-width:100%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.94em;line-height:1.55;white-space:pre-wrap;color:inherit"><code style="background:transparent !important;border:0 !important;padding:0 !important;box-shadow:none !important;color:inherit;white-space:inherit">p { color: #344054; }
 .notice { color: #087f5b; }
 #summary { font-weight: 700; }
 main &gt; p { outline: 1px solid #64748b; }
 section p { background: #eff6ff; }</code></pre>
-<!-- /wp:code -->
+<!-- /wp:html -->
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Inspecting Matches in Browser Developer Tools</h2>
@@ -179,16 +179,16 @@ section p { background: #eff6ff; }</code></pre>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>In the JavaScript console, the read-only method <code>document.querySelectorAll()</code> uses CSS selector syntax to retrieve matching nodes. The following counts were executed against the same HTML tree using Chromium. The example uses no network requests or system modifications.</p>
+<p>In the JavaScript console, the read-only method <code>document.querySelectorAll()</code> uses CSS selector syntax to retrieve matching nodes. The following counts were executed against the same HTML tree using Chromium. The example uses no network requests or system modifications. Check the exact matches in the browser console:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>document.querySelectorAll('p').length;         // 4
+<!-- wp:html -->
+<pre style="background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.4em !important;max-width:100%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.94em;line-height:1.55;white-space:pre-wrap;color:inherit"><code style="background:transparent !important;border:0 !important;padding:0 !important;box-shadow:none !important;color:inherit;white-space:inherit">document.querySelectorAll('p').length;         // 4
 document.querySelectorAll('main &gt; p').length; // 3
 document.querySelectorAll('main p').length;   // 4
 document.querySelectorAll('p.notice').length; // 1
 document.querySelectorAll('#summary').length; // 1</code></pre>
-<!-- /wp:code -->
+<!-- /wp:html -->
 
 <!-- wp:paragraph -->
 <p>If the console reports an unexpected count, check whether a paragraph was moved under <code>section</code>, the <code>class</code> or <code>id</code> value changed, or a selector prefix is missing. HTML nesting is part of the logic, not merely indentation. For broader context, read <a href="https://bitcoinversus.tech/2026/10/06/easy-tech-read-what-happens-when-you-type-a-website-into-your-browser/">how browsers load and display web pages</a>.</p>

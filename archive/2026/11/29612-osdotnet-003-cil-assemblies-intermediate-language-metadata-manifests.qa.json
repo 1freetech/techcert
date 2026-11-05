@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "track_id": "OSDotNet.003",
+  "subject": "dotnet",
+  "lesson_number": 3,
+  "wordpress_post_id": 29612,
+  "title": "OSDotNet.003: CIL and .NET Assemblies — Intermediate Language, Metadata, and Manifests",
+  "live_url": "https://bitcoinversus.tech/2026/11/05/osdotnet-003-cil-assemblies-intermediate-language-metadata-manifests/",
+  "date_local": "2026-11-05T04:39:26",
+  "date_gmt": "2026-11-05T09:39:26",
+  "publication_status": "published",
+  "verification_status": "published_unverified",
+  "featured_media": {
+    "id": 29602,
+    "dimensions": [
+      1200,
+      630
+    ],
+    "alt_text_attached": true
+  },
+  "inbody_media": {
+    "original_image_id": 29601,
+    "shortcode_youtube_ids": [
+      "0H66H8PxcB8",
+      "Vlkn9tFqrrI"
+    ],
+    "youtube_iframes_rendered": 2,
+    "video_playback_verified": false
+  },
+  "metadata": {
+    "saved_gutenberg_verified": true,
+    "rendered_html_verified": true,
+    "code_box_count": 0,
+    "unboxed_code_examples": 6,
+    "internal_link_occurrences": 6,
+    "original_qr_image_id": 24043,
+    "footer_order_valid": true,
+    "cover_not_duplicated_in_body": true
+  },
+  "engineering": {
+    "CIL_compiler_examples_executed": false,
+    "dotnet_sdk_available_in_agent_environment": false,
+    "primary_sources": [
+      "https://learn.microsoft.com/en-us/dotnet/standard/assembly/contents",
+      "https://learn.microsoft.com/en-us/dotnet/standard/managed-execution-process",
+      "https://learn.microsoft.com/en-us/dotnet/standard/metadata-and-self-describing-components",
+      "https://ecma-international.org/publications-and-standards/standards/ecma-335/"
+    ]
+  },
+  "release_gates": {
+    "duplicate_post_found": false,
+    "site_public": true,
+    "post_status_publish": true,
+    "desktop_screenshot_capture_ready": true,
+    "mobile_browser_tested": false,
+    "iframe_rendered": true,
+    "actual_youtube_playback_verified": false
+  },
+  "repair_log": [
+    "Native Gutenberg YouTube blocks initially rendered as plain watch links in draft",
+    "Replaced both with canonical WordPress [youtube ...] shortcodes using &amp; separators",
+    "WordPress rendered two distinct youtube.com/embed/ iframe sources after repair",
+    "Confirmed the same two iframe sources after publication"
+  ],
+  "defects_or_limitations": [
+    "Actual YouTube video playback not independently tested",
+    "Mobile viewport screenshot not independently visually inspected",
+    "C# and ILSpy examples not executed in this environment",
+    "Desktop screenshot capture returned ready but pixels were not independently evaluated"
+  ],
+  "smallest_next_step": "Run independent desktop/mobile browser playback smoke tests for both videos, then execute the sample with an installed .NET SDK and record outputs"
+}

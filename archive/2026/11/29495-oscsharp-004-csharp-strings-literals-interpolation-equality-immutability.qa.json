@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "track_id": "OSC#.004",
+  "wordpress_post_id": 29495,
+  "title": "OSC#.004: C# Strings — Literals, Interpolation, Equality, and Immutability",
+  "public_url": "https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/",
+  "date": "2026-11-05T03:04:11",
+  "date_gmt": "2026-11-05T08:04:11",
+  "archive_path": "archive/2026/11/29495-oscsharp-004-csharp-strings-literals-interpolation-equality-immutability.gutenberg.html",
+  "course_subject": "csharp",
+  "publication_status": "published",
+  "verification_status": "published_unverified",
+  "featured_media": {
+    "id": 29491,
+    "format": "image/jpeg",
+    "width": 1200,
+    "height": 630,
+    "original_art_style": "anime technical editorial",
+    "subject": "C# strings in a developer workstation",
+    "verified_wp_attachment_metadata": true
+  },
+  "in_body_media": {
+    "youtube_count": 2,
+    "photo_count": 0,
+    "social_embed_count": 0,
+    "verified_wp_rendered_iframes": 2,
+    "youtube": [
+      {
+        "id": "nus5SP3AoHM",
+        "title": "The Basics of Strings! [Pt 5] | C# for Beginners",
+        "channel": "dotnet",
+        "source": "https://www.youtube.com/watch?v=nus5SP3AoHM",
+        "source_checked": true,
+        "saved_gutenberg_block": true,
+        "wp_iframe_rendered": true,
+        "playback_verified": false
+      },
+      {
+        "id": "xY4EhUdBMbo",
+        "title": "C# Language Highlights: String Interpolation",
+        "channel": "dotnet",
+        "source": "https://www.youtube.com/watch?v=xY4EhUdBMbo",
+        "source_checked": true,
+        "saved_gutenberg_block": true,
+        "wp_iframe_rendered": true,
+        "playback_verified": false
+      }
+    ]
+  },
+  "internal_link_count": 6,
+  "source_links": [
+    "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/strings/",
+    "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/strings/interpolation",
+    "https://learn.microsoft.com/dotnet/csharp/fundamentals/strings/raw-string-literals",
+    "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-run"
+  ],
+  "footer": {
+    "verified_saved_markup": true,
+    "verified_wp_rendered": true,
+    "canonical_editor_note": true,
+    "original_donation_qr_media_id": 24043,
+    "financial_disclaimer": true
+  },
+  "code_examples": {
+    "syntax_reviewed_against_microsoft_docs": true,
+    "runtime_executed": false,
+    "reason": "dotnet SDK not installed in current execution container"
+  },
+  "live_visual": {
+    "wp_public_screenshot_capture": "ready",
+    "image_pixels_inspected": false,
+    "mobile_viewport_tested": false,
+    "desktop_viewport_width": 1200,
+    "desktop_viewport_height": 6000
+  },
+  "qa_blockers": [
+    "Video playback is not independently tested in an interactive browser",
+    "Desktop screenshot pixels and mobile viewport have not been visually inspected",
+    "C# code has not been compiled or executed in a .NET runtime"
+  ],
+  "summary": "Two distinct official dotnet videos, six internal links, original cover 1200x630, correct footer, source-reviewed C# code. WordPress status and rendered iframe checks pass; preserve published_unverified.",
+  "archive_parity": {
+    "verified": true,
+    "github_blob_sha": "210be944afc22dca95e0d65aedbfac6c4b4628f7",
+    "all_three_repositories": true
+  }
+}

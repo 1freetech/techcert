@@ -1,5 +1,9 @@
 # TechCert Lesson Authoring Standards
 
+## Mandatory Code Presentation — No Code or Text Boxes
+
+Apply the established clean Gutenberg lesson template to every new or repaired lesson. Commands, code, equations, and syntax must appear in normal responsive paragraph flow, using inline `<code>…</code>` when helpful. Place each command or line of multiline code in its own standard `wp:paragraph` block where needed for clarity; preserve command order and explain indentation or control flow in adjacent prose. For commands in a series, an ordinary semantic list is also acceptable. **Never use `wp:code`, `<pre>`, `wp-block-code`, HTML tables masquerading as code, colored text boxes, callouts, cards, panels, or fixed-width boxed containers.** Keep all technical examples accurate, readable, copyable, and free of mobile horizontal overflow. After save, verify zero boxed code blocks in saved Gutenberg and in the rendered page, then archive the exact verified WordPress markup to the project repositories.
+
 ## Plain Code Presentation Law — November 5, 2026 (LATEST, OVERRIDES ALL EARLIER FORMATTING)
 
 **NO TEXT BOXES IN LESSONS OR CODE DEMONSTRATIONS.** Do not use bordered, shaded, highlighted, callout, card, panel, inset, or default theme-styled Gutenberg code boxes. In particular, do not publish the standard boxed `wp:code` / `wp-block-code` treatment. Do not recreate a box by changing its border color, background color, dimensions, or padding.

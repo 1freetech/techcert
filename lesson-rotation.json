@@ -48,15 +48,15 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "emojicode",
+    "subject": "zig",
     "lesson_number": 2,
-    "track_id": "OSEmojicode.002",
-    "title": "OSEmojicode.002: Variables and Types — Constants, Mutation, and Scope",
-    "public_title": "OSEmojicode.002: Variables and Types — Constants, Mutation, and Scope",
-    "wordpress_post_id": 29638,
-    "live_url": "https://bitcoinversus.tech/2026/11/05/osemojicode-002-variables-types-constants-mutation-scope/",
-    "archive_path": "archive/2026/11/29638-osemojicode-002-variables-types-constants-mutation-scope.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/29638-osemojicode-002-variables-types-constants-mutation-scope.qa.json",
+    "track_id": "OSZig.002",
+    "title": "OSZig.002: Zig Variables and Types — const, var, and Mutability",
+    "public_title": "OSZig.002: Zig Variables and Types — const, var, and Mutability",
+    "wordpress_post_id": 29647,
+    "live_url": "https://bitcoinversus.tech/2026/11/05/oszig-002-variables-types-const-var-mutability/",
+    "archive_path": "archive/2026/11/29647-oszig-002-variables-types-const-var-mutability.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/29647-oszig-002-variables-types-const-var-mutability.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
@@ -64,23 +64,23 @@
     ],
     "publication_status": "published",
     "verification_status": "published_unverified",
-    "qa_status": "WordPress published #29638; original feature #29636 exactly 1200x630; original educational image #29637 exactly 1200x675; official Codecademy video #grmVLN4_Ztg renders as iframe; 8 unboxed code paragraphs and no wp:code blocks; 5 relevant internal links; original QR #24043 and editor/disclaimer correct. Sources Emojicode 1.0 beta 2 language reference. Compiler execution, actual playback, mobile rendering and QR scannability not independently verified. Byte-exact Gutenberg and QA archives matched in all 3 repositories.",
-    "youtube_iframe_rendered": true,
-    "actual_youtube_playback_verified": false,
-    "mobile_render_verified": false,
-    "compiler_examples_executed": false,
-    "featured_media_id": 29636,
-    "body_media_id": 29637,
-    "github_archive_blob_sha": "c1c22376f3791581c18c877eba7d09622b122c35"
+    "qa_status": "WordPress post #29647 published. Two genuine Zig tutorial URLs saved in native Gutenberg video blocks; live iframe and playback not independently verified. WordPress original featured crop #29650 exactly 1200x630. Eleven unboxed code examples and no wp:code blocks; five relevant internal links; original QR and editor/disclaimer order verified. Zig 0.17.1 official reference reviewed, but compiler runtime not installed. Both screenshot captures ready, pixels not inspected. Identical saved Gutenberg source and QA evidence archived and read back in three repositories, Git blob SHA 8652611600f538eaa8116a43bb7edb2d6e8b7c42.",
+    "featured_media_id": 29650,
+    "github_archive_blob_sha": "8652611600f538eaa8116a43bb7edb2d6e8b7c42",
+    "body_video_ids": [
+      "LaS8V7P-duQ",
+      "Hp4zvZf6K0g"
+    ],
+    "code_executed": false
   },
   "next": {
-    "subject": "zig",
-    "lesson_number": 2,
-    "title_format": "OSZig.002: {topic}",
-    "public_title_format": "OSZig.002: {topic}",
-    "resolution_note": "OSZig.001 #22207 already published Oct 8, 2026; obsolete Zig.001 rotation count advanced to Zig.002 after OSEmojicode.002 #29638 was published and byte-exact Gutenberg archived."
+    "subject": "leadership",
+    "lesson_number": 5,
+    "title_format": "OSLTC.005: {topic}",
+    "public_title_format": "OSLTC.005: {topic}",
+    "resolution_note": "OSZig.002 published and source archived. Leadership OSLTC.001–.004 already published (IDs 22070, 22250, 22598, 23311); next unique is OSLTC.005."
   },
-  "next_after_current": "leadership",
+  "next_after_current": "network_technician",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -330,10 +330,12 @@
     },
     "zig": {
       "acronym": "OSZig",
-      "next_lesson_number": 2,
-      "last_published_lesson_number": 1,
-      "last_wordpress_post_id": 22207,
-      "source_resolution": "WordPress published OSZig.001 #22207; avoid repeating first lesson."
+      "next_lesson_number": 3,
+      "last_published_lesson_number": 2,
+      "last_wordpress_post_id": 29647,
+      "source_resolution": "WordPress published OSZig.001 #22207; avoid repeating first lesson.",
+      "last_published_title": "OSZig.002: Zig Variables and Types — const, var, and Mutability",
+      "verification_status": "published_unverified"
     },
     "network_engineer": {
       "acronym": "OSNEC",
@@ -344,15 +346,15 @@
     }
   },
   "last_published": {
-    "subject": "emojicode",
+    "subject": "zig",
     "lesson_number": 2,
-    "track_id": "OSEmojicode.002",
-    "title": "OSEmojicode.002: Variables and Types — Constants, Mutation, and Scope",
-    "public_title": "OSEmojicode.002: Variables and Types — Constants, Mutation, and Scope",
-    "wordpress_post_id": 29638,
-    "live_url": "https://bitcoinversus.tech/2026/11/05/osemojicode-002-variables-types-constants-mutation-scope/",
-    "archive_path": "archive/2026/11/29638-osemojicode-002-variables-types-constants-mutation-scope.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/29638-osemojicode-002-variables-types-constants-mutation-scope.qa.json",
+    "track_id": "OSZig.002",
+    "title": "OSZig.002: Zig Variables and Types — const, var, and Mutability",
+    "public_title": "OSZig.002: Zig Variables and Types — const, var, and Mutability",
+    "wordpress_post_id": 29647,
+    "live_url": "https://bitcoinversus.tech/2026/11/05/oszig-002-variables-types-const-var-mutability/",
+    "archive_path": "archive/2026/11/29647-oszig-002-variables-types-const-var-mutability.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/29647-oszig-002-variables-types-const-var-mutability.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
@@ -360,14 +362,14 @@
     ],
     "publication_status": "published",
     "verification_status": "published_unverified",
-    "qa_status": "WordPress published #29638; original feature #29636 exactly 1200x630; original educational image #29637 exactly 1200x675; official Codecademy video #grmVLN4_Ztg renders as iframe; 8 unboxed code paragraphs and no wp:code blocks; 5 relevant internal links; original QR #24043 and editor/disclaimer correct. Sources Emojicode 1.0 beta 2 language reference. Compiler execution, actual playback, mobile rendering and QR scannability not independently verified. Byte-exact Gutenberg and QA archives matched in all 3 repositories.",
-    "youtube_iframe_rendered": true,
-    "actual_youtube_playback_verified": false,
-    "mobile_render_verified": false,
-    "compiler_examples_executed": false,
-    "featured_media_id": 29636,
-    "body_media_id": 29637,
-    "github_archive_blob_sha": "c1c22376f3791581c18c877eba7d09622b122c35"
+    "qa_status": "WordPress post #29647 published. Two genuine Zig tutorial URLs saved in native Gutenberg video blocks; live iframe and playback not independently verified. WordPress original featured crop #29650 exactly 1200x630. Eleven unboxed code examples and no wp:code blocks; five relevant internal links; original QR and editor/disclaimer order verified. Zig 0.17.1 official reference reviewed, but compiler runtime not installed. Both screenshot captures ready, pixels not inspected. Identical saved Gutenberg source and QA evidence archived and read back in three repositories, Git blob SHA 8652611600f538eaa8116a43bb7edb2d6e8b7c42.",
+    "featured_media_id": 29650,
+    "github_archive_blob_sha": "8652611600f538eaa8116a43bb7edb2d6e8b7c42",
+    "body_video_ids": [
+      "LaS8V7P-duQ",
+      "Hp4zvZf6K0g"
+    ],
+    "code_executed": false
   },
   "pending_publication_qa": [
     {
@@ -683,6 +685,25 @@
         "Mobile layout not inspected visually",
         "Emojicode compiler not available for running code examples",
         "QR code scan not verified"
+      ]
+    },
+    {
+      "wordpress_post_id": 29647,
+      "live_url": "https://bitcoinversus.tech/2026/11/05/oszig-002-variables-types-const-var-mutability/",
+      "featured_cover_verified": "1200x630 media #29650",
+      "archive_source_verified": true,
+      "body_youtube_count": 2,
+      "video_ids": [
+        "LaS8V7P-duQ",
+        "Hp4zvZf6K0g"
+      ],
+      "unboxed_code_examples": 11,
+      "github_archive_blob_sha": "8652611600f538eaa8116a43bb7edb2d6e8b7c42",
+      "unresolved": [
+        "Zig 0.17.1 compiler unavailable; examples not run",
+        "Both Youtube player renders and playback not verified",
+        "Desktop and mobile screenshot pixels not inspected",
+        "Donation QR not scan-tested"
       ]
     }
   ],
@@ -1035,6 +1056,25 @@
       "Emojicode runtime",
       "actual video playback",
       "mobile visual inspection",
+      "QR scan"
+    ]
+  },
+  "learning_events_2026_11_05_oszig002": {
+    "post_id": 29647,
+    "source_sha": "8652611600f538eaa8116a43bb7edb2d6e8b7c42",
+    "source_archive_exact_match_3_repos": true,
+    "level": "super-fundamentals",
+    "release": "0.17.1",
+    "video_count": 2,
+    "code_boxes": 0,
+    "code_plain_examples": 11,
+    "featured_media_id": 29650,
+    "next_track": "leadership",
+    "next_id": "OSLTC.005",
+    "open_qa": [
+      "compile",
+      "iframe playback",
+      "mobile visual check",
       "QR scan"
     ]
   }

@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "track_id": "OSCSS.001",
+  "wordpress_post_id": 29517,
+  "title": "OSCSS.001: CSS Selectors — Type, Class, ID, Attribute, and Relationships",
+  "url": "https://bitcoinversus.tech/2026/11/05/oscss-001-css-selectors-types-classes-ids-attributes-relationships/",
+  "post_status": "publish",
+  "publication_date": "2026-11-05T03:37:25",
+  "github_path": "archive/2026/11/29517-oscss-001-css-selectors-types-classes-ids-attributes-relationships.gutenberg.html",
+  "archive_exact_match": true,
+  "github_blob_sha": "a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b",
+  "verification_status": "published_unverified",
+  "curriculum": {
+    "subject": "css",
+    "lesson": 1,
+    "level": "super-fundamentals",
+    "rotation_subject_count": 43,
+    "previous_visited": "csharp",
+    "pre_duplicate_scan": "No OSCSS.001 published or draft posts found before creation"
+  },
+  "featured_cover": {
+    "id": 29505,
+    "width": 1200,
+    "height": 630,
+    "style": "modern technical editorial",
+    "subject": "CSS selector code and browser matches",
+    "dimensions_verified": true
+  },
+  "media": {
+    "total_distinct": 3,
+    "body_images": 1,
+    "youtube_embeds": 2,
+    "social_embeds": 0,
+    "body_image": {
+      "wordpress_id": 29510,
+      "width": 1200,
+      "height": 675,
+      "type": "original Chromium browser test screenshot"
+    },
+    "youtube": [
+      {
+        "id": "QgxkYbGr2II",
+        "title": "CSS Selectors Tutorial for Beginners",
+        "channel": "Dave Gray",
+        "canonical_url": "https://www.youtube.com/watch?v=QgxkYbGr2II",
+        "public_video_metadata_verified": true,
+        "saved_block": true,
+        "rendered_wordpress_iframe": true,
+        "playback_verified": false
+      },
+      {
+        "id": "l1mER1bV0N0",
+        "title": "Learn Every CSS Selector In 20 Minutes",
+        "channel": "Web Dev Simplified",
+        "canonical_url": "https://www.youtube.com/watch?v=l1mER1bV0N0",
+        "public_video_metadata_verified": true,
+        "saved_block": true,
+        "rendered_wordpress_iframe": true,
+        "playback_verified": false
+      }
+    ]
+  },
+  "body": {
+    "approx_word_count": 1649,
+    "verified_contextual_internal_links": 6,
+    "original_donation_qr_id": 24043,
+    "correct_footer_order": true,
+    "source_primary": "MDN CSS Guides and W3C Selectors 4"
+  },
+  "technical_tests": {
+    "platform": "Local Chromium via Playwright",
+    "method": "HTML fixture exact selector match assertions and computed style assertions",
+    "run_result": "passed",
+    "selectors": {
+      "p": 4,
+      "main > p": 3,
+      "main p": 4,
+      "p.notice": 1,
+      "#summary": 1,
+      "main > section > p": 1
+    },
+    "notice_computed_color": "rgb(100, 237, 183)",
+    "summary_font_weight": "700"
+  },
+  "wordpress_render_check": {
+    "source_read_back": true,
+    "rendered_iframe_count": 2,
+    "body_image_present": true,
+    "donation_qr_present": true,
+    "footer_present": true
+  },
+  "live_screenshot": {
+    "provider": "WordPress mshots",
+    "ready": true,
+    "shows": "public site",
+    "pixel_inspection_complete": false,
+    "viewport_width": 1200,
+    "viewport_height": 6000
+  },
+  "qa_blockers": [
+    "Interactive YouTube playback not verified; WordPress iframe render alone is insufficient",
+    "Independent mobile viewport screenshot and visual layout QA not verified",
+    "WordPress screenshot link ready, but pixels not manually evaluated"
+  ],
+  "last_repair": "No required Gutenberg source repair after read-back. Incremental creation used because long single write was blocked before creating a post."
+}

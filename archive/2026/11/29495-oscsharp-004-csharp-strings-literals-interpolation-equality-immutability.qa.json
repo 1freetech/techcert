@@ -21,7 +21,7 @@
   },
   "in_body_media": {
     "youtube_count": 2,
-    "photo_count": 0,
+    "photo_count": 1,
     "social_embed_count": 0,
     "verified_wp_rendered_iframes": 2,
     "youtube": [
@@ -45,7 +45,18 @@
         "wp_iframe_rendered": true,
         "playback_verified": false
       }
-    ]
+    ],
+    "original_illustrations": 1,
+    "total_distinct_media": 3,
+    "original_illustration": {
+      "wordpress_media_id": 29499,
+      "original_dimensions": [
+        1200,
+        675
+      ],
+      "type": "C# strings transformation conceptual illustration",
+      "not_a_runtime_screenshot": true
+    }
   },
   "internal_link_count": 6,
   "source_links": [
@@ -81,7 +92,8 @@
   "summary": "Two distinct official dotnet videos, six internal links, original cover 1200x630, correct footer, source-reviewed C# code. WordPress status and rendered iframe checks pass; preserve published_unverified.",
   "archive_parity": {
     "verified": true,
-    "github_blob_sha": "210be944afc22dca95e0d65aedbfac6c4b4628f7",
+    "github_blob_sha": "34e2d8898512763968bfe796b0d9997be21aa16a",
     "all_three_repositories": true
-  }
+  },
+  "editorial_final_source_updated": true
 }

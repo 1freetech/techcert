@@ -1,0 +1,239 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Shakespeare Programming Language (SPL) is an esoteric language in which source files resemble plays. Characters represent variables that hold signed integers; stage directions control who can participate in dialogue; nouns and adjectives form numeric constants; and dialogue assigns values. Learners should be able to identify a variable, trace a listener, evaluate simple signed constants, and explain how a program changes state. Begin with <a href="https://bitcoinversus.tech/2026/10/08/osshakespeare-001-how-a-shakespeare-program-is-structured/">OSShakespeare.001 — How a Shakespeare Program Is Structured</a>. Knowledge of <a href="https://bitcoinversus.tech/2026/10/15/osjavascript-003-variables-constants-let-const-var-reassignment-scope-temporal-dead-zone/">JavaScript variables</a>, <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-002-csharp-variables-built-in-types-var-const/">C# variables</a>, or <a href="https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/">PowerShell variables</a> provides useful comparisons.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A variable is a name attached to information a program needs. In many languages the name might be <code>score</code> or <code>count</code>. SPL replaces those ordinary labels with characters from Shakespeare's plays, including Romeo and Juliet. Each character remembers a whole number, such as zero, five, or negative three.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Think of two actors on a stage. One actor speaks a number to the other. The listener is the variable that receives the new value. The special words and stage directions look like a script for a performance, but they have exact computational meanings. A sentence that sounds beautiful is not automatically valid SPL syntax.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=6avJHaC3C2U&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>NDC Conferences — Dylan Beattie, <strong>The Art of Code</strong> (2020). The talk contextualizes esoteric programming; the original specification supplies the exact SPL rules.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Dramatis Personae Declares Variables</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The original language specification published in 2001 by Karl Hasselström and Jon Åslund requires all referenced characters to be declared before use. A program begins with a title ending in a period, followed by character declarations. The character names must come from the supported Shakespeare vocabulary. The descriptive prose beside each name is aesthetically useful but ignored when the program runs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>These first three sentences declare a program and its two variables:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>An Instruction in Two Voices.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>Romeo, a young man with a remarkable patience.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>Juliet, a likewise young woman of remarkable grace.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The names <code>Romeo</code> and <code>Juliet</code> identify the variables; their descriptions do not provide assigned numbers. In the reference execution model, each begins with a numeric value of zero. A character also has an associated stack for stored values, a feature explored later in the curriculum. Modern languages generally let programmers invent descriptive variable names, whereas SPL deliberately restricts names to theatrical characters.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The design is an example of an <em>esoteric programming language</em>, a language built partly to explore what counts as code. Related experiments include <a href="https://bitcoinversus.tech/2026/10/08/osemojicode-001-what-is-emojicode-how-emoji-become-programming-syntax/">Emojicode</a> and the unrelated <a href="https://bitcoinversus.tech/2026/10/08/oschef-001-program-structure-ingredients-mixing-bowls-methods-and-serves/">Chef culinary programming language</a>. Their syntax differs; learning one does not make its commands valid in another.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Who Is on Stage Determines Who Can Receive a Value</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A declared character is not necessarily present on stage. <code>[Enter Romeo and Juliet]</code> places both characters in the scene. <code>[Exit Romeo]</code> removes Romeo, and <code>[Exeunt]</code> clears the stage. A character must be present to speak, and the target of a second-person sentence must also be present.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>When exactly two characters are on stage, the character who is not speaking is the listener. Introducing a third active character makes a second-person reference ambiguous. Entering a character who is already present, or exiting one who is not present, can cause a runtime error. These are execution rules rather than literary conventions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":29564,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osshakespeare-002-character-dialogue-diagram.png" alt="Original Open Source Tech Cert diagram: Juliet is the speaking character and Romeo is the listener whose stored integer can change." class="wp-image-29564" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert diagram: Juliet is the speaking character and Romeo is the listener whose stored integer can change.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How Nouns and Adjectives Form Integer Constants</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In the original SPL grammar, recognized nouns represent either positive one or negative one. Pleasant and neutral nouns such as <code>hero</code> can mean <code>+1</code>, while negative nouns such as <code>pig</code> can mean <code>-1</code>. Each accepted adjective immediately modifying a noun doubles the numeric magnitude. Two adjectives therefore multiply the base by four, regardless of sign.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The simple-noun formula is <code>value = sign(noun) × 2^n</code>, where <code>n</code> is the number of accepted adjectives. For example, <code>brave hero</code> expresses the positive value two, and <code>handsome brave hero</code> expresses four. The phrase <code>stupid pig</code> has negative value two in magnitude, and adding another accepted adjective doubles the negative magnitude again. The exact word list matters: an English synonym is not necessarily a token recognized by the parser.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":29565,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osshakespeare-002-numeric-constants-diagram.png" alt="Original educational diagram explaining how positive and negative nouns acquire doubled magnitudes when valid adjectives are added." class="wp-image-29565" /><figcaption class="wp-element-caption"><em>Original educational diagram explaining how positive and negative nouns acquire doubled magnitudes when valid adjectives are added.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>The original language also supports more elaborate expressions, including sums, differences, products, squares, cubes, and pronoun references. Its historical Hello World example constructs output character codes using arithmetic hidden in compliments and insults. Later lessons can study the complete expression grammar; the current lesson concentrates on variable identity and simple assignment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Complete Two-Character Assignment</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following short program shows a declaration, stage entry, a numeric assignment, and numeric output. Its source is presented using the established Gutenberg code template, without boxed code blocks:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>An Instruction in Two Voices.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>Romeo, a young man with a remarkable patience.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>Juliet, a likewise young woman of remarkable grace.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>Act I: A meeting.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>Scene I: Juliet addresses Romeo.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>[Enter Romeo and Juliet]</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>Juliet:</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>You are a hero.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>Open your heart.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>[Exeunt]</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The first line is the title. The next two lines declare the variables. The Act and Scene provide labels, and the stage direction makes both characters available. Juliet speaks the line <code>You are a hero.</code> to Romeo, who receives the numeric value <code>+1</code>. The line <code>Open your heart.</code> prints Romeo's value as a number. Assuming a conforming interpreter and successful execution, the expected output is <code>1</code>. The program was not independently compiled or run during article preparation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Changing the instruction to <code>You are a pig.</code> changes the literal to <code>-1</code> in the original grammar. The expected output therefore becomes negative one. The insult is not a comment or a description; its noun encodes a numeric value. A parser needs the precise accepted words rather than approximate English meaning.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Pronouns and Reassignment</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The expression <code>thyself</code> refers to the character being spoken to; other second-person pronouns operate similarly. The speaker's value can be referenced through supported first-person forms such as <code>me</code>. These references allow an assignment to depend on an existing variable value.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For instance, <code>You are as good as thyself.</code> preserves the listener's current value. <code>You are as good as the sum of thyself and a hero.</code> describes adding one to the listener's previous value. The same operation might be written <code>count = count + 1</code> in a conventional language. The literary form changes how the operation is expressed, not the underlying arithmetic.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>SPL character stacks are conceptually similar to the push-and-pop abstraction demonstrated in the separate <a href="https://bitcoinversus.tech/2026/10/08/oschef-002-put-fold-and-stack-order/">Chef Put and Fold lesson</a>. However, SPL's <code>Remember</code> and <code>Recall</code> commands follow their own syntax and are reserved for a later module.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab and Troubleshooting</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use a compatible implementation, such as the modern <a href="https://shakespearelang.com/latest/">shakespearelang interpreter</a>, inside a disposable environment. Copy the teaching example into a file in the format required by the selected tool. Before executing, trace the initial values and predict the listener's result. Note the tool's version and compare the actual output against the prediction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Unknown character:</strong> Check that every name belongs to the implementation's supported Shakespeare cast and is declared.</li><li><strong>Missing listener:</strong> Check preceding Enter and Exit statements; an off-stage variable cannot receive a second-person assignment.</li><li><strong>Ambiguous audience:</strong> Reduce the stage to the intended two characters before using an unqualified second-person pronoun.</li><li><strong>Unexpected sign:</strong> Inspect the accepted noun, not merely the emotional tone of the sentence.</li><li><strong>Unexpected magnitude:</strong> Count valid adjectives immediately modifying that noun.</li><li><strong>Unexpected output type:</strong> Open your heart outputs a number, while Speak your mind outputs the corresponding character.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Repeat the experiment after substituting <code>pig</code> for <code>hero</code>, then add one accepted adjective to predict a value of negative two. Do not represent an unexecuted prediction as an observed result. Distinguish reference-specification behavior from extensions or incompatibilities in modern interpreters.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises and Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Which part of a character declaration determines the variable identity?</li><li>Why is the descriptive prose after Romeo's name not an ordinary variable assignment?</li><li>What is the value of a positive noun modified by two accepted adjectives?</li><li>When Juliet speaks to Romeo, whose value changes?</li><li>What differs between Open your heart and Speak your mind?</li><li>Why does a third on-stage character create a potential problem for second-person pronouns?</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>The recognized Shakespeare character name, such as Romeo.</li><li>The compiler uses the description for theatrical appearance and ignores it semantically.</li><li>Positive four, since one multiplied by two twice is four.</li><li>Romeo, because Juliet is the speaker and Romeo is the intended listener.</li><li>The former outputs a numeric value; the latter emits the character represented by the numeric code.</li><li>The listener becomes ambiguous when more than one other character is on stage.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">References and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://krayon.github.io/shakespearelang/docs/shakespeare.html">Original Shakespeare Programming Language specification (2001)</a></li><li><a href="https://github.com/krayon/shakespearelang">Mirror of the reference translator, vocabulary, and documentation</a></li><li><a href="https://shakespearelang.com/latest/">Modern SPL interpreter and debugger documentation</a></li><li><a href="https://github.com/dkk/ShakespearePL_Examples">Additional examples and experiments with SPL</a></li><li><a href="https://bitcoinversus.tech/2026/10/08/osshakespeare-001-how-a-shakespeare-program-is-structured/">Open Source Tech Cert — Shakespeare Program Structure</a></li><li><a href="https://bitcoinversus.tech/2026/10/08/osemojicode-001-what-is-emojicode-how-emoji-become-programming-syntax/">Open Source Tech Cert — Emojicode and Esoteric Syntax</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>SPL uses character names as variable names. It uses stage directions to decide which characters are available, and dialogue to change the number held by the listener. Special words can represent positive or negative numbers. Recognized adjectives double their magnitudes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>To understand a Shakespeare program, identify the speaker, find the listener, work out the value of the spoken expression, and update the listener's number. Beneath the costume of a stage play, the underlying reasoning is the same as in ordinary programming.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSShakespeare.002 builds on the previous lesson using the original 2001 SPL specification. The educational diagrams illustrate the language model. Code execution and individual video playback are not independently verified.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech donation QR code for 5,000 sats." class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open this lesson on a larger screen and use a compatible Bitcoin wallet to scan the original QR code. Verify the address before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate using the QR code provided.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,251 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>CSS selectors identify which <a href="https://bitcoinversus.tech/2026/10/10/oshtml-002-elements-start-tags-end-tags-void-elements-nesting-semantic-structure/">HTML elements</a> a stylesheet should affect. Learners will distinguish type, class, ID, attribute, and relationship selectors; read a CSS rule; inspect which elements match; and complete a browser-tested lab. Review <a href="https://bitcoinversus.tech/2026/10/09/oshtml-001-document-structure-doctype-html-head-body-metadata-first-page/">HTML document structure</a> and <a href="https://bitcoinversus.tech/2026/10/15/oshtml-003-attributes-names-values-global-boolean-element-specific-configuration/">HTML attributes</a> first. Only a modern browser and text editor are required.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A web page contains headings, paragraphs, links, buttons, and other pieces. HTML tells the browser which pieces exist. CSS adds their appearance. A selector is a pattern that tells the browser which pieces should receive a style. Imagine a librarian choosing books by category labels: one instruction might find every book, another only books marked as reference materials.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>CSS selectors can choose all paragraphs, one named element, every member of a class, or elements with a particular parent. A selector does not change HTML meaning; it determines which declarations are eligible to style matching elements. Selection is the foundation for future lessons on the cascade, layout, and accessibility.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=QgxkYbGr2II","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=QgxkYbGr2II
+</div><figcaption class="wp-element-caption"><em>Dave Gray, “CSS Selectors Tutorial for Beginners” (February 8, 2022): type, class, ID, grouping, relationship selectors, and developer-tools inspection.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Anatomy of a CSS Rule</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A CSS ruleset begins with a selector, followed by a declaration block enclosed in braces. Each declaration contains a property and a value separated by a colon. Browsers match the selector against the document, then consider those declarations alongside other applicable rules.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>p {
+  color: navy;
+  line-height: 1.5;
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Here <code>p</code> is a type selector. The properties <code>color</code> and <code>line-height</code> control the text color and line spacing. If no paragraph matches, the rule is still valid but changes nothing visible. When multiple rules affect the same property, the CSS cascade determines which declaration wins; the next lesson develops the full ordering rules.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Type, Class, and ID Selectors</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>type selector</strong> names an HTML element such as <code>p</code>, <code>h2</code>, or <code>button</code>. A <strong>class selector</strong> begins with a period and matches an element's <code>class</code> attribute. A class can be shared by many elements. An <strong>ID selector</strong> begins with a number sign and matches the <code>id</code> attribute. IDs should be unique within a well-formed HTML document.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>/* All paragraphs */
+p { color: #344054; }
+
+/* Every element carrying class="notice" */
+.notice { color: #087f5b; }
+
+/* The element with id="summary" */
+#summary { font-weight: 700; }
+
+/* Paragraphs also carrying the notice class */
+p.notice { text-decoration: underline; }</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Classes describe reusable roles such as notices and status messages. Document-unique IDs work well for anchors and label associations, but excessive ID styling can make future overrides harder. A compound selector such as <code>p.notice</code> matches only an element meeting both conditions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Attribute Selectors and Selector Lists</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An attribute selector uses brackets to match the presence of an HTML attribute or a particular value. For example, <code>[data-role]</code> matches any element carrying that attribute, while <code>[data-role="example"]</code> matches the specified value. Case matching depends on the attribute definition, and an optional <code>i</code> flag requests ASCII case-insensitive value matching.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>input[required] { border-color: #d97706; }
+button[type="submit"] { font-weight: 700; }
+[data-role="example"] { outline: 1px solid teal; }
+
+/* Commas combine independent selectors. */
+h1, h2, h3 { font-family: system-ui, sans-serif; }</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Attribute selection is often useful when styling <a href="https://bitcoinversus.tech/2026/11/01/oshtml-004-html-forms-labels-inputs-fieldsets-submission-validation/">HTML forms</a>. A selector can select a form field, but CSS cannot replace an actual HTML label, a keyboard-accessible interaction, or a visible focus indicator. Keep semantic HTML intact. A selector list separated by commas independently matches any listed selector; in an ordinary selector list, one invalid selector can invalidate the entire list.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Descendants, Children, and Siblings</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Combinators express relationships between HTML elements. A space means descendant, so <code>main p</code> selects paragraphs anywhere inside <code>main</code>, including those nested several levels down. A greater-than sign means direct child: <code>main &gt; p</code> selects only paragraphs whose immediate parent is <code>main</code>. A plus sign selects the next sibling, while a tilde selects later siblings sharing the same parent.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>main p { color: #334155; }       /* Any descendant p */
+main &gt; p { margin-top: 1rem; }   /* Direct child p */
+h2 + p { font-style: italic; }   /* Adjacent sibling p */
+h2 ~ p { line-height: 1.5; }   /* Later siblings p */</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>CSS relationships follow the HTML document tree, not visual proximity on a screen. Understanding structure prevents accidental global styling and makes a stylesheet easier to maintain. Pseudo-classes such as <code>:hover</code>, <code>:focus-visible</code>, and <code>:checked</code> select elements in particular states; detailed state selectors are covered in a later lesson.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=l1mER1bV0N0","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=l1mER1bV0N0
+</div><figcaption class="wp-element-caption"><em>Web Dev Simplified, “Learn Every CSS Selector In 20 Minutes” (July 7, 2020): practical demonstrations of selectors, combinators, and pseudo-classes.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Browser-Tested Selector Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The example contains four paragraphs. Three are immediate children of <code>main</code>; the fourth is nested inside <code>section</code>. The class selector matches the notice paragraph and the ID selector matches the summary paragraph. A local Chromium run checked match counts, text colors, and font weight, confirming the distinction between descendant and direct-child selectors.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":29510,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oscss-001-browser-tested-selector-lab.png?w=1024" alt="Browser-tested CSS type, class, ID and direct-child selector demonstration with correct match counts" class="wp-image-29510" /><figcaption class="wp-element-caption"><em>Original browser screenshot from a locally executed Chromium test: <code>main p</code> matched four elements, <code>main &gt; p</code> matched three, and <code>p.notice</code> and <code>#summary</code> matched one each.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Create two files named <code>index.html</code> and <code>styles.css</code> in the same disposable folder. The HTML establishes the tree; the CSS applies style rules. Open the HTML file in a browser and compare the matches. The image above shows the same document relationships rendered by Chromium, with additional diagnostic labels for teaching.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Complete Reproducible HTML and CSS</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Save the following document as <code>index.html</code>. The <code>link</code> element connects a stylesheet named <code>styles.css</code>. Keep four paragraph elements and preserve their nesting, because moving a paragraph changes the selector match counts.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Selector Lab&lt;/title&gt;
+  &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main&gt;
+    &lt;p class="notice" data-role="example"&gt;Notice&lt;/p&gt;
+    &lt;p id="summary"&gt;Summary&lt;/p&gt;
+    &lt;p&gt;Direct paragraph&lt;/p&gt;
+    &lt;section&gt;&lt;p&gt;Nested paragraph&lt;/p&gt;&lt;/section&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Now save the CSS declarations below into <code>styles.css</code>. The rules are intentionally short enough to test by inspection. The selector <code>section p</code> affects only paragraphs nested in a section. The class and ID declarations affect one of the paragraphs each.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>p { color: #344054; }
+.notice { color: #087f5b; }
+#summary { font-weight: 700; }
+main &gt; p { outline: 1px solid #64748b; }
+section p { background: #eff6ff; }</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inspecting Matches in Browser Developer Tools</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Open the browser developer tools, usually with F12 or the Inspect context menu. Select a paragraph in the Elements or Inspector panel. The Styles pane lists matching rules; the Computed pane reports resulting values. Inspect the notice element and check that its class rule supplies the intended color. CSS editing inside developer tools may be temporary, so apply lasting edits in the original stylesheet.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the JavaScript console, the read-only method <code>document.querySelectorAll()</code> uses CSS selector syntax to retrieve matching nodes. The following counts were executed against the same HTML tree using Chromium. The example uses no network requests or system modifications.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>document.querySelectorAll('p').length;         // 4
+document.querySelectorAll('main &gt; p').length; // 3
+document.querySelectorAll('main p').length;   // 4
+document.querySelectorAll('p.notice').length; // 1
+document.querySelectorAll('#summary').length; // 1</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>If the console reports an unexpected count, check whether a paragraph was moved under <code>section</code>, the <code>class</code> or <code>id</code> value changed, or a selector prefix is missing. HTML nesting is part of the logic, not merely indentation. For broader context, read <a href="https://bitcoinversus.tech/2026/10/06/easy-tech-read-what-happens-when-you-type-a-website-into-your-browser/">how browsers load and display web pages</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting and Common Mistakes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Use <code>.</code> for class names and <code>#</code> for IDs. Without either prefix, a name is normally treated as a type selector.</li><li>Keep each ID unique within the document. Duplicated IDs can break anchors, scripting assumptions, and label associations even when CSS matches multiple elements.</li><li>Do not confuse a space with <code>&gt;</code>: descendant matching includes nested generations, but direct-child matching requires an immediate parent.</li><li>Prefer meaningful, reusable classes over long selector chains that depend on incidental nesting.</li><li>Matching a selector does not guarantee a declaration wins; cascade origin, importance, layers, specificity, and order also matter.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice and Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Add another paragraph with <code>class="notice"</code> inside the <code>section</code>. Predict each of the five selector counts before rerunning the console expressions. The total paragraph count increases to five, the direct-child count stays at three, the descendant count increases to five, and the notice class match count becomes two. The ID selector still matches one element.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> What selects every paragraph? <strong>Answer:</strong> <code>p</code>. <strong>Question:</strong> What selects an element carrying class notice? <strong>Answer:</strong> <code>.notice</code>. <strong>Question:</strong> What selects the summary ID? <strong>Answer:</strong> <code>#summary</code>. <strong>Question:</strong> How is <code>main p</code> different from <code>main &gt; p</code>? <strong>Answer:</strong> The former selects descendants at any depth; the latter selects only direct children.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Code editors may use <a href="https://bitcoinversus.tech/2026/10/08/what-is-syntax-highlighting-why-code-editors-use-different-colors/">syntax highlighting</a> to make selector punctuation visible, but editor color preferences have no effect on browser matching. Next, study the CSS cascade to explain why several matching declarations may produce just one final property value.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Authoritative References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors">MDN — CSS selectors module</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors/Selectors_and_combinators">MDN — CSS selectors and combinators</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Selectors/Selector_structure">MDN — CSS selector structure</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity">MDN — CSS specificity</a></li><li><a href="https://www.w3.org/TR/selectors-4/">W3C — Selectors Level 4 specification</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>CSS selectors are patterns that tell a browser which elements should receive styling rules. Type selectors match HTML tag names, classes identify reusable groups, and IDs identify elements by document-specific labels. Relationship selectors care about where elements live in the HTML tree. By checking actual matches in a browser, a beginner can understand exactly why a style affects one element but not another.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original Bitcoin donation QR code for a 5,000 satoshi donation" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open this lesson on a larger screen and use a compatible Bitcoin wallet to scan the original QR code. Verify the address before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

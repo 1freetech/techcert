@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "track_id": "OSPowerShell.004",
+  "wordpress_post_id": 29453,
+  "title": "OSPowerShell.004: PowerShell Variables — Assignment, Objects, Strings, Types, and Scope",
+  "public_url": "https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/",
+  "source_repository_path": "archive/2026/11/29453-ospowershell-004-variables-assignment-objects-strings-types-scope.gutenberg.html",
+  "wordpress_status": "publish",
+  "date": "2026-11-05T02:46:32",
+  "date_gmt": "2026-11-05T07:46:32",
+  "wordpress_featured_media_id": 29448,
+  "editorial_status": "published_unverified",
+  "wordpress_saved_markup_read_back": true,
+  "wordpress_rendered_youtube_iframes": 2,
+  "youtube_videos": [
+    {
+      "id": "4Rc0aEMXiWw",
+      "title": "Working With PowerShell Variables",
+      "channel": "TechThoughts",
+      "video_metadata_source": "https://www.youtube.com/watch?v=4Rc0aEMXiWw",
+      "saved_block": true,
+      "live_iframe_rendered_in_rest": true,
+      "actual_playback_verified": false
+    },
+    {
+      "id": "Bmsa6F69afA",
+      "title": "PowerShell Master Class module — credentials, types, strings and scope",
+      "channel": "John Savill's Technical Training",
+      "video_metadata_source": "https://www.youtube.com/watch?v=Bmsa6F69afA",
+      "saved_block": true,
+      "live_iframe_rendered_in_rest": true,
+      "actual_playback_verified": false
+    }
+  ],
+  "featured_cover": {
+    "media_id": 29448,
+    "width": 1200,
+    "height": 630,
+    "verified_media_metadata": true
+  },
+  "in_body_media": {
+    "video_blocks": 2,
+    "images": 1,
+    "social_embeds": 0
+  },
+  "internal_links": 6,
+  "footer_verified_in_saved_source": true,
+  "powershell_examples_executed": false,
+  "actual_youtube_playback_verified": false,
+  "mobile_browser_smoketest_verified": false,
+  "qa_blockers": [
+    "YouTube playback not independently tested in an interactive browser",
+    "Mobile live-page visual inspection and screenshot not completed",
+    "PowerShell command examples source-reviewed but not runtime-executed"
+  ],
+  "completion_note": "User requested immediate publication. Preserve published_unverified status until remaining QA completed."
+}

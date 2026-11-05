@@ -1,5 +1,17 @@
 # TechCert Lesson Authoring Standards
 
+## Plain Code Presentation Law — November 5, 2026 (LATEST, OVERRIDES ALL EARLIER FORMATTING)
+
+**NO TEXT BOXES IN LESSONS OR CODE DEMONSTRATIONS.** Do not use bordered, shaded, highlighted, callout, card, panel, inset, or default theme-styled Gutenberg code boxes. In particular, do not publish the standard boxed `wp:code` / `wp-block-code` treatment. Do not recreate a box by changing its border color, background color, dimensions, or padding.
+
+Write ordinary flowing educational prose first. Immediately before each code sample, finish a relevant explanatory paragraph with a clear colon. On the following line, present only the code: no intermediary text box, label card, table, heading, badge, inset, decorative container, or unnecessary caption. Continue normal instructional prose after the code.
+
+For multiline code, retain accessible copyable monospaced code with preserved indentation and line breaks, rendered as an **unboxed** `pre`/`code` example in a plain custom HTML block when Gutenberg's native code block renders as a box. Force transparent background, zero borders, zero shadow, zero padding and reasonable mobile wrapping. Verify saved Gutenberg markup and actual WordPress rendered HTML separately; verify the live visual appearance when a browser screenshot or viewport tool permits. Never claim pixel-level or mobile QA without inspecting it. For one-line code, an ordinary inline `code` element may suffice.
+
+**Example pattern:** “The selector chooses every paragraph on the page:” followed immediately by an unboxed code line such as `p { color: navy; }`. No boxes. No code examples without preceding explanation.
+
+Apply the rule to all future Open Source Tech Cert / TechCert lessons, programming tutorials, and BitcoinVersus.Tech articles that demonstrate code. Existing educational content may be repaired upon request. Preserve the original technical code, verified references, media, links and footer when performing formatting repairs. Current repaired example: WordPress post 29517, OSCSS.001 (November 5, 2026).
+
 ## Authoritative Lesson Presentation Standard — October 28, 2026
 
 **All newly published educational lessons use a textbook / wiki / encyclopedia / dictionary style, always. Never display sequential lesson numbering in public lesson headlines, section headings, or prose as a navigation device.** Use concept-first, descriptive titles (for example, `Hashboard Signal Chains — Clock, Command, and Return Paths`, not `OSHRE.002: ...` or `Lesson 2: ...`). Section headings must be descriptive topics such as `Signal Path Basics`, `Electrical Characteristics`, `History`, `Failure Modes`, `Examples`, and `References`, **not** `1. Signal Path Basics` or `Chapter 2`. Write cohesive reference prose with accurate definitions, cross-linked terminology, specifications, documented examples, relevant media and citations. Retain exercises or knowledge checks as appropriate but do not frame the article as a sequential numbered lecture. Number items only where genuine ordered procedures, ranked data, or a technical standard requires an order, never for decorative article structure.

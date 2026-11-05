@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "track_id": "OSShakespeare.002",
+  "canonical_wordpress_post_id": 29571,
+  "canonical_url": "https://bitcoinversus.tech/2026/11/05/osshakespeare-002-characters-variables-values-dialogue-stage-addressing/",
+  "superseded_duplicate_wordpress_post_id": 29569,
+  "duplicate_status": "trash",
+  "subject": "shakespeare",
+  "date": "2026-11-05",
+  "status": "published_unverified",
+  "wp_saved_markup": {
+    "source_bytes": 18252,
+    "exact_source_archived": true,
+    "custom_code_boxes": 0,
+    "unboxed_examples": true,
+    "donation_qr_id": 24043,
+    "footer_present": true
+  },
+  "featured_media": {
+    "id": 29563,
+    "dimensions": [
+      1200,
+      630
+    ]
+  },
+  "inbody_media": {
+    "video_id": "6avJHaC3C2U",
+    "youtube_fallback_shortcode": true,
+    "rendered_youtube_iframe_count": 1,
+    "body_diagram_ids": [
+      29564,
+      29565
+    ]
+  },
+  "checks": {
+    "wordpress_published": true,
+    "duplicate_removed_from_publication": true,
+    "iframe_rendered": true,
+    "actual_video_playback_verified": false,
+    "mobile_visual_verified": false,
+    "code_execution_verified": false
+  },
+  "next_eligible": "OSDotNet.003",
+  "note": "Conflicting concurrent publication resulted in #29569; that post was moved to Trash. Canonical article and curriculum pointer retained at #29571. Duplicate archive entries under 29569 purged. This QA record preserves the reconciliation evidence."
+}

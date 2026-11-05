@@ -1,0 +1,250 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Understand how PowerShell variables name values, how assignment and expansion work, how objects and types relate to variables, how scope limits changes, and how to inspect variables safely. By the end, the learner should be able to store a command result, examine its type, interpolate a message, distinguish regular variables from environment variables, and explain local versus parent scope.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Prerequisites:</strong> A PowerShell 7 installation and an ordinary user account. Review <a href="https://bitcoinversus.tech/2026/10/09/ospowershell-001-cmdlets-verb-noun-get-command-get-help-first-workflow/">OSPowerShell.001 — Cmdlets</a>, <a href="https://bitcoinversus.tech/2026/10/10/ospowershell-002-objects-properties-methods-types-get-member/">OSPowerShell.002 — Objects</a>, and <a href="https://bitcoinversus.tech/2026/10/19/ospowershell-003-the-pipeline-object-flow-filtering-sorting-parameter-binding/">OSPowerShell.003 — The Pipeline</a>. Every lab command below is designed to avoid changing files, services, or system configuration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A variable is a named place for keeping information while a program works. Imagine attaching a reusable label to a number, a word, or a record about a running application. The label lets a later command use the stored value without typing or retrieving it again. PowerShell labels begin with a dollar sign, such as <code>$count</code> or <code>$process</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>PowerShell can hold objects, not only text. A process object, for example, can carry a name and numeric process identifier. The variable refers to the whole object, so the script can read one property when it needs it. Unlike saving a document, ordinary session variables are not automatically preserved after PowerShell exits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=4Rc0aEMXiWw","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=4Rc0aEMXiWw
+</div><figcaption class="wp-element-caption"><em>TechThoughts, “Working With PowerShell Variables,” demonstrates assignment, variable types, quotation marks, and basic variable inspection.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Create, Read, and Update Variables</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An assignment uses <code>=</code> to associate a name with a value. Variable names normally begin with a letter or underscore after the dollar sign and should describe what the value represents. PowerShell variable names are case-insensitive by default; <code>$count</code> and <code>$COUNT</code> refer to the same ordinary variable. The following example uses a plain string and an integer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>$computerName = 'lab-workstation'
+$retryCount = 3
+$computerName
+$retryCount
+$retryCount = $retryCount + 1
+$retryCount</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The displayed outputs are <code>lab-workstation</code>, <code>3</code>, then <code>4</code>. The final assignment reads the existing numeric value, adds one, and stores the result. Use clear names and avoid accidentally overwriting the automatic variables that PowerShell creates.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A variable can also hold the result of a command. Because the object remains structured, its properties can be accessed later. The special automatic variable <code>$PID</code> identifies the current PowerShell process, making a safe local example.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>$currentProcess = Get-Process -Id $PID
+$currentProcess.GetType().Name
+$currentProcess.ProcessName
+$currentProcess.Id</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The type name and process name can vary with the operating system and PowerShell host, while the ID is an integer assigned by the operating system. Notice the difference from parsing displayed table text: <code>$currentProcess.Id</code> selects a property of the saved process object. The same object-oriented practice supports <a href="https://bitcoinversus.tech/2026/10/08/ositc-003-windows-process-troubleshooting-task-manager-pid-process-explorer/">Windows process troubleshooting</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":23294,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/powershell-7-5-windows-terminal-wikimedia.png?w=1024" alt="PowerShell running in Windows Terminal, showing the PowerShell version table." class="wp-image-23294" /><figcaption class="wp-element-caption"><em>PowerShell running in Windows Terminal. Previously sourced to Refresh100/Wikimedia Commons in the PowerShell pipeline lesson.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inspect Values and Data Types</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>PowerShell is dynamically typed: a regular variable may refer to values of different runtime types over time. The value <code>3</code> commonly has type <code>System.Int32</code>; the text <code>'3'</code> has type <code>System.String</code>. Use <code>.GetType().FullName</code> or <code>Get-Member</code> to inspect a non-null value instead of assuming the type from its display.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>$quantity = 3
+$quantity.GetType().FullName       # System.Int32
+$quantity = 'three'
+$quantity.GetType().FullName       # System.String
+[int]$threshold = 5
+$threshold.GetType().Name          # Int32</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>A type-constrained variable such as <code>[int]$threshold</code> requires values convertible to an integer; assigning text such as <code>'five'</code> produces a conversion error. Basic variable study should stay focused on creating and inspecting values; later lessons introduce arrays and hash tables in greater detail.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Use <code>Get-Variable -Name quantity</code> to inspect metadata and the stored value, or <code>Get-Variable -Name quantity -ValueOnly</code> to retrieve only the value. A separate existence test, <code>Test-Path Variable:quantity</code>, returns a Boolean without depending on the value being non-null.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>Get-Variable -Name quantity
+Get-Variable -Name quantity -ValueOnly
+Test-Path Variable:quantity
+Test-Path Variable:noSuchTrainingVariable</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Single Quotes, Double Quotes, and Subexpressions</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A single-quoted PowerShell string is ordinarily literal: <code>'Hello $computerName'</code> displays the dollar sign and name. A double-quoted string expands simple variables, so <code>"Hello $computerName"</code> includes the stored text. Use <code>$()</code> for expressions and object properties inside expandable strings. Literal dollar signs in a double-quoted string can also be escaped with a backtick.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>$userName = 'Avery'
+'Hello $userName'               # Hello $userName
+"Hello $userName"               # Hello Avery
+"Process ID: $($currentProcess.Id)"
+"User: ${userName}_admin"      # User: Avery_admin</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The braced variable syntax <code>${userName}</code> makes the name boundary explicit when adjacent characters might otherwise be read as part of a name. Quotation marks also matter when writing paths or messages. For robust cross-platform path joining, prefer a suitable path cmdlet instead of assuming one operating system’s directory separator.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Bmsa6F69afA","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Bmsa6F69afA
+</div><figcaption class="wp-element-caption"><em>John Savill’s PowerShell Master Class module covers variable types, casting, strings, variable scope, and later hash tables; the relevant section begins around 13:57.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Scope and Variable Lifetime</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Scope determines where a variable name is accessible and where assignments take effect. An interactive session has a global scope; functions and scripts commonly run with their own scopes. Child scopes can read accessible values in parent scopes, but an ordinary assignment in a function normally creates or updates a local value rather than replacing the parent value. Microsoft documents scope explicitly, including <code>Local:</code>, <code>Script:</code>, and <code>Global:</code> modifiers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>$label = 'outside'
+function Show-Label {
+    $label = 'inside'
+    "Function: $label"
+}
+Show-Label
+"Caller: $label"</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Expected output is <code>Function: inside</code> followed by <code>Caller: outside</code>. Do not use <code>$Global:</code> merely to avoid passing parameters; global state can make scripts difficult to reuse and test. More advanced automation may require deliberate scope control when working with functions, scheduled tasks, or remoting.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Automatic Variables and Environment Variables</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>PowerShell supplies automatic variables including <code>$PSVersionTable</code>, <code>$PID</code>, <code>$null</code>, and the current pipeline-item alias <code>$_</code>. Inspect them rather than reassigning them. The environment-variable provider is different: <code>$Env:PATH</code> refers to the process environment, not a normal <code>$PATH</code> session variable. Environment settings can affect launched programs and may contain sensitive information.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>$PSVersionTable.PSVersion
+$PID
+($Env:PATH).GetType().Name
+Get-Variable -Name PID</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Variables are not a secure secret vault. Avoid printing tokens and passwords, writing secrets to shell history, or assuming a sensitive value is protected merely because it resides in a variable. When administrating computers, apply the account and privilege controls covered in <a href="https://bitcoinversus.tech/2026/10/12/ositc-006-windows-users-groups-permissions/">Windows users, groups, and permissions</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab — A Read-Only Process Snapshot</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Build a small inventory without opening, stopping, or modifying any process. First save the current shell process. Then create a structured summary. The last command interpolates its name and identifier into a readable message. Everything remains in memory within the current session.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>$myProcess = Get-Process -Id $PID
+$summary = [pscustomobject]@{
+    Name = $myProcess.ProcessName
+    Id   = $myProcess.Id
+}
+$summary | Format-List
+"Observed $($summary.Name) with PID $($summary.Id)"</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Verify the summary is an object by running <code>$summary | Get-Member</code>. Inspect its fields individually with <code>$summary.Name</code> and <code>$summary.Id</code>. The exercise connects variables to prior pipeline lessons while staying within the variable concept. For a different shell-language comparison, <a href="https://bitcoinversus.tech/2026/11/02/bash-loops-for-while-until-break-continue-safe-file-iteration/">the Bash loops and safe iteration lesson</a> offers related operational practice, although Bash expansion and scoping rules are not identical to PowerShell.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting and Common Errors</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Unexpected blank output:</strong> Check spelling and <code>Test-Path Variable:name</code>. An uninitialized variable normally evaluates to <code>$null</code>; strict mode changes some error behavior.</li><li><strong>Wrong numeric behavior:</strong> Check the value’s type. A string such as <code>'10'</code> is not the same as integer <code>10</code> in every operation.</li><li><strong>Unexpected literal dollar sign:</strong> Check whether the text was surrounded by single quotation marks.</li><li><strong>Missing property in a message:</strong> Use <code>$($object.Property)</code> inside double quotes, not a bare dotted expression.</li><li><strong>Value changed only inside a function:</strong> Inspect local and parent scope rather than assuming assignments modify the caller.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice and Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Create <code>$deviceName</code> and <code>$deviceCount</code> variables, then inspect each value and runtime type.</li><li>Compare the output of a single-quoted and a double-quoted string containing <code>$deviceName</code>.</li><li>Store the current process in a variable and show only its process name and ID.</li><li>Create a function that assigns a local variable with the same name as one in the caller and explain both outputs.</li><li>Explain the difference between <code>$Env:PATH</code> and <code>$PATH</code>, and why secrets should not be printed into logs.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge-Check Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>A string can contain a device name, while an integer can represent a count; <code>.GetType()</code> identifies each value’s runtime type.</li><li>Double quotes expand an ordinary variable, while single quotes ordinarily preserve literal text.</li><li><code>$item = Get-Process -Id $PID</code>, followed by <code>$item.ProcessName</code> and <code>$item.Id</code>, reads the local process without changing it.</li><li>The function assignment normally updates its local scope; the caller retains the original value.</li><li><code>$Env:PATH</code> accesses the process environment, whereas <code>$PATH</code> is an ordinary PowerShell variable if defined. Secret values can leak through display, logs, or history.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Sources and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables?view=powershell-7.6">Microsoft Learn — about_Variables</a></li><li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-7.6">Microsoft Learn — about_Scopes</a></li><li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables?view=powershell-7.6">Microsoft Learn — about_Automatic_Variables</a></li><li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-variable?view=powershell-7.6">Microsoft Learn — Get-Variable</a></li><li><a href="https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-string-substitutions">Microsoft Learn — String Substitution and Expansion</a></li><li><a href="https://learn.microsoft.com/en-us/powershell/scripting/lang-spec/chapter-05?view=powershell-7.6">PowerShell Language Specification — Variables</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A PowerShell variable is a name for information the shell is using. That information might be a number, a word, or a complete record about a program. Assign a value once, retrieve it by name, and inspect its properties whenever a command needs them. Quotes affect how text is built, types affect which operations are possible, and scopes prevent one part of a script from accidentally changing another part’s local work.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Once variables are clear, arrays and hash tables become easier to understand: they let a single name hold a collection of values or named fields. The main habit remains the same—know what is stored, inspect it before using it, and avoid changing system state while learning.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original Bitcoin donation QR code for a 5,000 satoshi donation" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open this lesson on a larger screen and use a compatible Bitcoin wallet to scan the original QR code. Verify the address before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

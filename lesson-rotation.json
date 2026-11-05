@@ -69,7 +69,8 @@
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
-    ]
+    ],
+    "github_archive_blob_sha": "fecd0ff8190acbbaa552a48dd044d8fdddbb2224"
   },
   "next": {
     "subject": "shakespeare",
@@ -350,7 +351,7 @@
     "css_browser_selector_tests_executed": true,
     "featured_media_id": 29505,
     "body_media_id": 29510,
-    "github_archive_blob_sha": "a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b"
+    "github_archive_blob_sha": "fecd0ff8190acbbaa552a48dd044d8fdddbb2224"
   },
   "pending_publication_qa": [
     {
@@ -644,7 +645,10 @@
         "Actual playback not independently verified",
         "Mobile browser viewport and screenshot pixels not independently reviewed"
       ],
-      "github_archive_blob_sha": "a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b"
+      "github_archive_blob_sha": "fecd0ff8190acbbaa552a48dd044d8fdddbb2224",
+      "unboxed_code_examples": 7,
+      "boxed_code_examples": 0,
+      "saved_and_rendered_box_removal_verified": true
     }
   ],
   "featured_image_rotation": {
@@ -935,11 +939,43 @@
     ],
     "css_chromium_fixture_tests_passed": true,
     "archive_source_exact_match": true,
-    "archive_blob_sha": "a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b",
+    "archive_blob_sha": "fecd0ff8190acbbaa552a48dd044d8fdddbb2224",
     "open_qa": [
       "playback",
       "mobile"
     ],
-    "next_rotation_blocker": "Chef esoteric-language vs Chef Infra course ID collision"
+    "next_rotation_blocker": "Chef esoteric-language vs Chef Infra course ID collision",
+    "code_formatting_fix": {
+      "removed_boxed_blocks": 7,
+      "unboxed_blocks": 7,
+      "wp_render_verified": true,
+      "live_screenshot_pixel_review": false
+    }
+  },
+  "code_presentation_policy_2026_11_05": {
+    "updated_at": "2026-11-05",
+    "enforced": true,
+    "apply_to": "All future lessons, technical tutorials and code-focused BitcoinVersus.Tech posts",
+    "forbidden": [
+      "boxed Gutenberg wp:code and wp-block-code styling",
+      "decorative text boxes",
+      "shaded examples",
+      "bordered callouts",
+      "cards or panels wrapping teaching prose or code"
+    ],
+    "required_pattern": "Normal paragraph explaining the example and ending with a colon; immediately underneath show unboxed monospaced code, preserving line breaks, indentation and mobile readability.",
+    "implementation": "When default WordPress code block is visually boxed, use plain custom HTML pre/code with transparent background, zero border, zero shadow and zero padding; verify saved and rendered markup.",
+    "repaired_example": {
+      "post_id": 29517,
+      "title": "OSCSS.001: CSS Selectors — Type, Class, ID, Attribute, and Relationships",
+      "boxed_code_before": 7,
+      "boxed_code_after": 0,
+      "unboxed_code_examples": 7,
+      "wordpress_saved_verified": true,
+      "wordpress_rendered_verified": true,
+      "github_archive_sha": "fecd0ff8190acbbaa552a48dd044d8fdddbb2224",
+      "archive_repositories_verified": 3,
+      "visual_pixel_review": false
+    }
   }
 }

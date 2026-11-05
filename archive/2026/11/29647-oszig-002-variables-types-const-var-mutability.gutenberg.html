@@ -1,0 +1,294 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives and prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Zig is a general-purpose systems programming language emphasizing explicit behavior and readable control over memory and data. After completing <a href="https://bitcoinversus.tech/2026/10/08/oszig-001-what-is-zig-source-files-toolchain-first-program/">OSZig.001 — What Is Zig?</a>, learners should be able to explain immutable versus mutable bindings, declare a variable with or without an explicit type, recognize common primitive types, and test a small state update. Examples target <strong>Zig 0.17.1</strong>, released in November 2026. Install the matching compiler using the official <a href="https://ziglang.org/download/">Zig downloads</a> if you wish to reproduce the lab.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A program needs names for information: a rack identifier, the maximum number of servers allowed, or a count of online devices. A Zig variable declaration connects such a name to a value. The distinction begins with the two keywords <code>const</code> and <code>var</code>. A <code>const</code> binding cannot be reassigned after initialization. A <code>var</code> binding can be updated, and Zig expects the programmer to actually need mutability. Zig recommends <code>const</code> by default because the intent is clearer to readers and the compiler.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The declaration syntax follows a predictable pattern: keyword, identifier, optional type, equals sign, value, and semicolon. Begin with a rack label and two numerical variables:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">const rack_id = "rack-A7";
+const capacity: u32 = 8;
+var active: u32 = 3;
+active += 1;</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The rack ID and capacity remain fixed. The active-device count changes from three to four. Here <code>u32</code> means an unsigned 32-bit integer, useful for counts that cannot be negative. The arithmetic update <code>+=</code> adds one and stores the result in the same mutable location.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=LaS8V7P-duQ","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=LaS8V7P-duQ</div><figcaption class="wp-element-caption"><em>Pokelego Dev, “Variables in Zig” (February 2026), an introductory demonstration of const, var, and compile-time considerations. The video is historical instruction; examples in the article follow Zig 0.17.1 documentation.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Constants, variable names, and reassignment</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <code>const</code> declaration expresses a promise that the binding's value will not be reassigned. A failed reassignment is caught at compile time. The following minimal example is intentionally invalid, and is useful as a controlled learning exercise rather than a program to run in production:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">pub fn main() void {
+    const capacity: u32 = 8;
+    capacity = 9; // compile error: cannot assign to constant
+}</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Use meaningful identifiers such as <code>capacity</code> or <code>active_devices</code> instead of cryptic one-letter names in operational code. Zig identifiers cannot silently shadow an identifier from an outer scope, avoiding a common source of confusion. The earlier <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-002-csharp-variables-built-in-types-var-const/">C# variables and types lesson</a> provides a comparison with a different set of assignment and type rules.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Mutable variables and the no-change compiler diagnostic</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Declare a mutable binding with <code>var</code> only when its value must change. The official Zig reference permits ordinary reassignment and operator assignment. The following sequence starts at zero, increases to one, then increases again to four:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">var completed: u32 = 0;
+completed += 1;
+completed += 3;</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If a local variable is declared with <code>var</code> but never actually changed, modern Zig versions generally report that the local variable is never mutated and recommend <code>const</code>. That compiler diagnostic encourages more precise code. Mutability is not a synonym for uncertainty: a value can be unknown until runtime and still be stored under a constant binding.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primitive types and type inference</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Zig supports integers with explicit signedness and widths, floating-point numbers, booleans and byte-oriented string values. Types such as <code>i32</code> and <code>u32</code> specify signed and unsigned 32-bit integers; <code>f64</code> specifies a floating-point format, and <code>bool</code> allows <code>true</code> and <code>false</code>. A string literal can be coerced to a read-only byte slice such as <code>[]const u8</code>. The example declares all four explicitly:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">const temperature_delta: i32 = -2;
+const utilization: f64 = 0.75;
+const enabled: bool = true;
+const machine_label: []const u8 = "rack-A7";</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An untyped numeric literal has a compile-time numeric type until Zig has enough context to give it a concrete integer or floating-point type. An explicit declaration such as <code>const n: i32 = 42;</code> removes the ambiguity. Zig does not automatically treat a string as a number; a conversion must be justified by the destination type and program requirements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Compile-time versus runtime values</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Zig distinguishes values known during compilation from values determined while a program runs. A literal such as <code>42</code> can be evaluated at compile time. But a <code>const</code> declaration does not guarantee that its value is available during compilation; it only promises no reassignment. Conversely, a <code>var</code> can be evaluated by compile-time code using <code>comptime</code>. The lesson stays focused on ordinary local declarations, leaving deeper compile-time programming for later study.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The following declarations make the type explicit and create a mutable counter that can change at runtime:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">const expected: u32 = 4;
+var observed: u32 = 3;
+observed += 1;</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The final observed value is four. The type annotation prevents accidentally using a negative integer as an unsigned count. When choosing widths, remember that <code>u8</code> holds 0 through 255 while <code>i8</code> holds −128 through 127. Overflow is a correctness issue, and programmers should never assume an out-of-range value is harmless.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Hp4zvZf6K0g","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=Hp4zvZf6K0g</div><figcaption class="wp-element-caption"><em>Dude the Builder, “Zig Master: var and const” (May 2024), a training demonstration contrasting variable updates and constant assignments. Syntax in the article is checked against newer Zig 0.17.1 documentation.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Blocks, scope, and identifier rules</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Local Zig variables live inside functions or other blocks. A nested block can access an appropriate outer variable, but Zig forbids declaring a second variable that shadows an identifier from an enclosing scope. That restriction makes it harder to mistake an inner variable for a different outer variable. Compare the approach with <a href="https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/">PowerShell's local and script scopes</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The block below changes the existing outer variable rather than creating another variable with the same name:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">pub fn main() void {
+    var active: u32 = 3;
+    {
+        active += 1;
+    }
+    _ = active;
+}</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The underscore discards an evaluated value, avoiding an unused-value diagnostic. In a real program, the updated count would normally be returned, checked or printed. An illegal nested declaration of another <code>active</code> would be rejected because the name is already in scope.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why initializing variables matters</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Zig requires declarations to have an initializer, whether a meaningful value or the special token <code>undefined</code>. The latter is not a safe optional value. Reading an undefined value can cause illegal behavior, and debug memory patterns are not a contract that makes such data meaningful. A beginner should use a valid initial value whenever possible. For example, a count starts at zero rather than being left unreadable:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">var completed: u32 = 0;
+completed += 1;</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A realistic application may use an optional type when a value might be absent; optionals are covered in a later track. If a counter has not yet been collected from monitoring software, a placeholder zero can also be misleading, so the program's actual requirements should determine how absence is represented.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical lab — an AI rack capacity report</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An infrastructure example connects immutable settings and mutable operational state. A rack capacity stays fixed for the demonstration, while the active device count increases as another device comes online. Save the following complete source as <code>main.zig</code> using a UTF-8 editor. The program reads no private information, makes no network connection, and requires no elevated permissions:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">const std = @import("std");
+
+pub fn main() void {
+    const label: []const u8 = "rack-A7";
+    const capacity: u32 = 8;
+    var active: u32 = 3;
+    const enabled: bool = true;
+
+    active += 1;
+    std.debug.print(
+        "rack={s} active={d}/{d} enabled={}\n",
+        .{ label, active, capacity, enabled },
+    );
+}</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Under Zig 0.17.1 semantics, the expected message is <code>rack=rack-A7 active=4/8 enabled=true</code>. <code>std.debug.print</code> normally writes to the standard error stream, so a shell redirection that captures only standard output may miss the message. The sample has been source-reviewed against Zig's current language reference; the Zig compiler could not be installed in the publication environment for independent execution.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Run the Zig compiler from the directory containing the file. The same source can be compiled directly or run using Zig's combined build-and-execute command:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">zig version
+zig run main.zig</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Confirm that the reported compiler is 0.17.1 when reproducing the lesson's exact version. If your machine has a different version, refer to its own language reference and verify any API changes before adopting code from another release.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Testing the expected result</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Zig toolchain also includes a test runner. A <code>test</code> declaration exercises a small behavior without adding complexity to <code>main</code>. Create a separate file named <code>counter_test.zig</code> containing one test for a counter increment and its capacity limit:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">const std = @import("std");
+
+test "active devices remain within capacity" {
+    const capacity: u32 = 8;
+    var active: u32 = 3;
+    active += 1;
+
+    try std.testing.expectEqual(@as(u32, 4), active);
+    try std.testing.expect(active &lt;= capacity);
+}</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The expected result is one passing test. Run the test file with the toolchain rather than copying output from an example online:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:0.95em;line-height:1.55;white-space:pre-wrap;background:transparent !important;border:0 !important;box-shadow:none !important;padding:0 !important;margin:0 0 1.2em !important"><code style="white-space:inherit;font-family:inherit;background:transparent !important;border:0 !important;box-shadow:none !important;color:inherit">zig test counter_test.zig</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The compiler should reject incompatible types and invalid reassignment before execution. Because the Zig 0.17.1 binary was unavailable in the current execution environment, the expected outputs above remain source-reviewed predictions, not independently recorded compiler or terminal results. Testing on the learner's own system should be treated as the final validation step.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting common mistakes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>cannot assign to constant</strong> error means code attempted to modify a <code>const</code> binding. Use <code>var</code> only when genuine updates are required. A <strong>local variable is never mutated</strong> diagnostic usually means <code>const</code> would better describe the intended value. A <strong>type mismatch</strong> means the expression does not match the declared destination type. A missing semicolon or unclosed brace may prevent the parser from reaching any variable analysis.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>When terminal output does not appear, remember that <code>std.debug.print</code> uses standard error rather than standard output. Check the active Zig version, exact file path and editor encoding before assuming the language code is incorrect. Use test cases to verify counts and ranges instead of relying exclusively on visual inspection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge check and answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>What is the difference between <code>const</code> and <code>var</code>? A constant binding cannot be reassigned, while a mutable binding may change. What does <code>u32</code> mean? An unsigned 32-bit integer. Why does Zig reject some unused <code>var</code> declarations? It encourages immutable bindings when no mutation occurs. Why is <code>undefined</code> risky? It represents data without a meaningful value and must not be read before proper assignment. Why does <code>zig test</code> matter? It helps verify the declared behavior against actual compiler and runtime results.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For independent practice, change the capacity from eight to twelve, start active devices at ten and increment twice. Update the test's expected value to twelve, then add an assertion that the total does not exceed capacity. Finally, replace an unnecessarily mutable binding with <code>const</code> and explain why the program becomes easier to review. Comparable topics appear in <a href="https://bitcoinversus.tech/2026/10/09/osrust-001-what-is-rust-rustup-rustc-cargo-ownership-first-program/">Rust fundamentals</a> and <a href="https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/">C# immutability and strings</a>, though Zig's compiler behavior is distinct.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary documentation and further reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://ziglang.org/documentation/0.17.1/">Zig 0.17.1 Language Reference</a> documents values, assignment, local variables, scopes and compiler diagnostics. The <a href="https://ziglang.org/download/">official Zig download page</a> identifies the stable release, while the <a href="https://ziglang.org/news/0.17.1-released/">November 3 release announcement</a> explains the bug-fix update. Zig's <a href="https://ziglang.org/learn/">Learn page</a> links to verified setup guides, exercises and the Ziglings curriculum.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Zig makes mutability explicit. Use <code>const</code> for values that will not be reassigned, <code>var</code> for values that genuinely change, and explicit numeric types when their width or signedness matters. A compiler-checked variable model prevents several classes of accidental modification before a program runs. The next Zig lessons can build on the same foundation when introducing functions, arrays, slices and pointers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> The lesson is based on Zig 0.17.1, the latest stable version as of November 5, 2026. Examples were reviewed against the official Zig language reference, but could not be compiled or executed in the available environment. The featured image is original conceptual editorial artwork rather than a screenshot of a verified runtime session.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original donation QR code for 5,000 satoshis" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open the lesson on another display and use a compatible Bitcoin wallet to scan the original QR code. Verify the destination before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

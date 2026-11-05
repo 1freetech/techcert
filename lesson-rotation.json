@@ -48,15 +48,15 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "csharp",
-    "lesson_number": 4,
-    "track_id": "OSC#.004",
-    "title": "OSC#.004: C# Strings — Literals, Interpolation, Equality, and Immutability",
-    "public_title": "OSC#.004: C# Strings — Literals, Interpolation, Equality, and Immutability",
-    "wordpress_post_id": 29495,
-    "live_url": "https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/",
-    "archive_path": "archive/2026/11/29495-oscsharp-004-csharp-strings-literals-interpolation-equality-immutability.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/29495-oscsharp-004-csharp-strings-literals-interpolation-equality-immutability.qa.json",
+    "subject": "css",
+    "lesson_number": 1,
+    "track_id": "OSCSS.001",
+    "title": "OSCSS.001: CSS Selectors — Type, Class, ID, Attribute, and Relationships",
+    "public_title": "OSCSS.001: CSS Selectors — Type, Class, ID, Attribute, and Relationships",
+    "wordpress_post_id": 29517,
+    "live_url": "https://bitcoinversus.tech/2026/11/05/oscss-001-css-selectors-types-classes-ids-attributes-relationships/",
+    "archive_path": "archive/2026/11/29517-oscss-001-css-selectors-types-classes-ids-attributes-relationships.gutenberg.html",
+    "qa_path": "archive/2026/11/29517-oscss-001-css-selectors-types-classes-ids-attributes-relationships.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
@@ -64,23 +64,24 @@
     ],
     "publication_status": "published",
     "verification_status": "published_unverified",
-    "qa_status": "WordPress status publish; exactly two responsive YouTube provider blocks rendered as distinct iframes, six verified WordPress internal destination links, one original 1200x675 C# immutability illustration media #29499, original C# strings anime editorial cover media #29491 confirmed 1200x630, canonical editor note → 5000 sats QR asset #24043 → approved financial disclaimer. Saved Gutenberg copied byte-identically across 3 GitHub archives with SHA 210be944afc22dca95e0d65aedbfac6c4b4628f7. Actual YouTube playback, mobile browser inspection, and C# runtime execution not independently verified.",
+    "qa_status": "WordPress post #29517 published; 2 verified public YouTube video IDs embedded and rendered as separate iframes; original featured CSS editorial image #29505 at 1200x630, tested Chromium lab screenshot #29510 at 1200x675, six contextual internal links and canonical note/QR/footer. CSS selector fixture executed in local Chromium; actual YouTube playback, independent mobile visual layout checks not verified. Original exact Gutenberg source archived in 3 GitHub repos with common blob a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
-    "code_examples_executed": false,
-    "featured_media_id": 29491,
-    "body_illustration_id": 29499,
-    "github_archive_blob_sha": "34e2d8898512763968bfe796b0d9997be21aa16a"
+    "css_browser_selector_tests_executed": true,
+    "featured_media_id": 29505,
+    "body_media_id": 29510,
+    "github_archive_blob_sha": "a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b"
   },
   "next": {
-    "subject": "css",
-    "lesson_number": 1,
-    "title_format": "OSCSS.001: {topic}",
-    "public_title_format": "OSCSS.001: {topic}",
-    "resolution_note": "C# 001–003 already published Oct 9–14 2026 in WordPress despite stale rotation pointer. Unique OSC#.004 #29495 published on November 5 and byte-identical source archived across all three repositories; next CSS.001 confirmed no matching live published/draft title."
+    "subject": "chef",
+    "lesson_number": 4,
+    "title_format": "OSChef.004: {topic}",
+    "public_title_format": "OSChef.004: {topic}",
+    "status": "identity_reconciliation_required",
+    "resolution_note": "Verified existing WordPress OSChef.001 #22043, OSChef.002 #22066 and OSChef.003 #22067 are Chef esoteric-language lessons, while coding-curriculum.json labels subject chef 'Open Source Chef Automation' and lists Chef Infra topics. OSChef.004 is next numerically available, but do not conflate distinct curricula without resolving the title/subject registry collision."
   },
-  "next_after_current": "chef",
+  "next_after_current": "shakespeare",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -280,11 +281,22 @@
     },
     "css": {
       "acronym": "OSCSS",
-      "next_lesson_number": 1
+      "next_lesson_number": 2,
+      "last_published_lesson_number": 1,
+      "last_wordpress_post_id": 29517,
+      "last_published_title": "OSCSS.001: CSS Selectors — Type, Class, ID, Attribute, and Relationships",
+      "verification_status": "published_unverified"
     },
     "chef": {
       "acronym": "OSChef",
-      "next_lesson_number": 1
+      "next_lesson_number": 4,
+      "previous_published_ids": [
+        22043,
+        22066,
+        22067
+      ],
+      "track_identity_conflict": "Published OSChef.001-003 cover esoteric Chef language, but registry new_tracks.chef name and lesson_stack are Chef Infra automation. Never silently publish the different Chef Infra course under OSChef.004.",
+      "status": "needs_curriculum_identity_reconciliation"
     },
     "shakespeare": {
       "acronym": "OSShakespeare",
@@ -311,15 +323,15 @@
     }
   },
   "last_published": {
-    "subject": "csharp",
-    "lesson_number": 4,
-    "track_id": "OSC#.004",
-    "title": "OSC#.004: C# Strings — Literals, Interpolation, Equality, and Immutability",
-    "public_title": "OSC#.004: C# Strings — Literals, Interpolation, Equality, and Immutability",
-    "wordpress_post_id": 29495,
-    "live_url": "https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/",
-    "archive_path": "archive/2026/11/29495-oscsharp-004-csharp-strings-literals-interpolation-equality-immutability.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/29495-oscsharp-004-csharp-strings-literals-interpolation-equality-immutability.qa.json",
+    "subject": "css",
+    "lesson_number": 1,
+    "track_id": "OSCSS.001",
+    "title": "OSCSS.001: CSS Selectors — Type, Class, ID, Attribute, and Relationships",
+    "public_title": "OSCSS.001: CSS Selectors — Type, Class, ID, Attribute, and Relationships",
+    "wordpress_post_id": 29517,
+    "live_url": "https://bitcoinversus.tech/2026/11/05/oscss-001-css-selectors-types-classes-ids-attributes-relationships/",
+    "archive_path": "archive/2026/11/29517-oscss-001-css-selectors-types-classes-ids-attributes-relationships.gutenberg.html",
+    "qa_path": "archive/2026/11/29517-oscss-001-css-selectors-types-classes-ids-attributes-relationships.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
@@ -327,14 +339,14 @@
     ],
     "publication_status": "published",
     "verification_status": "published_unverified",
-    "qa_status": "WordPress status publish; exactly two responsive YouTube provider blocks rendered as distinct iframes, six verified WordPress internal destination links, one original 1200x675 C# immutability illustration media #29499, original C# strings anime editorial cover media #29491 confirmed 1200x630, canonical editor note → 5000 sats QR asset #24043 → approved financial disclaimer. Saved Gutenberg copied byte-identically across 3 GitHub archives with SHA 210be944afc22dca95e0d65aedbfac6c4b4628f7. Actual YouTube playback, mobile browser inspection, and C# runtime execution not independently verified.",
+    "qa_status": "WordPress post #29517 published; 2 verified public YouTube video IDs embedded and rendered as separate iframes; original featured CSS editorial image #29505 at 1200x630, tested Chromium lab screenshot #29510 at 1200x675, six contextual internal links and canonical note/QR/footer. CSS selector fixture executed in local Chromium; actual YouTube playback, independent mobile visual layout checks not verified. Original exact Gutenberg source archived in 3 GitHub repos with common blob a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
-    "code_examples_executed": false,
-    "featured_media_id": 29491,
-    "body_illustration_id": 29499,
-    "github_archive_blob_sha": "34e2d8898512763968bfe796b0d9997be21aa16a"
+    "css_browser_selector_tests_executed": true,
+    "featured_media_id": 29505,
+    "body_media_id": 29510,
+    "github_archive_blob_sha": "a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b"
   },
   "pending_publication_qa": [
     {
@@ -611,6 +623,24 @@
       "github_archive_blob_sha": "34e2d8898512763968bfe796b0d9997be21aa16a",
       "body_illustration_id": 29499,
       "in_body_media_total": 3
+    },
+    {
+      "wordpress_post_id": 29517,
+      "live_url": "https://bitcoinversus.tech/2026/11/05/oscss-001-css-selectors-types-classes-ids-attributes-relationships/",
+      "featured_cover_verified": "Original attachment #29505 exactly 1200x630",
+      "archive_source_verified": true,
+      "video_iframe_count": 2,
+      "distinct_youtube_ids": [
+        "QgxkYbGr2II",
+        "l1mER1bV0N0"
+      ],
+      "body_illustration_id": 29510,
+      "css_selector_browser_test": "passed",
+      "unresolved": [
+        "Actual playback not independently verified",
+        "Mobile browser viewport and screenshot pixels not independently reviewed"
+      ],
+      "github_archive_blob_sha": "a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b"
     }
   ],
   "featured_image_rotation": {
@@ -889,5 +919,23 @@
     "next_subject": "css",
     "in_body_media_total": 3,
     "body_illustration_id": 29499
+  },
+  "learning_events_2026_11_05_oscss001": {
+    "post_id": 29517,
+    "word_count_approx": 1649,
+    "internal_links": 6,
+    "media_count": 3,
+    "youtube_ids": [
+      "QgxkYbGr2II",
+      "l1mER1bV0N0"
+    ],
+    "css_chromium_fixture_tests_passed": true,
+    "archive_source_exact_match": true,
+    "archive_blob_sha": "a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b",
+    "open_qa": [
+      "playback",
+      "mobile"
+    ],
+    "next_rotation_blocker": "Chef esoteric-language vs Chef Infra course ID collision"
   }
 }

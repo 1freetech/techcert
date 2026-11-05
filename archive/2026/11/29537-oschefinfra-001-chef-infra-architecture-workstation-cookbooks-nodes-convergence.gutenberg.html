@@ -64,13 +64,25 @@ https://www.youtube.com/watch?v=lqMijB1JIuU
 <p>A resource describes the <em>desired state</em> of one system element. For example, a <code>file</code> resource can declare a path, content, and permissions. Chef Infra Client evaluates the resource during a run and decides whether changes are required. The resources are expressed with Ruby syntax, but are interpreted through Chef’s domain-specific configuration language.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>file '/tmp/open-source-tech-cert-chef.txt' do
-  content 'Chef Infra practice file'
-  mode '0644'
-  action :create
-end</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>file '/tmp/open-source-tech-cert-chef.txt' do</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>content 'Chef Infra practice file'</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>mode '0644'</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>action :create</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>end</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>The example declares a Linux-style practice file. On a disposable Linux test machine, Chef would create or update that file with the declared content and permissions. If the file already matches, the resource should not need to rewrite it. The recipe is a declarative instruction, not a transcript from a successfully executed test. On Windows, file paths, ownership, and permission behavior differ; do not reuse <code>/tmp</code> unchanged.</p>
@@ -104,20 +116,29 @@ end</code></pre>
 <p>Install a supported Chef Workstation release from the official source and confirm the available tools with <code>chef --version</code>. A licensed or entitled installation may be required depending on the Chef product and edition. In an isolated development environment, create a starter cookbook, enter its directory, and inspect its default recipe:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>chef --version
-chef generate cookbook oschef_infra_starter
-cd oschef_infra_starter
-# Review recipes/default.rb in a text editor.</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>chef --version</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>chef generate cookbook oschef_infra_starter</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>cd oschef_infra_starter</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Review recipes/default.rb in a text editor.</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>The generator creates a cookbook structure. Open <code>recipes/default.rb</code> and study the resource definitions before modifying them. To check Ruby syntax when the workstation provides the bundled runtime, run the following read-only syntax check:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>chef exec ruby -c recipes/default.rb</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code>chef exec ruby -c recipes/default.rb</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>A syntactically valid file should report <code>Syntax OK</code>; that result checks Ruby parsing, not whether Chef resources would converge correctly, whether the desired state is secure, or whether a deployment is safe. A full test should instead run in a disposable VM with Test Kitchen or another isolated environment. Consult <a href="https://docs.chef.io/workstation/26.1/get_started/">Chef’s official Workstation getting-started guide</a> for the supported cookbook-test workflow and current prerequisites.</p>

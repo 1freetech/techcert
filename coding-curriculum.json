@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "description": "Coding-language lesson-track registry derived from the Full Stack Dev Languages roadmap. One lesson teaches one focused concept. Existing OSPython and OSC++ tracks continue their current numbering; newly registered tracks begin at .001.",
+  "priority_order": [
+    "python",
+    "javascript",
+    "java",
+    "go",
+    "cpp",
+    "csharp",
+    "c",
+    "rust",
+    "sql",
+    "bash",
+    "powershell",
+    "php",
+    "html",
+    "css",
+    "chef",
+    "shakespeare",
+    "dotnet",
+    "emojicode",
+    "zig",
+    "solidity"
+  ],
+  "existing_tracks": {
+    "python": {
+      "acronym": "OSPython",
+      "registry": "curriculum.json",
+      "status": "active_existing"
+    },
+    "cpp": {
+      "acronym": "OSC++",
+      "registry": "curriculum.json",
+      "status": "active_existing"
+    }
+  },
+  "new_tracks": [
+    {
+      "subject": "javascript",
+      "name": "Open Source JavaScript",
+      "acronym": "OSJavaScript",
+      "title_format": "OSJavaScript.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Runtime and browser console", "Variables and constants", "Primitive types", "Operators", "Arrays", "Objects", "Conditionals", "Loops", "Functions", "Scope", "Closures", "DOM fundamentals", "Events", "Modules", "JSON", "Fetch API", "Promises", "Async and await", "Error handling", "Classes", "Node.js", "npm", "Testing", "REST APIs", "Final project"]
+    },
+    {
+      "subject": "java",
+      "name": "Open Source Java",
+      "acronym": "OSJava",
+      "title_format": "OSJava.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["JDK and JVM", "Syntax and program structure", "Primitive and reference types", "Operators", "Strings", "Arrays", "Control flow", "Methods", "Classes", "Objects", "Encapsulation", "Inheritance", "Interfaces", "Exceptions", "Collections", "Generics", "Files and streams", "Lambdas", "Concurrency", "Maven and Gradle", "JDBC", "Testing", "Spring basics", "Final project"]
+    },
+    {
+      "subject": "go",
+      "name": "Open Source Go",
+      "acronym": "OSGo",
+      "title_format": "OSGo.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Go toolchain", "Packages", "Variables and constants", "Types", "Functions", "Arrays and slices", "Maps", "Structs", "Methods", "Interfaces", "Pointers", "Errors", "Files", "JSON", "Modules", "Testing", "Goroutines", "Channels", "Context", "HTTP servers", "REST APIs", "Databases", "Profiling", "Final project"]
+    },
+    {
+      "subject": "csharp",
+      "name": "Open Source C#",
+      "acronym": "OSC#",
+      "title_format": "OSC#.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": [".NET SDK and compiler", "Syntax", "Types", "Strings", "Collections", "Control flow", "Methods", "Classes", "Properties", "Interfaces", "Inheritance", "Exceptions", "Generics", "LINQ", "Files", "Async and await", "Delegates and events", "Dependency injection", "Testing", "Databases", "ASP.NET basics", "Web APIs", "Final project"]
+    },
+    {
+      "subject": "c",
+      "name": "Open Source C",
+      "acronym": "OSC",
+      "title_format": "OSC.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Compiler and toolchain", "Primitive types", "Operators", "Control flow", "Functions", "Arrays", "Strings", "Pointers", "Pointer arithmetic", "Structs", "Enums", "Memory layout", "Stack and heap", "malloc and free", "Files", "Headers", "Preprocessor", "Libraries", "Debugging", "Sockets", "Threads", "Make", "Final project"]
+    },
+    {
+      "subject": "rust",
+      "name": "Open Source Rust",
+      "acronym": "OSRust",
+      "title_format": "OSRust.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Cargo and toolchain", "Variables", "Types", "Control flow", "Functions", "Ownership", "Borrowing", "References", "Slices", "Structs", "Enums", "Pattern matching", "Option and Result", "Error handling", "Modules", "Collections", "Traits", "Generics", "Lifetimes", "Smart pointers", "Concurrency", "Async Rust", "Testing", "Crates", "Final project"]
+    },
+    {
+      "subject": "sql",
+      "name": "Open Source SQL",
+      "acronym": "OSSQL",
+      "title_format": "OSSQL.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Relational databases and tables", "SELECT", "WHERE", "ORDER BY", "LIMIT", "Aliases", "Aggregate functions", "GROUP BY", "HAVING", "INSERT", "UPDATE", "DELETE", "Primary and foreign keys", "Constraints", "JOINs", "Subqueries", "CTEs", "Indexes", "Views", "Transactions", "Normalization", "Query plans", "Window functions", "Final project"]
+    },
+    {
+      "subject": "bash",
+      "name": "Open Source Bash",
+      "acronym": "OSBash",
+      "title_format": "OSBash.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Shell and script basics", "Commands and paths", "Variables", "Quoting", "Pipes", "Redirection", "Conditionals", "Loops", "Functions", "Arguments", "Exit codes", "grep", "sed", "awk", "find", "Permissions", "Processes", "Environment variables", "Scheduling", "SSH automation", "Logging", "Safe error handling", "Final automation project"]
+    },
+    {
+      "subject": "powershell",
+      "name": "Open Source PowerShell",
+      "acronym": "OSPowerShell",
+      "title_format": "OSPowerShell.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Cmdlets", "Objects", "Pipeline", "Variables", "Types", "Arrays", "Hash tables", "Operators", "Conditionals", "Loops", "Functions", "Parameters", "Modules", "Files", "Registry", "Processes and services", "Remoting", "CIM and WMI", "JSON", "REST APIs", "Error handling", "Jobs", "Windows automation", "Final project"]
+    },
+    {
+      "subject": "php",
+      "name": "Open Source PHP",
+      "acronym": "OSPHP",
+      "title_format": "OSPHP.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["PHP runtime", "Syntax", "Variables", "Arrays", "Control flow", "Functions", "Forms", "GET and POST", "Sessions", "Cookies", "Files", "Classes", "Namespaces", "Exceptions", "Composer", "PDO", "Databases", "Authentication", "REST APIs", "JSON", "Web security", "Laravel basics", "Testing", "Final project"]
+    },
+    {
+      "subject": "html",
+      "name": "Open Source HTML",
+      "acronym": "OSHTML",
+      "title_format": "OSHTML.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Document structure", "Elements", "Attributes", "Headings and paragraphs", "Links", "Images", "Lists", "Tables", "Forms", "Inputs", "Semantic HTML", "Audio and video", "Accessibility", "Metadata", "SEO markup", "Responsive images", "Validation", "Final project"]
+    },
+    {
+      "subject": "css",
+      "name": "Open Source CSS",
+      "acronym": "OSCSS",
+      "title_format": "OSCSS.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Selectors", "Cascade", "Specificity", "Units", "Colors", "Typography", "Box model", "Display", "Positioning", "Flexbox", "Grid", "Responsive design", "Media queries", "Pseudo-classes", "Pseudo-elements", "Custom properties", "Transitions", "Animations", "Transforms", "Accessibility", "Final project"]
+    },
+    {
+      "subject": "chef",
+      "name": "Open Source Chef Automation",
+      "acronym": "OSChef",
+      "title_format": "OSChef.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Chef architecture", "Chef Infra DSL", "Resources", "Recipes", "Cookbooks", "Attributes", "Templates", "Files", "Notifications", "Guards", "Data bags", "Roles", "Environments", "Testing", "Policyfiles", "Final automation project"]
+    },
+    {
+      "subject": "shakespeare",
+      "name": "Open Source Shakespeare Programming Language",
+      "acronym": "OSShakespeare",
+      "title_format": "OSShakespeare.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Language structure", "Characters and variables", "Dialogue syntax", "Constants", "Stacks", "Arithmetic", "Input and output", "Control flow", "Labels", "Conditionals", "Debugging", "Final program"]
+    },
+    {
+      "subject": "dotnet",
+      "name": "Open Source .NET",
+      "acronym": "OSDotNet",
+      "title_format": "OSDotNet.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": [".NET platform overview", "CLR", ".NET SDK", "Assemblies", "NuGet", "Project structure", "Configuration", "Dependency injection", "Logging", "ASP.NET Core", "Middleware", "Web APIs", "Entity Framework", "Authentication", "Background services", "Testing", "Deployment", "Performance", "Final project"]
+    },
+    {
+      "subject": "emojicode",
+      "name": "Open Source Emojicode",
+      "acronym": "OSEmojicode",
+      "title_format": "OSEmojicode.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Toolchain", "Emoji syntax", "Values and types", "Variables", "Conditionals", "Loops", "Methods", "Classes", "Collections", "Optionals and errors", "Packages", "Final project"]
+    },
+    {
+      "subject": "zig",
+      "name": "Open Source Zig",
+      "acronym": "OSZig",
+      "title_format": "OSZig.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["Zig toolchain", "Variables", "Types", "Functions", "Arrays and slices", "Pointers", "Structs", "Enums", "Unions", "Optionals", "Error unions", "comptime", "Allocators", "Memory management", "Modules", "C interoperability", "Build system", "Testing", "Concurrency", "Final project"]
+    },
+    {
+      "subject": "solidity",
+      "name": "Open Source Solidity",
+      "acronym": "OSSolidity",
+      "title_format": "OSSolidity.{number}: {topic}",
+      "starting_lesson_number": 1,
+      "status": "active",
+      "lesson_stack": ["EVM and smart contracts", "Contract structure", "Types", "Functions", "Visibility", "State", "Mappings", "Arrays", "Structs", "Events", "Modifiers", "Inheritance", "Interfaces", "Ether handling", "Errors", "Gas", "Storage memory and calldata", "ERC-20", "ERC-721", "Access control", "Reentrancy", "Testing", "Deployment", "Final project"]
+    }
+  ],
+  "deferred_whiteboard_labels": [
+    {
+      "label": "C+",
+      "status": "needs_definition",
+      "reason": "No standard language is unambiguously identified by this label."
+    },
+    {
+      "label": "Zig++",
+      "status": "needs_definition",
+      "reason": "No standard language is unambiguously identified by this label."
+    }
+  ]
+}

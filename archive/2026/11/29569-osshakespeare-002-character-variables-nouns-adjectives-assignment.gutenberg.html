@@ -1,0 +1,257 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Shakespeare Programming Language (SPL) treats recognized Shakespearean characters as <strong>signed-integer variables</strong>. Learners will declare a character, distinguish a speaker from the character receiving a value, calculate poetic constants, and inspect numeric output. Review <a href="https://bitcoinversus.tech/2026/10/08/osshakespeare-001-how-a-shakespeare-program-is-structured/">OSShakespeare.001 — Program Structure</a> before continuing. The same underlying ideas are familiar from <a href="https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/">PowerShell variables</a> and <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-002-csharp-variables-built-in-types-var-const/">C# variables and numeric types</a>, although SPL uses theatrical language rather than an equals sign.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine two actors standing on an empty stage. One delivers a line, while the other receives a message. In SPL, the speaker is a character name followed by a colon. The character being addressed is the other variable currently on stage. A compliment or insult can assign that variable an integer. Words such as a rose and a pig are not arbitrary literary decoration: the language assigns them numeric meanings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An SPL play begins with a title, character declarations, an Act and Scene, and stage directions. The prior lesson covered that structure. The new skill is following a value from written words to the recipient’s stored number. Understanding that distinction prevents the most common beginner error: assuming the speaker is the variable being changed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=6avJHaC3C2U","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=6avJHaC3C2U
+</div><figcaption class="wp-element-caption"><em>NDC Conferences — Dylan Beattie, The Art of Code (2020). The Shakespeare Programming Language is discussed around 36:34–38:00, including the relationship between dialogue and variable values.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Declaring the Variables</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A character declaration uses a recognized Shakespearean name followed by a descriptive phrase. The runtime stores a signed integer for each declared character, and the descriptive phrase is ignored by the language parser. For example, the following declarations create two distinct integer variables:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:0.95em;line-height:1.5;background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1.3em"><code style="background:transparent;border:0;box-shadow:none;padding:0;color:inherit;white-space:inherit">Hamlet, a thoughtful prince.
+Juliet, a careful observer.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The declared names must belong to the implementation’s recognized list of Shakespeare characters; inventing a random fictional name is not guaranteed to compile. An SPL description is not a type annotation or an initial value. It exists primarily to make the source resemble a stage play. The storage is associated with the actual character name.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Stage Decides Who Receives a Value</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The speaker and recipient must be on stage in a valid arrangement. With Hamlet and Juliet both present, a line attributed to Juliet directs second-person language toward Hamlet. The line below asks Hamlet to take the numeric value represented by a King:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:0.95em;line-height:1.5;background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1.3em"><code style="background:transparent;border:0;box-shadow:none;padding:0;color:inherit;white-space:inherit">[Enter Hamlet and Juliet]
+Juliet:
+  Thou art a King.
+  Open your heart.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The original language specification defines a positive noun such as King as the value 1. The line changes Hamlet’s integer variable, and <code>Open your heart</code> prints its numeric value. By contrast, <code>Speak your mind</code> interprets that integer as a character code. Both output instructions operate on the person being addressed, not on the speaker.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why Nouns and Adjectives Become Numbers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A positive or neutral noun contributes +1, while a negative noun contributes −1. Every adjective preceding a noun doubles the magnitude. A positive noun with two adjectives represents +4; a negative noun with two adjectives represents −4. No power operator is typed explicitly because the grammar makes an adjective act as a multiplication by two.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Compute Positive and Negative Constants</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The lexical examples below illustrate the signed powers of two defined by the original SPL language report. Each adjective doubles the magnitude contributed by the noun. The values are mathematical interpretations of SPL phrases, not ordinary English-language sentiment scores:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:0.95em;line-height:1.5;background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1.3em"><code style="background:transparent;border:0;box-shadow:none;padding:0;color:inherit;white-space:inherit">a rose                  =  +1
+a lovely rose           =  +2
+a lovely sweet rose     =  +4
+a pig                   =  -1
+a rotten pig            =  -2
+a rotten smelly pig     =  -4</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The original language specification assigns positive value to a flower or rose and negative value to a pig. Extra adjectives multiply the absolute value by two, regardless of whether they sound positive or negative. A programmer can form larger values through arithmetic expressions in dialogue. Some editions or alternative interpreters have slightly different accepted word lists, so always consult the implementation’s vocabulary before inventing poetic constants.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":29568,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osshakespeare-002-noun-adjective-values.png?w=1024" alt="Diagram of Shakespeare Programming Language constants, showing rose and pig with adjectives representing positive or negative powers of two" class="wp-image-29568" /><figcaption class="wp-element-caption"><em>Original technical diagram showing how signed noun values change when adjectives are added. Based on the original SPL language specification by Karl Hasselström and Jon Åslund (2001).</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Assignments Operate on the Listener</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A sentence addressed to the other character on stage assigns a number to that character. With Juliet speaking to Hamlet, <code>Thou art a lovely rose.</code> means Hamlet receives positive two. A later assignment replaces the current value. Numeric output is requested separately, as shown in the following dialogue:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:0.95em;line-height:1.5;background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1.3em"><code style="background:transparent;border:0;box-shadow:none;padding:0;color:inherit;white-space:inherit">Juliet:
+  Thou art a lovely rose.
+  Open your heart.
+  Thou art a rotten pig.
+  Open your heart.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The two output operations request the signed numbers +2 and −1, respectively. An interpreter may print the numbers consecutively rather than adding separators, so a captured terminal output can look different from a list of separately evaluated values. The numerical interpretation follows the original grammar; exact terminal formatting has not been runtime-tested here.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Arithmetic Can Reuse a Character’s Value</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The pronouns <code>thyself</code> and <code>yourself</code> refer to the listener’s current value within an assignment. A sum can add another constant without changing the speaker’s stored value. Starting from Hamlet = 2, the following line updates Hamlet to three:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:0.95em;line-height:1.5;background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1.3em"><code style="background:transparent;border:0;box-shadow:none;padding:0;color:inherit;white-space:inherit">Juliet:
+  Thou art the sum of thyself and a flower.
+  Open your heart.</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A new assignment is not an incremental modification unless its expression uses the old value. The earlier phrase <code>Thou art a King.</code> simply replaces whatever Hamlet held with +1. A sum using <code>thyself</code> instead reads the previous value, adds another expression, and stores the result back into the same listener variable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=-e8oBF4IrgU","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=-e8oBF4IrgU
+</div><figcaption class="wp-element-caption"><em>Computational Drama: Shakespeare, a 2007 performance referenced in research on esoteric programming languages. A theatrical performance makes the distinction between speaking characters and affected variables easier to visualize.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab — A Small Play That Counts</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Save an original example as <code>character_values.spl</code> in a disposable project directory. The program has one Act, one Scene, two characters, and two numeric output operations. Juliet speaks, Hamlet receives the values, and the arithmetic expression reuses Hamlet’s previous value. All required context is included in the complete source file:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:0.95em;line-height:1.5;background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1.3em"><code style="background:transparent;border:0;box-shadow:none;padding:0;color:inherit;white-space:inherit">A Small Reckoning.
+
+Hamlet, a thoughtful prince.
+Juliet, a careful observer.
+
+Act I: The Reckoning.
+Scene I: Counting in Words.
+
+[Enter Hamlet and Juliet]
+
+Juliet:
+  Thou art a lovely rose.
+  Open your heart.
+  Thou art the sum of thyself and a flower.
+  Open your heart.
+
+[Exeunt]</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The expected numeric outputs are two followed by three. Since SPL numeric output does not necessarily insert a separator between successive values, a reader might see <code>23</code> rather than two lines. Do not interpret that possible display as the single value twenty-three. The lesson example is source-reviewed against the original SPL documentation, but has not been executed through an installed interpreter during publication.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Using a Modern Interpreter</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The community-maintained <a href="https://shakespearelang.com/">shakespearelang Python implementation</a> provides a command-line runner and debugger. For an isolated environment, create a virtual environment and activate it before installing the package. Installation may vary by operating system and Python version. Use the commands below in a disposable development environment, not on an unfamiliar production host:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:0.95em;line-height:1.5;background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1.3em"><code style="background:transparent;border:0;box-shadow:none;padding:0;color:inherit;white-space:inherit">python -m venv .venv
+# Activate .venv using the steps for your operating system.
+python -m pip install shakespearelang
+shakespeare run character_values.spl</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The commands assume an environment where the installed <code>shakespeare</code> command is available on the active PATH. To observe assignments and stage state, consult the interpreter’s documented debugger. A command shown in an educational lesson is not evidence that it successfully ran in the publishing environment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common Errors and Diagnostics</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Troubleshooting starts by identifying which character currently speaks and which character receives the assignment. A well-formed play may still produce unexpected results if a value is assigned to the wrong listener, a poetic constant has an unexpected sign, or a noun is not part of the interpreter’s grammar. Check the following failures in a safe test environment rather than changing a production system:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An undeclared or unrecognized character name may fail during parsing. Use supported names such as Hamlet, Romeo, or Juliet and declare them before their first entrance. If a third character is on stage, a second-person assignment becomes ambiguous; keep introductory exercises limited to two characters. A description after a character name is ignored by the original parser and cannot initialize the variable. Use <code>Open your heart</code> for numeric output instead of the character-oriented <code>Speak your mind</code>. Finally, remember that an ordinary assignment replaces the current number, while an expression involving <code>thyself</code> can reuse the existing value.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice and Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Replace <code>a lovely rose</code> with <code>a lovely sweet rose</code> and predict the first value before running the play. It becomes four because two adjectives double positive one twice. The final value becomes five after adding a flower. Next, change the first noun to a pig and explain its negative sign. Finally, switch the speaker and listener and identify which character variable receives the assignment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>What does a character store? A signed integer, with a stack available elsewhere in the language. Does Juliet update herself while saying <code>Thou art a King</code> to Hamlet? No, Hamlet is the listener and receives +1. What does each adjective do? It doubles the magnitude of a noun constant. What makes <code>thyself</code> useful? It provides the current listener value so an expression can calculate a new one.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why the Language Matters</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Shakespeare Programming Language is a deliberately experimental language showing that variables, numbers, and assignments need not be written using ordinary programming syntax. The unrelated <a href="https://bitcoinversus.tech/2026/10/08/oschef-001-program-structure-ingredients-mixing-bowls-methods-and-serves/">Chef esoteric programming language</a> uses culinary metaphors rather than theatrical dialogue. A wider <a href="https://bitcoinversus.tech/2026/09/30/assembly-to-kotlin-programming-languages-changed-computing/">history of programming languages</a> helps explain why practical languages emphasize compact syntax, tooling, and maintainability. SPL remains valuable for understanding how tokenization and parsing can assign precise computational meaning to surprising surface forms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Original Documentation and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://krayon.github.io/shakespearelang/docs/shakespeare.html">Hasselström and Åslund — Original Shakespeare Programming Language specification (2001)</a></li><li><a href="https://shakespearelang.com/">shakespearelang — Python interpreter, runner, and debugger</a></li><li><a href="https://github.com/dkk/ShakespearePL_Examples">ShakespearePL Examples — Source examples and references</a></li><li><a href="https://a-z.readthedocs.io/en/latest/shakespeare.html">Interview with the language creators</a></li><li><a href="https://www.youtube.com/watch?v=6avJHaC3C2U">NDC Conferences — Dylan Beattie, The Art of Code</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A Shakespeare Programming Language character is an integer variable, and theatrical dialogue can be an assignment. Nouns represent positive or negative one, adjectives repeatedly double the magnitude, and arithmetic expressions combine those values into larger numbers. The speaker generally directs a second-person assignment to the other character on stage. Once the listener and its current value are clear, later lessons on dialogue syntax, stacks, and control flow become much easier to follow.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> This educational lesson follows the original Shakespeare Programming Language specification and distinguishes source-derived numeric interpretations from code execution. The sample output is a documented expectation, not a claimed independent runtime test.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original donation QR code for 5,000 sats" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open the lesson on a larger screen and scan the QR with a compatible Bitcoin wallet. Verify the destination before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

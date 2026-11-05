@@ -64,12 +64,14 @@
     ],
     "publication_status": "published",
     "verification_status": "published_unverified",
-    "qa_status": "WordPress status publish; exactly two responsive YouTube provider blocks rendered as distinct iframes, six verified WordPress internal destination links, original C# strings anime editorial cover media #29491 confirmed 1200x630, canonical editor note → 5000 sats QR asset #24043 → approved financial disclaimer. Saved Gutenberg copied byte-identically across 3 GitHub archives with SHA 210be944afc22dca95e0d65aedbfac6c4b4628f7. Actual YouTube playback, mobile browser inspection, and C# runtime execution not independently verified.",
+    "qa_status": "WordPress status publish; exactly two responsive YouTube provider blocks rendered as distinct iframes, six verified WordPress internal destination links, one original 1200x675 C# immutability illustration media #29499, original C# strings anime editorial cover media #29491 confirmed 1200x630, canonical editor note → 5000 sats QR asset #24043 → approved financial disclaimer. Saved Gutenberg copied byte-identically across 3 GitHub archives with SHA 210be944afc22dca95e0d65aedbfac6c4b4628f7. Actual YouTube playback, mobile browser inspection, and C# runtime execution not independently verified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
     "code_examples_executed": false,
-    "featured_media_id": 29491
+    "featured_media_id": 29491,
+    "body_illustration_id": 29499,
+    "github_archive_blob_sha": "34e2d8898512763968bfe796b0d9997be21aa16a"
   },
   "next": {
     "subject": "css",
@@ -325,12 +327,14 @@
     ],
     "publication_status": "published",
     "verification_status": "published_unverified",
-    "qa_status": "WordPress status publish; exactly two responsive YouTube provider blocks rendered as distinct iframes, six verified WordPress internal destination links, original C# strings anime editorial cover media #29491 confirmed 1200x630, canonical editor note → 5000 sats QR asset #24043 → approved financial disclaimer. Saved Gutenberg copied byte-identically across 3 GitHub archives with SHA 210be944afc22dca95e0d65aedbfac6c4b4628f7. Actual YouTube playback, mobile browser inspection, and C# runtime execution not independently verified.",
+    "qa_status": "WordPress status publish; exactly two responsive YouTube provider blocks rendered as distinct iframes, six verified WordPress internal destination links, one original 1200x675 C# immutability illustration media #29499, original C# strings anime editorial cover media #29491 confirmed 1200x630, canonical editor note → 5000 sats QR asset #24043 → approved financial disclaimer. Saved Gutenberg copied byte-identically across 3 GitHub archives with SHA 210be944afc22dca95e0d65aedbfac6c4b4628f7. Actual YouTube playback, mobile browser inspection, and C# runtime execution not independently verified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
     "code_examples_executed": false,
-    "featured_media_id": 29491
+    "featured_media_id": 29491,
+    "body_illustration_id": 29499,
+    "github_archive_blob_sha": "34e2d8898512763968bfe796b0d9997be21aa16a"
   },
   "pending_publication_qa": [
     {
@@ -604,7 +608,9 @@
         "Independent mobile visual test not completed",
         "C# examples reviewed against Microsoft docs but not compiled/executed locally"
       ],
-      "github_archive_blob_sha": "210be944afc22dca95e0d65aedbfac6c4b4628f7"
+      "github_archive_blob_sha": "34e2d8898512763968bfe796b0d9997be21aa16a",
+      "body_illustration_id": 29499,
+      "in_body_media_total": 3
     }
   ],
   "featured_image_rotation": {
@@ -876,10 +882,12 @@
     "duplicate_prevention": "Found .001–.003 published; skipped stale .001 rotation slot",
     "youtube_rendered_iframes": 2,
     "source_archives_exact": true,
-    "github_blob_sha": "210be944afc22dca95e0d65aedbfac6c4b4628f7",
+    "github_blob_sha": "34e2d8898512763968bfe796b0d9997be21aa16a",
     "code_runtime_executed": false,
     "mobile_tested": false,
     "actual_playback_verified": false,
-    "next_subject": "css"
+    "next_subject": "css",
+    "in_body_media_total": 3,
+    "body_illustration_id": 29499
   }
 }

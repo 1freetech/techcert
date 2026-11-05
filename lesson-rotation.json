@@ -48,14 +48,15 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "powershell",
+    "subject": "csharp",
     "lesson_number": 4,
-    "track_id": "OSPowerShell.004",
-    "title": "OSPowerShell.004: PowerShell Variables — Assignment, Objects, Strings, Types, and Scope",
-    "public_title": "OSPowerShell.004: PowerShell Variables — Assignment, Objects, Strings, Types, and Scope",
-    "wordpress_post_id": 29453,
-    "live_url": "https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/",
-    "archive_path": "archive/2026/11/29453-ospowershell-004-variables-assignment-objects-strings-types-scope.gutenberg.html",
+    "track_id": "OSC#.004",
+    "title": "OSC#.004: C# Strings — Literals, Interpolation, Equality, and Immutability",
+    "public_title": "OSC#.004: C# Strings — Literals, Interpolation, Equality, and Immutability",
+    "wordpress_post_id": 29495,
+    "live_url": "https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/",
+    "archive_path": "archive/2026/11/29495-oscsharp-004-csharp-strings-literals-interpolation-equality-immutability.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/29495-oscsharp-004-csharp-strings-literals-interpolation-equality-immutability.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
@@ -63,21 +64,21 @@
     ],
     "publication_status": "published",
     "verification_status": "published_unverified",
-    "qa_status": "WP status publish; original 1200x630 featured cover #29448; 1662 approximate words; 6 internal links, one real terminal screenshot, 2 genuine public YouTube IDs. WordPress raw Gutenberg read-back confirms all blocks and footer, rendered content contains both distinct YouTube iframes. All 3 GitHub Gutenberg archives read back byte-for-byte, same blob SHA 2e13e811496e49e77d71235f9c339ca40d22613c. Playback/browser/mobile visual checks and runtime PowerShell execution not independently completed.",
+    "qa_status": "WordPress status publish; exactly two responsive YouTube provider blocks rendered as distinct iframes, six verified WordPress internal destination links, original C# strings anime editorial cover media #29491 confirmed 1200x630, canonical editor note → 5000 sats QR asset #24043 → approved financial disclaimer. Saved Gutenberg copied byte-identically across 3 GitHub archives with SHA 210be944afc22dca95e0d65aedbfac6c4b4628f7. Actual YouTube playback, mobile browser inspection, and C# runtime execution not independently verified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
-    "powershell_examples_executed": false,
-    "featured_media_id": 29448
+    "code_examples_executed": false,
+    "featured_media_id": 29491
   },
   "next": {
-    "subject": "csharp",
+    "subject": "css",
     "lesson_number": 1,
-    "title_format": "OSC#.001: {topic}",
-    "public_title_format": "OSC#.001: {topic}",
-    "resolution_note": "OSPowerShell.004 WordPress #29453 published and exact Gutenberg markup archived with byte-identical readback across 3 repositories. Playback/mobile/code-runtime checks remain in pending_publication_qa; do not infer full QA certification."
+    "title_format": "OSCSS.001: {topic}",
+    "public_title_format": "OSCSS.001: {topic}",
+    "resolution_note": "C# 001–003 already published Oct 9–14 2026 in WordPress despite stale rotation pointer. Unique OSC#.004 #29495 published on November 5 and byte-identical source archived across all three repositories; next CSS.001 confirmed no matching live published/draft title."
   },
-  "next_after_current": "css",
+  "next_after_current": "chef",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -268,7 +269,12 @@
     },
     "csharp": {
       "acronym": "OSC#",
-      "next_lesson_number": 1
+      "next_lesson_number": 5,
+      "last_published_lesson_number": 4,
+      "last_wordpress_post_id": 29495,
+      "last_published_title": "OSC#.004: C# Strings — Literals, Interpolation, Equality, and Immutability",
+      "verification_status": "published_unverified",
+      "source_resolution": "WordPress live check discovered OSC#.001 post 22626, OSC#.002 post 25110 and OSC#.003 post 25143. Did not publish duplicate OSC#.001; continued to OSC#.004."
     },
     "css": {
       "acronym": "OSCSS",
@@ -303,14 +309,15 @@
     }
   },
   "last_published": {
-    "subject": "powershell",
+    "subject": "csharp",
     "lesson_number": 4,
-    "track_id": "OSPowerShell.004",
-    "title": "OSPowerShell.004: PowerShell Variables — Assignment, Objects, Strings, Types, and Scope",
-    "public_title": "OSPowerShell.004: PowerShell Variables — Assignment, Objects, Strings, Types, and Scope",
-    "wordpress_post_id": 29453,
-    "live_url": "https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/",
-    "archive_path": "archive/2026/11/29453-ospowershell-004-variables-assignment-objects-strings-types-scope.gutenberg.html",
+    "track_id": "OSC#.004",
+    "title": "OSC#.004: C# Strings — Literals, Interpolation, Equality, and Immutability",
+    "public_title": "OSC#.004: C# Strings — Literals, Interpolation, Equality, and Immutability",
+    "wordpress_post_id": 29495,
+    "live_url": "https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/",
+    "archive_path": "archive/2026/11/29495-oscsharp-004-csharp-strings-literals-interpolation-equality-immutability.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/29495-oscsharp-004-csharp-strings-literals-interpolation-equality-immutability.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
@@ -318,12 +325,12 @@
     ],
     "publication_status": "published",
     "verification_status": "published_unverified",
-    "qa_status": "WP status publish; original 1200x630 featured cover #29448; 1662 approximate words; 6 internal links, one real terminal screenshot, 2 genuine public YouTube IDs. WordPress raw Gutenberg read-back confirms all blocks and footer, rendered content contains both distinct YouTube iframes. All 3 GitHub Gutenberg archives read back byte-for-byte, same blob SHA 2e13e811496e49e77d71235f9c339ca40d22613c. Playback/browser/mobile visual checks and runtime PowerShell execution not independently completed.",
+    "qa_status": "WordPress status publish; exactly two responsive YouTube provider blocks rendered as distinct iframes, six verified WordPress internal destination links, original C# strings anime editorial cover media #29491 confirmed 1200x630, canonical editor note → 5000 sats QR asset #24043 → approved financial disclaimer. Saved Gutenberg copied byte-identically across 3 GitHub archives with SHA 210be944afc22dca95e0d65aedbfac6c4b4628f7. Actual YouTube playback, mobile browser inspection, and C# runtime execution not independently verified.",
     "youtube_embed_rendered": true,
     "youtube_playback_verified": false,
     "mobile_render_verified": false,
-    "powershell_examples_executed": false,
-    "featured_media_id": 29448
+    "code_examples_executed": false,
+    "featured_media_id": 29491
   },
   "pending_publication_qa": [
     {
@@ -581,6 +588,23 @@
         "PowerShell scripts not executed in a PowerShell runtime",
         "Cover-style rotation expected anime editorial; actual cover described as editorial workstation art"
       ]
+    },
+    {
+      "wordpress_post_id": 29495,
+      "live_url": "https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/",
+      "featured_cover_verified": "original 1200x630 image metadata; anime technical theme",
+      "archive_source_verified": true,
+      "video_iframe_count": 2,
+      "distinct_youtube_ids": [
+        "nus5SP3AoHM",
+        "xY4EhUdBMbo"
+      ],
+      "unresolved": [
+        "Actual playback not verified through interactive browser",
+        "Independent mobile visual test not completed",
+        "C# examples reviewed against Microsoft docs but not compiled/executed locally"
+      ],
+      "github_archive_blob_sha": "210be944afc22dca95e0d65aedbfac6c4b4628f7"
     }
   ],
   "featured_image_rotation": {
@@ -846,5 +870,16 @@
       "powershell_runtime",
       "cover_rotation_style"
     ]
+  },
+  "learning_events_2026_11_05_oscsharp004": {
+    "wordpress_id": 29495,
+    "duplicate_prevention": "Found .001–.003 published; skipped stale .001 rotation slot",
+    "youtube_rendered_iframes": 2,
+    "source_archives_exact": true,
+    "github_blob_sha": "210be944afc22dca95e0d65aedbfac6c4b4628f7",
+    "code_runtime_executed": false,
+    "mobile_tested": false,
+    "actual_playback_verified": false,
+    "next_subject": "css"
   }
 }

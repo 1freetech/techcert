@@ -1,0 +1,194 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Chef Infra is a configuration-management system that describes the intended condition of computers as code and applies policies through Chef Infra Client. Learners will identify the role of Chef Workstation, cookbooks, recipes, resources, managed nodes, policy distribution, and convergence; distinguish server-based from local-mode operation; and explain why repeatable configuration matters. The practical exercise creates a local cookbook skeleton and inspects a Ruby-based recipe before any configuration is applied.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: a basic understanding of <a href="https://bitcoinversus.tech/2026/10/09/osbash-001-shell-script-basics-bash-shebang-chmod-first-script/">shell commands and scripts</a>, files, operating-system permissions, and a disposable test environment. Prior <a href="https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/">PowerShell variables</a> knowledge helps when comparing administration approaches, but Chef’s recipe DSL is Ruby-based rather than PowerShell or Bash.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine a school with many computers. Each computer should have an approved set of software, settings, accounts, and configuration files. Checking every computer by hand is slow, and the machines can gradually become different. Chef Infra lets an administrator write down the desired condition as a recipe, then use software to bring computers closer to that condition.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The main idea is not to repeat a command blindly. It is to compare what is present with what is wanted, and make a change when the two differ. That is called convergence. If the computer already matches the recipe, a correctly designed resource should normally leave it alone. Chef also provides tools for developing, testing, and distributing those rules. These concepts are especially useful across Linux and Windows systems.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=lqMijB1JIuU","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=lqMijB1JIuU
+</div><figcaption class="wp-element-caption"><em>Progress Chef: “How to Set Up Chef Workstation, Create a Cookbook and Get Started with Compliance” (August 2021). Official introductory walkthrough of the workstation and cookbook development process.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Major Components of Chef Infra</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>Chef Workstation</strong> is the developer environment used to author infrastructure code, including the Chef command-line tools, Cookstyle linting, and testing utilities. A <strong>cookbook</strong> is a directory of related configuration instructions, files, templates, and metadata. A <strong>recipe</strong> is a Ruby-based file within a cookbook that declares resources such as packages, directories, or configuration files. A <strong>node</strong> is a managed machine or computing system. <strong>Chef Infra Client</strong> is the agent that evaluates and applies the desired resource state on that node.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the traditional server-backed model, Chef Infra Server stores cookbook versions and node policy information, while Chef Infra Client fetches the required configuration and performs the actual work locally. A workstation authors and tests code before distribution. A separate <strong>local mode</strong> lets Chef Infra Client use local cookbooks without contacting an Infra Server. These are operational models, not distinct programming languages. <a href="https://bitcoinversus.tech/2026/10/11/osdctc-008-server-network-configuration-validation/">Server network configuration and validation</a> remain necessary when agents retrieve policy across a network.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":29533,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oschefinfra-001-architecture-diagram.png" alt="Chef Infra architecture with Chef Workstation, policy distribution, and Chef Infra Client on managed nodes." class="wp-image-29533"/><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert architecture diagram derived from Progress Chef’s documentation. The central distribution tier summarizes the legacy server-backed model and the newer Chef 360 direction; its alternatives require separate configuration.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">2026 Platform Status and Migration Context</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An important lifecycle distinction applies in November 2026: Progress Chef lists <strong>Chef Infra Server 15.x as deprecated, with an end-of-life date of November 30, 2026</strong>, and recommends evaluating <strong>Chef 360 Platform</strong> for replacement. Chef Infra Client 19.x and Chef Workstation 26.x are listed among the supported product lines. The server’s end-of-life date is not a statement that Chef Infra Client or every existing cookbook ceases to function on the same date. Version and compatibility choices should be checked against the current <a href="https://docs.chef.io/versions/">official supported-versions table</a> for a specific deployment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An established Chef Infra Server estate should inventory policies, clients, cookbooks, credentials, and dependencies before choosing a migration path. Chef 360 has different platform functions and should not be assumed to be a drop-in replacement for every older service or API. This lesson introduces the architecture; it does not instruct readers to deploy a new production Chef Infra Server.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Cookbooks, Recipes, and Resources</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A resource describes the <em>desired state</em> of one system element. For example, a <code>file</code> resource can declare a path, content, and permissions. Chef Infra Client evaluates the resource during a run and decides whether changes are required. The resources are expressed with Ruby syntax, but are interpreted through Chef’s domain-specific configuration language.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>file '/tmp/open-source-tech-cert-chef.txt' do
+  content 'Chef Infra practice file\n'
+  mode '0644'
+  action :create
+end</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The example declares a Linux-style practice file. On a disposable Linux test machine, Chef would create or update that file with the declared content and permissions. If the file already matches, the resource should not need to rewrite it. The recipe is a declarative instruction, not a transcript from a successfully executed test. On Windows, file paths, ownership, and permission behavior differ; do not reuse <code>/tmp</code> unchanged.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A recipe may contain multiple resources, such as a package followed by a service, and a cookbook can group related recipes. Later lessons will examine each resource type, attribute precedence, templates, notifications, and guards. Proper sequencing matters because one resource may depend on software or files managed by another. The concept resembles safe, repeatable administration with <a href="https://bitcoinversus.tech/2026/11/02/bash-loops-for-while-until-break-continue-safe-file-iteration/">Bash loops and iteration</a>, but Chef models desired end state rather than merely repeating commands.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why Idempotence and Configuration Drift Matter</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An <strong>idempotent</strong> operation produces the same intended state when applied again. Chef’s declarative resources are designed so repeated runs correct differences without making unnecessary changes. <strong>Configuration drift</strong> occurs when the actual state of a node diverges from the approved state—for example, when a file is manually edited or a required service is disabled. A subsequent Chef run can restore the declared condition, subject to the resources and policies actually being configured.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Consider a hypothetical fleet of 20 nodes where 3 have settings that differ from policy. The observed drift rate in that example would be <code>(3 ÷ 20) × 100 = 15%</code>. The figure is an instructional calculation, not production telemetry. An automation system can report which nodes converged, which were unchanged, and which failed, but a clean run cannot by itself prove the system satisfies every security or application requirement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Permissions and trust are central to infrastructure automation. A flawed or excessively privileged cookbook can propagate misconfiguration across machines. Use version control, reviews, policy tests, least privilege, secret-management controls, and staged deployments. Review <a href="https://bitcoinversus.tech/2026/10/12/ositc-006-windows-users-groups-permissions/">Windows users, groups, and permissions</a> and <a href="https://bitcoinversus.tech/2026/10/13/linux-command-55-chattr-linux-os/">Linux file attributes</a> before treating permission settings as interchangeable across operating systems.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab — Inspect a Cookbook Without Deploying</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Install a supported Chef Workstation release from the official source and confirm the available tools with <code>chef --version</code>. A licensed or entitled installation may be required depending on the Chef product and edition. In an isolated development environment, create a starter cookbook, enter its directory, and inspect its default recipe:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>chef --version
+chef generate cookbook oschef_infra_starter
+cd oschef_infra_starter
+# Review recipes/default.rb in a text editor.</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The generator creates a cookbook structure. Open <code>recipes/default.rb</code> and study the resource definitions before modifying them. To check Ruby syntax when the workstation provides the bundled runtime, run the following read-only syntax check:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>chef exec ruby -c recipes/default.rb</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>A syntactically valid file should report <code>Syntax OK</code>; that result checks Ruby parsing, not whether Chef resources would converge correctly, whether the desired state is secure, or whether a deployment is safe. A full test should instead run in a disposable VM with Test Kitchen or another isolated environment. Consult <a href="https://docs.chef.io/workstation/26.1/get_started/">Chef’s official Workstation getting-started guide</a> for the supported cookbook-test workflow and current prerequisites.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=XlCyd_DH1YU","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=XlCyd_DH1YU
+</div><figcaption class="wp-element-caption"><em>Progress Chef: “How to Install Chef Automate and Chef Infra Server” (2021). Historical demonstration of the legacy server-backed environment; do not treat the deprecated Infra Server deployment steps as current production guidance.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Testing, Verification, and Troubleshooting</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Cookstyle evaluates the style and many common errors in recipes. Chef InSpec expresses assertions about the condition of a system; Test Kitchen can create a test machine, apply the cookbook, and run integration checks. A syntax check is only the first gate. The next gates validate resource compilation, repeat convergence, application function, security expectations, and test cleanup. Separate reported behavior from any steps the learner has personally executed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Cookbook not found:</strong> Confirm the working directory, cookbook name, local repository structure, and run-list name before changing system configuration.</li><li><strong>Unauthorized or failed policy download:</strong> Review network reachability, node credentials, certificate trust, and the actual deployment model; never bypass authentication to make a test pass.</li><li><strong>Repeated changes on every run:</strong> Inspect resource declarations, unstable inputs, templates, notifications, and the actual node state for causes of non-idempotent behavior.</li><li><strong>Permission denied:</strong> Check the account running Chef Infra Client, OS-specific file ownership, and approved privilege boundaries.</li><li><strong>Unsupported version:</strong> Consult the official supported-versions page and migration documentation rather than following archived tutorials literally.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice Exercises</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Identify the responsibility of Chef Workstation, Chef Infra Client, a cookbook, and a managed node.</li><li>Explain which component stores the desired policy and which component performs configuration work in the traditional model.</li><li>Write down what should happen when a file already has the exact content declared by a Chef resource.</li><li>Calculate the percentage of drifted systems if 4 out of 25 managed nodes have incorrect settings.</li><li>Explain why a 2021 video about deploying Chef Infra Server needs a 2026 lifecycle warning.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Workstation develops and tests automation; Infra Client applies resources; cookbooks organize configuration code; a node is a managed system.</li><li>The legacy Chef Infra Server distributes policies and cookbooks, while Chef Infra Client performs configuration operations on each node. Local mode is a separate option.</li><li>The intended file resource should make no change if the file already meets its declared state.</li><li>The hypothetical rate is <code>(4 ÷ 25) × 100 = 16%</code>.</li><li>Chef Infra Server 15.x is scheduled for end of life on November 30, 2026; archived videos may teach obsolete provisioning paths even when their conceptual explanations remain useful.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary Sources and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://docs.chef.io/platform_overview/">Progress Chef — Platform Overview</a></li><li><a href="https://docs.chef.io/client/19/overview/chef_overview/">Progress Chef — Chef Infra architecture and components</a></li><li><a href="https://docs.chef.io/client/19/quickstart/">Progress Chef — Infra quickstart</a></li><li><a href="https://docs.chef.io/workstation/26.1/get_started/">Progress Chef — Workstation cookbook workflow</a></li><li><a href="https://docs.chef.io/versions/">Progress Chef — Supported versions and product lifecycles</a></li><li><a href="https://docs.chef.io/server/">Progress Chef — Legacy Infra Server overview and deprecation warning</a></li><li><a href="https://www.chef.io/blog/getting-started-with-chef-infrastructure-management-in-30-minutes">Progress Chef — Original introductions to the official videos</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Chef Infra helps many computers follow the same written instructions for their setup. An administrator prepares and tests a cookbook, and Chef Infra Client checks whether each managed computer matches the recipe. If something differs, the client can make the approved change. When everything already matches, the system should avoid changing it needlessly.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Reliable infrastructure automation is a combination of code, careful testing, trusted distribution, permissions, and repeated checks. Modern organizations must also consider whether a platform component is still supported. Chef Infra Server belongs to a legacy deployment model being replaced by newer Chef platform offerings; Chef Infra concepts remain useful for learning repeatable system configuration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> The OSChefInfra.001 identifier distinguishes Progress Chef infrastructure automation from the already-published OSChef.001–.003 lessons about the unrelated Chef esoteric programming language. Historical vendor videos are labeled by year; specifications and lifecycle status follow the current vendor documentation.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original QR code for donating 5,000 sats." class="wp-image-24043"/><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech donation QR code.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open this lesson on a larger screen and use a compatible Bitcoin wallet to scan the original QR code. Verify the address before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

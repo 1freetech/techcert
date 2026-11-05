@@ -51,7 +51,30 @@
   "qa_blockers": [
     "YouTube playback not independently tested in an interactive browser",
     "Mobile live-page visual inspection and screenshot not completed",
-    "PowerShell command examples source-reviewed but not runtime-executed"
+    "PowerShell command examples source-reviewed but not runtime-executed",
+    "Cover style rotation calls for anime editorial; existing subject-accurate cover is realistic technical illustration",
+    "Captured desktop screenshot link exists, but visual pixels and mobile viewport were not independently inspected"
   ],
-  "completion_note": "User requested immediate publication. Preserve published_unverified status until remaining QA completed."
+  "completion_note": "User requested immediate publication. Preserve published_unverified status until remaining QA completed.",
+  "wordpress_published_content_rendered_checked": true,
+  "wordpress_public_page_screenshot": {
+    "capture_source": "WordPress screenshot link",
+    "url": "https://s0.wp.com/mshots/v1/https%3A%2F%2Fbitcoinversus.tech%2F2026%2F11%2F05%2Fospowershell-004-variables-assignment-objects-strings-types-scope%2F?vpw=1200&vph=3200&w=1200&requeue=true",
+    "viewport_width": 1200,
+    "viewport_height": 3200,
+    "capture_status": "ready",
+    "capture_shows": "site",
+    "public_visibility": true,
+    "pixels_manually_inspected": false
+  },
+  "editorial_cover_decision": {
+    "featured_id": 29448,
+    "featured_subject": "PowerShell workstation",
+    "attached_cover_valid": true,
+    "original_dimensions_verified": true,
+    "style_rotation_expected": "anime technical editorial",
+    "style_deviation_open": true,
+    "rejected_candidate": "Generated networking equipment image does not match PowerShell variables; not uploaded or attached"
+  },
+  "github_archive_exact_blob_sha": "2e13e811496e49e77d71235f9c339ca40d22613c"
 }

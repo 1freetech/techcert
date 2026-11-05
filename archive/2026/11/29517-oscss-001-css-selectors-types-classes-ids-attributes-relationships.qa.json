@@ -8,7 +8,7 @@
   "publication_date": "2026-11-05T03:37:25",
   "github_path": "archive/2026/11/29517-oscss-001-css-selectors-types-classes-ids-attributes-relationships.gutenberg.html",
   "archive_exact_match": true,
-  "github_blob_sha": "a3725e6ba6e0e90ea37ca6e70bd0918cee779f9b",
+  "github_blob_sha": "fecd0ff8190acbbaa552a48dd044d8fdddbb2224",
   "verification_status": "published_unverified",
   "curriculum": {
     "subject": "css",
@@ -102,5 +102,20 @@
     "Independent mobile viewport screenshot and visual layout QA not verified",
     "WordPress screenshot link ready, but pixels not manually evaluated"
   ],
-  "last_repair": "No required Gutenberg source repair after read-back. Incremental creation used because long single write was blocked before creating a post."
+  "last_repair": "2026-11-05: Replaced 7 default boxed Gutenberg code blocks with seven unboxed, plain preformatted code snippets following ordinary explanatory paragraphs and colons. WordPress save/render verified; source archived byte-identically in all 3 repositories. Actual mobile/screenshot visual QA remains open.",
+  "code_presentation_repair": {
+    "performed_at_date": "2026-11-05",
+    "user_instruction": "No text boxes. Explain code in regular paragraphs, end the introductory paragraph with a colon, and put the code directly below it. No bordered or shaded wrappers.",
+    "boxed_wp_code_before": 7,
+    "boxed_wp_code_after": 0,
+    "unboxed_custom_html_pre_count": 7,
+    "all_seven_examples_preceded_by_explanatory_prose": true,
+    "rendered_boxed_code_class_present": false,
+    "wordPress_source_read_back": true,
+    "rendered_pre_elements": 7,
+    "style": "transparent background, no border, no shadow, no padding, wrapping code for smaller screens",
+    "read_back_sha": "fecd0ff8190acbbaa552a48dd044d8fdddbb2224",
+    "videos_images_footer_unchanged": true,
+    "visual_browser_screenshot_pixels_inspected": false
+  }
 }

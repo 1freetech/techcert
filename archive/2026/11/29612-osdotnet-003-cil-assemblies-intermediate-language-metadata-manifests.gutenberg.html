@@ -1,0 +1,142 @@
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A compiled .NET application contains more than the original C# source. Common Intermediate Language (CIL), structured metadata and the assembly manifest help the runtime understand and execute a managed program. Learners will identify those components, distinguish CIL from native instructions, and build and inspect a sample assembly without changing production systems.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Review <a href="https://bitcoinversus.tech/2026/10/08/osdotnet-001-what-is-dotnet-platform-runtime-sdk-libraries/">OSDotNet.001 — The .NET Platform</a> and <a href="https://bitcoinversus.tech/2026/10/08/osdotnet-002-what-common-language-runtime-does/">OSDotNet.002 — The CLR</a>. A supported .NET SDK and a terminal are required for the optional build lab; the <a href="https://bitcoinversus.tech/2026/10/09/oscsharp-001-dotnet-sdk-compiler-install-verify-create-build-run-csharp-toolchain/">C# compiler and SDK lesson</a> covers setup.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Imagine a labeled box containing written instructions, a parts list and an identity card. The instructions describe what to do, the parts list identifies what each item means, and the card identifies the box. A .NET assembly works similarly: CIL contains intermediate instructions, metadata describes types and members, and the manifest identifies the assembly and its dependencies.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A managed <code>.dll</code> commonly contains processor-independent code that a compatible runtime can translate into native instructions. This model supports C#, F# and other managed languages, but not every .NET deployment uses just-in-time compilation: Native AOT and other publishing techniques can generate native machine code ahead of execution. The standard managed assembly remains the central model for studying the .NET runtime.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=0H66H8PxcB8&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Nick Chapsas, “Hello World in .NET written using IL code” (June 1, 2021), demonstrates constructing managed intermediate language directly.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">From Source Code to Native Execution</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A typical .NET compilation path consists of several different jobs. A language compiler checks C# source, emits CIL and metadata, and packages them in an assembly. The runtime loads that assembly and typically JIT-compiles invoked method bodies into instructions for the target CPU. The <a href="https://learn.microsoft.com/en-us/dotnet/standard/managed-execution-process">Microsoft managed-execution guide</a> documents the relationship.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The following sequence is a conceptual model, not terminal output:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0"><code style="background:transparent;border:0;box-shadow:none;white-space:inherit">C# source → compiler → CIL + metadata → managed DLL → CLR/JIT → native CPU instructions</code></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The original C# syntax is lost as source text in the ordinary binary output, but enough structured information remains for runtime loading and reflection. Compare the source-level concepts in the <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-002-csharp-variables-built-in-types-var-const/">C# variables and types lesson</a> and the <a href="https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/">C# strings lesson</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The CIL Instruction Set</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>CIL is a standardized, stack-oriented instruction set. Rather than requiring a specific processor register, many instructions work with an evaluation stack. A method can load a constant, call another method, branch, perform arithmetic or return. Terms such as IL and MSIL often refer to the same managed intermediate-language concept in developer tools.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The following three lines illustrate how a managed method might print a short string; actual output differs according to compiler, project and target framework:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0"><code style="background:transparent;border:0;box-shadow:none;white-space:inherit">ldstr "Hello, .NET!"
+call void [System.Console]System.Console::WriteLine(string)
+ret</code></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Here <code>ldstr</code> loads a string reference, <code>call</code> invokes the referenced method, and <code>ret</code> returns. Real disassembly also includes method signatures, metadata references and offsets. The <a href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.emit.opcodes.ldstr">Microsoft ldstr documentation</a> describes its use of metadata string tokens.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Four Typical Assembly Components</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A static managed assembly normally has an assembly manifest, type metadata, CIL code and optional resources. The manifest provides assembly identity and references; metadata describes types, fields, methods, signatures and attributes; CIL contains method bodies; resources can hold text, images or other embedded information. The exact set of resources depends on the application.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The <a href="https://learn.microsoft.com/en-us/dotnet/standard/assembly/contents">Microsoft assembly contents guide</a> describes those elements. The <a href="https://learn.microsoft.com/en-us/dotnet/standard/assembly/manifest">manifest documentation</a> identifies fields including name, version, culture, dependency references and, where used, public-key information. A strong name is an identity mechanism, not a substitute for evaluating whether binary code is trustworthy.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":29601,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osdotnet-003-csharp-assembly-workstation.png?w=1024" alt="Editorial view of a .NET C# programming workstation." class="wp-image-29601" /><figcaption class="wp-element-caption"><em>Original .NET development-workstation illustration; technical binary-layout details are explained by Microsoft and the ECMA specification.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Metadata and Self-Describing Files</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Metadata is binary information describing the types and members defined or referenced by a .NET component. Tables hold type definitions, method definitions, member references and assembly references; heaps store strings and other data. The runtime can use metadata when loading code, resolving calls, validating types and supporting reflection.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A metadata token identifies a table entry. For example, Microsoft documents <code>0x06000004</code> as a method-definition token referring to the fourth row of the MethodDef table. That number is an illustrative reference, not a token measured from the learner’s own compiled project. Read the <a href="https://learn.microsoft.com/en-us/dotnet/standard/metadata-and-self-describing-components">self-describing components guide</a> and the <a href="https://ecma-international.org/publications-and-standards/standards/ecma-335/">ECMA-335 Common Language Infrastructure standard</a> for the formal structures.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A file extension alone is not proof of internal format. A managed DLL, a native DLL and a native application launcher can all be present in modern .NET workflows. Inspect the actual managed assembly rather than assuming that every executable contains CIL.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Assembly Names, Versions, and Dependencies</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An assembly manifest acts like a catalog entry. The assembly name identifies its component, a four-part version can describe compatibility, and references help the runtime find dependent assemblies. The usual assembly-version notation is <code>Major.Minor.Build.Revision</code>. A marketing or product version may differ from the assembly version; neither number should be guessed from a file creation date.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Applications can depend on assemblies from libraries and packages. Modern .NET build output may also contain a runtime configuration file and a dependency manifest in JSON, which serve hosting and dependency purposes but are not themselves the CIL-containing assembly. The <a href="https://learn.microsoft.com/en-us/dotnet/standard/assembly/versioning">Microsoft assembly-versioning guide</a> explains why assembly identity matters.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practical Lab — Build and Inspect Your Own Assembly</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Use a terminal in a disposable project directory. Confirm the installed SDK, create a new console project, and navigate into it. The commands are presented without fixed-width code boxes:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0"><code style="background:transparent;border:0;box-shadow:none;white-space:inherit">dotnet --list-sdks
+dotnet new console --name CilWorkshop
+cd CilWorkshop</code></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Open the generated <code>Program.cs</code> file and replace its initial contents with a reflection example. The code asks the currently executing assembly for its own name, version and type count:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0"><code style="background:transparent;border:0;box-shadow:none;white-space:inherit">using System;
+using System.Reflection;
+
+Assembly assembly = Assembly.GetExecutingAssembly();
+AssemblyName identity = assembly.GetName();
+
+Console.WriteLine($"Assembly: {identity.Name}");
+Console.WriteLine($"Version: {identity.Version}");
+Console.WriteLine($"Defined types: {assembly.GetTypes().Length}");</code></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Compile into a predictable folder and run the console application. The build is permitted to restore required SDK components; avoid using untrusted package feeds for an educational test:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0"><code style="background:transparent;border:0;box-shadow:none;white-space:inherit">dotnet build --output ./artifacts
+dotnet run</code></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The expected name is <code>CilWorkshop</code>. The exact assembly version and count of defined types may vary with SDK and project settings; they are not fixed values asserted by the lesson. Observe the displayed metadata rather than interpreting a successful compilation as proof that every type and dependency is correctly configured.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Inspect the output directory for <code>CilWorkshop.dll</code> and companion runtime files. The DLL is the managed assembly; the <code>.deps.json</code> and <code>.runtimeconfig.json</code> files support dependency and runtime selection. A separate native application host may be generated as well, depending on the selected build platform.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Optional IL Disassembly with ILSpy</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The Windows Visual Studio developer tools include an IL Disassembler known as <code>ildasm</code>. The open-source <a href="https://github.com/icsharpcode/ILSpy">ILSpy project</a> supplies an assembly browser and the cross-platform <code>ilspycmd</code> tool. As documented by the current project, the latest pointer package requires .NET SDK 10.0.100 or newer. If the lab machine uses an older SDK, check the compatible release instead of assuming the newest ILSpy version will install.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>In a disposable environment with a suitable SDK and a trusted assembly, install the optional tool and display IL from the compiled file:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p style="white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0"><code style="background:transparent;border:0;box-shadow:none;white-space:inherit">dotnet tool install --global ilspycmd
+ilspycmd --help
+ilspycmd --ilcode ./artifacts/CilWorkshop.dll</code></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The output may contain type definitions, an entry-point method, <code>ldstr</code> instructions for strings, calls into <code>System.Console</code>, and metadata tokens. The exact tokens and method layout vary with compiler and target framework. Those features should be observed in the real output rather than copied from a diagram and reported as a runtime test.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=Vlkn9tFqrrI&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>OurTechRoom, “How to Use Ildasm (IL Disassembler) to Inspect .NET DLL and EXE Files?” (November 21, 2025). A demonstration of viewing IL, types, methods and metadata from managed files.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Safety, Compatibility, and Troubleshooting</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>dotnet command is missing:</strong> Confirm the installed SDK and its command search path. Review the <a href="https://bitcoinversus.tech/2026/10/08/it-what-is-path-environment-variable-windows-linux/">Windows and Linux PATH explainer</a>.</li><li><strong>No DLL in the output folder:</strong> Verify that <code>dotnet build</code> completed successfully and that the terminal is in the correct project directory.</li><li><strong>Unexpected name or version:</strong> Inspect the project properties and compare the actual DLL with the file the reflection program is executing.</li><li><strong>ILSpy installation fails:</strong> Check the current SDK requirements and PATH. Use a compatible installer only from a trustworthy source.</li><li><strong>The file is not a managed assembly:</strong> Do not confuse an application host or a native library with the project’s managed DLL.</li><li><strong>Unknown binary inspection:</strong> Never load untrusted assemblies into a privileged process. Microsoft warns that malformed PE and metadata can cause failures in reader tools.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Exercises</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Name the four typical elements of a managed assembly and explain which one carries the program's identity.</li><li>Explain the difference between CIL and the native instructions the processor ultimately executes.</li><li>Build the CilWorkshop sample and identify the managed DLL without relying on its filename alone.</li><li>Use the reflection example to record the assembly name and actual version from your own environment.</li><li>Describe what the metadata token <code>0x06000004</code> represents in Microsoft's teaching example.</li><li>Explain why a native application host can be present beside a managed .NET assembly.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check — Answer Key</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>The manifest identifies the assembly; type metadata describes types and members, CIL contains managed method instructions, and optional resources contain embedded data.</li><li>CIL is intermediate code that generally requires runtime translation; native instructions are CPU-specific and can be executed by that processor.</li><li>The sample normally produces <code>CilWorkshop.dll</code> in the selected build output, but a valid managed file must contain the appropriate managed metadata.</li><li>The version is whatever the build reports through <code>Assembly.GetName()</code>, not a universal value invented for all SDKs.</li><li>The high byte <code>0x06</code> denotes a MethodDef table entry and the low bytes specify row four. The value is illustrative, not measured from the sample.</li><li>An application host can be native machine code responsible for launching the managed runtime, while a managed DLL holds CIL and metadata.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Sources and Further Reading</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://learn.microsoft.com/en-us/dotnet/standard/managed-execution-process">Microsoft Learn — Managed execution process</a></li><li><a href="https://learn.microsoft.com/en-us/dotnet/standard/assembly/contents">Microsoft Learn — Assembly contents</a></li><li><a href="https://learn.microsoft.com/en-us/dotnet/standard/assembly/manifest">Microsoft Learn — Assembly manifest</a></li><li><a href="https://learn.microsoft.com/en-us/dotnet/standard/metadata-and-self-describing-components">Microsoft Learn — Metadata and self-describing components</a></li><li><a href="https://learn.microsoft.com/en-us/dotnet/standard/assembly/file-format">Microsoft Learn — .NET assembly binary format and safety caveat</a></li><li><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build">Microsoft Learn — dotnet build</a></li><li><a href="https://ecma-international.org/publications-and-standards/standards/ecma-335/">Ecma International — ECMA-335 Common Language Infrastructure standard</a></li><li><a href="https://github.com/icsharpcode/ILSpy/blob/master/ICSharpCode.ILSpyCmd/README.md">ILSpy — Official ilspycmd command-line documentation</a></li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A .NET assembly is a structured binary containing enough information for a compatible runtime to load and understand the program. CIL describes intermediate operations; metadata identifies types, methods and references; the manifest gives the assembly a name and version. The runtime then applies an execution strategy, commonly JIT compilation, to produce the machine instructions that do the work.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Understanding those boundaries helps developers distinguish source-code errors, missing SDK tools, invalid dependencies and runtime-loading failures. The next .NET curriculum lesson will explore the SDK and project structure in greater detail.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor’s Note:</strong> OSDotNet.003 follows the published CLR lesson. CIL examples and expected output are documented technical illustrations, not independently executed commands; video playback and mobile-browser layout require separate final checks. Microsoft and Ecma standards are cited for the underlying binary and instruction models.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech donation QR code for 5,000 satoshis." class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, open this lesson on a larger screen and use a compatible Bitcoin wallet to scan the original QR code. Verify the destination before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please donate using the QR code provided.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p><!-- /wp:paragraph -->

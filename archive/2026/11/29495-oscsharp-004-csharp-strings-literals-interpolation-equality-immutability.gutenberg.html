@@ -1,0 +1,227 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>C# strings represent text using the <code>string</code> keyword and the <code>System.String</code> type. After completing the <a href="https://bitcoinversus.tech/2026/10/09/oscsharp-001-dotnet-sdk-compiler-install-verify-create-build-run-csharp-toolchain/">C# toolchain and compiler</a>, <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-002-csharp-variables-built-in-types-var-const/">C# variables and types</a>, and <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-003-csharp-operators-expressions-precedence/">operators and expressions</a> lessons, learners should be able to create string literals, insert values into messages, compare text deliberately, identify the limits of <code>Length</code>, and explain why modifying a string produces a new value. The practical lab uses a console application and requires a working .NET SDK.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A string is a piece of text a program remembers, such as a server label, a warning message, or a filename. A variable holds a reference to the text. The program can ask how long the text is, check whether it matches a stored value, or build a new message around it. C# calls its text type <code>string</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Imagine writing a message on a card. Changing the message does not erase the original card; the program makes another text value and can point the same variable name to the new value. That behavior is called <strong>immutability</strong>. It helps programmers reason about saved labels, comparisons, and repeated operations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=nus5SP3AoHM","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=nus5SP3AoHM
+</div><figcaption class="wp-element-caption"><em>Microsoft's official .NET channel: “The Basics of Strings! [Pt 5] | C# for Beginners” (November 10, 2023). Scott Hanselman and David Fowler explain declaring, joining, interpolating, and trimming strings.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The String Type and Literal Text</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>C# uses the <code>string</code> keyword as an alias for <code>System.String</code>. A regular string literal is enclosed in double quotation marks. The <code>+</code> operator can combine strings, while <code>Console.WriteLine</code> sends the resulting message to the console. Unlike a numeric operation, combining two string values produces another sequence of text.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>string left = "Data";
+string right = "Center";
+string label = left + " " + right;
+Console.WriteLine(label);
+// Expected output: Data Center</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>A string variable holds a reference to an object; <a href="https://bitcoinversus.tech/2026/10/08/osdotnet-001-what-is-dotnet-platform-runtime-sdk-libraries/">the .NET runtime</a> and <a href="https://bitcoinversus.tech/2026/10/08/osdotnet-002-what-common-language-runtime-does/">the Common Language Runtime</a> provide the wider context for the runtime. C# strings are stored as sequences of UTF-16 code units. A <code>char</code> represents one UTF-16 code unit, so <code>Length</code> reports code units, not necessarily human-perceived characters. Some emoji and other Unicode characters require multiple code units.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>string rack = "A7";
+Console.WriteLine(rack.Length);  // 2
+Console.WriteLine(rack[0]);     // A
+Console.WriteLine(rack[1]);     // 7</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Quotes, Escapes, and Raw String Literals</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Ordinary quoted strings recognize escape sequences: <code>\n</code> represents a newline, <code>\t</code> a tab, <code>\"</code> a quote, and <code>\\</code> a literal backslash. A verbatim literal begins with <code>@</code> and treats backslashes literally. Raw literals, supported in C# 11 and later, use three or more quotation marks and are particularly useful when embedded text contains quotes or formatting.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>string status = "Online\nReady";
+string path = @"C:\logs\rack.txt";
+string json = """{"rack":"A7","online":true}""";
+
+Console.WriteLine(path);
+Console.WriteLine(json);</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Raw string literals improve readability; they do not make embedded commands or database queries safe. Never interpolate untrusted input directly into SQL commands. Use parameterized database APIs instead. When developing across Windows, macOS, and Linux, filesystem paths should be assembled with <code>Path.Combine</code> rather than hand-written platform separators.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Interpolation and Formatting</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Prefix a quoted string with <code>$</code> to enable interpolation. The expression inside each pair of braces is evaluated, converted to text, and inserted into the resulting string. Interpolation is often clearer than joining a long series of values with <code>+</code>. Formatting may follow a colon, such as <code>:F2</code> for two fractional digits; the output can depend on the current culture.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>string machine = "miner-04";
+int boards = 3;
+double efficiency = 12.5;
+
+Console.WriteLine($"Machine {machine} has {boards} boards.");
+Console.WriteLine($"Efficiency: {efficiency:F2} J/TH");
+// Expected on an en-US culture:
+// Machine miner-04 has 3 boards.
+// Efficiency: 12.50 J/TH</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=xY4EhUdBMbo","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=xY4EhUdBMbo
+</div><figcaption class="wp-element-caption"><em>Microsoft's official .NET channel: “C# Language Highlights: String Interpolation” (June 3, 2021), with James Montemagno and Maira Wenzel explaining interpolated expressions.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Immutability and Common Text Operations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Calling <code>ToUpperInvariant()</code>, <code>Trim()</code>, or <code>Replace()</code> returns another string rather than modifying the existing object's characters. A variable can then refer to the returned value. When combining many pieces repeatedly in a large loop, <code>StringBuilder</code> may reduce temporary allocations, but ordinary interpolation is the better default for short messages.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>string original = "  rack-a7  ";
+string clean = original.Trim().ToUpperInvariant();
+
+Console.WriteLine($"Original: [{original}]");
+Console.WriteLine($"Clean: [{clean}]");
+// Expected:
+// Original: [  rack-a7  ]
+// Clean: [RACK-A7]</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>String immutability is shared with languages such as Java; compare the related treatment in the existing <a href="https://bitcoinversus.tech/2026/11/01/osjava-005-java-strings-literals-immutability-equals-length-substring/">Java string fundamentals</a> lesson. A string can also be <code>null</code> when its declared nullability permits it, which is different from <code>""</code> (empty text) or <code>" "</code> (one space). Use <code>string.IsNullOrWhiteSpace</code> when deciding whether a field contains meaningful visible text.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Text Equality and Defensive Comparison</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <code>==</code> operator compares string contents using ordinal, case-sensitive equality. Case-insensitive comparisons should state their intended rules explicitly: <code>StringComparison.OrdinalIgnoreCase</code> is useful for many protocol identifiers, but human-language names may require culture-sensitive comparison rules. Avoid assuming a comparison automatically ignores spaces or punctuation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>string a = "READY";
+string b = "ready";
+Console.WriteLine(a == b);   // False
+Console.WriteLine(string.Equals(a, b, StringComparison.OrdinalIgnoreCase)); // True
+Console.WriteLine(string.IsNullOrWhiteSpace("   ")); // True</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>For security-sensitive identifiers, comparison behavior should be chosen from the relevant protocol or application requirements. Even a case-insensitive comparison does not validate a user's authorization, and equality checks involving secrets may require specialized timing-safe techniques.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab — Build a String Report</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Open a terminal with the .NET SDK installed. Run <code>dotnet --info</code> to check the local toolchain. Create a disposable console project and replace its <code>Program.cs</code> contents with the complete C# example below. Run the application in the project folder. The lab reads and transforms literal strings only; it does not edit the registry, control services, or transmit network data.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>dotnet new console -n StringLab
+cd StringLab
+# Replace Program.cs with the sample, then run:
+dotnet run</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>using System;
+
+string source = "  rack-07  ";
+string cleaned = source.Trim().ToUpperInvariant();
+string renamed = cleaned.Replace("RACK", "NODE", StringComparison.Ordinal);
+bool matches = string.Equals("ok", "OK", StringComparison.OrdinalIgnoreCase);
+
+Console.WriteLine($"Original: [{source}]");
+Console.WriteLine($"Cleaned: [{cleaned}]");
+Console.WriteLine($"Renamed: [{renamed}]");
+Console.WriteLine($"Equal ignoring case: {matches}");</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p><strong>Expected output:</strong> The bracketed original retains its leading and trailing spaces, the cleaned label reads <code>RACK-07</code>, the renamed label reads <code>NODE-07</code>, and the last line reports <code>True</code>. The examples have been checked against Microsoft’s documented C# syntax and semantics; C# compilation and runtime execution were not independently performed in the publishing environment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting and Diagnostics</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Compiler errors near quotes: verify matching delimiters, escaped quotation marks, and correctly opened raw strings.</li><li>Unexpected whitespace: inspect the string inside visible delimiters such as <code>[{value}]</code>; <code>Trim()</code> returns a new string.</li><li>Unexpected case-sensitive results: use an explicit <code>StringComparison</code> rule where the application requires it.</li><li>An incorrect character count: remember that <code>Length</code> counts UTF-16 code units, not grapheme clusters.</li><li>Unexpected numeric formatting: confirm the current culture before comparing formatted output with sample results.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice, Knowledge Check, and Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Change the lab's source to <code>"  miner-12  "</code> and predict the cleaned value before running it. Replace the case-insensitive comparison with <code>StringComparison.Ordinal</code> and explain why the result changes. Create a new <code>"A7"</code> string, inspect <code>Length</code>, and print each indexed character.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> Does <code>Trim()</code> change the original string? <strong>Answer:</strong> No, it returns another string. <strong>Question:</strong> Why does interpolation use a <code>$</code> prefix? <strong>Answer:</strong> It tells the compiler to evaluate expressions inside braces. <strong>Question:</strong> Is <code>"a" == "A"</code> true? <strong>Answer:</strong> No, ordinary string equality is case-sensitive. <strong>Question:</strong> Does <code>Length</code> always equal the number of visible characters? <strong>Answer:</strong> No; Unicode text may contain multiple UTF-16 code units for one visible symbol.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Authoritative Sources and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/strings/">Microsoft Learn — C# strings and immutability</a></li><li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/strings/interpolation">Microsoft Learn — String interpolation</a></li><li><a href="https://learn.microsoft.com/dotnet/csharp/fundamentals/strings/raw-string-literals">Microsoft Learn — Raw string literals</a></li><li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/">Microsoft Learn — Working with strings</a></li><li><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-run">Microsoft Learn — dotnet run</a></li><li><a href="https://learn.microsoft.com/en-us/training/modules/csharp-basic-formatting/">Microsoft Learn — String-formatting exercises</a></li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A C# string is a nameable text value that a program can display, compare, and use to build messages. Quotation marks create text, a dollar sign allows variables to appear inside it, and explicit comparison rules help prevent mistaken matches. Strings cannot have their characters changed in place; transformations produce new strings. Reliable text handling is a foundation for later lessons on arrays, file operations, APIs, and application debugging.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original Bitcoin donation QR code for a 5,000 satoshi donation" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open this lesson on a larger screen and use a compatible Bitcoin wallet to scan the original QR code. Verify the address before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

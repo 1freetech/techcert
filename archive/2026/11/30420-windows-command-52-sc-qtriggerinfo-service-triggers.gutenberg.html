@@ -1,0 +1,260 @@
+<!-- wp:paragraph -->
+<p><strong><code>sc.exe qtriggerinfo</code></strong> is a Windows service-control query that displays <strong>event-trigger configuration</strong> for a named service. A Windows service may start automatically at boot, start on demand, or respond to a system event such as a device arriving or a computer joining a domain. A technician who sees a stopped service should therefore inspect the trigger policy before assuming that the service is broken.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Windows Command #52 continues <a href="https://bitcoinversus.tech/2026/10/30/windows-command-51-sc-getkeyname-windows-os/">Command #51 — sc getkeyname</a>. The previous chapter established how the internal service name differs from a display name; the present chapter uses that internal identifier to inspect <em>when</em> the Windows Service Control Manager may start or stop a service. It also builds on <a href="https://bitcoinversus.tech/2026/10/10/ositc-005-windows-services-fundamentals-service-control-manager-startup-types-dependencies-services-msc-and-verification/">Windows Services fundamentals</a> and earlier service-status commands.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain service trigger-start behavior and distinguish it from Automatic, Manual, and Disabled startup configuration.</li><li>Run <code>sc.exe qtriggerinfo &lt;ServiceName&gt;</code> safely and identify the target by its internal service name.</li><li>Interpret <code>START SERVICE</code>, <code>STOP SERVICE</code>, trigger type, subtype GUID, and optional matching data.</li><li>Connect trigger configuration with <code>sc.exe qc</code>, <code>sc.exe query</code>, and Windows event evidence.</li><li>Recognize why a stopped Windows Time service may be expected on some workgroup or domain configurations.</li><li>Document read-only findings without disabling triggers or changing a production service's startup policy.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites are familiarity with Command Prompt, service names, and the difference between configuration and current runtime state. <code>sc.exe</code> is the native Windows Service Control utility; examples are intended for Windows 10/11 and supported Windows Server installations, but individual service definitions and access permissions vary. The command examples were verified against Microsoft Learn documentation. No Windows machine or Service Control Manager was accessed to execute the article's commands.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Service Control Manager and Event-Driven Startup</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Service Control Manager (SCM) maintains the installed-service database and controls service lifecycles. A traditional Automatic service is generally scheduled for startup during boot. A demand-start service can be started by an authorized caller. <strong>Trigger-start</strong> adds another mechanism: the service can register conditions that cause the SCM to start or stop it when particular system events occur.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Microsoft introduced trigger-start services to reduce unnecessary persistent background activity. The <a href="https://learn.microsoft.com/en-us/windows/win32/services/service-trigger-events">Service Trigger Events reference</a> describes events including device-interface arrivals, network availability changes, domain join/leave status, and custom events. Not every Windows service has triggers, and the presence of a trigger does not guarantee that the service must remain running after the event.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Microsoft distinguishes a service's <strong>startup type</strong> from its event triggers. A service configured for Manual startup may also have registered triggers that start it when its prerequisites become available. A brief stopped interval is therefore not enough to diagnose failure. Review the configured triggers, service state, dependencies, event logs, and the service's documented behavior together.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=IXiXjjcXGmA&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>TheWindowsClub, “How to open and use Windows Services Manager (Services.msc)” (September 20, 2020). The demonstration establishes where a technician views service status and startup type in the graphical Services management tool. It is background instruction rather than a specific demonstration of <code>qtriggerinfo</code>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Command Syntax and the Correct Shell</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In an ordinary Windows Command Prompt, enter the following command to inspect a service's registered trigger configuration. Substitute an installed service's internal name where appropriate:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">sc.exe qtriggerinfo W32Time</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Using the explicit executable name <code>sc.exe</code> is also important in Windows PowerShell. In older Windows PowerShell environments, the token <code>sc</code> can resolve to the <code>Set-Content</code> alias instead of the Service Control utility. Qualifying the program as <code>sc.exe</code> avoids that collision. Windows PowerShell and PowerShell may differ in alias definitions, so there is no reason to rely on an ambiguous shortcut.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/windows/win32/services/configuring-a-service-using-sc">SCM command syntax documentation</a> describes the optional remote computer field before the command. On a machine where remote service-control rights and firewalls permit access, the corresponding format is:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">sc.exe \\SERVER01 qtriggerinfo W32Time</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A remote inspection can fail due to service-control permissions, name resolution, host unavailability, firewall rules or the service not being installed on the remote computer. Do not put administrator passwords on the command line. A query normally requires sufficient rights to read the service's configuration; remote access depends on the target computer's security policy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reading the Official Windows Time Trigger Example</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/windows/win32/services/service-trigger-events">Service Trigger Events</a> documentation provides the following example for a <code>W32Time</code> service configured around domain membership. The block below condenses the <strong>illustrative documentation output</strong> while preserving the two trigger actions and their Microsoft-documented identifiers; it is not captured output from a computer accessed for the lesson:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">[SC] QueryServiceConfig2 SUCCESS
+SERVICE_NAME: w32time
+
+START SERVICE
+  DOMAIN JOINED STATUS : 1ce20aba-9851-4421-9430-1ddeb766e809 [DOMAIN JOINED]
+STOP SERVICE
+  DOMAIN JOINED STATUS : ddaf516e-58c2-4866-9574-c3b615d42ea1 [NOT DOMAIN JOINED]</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The phrase <strong>START SERVICE</strong> identifies an action associated with the first domain-status condition. The second record associates a domain-leave condition with a <strong>STOP SERVICE</strong> action. The GUIDs are identifiers for particular trigger subtypes, not IP addresses or resource usage metrics. An organization may configure <code>W32Time</code> differently; compare the target host's actual settings with its domain membership and policy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Microsoft separately documents cases in which <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/active-directory/w32time-not-start-on-workgroup">Windows Time does not run on a workgroup computer</a> because its configured trigger and startup behavior differ from a domain-joined host. A stopped service can be expected in that situation. Changing the startup type or deleting trigger information without a diagnosis may mask the reason for its configured state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30411,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/windows-command-52-windows-service-trigger-diagnostics.png" alt="Windows workstation next to server equipment displaying an illustrative service configuration screen" class="wp-image-30411" /><figcaption class="wp-element-caption"><em>Original AI-generated educational image representing service diagnostics at an IT workstation. The pictured interface is conceptual; the exact trigger output above comes from Microsoft documentation.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Recognizing Device, Network, and Domain Triggers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Trigger records describe an action plus a category of event. The precise configuration may include a subtype GUID and one or more qualifying data items. For example, the Service Trigger Events documentation shows a device-interface-arrival trigger for the historical Tablet Input service, with device-identifying data that narrows which interface arrivals should activate it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Device-interface arrival:</strong> a service may start when supported hardware or a software-visible device interface becomes present.</li><li><strong>Network availability:</strong> a service can respond to configured network-connected or disconnected conditions; distinguish the trigger signal from actual application reachability.</li><li><strong>Domain status:</strong> the service may react to a computer joining or leaving a Windows domain.</li><li><strong>Custom trigger:</strong> a service developer can register matching event information for a supported service-trigger mechanism.</li><li><strong>Trigger-specific data:</strong> the service may match an event subtype and additional strings or other data rather than every event in a broad category.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/install/best-practices-win32services-interacting-with-devices">device-facing Win32 service guidance</a> describes designing a service to start when an appropriate interface arrives and to release resources when the last relevant interface leaves. The associated device driver and service are not interchangeable; the Windows Plug and Play system and Service Control Manager participate in distinct parts of the lifecycle.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A trigger event can already be satisfied when Windows starts, so an eligible service may launch at boot even though it is considered trigger-start. A triggered service may also be started manually or by another authorized component. Current state alone does not prove which event initiated it. Correlate with timestamped logs before claiming cause and effect.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inspect Current State Separately from Trigger Policy</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The trigger query describes configured event conditions. To inspect the service's current state and startup configuration, use the other documented read-only SCM commands in separate steps:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">sc.exe query W32Time
+sc.exe qc W32Time
+sc.exe qtriggerinfo W32Time</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <code>query</code> output reports a service's current state such as running or stopped; <code>qc</code> reports general configuration including startup type; <code>qtriggerinfo</code> retrieves trigger settings. Learn more from <a href="https://bitcoinversus.tech/2026/10/06/windows-command-34-sc-query/">Windows Command #34 — sc query</a> and <a href="https://bitcoinversus.tech/2026/10/08/windows-command-38-sc-qc-windows-os/">Windows Command #38 — sc qc</a>. A consistent diagnosis requires all three views.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Avoid assuming that a Manual startup type excludes trigger activation. Likewise, do not interpret <code>START SERVICE</code> in trigger output as confirmation that the service is running at the moment of the query. It denotes a configured action. The service state must be checked independently.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=aDdFgbwquyg&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Secure2Cyber, “How to Set Startup Type of Any Service in Windows (Automatic, Manual, Disabled)” (August 23, 2025). The video demonstrates the startup-type controls in Services and the <code>sc config</code> workflow. Configuration commands shown by the presenter are not part of the read-only lab; use them only with change approval.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inspect an Internal Service Name Before Running the Query</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Administrators often receive a service's friendly name from a user or GUI. The SCM query expects an internal service name. In the earlier <a href="https://bitcoinversus.tech/2026/10/30/windows-command-51-sc-getkeyname-windows-os/">getkeyname lesson</a>, the display name <em>Print Spooler</em> maps to the internal identifier <code>Spooler</code> on installations where the service exists. A read-only lookup can find the key name before checking trigger settings:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">sc.exe getkeyname &quot;Print Spooler&quot;
+sc.exe qtriggerinfo Spooler</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Do not expect all services to return meaningful trigger information. Some traditional services lack registered triggers; an empty or unavailable trigger result does not establish that the service has failed. Check whether the target service exists, the machine supports the query, and whether the service has trigger configuration at all.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The service key name should not be guessed from capitalization or translated display labels. For machine-specific scripts, use verified identifiers and check return codes rather than interpreting an absent service as a trigger-policy failure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30412,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/windows-command-52-network-and-device-event-workstation.png" alt="Technician observing a Windows laptop connected to network and device hardware" class="wp-image-30412" /><figcaption class="wp-element-caption"><em>Original AI-generated educational image illustrating system events that may relate to Windows service triggers. No real device-arrival event or service-start transition was recorded for the image.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Practical Read-Only Diagnosis on an Authorized Windows Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Suppose a hypothetical Windows 11 workstation shows the Windows Time service stopped, and a technician receives a synchronization complaint. The aim is to determine the configuration before making an operational change. No changes are necessary during the initial evidence-gathering stage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Confirm identity:</strong> verify the installed internal service name through the Services application or <code>sc.exe getkeyname</code>.</li><li><strong>Record state:</strong> run <code>sc.exe query W32Time</code> and note the observed state with the current timestamp.</li><li><strong>Inspect configuration:</strong> use <code>sc.exe qc W32Time</code> and <code>sc.exe qtriggerinfo W32Time</code>. Preserve all relevant output.</li><li><strong>Establish context:</strong> check whether the computer is domain joined or in a workgroup, and whether organization policy defines a different time source or startup behavior.</li><li><strong>Review logged events:</strong> inspect Service Control Manager and Windows Time events in Event Viewer, with timestamps and error codes, rather than inferring an outage solely from a stopped service.</li><li><strong>Evaluate the actual requirement:</strong> confirm whether an observable time-synchronization problem exists and whether the configuration is intended.</li><li><strong>Escalate safely:</strong> document findings and request authorization before any startup-type, trigger, registry or time-service policy change.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The worked case is an engineering exercise, not an actual investigation. A stopped <code>W32Time</code> on a particular machine may be normal or faulty depending on its configuration. The relevant question is whether system time meets the organization's synchronization requirement, not whether every service must remain continuously running.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Failure-Analysis Example with Evidence Classification</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine a service that starts on a network event and stops when network availability changes. An operator reports that the application cannot connect after a network adapter is unplugged. The triggered stop may be part of the intended configuration, but several alternatives remain: a genuine network failure, a dependency issue, a service crash, a permission change, or a mismatch between network detection and the application's needs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The responsible troubleshooting sequence separates four pieces of evidence: <strong>policy</strong> from <code>qtriggerinfo</code>, <strong>current state</strong> from <code>query</code>, <strong>general startup configuration</strong> from <code>qc</code>, and <strong>observed events</strong> from timestamped system logs. A fifth check determines whether the application's user-visible behavior actually violated its service-level objective. A correct trigger configuration cannot by itself prove the entire application is healthy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Compare earlier lessons on <a href="https://bitcoinversus.tech/2026/10/14/windows-command-49-sc-sidtype-windows-os/">Windows service security identities</a> and <a href="https://bitcoinversus.tech/2026/10/12/ositc-006-windows-users-groups-permissions/">Windows users, groups and permissions</a>. Service metadata may be readable to a standard user while modification rights are restricted. That difference is intentional: observing a policy is not equivalent to receiving authorization to change it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common Errors and Risky Misinterpretations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Using <code>sc</code> in PowerShell:</strong> prefer <code>sc.exe</code> explicitly because the shorthand can collide with an alias.</li><li><strong>Using a friendly display name as the internal identifier:</strong> verify the key name first, especially on multilingual systems.</li><li><strong>Assuming Manual always means manually started:</strong> event-triggered startup can coexist with demand-start behavior.</li><li><strong>Treating a configured START action as a real event log:</strong> trigger metadata does not prove an event occurred.</li><li><strong>Declaring a stopped service broken:</strong> examine the expected trigger, dependencies and actual application requirement.</li><li><strong>Confusing Service Control events and Task Scheduler:</strong> a service trigger is defined in SCM service configuration, not automatically as a Task Scheduler task.</li><li><strong>Deleting or replacing trigger entries during diagnosis:</strong> <code>sc.exe triggerinfo</code> changes configuration; <code>sc.exe qtriggerinfo</code> queries it. Do not use the modifying form in a read-only lab.</li><li><strong>Trusting a screenshot without a host/version record:</strong> document the Windows release and service environment because trigger definitions can vary across devices and administrators.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check with Explained Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>What does <code>sc.exe qtriggerinfo</code> retrieve?</strong> Event-trigger configuration for a named Windows service, including applicable action and condition metadata.</li><li><strong>Does an output line saying START SERVICE mean the service is currently running?</strong> No. It identifies the action defined for the corresponding trigger; current state comes from a separate status query.</li><li><strong>What identifier follows <code>qtriggerinfo</code>?</strong> The service's internal name, for example <code>W32Time</code>, not necessarily the localized display name.</li><li><strong>Why use <code>sc.exe</code> instead of only <code>sc</code>?</strong> The explicit executable avoids ambiguity with a PowerShell alias in some environments.</li><li><strong>Can a Manual service start after a device arrives?</strong> Yes, when an appropriate trigger is registered and applicable system conditions occur.</li><li><strong>Why can two machines show different triggers for the same service?</strong> Windows versions, deployment policy, domain state and service configuration can differ.</li><li><strong>Should a technician delete triggers to resolve a stopped service?</strong> Not without a verified cause, change approval and rollback plan; first compare configuration, state and logs.</li><li><strong>What does the published W32Time sample demonstrate?</strong> A domain-associated start condition and a corresponding leave-domain stop condition in a Microsoft documentation example, not a verified configuration of the reader's machine.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Official References and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary Microsoft documentation: <a href="https://learn.microsoft.com/en-us/windows/win32/services/service-trigger-events">Service Trigger Events</a>; <a href="https://learn.microsoft.com/en-us/windows/win32/services/configuring-a-service-using-sc">Configuring a Service Using SC</a>; <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/active-directory/w32time-not-start-on-workgroup">W32Time doesn't start on a workgroup computer</a>; and <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/install/best-practices-win32services-interacting-with-devices">Best practices for Win32 services interacting with devices</a>. The videos by TheWindowsClub and Secure2Cyber are contextual demonstrations of the Windows Services interface and startup settings; Microsoft documentation is the authority for the <code>qtriggerinfo</code> examples.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A Windows service can be stopped without being misconfigured. <code>sc.exe qtriggerinfo</code> helps technicians determine whether event-driven startup or stop rules explain a service's expected lifecycle. Combine the trigger configuration with service identity, startup type, current state and event history. Accurate diagnosis relies on separating configured behavior from observed activity, then making only authorized changes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Windows Command #52 follows the verified publication of Windows Command #51. Command syntax and service-trigger concepts were checked against Microsoft's official Service Control Manager and Windows Time documentation on November 6, 2026. The W32Time terminal example is sourced from Microsoft, not from an independently executed Windows session. No production service, registry setting or trigger configuration was changed. The featured cover and two body illustrations are AI-generated editorial artwork. YouTube metadata was verified from published source pages; live player rendering and playback are checked separately.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original 5,000-satoshi donation QR code" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, display the article and original QR code on a separate computer or second screen, then scan it with a compatible Bitcoin wallet. Some wallets can scan an image saved to the same phone. Verify the destination before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the original QR code to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

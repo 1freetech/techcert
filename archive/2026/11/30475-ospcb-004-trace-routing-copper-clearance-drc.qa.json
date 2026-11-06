@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-06",
+  "lesson_id": "OSPCB.004",
+  "subject": "pcb_engineering",
+  "wordpress_post_id": 30475,
+  "title": "OSPCB.004 — PCB Trace Routing, Copper Width, Clearance, and Design Rule Checks",
+  "live_url": "https://bitcoinversus.tech/2026/11/06/ospcb-004-pcb-trace-routing-copper-width-clearance-drc/",
+  "status": "published",
+  "verification_status": "youtube_iframes_rendered_in_wordpress_interactive_playback_unverified",
+  "featured_media": {
+    "id": 30469,
+    "width": 1200,
+    "height": 630,
+    "verified_by_wordpress_media_read": true,
+    "pixels_visually_inspected": false
+  },
+  "body_media": {
+    "image_ids": [
+      30467,
+      30468
+    ],
+    "video_ids": [
+      "g3vxpdG1chs",
+      "igQWdVGZGpI"
+    ],
+    "video_channels": [
+      "EmbeddedU",
+      "Phil's Lab"
+    ],
+    "shortcodes_in_saved_markup": 2,
+    "rendered_wordpress_iframes": 2,
+    "playback_independently_verified": false
+  },
+  "editorial": {
+    "contextual_internal_links": 8,
+    "original_donation_qr_id": 24043,
+    "donation_sats": 5000,
+    "italic_editor_note_present": true,
+    "volunteer_disclaimer_present": true,
+    "no_decorative_code_blocks": true,
+    "category_ids": [
+      792709720,
+      284207,
+      2509703
+    ],
+    "subscriber_email_disabled": true
+  },
+  "technical_validation": {
+    "sources": [
+      "https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html",
+      "https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=277660",
+      "https://www.ipc.org/TOC/IPC-2152.pdf",
+      "https://www.phils-lab.net/courses"
+    ],
+    "example": {
+      "assumed_width_mm": 0.25,
+      "assumed_thickness_micrometer": 35,
+      "assumed_length_mm": 50,
+      "assumed_resistivity_ohm_m": 1.68e-8,
+      "calculated_resistance_ohm": 0.096,
+      "current_a": 0.5,
+      "voltage_drop_v": 0.048,
+      "loss_w": 0.024,
+      "assumption": "ideal uniform copper room-temperature illustrative geometry; NOT a safe current rating"
+    },
+    "manufactured_board_tested": false,
+    "kicad_gui_executed": false,
+    "no_hardware_or_thermal_test": true
+  },
+  "curriculum": {
+    "rotation_subjects": 43,
+    "registered_coding_tracks": 20,
+    "prerequisite_ids": [
+      "OSPCB.001",
+      "OSPCB.002",
+      "OSPCB.003"
+    ],
+    "next_subject": "cpp",
+    "next_number_requires_live_duplicate_check": true
+  },
+  "screenshot_captures": {
+    "desktop": {
+      "ready": true,
+      "viewport_width": 1200,
+      "pixels_inspected": false
+    },
+    "mobile": {
+      "ready": true,
+      "viewport_width": 390,
+      "pixels_inspected": false
+    }
+  },
+  "unverified": [
+    "Interactive playback on public YouTube embed players",
+    "Desktop and mobile screenshot pixel inspection",
+    "Actual KiCad DRC execution for an editable board file",
+    "Manufacturing feasibility and PCB current-capacity tests"
+  ],
+  "archive_gutenberg_path": "archive/2026/11/30475-ospcb-004-trace-routing-copper-clearance-drc.gutenberg.html",
+  "qa_path": "archive/2026/11/30475-ospcb-004-trace-routing-copper-clearance-drc.qa.json",
+  "archive_repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ]
+}

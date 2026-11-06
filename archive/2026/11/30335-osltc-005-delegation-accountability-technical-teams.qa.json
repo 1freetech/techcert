@@ -7,7 +7,7 @@
   "title": "OSLTC.005 — Delegation and Accountability for Technical Teams",
   "live_url": "https://bitcoinversus.tech/2026/11/06/osltc-005-delegation-accountability-technical-teams/",
   "publication_status": "published",
-  "verification_status": "published_unverified",
+  "verification_status": "rendered_iframe_verified_playback_unverified",
   "wordpress_site": "bitcoinversus.tech",
   "category_ids": [
     5812,
@@ -32,8 +32,10 @@
       "i41cFYIMQlw"
     ],
     "youtube_channel": "Harvard Business Impact Enterprise",
-    "native_gutenberg_embed_saved": true,
-    "playback_verified": false
+    "native_gutenberg_embed_saved": false,
+    "playback_verified": false,
+    "rendered_youtube_iframe_verified": true,
+    "youtube_shortcode_saved": true
   },
   "editorial": {
     "internal_link_count": 6,
@@ -70,11 +72,20 @@
   ],
   "archive_readback": "three identical copies verified against saved WordPress Gutenberg source",
   "limitations": [
-    "Live video iframe and playback were not independently verified.",
+    "Server-rendered video iframe verified after shortcode repair; interactive video playback not independently verified.",
     "Desktop and mobile screenshot pixel content was not independently inspected.",
     "No live manual cross-browser navigation test was performed.",
     "The editorial images are AI-generated conceptual illustrations, not source photographs."
   ],
   "next_subject": "network_technician",
-  "next_lesson_id": "OSNTC.037"
+  "next_lesson_id": "OSNTC.037",
+  "repair": {
+    "timestamp": "2026-11-06",
+    "old_issue": "Native Gutenberg embed rendered only a clickable YouTube URL in WordPress view output.",
+    "fix": "Replaced embed with WordPress [youtube URL&w=640&h=360] shortcode and adjacent italicized caption.",
+    "saved_markup_verified": true,
+    "server_rendered_iframe_verified": true,
+    "video_id": "i41cFYIMQlw",
+    "playback_verified": false
+  }
 }

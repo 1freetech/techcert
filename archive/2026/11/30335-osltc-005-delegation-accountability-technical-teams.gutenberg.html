@@ -1,0 +1,199 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Delegation is the assignment of a defined responsibility to a capable person together with sufficient authority, resources, and a way to evaluate the outcome. After completing OSLTC.001–.004, the learner should be able to distinguish responsibility from authority and accountability; specify a delegated result, owner, deadline, decision boundary, escalation trigger, and acceptance test; run a short team brief; and close an assignment with evidence and feedback. Prerequisites are <a href="https://bitcoinversus.tech/2026/10/08/osltc-002-how-to-set-clear-expectations/">OSLTC.002 on clear expectations</a> and <a href="https://bitcoinversus.tech/2026/10/09/osltc-003-leadership-through-listening-active-listening-adaptive-feedback-responding-to-what-you-hear/">OSLTC.003 on active listening</a>. No programming background is required.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why Delegation Is an Engineering Control</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A technical supervisor cannot personally inspect every maintenance ticket, fiber path, firmware update, and service request. As systems expand, unmanaged work becomes a coordination risk. Delegation distributes execution without dissolving ownership. The supervisor still has a duty to provide an achievable plan and intervene when safety, legal, staffing, or operational constraints require it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.opm.gov/policy-data-oversight/training-and-development/training-program-management/federal-supervisory-and-managerial-frameworks-and-guidance.pdf">U.S. Office of Personnel Management's supervisory framework</a> defines delegation around assigning tasks, granting appropriate authority, making fair assignments, supplying resources, and providing feedback. In engineering work, those principles become concrete: name the maintenance owner, state which devices may be changed, identify an approved method, and define the evidence needed to accept the result.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=i41cFYIMQlw","type":"video","providerNameSlug":"youtube","responsive":true} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=i41cFYIMQlw</div><figcaption class="wp-element-caption"><em>Harvard Business Impact Enterprise, “Introduction to Harvard ManageMentor Topic: Delegating” (July 25, 2019). The official instructional video explains evaluating an assignment, matching it to capability, and supporting execution. Public video metadata was verified; live embedded playback remains unverified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Separate Responsibility, Authority, and Accountability</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Responsibility</strong> means carrying out the task. <strong>Authority</strong> means having permission to make defined decisions or use specified resources. <strong>Accountability</strong> means answering for the agreed result and explaining deviations. These concepts overlap, but they are not interchangeable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Responsible technician:</strong> collects baseline readings, executes authorized checks, records results, and reports abnormal findings.</li><li><strong>Decision owner:</strong> chooses among options explicitly permitted by the change plan and records the reasons.</li><li><strong>Approver:</strong> authorizes restricted actions, such as a production restart, when the organization's controls require approval.</li><li><strong>Supervisor:</strong> arranges staffing, access, supervision, and escalation; remains answerable for management obligations under organizational policy.</li><li><strong>Consulted specialist:</strong> supplies expertise without automatically taking ownership of the task.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>GitLab documents the <a href="https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/gitlab-delivery/distribution/workflow/">directly responsible individual (DRI)</a> as a named coordinator who requests subject-matter support and escalates appropriately. A DRI is not necessarily the only technician doing the work or the person authorized to override every safeguard. Each organization must define the actual authority boundary rather than importing another company's title as a legal rule.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Six-Part Assignment Contract</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A useful delegation can be written as a short operational agreement. Six fields make the work reviewable without imposing a complicated bureaucracy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Outcome:</strong> define the deliverable in observable terms; for example, 'validate the replacement top-of-rack switch uplink and document link stability.'</li><li><strong>Owner:</strong> identify one person coordinating the result, and name backup coverage for absence.</li><li><strong>Authority:</strong> describe approved diagnostics, permitted configuration changes, and decisions requiring a separate authorization.</li><li><strong>Resources:</strong> confirm access, tools, documentation, training, help contacts, and the actual available maintenance window.</li><li><strong>Acceptance evidence:</strong> specify test outputs, before/after measurements, change record, rollback readiness, and signoff where required.</li><li><strong>Checkpoints and escalation:</strong> identify progress review times plus conditions that trigger immediate pause and escalation.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The contract is a teaching model rather than a universal standard. Different workplaces use change-control systems, work orders, ticketing fields, or written approvals. The important outcome is that the owner and supervisor can independently describe what is being done, what success means, and where execution must stop.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30324,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osltc.005-delegation-team-brief-illustration.png" alt="Engineers assigning maintenance tasks during a team brief" class="wp-image-30324" /><figcaption class="wp-element-caption"><em>Original conceptual editorial illustration produced for OSLTC.005. A task brief should communicate outcomes, roles, decision boundaries, and resource constraints; the depicted meeting is illustrative rather than documentation of a real event.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Match the Assignment to Skill, Capacity, and Risk</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A fair delegation decision considers the person's demonstrated competence, present workload, available support, and the consequences of failure. Assigning an entry-level employee a supervised documentation or measurement task may create a learning opportunity. Assigning the same employee unsupervised high-voltage switching or security-sensitive changes can exceed their training and authorization.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A simple decision screen examines <strong>impact</strong> and <strong>uncertainty</strong>. A low-impact, routine task with an established method can usually receive broad discretion. Higher-impact or poorly understood work needs tighter boundaries, approvals, and more frequent checks. The approach is qualitative and does not replace a site-specific risk assessment or formal safety procedure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Routine:</strong> review documentation, validate asset inventory, and submit evidence for peer review.</li><li><strong>Controlled:</strong> perform an approved network change within a maintenance window, with a rollback owner and a documented approval.</li><li><strong>Restricted:</strong> energized electrical work, protective-system bypasses, privileged access, or actions requiring licensed or otherwise specifically authorized personnel; do not transfer authority through an informal delegation.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prior lessons on <a href="https://bitcoinversus.tech/2026/10/08/osltc-001-how-to-lead-with-positive-reinforcement/">positive reinforcement</a> and <a href="https://bitcoinversus.tech/2026/10/10/osltc-004-how-to-give-corrective-feedback-without-making-it-personal/">corrective feedback</a> explain why the resulting review should reinforce verified work or address observable gaps, not judge the person.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Brief, Huddle, Debrief: A Repeatable Communication Loop</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The U.S. Agency for Healthcare Research and Quality's <a href="https://www.ahrq.gov/teamstepps-program/curriculum/team/overview/index.html">TeamSTEPPS leadership guidance</a> organizes team coordination into a brief before work, huddles when conditions change, and a debrief after execution. TeamSTEPPS was designed for healthcare; applying its communication sequence to data center operations is an instructional adaptation, not a claim that the healthcare protocol is an engineering regulation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Brief:</strong> state mission, owner, participants, expected outcome, constraints, contingency, and who has authority to stop the work.</li><li><strong>Huddle:</strong> recheck status when a blocker, scope change, staff absence, unexpected alarm, or new safety information appears.</li><li><strong>Debrief:</strong> compare the result with the acceptance standard, note what changed, record corrective actions, and revise the future checklist.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.ahrq.gov/teamstepps-program/curriculum/team/tools/briefs.html">AHRQ team brief checklist</a> asks whether responsibilities, resources, workload, and shared goals are understood. It is useful as a model for a technical pre-change meeting. A huddle does not substitute for formal approval when a new change exceeds the original scope.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab: Delegate a Rack Network Maintenance Task</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Scenario: an operations team must verify that a new top-of-rack switch uplink negotiates at the expected speed after a planned replacement. The assignment is simulated: no production network devices will be accessed during the exercise. The learner acts as the supervisor, another participant as the task owner, and a third as the reviewer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Define the outcome:</strong> produce a change record with the device identifier, pre-change baseline, authorized change window, interface state, post-change link observations, and reviewer conclusion.</li><li><strong>Define the scope:</strong> approve observation and documentation only in the first exercise. Configuration changes, physical cabling changes, and port shutdowns require separate authorization.</li><li><strong>Assign the DRI:</strong> designate the technician responsible for coordinating collection of evidence and the person who reviews the completed record.</li><li><strong>Set a safe stop rule:</strong> if monitoring shows an unexpected network outage, the port is not the expected interface, or an authorization is missing, pause and escalate under the organization's incident process.</li><li><strong>Set acceptance criteria:</strong> the expected interface state is documented, baseline and later readings are compared, any anomalies are recorded rather than hidden, and the reviewer signs the record.</li><li><strong>Hold a brief and a simulated huddle:</strong> have the instructor announce a hypothetical 15-minute maintenance-window reduction and ask the team whether the original work can still be completed safely.</li><li><strong>Debrief:</strong> review evidence quality, task timing, access, decision boundaries, and which actions require a better handoff.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The earlier <a href="https://bitcoinversus.tech/2026/10/10/osntc-026-dns-troubleshooting-resolver-settings-nslookup-dig-nxdomain-servfail-packet-capture/">network troubleshooting lesson</a> illustrates a different technical environment where observations, commands, and evidence should be separated from assumptions. The same principle applies to assigning maintenance: someone must know the exact requested output, not merely 'go check the network.'</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Calculate a Realistic Workload and Checkpoint</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Suppose a maintenance task contains 20 minutes of pre-change evidence capture, 35 minutes of authorized validation, 25 minutes of documentation, and 10 minutes of peer review. The estimated total effort is <strong>20 + 35 + 25 + 10 = 90 minutes</strong>. If the allowable window is only 60 minutes, the plan is infeasible without revising scope, moving eligible documentation outside the window, or changing staffing. A manager must not treat missing time as an employee's performance failure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If the team has 120 minutes available and the 90-minute plan is credible, the schedule reserve is <strong>120 − 90 = 30 minutes</strong>, or <strong>25% of the available window</strong>. These are planning arithmetic examples, not empirical productivity benchmarks. Reserve is not permission to skip verification, and actual task durations vary.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a 90-minute planned task, a checkpoint after the baseline evidence is captured may be appropriate. The checkpoint should ask whether conditions still match the approved plan, not invite the manager to perform every step instead of the technician. Excessive checking can remove practical ownership; nonexistent checking can conceal blockers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30329,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osltc.005-debrief-and-feedback-illustration.png" alt="Engineers reviewing results of a completed technical assignment" class="wp-image-30329" /><figcaption class="wp-element-caption"><em>Original conceptual editorial illustration for OSLTC.005. A debrief compares observed outcomes against the assignment contract and records opportunities to improve; the scene is not a photograph of an actual organization.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Use Feedback Without Reclaiming Every Task</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A supervisor should ask the owner to explain results and uncertainties. Strong feedback distinguishes evidence from interpretation: 'The change record includes baseline and post-change observations, but the approval field is blank' is more useful than 'You aren't careful.' The feedback should identify the next action and any change to the approval workflow.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The earlier lesson on <a href="https://bitcoinversus.tech/2026/10/09/what-is-psychological-safety-technical-teams/">psychological safety in technical teams</a> reinforces a related concern: workers need to report uncertainty and errors without suppressing information to protect appearances. Reporting an unexpected reading promptly is better than quietly treating it as a success.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common Delegation Failures</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Task without authority:</strong> the employee is held responsible for an outcome but cannot obtain needed approvals or resources.</li><li><strong>Multiple competing owners:</strong> everyone participates, but nobody coordinates the final deliverable.</li><li><strong>Undefined acceptance:</strong> 'finish the job' has no measurable definition.</li><li><strong>Hidden capacity constraints:</strong> a supervisor assigns work without inspecting the existing queue or maintenance window.</li><li><strong>Unclear escalation:</strong> a technician guesses instead of stopping when the approved scope changes.</li><li><strong>Micromanagement:</strong> the manager repeatedly reverses permissible choices and prevents ownership.</li><li><strong>Abandonment:</strong> an assignment is handed off with no access, support, review, or feedback.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice and Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Who is accountable when work has been delegated?</strong> Responsibility for execution can move to a named person, but supervisors and formal approvers retain their own defined governance and safety obligations. Accountability must be documented according to organizational policy.</li><li><strong>What is the difference between an owner and an approver?</strong> The owner coordinates the result; an approver authorizes a specified restricted decision. Sometimes one person holds both roles, but only when duly authorized.</li><li><strong>What should trigger a huddle?</strong> A material change in conditions, scope, risk, staffing, timing, or resource availability.</li><li><strong>Why is an acceptance criterion necessary?</strong> It makes completion independently inspectable and limits disagreements over an undefined goal.</li><li><strong>How much reserve remains in a 120-minute window after 90 minutes of work?</strong> Thirty minutes, equal to 25% of the 120-minute window.</li><li><strong>Can verbal delegation override electrical safety procedures or production change controls?</strong> No. Authorization, licensing, site procedures, and stop-work requirements continue to apply.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>For an independent exercise, write a one-page delegation contract for a simulated cable-inventory audit, peer-review it, and revise the acceptance evidence and escalation rules. Keep the first attempt, the review comments, and the amended contract as artifacts of learning.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary Sources and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Technical and instructional sources: <a href="https://www.opm.gov/policy-data-oversight/training-and-development/training-program-management/federal-supervisory-and-managerial-frameworks-and-guidance.pdf">U.S. Office of Personnel Management supervisory competency framework</a>; <a href="https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/gitlab-delivery/distribution/workflow/">GitLab Distribution DRI workflow</a>; <a href="https://www.ahrq.gov/teamstepps-program/curriculum/team/overview/index.html">AHRQ TeamSTEPPS leadership overview</a>; <a href="https://www.ahrq.gov/teamstepps-program/curriculum/team/tools/debrief.html">AHRQ debrief guidance</a>; and <a href="https://hbr.org/podcast/2023/09/how-to-delegate">Harvard Business Review discussion of delegation</a>. The operational example, arithmetic, and assignment contract are instructional constructions rather than reported performance results.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Summary</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Effective delegation combines a clear result, one coordinator, sufficient authority and resources, a realistic timeframe, objective evidence, and a safety-aware escalation path. Technical leaders should brief before work, adapt the plan when conditions change, and debrief the outcome. Delegation works when a person gains meaningful ownership without losing the guidance and controls needed to perform the work safely.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSLTC.005 builds on the previously published leadership sequence. U.S. OPM, GitLab, and AHRQ materials were checked for the described principles; the data center scenarios, task durations, and generated editorial illustrations are educational examples. The Harvard Business Impact video identity was checked through public metadata, but the embedded player and actual playback have not been independently verified. The original editorial cover was cropped into a separate, verified 1200 × 630 featured-media asset.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original donation QR code for 5,000 satoshis" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open the lesson on another display and use a compatible Bitcoin wallet to scan the original QR code. Verify the destination before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

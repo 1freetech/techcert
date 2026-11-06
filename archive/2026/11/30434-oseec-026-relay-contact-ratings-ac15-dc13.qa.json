@@ -1,0 +1,35 @@
+{
+  "article_id": 30434,
+  "title": "OSEEC.026: Relay Contact Ratings — AC-15, DC-13, Inrush, and Electrical Endurance",
+  "url": "https://bitcoinversus.tech/2026/11/06/oseec-026-relay-contact-ratings-ac15-dc13-electrical-endurance/",
+  "verified_at": "2026-11-06",
+  "status": "published",
+  "featured_media_id": 30431,
+  "featured_dimensions": [
+    1200,
+    630
+  ],
+  "in_story_image_ids": [
+    30433,
+    30432
+  ],
+  "video_ids": [
+    "WT14nfmu1cI"
+  ],
+  "video_metadata": "Jim Pytel, Contactors (Full Lecture), 2015-03-13, YouTube publisher explicitly permits embeds",
+  "wordpress_saved_block_count": 50,
+  "internal_link_count": 6,
+  "qr_media_id": 24043,
+  "editor_note_present": true,
+  "html_serialization": "retrieved from WordPress context edit",
+  "visual_checks": "WordPress screenshot links status ready for 1280px and 390px; screenshot pixels not independently reviewed",
+  "youtube_rendering": "Gutenberg YouTube embed saved; rendered iframe and live playback not independently verified",
+  "electrical_hardware_test": "not performed",
+  "original_calculations": [
+    "24 x 0.6 = 14.4 W",
+    "5 x 60 x 8 x 250 = 600000 operations/year",
+    "2000000 / 600000 = 3.333... years (illustrative)"
+  ],
+  "next_subject": "electrical_technician",
+  "notes": "Live WordPress inventory confirmed OSEEC.025 previously published and OSETC.040 published; #41 next eligible electrical technician number. No unverified claims of testing."
+}

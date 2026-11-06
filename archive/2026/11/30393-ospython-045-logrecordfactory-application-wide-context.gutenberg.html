@@ -1,0 +1,301 @@
+<!-- wp:paragraph -->
+<p>A Python service can emit diagnostic events from many modules, libraries and worker functions. Adding an identifier to each individual logging call becomes difficult to maintain. The <strong><code>logging.setLogRecordFactory()</code></strong> hook supplies a controlled way to add a consistent field to each newly created <code>LogRecord</code>, while <code>contextvars.ContextVar</code> provides a value associated with the current execution context. Together, they can help operators correlate application events from servers, monitoring collectors and network automation systems.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>OSPython.045 extends <a href="https://bitcoinversus.tech/2026/10/27/ospython-043-correlation-ids-contextvars-request-logging/">OSPython.043 on correlation IDs</a> and <a href="https://bitcoinversus.tech/2026/10/29/ospython-044-memoryhandler-buffered-logging-flush-levels-error-context/">OSPython.044 on buffered logging</a>. Previous lessons explained how records flow, how an error can release diagnostic context, and how loggers connect through handlers. The new lesson focuses on changing the record-creation step itself. No third-party packages are required.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Describe the roles of a Python <code>Logger</code>, <code>LogRecord</code>, handler, formatter, filter, and record factory.</li><li>Understand why a custom record factory affects logging across one Python process and why it is not a substitute for explicit interprocess context propagation.</li><li>Add a safe, non-secret <code>request_id</code> field to each record while preserving the original factory.</li><li>Demonstrate <code>ContextVar.set()</code> and <code>reset()</code> so one operation does not leak an identifier into later work.</li><li>Run a Python standard-library example and an executable unit test with expected output.</li><li>Identify global-state, performance, naming-collision, concurrency and secret-handling risks.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: <a href="https://bitcoinversus.tech/2026/10/07/ospython-028-python-logging-basics/">Python logging basics</a>, <a href="https://bitcoinversus.tech/2026/10/08/ospython-032-custom-log-formatting-logging-formatter-timestamps-levels-logger-names-message-layout/">formatters and handlers</a>, and <a href="https://bitcoinversus.tech/2026/10/10/ospython-034-contextual-logging-with-loggeradapter-and-extra/">LoggerAdapter and extra context</a>. Examples use the Python standard library and were executed on <strong>Python 3.13.5</strong>. The basic APIs are available on earlier Python 3 releases; the explanation of replacement records returned by filters is explicitly version-qualified.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How Python Creates a Log Record</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>When an enabled logger handles an event, Python constructs a <code>LogRecord</code> carrying properties such as logger name, level, message template, positional arguments, path, source line and timestamp. Handler filters may then examine a record; handlers send accepted events to destinations, and formatters convert the data to text. The record factory sits earlier: it participates whenever a logger creates a normal record. The <a href="https://docs.python.org/3/library/logging.html#logging.setLogRecordFactory">official logging library reference</a> documents replacing and retrieving the current factory.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A factory is a callable accepting the usual <code>LogRecord</code> constructor parameters and returning a record. Wrapping the previous factory is safer than discarding it because another framework or instrumentation library may have installed customization already. The wrapper must return a valid record with all standard attributes intact.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=9L77QExPmI0&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>mCoding, “Modern Python logging” (January 22, 2024). The detailed tutorial discusses the logging pipeline, formatters, added context, filters and queued handlers; the segment around 15:46 covers the <code>extra</code> mechanism and context. Video identity is verified from its public source; WordPress playback is checked separately.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Context Variable Is Not a Global Request Identifier</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A normal mutable module-level string is shared by concurrent callers in one process. If two tasks overwrite a single global request ID, their diagnostic lines can be mislabeled. Python's <code>ContextVar</code> instead associates a value with an execution context. Separate asynchronous tasks normally maintain their own context; new threads or separate processes require deliberate handling when continuity is needed. The <a href="https://docs.python.org/3/library/contextvars.html">Python contextvars reference</a> explains context-local values, tokens, and context propagation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The demonstration uses a single synchronous function, but the same mechanism can be integrated with an asynchronous request handler that sets the ID at request entry and resets the token in a <code>finally</code> clause. Do not assume <code>ContextVar</code> automatically carries a value to a remote API, container, or process; explicit transmission and privacy rules remain necessary.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30387,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ospython.045-logging-factory-software-lab-illustration.png" alt="Software engineer examining logs on workstation monitors" class="wp-image-30387" /><figcaption class="wp-element-caption"><em>Original AI-generated conceptual editorial image for OSPython.045. The illustration represents log inspection; it is not an authentic screenshot of the code execution described below.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Complete Runnable Lab: One Factory, Three Events</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Save the following complete source as <code>record_factory_lab.py</code> in a new, unprivileged working directory. It imports only Python standard-library modules. The <code>StringIO</code> destination makes the example deterministic, so it creates no log files and sends no data over the network. The logger's handler and global factory are restored when the function finishes:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.62 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">&quot;&quot;&quot;OSPython.045: application-wide log context, Python 3.12+ stdlib.&quot;&quot;&quot;
+from contextvars import ContextVar
+import io
+import logging
+
+request_id = ContextVar(&quot;request_id&quot;, default=&quot;unassigned&quot;)
+old_factory = logging.getLogRecordFactory()
+
+
+def context_record_factory(*args, **kwargs):
+    record = old_factory(*args, **kwargs)
+    record.request_id = request_id.get()
+    return record
+
+
+def demo() -&gt; str:
+    output = io.StringIO()
+    handler = logging.StreamHandler(output)
+    handler.setFormatter(logging.Formatter(
+        &quot;%(levelname)s %(name)s id=%(request_id)s %(message)s&quot;
+    ))
+    logger = logging.getLogger(&quot;open_cert.telemetry&quot;)
+    old_level = logger.level
+    old_propagate = logger.propagate
+    logging.setLogRecordFactory(context_record_factory)
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    logger.addHandler(handler)
+    try:
+        logger.info(&quot;collector started&quot;)
+        token = request_id.set(&quot;rack-A7&quot;)
+        try:
+            logger.warning(&quot;temperature sensor unavailable&quot;)
+        finally:
+            request_id.reset(token)
+        logger.info(&quot;collector finished&quot;)
+    finally:
+        logger.removeHandler(handler)
+        handler.close()
+        logger.setLevel(old_level)
+        logger.propagate = old_propagate
+        logging.setLogRecordFactory(old_factory)
+    return output.getvalue()
+
+
+if __name__ == &quot;__main__&quot;:
+    print(demo(), end=&quot;&quot;)</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The original factory is captured before the wrapper is installed. The wrapper delegates ordinary record creation to that factory and adds <code>request_id</code> from the active context. The formatter expects the new field on every record it processes. A <code>try/finally</code> sequence restores the context token after the simulated warning, and another <code>finally</code> removes the handler and restores prior logger state. Restoring global changes is particularly important in unit tests, interactive notebooks, and applications that share a logging process with other libraries.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Run the file from the directory containing the source using the Python interpreter matching your environment:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.62 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">python --version
+python record_factory_lab.py</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The example was executed on Python 3.13.5. Its verified output was:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.62 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">INFO open_cert.telemetry id=unassigned collector started
+WARNING open_cert.telemetry id=rack-A7 temperature sensor unavailable
+INFO open_cert.telemetry id=unassigned collector finished</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The second line includes the temporary rack identifier. The third line returns to <code>unassigned</code>, demonstrating that the diagnostic context was removed rather than leaking into the subsequent event. These lines are actual observed output from the stated test environment, not proposed production metrics.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Executable Unit Test for Context and Cleanup</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Create a second file, <code>test_record_factory.py</code>, in the same directory. The test asserts the complete output, checks that the original record factory is restored by identity, and verifies that the context variable has its original default value:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.62 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">import logging
+import unittest
+from record_factory_lab import demo, request_id
+
+
+class RecordFactoryTests(unittest.TestCase):
+    def test_context_and_cleanup(self):
+        before = logging.getLogRecordFactory()
+        result = demo().splitlines()
+        self.assertEqual(result, [
+            &quot;INFO open_cert.telemetry id=unassigned collector started&quot;,
+            &quot;WARNING open_cert.telemetry id=rack-A7 temperature sensor unavailable&quot;,
+            &quot;INFO open_cert.telemetry id=unassigned collector finished&quot;,
+        ])
+        self.assertIs(logging.getLogRecordFactory(), before)
+        self.assertEqual(request_id.get(), &quot;unassigned&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    unittest.main()</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Execute the test module as follows:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.62 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">python -m unittest -v test_record_factory.py</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The test passed on Python 3.13.5, reporting one successful test. The observed terminal summary was:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.62 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">Ran 1 test in 0.001s
+
+OK</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Runtime values and elapsed execution time may vary by computer; the important invariants are one passing test, exact event fields, no leftover context, and restoration of the prior factory. For integration into a larger application, also test nested context changes, concurrent tasks, and cooperation with framework-installed record factories.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Factory, Filter, and LoggerAdapter: Different Responsibilities</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>LoggerAdapter</strong> supplies contextual fields to calls made through that adapter. A <strong>filter</strong> can accept, reject, or modify records at a selected logger or handler. A <strong>LogRecordFactory</strong> changes record creation across the process for qualifying events. Each solution has a different scope. The earlier <a href="https://bitcoinversus.tech/2026/10/09/ospython-033-logging-filters-select-records-custom-rules/">logging filters lesson</a> covered selection rules; a factory is useful when a field should exist before downstream formatters examine a newly created record.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Python 3.12 introduced the ability for a handler filter to return a replacement <code>LogRecord</code> instead of simply mutating an existing one. That mechanism can isolate changes to one output handler. A factory remains process-wide, so it should be adopted only when the wider scope is intentional. Refer to the <a href="https://docs.python.org/3/library/logging.html#filter-objects">official logging.Filter reference</a> for the version-specific distinction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=urrfJgHwIJA&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Tech With Tim, “Python Logging - Tutorial” (April 27, 2022). Introduces event levels and shows how loggers, handlers, and formatters interact; the discussion of handlers and formatters begins around 12:21. The official channel and video metadata were checked. The presentation supplies foundational context for the record-factory demonstration.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Naming Collisions and Secret-Handling Rules</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A factory-inserted field must avoid the names Python already reserves for records, including <code>message</code>, <code>levelname</code>, and <code>asctime</code>. The demonstration uses the new attribute <code>request_id</code>. Do <strong>not</strong> also pass a conflicting <code>extra={"request_id": ...}</code> field on the same event: <code>Logger.makeRecord()</code> rejects an attempt to overwrite an attribute already set on the record, raising a <code>KeyError</code>. Choose one source of truth, or document a different field name for adapter-specific context.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Never add tokens, passwords, private keys, customer secrets, session cookies or entire authorization headers to the factory. A globally injected field reaches more handlers than a developer may expect. Review <a href="https://bitcoinversus.tech/2026/10/18/ospython-041-logging-secrets-safely-redaction-filters-and-credential-protection/">OSPython.041 on redaction and credential protection</a> before logging identifiers derived from sensitive user data. The public sample uses an invented equipment label and no secrets.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Factories also have performance overhead: every enabled event creates a record and invokes the wrapper. Complex database calls, file reads, blocking network operations or recursive logging inside a record factory can slow down applications or create errors. Keep the wrapper small and predictable. If an application sends logs through a process boundary, serialize appropriate context explicitly rather than assuming that a process-local factory setting has propagated.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30388,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ospython.045-structured-diagnostic-logging-in-data-center.png" alt="Data center engineer inspecting multiple system event streams" class="wp-image-30388" /><figcaption class="wp-element-caption"><em>Original AI-generated conceptual editorial image. Consistent event fields can support diagnostics across software modules, but the illustration does not depict verified production telemetry.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Exercise: Two Maintenance Tickets</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Modify the demonstration to log two sequential simulated maintenance tickets. Set <code>request_id</code> to <code>rack-A7</code> for the first operation and <code>rack-B2</code> for the second. Reset each token after its own operation. Add a third event after both assignments and verify that the final record again shows <code>unassigned</code>. Do not print raw credentials, device secrets or personal identifiers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Record the Python version and the exact source file used for the lab.</li><li>Run the unchanged sample and save its three verified output lines.</li><li>Create a second request context with a distinct synthetic device ID.</li><li>Check that the first ticket's ID never appears in the second ticket's output.</li><li>Ensure the post-ticket log record has the default value; restore the factory even if a simulated exception occurs.</li><li>Use <code>unittest</code> to assert both the expected event sequence and the cleanup invariants.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>A second extension is to route the same logger to two <code>StringIO</code> stream handlers, each with a different formatter. When the global factory supplies the context field, both handlers can access it without each event specifying the ID manually. Compare with <a href="https://bitcoinversus.tech/2026/10/29/ospython-044-memoryhandler-buffered-logging-flush-levels-error-context/">the MemoryHandler lesson</a>, where buffering affects delivery timing rather than record construction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting Common Factory Errors</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong><code>KeyError: Attempt to overwrite 'request_id'</code>:</strong> avoid passing the same field in both a global factory and a per-call <code>extra</code> dictionary.</li><li><strong><code>ValueError: Formatting field not found in record</code>:</strong> make sure a formatter requiring a custom field is paired with a record producer that actually supplies it.</li><li><strong>Unexpected duplicate log lines:</strong> inspect handler registration and <code>propagate</code>; adding a handler twice or forwarding to the root logger can duplicate output.</li><li><strong>Incorrect context after work finishes:</strong> reset the exact <code>ContextVar</code> token inside a <code>finally</code> clause, including on exception paths.</li><li><strong>Context absent in a new worker:</strong> evaluate how the execution context is propagated into threads, tasks or independent processes.</li><li><strong>Slow log production:</strong> keep the factory lightweight and avoid logging recursively inside the record-creation path.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check and Explained Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>What does a record factory customize?</strong> The creation of eligible <code>LogRecord</code> objects, before downstream handlers format them.</li><li><strong>Why call the previous factory?</strong> To preserve existing record behavior and avoid replacing framework customizations unnecessarily.</li><li><strong>What is the purpose of a ContextVar token?</strong> It permits restoring the exact prior context state after a temporary value is assigned.</li><li><strong>Does a ContextVar automatically synchronize across separate processes?</strong> No. Separate processes require explicit state and correlation handling.</li><li><strong>Why does a formatter fail when it references a field missing from the record?</strong> Its format string assumes an attribute that the record producer did not set.</li><li><strong>Why can a custom request ID conflict with <code>extra</code>?</strong> Python prevents per-call <code>extra</code> entries from overwriting an existing record attribute.</li><li><strong>What did the executable test validate?</strong> The exact event sequence and request IDs, absence of leaked context, and restoration of the original global factory.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary Documentation and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary reference: the <a href="https://docs.python.org/3/library/logging.html#logging.setLogRecordFactory">Python standard-library logging API</a>, including <code>getLogRecordFactory()</code> and <code>setLogRecordFactory()</code>; the <a href="https://docs.python.org/3/howto/logging-cookbook.html#customizing-logrecord">Logging Cookbook's customizing LogRecord section</a>; the <a href="https://docs.python.org/3/library/contextvars.html">contextvars module reference</a>; and <a href="https://docs.python.org/3/library/unittest.html">unittest documentation</a>. The sample was tested locally with the Python 3.13.5 interpreter; no external packages, elevated permissions, external HTTP calls or production infrastructure were involved.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Summary</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A record factory gives an application a central place to attach uniform metadata to new Python log events. Used with a context variable, it can expose a temporary synthetic request ID without adding that identifier to every logging statement. Correct implementation delegates to the previous factory, keeps global changes reversible, resets context tokens, avoids record-key collisions and redacts secrets. Testing both the event output and cleanup steps turns a convenient diagnostic technique into a maintainable engineering pattern.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSPython.045 advances the verified Python lesson sequence after OSPython.044. The complete Python 3.13.5 example and one unittest were executed successfully; the three sample output lines are observed results. The technical explanations were checked against the Python standard library documentation. The original featured artwork and in-body illustrations are AI-generated conceptual editorial imagery, not verified live software screenshots. The YouTube blocks are checked separately for WordPress iframe rendering; interactive playback cannot be confirmed without player interaction.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original donation QR code for 5,000 satoshis" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open the lesson on another display and use a compatible Bitcoin wallet to scan the original QR code. Verify the destination before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

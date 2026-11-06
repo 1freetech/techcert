@@ -1,0 +1,260 @@
+<!-- wp:paragraph -->
+<p><strong>systemd-cgtop</strong> is a read-only Linux command that displays resource usage by <strong>control group (cgroup)</strong> rather than by an individual process. On a systemd-managed server, groups of processes are organized into services, slices, and scopes. A technician can use the utility to identify which workload hierarchy consumes CPU time, memory, tasks, or block I/O and decide what to investigate next without stopping services or changing resource limits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Linux Command #67 follows <a href="https://bitcoinversus.tech/2026/10/30/linux-command-66-coredumpctl-linux-os/">Command #66 — coredumpctl</a>, which investigates application crashes, and <a href="https://bitcoinversus.tech/2026/10/28/linux-command-65-systemd-analyze-linux-os/">Command #65 — systemd-analyze</a>, which examines service startup. Resource monitoring is the next diagnostic skill: a service may start correctly and never crash, yet consume excessive memory or CPU at runtime.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain how Linux control groups organize and account for resources consumed by related processes.</li><li>Interpret <code>systemd-cgtop</code> group paths, task counts, CPU percentages, memory, and disk I/O fields without confusing them with per-process utilization.</li><li>Run a bounded, read-only snapshot with batch mode, ordering, depth limits, and iteration counts.</li><li>Identify when missing CPU, memory, or I/O values reflect controller availability, accounting settings, sampling, or container visibility.</li><li>Contrast the process view of <code>top</code> with the hierarchical group view of <code>systemd-cgtop</code>.</li><li>Apply a documented troubleshooting workflow for a high-resource workload without changing service policies.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites are basic Linux shell navigation, familiarity with services from <a href="https://bitcoinversus.tech/2026/10/08/what-is-systemd-how-linux-starts-stops-and-watches-background-services/">What Is systemd?</a>, and an understanding that a service may consist of multiple processes or threads. The command is part of systemd, not a portable POSIX command; behavior and visibility depend on the host operating system, version, privilege level, kernel, and container environment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Control Group Measures a Workload, Not Merely a PID</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>control group</strong> is a kernel mechanism for grouping processes for resource accounting and control. A systemd service such as a web server may create worker processes, but an operator generally needs to know what the entire service consumes. On a typical systemd host, paths such as <code>/system.slice/</code> contain system services, <code>/user.slice/</code> contains user-related workloads, and sometimes <code>/machine.slice/</code> contains virtual machines or container scopes. The exact hierarchy differs among installations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Cgroups are also used by many container runtimes, so an isolated container may reveal only its delegated subtree rather than a complete physical host. The <a href="https://docs.kernel.org/admin-guide/cgroup-v2.html">Linux kernel's cgroup v2 documentation</a> describes the unified hierarchy and controller interfaces; the <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-cgtop.html">official systemd-cgtop manual</a> specifies the display and command-line options.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=ZD7HDrtkZoI&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>The Linux Foundation, “Modern Linux Servers with cgroups,” presented by Brandon Philips of CoreOS at LinuxCon/CloudOpen North America (October 1, 2013). Historical background on cgroup-based service isolation; it predates today's widespread cgroup v2 operation and should not be used as a current configuration guide.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What the CPU, Memory, Tasks, and I/O Columns Mean</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The terminal display can rank groups by CPU, memory, disk I/O, task count, or path. CPU percentage measures activity across available processors: it is <strong>not necessarily capped at 100%</strong>. For example, on an eight-logical-CPU server, a workload reported at 240% is consuming approximately 2.4 CPU equivalents during the sample, or 240 ÷ 800 = <strong>30% of the host's aggregate logical CPU capacity</strong> if each logical CPU is treated equally for the rough calculation. The value is not a direct measure of completed work, application efficiency, or power draw.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Memory values represent accounted memory used by the group according to the active controller and hierarchy. Disk I/O columns refer to measured I/O activity where the appropriate I/O controller and accounting are available; they are not Ethernet network bandwidth. A task count can include threads, and the command's <code>-P</code> switch is available when process counting rather than the default task counting is needed. Cgroup hierarchy totals can include descendants, so blindly summing parent and child rows may double-count usage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-cgtop.html">upstream manual</a> warns that memory and I/O values may be unavailable without enabled controllers and accounting. On a relevant unit, <code>MemoryAccounting=</code> and <code>IOAccounting=</code> control systemd accounting. A dash is therefore not equivalent to zero activity. CPU accounting behavior has changed across systemd versions and cgroup modes; use the documentation matching the deployed release before drawing conclusions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30400,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/linux-command-67-control-group-resource-observation.png" alt="Rack of Linux servers with a maintenance terminal in a data center lab" class="wp-image-30400" /><figcaption class="wp-element-caption"><em>Original AI-generated editorial illustration of Linux server infrastructure. The terminal is conceptual; the real program prints control-group metrics in columns, which are examined separately in the lesson.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Begin with Help, Version, and a Single Sample</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Start in an unprivileged terminal. The first commands are inspection-only and show which syntax the installed version supports:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">systemd-cgtop --version
+systemd-cgtop --help</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The example was tested in a restricted Debian GNU/Linux 13 environment with <strong>systemd 257.9</strong>. The locally installed help output supported <code>--order=</code>, <code>--batch</code>, <code>--iterations=</code>, <code>--depth=</code>, <code>--raw</code>, and <code>--cpu=</code>. The flags have also been checked against the official systemd reference, but another distribution may ship a different release.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a non-interactive one-shot observation, use a bounded batch command. It does not change the service configuration:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">systemd-cgtop --batch --iterations=1 --order=memory --depth=2</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>On the tested container, the command completed and displayed only the root cgroup, with an observed sample resembling the following single line. The values are environment-specific and will differ on other machines:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">/        66      -   479.9M        -        -</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The container used <code>supervisord</code> rather than systemd as PID 1 and exposed only its restricted cgroup namespace. The absence of individual service rows was an <strong>environment limitation</strong>, not proof that the host had no running services. For a complete systemd host, an interactive terminal usually displays many service and user groups when permitted. Non-TTY batch output omits column headers, so do not assume the values can be parsed without checking the relevant version's output format.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Get a More Useful CPU Sample</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>CPU rate measurement benefits from repeated observations. The following command reads two iterations, stops automatically, orders by CPU, and inspects a deeper control-group tree. Some environments show a dash or incomplete rates for the initial sample because a time interval is needed:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">systemd-cgtop --batch --iterations=2 --order=cpu --depth=4</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <code>--batch</code> option disables interactive input, <code>--iterations=2</code> bounds output, <code>--order=cpu</code> selects the primary sort, and <code>--depth=4</code> permits deeper traversal than the default. No <code>sudo</code> is required for the examples, although unprivileged access may omit protected details. Production scripts should not assume column positions never change across systemd versions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>On an interactive host, running <code>systemd-cgtop</code> without <code>--batch</code> refreshes the display at regular intervals. It resembles <code>top</code>, but each row names a cgroup instead of an individual PID. Stop the program with the terminal's standard interrupt if necessary.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Sort by Memory, I/O, Tasks, or Group Path</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Sorting helps isolate the kind of resource pressure under investigation. The flags below are read-only, use one iteration, and produce manageable terminal output:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">systemd-cgtop --batch --iterations=1 --order=memory
+systemd-cgtop --batch --iterations=1 --order=io
+systemd-cgtop --batch --iterations=1 --order=tasks
+systemd-cgtop --batch --iterations=1 --order=path</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Sort order is not a diagnosis by itself. A high memory footprint can be normal for a cache or database; a process tree with many tasks can be expected for a multi-worker service. Correlate resource reports with established baselines, system performance, error logs and the service's actual responsibilities. A CPU hotspot may show activity while the application's real bottleneck is I/O wait or an external service.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The tool also supports <code>--cpu=time</code> for CPU time display and <code>--raw</code> for numeric byte counts rather than human-readable units. The <code>-P</code> option counts user-space processes instead of all tasks; read the manual before mixing it with other task-count options.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=Sd34SoITwro&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>LinuxCloudHacks, “Systemd Tutorial: User Resource Limits (Stop Resource Exhaustion &amp; Boost Linux Stability)” (March 30, 2025). The demonstration explains systemd slices and explicitly uses systemd-cgtop alongside other management tools. The video includes resource-control changes and a destructive process-stress demonstration; the present lesson does not instruct readers to reproduce those risky steps on production equipment.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inspect the Hierarchy Without Editing It</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>If <code>systemd-cgtop</code> identifies a busy slice but the group name is difficult to interpret, use the separate <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-cgls.html">systemd-cgls</a> utility to view the hierarchy of processes. Then inspect known service accounting fields through <code>systemctl show</code>. All of the following examples are read-only, but some require a working systemd manager:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">systemd-cgls --no-pager
+systemctl show --property=CPUAccounting,MemoryAccounting,IOAccounting example.service</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Replace <code>example.service</code> with the real, authorized unit name before running <code>systemctl show</code>. Do not interpret a failure to connect to the system manager in a container as a host-service failure. A restricted container without systemd as PID 1 may have cgroup filesystem access while systemctl's service-management interface is unavailable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>On systems using the unified cgroup v2 hierarchy, the following read-only file can show controllers available to the current cgroup:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">cat /sys/fs/cgroup/cgroup.controllers</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the local test container, the controllers listed were <code>cpuset cpu io memory hugetlb pids</code>. Availability in <code>cgroup.controllers</code> does not prove that every controller is enabled in every descendant. The kernel documentation distinguishes available controllers from delegated or enabled controller interfaces; check the target scope before relying on a particular metric.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30402,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/linux-command-67-cgroups-diagnostics-illustration.png" alt="Infrastructure technician inspecting server diagnostics and cooling hardware" class="wp-image-30402" /><figcaption class="wp-element-caption"><em>Original AI-generated conceptual editorial photograph. A visual monitoring station helps illustrate resource investigations, but the image is not a verified capture of systemd-cgtop in operation.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked Diagnostic Scenario: A Busy Data Center Service</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Assume a hypothetical eight-logical-CPU Linux system running a network telemetry service. The operator observes its cgroup at <strong>240% CPU</strong> for several intervals, approximately <strong>2.4 logical CPUs</strong>, or 30% of the machine's theoretical aggregate CPU percentage range. The same service reports 1.5 GiB of accounted memory on a machine with 16 GiB of physical RAM. Relative to the chosen 16 GiB denominator, that is <strong>1.5 ÷ 16 × 100 = 9.375%</strong>. The calculation is explanatory and does not mean every memory category is represented in that metric.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Neither measurement alone establishes a fault. The operator asks whether workload volume increased, whether the service's response time changed, whether swap pressure or I/O wait appeared, and whether new errors were recorded. A rising task count can suggest more worker threads or a runaway task-creation condition, but a snapshot cannot distinguish the possibilities.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The next checks connect the current observation to <a href="https://bitcoinversus.tech/2026/09/26/linux-command-28-troubleshoot-system-logs-with-journalctl/">journalctl</a> for service error logs and <a href="https://bitcoinversus.tech/2026/09/24/command-26-ss-linux-os/">ss</a> for network socket inventory. A technician might use <code>systemd-cgtop</code> to identify an overloaded service, then investigate whether frequent reconnections, invalid requests, application bugs or normal demand explain the utilization. A proposed quota or service restart requires change approval and a rollback plan.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Lab: Compare Observations and Report Limitations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Confirm the installed command's version with <code>systemd-cgtop --version</code> and preserve the distribution information.</li><li>Collect one bounded memory-ordered snapshot with <code>--batch --iterations=1</code>, noting whether the environment is a full systemd host or container.</li><li>Collect two CPU-ordered iterations without changing any unit configuration. Record whether the first and second samples differ.</li><li>Inspect the control-group tree with <code>systemd-cgls --no-pager</code> if the current environment permits it.</li><li>Record missing metrics honestly: an unavailable column, a restricted namespace, lack of privileges, or disabled accounting may make the observation incomplete.</li><li>Choose an existing service and compare its relevant accounting properties with <code>systemctl show</code>. Use read-only commands and avoid changing units on shared infrastructure.</li><li>Write a short diagnostic report stating the systemd release, timestamp, commands, cgroup path, observation, uncertainty, and safe next step.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Avoid load generators, fork bombs, service restarts, setting CPU quotas, or modifying slice configurations on production systems as part of the introductory exercise. The lab is complete when a learner can explain what the utility could and could not observe, even if the sandbox shows only the root control group.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common Failure Modes and Correct Interpretation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>No command found:</strong> confirm the installed systemd packages, distribution, and path. Some containers and minimal systems omit the tool.</li><li><strong>No service rows:</strong> check whether the container sees a limited cgroup namespace and whether systemd is acting as the host service manager.</li><li><strong>Dash in the I/O column:</strong> investigate whether the relevant controller and I/O accounting are available; do not read it as zero disk traffic.</li><li><strong>CPU above 100%:</strong> multi-CPU workloads can consume more than one logical CPU. The result is not a syntax error.</li><li><strong>Unexplained parent totals:</strong> remember that the hierarchy is nested; summing both parents and children can inflate totals.</li><li><strong>Unexpected task count:</strong> distinguish kernel threads, user threads, processes, and the <code>-P</code> counting option.</li><li><strong>Different output from a manual screenshot:</strong> compare versions, terminal versus batch display, controller state, and system load.</li><li><strong>Performance still poor with low cgroup CPU:</strong> consider I/O latency, locks, network dependencies, throttling or stalled external services rather than assuming the CPU view covers every bottleneck.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check With Explanations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>What is the key difference between top and systemd-cgtop?</strong> The latter organizes resource usage by cgroup, which may contain many processes or threads, instead of primarily listing individual processes.</li><li><strong>How can a group show 240% CPU?</strong> It can consume 2.4 logical CPU equivalents on a multi-processor machine during a sample. The theoretical aggregate on eight logical CPUs is up to 800%.</li><li><strong>Does a dash in an I/O column mean no disk operations?</strong> No. Data can be absent because of controller, accounting, or visibility limitations.</li><li><strong>What does <code>--iterations=2</code> change?</strong> It stops the program after two measurement iterations, which is appropriate for bounded batch diagnostics.</li><li><strong>Why might a container display only the root cgroup?</strong> Namespace delegation and restricted visibility can prevent it from seeing the host's complete group hierarchy.</li><li><strong>What is a safe next check after finding a busy service?</strong> Correlate with service state, logs, load baseline and accounting settings before proposing operational changes.</li><li><strong>Why should parent and child utilization not always be added?</strong> Hierarchical group totals can already account for descendant usage.</li><li><strong>What did the local test prove?</strong> systemd 257.9 recognized the documented flags and returned a root-group snapshot in an isolated container; it did not validate complete host-level service attribution.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Official Documentation and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary sources: <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-cgtop.html">systemd-cgtop(1) upstream manual</a>; <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html">systemd.resource-control(5)</a>; <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-cgls.html">systemd-cgls(1)</a>; <a href="https://www.freedesktop.org/software/systemd/man/latest/systemctl.html">systemctl(1)</a>; and the <a href="https://docs.kernel.org/admin-guide/cgroup-v2.html">Linux kernel cgroup v2 administrator guide</a>. The original lesson's video materials provide historical cgroup context and a practical systemd administration demonstration, not a substitute for the version-matched man page.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>systemd-cgtop helps a Linux technician connect resource usage to operational units. Its strength is the control-group view: a service or slice can be investigated as a workload instead of as a collection of unrelated PIDs. Its limitation is that the numbers depend on accounting, permissions, sampling, kernel support, and the visible hierarchy. Accurate diagnosis requires confirming those conditions and correlating metrics with established baselines and service behavior.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Linux Command #67 follows the published Command #66 and preserves the full Open Source Tech Cert subject rotation, including specialty and programming tracks. The systemd 257.9 <code>--help</code> and a bounded <code>systemd-cgtop</code> snapshot were executed in Debian GNU/Linux 13, inside a limited container that exposed only the root cgroup. No production service was modified. The CPU and memory percentages in the worked example are hypothetical calculations. The editorial cover and two in-body photographs are AI-generated conceptual illustrations, not screenshots of the executed terminal. Embedded videos are credited to their source channels; server-rendered iframe verification and interactive playback are tracked separately.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original donation QR code for 5,000 satoshis" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, display the lesson and original QR code on a computer or second screen, then scan it using a compatible Bitcoin wallet. On the same phone, a wallet may support scanning an image saved from the page. Verify the destination before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the original donation QR code to contribute 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

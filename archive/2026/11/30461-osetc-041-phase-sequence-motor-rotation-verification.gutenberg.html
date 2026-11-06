@@ -1,0 +1,236 @@
+<!-- wp:paragraph -->
+<p>Three-phase power has more than a voltage magnitude: the three alternating waveforms reach their corresponding peaks in an ordered sequence. A three-phase induction motor relies on that order to establish the direction of its rotating magnetic field. Reversed connections may leave all three line-to-line voltages apparently normal while a pump, fan, conveyor or compressor attempts to run backward. <strong>Phase sequence verification</strong> is therefore a separate commissioning check from ordinary voltage and current balance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>OSETC.041</strong> advances the Electrical Technician curriculum after <a href="https://bitcoinversus.tech/2026/10/30/osetc-040-three-phase-motor-voltage-imbalance-line-to-line-troubleshooting/">OSETC.040 — Three-Phase Motor Voltage Imbalance</a>, <a href="https://bitcoinversus.tech/2026/10/29/osetc-039-three-phase-motor-current-imbalance-clamp-meter-single-phasing/">OSETC.039 — Three-Phase Motor Current Imbalance</a>, and <a href="https://bitcoinversus.tech/2026/10/27/osetc-038-motor-winding-resistance-phase-balance-low-ohm-testing/">OSETC.038 — Motor Winding Resistance</a>. The preceding lessons teach whether the electrical supply and motor phases are healthy; the new chapter teaches whether phase order matches the equipment's intended rotation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Define phase sequence, phase rotation, rotating field and mechanical shaft direction without treating them as interchangeable measurements.</li><li>Explain why exchanging any two phases reverses the rotating field in a conventional line-fed three-phase induction motor.</li><li>Distinguish a live-line phase sequence indicator from an instrument designed to predict an isolated motor's rotation.</li><li>Calculate synchronous speed for a motor with a specified number of poles and supply frequency.</li><li>Explain what a tester's clockwise or counterclockwise indicator actually says about its connected lead order.</li><li>Create a safe phase-sequence verification record without manipulating an energized installation or running a motor unexpectedly.</li><li>Recognize important exceptions for variable-frequency drives, bypass circuits, mechanical transmissions and manufacturer-specific requirements.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: the distinction between line and phase, a basic knowledge of the <a href="https://bitcoinversus.tech/2026/10/02/oseec-008-three-phase-power-fundamentals/">three-phase supply waveforms</a>, motor nameplate interpretation and authorization requirements for industrial electrical work. The lesson teaches concepts, evidence interpretation and safe planning. It does not authorize unqualified personnel to probe energized conductors, change wiring or perform a motor bump test.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Physical Meaning of Phase Sequence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In a balanced three-phase system, sinusoidal phase quantities have nominally equal magnitude and are displaced by 120 electrical degrees. One sequence may be denoted A–B–C or L1–L2–L3; reversing two positions produces the opposite order, such as A–C–B. The exact designation depends on the measurement convention and on which physical terminal a tester identifies as L1.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The electromagnetic field produced by a three-phase stator advances around the motor as the excitation sequence moves through its windings. Changing the sequence reverses the field's direction. For the ordinary induction motor directly connected to a fixed-frequency supply, the rotor follows the field's direction at a speed somewhat below synchronous speed while loaded.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a mathematical model of an ideal balanced phase set, the instantaneous phase-to-reference voltages may be represented as follows. The expressions describe a conceptual signal; they are not captured measurements:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.93em/1.62 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;padding:0;box-shadow:none;color:inherit">vA(t) = Vm × sin(ωt)
+vB(t) = Vm × sin(ωt − 120°)
+vC(t) = Vm × sin(ωt + 120°)
+ω = 2πf</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If B and C trade positions relative to the connected stator terminals, the excitation order reverses. The three phases can retain equal RMS magnitudes, so a technician cannot verify rotation solely by observing that all line-to-line voltages are near nominal. The physical terminal order and relevant equipment drawings are essential.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=OmgiQiESu8U&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Fluke Corporation, “How to Measure Phase Rotation with the Fluke T+ Pro | 3-Phase Electrical Testing Explained” (January 27, 2025). The official vendor demonstration explains the tester's phase indication and illustrates the importance of a consistent lead-connection convention. Demonstration is educational, not permission to perform energized work without qualifications and controls.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Line Phase Sequence Is Not Guaranteed Shaft Direction</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A phase-sequence indicator reports the order of three observed line conductors relative to its own probe assignments. It does not, by itself, establish that a particular pump's impeller will turn in the required direction. Motor terminal mapping, internal connection scheme, any intervening drive, mechanical gearing and the equipment's marked direction all matter.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A separate motor-rotation tester may determine intended motor terminal relationships without energizing the motor. Megger describes that distinction in its <a href="https://www.megger.com/en-us/products/motor-and-phase-rotation-tester">Motor and Phase Rotation Tester</a> product documentation. Such functions differ by instrument: a simple mains phase-sequence indicator is not automatically a powerless motor-rotation test set.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Fluke's <a href="https://www.myflukestore.com/pdfs/cache/www.myflukestore.com/fluke/phase_rotation_tester/9040/manual/fluke_9040_phase_rotation_tester_manual.pdf">9040 Phase Rotation Indicator manual</a> explains that its clockwise/counterclockwise light refers to the instrument's observed rotary field after connecting three leads. It also warns about misleading indications under some erroneous connections. Confirm all three test points, the model's stated operating range and the lead convention before interpreting an arrow.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30442,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osetc.041-deenergized-motor-nameplate-and-terminal-identification.png" alt="Three-phase motor with closed terminal enclosure and a nameplate on an industrial training bench" class="wp-image-30442" /><figcaption class="wp-element-caption"><em>Original conceptual AI editorial image for OSETC.041. The motor is pictured for identification teaching; nameplate details are intentionally not used as measured values.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What a Phase-Sequence Tester Can and Cannot Establish</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Can establish:</strong> the sequence of the connected three phases relative to the tester's L1/L2/L3 or equivalent input convention, when used within its rated specifications.</li><li><strong>Cannot alone establish:</strong> a complete downstream motor-winding mapping, a drive's programmed output phase order or actual rotating machinery direction.</li><li><strong>Can support:</strong> checking consistency across a designed distribution path, comparing a known-good feeder to an approved replacement and documenting an electrical asset's supply phase order.</li><li><strong>Cannot substitute for:</strong> voltage-absence verification, a complete motor commissioning procedure, manufacturer instructions or physical machine guards.</li><li><strong>Must not be confused with:</strong> an ordinary three-phase voltmeter, continuity tester or noncontact voltage detector; those devices do not necessarily provide valid phase-order information.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://portalvhds963slh4m3fqg2.blob.core.windows.net/megger-products/3PH_AN81_en_V01.pdf">Megger three-phase systems application note</a> explains why a reverse sequence can matter for brakes, motors and other direction-sensitive installations. The appropriate test instrument must match the electrical category, frequency and voltage of the actual installation. A qualified worker establishes the site's method and protective controls.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Electrical Safety Before Any Physical Test</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Under <a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333">OSHA 29 CFR 1910.333</a>, exposed live parts generally must be de-energized before nearby work unless the employer establishes an applicable exception. Only qualified people may work on exposed energized parts under the required protective practices. A phase-order check that needs line voltage is not an informal learner exercise.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A site-specific procedure must address authorized work scope, equipment shutdown and isolation, lockout/tagout, all energy sources and stored energy, a verified absence-of-voltage process where required, appropriate measurement category and voltage limits, rated PPE and arc-flash assessment, and how people remain clear of any possible motor or load movement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For the training sequence, physical testing is intentionally replaced with interpretation of a hypothetical diagram and supplied manufacturer documentation. Never exchange two energized motor leads, bridge terminal blocks, defeat interlocks, remove a machine guard or spin connected rotating machinery merely to confirm the lesson. Only a qualified technician with an approved plan may perform commissioning operations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked Calculation: Motor Speed Versus Rotation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The synchronous speed of an AC motor's rotating magnetic field depends on electrical frequency and the number of magnetic poles. For a conventional motor supplied from fixed-frequency three-phase power, the standard relation is:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.93em/1.62 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;padding:0;box-shadow:none;color:inherit">Ns (rpm) = 120 × f (Hz) ÷ P (poles)</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Consider a hypothetical four-pole induction motor operating on a 60 Hz supply. Its synchronous speed is <strong>120 × 60 ÷ 4 = 1,800 rpm</strong>. If the actual shaft speed under a particular load is 1,750 rpm, its slip as a percentage of synchronous speed is:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.93em/1.62 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;padding:0;box-shadow:none;color:inherit">Slip (%) = (Ns − Nr) ÷ Ns × 100
+Slip (%) = (1,800 − 1,750) ÷ 1,800 × 100
+Slip = 2.78% (rounded)</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Reversing the applied phase order reverses the direction of the ideal rotating field, but does not change the 60 Hz electrical frequency or four-pole synchronous-speed <em>magnitude</em>. Actual speed and load characteristics may differ between forward and reverse duty because the driven machine may not be designed to operate equally in both directions. Mechanical rotation must be understood separately from supply RMS voltage balance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why Motor Direction Matters to Cooling and Mechanical Equipment</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Fans, pumps, compressors, conveyors and material-handling systems frequently specify a required rotation direction. Reversal can reduce flow or pressure, reverse material transport, compromise lubrication or violate a manufacturer's mechanical requirements. Damage severity depends on equipment design, load and protective systems; never assume that a machine is safe to trial-run backward.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An industrial ventilation fan may retain a spinning shaft while producing less useful flow if the impeller operates in the wrong direction. A pump may likewise rotate while failing to meet its intended hydraulic performance. Motor current and vibration may change, but neither observation is a standalone proof of direction. The direction marked on the machine and the vendor's commissioning documentation are the reference.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30444,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osetc.041-industrial-ventilation-fan-rotation-check.png" alt="Guarded industrial ventilation fan assembly and technician making a noncontact visual inspection" class="wp-image-30444" /><figcaption class="wp-element-caption"><em>Original AI-generated conceptual equipment image. The illustrated guarded fan is not evidence of a measured phase sequence, airflow rate or commissioned operating direction.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Special Case: Soft Starters, Variable-Frequency Drives, and Bypass</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A basic soft starter often changes how motor voltage rises during startup without intentionally changing the incoming phase sequence. However, drive and bypass architectures require model-specific review. Schneider Electric distinguishes the sequence behavior of soft starters and variable-speed drives in its <a href="https://www.se.com/ie/en/faqs/FA28080/">official starter and drive application guidance</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A variable-frequency drive (VFD) synthesizes output switching waveforms; the incoming phase sequence may not determine the output motor rotation in the manner of a direct-on-line supply. The drive's output terminals and rotation parameters must be evaluated according to the exact model. Schneider's <a href="https://www.se.com/us/en/faqs/FAQ000208178/">Altivar troubleshooting guidance</a> warns about differences when a bypass path is present and says direction must be verified separately in drive and bypass operation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A motor that rotates correctly under a VFD but incorrectly under a bypass may have a mismatch in the separate power paths. A technician must not modify the upstream phase order of an entire distribution board to correct one downstream motor; such a change could reverse other connected loads. Correction, if justified, is a controlled design and commissioning task for qualified staff, not an introductory hands-on lab.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=l_cryhIzdHY&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Electrician U, “How Do You Change Rotation Direction in Three Phase Motors” (June 27, 2022). The presentation explains why exchanging phase order reverses motor rotation. Physical wiring demonstrations require appropriate isolation, qualification, equipment controls and site authorization; the lesson's practical exercise remains documentation-only.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab: Verify a Documented Rotation Plan</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a safe training exercise, imagine a new industrial exhaust fan labeled <strong>Fan EF-12</strong> with a required rotation direction shown on the OEM drawing. A three-phase source is documented as L1–L2–L3 at a known test location. The technician has not energized the motor; the exercise concerns how to assemble an evidence record before a qualified commissioning team is authorized to work.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Collect drawings:</strong> identify the supply source, motor terminals, disconnect, protective device, drive or starter and any bypass circuit, using approved documents rather than assumed cable colors.</li><li><strong>Identify scope:</strong> distinguish the phase-sequence reading at the source from the eventual motor terminal connection and any intervening power electronics.</li><li><strong>Confirm instrument:</strong> document the approved phase rotation indicator model, category and voltage/frequency limits from its manual; do not physically connect it during the paper exercise.</li><li><strong>Record the example:</strong> treat a hypothetical indicator result of L1–L2–L3 as one documented supply observation. Do not translate it automatically into clockwise shaft rotation.</li><li><strong>Compare requirements:</strong> note the intended OEM direction, shaft viewing position, fan guard requirements, and whether a manufacturer-approved nonenergized motor-rotation method exists.</li><li><strong>Plan contingencies:</strong> identify who is authorized to perform isolation, testing, possible phase correction and formal re-energization, with hazards and rollback steps.</li><li><strong>Report gaps:</strong> if the motor terminal mapping or bypass behavior is unknown, mark the verification incomplete and request the missing drawing or manufacturer's instructions.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The lab's success criterion is an accurate, reviewable verification plan, <strong>not</strong> a spinning motor. A learner should be able to state which evidence is known, which is assumed, and which commissioning actions need a qualified team. Documentation-only practice cannot certify a physical motor's correct rotation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting Misleading Indications</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Normal three-phase voltage but wrong mechanical direction:</strong> voltage magnitudes do not encode phase order; compare source sequence, terminal mapping and OEM requirements.</li><li><strong>Clockwise indicator disagrees with an expected shaft view:</strong> clarify the tester's lead order and the shaft's stated viewing direction, then account for VFDs and mechanical reduction gear.</li><li><strong>Unexpected reading or missing indicator:</strong> evaluate correct probe identification, instrument limits, missing phase and instrument-specific fault warnings without touching live equipment as an unqualified learner.</li><li><strong>Correct direction in drive mode but not bypass:</strong> consider separately wired output paths and documented bypass interlocks.</li><li><strong>Change to one feeder affects several motors:</strong> alterations made too far upstream can change phase sequence for multiple downstream loads.</li><li><strong>Apparent motor fault with only a phase-order observation:</strong> examine the broader findings from <a href="https://bitcoinversus.tech/2026/10/30/osetc-040-three-phase-motor-voltage-imbalance-line-to-line-troubleshooting/">voltage imbalance</a> and <a href="https://bitcoinversus.tech/2026/10/29/osetc-039-three-phase-motor-current-imbalance-clamp-meter-single-phasing/">current imbalance and single-phasing</a> before reaching a diagnosis.</li><li><strong>Incorrectly assumed standard rotation:</strong> consult the actual manufacturer documentation and use an explicitly identified observation point; phase letters alone do not fix every machine's direction.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check and Answer Guide</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>What does a three-phase sequence indicator report?</strong> The order of the three connected source phases relative to its test-lead convention, not an independent measurement of motor shaft motion.</li><li><strong>Why can two equally balanced supplies produce opposite motor field directions?</strong> Reversing the ordering of two phase connections reverses the stator excitation sequence while retaining balanced voltage magnitudes.</li><li><strong>What is the synchronous speed of a four-pole motor at 60 Hz?</strong> 1,800 rpm from 120 × 60 ÷ 4.</li><li><strong>What slip is implied by 1,750 rpm for the hypothetical 1,800-rpm field?</strong> Approximately 2.78%; the figure is derived from an assumed speed and does not represent a field measurement.</li><li><strong>Is every counterclockwise indicator reading a dangerous motor installation?</strong> No. The displayed rotation is instrument-relative and must be compared with terminal mapping and the intended machine direction.</li><li><strong>Can a basic line sequence meter predict a VFD's output shaft direction on every model?</strong> No. The output sequence and control settings may differ from the incoming line sequence.</li><li><strong>What is the safe learner lab?</strong> A documentation-only verification plan that names the expected direction, source, test method, known assumptions and qualified commissioning roles.</li><li><strong>Why should the entire feeder phase order not be changed to correct a single motor?</strong> Other downstream equipment may depend on the original phase sequence and could be reversed.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Technical and safety references: <a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333">OSHA 29 CFR 1910.333 — electrical work practices</a>; <a href="https://portalvhds963slh4m3fqg2.blob.core.windows.net/megger-products/3PH_AN81_en_V01.pdf">Megger Application Note 81 — Testing Three Phase Systems</a>; <a href="https://www.megger.com/en-us/products/motor-and-phase-rotation-tester">Megger motor and phase rotation instrument information</a>; <a href="https://www.myflukestore.com/pdfs/cache/www.myflukestore.com/fluke/phase_rotation_tester/9040/manual/fluke_9040_phase_rotation_tester_manual.pdf">Fluke 9040 operating manual</a>; and <a href="https://www.se.com/us/en/faqs/FAQ000208178/">Schneider Electric Altivar phase-rotation troubleshooting</a>. The Fluke Corporation and Electrician U videos are educational complements to the primary equipment and workplace-safety documents.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Three-phase motor troubleshooting requires more than checking that all line voltages look similar. The intended direction is established by the sequence of stator excitation, the motor's terminal connection, any drive or bypass power path, and the mechanically driven equipment. A technician must keep <strong>supply phase order</strong>, <strong>rotating-field direction</strong>, and <strong>actual shaft direction</strong> distinct. Correct records and approved safety procedures are prerequisites to any physical correction or commissioning.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSETC.041 advances the independently verified Electrical Technician sequence after OSETC.040. Phase-sequence principles were checked against Fluke, Megger, Schneider Electric and OSHA references on November 6, 2026. Mathematical motor-speed and slip examples are illustrative and were calculated, not physically measured. No energized electrical testing, motor startup or wiring change was performed. The cover and two body illustrations are original AI-generated conceptual editorial images rather than actual equipment test records. Video metadata was checked, while saved WordPress playback and visual release checks are audited separately.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000-satoshi donation QR code" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, display the lesson and original QR image on a laptop or separate screen and scan it with a compatible Bitcoin wallet. Some wallets also support scanning a saved QR image from the same phone. Verify the destination before sending 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech provides educational information and journalism, not individualized electrical-safety or financial advice.</em></p>
+<!-- /wp:paragraph -->

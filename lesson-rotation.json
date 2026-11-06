@@ -48,38 +48,39 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "network_technician",
-    "lesson_number": 38,
-    "track_id": "OSNTC.038",
-    "title": "OSNTC.038 — MACsec Ethernet Encryption, MKA, and Link Troubleshooting",
-    "public_title": "OSNTC.038 — MACsec Ethernet Encryption, MKA, and Link Troubleshooting",
-    "wordpress_post_id": 30369,
-    "live_url": "https://bitcoinversus.tech/2026/11/06/osntc-038-macsec-ethernet-encryption-mka-troubleshooting/",
-    "archive_path": "archive/2026/11/30369-osntc-038-macsec-ethernet-encryption-mka-troubleshooting.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/30369-osntc-038-macsec-ethernet-encryption-mka-troubleshooting.qa.json",
+    "subject": "network_engineer",
+    "lesson_number": 5,
+    "track_id": "OSNEC.005",
+    "title": "OSNEC.005 — OSPF Link-State Advertisements, LSDBs, and SPF Path Calculation",
+    "public_title": "OSNEC.005 — OSPF Link-State Advertisements, LSDBs, and SPF Path Calculation",
+    "wordpress_post_id": 30379,
+    "live_url": "https://bitcoinversus.tech/2026/11/06/osnec-005-ospf-link-state-advertisements-lsdb-spf-path-calculation/",
+    "archive_path": "archive/2026/11/30379-osnec-005-ospf-lsas-lsdb-spf-path-calculation.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/30379-osnec-005-ospf-lsas-lsdb-spf-path-calculation.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
     "publication_status": "published",
-    "verification_status": "rendered_iframe_verified_playback_unverified",
-    "qa_status": "WordPress post #30369 published, exact 1200x630 featured cover #30360, 2 body images, official Cisco MACsec YouTube shortcode with server-rendered iframe, 4 internal links, approved QR. Desktop and mobile captures ready but pixels not inspected. Original OSNTC.037 already published as WP #27261 Oct 29; rotation reconciled to unique .038. Archive source and QA records saved to 3 repositories; full source read-back matched.",
-    "featured_media_id": 30360,
-    "github_archive_blob_sha": "94c7f07d7dbce8ea40b0da9945285670e1036ad2",
+    "verification_status": "rendered_iframes_verified_playback_unverified",
+    "qa_status": "WordPress post #30379 live. Saved YouTube shortcodes produced two server-rendered iframe players; real playback unverified. Exact 1200x630 featured image #30378, two in-body illustrative images, six contextual internal links and original editor/donation footer. Screenshot capture service ready for desktop/mobile, pixels not independently inspected. Identical Gutenberg source and QA archived and read back in three GitHub repos. Detected prior published OSPython.044 (#27274, October 29), so next Python lesson advances to .045.",
+    "featured_media_id": 30378,
+    "github_archive_blob_sha": "c1132271f46febd08f85946917fda96208106e4d",
     "body_video_ids": [
-      "6ocoC4W6Hf8"
+      "_ThYOX1wX_4",
+      "6EIdx1j6FMw"
     ],
     "code_executed": false
   },
   "next": {
-    "subject": "network_engineer",
-    "lesson_number": 5,
-    "title_format": "OSNEC.005: {topic}",
-    "public_title_format": "OSNEC.005: {topic}",
-    "resolution_note": "OSNTC.037 already published on 2026-10-29 (WordPress #27261), so unique OSNTC.038 was published 2026-11-06 (#30369). The 43-subject rotation advances to Network Engineer OSNEC.005."
+    "subject": "python",
+    "lesson_number": 45,
+    "title_format": "OSPython.045: {topic}",
+    "public_title_format": "OSPython.045: {topic}",
+    "resolution_note": "OSNEC.005 published and source archived on Nov 6. Live WordPress confirms OSPython.044 was already published on Oct 29 as post #27274, correcting stale next_lesson_number from 44 to 45. WordPress search found no OSPython.045."
   },
-  "next_after_current": "python",
+  "next_after_current": "linux",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -192,7 +193,9 @@
     },
     "python": {
       "acronym": "OSPython",
-      "next_lesson_number": 44
+      "next_lesson_number": 45,
+      "last_published_lesson_number": 44,
+      "last_wordpress_post_id": 27274
     },
     "linux": {
       "acronym": "Linux Command",
@@ -340,9 +343,9 @@
     },
     "network_engineer": {
       "acronym": "OSNEC",
-      "next_lesson_number": 5,
-      "last_published_lesson_number": 4,
-      "last_wordpress_post_id": 23504,
+      "next_lesson_number": 6,
+      "last_published_lesson_number": 5,
+      "last_wordpress_post_id": 30379,
       "status": "active; repaired missing state from 2026-10-11 published OSNEC.004"
     }
   },

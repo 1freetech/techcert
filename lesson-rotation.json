@@ -48,39 +48,39 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "linux",
-    "lesson_number": 67,
-    "track_id": "Linux Command #67",
-    "title": "Linux Command #67 – systemd-cgtop: Monitoring CPU, Memory, and I/O by Control Group (Linux OS)",
-    "public_title": "Linux Command #67 – systemd-cgtop: Monitoring CPU, Memory, and I/O by Control Group (Linux OS)",
-    "wordpress_post_id": 30407,
-    "live_url": "https://bitcoinversus.tech/2026/11/06/linux-command-67-systemd-cgtop-cgroup-cpu-memory-io/",
-    "archive_path": "archive/2026/11/30407-linux-command-67-systemd-cgtop-cgroup-resource-monitoring.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/30407-linux-command-67-systemd-cgtop-cgroup-resource-monitoring.qa.json",
+    "subject": "windows",
+    "lesson_number": 52,
+    "track_id": "Windows Command #52",
+    "title": "Windows Command #52 – sc qtriggerinfo: Inspecting Service Trigger Events (Windows OS)",
+    "public_title": "Windows Command #52 – sc qtriggerinfo: Inspecting Service Trigger Events (Windows OS)",
+    "wordpress_post_id": 30420,
+    "live_url": "https://bitcoinversus.tech/2026/11/06/windows-command-52-sc-qtriggerinfo-service-trigger-events/",
+    "archive_path": "archive/2026/11/30420-windows-command-52-sc-qtriggerinfo-service-triggers.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/30420-windows-command-52-sc-qtriggerinfo-service-triggers.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
     "publication_status": "published",
-    "verification_status": "rendered_iframes_verified_playback_unverified",
-    "qa_status": "WordPress post #30407 live, exact 1200x630 featured media #30403. Two YouTube shortcode blocks rendered as iframes, playback not independently confirmed. Two in-body conceptual editorial images and 5 verified internal links, original 5k sat donation QR and italicized Editor Note. Desktop/mobile screenshot capture ready, pixels not independently visually inspected. Debian 13 systemd-cgtop 257.9 version/help and bounded snapshot executed in restricted container; only root cgroup visible. Exact published Gutenberg and QA archived/read-back in all 3 GitHub repositories. Windows Command #51 already published 2026-10-30 as WP #27415; next unused is #52.",
-    "featured_media_id": 30403,
-    "github_archive_blob_sha": "08e126cf5106155778c0da6d4412b286caaed8b6",
+    "verification_status": "wp_rendered_iframes_verified_playback_unverified",
+    "qa_status": "WordPress post #30420 published and independently read back. Both YouTube shortcodes render as iframe players; interactive playback not verified. Featured cover WordPress ID 30413 confirmed 1200x630, body image IDs 30411/30412, seven contextual internal links, original QR ID 24043, fully italicized Editor Note, no box code. Desktop/mobile screenshots ready but not pixel-inspected. No Windows runtime available; commands checked against Microsoft Learn. Exact published Gutenberg source and QA archived and read back identically in all three GitHub repositories. Electrical Engineering OSEEC.021–.025 already published, so advance to .026.",
+    "featured_media_id": 30413,
+    "github_archive_blob_sha": "dc91354aa4129d14b799e8bc93e31f023b604a24",
     "body_video_ids": [
-      "ZD7HDrtkZoI",
-      "Sd34SoITwro"
+      "IXiXjjcXGmA",
+      "aDdFgbwquyg"
     ],
-    "code_executed": true
+    "code_executed": false
   },
   "next": {
-    "subject": "windows",
-    "lesson_number": 52,
-    "title_format": "Windows Command #52 – {topic} (Windows OS)",
-    "public_title_format": "Windows Command #52 – {topic} (Windows OS)",
-    "resolution_note": "Linux Command #67 published November 6, 2026 and archived exactly in all three repos. Live WordPress confirms Windows Command #51 (sc getkeyname) already published October 30 as post #27415. Next eligible Windows Command is #52. Full 43-subject rotation and 20 coding tracks remain intact."
+    "subject": "electrical_engineering",
+    "lesson_number": 26,
+    "title_format": "OSEEC.026: {topic}",
+    "public_title_format": "OSEEC.026: {topic}",
+    "resolution_note": "Windows Command #52 published November 6 and archived in 3 GitHub repos. Current WordPress inventory confirms OSEEC.021, .022, .023, .024 and .025 already published; OSEEC.026 is unused. Full 43-subject rotation and 20 programming tracks preserved."
   },
-  "next_after_current": "electrical_engineering",
+  "next_after_current": "electrical_technician",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -205,13 +205,15 @@
     },
     "windows": {
       "acronym": "Windows Command",
-      "next_lesson_number": 52,
-      "last_published_lesson_number": 51,
-      "last_wordpress_post_id": 27415
+      "next_lesson_number": 53,
+      "last_published_lesson_number": 52,
+      "last_wordpress_post_id": 30420
     },
     "electrical_engineering": {
       "acronym": "OSEEC",
-      "next_lesson_number": 21
+      "next_lesson_number": 26,
+      "last_published_lesson_number": 25,
+      "last_wordpress_post_id": 27425
     },
     "electrical_technician": {
       "acronym": "OSETC",

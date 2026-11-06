@@ -1,0 +1,205 @@
+<!-- wp:paragraph -->
+<p><strong>OSEEC.026</strong> examines why relay and auxiliary-contact selection depends on the <em>load being switched</em>, not merely on an attractive current number printed on a device. A 10 A thermal or resistive rating cannot be treated as permission to repeatedly switch a 10 A inductive load. Contact material, circuit voltage, alternating versus direct current, inrush, release energy and the number of operations all affect electrical life and failure risk.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The preceding <a href="https://bitcoinversus.tech/2026/10/30/oseec-025-contactor-coil-suppression-flyback-diodes-tvs-rc-snubbers/">OSEEC.025 coil-suppression lesson</a> examined how to control transients when a contactor coil is de-energized. The present chapter continues the same circuit from the perspective of the <strong>contacts that open and close the load</strong>. It also builds on <a href="https://bitcoinversus.tech/2026/10/13/oseec-020-motor-control-engineering-contactors-seal-in-circuits-interlocks-reversing-starters-control-power/">OSEEC.020 motor-control engineering</a> and <a href="https://bitcoinversus.tech/2026/10/14/oseec-021-electrical-drawings-ladder-diagrams/">OSEEC.021 electrical drawings and ladder diagrams</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Distinguish a relay's coil circuit from its mechanically operated load contacts.</li><li>Explain normally open (NO), normally closed (NC), auxiliary, dry, and power contacts without confusing their roles.</li><li>Separate rated carry current, making capacity, breaking capacity, rated operational current and electrical endurance.</li><li>Describe how resistive, inductive, capacitive and lamp loads produce different switching stresses.</li><li>Interpret IEC utilization categories AC-14, AC-15 and DC-13 at a conceptual level.</li><li>Perform a conservative datasheet screening exercise and identify details that require manufacturer verification.</li><li>Calculate approximate operations per year and explain why a catalog endurance figure is not a service-life guarantee.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: voltage, current and power relationships; basic AC and DC circuits; a schematic understanding of coils, contacts and control power. No live electrical work is required. Engineering examples are hypothetical and intended for analysis only. Electrical equipment must be selected, installed and tested according to applicable codes, standards, manufacturer instructions and site procedures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Coil Is Not the Same Circuit as Its Contacts</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An electromechanical relay uses an energized electromagnetic coil to move contacts. The coil may be rated for 24 V DC while an isolated contact set switches a different permitted circuit. The coil's specified voltage, power and pickup behavior do not automatically establish the voltage or current that its contacts can safely interrupt. A normally open contact closes upon actuation; a normally closed contact opens upon actuation, assuming a conventional non-latching device in its normal de-energized condition.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30433,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oseec-026-diagram-2.png" alt="Conceptual diagram comparing a 24 V DC control coil with a separate normally open inductive load circuit" class="wp-image-30433" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech instructional schematic. Coil and contact sides are conceptual and intentionally omit protective devices; not an installation drawing.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Auxiliary contacts commonly carry signals, permissive circuits, holding circuits and interlock commands. They are not automatically equivalent to the main poles of a motor contactor. A contact used for an emergency-stop or other safety function also requires an appropriate certified safety architecture rather than ordinary relay selection alone. Schneider Electric's <a href="https://eshop.se.com/ae/tesys-d-control-relay-3-no-2-nc-690-v-110-v-ac-standard-coil-cad32f7.html">TeSys CAD control relay specifications</a> identify control-circuit application, contact arrangement and IEC utilization categories separately from coil supply characteristics.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Rated Carry Current Versus Actual Switching Duty</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A contact can be capable of carrying a specified current while already closed yet have a lower permissible current when it must <em>make</em> or <em>break</em> a particular load. Closing onto an incandescent lamp, motor or capacitive input can create an inrush peak. Opening an inductive circuit forces stored magnetic energy to dissipate and can sustain an arc between separating contacts. Repeated arcing can erode or transfer contact metal, heat surfaces and eventually produce sticking, high resistance or failure to interrupt.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Omron's <a href="https://www.ia.omron.com/product/cautions/36/safety_precautions.html">general-purpose relay safety precautions</a> explicitly distinguish resistive and inductive switching. One illustrative table reports 250 V AC at 10 A and 30 V DC at 10 A for resistive duty, but 250 V AC at 7.5 A and 30 V DC at 5 A for an identified inductive duty condition. Those figures are <strong>not universal relay ratings</strong>: manufacturers publish ratings for specific models and test conditions. Never transpose the figures to another relay or another load.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Direct-current switching can be especially demanding because a DC arc has no recurring voltage/current zero crossing comparable to a sinusoidal AC waveform. Nonetheless, the engineering decision is not that every DC circuit is unsafe; the correct lesson is to use a contact with an explicit DC rating at the operating voltage, circuit time constant, load type and switching frequency. Manufacturer documentation may additionally specify an arc-suppression module or an entirely different switching technology.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What the AC-14, AC-15, and DC-13 Categories Describe</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>IEC 60947-5-1 is a principal product-standard family for control-circuit devices and switching elements. A utilization category summarizes prescribed operating characteristics and tests for a class of load. For auxiliary/control contacts, AC-14 is associated with smaller AC electromagnetic control loads, AC-15 with more demanding AC electromagnetic control loads, and DC-13 with DC electromagnets. Exact requirements depend on the edition and the device's certification and are not fully captured by a short category label.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>AC-14:</strong> an AC control-circuit utilization category associated with electromagnetic loads below the larger AC-15 duty; consult the standard and the particular manufacturer's application table.</li><li><strong>AC-15:</strong> AC control of electromagnetic loads such as contactor coils; use the device's <em>AC-15 rated operational current at the actual voltage</em>.</li><li><strong>DC-13:</strong> DC control of electromagnets; compare the device's DC-13 rating to the real operating voltage and load characteristics.</li><li><strong>AC-3:</strong> a different motor-contacting duty commonly applied to main power poles, not a substitute for an auxiliary contact's AC-15 rating.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Schneider Electric's <a href="https://eshop.se.com/qa/tesys-d-control-relay-3-no-2-nc-690-v-24-v-dc-standard-coil-cad32bd.html">TeSys Deca control relay entry</a> identifies AC-15/DC-13 applications, while a <a href="https://www.ia.omron.com/product/cautions/16/safety_precautions.html">separate Omron safety-relay design guide</a> explains why inrush and stored magnetic energy change contact performance. Product approvals, insulation ratings, thermal ratings, switching ratings and mechanical service life answer distinct engineering questions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=WT14nfmu1cI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">https://www.youtube.com/watch?v=WT14nfmu1cI</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Jim Pytel, “Contactors (Full Lecture),” published March 13, 2015. The freely available educational lecture covers main versus auxiliary contacts, ratings, utilization categories and arcing. Its publisher expressly authorizes embedding; the video is instructional context, not a substitute for current standards or the chosen manufacturer's data.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Datasheet-First Selection Workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A reliable selection begins with the load and the documented operating scenario rather than with a relay's marketing current figure. An engineer should record the supply voltage, AC frequency or DC polarity, load identity, continuous current, worst-case energization and de-energization conditions, expected operations per hour, ambient temperature, wiring environment and the protective-device arrangement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30432,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oseec-026-diagram-1.png" alt="Flow diagram of load type, switching duty, utilization category, and datasheet checks for relay contacts" class="wp-image-30432" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech selection-flow illustration. The diagram is a screening method, not final engineering approval.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Define the actual load.</strong> Record whether it is a relay coil, contactor coil, pilot lamp, solenoid, motor, heater or electronic power supply. A load can combine steady, inrush and stored-energy effects.</li><li><strong>Identify the supply.</strong> Document voltage, AC or DC, and the expected operating range. Contact ratings are often different at 24 V DC, 110 V DC and 230 V AC.</li><li><strong>Read utilization-category values.</strong> Select the relevant AC-15, DC-13, resistive or other rating at the actual voltage, rather than relying on rated thermal current alone.</li><li><strong>Check make and break duty.</strong> Account for energization current, release transients, whether suppression is required, and how current or power changes under abnormal conditions.</li><li><strong>Check endurance and environment.</strong> Compare the manufacturer's electrical-endurance graph with estimated operations, temperature limits, contact protection, mounting, and duty cycle.</li><li><strong>Review protection and certification.</strong> Confirm contact coordination with overcurrent devices, control-panel requirements and any applicable safety functions before installation.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked Example: A 24 V DC Contactor Coil</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a <strong>hypothetical</strong> control system in which a 24 V DC contactor coil draws 0.60 A after it has settled. The steady electrical input is calculated from voltage and current:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>P = V × I
+P = 24 V × 0.60 A
+P = 14.4 W</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The 14.4 W result describes the steady input under the assumptions stated. It does <strong>not</strong> establish the contact's actual making/breaking duty or certify that an auxiliary contact rated for 0.60 A in some other category is suitable. A DC coil's electrical transient depends on resistance, inductance, driver design, suppression components and operating voltage. The circuit may draw different current during pull-in, and release energy affects opening contacts. Obtain the coil datasheet and the proposed contact's specified DC-13 rating, then evaluate their matching conditions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Suppose a manufacturer documents a contact with a DC-13 operational rating at 24 V DC exceeding the expected switching duty. That is only an initial compatibility screen. The electrical-endurance curve, minimum switching current, overload behavior, safety requirements and approved suppressor components remain to be checked. A conventional flyback diode may reduce voltage stress but lengthen coil release time; <a href="https://bitcoinversus.tech/2026/10/30/oseec-025-contactor-coil-suppression-flyback-diodes-tvs-rc-snubbers/">OSEEC.025</a> compares suppression strategies and their tradeoffs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Calculating Switching Frequency and Electrical Endurance</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Electrical endurance is evaluated under specified electrical load and test conditions. Mechanical endurance commonly describes unloaded operation. Converting operations into a calendar estimate can support maintenance planning, but it cannot predict real field life without the correct load-specific durability data.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Assume an illustrative relay operates five complete cycles per minute during an eight-hour shift and 250 shifts per year. Here, one complete operation cycle means one full make/break sequence. Annual operation count is:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>5 cycles/min × 60 min/h × 8 h/day × 250 days/year
+= 600,000 cycles/year
+
+If a hypothetical matching-duty test is 2,000,000 cycles:
+2,000,000 / 600,000 ≈ 3.33 operating years</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The 3.33-year quotient is an <em>arithmetic planning illustration</em>, not a recommended replacement interval or reliability promise. The example assumes continuous operation at the stated rate and a hypothetical 2-million-cycle rating valid for exactly the same load and environmental conditions. Manufacturer test results, maintenance policy, failure consequences and measured degradation must govern decisions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Compare <a href="https://bitcoinversus.tech/2026/10/29/oseec-024-control-circuit-voltage-drop-contactor-pickup-transformer-regulation/">OSEEC.024</a> on control voltage drop: a sagging control supply can cause coil chatter, multiplying contact operations and mechanical stress. <a href="https://bitcoinversus.tech/2026/10/27/oseec-023-control-transformer-sizing-sealed-inrush-va/">OSEEC.023</a> explains why a transformer that handles steady load may still have inadequate momentary voltage regulation for electromagnetic devices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Failure Modes and Safe Diagnostics</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Contact pitting or high resistance:</strong> inspect service history and rated switching duty; never assume cleaning or replacing contacts is permitted for the particular assembly.</li><li><strong>Welded/stuck contacts:</strong> investigate abnormal current, inrush, contact protection and certified replacement requirements; isolate and lock out equipment under approved procedures.</li><li><strong>Chattering:</strong> check command signal, coil voltage, transformer regulation and mechanical condition; the root problem may be control power rather than contact ampere rating.</li><li><strong>Unexpected failure at DC voltage:</strong> verify an actual DC breaking rating, not only an AC rating or a contact carry current.</li><li><strong>Frequent replacement:</strong> compare operational duty and switching frequency with manufacturer endurance data and permissible environmental limits.</li><li><strong>Incorrect auxiliary-block use:</strong> check approved mechanical fit, contact arrangement, safety function and product-series compatibility.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>A technician should not open, probe or cycle energized industrial control panels merely to recreate a classroom example. Conduct document-based exercises on an isolated bench setup or simulation under an appropriately qualified supervisor; real equipment work requires documented de-energization, lockout/tagout, absence-of-voltage verification with suitable equipment, and jurisdiction-specific electrical safety procedures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab: A Documentation-Only Rating Review</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Choose a publicly documented relay or auxiliary-contact model from an authorized manufacturer and save the current datasheet revision.</li><li>Write down coil voltage, contact arrangement, thermal current, maximum voltage, rated operational current and named utilization categories; do not treat the figures as interchangeable.</li><li>Choose a fictional 24 V DC solenoid load and specify its hypothetical steady and transient characteristics. Avoid claiming unknown transient values as measured.</li><li>Identify which ratings and curves would be needed to assess the fictional load and mark missing datasheet values as unresolved.</li><li>Estimate annual operation count for a defined duty cycle, compare only against a matching electrical-endurance specification, and record every assumption.</li><li>Write a short design-review decision: acceptable for further investigation, clearly incompatible, or unable to determine from available evidence.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check and Explained Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Why is 10 A thermal current not a 10 A universal switching rating?</strong> A thermal carry limit is distinct from the ability to repeatedly close and interrupt real load current under specified voltage and load conditions.</li><li><strong>What does DC-13 generally address?</strong> Switching DC electromagnetic control loads; the actual operational rating must be taken from a model-specific datasheet.</li><li><strong>Why can inductive loads damage contacts at opening?</strong> Stored magnetic energy can sustain an arc as contacts separate.</li><li><strong>Are coil voltage and contact voltage automatically identical?</strong> No. Coil and isolated load contact circuits have separate ratings.</li><li><strong>What is the electrical input of the hypothetical 24 V, 0.60 A steady load?</strong> 14.4 W, assuming those steady values apply concurrently.</li><li><strong>At five complete cycles/min for eight hours on 250 days, how many cycles occur annually?</strong> 600,000 cycles/year.</li><li><strong>Does a mechanical-life figure establish service life under load?</strong> No. Electrical endurance is load-dependent, and field conditions may differ from tests.</li><li><strong>Can a flyback diode solve every contact-rating problem?</strong> No. It can shape an inductive transient but may slow release and cannot substitute for correct load-specific ratings.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary Sources and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Manufacturer and technical references: Omron, <a href="https://www.ia.omron.com/product/cautions/36/safety_precautions.html">General-purpose Relay Safety Precautions</a>; Omron, <a href="https://www.ia.omron.com/product/cautions/16/safety_precautions.html">Safety Relay Circuit Design</a>; Schneider Electric, <a href="https://eshop.se.com/ae/tesys-d-control-relay-3-no-2-nc-690-v-110-v-ac-standard-coil-cad32f7.html">TeSys CAD Control Relay</a>; Schneider Electric, <a href="https://eshop.se.com/qa/tesys-d-control-relay-3-no-2-nc-690-v-24-v-dc-standard-coil-cad32bd.html">TeSys Deca Control Relay</a>. Consult the applicable purchased edition of IEC 60947-5-1 and the device-specific certified datasheet before performing an engineered selection. Ratings and examples were reviewed November 6, 2026. No relay or electrical panel was energized or electrically tested for the lesson.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Relay contacts are selected for the real switching duty, not merely the highest number printed in a catalog. The load type, operating voltage, AC/DC behavior, utilization category, making/breaking stresses, electrical endurance, protection and environment together determine whether a control device is a credible candidate. A defensible engineering record keeps steady current, switching duty and manufacturer test ratings separate.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSEEC.026 follows published OSEEC.025. Mathematical examples are fictional and independently rechecked; manufacturer links are primary references. The cover is original AI-generated editorial imagery and both diagrams are original conceptual illustrations, not installation instructions. The embedded lecture provides historical educational context. Live video playback and visual browser inspection require separate confirmation.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech donation QR code for 5,000 satoshis" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech donation QR. Verify the wallet destination before sending any payment.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>To scan the 5,000-sat donation QR on a phone, display the article on a separate screen and scan with a compatible Bitcoin wallet, or use your wallet's saved-image scanner when supported. Verify the destination shown by the wallet before authorizing a payment.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech provides educational and journalistic information, not individualized financial, legal or electrical-safety advice.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-06",
+  "lesson_id": "OSNEC.005",
+  "wordpress_post_id": 30379,
+  "title": "OSNEC.005 — OSPF Link-State Advertisements, LSDBs, and SPF Path Calculation",
+  "live_url": "https://bitcoinversus.tech/2026/11/06/osnec-005-ospf-link-state-advertisements-lsdb-spf-path-calculation/",
+  "status": "published",
+  "verification_status": "rendered_iframes_verified_playback_unverified",
+  "featured_media": {
+    "id": 30378,
+    "width": 1200,
+    "height": 630,
+    "dimension_metadata_verified": true,
+    "alt_text": "Rack-mounted networking routers connected by fiber optic links in a datacenter laboratory",
+    "on_page_pixel_visual_verified": false
+  },
+  "body_media": {
+    "image_ids": [
+      30375,
+      30376
+    ],
+    "video_ids": [
+      "_ThYOX1wX_4",
+      "6EIdx1j6FMw"
+    ],
+    "video_channels": [
+      "Practical Networking",
+      "Practical Networking"
+    ],
+    "saved_shortcodes": 2,
+    "server_rendered_iframe_count": 2,
+    "playback_independently_verified": false
+  },
+  "editorial": {
+    "internal_links": 6,
+    "original_qr_id": 24043,
+    "donation_sats": 5000,
+    "editor_note_italicized": true,
+    "code_block_count": 0,
+    "read_only_commands_documentation_reviewed": true,
+    "production_commands_executed": false
+  },
+  "external_sources": [
+    "https://www.rfc-editor.org/rfc/rfc2328",
+    "https://www.rfc-editor.org/rfc/rfc3101",
+    "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/m_ospf-s1.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/47864-ospfdb5.html"
+  ],
+  "screen_captures": {
+    "desktop": {
+      "status": "ready",
+      "viewport_width": 1200,
+      "pixels_inspected": false
+    },
+    "mobile": {
+      "status": "ready",
+      "viewport_width": 390,
+      "pixels_inspected": false
+    }
+  },
+  "archive_path": "archive/2026/11/30379-osnec-005-ospf-lsas-lsdb-spf-path-calculation.gutenberg.html",
+  "qa_path": "archive/2026/11/30379-osnec-005-ospf-lsas-lsdb-spf-path-calculation.qa.json",
+  "archive_repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ],
+  "qa_notes": "WordPress post read back after publication. Two YouTube shortcode blocks produce two server-rendered iframes. Featured media exactly 1200×630 according to WordPress media record. Source includes two instructional images, six contextual internal links, editor note, 5,000-sat original QR. Live screen captures ready but not visually inspected; interactive YouTube playback not independently tested. Image visuals are conceptual AI-generated artwork. OSPF SPF calculations and CLI descriptions were source-reviewed but no router lab was run.",
+  "next_subject": "python",
+  "next_track_id": "OSPython.044"
+}

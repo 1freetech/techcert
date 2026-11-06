@@ -48,37 +48,39 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "electrical_engineering",
-    "lesson_number": 26,
-    "track_id": "OSEEC.026",
-    "title": "OSEEC.026: Relay Contact Ratings — AC-15, DC-13, Inrush, and Electrical Endurance",
-    "public_title": "OSEEC.026: Relay Contact Ratings — AC-15, DC-13, Inrush, and Electrical Endurance",
-    "wordpress_post_id": 30434,
-    "live_url": "https://bitcoinversus.tech/2026/11/06/oseec-026-relay-contact-ratings-ac15-dc13-electrical-endurance/",
-    "archive_path": "archive/2026/11/30434-oseec-026-relay-contact-ratings-ac15-dc13.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/30434-oseec-026-relay-contact-ratings-ac15-dc13.qa.json",
+    "subject": "electrical_technician",
+    "lesson_number": 41,
+    "track_id": "OSETC.041",
+    "title": "OSETC.041 — Three-Phase Phase Sequence and Motor Rotation Verification",
+    "public_title": "OSETC.041 — Three-Phase Phase Sequence and Motor Rotation Verification",
+    "wordpress_post_id": 30461,
+    "live_url": "https://bitcoinversus.tech/2026/11/06/osetc-041-three-phase-sequence-motor-rotation-verification/",
+    "archive_path": "archive/2026/11/30461-osetc-041-phase-sequence-motor-rotation-verification.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/30461-osetc-041-phase-sequence-motor-rotation-verification.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
     "publication_status": "published",
-    "verification_status": "WordPress_status_confirmed_markup_saved_screenshots_ready_playback_unverified",
-    "qa_status": "WordPress #30434 live. 1200x630 featured image #30431; 2 original in-story diagrams #30432/30433; one verifiable Jim Pytel YouTube watch URL embedded via native Gutenberg, playback not independently observed; six WordPress internal lesson links; 5k sat original QR #24043; italicized Editor Note. Source verified against primary manufacturer documentation, math examples checked; no live hardware tests. Screenshot links ready at 1280px and 390px but pixels not directly inspected. Published source and QA archive in three repositories.",
-    "featured_media_id": 30431,
+    "verification_status": "wordpress_rendered_iframes_verified_playback_unverified",
+    "qa_status": "WordPress #30461 published, independently read-back. Two YouTube shortcode blocks generated rendered iframes (playback unverified); 2 original in-body AI editorial images and 6 contextual links; exact 1200x630 featured cover #30448; QR #24043 and italic editor note. Desktop/mobile screenshot captures ready, pixel inspection unverified. Documentation-only training lab, no live motor tested. Exact Gutenberg source + QA archived and verified identical in all 3 GitHub repos. Next PCB Engineering OSPCB.004 not in published/draft WordPress records. Full 43 subjects and 20 coding tracks preserved.",
+    "featured_media_id": 30448,
+    "github_archive_blob_sha": "689cff9eea45efc9cb2057b14c03ca90d8229223",
     "body_video_ids": [
-      "WT14nfmu1cI"
+      "OmgiQiESu8U",
+      "l_cryhIzdHY"
     ],
     "code_executed": false
   },
   "next": {
-    "subject": "electrical_technician",
-    "lesson_number": 41,
-    "title_format": "OSETC.041: {topic}",
-    "public_title_format": "OSETC.041: {topic}",
-    "resolution_note": "OSEEC.026 published Nov 6, 2026 as WP #30434. WordPress verified OSETC.039 and OSETC.040 already published on Oct 29–30; OSETC.041 unused. Retain 43-subject rotation and all 20 coding tracks."
+    "subject": "pcb_engineering",
+    "lesson_number": 4,
+    "title_format": "OSPCB.004: {topic}",
+    "public_title_format": "OSPCB.004: {topic}",
+    "resolution_note": "OSETC.041 published November 6 WordPress #30461; archived in 3 repos. OSPCB.003 published October 24 as WP #26344, while OSPCB.004 is unused in WordPress. All 43 rotation subjects and 20 programming tracks retained."
   },
-  "next_after_current": "pcb_engineering",
+  "next_after_current": "cpp",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -215,9 +217,9 @@
     },
     "electrical_technician": {
       "acronym": "OSETC",
-      "next_lesson_number": 41,
-      "last_published_lesson_number": 40,
-      "last_wordpress_post_id": 27439
+      "next_lesson_number": 42,
+      "last_published_lesson_number": 41,
+      "last_wordpress_post_id": 30461
     },
     "cpp": {
       "acronym": "OSC++",
@@ -258,7 +260,9 @@
     },
     "pcb_engineering": {
       "acronym": "OSPCB",
-      "next_lesson_number": 4
+      "next_lesson_number": 4,
+      "last_published_lesson_number": 3,
+      "last_wordpress_post_id": 26344
     },
     "hashboard_repair": {
       "acronym": "OSHRE",

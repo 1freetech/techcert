@@ -1,6 +1,6 @@
 {
   "schema_version": 8,
-  "updated_at": "2026-11-05",
+  "updated_at": "2026-11-06",
   "rotation": [
     "data_center_technician",
     "data_center_engineer",
@@ -48,15 +48,15 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "zig",
-    "lesson_number": 2,
-    "track_id": "OSZig.002",
-    "title": "OSZig.002: Zig Variables and Types — const, var, and Mutability",
-    "public_title": "OSZig.002: Zig Variables and Types — const, var, and Mutability",
-    "wordpress_post_id": 29647,
-    "live_url": "https://bitcoinversus.tech/2026/11/05/oszig-002-variables-types-const-var-mutability/",
-    "archive_path": "archive/2026/11/29647-oszig-002-variables-types-const-var-mutability.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/29647-oszig-002-variables-types-const-var-mutability.qa.json",
+    "subject": "leadership",
+    "lesson_number": 5,
+    "track_id": "OSLTC.005",
+    "title": "OSLTC.005 — Delegation and Accountability for Technical Teams",
+    "public_title": "OSLTC.005 — Delegation and Accountability for Technical Teams",
+    "wordpress_post_id": 30335,
+    "live_url": "https://bitcoinversus.tech/2026/11/06/osltc-005-delegation-accountability-technical-teams/",
+    "archive_path": "archive/2026/11/30335-osltc-005-delegation-accountability-technical-teams.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/30335-osltc-005-delegation-accountability-technical-teams.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
@@ -64,23 +64,22 @@
     ],
     "publication_status": "published",
     "verification_status": "published_unverified",
-    "qa_status": "WordPress post #29647 published. Two genuine Zig tutorial URLs saved in native Gutenberg video blocks; live iframe and playback not independently verified. WordPress original featured crop #29650 exactly 1200x630. Eleven unboxed code examples and no wp:code blocks; five relevant internal links; original QR and editor/disclaimer order verified. Zig 0.17.1 official reference reviewed, but compiler runtime not installed. Both screenshot captures ready, pixels not inspected. Identical saved Gutenberg source and QA evidence archived and read back in three repositories, Git blob SHA 8652611600f538eaa8116a43bb7edb2d6e8b7c42.",
-    "featured_media_id": 29650,
-    "github_archive_blob_sha": "8652611600f538eaa8116a43bb7edb2d6e8b7c42",
+    "qa_status": "WordPress #30335 published. Six internal links, two body instructional images, one native Gutenberg Harvard Business Impact YouTube embed, approved QR/editor/disclaimer, 1200×630 featured media #30339. Public video metadata checked; playback unverified. Desktop/mobile screenshots captured ready, pixels not inspected. Identical published Gutenberg source and QA records archived in three repos and read back.",
+    "featured_media_id": 30339,
+    "github_archive_blob_sha": "94c01bee75ac1e5e31df8ec49f106fe2b067dcf4",
     "body_video_ids": [
-      "LaS8V7P-duQ",
-      "Hp4zvZf6K0g"
+      "i41cFYIMQlw"
     ],
     "code_executed": false
   },
   "next": {
-    "subject": "leadership",
-    "lesson_number": 5,
-    "title_format": "OSLTC.005: {topic}",
-    "public_title_format": "OSLTC.005: {topic}",
-    "resolution_note": "OSZig.002 published and source archived. Leadership OSLTC.001–.004 already published (IDs 22070, 22250, 22598, 23311); next unique is OSLTC.005."
+    "subject": "network_technician",
+    "lesson_number": 37,
+    "title_format": "OSNTC.037: {topic}",
+    "public_title_format": "OSNTC.037: {topic}",
+    "resolution_note": "OSLTC.005 published, source archived identically in three repositories, and curriculum rotation advanced from leadership to the network technician track."
   },
-  "next_after_current": "network_technician",
+  "next_after_current": "network_engineer",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -233,7 +232,7 @@
     },
     "leadership": {
       "acronym": "OSLTC",
-      "next_lesson_number": 5
+      "next_lesson_number": 6
     },
     "network_technician": {
       "acronym": "OSNTC",

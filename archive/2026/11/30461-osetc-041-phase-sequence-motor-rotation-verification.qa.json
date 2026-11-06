@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-06",
+  "lesson_id": "OSETC.041",
+  "subject": "electrical_technician",
+  "wordpress_post_id": 30461,
+  "title": "OSETC.041 — Three-Phase Phase Sequence and Motor Rotation Verification",
+  "live_url": "https://bitcoinversus.tech/2026/11/06/osetc-041-three-phase-sequence-motor-rotation-verification/",
+  "publication_status": "published",
+  "verification_status": "wordpress_rendered_youtube_iframes_verified_interactive_playback_unverified",
+  "featured_media": {
+    "id": 30448,
+    "width": 1200,
+    "height": 630,
+    "dimensions_verified_wordpress": true,
+    "alt_text": "Three-phase industrial motor and disconnected phase-sequence tester on a safe maintenance workbench",
+    "visual_pixel_inspection": false
+  },
+  "body_media": {
+    "image_ids": [
+      30442,
+      30444
+    ],
+    "youtube_ids": [
+      "OmgiQiESu8U",
+      "l_cryhIzdHY"
+    ],
+    "youtube_channels": [
+      "Fluke Corporation",
+      "Electrician U"
+    ],
+    "saved_youtube_shortcodes": 2,
+    "server_rendered_iframe_count": 2,
+    "interactive_player_playback_verified": false
+  },
+  "editorial": {
+    "internal_link_count": 6,
+    "original_donation_qr_media_id": 24043,
+    "donation_sats": 5000,
+    "editor_note_fully_italicized": true,
+    "disclaimer_present": true,
+    "unboxed_code": true,
+    "site_categories": [
+      2509703,
+      6
+    ],
+    "subscriber_emails_disabled": true
+  },
+  "technical_validation": {
+    "sources": [
+      "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333",
+      "https://www.megger.com/en-us/products/motor-and-phase-rotation-tester",
+      "https://portalvhds963slh4m3fqg2.blob.core.windows.net/megger-products/3PH_AN81_en_V01.pdf",
+      "https://www.myflukestore.com/pdfs/cache/www.myflukestore.com/fluke/phase_rotation_tester/9040/manual/fluke_9040_phase_rotation_tester_manual.pdf",
+      "https://www.se.com/us/en/faqs/FAQ000208178/"
+    ],
+    "mathematics_checked": [
+      "60 Hz 4 pole synchronous speed = 1800 rpm",
+      "1750 rpm hypothetical speed implies slip 2.78 percent"
+    ],
+    "energized_tests_performed": false,
+    "real_motor_or_physical_instrument_tested": false,
+    "corrective_wiring_performed": false,
+    "lab_type": "documentation-only"
+  },
+  "curriculum": {
+    "rotation_subjects": 43,
+    "coding_tracks": 20,
+    "prerequisites": [
+      "OSETC.040",
+      "OSETC.039",
+      "OSETC.038"
+    ],
+    "next_subject": "pcb_engineering"
+  },
+  "desktop_capture": {
+    "status": "ready",
+    "viewport_width": 1200,
+    "pixels_visually_inspected": false
+  },
+  "mobile_capture": {
+    "status": "ready",
+    "viewport_width": 390,
+    "pixels_visually_inspected": false
+  },
+  "limitations": [
+    "Live WordPress video iframe elements confirmed, actual playback unverified.",
+    "Desktop/mobile screenshot links ready, but image pixels not visually inspected.",
+    "AI-generated editorial equipment illustrations are conceptual, not field measurements.",
+    "No physical motor, phase-sequence instrument or energized electrical circuit tested."
+  ],
+  "archive_path": "archive/2026/11/30461-osetc-041-phase-sequence-motor-rotation-verification.gutenberg.html",
+  "qa_path": "archive/2026/11/30461-osetc-041-phase-sequence-motor-rotation-verification.qa.json",
+  "archive_repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ]
+}

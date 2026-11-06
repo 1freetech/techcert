@@ -1,0 +1,237 @@
+<!-- wp:paragraph -->
+<p>An OSPF router does not learn a complete network map from a single routing update. Routers exchange <strong>link-state advertisements (LSAs)</strong>, maintain a <strong>link-state database (LSDB)</strong>, and calculate a shortest-path tree using the Shortest Path First (SPF) algorithm. As topologies grow beyond a single router, recognizing the information contained in each LSA becomes essential for finding routing faults without guessing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>OSNEC.005 builds directly on <a href="https://bitcoinversus.tech/2026/10/02/osnec-001-ospf-fundamentals/">OSNEC.001 — OSPF Fundamentals</a> and <a href="https://bitcoinversus.tech/2026/10/11/osnec-004-ospf-areas-abrs-area-0-inter-area-routing-verification/">OSNEC.004 — OSPF Areas and ABRs</a>. Earlier lessons introduced route metrics, Area 0, and inter-area routing. The engineering objective now is to explain <em>where routing information comes from, how it travels, and how routers turn it into preferred paths.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain the difference between an OSPF packet, an LSA, the LSDB, the SPF tree, and the installed routing table.</li><li>Identify OSPFv2 LSA types 1, 2, 3, 4 and 5, plus the NSSA Type 7 extension, including their originators and flooding scopes.</li><li>Read the major LSA header fields: type, Link State ID, Advertising Router, sequence, checksum, and age.</li><li>Perform a worked shortest-path cost comparison and identify a lowest-cost route.</li><li>Use documented Cisco IOS/IOS XE show commands to inspect OSPF neighbors, LSA records, and installed routes.</li><li>Distinguish absent topology evidence from a database synchronization failure, a missing summary, or an external route problem.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites include basic IPv4 addressing, OSPF adjacencies, and the ability to interpret a routed interface's cost. Review <a href="https://bitcoinversus.tech/2026/10/02/osnec-002-route-summarization-fundamentals/">route summarization fundamentals</a> and <a href="https://bitcoinversus.tech/2026/10/09/osnec-003-ospf-default-routes-origination-verification-failure-risks/">OSPF default route origination</a> if those ideas remain unfamiliar.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How a Link-State Router Builds Its View of the Network</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Open Shortest Path First, standardized for IPv4 as <a href="https://www.rfc-editor.org/rfc/rfc2328">RFC 2328</a>, is a link-state interior gateway protocol. Each router originates advertisements describing eligible local topology information and exchanges them with adjacent OSPF neighbors. A router stores accepted advertisements in its LSDB, runs SPF for the relevant area, and evaluates routing candidates for installation into its routing information base. The forwarding table used to move packets is a further implementation-dependent stage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Link-state flooding is not equivalent to a distance-vector router periodically sending its entire routing table. OSPF distributes advertisements describing a graph of routers, links, transit networks, and reachability. Routers use that graph to calculate paths locally. Within an area, routers with synchronized, fully established adjacencies converge toward consistent area-specific topology data, while an Area Border Router maintains data for each attached area.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=_ThYOX1wX_4&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Practical Networking, “OSPF Framework &amp; OSPF Packets: LSDB, LSA, Hello, DBD, LSR, LSU, LSAck” (March 8, 2022). Demonstrates the distinction between the neighbor table, LSDB, route table, and five OSPF packet types. Video metadata was checked; playback remains a separate release check.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Five OSPF Packet Types Are Not the Same as LSA Types</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>OSPFv2 exchanges Hello packets to discover or maintain neighbors. Database Description (DBD) packets summarize LSDB contents; Link State Request (LSR) packets request particular LSA instances; Link State Update (LSU) packets carry one or more complete LSAs; and Link State Acknowledgment packets confirm receipt. Those are <strong>packet types</strong> used for protocol exchange. LSA types instead identify the <strong>kind of topology information</strong> inside the updates. Confusing the two categories makes packet captures hard to interpret.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A neighbor in the 2-Way state is not automatically fully adjacent on a broadcast segment. Designated Router (DR) and Backup Designated Router (BDR) relationships influence which adjacencies exchange complete database information. A meaningful troubleshooting record should include the interface, neighbor state, router ID, area, and what database entries were expected.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">OSPFv2 LSA Types and Their Roles</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Type 1 — Router-LSA:</strong> generated by every router for each area to which it belongs, describing the router's area-local links, states and advertised costs. Flooded within that area.</li><li><strong>Type 2 — Network-LSA:</strong> generated by the Designated Router for qualifying multiaccess transit networks; lists attached routers. Flooded within the area. A point-to-point-only topology may contain no Type 2 records.</li><li><strong>Type 3 — Summary Network-LSA:</strong> originated by an Area Border Router to convey reachability to IP networks across area boundaries. The term <em>summary</em> does not guarantee that configured aggregation has been performed.</li><li><strong>Type 4 — Summary ASBR-LSA:</strong> originated by an ABR to describe the reachability of an Autonomous System Boundary Router (ASBR) for routers in other areas, subject to OSPF area rules.</li><li><strong>Type 5 — AS-External-LSA:</strong> originated by an ASBR to announce an eligible route redistributed from outside the OSPF routing domain. Flooded across appropriate non-stub areas; filtered from stub and NSSA areas by design.</li><li><strong>Type 7 — NSSA External-LSA:</strong> defined by <a href="https://www.rfc-editor.org/rfc/rfc3101">RFC 3101</a> for external routing information inside a Not-So-Stubby Area; area-local Type 7 records may be translated by an NSSA border router into Type 5 advertisements where permitted.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>RFC 2328 defines the five fundamental OSPFv2 LSA types. RFC 3101 adds the NSSA Type 7 extension; it does not mean that every OSPF deployment contains a Type 7 LSA. OSPFv3 introduces different LSA structures and additional types, so an OSPFv2 Type 3 should not be described as though it were an OSPFv3 inter-area-prefix advertisement without qualification.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30375,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osnec.005-ospf-network-engineer-inspection.png" alt="Network engineer examining a network topology display next to routing hardware" class="wp-image-30375" /><figcaption class="wp-element-caption"><em>Original conceptual editorial photograph produced for OSNEC.005. An actual LSDB must be read from a router or a validated lab; the display is illustrative, not captured OSPF output.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reading an LSA Header Without Confusing Router IDs and Prefixes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Every OSPFv2 LSA includes a standard 20-byte header. Its <strong>LS type</strong>, <strong>Link State ID</strong>, and <strong>Advertising Router</strong> jointly identify a database item. The Link State ID is interpreted according to the LSA type: for a Type 1 record it identifies a router; for a Type 3 record it relates to the advertised network. The Advertising Router is the Router ID of the device that originally generated the record, not necessarily the last neighbor that transmitted it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <strong>sequence number</strong>, <strong>checksum</strong>, and <strong>age</strong> help a router determine which LSA instance is newer and whether an advertisement is stale. The fields should be interpreted together under the RFC's ordering rules; sequence numbers are not interface metrics, and differing ages alone are not proof that routers contain different topology versions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A missing Type 3 LSA in a receiving area can reflect ABR configuration, area type, route filtering or missing reachability, rather than a failure of the SPF algorithm. A missing Type 5 in a stub area may be the expected design rather than a defect.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How Dijkstra's Algorithm Selects a Lowest-Cost Tree</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>OSPF computes paths from the local router as the root of a shortest-path tree. Link metrics express <em>cost</em>, not throughput in bits per second or measured round-trip delay. The cost of a candidate path in a simplified directed graph is the sum of the relevant advertised outgoing link costs. Dijkstra's algorithm repeatedly selects the nearest unsettled vertex, records its lowest known cost, and evaluates adjacent candidates. RFC 2328 specifies the actual graph and SPF stages for routers and transit network vertices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Consider four routers in a hypothetical single OSPF area. For teaching purposes, assume the graph has symmetric costs and no transit-network vertex complications: R1–R2 costs 10, R1–R3 costs 25, R2–R3 costs 5, R2–R4 costs 20, and R3–R4 costs 5. R1 is the root.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Initialize:</strong> the root R1 has cost 0; tentative neighbors are R2 at cost 10 and R3 at cost 25.</li><li><strong>Visit R2:</strong> cost 10 is the smallest unsettled value. Through R2, R3 improves to 10 + 5 = 15 and R4 receives tentative cost 10 + 20 = 30.</li><li><strong>Visit R3:</strong> its settled cost is 15. Through R3, R4 improves to 15 + 5 = 20.</li><li><strong>Visit R4:</strong> the best discovered cost is 20, reached by R1 → R2 → R3 → R4.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The alternate R1 → R3 → R4 path costs 25 + 5 = 30, while R1 → R2 → R4 costs 10 + 20 = 30. The three-link route is therefore selected by <em>lowest total cost</em>, despite containing more hops. The correct conclusion for the simplified example is <strong>20 &lt; 30</strong>, not that the fewest-hop route always wins.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Real OSPF paths also depend on topology connectivity, LSA consistency, destination type, route-preference rules, and the behavior of platform routing processes. Equal-cost candidate paths can lead to equal-cost multipath when supported and enabled. A better metric does not override a route that cannot be resolved from valid topology data.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why the Area LSDB and Routing Table May Look Different</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The LSDB stores advertisements, not one final forwarding row for every advertisement. Several advertisements may describe transit networks, ABRs, or external reachability; SPF and later route-selection stages construct candidate routes from their relationships. A network may appear in the LSDB yet not appear as an installed OSPF route because an equal or more preferred route from another source wins under local routing policy, because a path cannot be resolved, or because the destination is directly connected.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An Area Border Router may have distinct LSDB views for Area 0 and Area 10, while a router confined to Area 10 does not need every Type 1 and Type 2 record from Area 0. ABRs exchange inter-area information primarily through appropriate summary LSAs. The separation is the central reason <a href="https://bitcoinversus.tech/2026/10/11/osnec-004-ospf-areas-abrs-area-0-inter-area-routing-verification/">OSNEC.004 examined backbone design and ABR roles</a> before the present lesson.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=6EIdx1j6FMw&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Practical Networking (November 16, 2022), an OSPF LSDB topology reconstruction demonstration. The instructor reconstructs a network from Type 1, Type 2 and external LSAs. The video is an independent practical demonstration, not evidence of a live lab performed for the article.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read-Only Router Diagnostics on Cisco IOS and IOS XE</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Cisco's <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/m_ospf-s1.html">OSPF command reference</a> documents show commands for OSPF processes and LSDB contents. In an authorized network environment, begin by inspecting the neighbors and the overall database summary. The following examples are <strong>read-only diagnostic commands</strong>, not a claim that hardware was accessed for the lesson:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">show ip ospf neighbor
+show ip ospf database
+show ip ospf database database-summary</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Inspect the relevant LSA family after identifying the area and route. A router LSA describes area-local links, a network LSA describes a DR-managed multiaccess network, and a summary LSA describes advertised inter-area networks:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">show ip ospf database router
+show ip ospf database network
+show ip ospf database summary
+show ip ospf database external</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Compare advertised prefixes with the installed routes and router-specific cost settings. IOS variants and software releases can differ in command grammar and interface behavior, so check the target platform's documentation before execution:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">show ip route ospf
+show ip ospf interface</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/47864-ospfdb5.html">Cisco inter-area OSPF LSDB walkthrough</a> demonstrates why Type 1 data differs across areas and where Type 3 records appear. A <code>show ip ospf database</code> output alone cannot prove correct forwarding; compare area membership, neighbor state, route installation, and the relevant live interface counters.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30376,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osnec.005-ospf-route-verification-lab.png" alt="Router laboratory bench with Ethernet and fiber connections and a diagnostic laptop" class="wp-image-30376" /><figcaption class="wp-element-caption"><em>Original conceptual editorial image of routing test equipment. Displayed screens are illustrative; the Cisco commands in the lesson are documentation-reviewed rather than independently executed.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab — Locate a Missing Inter-Area Prefix</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The exercise is deliberately simulated and does not change a production router. Imagine R1 and R2 operating in Area 10 and R2 acting as an ABR connected to Area 0. Network 10.50.0.0/24 exists in Area 0, but R1 has no OSPF-installed route to the prefix. The laboratory aim is to distinguish a topology failure, missing advertisement, and route-selection issue.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Check neighbor status:</strong> confirm whether R1 has the intended full OSPF adjacency to R2 on the correct area-local interface.</li><li><strong>Read the R1 LSDB:</strong> check whether a Type 3 advertisement for 10.50.0.0/24 is present and inspect its Advertising Router and age.</li><li><strong>Examine the ABR:</strong> compare the ABR's area-local and backbone database views and confirm that the prefix exists and is allowed for advertisement into Area 10.</li><li><strong>Inspect routing:</strong> if R1 has the summary advertisement but no installed OSPF route, examine calculated next hops, other candidate routes and route-selection policy.</li><li><strong>Record evidence:</strong> note the topology, relevant router IDs, area, timestamps, commands, expected LSA type, actual result, and the approved next action.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Do not use a missing route as a reason to inject an unconditional default route or disable an area control. The earlier <a href="https://bitcoinversus.tech/2026/10/09/osnec-003-ospf-default-routes-origination-verification-failure-risks/">OSPF default-route lesson</a> explains how an attractive but invalid exit can create a black hole. Verify the intended advertisement before proposing a configuration change.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common Troubleshooting Errors</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Treating an LSU as an LSA:</strong> an update packet may carry several advertisements. Look inside the packet to identify the individual type and originator.</li><li><strong>Assuming every 2-Way neighbor must be Full:</strong> broadcast-network DR/BDR designs may intentionally leave some neighbors at 2-Way.</li><li><strong>Comparing LSDBs from unrelated areas:</strong> Type 1 and Type 2 flooding is intentionally scoped, so the databases need not look identical.</li><li><strong>Interpreting Link State ID as a next hop:</strong> its meaning varies with the LSA type.</li><li><strong>Choosing the fewest-hop path:</strong> OSPF relies on cost; hop count is not the general SPF selection metric.</li><li><strong>Ignoring route source preference:</strong> database presence does not guarantee an OSPF route will win installation.</li><li><strong>Overwriting evidence during troubleshooting:</strong> capture read-only records and obtain change approval before modifying OSPF cost, authentication, area membership or summarization.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check and Answer Guide</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Which OSPF packet carries complete LSAs?</strong> A Link State Update packet (LSU).</li><li><strong>Which LSA type describes a router's area-local links?</strong> Type 1 Router-LSA.</li><li><strong>Which LSA type is normally generated by a DR for a qualifying multiaccess transit network?</strong> Type 2 Network-LSA.</li><li><strong>Which LSA type normally introduces network reachability between areas?</strong> Type 3 Summary Network-LSA from an ABR.</li><li><strong>Which LSA type tells routers about an ASBR in another area?</strong> Type 4 Summary ASBR-LSA, subject to area rules.</li><li><strong>Which types describe eligible external routes?</strong> Type 5 generally, and Type 7 inside NSSAs.</li><li><strong>What cost does R1 reach R4 with in the four-router exercise?</strong> 20, via R2 and R3. It is smaller than the two alternate costs of 30.</li><li><strong>Why might a route appear in the LSDB but not the final route table?</strong> The LSA is input data; next-hop resolution, policy, local routes and route-selection decisions determine installation.</li><li><strong>Does an ABR have to share Area 0's complete Type 1 topology with Area 10?</strong> No. The areas maintain distinct topology data; ABRs advertise appropriate inter-area reachability.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary Documentation and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The main protocol sources are <a href="https://www.rfc-editor.org/rfc/rfc2328">RFC 2328 — OSPF Version 2</a> (LSA format and SPF calculation), <a href="https://www.rfc-editor.org/rfc/rfc3101">RFC 3101 — The OSPF NSSA Option</a> (Type 7), <a href="https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/iproute_ospf/command/iro-cr-book/m_ospf-s1.html">Cisco IOS OSPF Command Reference</a>, and <a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/47865-ospfdb6.html">Cisco's external-route database walkthrough</a>. For independent video demonstrations, refer to the two Practical Networking lessons embedded above. The diagram and SPF numbers are original instructional examples and are not actual packet captures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Review</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An OSPF router learns connectivity through link-state advertisements, organizes the relevant records into an area-aware LSDB, calculates cost-based shortest-path trees, and selects routes from the resulting reachability information. Engineering verification should work through the stages in order: neighbor state, expected LSA type, originator, flood scope, LSDB presence, SPF result, and routing installation. A stable network is not merely one with a Full adjacency; it is one whose intended destinations remain reachable and whose failure conditions are understood.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSNEC.005 advances the verified Network Engineer curriculum after OSNEC.004. RFC 2328, RFC 3101 and Cisco's OSPF references ground the protocol descriptions. The sample graph, costs and laboratory failure cases are hypothetical and no production routing changes, packet captures, or console executions were performed for the lesson. Both instructional body images and the featured cover are original AI-generated conceptual editorial imagery; media-server rendering is verified separately from actual video playback.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original donation QR code for 5,000 satoshis" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open the lesson on another display and use a compatible Bitcoin wallet to scan the original QR code. Verify the destination before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

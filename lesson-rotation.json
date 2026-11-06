@@ -48,15 +48,15 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "python",
-    "lesson_number": 45,
-    "track_id": "OSPython.045",
-    "title": "OSPython.045 — Application-Wide Logging Context with LogRecordFactory",
-    "public_title": "OSPython.045 — Application-Wide Logging Context with LogRecordFactory",
-    "wordpress_post_id": 30393,
-    "live_url": "https://bitcoinversus.tech/2026/11/06/ospython-045-logrecordfactory-application-wide-logging-context/",
-    "archive_path": "archive/2026/11/30393-ospython-045-logrecordfactory-application-wide-context.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/30393-ospython-045-logrecordfactory-application-wide-context.qa.json",
+    "subject": "linux",
+    "lesson_number": 67,
+    "track_id": "Linux Command #67",
+    "title": "Linux Command #67 – systemd-cgtop: Monitoring CPU, Memory, and I/O by Control Group (Linux OS)",
+    "public_title": "Linux Command #67 – systemd-cgtop: Monitoring CPU, Memory, and I/O by Control Group (Linux OS)",
+    "wordpress_post_id": 30407,
+    "live_url": "https://bitcoinversus.tech/2026/11/06/linux-command-67-systemd-cgtop-cgroup-cpu-memory-io/",
+    "archive_path": "archive/2026/11/30407-linux-command-67-systemd-cgtop-cgroup-resource-monitoring.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/30407-linux-command-67-systemd-cgtop-cgroup-resource-monitoring.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
@@ -64,24 +64,23 @@
     ],
     "publication_status": "published",
     "verification_status": "rendered_iframes_verified_playback_unverified",
-    "qa_status": "WordPress post #30393 published. Python 3.13.5 example executed and 1 unittest passed with exact output, context reset, factory restored. Two YouTube shortcodes rendered as two iframes, playback not independently tested. Two in-body instructional images, eight verified internal links, exact 1200×630 featured cover #30390, original approved QR/footer. Desktop/mobile captures ready but pixels not inspected. Gutenberg and QA archives identical in 3 repositories. Full 43-subject rotation preserved, 20 coding tracks remain registered. Linux Command #66 was previously published 2026-10-30 as WP #27377, so Linux #67 is next.",
-    "featured_media_id": 30390,
-    "github_archive_blob_sha": "8cd09995eddf62fba1cbc9664223e66a2e3d2cd6",
+    "qa_status": "WordPress post #30407 live, exact 1200x630 featured media #30403. Two YouTube shortcode blocks rendered as iframes, playback not independently confirmed. Two in-body conceptual editorial images and 5 verified internal links, original 5k sat donation QR and italicized Editor Note. Desktop/mobile screenshot capture ready, pixels not independently visually inspected. Debian 13 systemd-cgtop 257.9 version/help and bounded snapshot executed in restricted container; only root cgroup visible. Exact published Gutenberg and QA archived/read-back in all 3 GitHub repositories. Windows Command #51 already published 2026-10-30 as WP #27415; next unused is #52.",
+    "featured_media_id": 30403,
+    "github_archive_blob_sha": "08e126cf5106155778c0da6d4412b286caaed8b6",
     "body_video_ids": [
-      "9L77QExPmI0",
-      "urrfJgHwIJA"
+      "ZD7HDrtkZoI",
+      "Sd34SoITwro"
     ],
-    "code_executed": true,
-    "tests_passed": 1
+    "code_executed": true
   },
   "next": {
-    "subject": "linux",
-    "lesson_number": 67,
-    "title_format": "Linux Command #67 – {topic} (Linux OS)",
-    "public_title_format": "Linux Command #67 – {topic} (Linux OS)",
-    "resolution_note": "OSPython.045 published and source archived Nov 6. Full 43-subject rotation and 20 programming tracks preserved. Linux Command #66 coredumpctl already published October 30 as WordPress post #27377; next unique Linux Command is #67."
+    "subject": "windows",
+    "lesson_number": 52,
+    "title_format": "Windows Command #52 – {topic} (Windows OS)",
+    "public_title_format": "Windows Command #52 – {topic} (Windows OS)",
+    "resolution_note": "Linux Command #67 published November 6, 2026 and archived exactly in all three repos. Live WordPress confirms Windows Command #51 (sc getkeyname) already published October 30 as post #27415. Next eligible Windows Command is #52. Full 43-subject rotation and 20 coding tracks remain intact."
   },
-  "next_after_current": "windows",
+  "next_after_current": "electrical_engineering",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -200,13 +199,15 @@
     },
     "linux": {
       "acronym": "Linux Command",
-      "next_lesson_number": 67,
-      "last_published_lesson_number": 66,
-      "last_wordpress_post_id": 27377
+      "next_lesson_number": 68,
+      "last_published_lesson_number": 67,
+      "last_wordpress_post_id": 30407
     },
     "windows": {
       "acronym": "Windows Command",
-      "next_lesson_number": 51
+      "next_lesson_number": 52,
+      "last_published_lesson_number": 51,
+      "last_wordpress_post_id": 27415
     },
     "electrical_engineering": {
       "acronym": "OSEEC",

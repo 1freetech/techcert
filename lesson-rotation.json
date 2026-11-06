@@ -48,39 +48,37 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "windows",
-    "lesson_number": 52,
-    "track_id": "Windows Command #52",
-    "title": "Windows Command #52 – sc qtriggerinfo: Inspecting Service Trigger Events (Windows OS)",
-    "public_title": "Windows Command #52 – sc qtriggerinfo: Inspecting Service Trigger Events (Windows OS)",
-    "wordpress_post_id": 30420,
-    "live_url": "https://bitcoinversus.tech/2026/11/06/windows-command-52-sc-qtriggerinfo-service-trigger-events/",
-    "archive_path": "archive/2026/11/30420-windows-command-52-sc-qtriggerinfo-service-triggers.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/30420-windows-command-52-sc-qtriggerinfo-service-triggers.qa.json",
+    "subject": "electrical_engineering",
+    "lesson_number": 26,
+    "track_id": "OSEEC.026",
+    "title": "OSEEC.026: Relay Contact Ratings — AC-15, DC-13, Inrush, and Electrical Endurance",
+    "public_title": "OSEEC.026: Relay Contact Ratings — AC-15, DC-13, Inrush, and Electrical Endurance",
+    "wordpress_post_id": 30434,
+    "live_url": "https://bitcoinversus.tech/2026/11/06/oseec-026-relay-contact-ratings-ac15-dc13-electrical-endurance/",
+    "archive_path": "archive/2026/11/30434-oseec-026-relay-contact-ratings-ac15-dc13.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/30434-oseec-026-relay-contact-ratings-ac15-dc13.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
     "publication_status": "published",
-    "verification_status": "wp_rendered_iframes_verified_playback_unverified",
-    "qa_status": "WordPress post #30420 published and independently read back. Both YouTube shortcodes render as iframe players; interactive playback not verified. Featured cover WordPress ID 30413 confirmed 1200x630, body image IDs 30411/30412, seven contextual internal links, original QR ID 24043, fully italicized Editor Note, no box code. Desktop/mobile screenshots ready but not pixel-inspected. No Windows runtime available; commands checked against Microsoft Learn. Exact published Gutenberg source and QA archived and read back identically in all three GitHub repositories. Electrical Engineering OSEEC.021–.025 already published, so advance to .026.",
-    "featured_media_id": 30413,
-    "github_archive_blob_sha": "dc91354aa4129d14b799e8bc93e31f023b604a24",
+    "verification_status": "WordPress_status_confirmed_markup_saved_screenshots_ready_playback_unverified",
+    "qa_status": "WordPress #30434 live. 1200x630 featured image #30431; 2 original in-story diagrams #30432/30433; one verifiable Jim Pytel YouTube watch URL embedded via native Gutenberg, playback not independently observed; six WordPress internal lesson links; 5k sat original QR #24043; italicized Editor Note. Source verified against primary manufacturer documentation, math examples checked; no live hardware tests. Screenshot links ready at 1280px and 390px but pixels not directly inspected. Published source and QA archive in three repositories.",
+    "featured_media_id": 30431,
     "body_video_ids": [
-      "IXiXjjcXGmA",
-      "aDdFgbwquyg"
+      "WT14nfmu1cI"
     ],
     "code_executed": false
   },
   "next": {
-    "subject": "electrical_engineering",
-    "lesson_number": 26,
-    "title_format": "OSEEC.026: {topic}",
-    "public_title_format": "OSEEC.026: {topic}",
-    "resolution_note": "Windows Command #52 published November 6 and archived in 3 GitHub repos. Current WordPress inventory confirms OSEEC.021, .022, .023, .024 and .025 already published; OSEEC.026 is unused. Full 43-subject rotation and 20 programming tracks preserved."
+    "subject": "electrical_technician",
+    "lesson_number": 41,
+    "title_format": "OSETC.041: {topic}",
+    "public_title_format": "OSETC.041: {topic}",
+    "resolution_note": "OSEEC.026 published Nov 6, 2026 as WP #30434. WordPress verified OSETC.039 and OSETC.040 already published on Oct 29–30; OSETC.041 unused. Retain 43-subject rotation and all 20 coding tracks."
   },
-  "next_after_current": "electrical_technician",
+  "next_after_current": "pcb_engineering",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -211,13 +209,15 @@
     },
     "electrical_engineering": {
       "acronym": "OSEEC",
-      "next_lesson_number": 26,
-      "last_published_lesson_number": 25,
-      "last_wordpress_post_id": 27425
+      "next_lesson_number": 27,
+      "last_published_lesson_number": 26,
+      "last_wordpress_post_id": 30434
     },
     "electrical_technician": {
       "acronym": "OSETC",
-      "next_lesson_number": 36
+      "next_lesson_number": 41,
+      "last_published_lesson_number": 40,
+      "last_wordpress_post_id": 27439
     },
     "cpp": {
       "acronym": "OSC++",

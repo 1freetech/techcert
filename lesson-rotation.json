@@ -48,15 +48,15 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants.",
   "last_completed": {
-    "subject": "network_engineer",
-    "lesson_number": 5,
-    "track_id": "OSNEC.005",
-    "title": "OSNEC.005 — OSPF Link-State Advertisements, LSDBs, and SPF Path Calculation",
-    "public_title": "OSNEC.005 — OSPF Link-State Advertisements, LSDBs, and SPF Path Calculation",
-    "wordpress_post_id": 30379,
-    "live_url": "https://bitcoinversus.tech/2026/11/06/osnec-005-ospf-link-state-advertisements-lsdb-spf-path-calculation/",
-    "archive_path": "archive/2026/11/30379-osnec-005-ospf-lsas-lsdb-spf-path-calculation.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/30379-osnec-005-ospf-lsas-lsdb-spf-path-calculation.qa.json",
+    "subject": "python",
+    "lesson_number": 45,
+    "track_id": "OSPython.045",
+    "title": "OSPython.045 — Application-Wide Logging Context with LogRecordFactory",
+    "public_title": "OSPython.045 — Application-Wide Logging Context with LogRecordFactory",
+    "wordpress_post_id": 30393,
+    "live_url": "https://bitcoinversus.tech/2026/11/06/ospython-045-logrecordfactory-application-wide-logging-context/",
+    "archive_path": "archive/2026/11/30393-ospython-045-logrecordfactory-application-wide-context.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/30393-ospython-045-logrecordfactory-application-wide-context.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
@@ -64,23 +64,24 @@
     ],
     "publication_status": "published",
     "verification_status": "rendered_iframes_verified_playback_unverified",
-    "qa_status": "WordPress post #30379 live. Saved YouTube shortcodes produced two server-rendered iframe players; real playback unverified. Exact 1200x630 featured image #30378, two in-body illustrative images, six contextual internal links and original editor/donation footer. Screenshot capture service ready for desktop/mobile, pixels not independently inspected. Identical Gutenberg source and QA archived and read back in three GitHub repos. Detected prior published OSPython.044 (#27274, October 29), so next Python lesson advances to .045.",
-    "featured_media_id": 30378,
-    "github_archive_blob_sha": "c1132271f46febd08f85946917fda96208106e4d",
+    "qa_status": "WordPress post #30393 published. Python 3.13.5 example executed and 1 unittest passed with exact output, context reset, factory restored. Two YouTube shortcodes rendered as two iframes, playback not independently tested. Two in-body instructional images, eight verified internal links, exact 1200×630 featured cover #30390, original approved QR/footer. Desktop/mobile captures ready but pixels not inspected. Gutenberg and QA archives identical in 3 repositories. Full 43-subject rotation preserved, 20 coding tracks remain registered. Linux Command #66 was previously published 2026-10-30 as WP #27377, so Linux #67 is next.",
+    "featured_media_id": 30390,
+    "github_archive_blob_sha": "8cd09995eddf62fba1cbc9664223e66a2e3d2cd6",
     "body_video_ids": [
-      "_ThYOX1wX_4",
-      "6EIdx1j6FMw"
+      "9L77QExPmI0",
+      "urrfJgHwIJA"
     ],
-    "code_executed": false
+    "code_executed": true,
+    "tests_passed": 1
   },
   "next": {
-    "subject": "python",
-    "lesson_number": 45,
-    "title_format": "OSPython.045: {topic}",
-    "public_title_format": "OSPython.045: {topic}",
-    "resolution_note": "OSNEC.005 published and source archived on Nov 6. Live WordPress confirms OSPython.044 was already published on Oct 29 as post #27274, correcting stale next_lesson_number from 44 to 45. WordPress search found no OSPython.045."
+    "subject": "linux",
+    "lesson_number": 67,
+    "title_format": "Linux Command #67 – {topic} (Linux OS)",
+    "public_title_format": "Linux Command #67 – {topic} (Linux OS)",
+    "resolution_note": "OSPython.045 published and source archived Nov 6. Full 43-subject rotation and 20 programming tracks preserved. Linux Command #66 coredumpctl already published October 30 as WordPress post #27377; next unique Linux Command is #67."
   },
-  "next_after_current": "linux",
+  "next_after_current": "windows",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -193,13 +194,15 @@
     },
     "python": {
       "acronym": "OSPython",
-      "next_lesson_number": 45,
-      "last_published_lesson_number": 44,
-      "last_wordpress_post_id": 27274
+      "next_lesson_number": 46,
+      "last_published_lesson_number": 45,
+      "last_wordpress_post_id": 30393
     },
     "linux": {
       "acronym": "Linux Command",
-      "next_lesson_number": 66
+      "next_lesson_number": 67,
+      "last_published_lesson_number": 66,
+      "last_wordpress_post_id": 27377
     },
     "windows": {
       "acronym": "Windows Command",

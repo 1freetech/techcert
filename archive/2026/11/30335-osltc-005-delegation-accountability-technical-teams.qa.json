@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-06",
+  "post_id": 30335,
+  "track_id": "OSLTC.005",
+  "subject": "leadership",
+  "title": "OSLTC.005 — Delegation and Accountability for Technical Teams",
+  "live_url": "https://bitcoinversus.tech/2026/11/06/osltc-005-delegation-accountability-technical-teams/",
+  "publication_status": "published",
+  "verification_status": "published_unverified",
+  "wordpress_site": "bitcoinversus.tech",
+  "category_ids": [
+    5812,
+    7885,
+    2509703,
+    6
+  ],
+  "featured_media": {
+    "id": 30339,
+    "width": 1200,
+    "height": 630,
+    "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osltc-005-delegation-1200x630-featured.png",
+    "media_metadata_verified": true,
+    "live_pixel_rendering_verified": false
+  },
+  "body_media": {
+    "image_ids": [
+      30324,
+      30329
+    ],
+    "youtube_ids": [
+      "i41cFYIMQlw"
+    ],
+    "youtube_channel": "Harvard Business Impact Enterprise",
+    "native_gutenberg_embed_saved": true,
+    "playback_verified": false
+  },
+  "editorial": {
+    "internal_link_count": 6,
+    "primary_sources": [
+      "https://www.opm.gov/policy-data-oversight/training-and-development/training-program-management/federal-supervisory-and-managerial-frameworks-and-guidance.pdf",
+      "https://handbook.gitlab.com/handbook/engineering/infrastructure-platforms/gitlab-delivery/distribution/workflow/",
+      "https://www.ahrq.gov/teamstepps-program/curriculum/team/overview/index.html",
+      "https://hbr.org/podcast/2023/09/how-to-delegate"
+    ],
+    "code_blocks": 0,
+    "footer_original_qr_id": 24043,
+    "footer_verified_from_post_id": 29647,
+    "donation_amount_sats": 5000,
+    "editors_note_italicized": true
+  },
+  "screen_capture": {
+    "desktop": {
+      "status": "ready",
+      "viewport_width": 1200,
+      "pixels_inspected": false
+    },
+    "mobile": {
+      "status": "ready",
+      "viewport_width": 390,
+      "pixels_inspected": false
+    }
+  },
+  "archive_path": "archive/2026/11/30335-osltc-005-delegation-accountability-technical-teams.gutenberg.html",
+  "archive_blob_sha": "94c01bee75ac1e5e31df8ec49f106fe2b067dcf4",
+  "archive_repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ],
+  "archive_readback": "three identical copies verified against saved WordPress Gutenberg source",
+  "limitations": [
+    "Live video iframe and playback were not independently verified.",
+    "Desktop and mobile screenshot pixel content was not independently inspected.",
+    "No live manual cross-browser navigation test was performed.",
+    "The editorial images are AI-generated conceptual illustrations, not source photographs."
+  ],
+  "next_subject": "network_technician",
+  "next_lesson_id": "OSNTC.037"
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-06",
+  "track_id": "OSPython.045",
+  "subject": "python",
+  "post_id": 30393,
+  "title": "OSPython.045 — Application-Wide Logging Context with LogRecordFactory",
+  "live_url": "https://bitcoinversus.tech/2026/11/06/ospython-045-logrecordfactory-application-wide-logging-context/",
+  "publication_status": "published",
+  "verification_status": "rendered_iframes_verified_playback_unverified",
+  "featured_media": {
+    "id": 30390,
+    "width": 1200,
+    "height": 630,
+    "verified_media_record": true,
+    "visually_inspected": false
+  },
+  "body_media": {
+    "image_ids": [
+      30387,
+      30388
+    ],
+    "youtube_ids": [
+      "9L77QExPmI0",
+      "urrfJgHwIJA"
+    ],
+    "saved_youtube_shortcodes": 2,
+    "server_rendered_iframe_count": 2,
+    "interactive_playback_verified": false
+  },
+  "editorial": {
+    "internal_link_count": 8,
+    "original_qr_media_id": 24043,
+    "donation_sats": 5000,
+    "editor_note_italicized": true,
+    "no_wp_code_blocks": true,
+    "real_code_test_available": true
+  },
+  "python_validation": {
+    "runtime": "Python 3.13.5",
+    "stdlib_only": true,
+    "example_executed": true,
+    "expected_output_matched": true,
+    "unit_tests_run": 1,
+    "unit_tests_passed": 1,
+    "test_command": "python -m unittest -v test_record_factory.py",
+    "tested_behaviors": [
+      "three output records matched exact expected text",
+      "ContextVar value reset to unassigned after use",
+      "global logging factory restored to prior identity"
+    ]
+  },
+  "curriculum": {
+    "rotation_subjects": 43,
+    "coding_language_tracks": 20,
+    "archive_index_historical_folders": 38,
+    "archive_index_historical_entries": 626,
+    "next_subject": "linux",
+    "other_specialty_subjects_retained": true
+  },
+  "archive_path": "archive/2026/11/30393-ospython-045-logrecordfactory-application-wide-context.gutenberg.html",
+  "qa_archive_path": "archive/2026/11/30393-ospython-045-logrecordfactory-application-wide-context.qa.json",
+  "archived_repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ],
+  "sources": [
+    "https://docs.python.org/3/library/logging.html#logging.setLogRecordFactory",
+    "https://docs.python.org/3/howto/logging-cookbook.html#customizing-logrecord",
+    "https://docs.python.org/3/library/contextvars.html",
+    "https://docs.python.org/3/library/unittest.html"
+  ],
+  "desktop_screen": {
+    "status": "ready",
+    "viewport_width": 1200,
+    "pixels_inspected": false
+  },
+  "mobile_screen": {
+    "status": "ready",
+    "viewport_width": 390,
+    "pixels_inspected": false
+  },
+  "limitations": [
+    "Live YouTube iframe HTML verified, actual playback not independently verified.",
+    "WordPress desktop/mobile screenshot capture links produced, pixels not visually inspected.",
+    "Original editorial images are AI-generated and are not screenshots of executed code.",
+    "Python tests were run in local Python 3.13.5, not a production environment."
+  ]
+}

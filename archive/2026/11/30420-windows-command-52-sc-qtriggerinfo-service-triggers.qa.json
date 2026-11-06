@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-06",
+  "track_id": "Windows Command #52",
+  "subject": "windows",
+  "post_id": 30420,
+  "title": "Windows Command #52 – sc qtriggerinfo: Inspecting Service Trigger Events (Windows OS)",
+  "live_url": "https://bitcoinversus.tech/2026/11/06/windows-command-52-sc-qtriggerinfo-service-trigger-events/",
+  "publication_status": "published",
+  "verification_status": "wp_rendered_iframes_verified_playback_unverified",
+  "featured_media": {
+    "id": 30413,
+    "width": 1200,
+    "height": 630,
+    "dimensions_verified_via_wordpress": true,
+    "alt_text": "Systems technician reviewing Windows service trigger diagnostics at a professional server administration workstation",
+    "pixels_inspected": false
+  },
+  "body_media": {
+    "image_ids": [
+      30411,
+      30412
+    ],
+    "youtube_ids": [
+      "IXiXjjcXGmA",
+      "aDdFgbwquyg"
+    ],
+    "youtube_channels": [
+      "TheWindowsClub",
+      "Secure2Cyber"
+    ],
+    "saved_youtube_shortcodes": 2,
+    "server_rendered_iframes": 2,
+    "playback_independently_verified": false
+  },
+  "editorial": {
+    "original_donation_qr_id": 24043,
+    "donation_sats": 5000,
+    "editor_note_italicized": true,
+    "volunteer_disclaimer_present": true,
+    "contextual_internal_links": 7,
+    "code_block_containers": 0,
+    "category_ids": [
+      5812,
+      2509703,
+      6
+    ],
+    "subscriber_notification_disabled": true
+  },
+  "technical_validation": {
+    "primary_sources": [
+      "https://learn.microsoft.com/en-us/windows/win32/services/service-trigger-events",
+      "https://learn.microsoft.com/en-us/windows/win32/services/configuring-a-service-using-sc",
+      "https://learn.microsoft.com/en-us/troubleshoot/windows-client/active-directory/w32time-not-start-on-workgroup",
+      "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/best-practices-win32services-interacting-with-devices"
+    ],
+    "sample_output_source": "Microsoft Learn Service Trigger Events; condensed example",
+    "windows_commands_executed": false,
+    "production_changes_made": false,
+    "technical_diagnostics_documentation_verified": true
+  },
+  "curriculum": {
+    "subjects_preserved": 43,
+    "coding_tracks_preserved": 20,
+    "prior_windows_command": 51,
+    "next_subject": "electrical_engineering"
+  },
+  "desktop_capture": {
+    "status": "ready",
+    "viewport_width": 1200,
+    "pixels_visually_inspected": false
+  },
+  "mobile_capture": {
+    "status": "ready",
+    "viewport_width": 390,
+    "pixels_visually_inspected": false
+  },
+  "limitations": [
+    "Video metadata verified and live HTML iframe presence confirmed, interactive YouTube playback not verified.",
+    "Desktop and mobile screenshot capture status ready, pixels not visually inspected.",
+    "AI-generated conceptual cover and supporting pictures are not actual system screenshots.",
+    "No Windows operating system was available for command execution; all command examples are documentation-derived and unexecuted."
+  ],
+  "archive_path": "archive/2026/11/30420-windows-command-52-sc-qtriggerinfo-service-triggers.gutenberg.html",
+  "qa_archive_path": "archive/2026/11/30420-windows-command-52-sc-qtriggerinfo-service-triggers.qa.json",
+  "archive_repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ]
+}

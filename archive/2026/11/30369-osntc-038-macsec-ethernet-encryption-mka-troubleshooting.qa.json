@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-06",
+  "wordpress_post_id": 30369,
+  "title": "OSNTC.038 — MACsec Ethernet Encryption, MKA, and Link Troubleshooting",
+  "track_id": "OSNTC.038",
+  "subject": "network_technician",
+  "status": "published",
+  "published_url": "https://bitcoinversus.tech/2026/11/06/osntc-038-macsec-ethernet-encryption-mka-troubleshooting/",
+  "numbering_resolution": "WordPress post 27261 already published OSNTC.037 on October 29; stale pointer of OSNTC.037 resolved to OSNTC.038.",
+  "featured_media": {
+    "id": 30360,
+    "width": 1200,
+    "height": 630,
+    "verified_metadata": true
+  },
+  "body_media": {
+    "image_ids": [
+      30357,
+      30358
+    ],
+    "youtube_ids": [
+      "6ocoC4W6Hf8"
+    ],
+    "youtube_title": "Effortless Network Security with Cisco MACsec as a Service",
+    "youtube_channel": "Cisco",
+    "shortcode_saved": true,
+    "iframe_in_wordpress_rendered_content": true,
+    "playback_independently_verified": false
+  },
+  "internal_links": 4,
+  "editor_note_italicized": true,
+  "original_donation_qr_id": 24043,
+  "donation_sats": 5000,
+  "desktop_capture": "ready; pixels uninspected",
+  "mobile_capture": "ready; pixels uninspected",
+  "production_configuration_executed": false,
+  "code_tested_on_hardware": false,
+  "tech_sources": [
+    "https://1.ieee802.org/security/802-1ae/",
+    "https://www.cisco.com/c/en/us/support/docs/routers/asr-1000-series-aggregation-services-routers/221079-troubleshoot-wan-macsec-on-routers.html",
+    "https://www.juniper.net/documentation/us/en/software/junos/security-services/topics/topic-map/understanding-macsec.html",
+    "https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/command/show-security-mka-sessions.html"
+  ],
+  "publication_qa": "Saved and server-rendered WordPress read-back passed: iframe present, 2 body instructional images, 4 contextual internal links, footer QR, 1200x630 feature media. No user-device playback or desktop/mobile pixel inspection.",
+  "archive_path": "archive/2026/11/30369-osntc-038-macsec-ethernet-encryption-mka-troubleshooting.gutenberg.html",
+  "qa_path": "archive/2026/11/30369-osntc-038-macsec-ethernet-encryption-mka-troubleshooting.qa.json",
+  "archived_repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ],
+  "remaining_limitations": [
+    "Interactive video playback not independently verified.",
+    "Desktop and mobile screenshot pixel content was not independently inspected.",
+    "No MACsec hardware lab was available to execute commands; demonstrations are documented read-only examples."
+  ],
+  "next_subject": "network_engineer"
+}

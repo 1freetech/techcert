@@ -1,0 +1,237 @@
+<!-- wp:paragraph -->
+<p>A printed circuit board does more than hold electronic parts. Its patterned copper forms the electrical routes between component terminals. After defining the stackup, pads, vias and footprints, an engineer must connect the intended nets while preserving copper spacing, manufacturability, signal integrity and adequate conductor dimensions. The layout stage transforms a schematic's logical connections into physical metal.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>OSPCB.004</strong> builds on <a href="https://bitcoinversus.tech/2026/10/24/ospcb-003-component-footprints-land-patterns/">OSPCB.003 — Component Footprints and Land Patterns</a>, <a href="https://bitcoinversus.tech/2026/10/24/ospcb-002-pads-vias-through-holes/">OSPCB.002 — Pads, Vias and Through-Holes</a>, and <a href="https://bitcoinversus.tech/2026/10/24/ospcb-001-pcb-layers-copper-stackups/">OSPCB.001 — PCB Layers and Copper Stackups</a>. The current chapter introduces the <strong>trace</strong>, the meaning of width and clearance, design-rule checking (DRC), and how an interactive router keeps a layout inside approved board rules.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Distinguish a <strong>net</strong> from a copper track, a segment, a via, a copper zone and a footprint pad.</li><li>Explain why trace width affects conductor resistance and heating, and why a simple resistance calculation cannot determine allowable current alone.</li><li>Define copper-to-copper clearance as an edge-to-edge distance, distinct from center-to-center pitch and from board-edge clearance.</li><li>Interpret hypothetical routing rules without mistaking illustrative dimensions for universal fabrication limits.</li><li>Describe KiCad 10's interactive routing modes, net classes, board setup, and DRC workflow.</li><li>Calculate simplified trace cross-sectional area, resistance, voltage drop and I²R dissipation for known dimensions.</li><li>Run a documentation-based PCB review and record unresolved fabrication, insulation or signal-integrity requirements before release.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites include a schematic netlist, correctly assigned footprints, the distinction between top and bottom copper layers, and the basic meaning of resistance in ohms. The <a href="https://bitcoinversus.tech/2026/10/24/ospcb-000-what-is-a-printed-circuit-board/">introductory printed-circuit-board lesson</a> supplies the earlier vocabulary. No electrical power, soldering, chemical processing or live board measurement is required for the training exercise.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Net Is Logical; the Trace Is Physical</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In schematic capture, a <strong>net</strong> is a named electrical connection among pins. In a PCB editor, the corresponding pads are often joined by narrow copper tracks and, when necessary, plated vias that carry the connection to another copper layer. The short graphical lines that show connections needing routing are often called <strong>ratsnest</strong> or airwires. They are visual reminders, not metal conductors and not finished board routes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A track can consist of several line segments. The <strong>trace width</strong> is the physical copper width measured perpendicular to its local path. A <strong>copper zone</strong> fills a region and may connect many pads to the same net; its relationships to other nets must also meet clearance rules. A via changes layers, but also adds geometry, manufacturing cost and electrical effects. The most direct route is not automatically the best route if it cuts through the required return path or approaches another net too closely.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The KiCad 10 <a href="https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html">PCB Editor documentation</a> specifies that the interactive router uses net-class width and board design rules. Its default routing modes are designed to preserve clearance rules while placing or moving tracks, with deliberately permissive options available for advanced users. Beginners should not disable DRC protections to make a crowded route fit.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30467,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ospcb.004-pcb-routing-detail-layout-training-image.png" alt="Close-up of printed circuit board with visible pad patterns, vias, and neighboring copper routing features" class="wp-image-30467" /><figcaption class="wp-element-caption"><em>Original AI-generated conceptual PCB editorial photograph for OSPCB.004. Distances and trace widths are not measured or validated from the illustration; all numerical examples appear separately in text.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Trace Width, Copper Thickness, and Cross-Sectional Area</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A simplified rectangular track has cross-sectional area <strong>A = w × t</strong>, where <em>w</em> is width and <em>t</em> is the finished conducting copper thickness. Thin PCB copper is commonly described using nominal copper weight, such as one ounce per square foot (often approximated as 35 µm thickness for elementary calculations). Finished conductor thickness and manufacturing tolerances may differ from the nominal foil specification.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Electrical resistance at a chosen reference temperature follows <strong>R = ρL/A</strong> in an ideal uniform conductor, where <em>ρ</em> is material resistivity and <em>L</em> is length. Geometry matters: doubling the width, with the same material and thickness, doubles cross-sectional area and halves modeled DC resistance. Increasing length in the same ratio increases resistance. A via, connector, narrow pad transition, or solder joint may contribute additional resistance beyond the ideal straight trace.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Use the following <strong>hypothetical</strong> copper route, with uniform cross-section and a room-temperature copper resistivity approximated as 1.68 × 10⁻⁸ Ω·m. All quantities must be converted to compatible SI units before evaluating the equation:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.93em/1.58 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">Length L = 50 mm = 0.050 m
+Width w = 0.25 mm = 0.00025 m
+Copper thickness t = 35 µm = 0.000035 m
+Area A = w × t = 8.75 × 10⁻⁹ m²
+ρ = 1.68 × 10⁻⁸ Ω·m
+R = ρL / A = 0.096 Ω</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>At a hypothetical direct current of 0.50 A, the modeled voltage drop is <strong>ΔV = I × R = 0.048 V</strong>, or 48 mV. Its dissipated power is <strong>P = I²R = 0.024 W</strong>, or 24 mW. If width increases to 0.50 mm while all other assumptions remain unchanged, the modeled trace resistance falls to 0.048 Ω, the drop to 24 mV, and dissipation to 12 mW.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.93em/1.58 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">Width 0.25 mm: R = 0.096 Ω; ΔV = 0.048 V; P = 0.024 W
+Width 0.50 mm: R = 0.048 Ω; ΔV = 0.024 V; P = 0.012 W</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The calculation was checked numerically; it is an ideal geometric comparison, <strong>not a safe current rating</strong>. Copper resistance rises with temperature; conductor heating depends on nearby copper, board construction, airflow, component heat, waveform, and acceptable temperature rise. The <a href="https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=277660">IPC-2152 design standard</a> addresses current-carrying capacity through the interaction of conductor dimensions and thermal conditions. Published current-capacity tables or calculators should be used only with correct assumptions and design validation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What Counts as Copper Clearance</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Clearance</strong> ordinarily describes the shortest permitted separation between two conductive objects on different nets. It is measured from copper edge to copper edge, not between the centers of traces. For example, two straight 0.25 mm-wide parallel traces separated by an <em>edge clearance</em> of 0.20 mm have a center-to-center distance of 0.25 + 0.20 = <strong>0.45 mm</strong> when they have equal widths.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A net's required electrical clearance can depend on voltage, insulation standards, expected pollution environment, manufacturing process and the applicable product safety rules. A 0.20 mm clearance may be adequate for some low-voltage manufacturer capabilities but is emphatically <strong>not</strong> a blanket instruction for mains, high-voltage, medical, automotive, safety-isolated or other controlled circuits. <strong>Creepage</strong> follows an insulating surface path, while <strong>clearance</strong> in insulation coordination can refer to the shortest distance through air. PCB tool fields also include specialized copper-clearance constraints; read the applicable rule type rather than treating all distances as equivalent.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Consider an illustrative low-voltage design in which a selected fabricator confirms a 0.20 mm minimum copper separation. A proposed 0.15 mm gap would miss that stated constraint by <strong>0.05 mm</strong>. The correct response is not to suppress the violation; it is to reroute, change placement, or obtain an approved alternative manufacturing rule. Board-edge spacing, drill-to-copper, copper-to-hole and solder-mask sliver constraints are separate checks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">KiCad 10 Router and Design-Rule Workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The KiCad PCB Editor provides board-wide constraints, net-class defaults and custom rules. Values must be derived from actual fabrication capabilities and circuit requirements. KiCad's <a href="https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html">version 10 PCB editor manual</a> describes board setup, interactive routing, the graphical design-rule editor and DRC reporting. An illustrative beginner workflow proceeds in the following order:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Verify the schematic and netlist:</strong> use the PCB editor's schematic-update workflow so pads carry the intended net assignments. Review <a href="https://bitcoinversus.tech/2026/10/24/ospcb-003-component-footprints-land-patterns/">footprint-to-component matching</a> before routing.</li><li><strong>Review the stackup and manufacturer limits:</strong> identify copper-layer count, finished copper thickness, allowable track/gap limits, drill sizes, annular rings and edge clearances from the selected fabricator.</li><li><strong>Set board constraints:</strong> configure Board Setup and the relevant net classes. A wide high-current supply net may require different preferred widths than ordinary low-current logic signals.</li><li><strong>Place components intentionally:</strong> group related parts, allow assembly access and consider the current-return path. Netlines can guide placement, but shortest airwire length is not the only objective.</li><li><strong>Choose a routing width:</strong> set a rule-backed preferred size before starting the interactive router. Do not assume the default size suits all nets.</li><li><strong>Route one same-net connection:</strong> in the PCB Editor, use the Route Tracks tool or press <code>X</code>, start from the pad, and follow the highlighted net. KiCad's Shove and Walk Around modes try to maintain legal separation.</li><li><strong>Review vias and zones:</strong> confirm that layers connect where intended and that a filled zone has the correct net, clearance and thermal-relief settings.</li><li><strong>Run Design Rules Checker:</strong> investigate shorted nets, clearance errors, track-width rule violations, unconnected ends, via connection warnings and manufacturing exceptions.</li><li><strong>Recheck before release:</strong> compare the final layout against the schematic and the fabricator's actual capabilities, then inspect generated manufacturing outputs independently.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=g3vxpdG1chs&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>EmbeddedU, “KiCad 10 Made Simple From Zero Experience to a Real PCB” (July 27, 2026). The beginner tutorial follows schematic capture, footprint assignment, trace routing, ground zones, DRC and fabrication outputs. The video is instructional; no manufacturing outcome from its example is treated as proof that another PCB will be compliant.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How the Interactive Router Handles Obstacles</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In <strong>Shove</strong> mode, KiCad can move unlocked, movable traces away from a new route where constraints permit. In <strong>Walk Around</strong> mode, the new track instead navigates around obstacles without relocating existing copper. In <strong>Highlight Collisions</strong> mode, the editor allows greater manual control and highlights potential violations; the separate option to allow DRC violations should not be used as a routine beginner shortcut.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A valid connection at one zoom level can still fail an end-of-design DRC because a nearby track narrows, a via violates a drill rule, a pad doesn't connect to its intended net, or a zone fill changes. The interactive router is a design aid—not an independent sign-off against every electrical, thermal, high-speed and factory constraint.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html">KiCad 10 DRC rules</a> include different check categories for actual copper shorts, net clearance, track-width limits and unconnected ends. The preferred net-class width can influence how the router draws new tracks, but its preferred value does <em>not</em> automatically set the absolute minimum or maximum permitted width; explicit board or custom rule constraints govern violation checks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30468,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ospcb.004-pcb-drc-inspection-engineering-workbench.png" alt="PCB engineer reviewing an abstract board layout on a workstation next to a physical printed circuit board" class="wp-image-30468" /><figcaption class="wp-element-caption"><em>Original AI-generated conceptual editorial image. The illustrated CAD interface is not an authentic screenshot or proof that a board design passed KiCad's DRC.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read an Example DRC Report Correctly</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Assume a hypothetical four-net PCB with a general minimum trace width of 0.20 mm, a manufacturer-approved copper gap of 0.20 mm, and a 0.25 mm preferred default routing width. A new trace was narrowed locally to 0.15 mm and another signal track now runs only 0.12 mm from a different-net copper pad. The imagined DRC results should be interpreted as follows:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Track width rule violation:</strong> 0.15 mm is narrower than the specified 0.20 mm minimum, by 0.05 mm.</li><li><strong>Clearance violation:</strong> 0.12 mm separation is below the specified 0.20 mm minimum, by 0.08 mm.</li><li><strong>Unconnected item:</strong> a pad not yet joined to the intended same-net route may appear as an unconnected warning rather than a copper short.</li><li><strong>Preferred width difference:</strong> a trace of 0.22 mm may differ from the 0.25 mm preference but need not violate a 0.20 mm explicit minimum. Determine the actual effective rule before reporting an error.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>These are teaching figures, <strong>not</strong> real DRC logs. The correct workflow is to confirm which rule was applied, inspect the geometry, adjust the routing or constraints through the design approval process, refill copper zones when appropriate, and rerun the full DRC. If a violation is unavoidable, the exception must have an engineering rationale; hiding the error is not an equivalent remedy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">When Simple Trace Geometry Is Not Enough</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A PCB track carrying a digital edge, high-current pulse, radio-frequency signal, fast serial pair or sensitive analog signal may require analysis beyond ordinary resistance. Controlled impedance depends on trace width, dielectric thickness and permittivity, copper geometry and the nearby reference plane; a trace's 50 Ω characteristic impedance is not its DC conductor resistance. Differential pairs can require intentional spacing and skew control. Return-current paths and layer transitions influence signal integrity and electromagnetic emissions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For higher-current nets, check conductor and via cross section, cumulative voltage drop and thermal response. For switching power stages, verify loop geometry and return paths. For a high-voltage circuit, use relevant insulation rules rather than borrowing low-voltage prototype clearances. For unregulated or safety-related uses, consult a qualified engineer, the actual device requirements and the selected PCB fabrication process before release.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=igQWdVGZGpI&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Phil’s Lab, “KiCad 9 Hardware Design Tutorial (TI MSPM0) (2/2 PCB)” (November 28, 2025). The expert layout walkthrough includes power routing, vias, decoupling, mixed-signal routes, DRC and manufacturing files. It uses KiCad 9; interface placement may differ in KiCad 10, whose current documentation governs the steps taught in OSPCB.004.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Five-Minute Documentation Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use a fictitious, unpowered board containing an LED, a series resistor, a small microcontroller and a connector. Do not assume the illustration's traces are real routed nets. With a schematic or paper sketch, identify the supply, return and signal connections. Assign a net name to each and annotate the intended copper layer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>List the relevant PCB layer count, copper thickness and hypothetical manufacturer capabilities.</li><li>Define a nominal low-current track width and a separate width candidate for the supply net, documenting why they differ.</li><li>Measure the <em>edge-to-edge</em> distance between two theoretical neighboring tracks and compare it with the selected rule.</li><li>Calculate the ideal resistance of a chosen 50 mm copper trace using the numerical example above, then repeat at twice the width.</li><li>Describe a routing path that avoids a different-net pad, a drilled hole and a board edge, without disabling clearance rules.</li><li>Read a hypothetical DRC warning and distinguish a real violation from a mere change in preferred routing width.</li><li>Write a sign-off note separating <strong>validated information</strong> from the <strong>thermal, signal-integrity, electrical-safety and manufacturer checks still required</strong>.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>If a learner has KiCad 10 installed, the same exercise may be reproduced in an isolated project and its actual DRC run documented. No live KiCad GUI or PCB project file was created or tested in preparing the lesson, so program-interface guidance is grounded in KiCad's official manual rather than an asserted execution.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting Common Layout Mistakes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Routing by appearance only:</strong> a visually touching track may belong to the wrong net; use electrical net assignments and DRC.</li><li><strong>Assuming a zero-airwire board must be valid:</strong> connected pads can still coexist with shorts, thermal issues or manufacturing errors.</li><li><strong>Confusing clearance with pitch:</strong> center-to-center spacing includes trace half-widths; manufacturer rules may specify edge separation.</li><li><strong>Using a universal width for all supply tracks:</strong> actual allowable current depends on temperature rise, copper thickness, placement and operating conditions.</li><li><strong>Forcing a trace through an obstacle:</strong> inspect routing constraints and component placement before bypassing DRC safeguards.</li><li><strong>Adding a via merely to complete a route:</strong> verify drill capability, annular ring, layer connection and its electrical effect.</li><li><strong>Assuming silkscreen and solder mask are copper layers:</strong> distinguish manufacturing coating and marking layers from conductive copper.</li><li><strong>Ignoring connection to a plane:</strong> ensure each pad has the intended net and appropriate zone connection, thermal relief or direct tie.</li><li><strong>Confusing DC resistance with high-speed impedance:</strong> the physical quantities represent different electrical behavior.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check and Explained Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>What is the difference between a net and a trace?</strong> A net is a logical electrical connection; a trace is physical copper that can implement part of that net.</li><li><strong>What does DRC stand for?</strong> Design Rules Checker or design-rule checking: automated checks against defined board constraints.</li><li><strong>Why doesn't a preferred width always cause a DRC error?</strong> The preference can guide routing while separate minimum and maximum constraints determine enforceable width violations.</li><li><strong>What is the cross-section of a 0.25 mm-wide, 35 µm-thick rectangular track?</strong> 8.75 × 10⁻⁹ m², using the assumed nominal thickness.</li><li><strong>What is the approximate resistance of the illustrative 50 mm trace?</strong> 0.096 Ω under the chosen uniform copper resistivity assumption.</li><li><strong>What happens to the ideal DC resistance if that trace's width doubles?</strong> It halves, as long as material, thickness, temperature and length stay unchanged.</li><li><strong>Why can't a resistance formula alone assign a safe current rating?</strong> Heating, thermal surroundings, allowable temperature rise, manufacturing variation and other factors must be evaluated.</li><li><strong>What can a DRC pass not guarantee?</strong> Electrical function, complete safety compliance, signal integrity, adequate thermal performance, real manufacturer acceptance or an actual manufactured board's quality.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary sources: <a href="https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html">KiCad PCB Editor 10.0 documentation</a> for interactive routing, board constraints, net classes and DRC; <a href="https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=277660">DLA's IPC-2152 standard record</a> for the active current-carrying-capacity standard; <a href="https://www.ipc.org/TOC/IPC-2152.pdf">IPC's published scope and contents for IPC-2152</a>; and <a href="https://www.phils-lab.net/courses">Phil’s Lab PCB routing and design-rule course outlines</a>. Related lessons include <a href="https://bitcoinversus.tech/2026/10/24/ospcb-002-pads-vias-through-holes/">OSPCB.002</a>, <a href="https://bitcoinversus.tech/2026/10/24/ospcb-003-component-footprints-land-patterns/">OSPCB.003</a> and the site’s <a href="https://bitcoinversus.tech/2026/10/24/kicad-10-schematics-to-pcb-1007-1008-october-2026/">KiCad 10 background coverage</a>. All values in the worked examples are hypothetical.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>PCB layout translates a netlist into real copper geometry while applying manufacturing and electrical constraints. Track width affects modeled DC resistance; copper clearance protects separation between incompatible conductors; net classes and routing tools organize the work; and DRC identifies selected rule violations. Successful engineering requires keeping the underlying physical requirements, fabricator limits, thermal behavior and final validation separate from what the editor can automatically detect.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSPCB.004 follows verified OSPCB.003 and preserves the full 43-subject Open Source Tech Cert rotation, including twenty registered programming tracks. Technical descriptions were checked against KiCad 10, IPC and engineering education sources on November 6, 2026. The simplified copper-resistance and voltage-drop calculations were numerically checked; they are not measured current ratings or proof of a manufacturable board. No KiCad project, hardware experiment, board manufacturing or thermal test was performed. The editorial cover and two body images are original AI-generated conceptual visuals. Both educational YouTube videos have identified public titles, channels and IDs; WordPress iframe rendering and actual playback are audited independently.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original 5,000-satoshi donation QR code" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, display the lesson and original QR code on a computer or second screen and scan it with a compatible Bitcoin wallet. Wallets that support scanning a saved image can use that option on the same phone. Verify the destination shown by the wallet before donating 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech provides technical education and journalism rather than individualized electrical-safety, compliance, financial or manufacturing certification advice.</em></p>
+<!-- /wp:paragraph -->

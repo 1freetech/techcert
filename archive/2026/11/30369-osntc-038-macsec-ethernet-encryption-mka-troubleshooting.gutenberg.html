@@ -1,0 +1,222 @@
+<!-- wp:paragraph -->
+<p><strong>IEEE 802.1AE Media Access Control Security (MACsec)</strong> protects Ethernet frames on supported links through authenticated integrity checks, optional confidentiality encryption and replay protection. Following <a href="https://bitcoinversus.tech/2026/10/29/osntc-037-8021x-network-access-control-eapol-radius-port-authentication/">OSNTC.037 on 802.1X network access control</a>, the networking technician now needs to recognize a secured Ethernet link, distinguish MACsec from port admission, and diagnose a failed key-agreement session without disabling encryption to restore connectivity.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain why Ethernet link encryption differs from IPsec, TLS, and 802.1X port authorization.</li><li>Identify MACsec peers, connectivity associations (CAs), secure channels (SCs), secure associations (SAs), and secure association keys (SAKs).</li><li>Describe the roles of MKA, CAK, CKN, key-server election, and packet numbers in a protected link.</li><li>Distinguish an ordinary physical link-up indication from an authenticated, secured MACsec session.</li><li>Use vendor-documented read-only show commands and interface counters to diagnose a failed session.</li><li>Document an outage-safe lab observation and explain why changing keys or policies requires authorization.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites include <a href="https://bitcoinversus.tech/2026/10/07/osntc-018-ethernet-link-negotiation-speed-duplex-auto-negotiation-link-leds-interface-errors/">Ethernet link negotiation</a>, <a href="https://bitcoinversus.tech/2026/10/27/osntc-036-lldp-neighbor-discovery-switch-port-mapping/">LLDP neighbor discovery</a>, <a href="https://bitcoinversus.tech/2026/10/14/osntc-030-layer-2-switch-security/">Layer 2 switch security</a>, and the preceding 802.1X lesson. MACsec examples describe concepts that apply to compliant hardware; operational commands are vendor and software-release specific.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Problem MACsec Is Designed to Solve</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Ethernet carries traffic across cables, switch ports and provider connections. Physical control of a wiring path is not always guaranteed, and higher-layer encryption may not cover every protocol in a link. MACsec provides protections at the media access layer and can authenticate the origin and integrity of frames transmitted between MACsec peers. With encryption enabled, it also makes protected payload data unreadable to an observer without the appropriate keys.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://1.ieee802.org/security/802-1ae/">IEEE 802.1AE working-group overview</a> identifies confidentiality, data integrity, data-origin authenticity and privacy protections. IEEE 802.1AE was first published in 2006; IEEE 802.1AE-2018 remains a base standard alongside later approved amendments. A network engineer must still confirm current capabilities and software versions on the actual devices, because a generic standards description does not ensure that every interface, transceiver, card or device supports a requested mode.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>MACsec is primarily link or segment protection, not a universal replacement for end-to-end application encryption. A packet may be decrypted at an intermediate MACsec endpoint before crossing another segment. TLS or IPsec can still provide separate protection at higher layers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=6ocoC4W6Hf8&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Cisco, “Effortless Network Security with Cisco MACsec as a Service” (June 24, 2020). The official Cisco presentation illustrates enterprise and provider MACsec deployment models. The video title, channel, and ID were checked against public source records; WordPress iframe output and actual playback require post-publication verification.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What Is Protected Inside an Ethernet Frame?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A MACsec-protected Ethernet frame carries a security tag (SecTAG) and an integrity check value (ICV), with a protected portion of the Ethernet traffic between them. A MACsec-specific EtherType of <strong>0x88E5</strong> identifies MACsec traffic. The SecTAG carries information including a packet number and an association number, with a secure channel identifier when applicable. The receiver uses the relevant secure association and packet number to authenticate the frame and check for replay or tampering.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The exact field arrangement and overhead depend on tag options, cipher suite and device implementation. Some Ethernet header information must remain available for forwarding. An engineer should not claim all frame bytes are encrypted. IEEE describes both confidentiality and integrity services; some deployments deliberately use <em>integrity-only</em> operation with payloads left readable. <a href="https://www.juniper.net/documentation/us/en/software/junos/security-services/topics/task/macsec-configuring-advanced.html">Juniper's advanced MACsec guide</a> documents the distinction between encrypted and integrity-only modes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30357,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osntc.038-macsec-link-security-hardware.png" alt="Enterprise switches linked by optical fiber in an illustrative data center rack" class="wp-image-30357" /><figcaption class="wp-element-caption"><em>Original editorial illustration of fiber-connected switching equipment. MACsec protects traffic between compatible logical endpoints; the picture does not prove that MACsec is enabled on the portrayed equipment.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">MKA, Authentication, and Key Management</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <strong>MACsec Key Agreement (MKA)</strong> protocol, specified with IEEE 802.1X, enables authenticated peers to coordinate link protection. MKA establishes and manages a connectivity association, determines live peers, elects a key server and manages the <strong>secure association keys (SAKs)</strong> used for frame protection. MACsec performs the protected frame processing; MKA is the protocol for managing keys and peer state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In a preshared-key design, the connectivity association key (<strong>CAK</strong>) is a shared secret used in the association, and the connectivity association key name (<strong>CKN</strong>) identifies the relevant key context. The name is not itself a secret key. A mismatch in CAK or CKN prevents the expected trusted relationship. In other deployments, key material can derive from an 802.1X authentication exchange. Secure credentials must never be pasted into tickets, screenshots, or public training examples.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <strong>secure channel (SC)</strong> represents a one-way relationship for protected frames; within it, secure associations (SAs) carry the active cipher and key context. A packet number (<strong>PN</strong>) supports replay detection and unique cryptographic nonces. MKA coordinates SAK installation and key changes. The <a href="https://www.cisco.com/c/en/us/support/docs/routers/asr-1000-series-aggregation-services-routers/221079-troubleshoot-wan-macsec-on-routers.html">Cisco WAN MACsec troubleshooting guide</a> describes peer discovery, key-server election, cipher selection, SAK distribution and rekeying.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Standard MACsec supports GCM-AES cipher suites; options include AES-128 and AES-256 and extended packet numbering (XPN), subject to platform support. XPN extends the numbering regime to reduce the frequency of packet-number exhaustion in high-speed links. It is not a reason to disable rekeying or packet-number protections.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">An Operational State Is More Than Link Up</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The interface LEDs might show a healthy optical or copper connection while MACsec remains unestablished. A technician therefore separates <strong>physical link state</strong>, <strong>802.1X or MKA authentication state</strong>, <strong>secured session status</strong>, and <strong>data-plane forwarding</strong>. The path can fail at more than one layer; confirming a light is on proves neither that key agreement succeeded nor that protected traffic is passing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Physical layer:</strong> check transceiver compatibility, signal condition, negotiated speed, duplex and interface errors.</li><li><strong>Peer and key agreement:</strong> confirm the expected MKA peer is discovered and that the authorized key context and key-server decision are consistent.</li><li><strong>Cipher negotiation:</strong> check whether both endpoints support the selected cipher suite and packet-number mode.</li><li><strong>Policy:</strong> determine whether the endpoint requires secure traffic, permits temporary unprotected traffic, or intentionally rejects noncompliant frames.</li><li><strong>Data plane:</strong> review ingress and egress MACsec counters, ICV failures, replay discards, packet-number state and unexpected drops.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>A security alarm or lost peer after a device upgrade may indicate policy or software interoperability differences rather than a bad cable. Conversely, a physical fault may prevent the MKA exchange from completing at all. Neither scenario justifies copying a working secret from a different device or moving traffic to a permissive port.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read-Only Verification on Cisco and Juniper</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Cisco IOS XE devices that implement the relevant MACsec CLI can expose MKA session state and MACsec interface details. The exact command spelling and available output depend on platform and software release. The following are documented <strong>illustrative read-only commands</strong>, not configuration commands or evidence that a particular switch was tested:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">show mka sessions
+show macsec interface</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Cisco's <a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-5/configuration_guide/sec/b_175_sec_9300_cg/macsec_encryption.pdf">Catalyst MACsec configuration guide</a> documents these verification commands. On a device that supports them, inspect established versus pending sessions, the selected key server, peer identity, active associations and the interface's protected frame counters. Some releases provide a singular <code>show mka session</code> form, so verify against the device's own command reference.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Juniper Junos platforms provide operational MKA and MACsec status commands, subject to product support. The <a href="https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/command/show-security-mka-sessions.html">official command reference</a> documents the following:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="display:block;white-space:pre-wrap;font:0.94em/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:transparent;border:0;box-shadow:none;padding:0;color:inherit">show security mka sessions
+show security mka sessions detail
+show security macsec statistics</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Do not misinterpret a <em>secured</em> MKA state as evidence that a particular end-user application has no security or performance issues. Verify forwarding and required services separately, using logs and counters appropriate to the maintenance plan. Commands are executed only on equipment the technician is authorized to inspect.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30358,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osntc.038-macsec-troubleshooting-workbench.png" alt="Network technician reviewing Ethernet switch diagnostics in a lab" class="wp-image-30358" /><figcaption class="wp-element-caption"><em>Original conceptual editorial illustration of a troubleshooting workbench. Actual MKA and MACsec results must be collected from a supported device; the portrayed screen is not a verified terminal capture.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab — Diagnose Two Hypothetical Secure Links</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following activity is a <strong>paper or simulator-based exercise</strong> and requires no production device changes. Learners compare observations from two hypothetical interfaces. No real CAK, CKN, certificate or other secret is supplied.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>In Scenario A, the physical port is up and passing light, but no secure MKA session appears. Write down three possible causes, separating missing peer discovery, incompatible key context and unsupported cipher configuration.</li><li>In Scenario B, the MKA session is secured, but protected-frame discard counters rise. Consider ICV failures, replay-window behavior and direction-specific interface faults before accusing the other device of misconfiguration.</li><li>Describe what observations a switch operator can collect without exposing secrets: interface identity, peer identity, redacted association identifiers, session state, selected cipher, link errors and appropriately sanitized counters.</li><li>Draft an escalation note naming the observed failure, time, interface, baseline, known change and approved next action. Do not propose disabling MACsec as a default repair.</li><li>Choose a safe acceptance criterion: both ends report a secured session, the peer identity is expected, counters remain within site-established thresholds, and authorized test traffic meets service requirements.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>An enterprise change-control system may require a peer review or dedicated maintenance approval before any key or policy modification. A lab using real hardware should begin with vendor documentation and a rollback plan. If access is limited, use screenshots from official vendor documentation and clearly label expected output as a sample rather than recorded results.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Calculate Link-Layer Overhead Without Guessing</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a simplified MACsec example in which a selected configuration adds a <strong>16-byte SecTAG</strong> and a <strong>16-byte ICV</strong> to a frame. The added frame bytes are <strong>16 + 16 = 32 bytes</strong>. Relative to a hypothetical 1,500-byte protected payload, that is <strong>32 / 1,500 × 100 ≈ 2.13%</strong> additional bytes compared with the chosen payload size. This is a teaching calculation, not a measurement of throughput loss.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Real MACsec overhead depends on tag fields, optional SCI, implementation, packet mix, VLAN tags, physical-layer framing and whether encapsulation affects a given interface's maximum transmission unit. An operator must verify interface MTU and effective path MTU rather than assuming a particular 32-byte example applies everywhere. Larger line-rate traffic volumes also make cipher support, hardware acceleration and packet-number mode especially important.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What MACsec Cannot Guarantee</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>MACsec does not secure a compromised endpoint, repair an incorrect VLAN, prevent every denial-of-service condition, or replace an organization's access and change-control policies. Some traffic types may be excluded from protection, and encryption may terminate at each MACsec-capable hop. Avoid blanket statements that MACsec produces 'end-to-end' encryption when the actual deployment only secures successive links.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>MACsec compatibility varies by switch, router, NIC, line card, transceiver interface and software version. Before any deployment, use an official product compatibility matrix and the actual operating-system reference. <a href="https://apps.juniper.net/feature-explorer/feature/7842">Juniper's MACsec feature explorer</a> illustrates why platform and release checks are part of responsible implementation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting Checklist and Common Errors</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Link down:</strong> verify optics, cable continuity, transceiver state and interface negotiation before inspecting cryptographic state.</li><li><strong>No MKA peer:</strong> verify device roles, connectivity, permitted EAPOL exchanges, authentication prerequisites and interface feature support.</li><li><strong>Peer discovered but unsecured:</strong> inspect authorized CAK/CKN matching, cipher compatibility, key-server state and session policy without displaying secrets.</li><li><strong>Secure state but drops:</strong> inspect ICV and replay counters, sequence and rekey events, MTU and traffic direction.</li><li><strong>Intermittent failures:</strong> correlate logs with interface flaps, reauthentication, rekey timing and software changes.</li><li><strong>Policy mismatch:</strong> check whether each endpoint expects secured frames, allows exceptions or is configured for integrity-only mode.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Any configuration fix should follow documented change control and preserve rollback capability. Technical competence includes knowing when to stop and escalate; a secure network that fails closed can be working exactly as designed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check With Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>What standard defines MACsec?</strong> IEEE 802.1AE. MKA key agreement is specified with IEEE 802.1X.</li><li><strong>What does MKA do?</strong> It coordinates authenticated MACsec peers, key-server selection, secure association keys and rekeying.</li><li><strong>What does an ICV failure suggest?</strong> Protected-frame integrity validation failed; further evidence is needed to determine whether the cause is tampering, an inconsistent key state or another operational problem.</li><li><strong>Why can a port show link up while traffic fails?</strong> The physical connection may be healthy while MKA or the data-plane security policy remains unestablished.</li><li><strong>What is a safe first response to a MACsec failure?</strong> Collect authorized read-only evidence, check both endpoints and escalate rather than turning encryption off.</li><li><strong>Is MACsec a substitute for TLS across an entire application path?</strong> No. It commonly protects particular Ethernet links, while application or network-layer encryption addresses different endpoints and trust boundaries.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References and Further Reading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://1.ieee802.org/security/802-1ae/">IEEE 802.1AE MAC Security overview</a>; <a href="https://www.juniper.net/documentation/us/en/software/junos/security-services/topics/topic-map/understanding-macsec.html">Juniper MACsec fundamentals</a>; <a href="https://www.cisco.com/c/en/us/support/docs/routers/asr-1000-series-aggregation-services-routers/221079-troubleshoot-wan-macsec-on-routers.html">Cisco WAN MACsec troubleshooting</a>; <a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9300/software/release/17-5/configuration_guide/sec/b_175_sec_9300_cg/macsec_encryption.pdf">Cisco Catalyst MACsec configuration guide</a>; <a href="https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/command/show-security-mka-sessions.html">Junos MKA session reference</a>. The arithmetic and troubleshooting scenarios are explicitly hypothetical; no production changes or packet captures were performed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>MACsec extends Ethernet security beyond deciding who may connect. A capable technician should verify link status, authentication state, MKA peer membership, key management, protected-frame integrity and traffic outcomes as separate checks. Good troubleshooting preserves security controls while gathering enough evidence for a controlled repair.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSNTC.038 follows the verified publication of OSNTC.037. Sources were reviewed from IEEE, Cisco and Juniper documentation current to November 6, 2026. Examples are instructional; no live MACsec lab or software runtime was operated. Illustrative editorial images are AI-generated; the Cisco video is an official published video, while iframe playback must be independently checked after publishing.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original donation QR code for 5,000 satoshis" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, open the lesson on another display and use a compatible Bitcoin wallet to scan the original QR code. Verify the destination before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code below to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

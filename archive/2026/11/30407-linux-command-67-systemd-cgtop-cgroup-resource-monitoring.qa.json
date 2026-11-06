@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-06",
+  "lesson_id": "Linux Command #67",
+  "subject": "linux",
+  "wordpress_post_id": 30407,
+  "title": "Linux Command #67 – systemd-cgtop: Monitoring CPU, Memory, and I/O by Control Group (Linux OS)",
+  "published_url": "https://bitcoinversus.tech/2026/11/06/linux-command-67-systemd-cgtop-cgroup-cpu-memory-io/",
+  "publication_status": "published",
+  "verification_status": "wordPress_iframes_confirmed_playback_unverified",
+  "featured_media": {
+    "id": 30403,
+    "width": 1200,
+    "height": 630,
+    "alt_text": "Linux administrator monitoring server resource usage in a data center with systemd-cgtop",
+    "size_verified_via_wp": true,
+    "pixels_visually_inspected": false
+  },
+  "body_media": {
+    "image_ids": [
+      30400,
+      30402
+    ],
+    "youtube_ids": [
+      "ZD7HDrtkZoI",
+      "Sd34SoITwro"
+    ],
+    "youtube_channels": [
+      "The Linux Foundation",
+      "LinuxCloudHacks"
+    ],
+    "saved_shortcodes": 2,
+    "rendered_wordpress_iframes": 2,
+    "interactive_playback_verified": false
+  },
+  "editorial": {
+    "internal_link_count": 5,
+    "original_donation_qr_id": 24043,
+    "donation_sats": 5000,
+    "editor_note_italicized": true,
+    "volunteer_disclaimer_present": true,
+    "code_blocks_no_boxes": true,
+    "category_ids": [
+      5812,
+      34922710,
+      2509703,
+      6
+    ]
+  },
+  "technical_validation": {
+    "reference_man_page": "https://www.freedesktop.org/software/systemd/man/latest/systemd-cgtop.html",
+    "linux_kernel_cgroup_reference": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+    "environment": "Debian GNU/Linux 13 (trixie) restricted container",
+    "systemd_version": "257.9-1~deb13u1",
+    "binary_available": true,
+    "help_and_version_executed": true,
+    "single_snapshot_executed": true,
+    "observed_snapshot": "/        66      -   479.9M        -        -",
+    "observed_pid1": "supervisord",
+    "observed_controller_list": "cpuset cpu io memory hugetlb pids",
+    "environment_not_representative_of_full_host": true,
+    "no_production_changes": true,
+    "other_commands_documentation_reviewed_not_all_executed": true
+  },
+  "curriculum": {
+    "subjects_in_rotation": 43,
+    "coding_tracks": 20,
+    "next_subject": "windows",
+    "historical_index_entries": 626,
+    "historical_index_folders": 38
+  },
+  "desktop_screenshot": {
+    "status": "ready",
+    "viewport_width": 1200,
+    "pixels_visually_inspected": false
+  },
+  "mobile_screenshot": {
+    "status": "ready",
+    "viewport_width": 390,
+    "pixels_visually_inspected": false
+  },
+  "limitations": [
+    "Actual viewer video playback could not be verified; iframe presence confirmed only.",
+    "Desktop/mobile screenshot captures returned ready but pixel inspection was blocked.",
+    "In-body images and featured cover are AI-generated conceptual editorial imagery, not real host observations.",
+    "Only read-only systemd-cgtop version, help, and bounded snapshot were executed in a restricted container."
+  ],
+  "archive_path": "archive/2026/11/30407-linux-command-67-systemd-cgtop-cgroup-resource-monitoring.gutenberg.html",
+  "qa_path": "archive/2026/11/30407-linux-command-67-systemd-cgtop-cgroup-resource-monitoring.qa.json",
+  "archives": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ]
+}

@@ -1,0 +1,199 @@
+<!-- wp:paragraph --><p><strong>OSRust.007</strong> advances from Rust ownership and borrowing to <strong>slices</strong>, which provide borrowed views of contiguous sequences without transferring ownership of their underlying storage. A Rust string slice, <code>&amp;str</code>, contains a reference to valid UTF-8 data. Its ranges use <em>byte offsets</em>, not user-visible character positions. Recognizing that distinction is fundamental for safe text parsing, filesystem tooling, structured logs, networking, and software that handles international text.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The lesson follows <a href="https://bitcoinversus.tech/2026/11/01/osrust-006-ownership-moves-borrowing-references-memory-safety/">OSRust.006 on ownership, moves and borrowing</a>, <a href="https://bitcoinversus.tech/2026/10/14/osrust-004-functions-parameters-expressions-return-values/">OSRust.004 on functions</a>, and <a href="https://bitcoinversus.tech/2026/10/10/osrust-003-scalar-and-compound-data-types-integers-floats-bool-char-tuples-arrays-and-type-annotations/">OSRust.003 on scalar and compound data types</a>. The earlier borrowing lesson introduced references; the present lesson focuses on reference ranges and encoding-aware text boundaries rather than repeating ownership fundamentals.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Distinguish owned <code>String</code> from borrowed <code>&amp;str</code>, and explain the difference between a slice and its owner.</li><li>Use half-open slice ranges such as <code>..3</code>, <code>3..</code>, and <code>1..4</code> for valid boundaries.</li><li>Compute UTF-8 byte length separately from the number of Unicode scalar values returned by <code>chars()</code>.</li><li>Use <code>str::get</code> to return <code>Option&lt;&amp;str&gt;</code> instead of panicking when a user-provided range is invalid.</li><li>Write functions that accept <code>&amp;str</code> and slices such as <code>&amp;[i32]</code> without cloning data.</li><li>Explain how borrow checking prevents mutation or deallocation while an active borrowed view is still used.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: OSRust.006 borrowing and references, <code>if</code> and <code>for</code> syntax from <a href="https://bitcoinversus.tech/2026/10/14/osrust-005-control-flow-if-loop-while-for-break-continue/">OSRust.005</a>, plus basic understanding of bytes and hexadecimal notation. Materials: a Rust toolchain installed through <a href="https://rustup.rs/">rustup</a>, a text editor and terminal. A current stable Rust compiler supporting Edition 2021 is suitable. No external crate or elevated access is needed. The available publishing environment did not contain <code>rustc</code> or <code>cargo</code>, so Rust code in the lesson was checked against official specifications but <strong>was not compiled or executed here</strong>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Why Borrowed Slices Matter</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>In Rust, a <code>String</code> owns a growable UTF-8 string allocation, while <code>&amp;str</code> borrows a UTF-8 sequence. The borrowed view can point into a <code>String</code> or represent a string literal. Passing <code>&amp;str</code> does not transfer ownership or require copying the selected text. The official <a href="https://doc.rust-lang.org/book/ch04-03-slices.html">Rust Book chapter on slices</a> develops precisely that relationship and shows why a borrowed range is more reliable than retaining an unrelated byte index after an owned string changes.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":31006,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osrust-007-official-rust-foundation-logo-cc-by-4.png" alt="Black gear-shaped letter R logo used by the Rust programming language" class="wp-image-31006" /><figcaption><em>Rust Foundation / <a href="https://commons.wikimedia.org/wiki/File:Rust_programming_language_black_logo.svg">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Unmodified official project artwork; the educational lesson is independent and not endorsed by the Rust Project. Trademark restrictions also apply.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p>A <code>&amp;str</code> value conceptually contains a pointer to the start of the selected bytes plus a byte length. It does not own the allocation behind those bytes. Rust checks that an ordinary safe reference does not outlive the data it points to. The exact physical layout of every variable or allocation is an implementation concern: the important source-level property is that ownership stays with the source while an immutable slice borrows its contents.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">String Slices Use Half-Open Byte Ranges</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The expression <code>&amp;message[0..4]</code> creates a borrowed string slice from byte offset 0 up to but excluding offset 4. Valid UTF-8 string slicing requires both ends to be within the allocation and positioned at UTF-8 scalar boundaries. Rust's usual range notation follows a half-open convention; the range length in bytes equals its end minus its start. Ranges with omitted bounds use the beginning or end of the string.</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">fn main() {
+    let message = String::from("rust language");
+    let first = &amp;message[..4];
+    let rest = &amp;message[5..];
+
+    println!("{first}");
+    println!("{rest}");
+}</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p><strong>Expected output</strong> (documentation-checked, not executed here):</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">rust
+language</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>The source is entirely ASCII, so all its byte boundaries align with visible characters. The first slice borrows bytes 0–3; the second starts at offset 5, after the space at byte offset 4. A string literal such as <code>"rust language"</code> also has type <code>&amp;str</code>. Code can therefore accept a borrowed view without requiring that callers allocate a new <code>String</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Unicode Text Is Not an Array of One-Byte Characters</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>UTF-8 uses a variable number of bytes to represent a Unicode scalar value. For example, <code>A</code> is one byte, <code>é</code> is two bytes, and the crab emoji 🦀 is four bytes. Their concatenation <code>"Aé🦀"</code> contains seven bytes but three Unicode scalar values. Rust <code>str::len()</code> returns <strong>bytes</strong>, whereas <code>chars().count()</code> counts scalar values. A human-perceived grapheme cluster can contain several scalar values and is not counted by a standard-library grapheme API. The official <a href="https://doc.rust-lang.org/book/ch08-02-strings.html">Rust Book discussion of UTF-8 strings</a> explains the differences.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":31004,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osrust-007-utf8-byte-slice-boundaries.png" alt="Original byte map showing the UTF-8 sequence A, e acute and crab emoji and valid slice offsets 0, 1, 3 and 7" class="wp-image-31004" /><figcaption><em>Original BitcoinVersus.Tech source-grounded chart. <strong>Aé🦀</strong> encodes as <code>41 C3 A9 F0 9F A6 80</code> and has valid scalar boundaries at byte offsets 0, 1, 3, and 7. Bytes independently checked using UTF-8 encoding; Rust execution was not available.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p>Offsets 2, 4, 5 and 6 fall inside multibyte scalar values, not between complete scalars. Therefore <code>&amp;text[1..3]</code> is a valid slice of <code>"Aé🦀"</code> representing <code>"é"</code>, while <code>&amp;text[2..3]</code> would <strong>panic at runtime</strong> rather than form an invalid <code>&amp;str</code>. By contrast, <code>text.get(2..3)</code> returns <code>None</code> safely. The <a href="https://doc.rust-lang.org/std/primitive.str.html">standard-library <code>str</code> documentation</a> states both the boundary requirement and the non-panicking behavior of <code>get</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Byte Count, Scalar Count, and Grapheme Count</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Visual appearance cannot determine the number of bytes or Unicode scalar values. A precomposed <code>é</code> is two UTF-8 bytes and one scalar value; an <code>e</code> followed by a combining acute accent is three bytes and two scalar values. Both can look similar when rendered with appropriate font support, but their byte sequences differ. Unicode normalization and grapheme segmentation are separate topics, not automatically performed by ordinary string slicing.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":31005,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osrust-007-utf8-bytes-versus-unicode-scalars.png" alt="Original horizontal bar chart comparing UTF-8 byte lengths with Unicode scalar counts for A, e acute, crab emoji and combining-accent text" class="wp-image-31005" /><figcaption><em>Original data chart from independently calculated UTF-8 encoding: <code>A</code> 1 byte/1 scalar, <code>é</code> 2/1, 🦀 4/1, and <code>e</code> plus combining acute accent 3/2. Standard Rust counts scalars with <code>chars()</code>; it does not provide user-perceived grapheme segmentation by default.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use get() for Untrusted Byte Offsets</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Direct indexing with a range checks boundaries but may panic if the range is invalid. For text offsets derived from a file, network message, or user input, return an <code>Option</code> instead. The <code>get</code> method reports valid ranges with <code>Some(&amp;str)</code> and invalid ones with <code>None</code>. It does not make arbitrary offsets meaningful: the caller still needs to decide whether those positions represent words, protocol fields, or whole Unicode scalar values.</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">fn safe_prefix(text: &amp;str, end: usize) -&gt; Option&lt;&amp;str&gt; {
+    text.get(..end)
+}
+
+fn main() {
+    let text = "Aé🦀";
+    println!("bytes = {}", text.len());
+    println!("scalars = {}", text.chars().count());
+    println!("valid = {:?}", safe_prefix(text, 3));
+    println!("invalid = {:?}", safe_prefix(text, 2));
+}</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p><strong>Expected output</strong> (not compiler-tested in the present environment):</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">bytes = 7
+scalars = 3
+valid = Some("Aé")
+invalid = None</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>The signature <code>Option&lt;&amp;str&gt;</code> uses lifetime elision: the returned borrowed view is tied to the input <code>text</code>, not to new owned storage. A program must not return a slice of a temporary <code>String</code> that has already been destroyed. When an application actually needs to keep text independently, it may use an explicitly allocated owned <code>String</code>. Do not replace safe indexing with <code>get_unchecked</code> to bypass boundary checks without a carefully proven unsafe contract.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Build a Function That Borrows Its First Word</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A reusable function may accept <code>&amp;str</code> regardless of whether the caller has a <code>String</code> or a literal. The example uses <code>split_whitespace</code> to find a word according to Rust's Unicode whitespace behavior and returns a borrowed slice of the original input. It does not allocate a new word string. For an empty input or input containing only whitespace, the chosen API returns an empty slice.</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">fn first_word(text: &amp;str) -&gt; &amp;str {
+    text.split_whitespace().next().unwrap_or("")
+}
+
+fn main() {
+    let owned = String::from("café 🦀 tools");
+    let word = first_word(&amp;owned);
+    println!("word = {word}");
+    println!("word bytes = {}", word.len());
+    println!("word scalars = {}", word.chars().count());
+    println!("empty = {:?}", first_word("  "));
+}</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p><strong>Expected output</strong> (source reviewed, not executed):</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">word = café
+word bytes = 5
+word scalars = 4
+empty = ""</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>The whitespace iterator uses a language-defined property; applications needing punctuation-aware or locale-specific tokenization must implement a more explicit policy. The borrowed word stays tied to the original allocation. A later attempt to mutate the underlying <code>String</code> while the borrowed word remains in use can be rejected by the borrow checker. Under modern non-lexical lifetimes, the borrow can end after its last actual use; mutation later in the same block may be permitted when the reference is no longer used.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Array Slices Work Without Unicode Complications</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Slices are not limited to text. The type <code>&amp;[i32]</code> views a contiguous region of integer elements while retaining ownership elsewhere. Its indices are element positions rather than UTF-8 byte positions. The same safe borrowing principle applies to a borrowed array view, an allocated <code>Vec&lt;i32&gt;</code>, or a portion of either. The <a href="https://doc.rust-lang.org/std/primitive.slice.html">Rust slice primitive reference</a> documents the type and its methods.</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">fn sum(values: &amp;[i32]) -&gt; i32 {
+    values.iter().copied().sum()
+}
+
+fn double(values: &amp;mut [i32]) {
+    for value in values.iter_mut() {
+        *value *= 2;
+    }
+}
+
+fn main() {
+    let numbers = [3, 5, 8, 13, 21];
+    println!("sum = {}", sum(&amp;numbers[1..4]));
+
+    let mut other = [2, 4, 6, 8];
+    double(&amp;mut other[1..3]);
+    println!("doubled = {:?}", other);
+}</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p><strong>Expected output</strong> from the shown values (calculated, not executed):</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">sum = 26
+doubled = [2, 8, 12, 8]</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>The sum includes elements with indices 1, 2 and 3: 5 + 8 + 13 = 26. The mutable slice modifies elements 1 and 2 in <code>other</code>, leaving the owner of the array intact. Real input processing must consider signed integer overflow: <code>sum()</code> with <code>i32</code> is not safe for every conceivable array. For arbitrary data, use checked arithmetic, an appropriately wider type, or a documented overflow policy.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practical Lab and Reproducibility</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Use a local training directory and the standard Rust toolchain; no external crates, administrator access, network service, or real customer information are required. The demonstrations are copyable and use Rust's 2021 edition. In this publishing environment, Rust compiler execution was unavailable because <code>rustc</code> and <code>cargo</code> were not installed; compilation and test results are <strong>instructions for the learner to verify</strong>, not a test record falsely attributed to the publisher.</p><!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Run <code>rustc --version</code> and <code>cargo --version</code> to document your toolchain. If unavailable, install using the official rustup instructions for your operating system.</li><li>Create a new package using <code>cargo new slice_lab</code>, move into its folder, and replace <code>src/main.rs</code> with one complete example above at a time. Run <code>cargo run</code>.</li><li>Confirm <code>"Aé🦀".len() == 7</code>, <code>chars().count() == 3</code>, <code>get(1..3) == Some("é")</code>, and <code>get(2..3).is_none()</code>.</li><li>Change a requested prefix byte offset from 3 to 7 and record why the result changes from <code>Some("Aé")</code> to <code>Some("Aé🦀")</code>.</li><li>Call <code>first_word</code> on <code>"café 🦀 tools"</code>, an empty string, and a whitespace-only input. Document all three results.</li><li>Explain why an array slice <code>&amp;numbers[1..4]</code> has three elements even though it may occupy many bytes.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Add Automated Tests to Verify the Claims</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>To make the boundary behavior independently testable, add the following code to <code>src/lib.rs</code> in a local Cargo package, then run <code>cargo test</code>. These assertions cover normal Unicode slicing, an invalid mid-scalar offset, empty input, and the word-borrowing contract. The tests have not been run by the publisher and should be treated as a reproducible verification plan.</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">pub fn safe_prefix(text: &amp;str, end: usize) -&gt; Option&lt;&amp;str&gt; {
+    text.get(..end)
+}
+
+pub fn first_word(text: &amp;str) -&gt; &amp;str {
+    text.split_whitespace().next().unwrap_or("")
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn utf8_boundaries() {
+        let text = "Aé🦀";
+        assert_eq!(text.len(), 7);
+        assert_eq!(text.chars().count(), 3);
+        assert_eq!(safe_prefix(text, 1), Some("A"));
+        assert_eq!(safe_prefix(text, 3), Some("Aé"));
+        assert_eq!(safe_prefix(text, 2), None);
+        assert_eq!(safe_prefix(text, 7), Some(text));
+    }
+
+    #[test]
+    fn words_borrow_input() {
+        assert_eq!(first_word("café 🦀 tools"), "café");
+        assert_eq!(first_word(""), "");
+        assert_eq!(first_word("   "), "");
+    }
+}</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>A successful local <code>cargo test</code> should report two passing test functions, while the assertions inside them verify several properties. If compilation fails because there is already a function named <code>safe_prefix</code> or <code>first_word</code> in the same module, avoid duplicate definitions by using the library tests separately from the earlier <code>main.rs</code> examples. If the editor inserts invalid Unicode replacement symbols, save the source in UTF-8 and inspect the original literal.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting Common Errors</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Panic from a range:</strong> a range like <code>&amp;text[2..3]</code> splits a multibyte scalar. Use <code>get</code> to handle invalid positions and work with actual scalar boundaries.</li><li><strong>Cannot index str by integer:</strong> Rust does not implement direct numeric character indexing like <code>text[0]</code>. Choose <code>chars()</code>, a byte-range slice, or a protocol-specific parser.</li><li><strong>Borrow checker rejects a mutation:</strong> an immutable borrowed view is still used after a proposed mutation. Rearrange the final use, return an owned value, or redesign the data flow instead of bypassing memory safety.</li><li><strong>Unexpected byte count:</strong> <code>len()</code> counts UTF-8 bytes. Compare it with <code>chars().count()</code> and do not assume grapheme clusters equal scalar values.</li><li><strong>Empty result from word parsing:</strong> leading whitespace or empty input requires a defined application policy. <code>split_whitespace()</code> skips whitespace, and <code>unwrap_or("")</code> provides the chosen empty fallback.</li><li><strong>Out-of-bounds array range:</strong> array and vector slices have bounds checks too, but use element positions; <code>get</code> also provides safe optional access for slices.</li><li><strong>Compiler not found:</strong> <code>rustc</code> and <code>cargo</code> are not installed or missing from the path. Use official rustup documentation and record the installed toolchain before claiming any test was executed.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check with Answers</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li><strong>Who owns bytes referenced by an &amp;str?</strong> The owner of the original allocation or static data, not the borrowed slice.</li><li><strong>How many bytes and scalar values are in "Aé🦀"?</strong> Seven bytes and three scalar values.</li><li><strong>What is the difference between <code>text.get(2..3)</code> and <code>&amp;text[2..3]</code> for that string?</strong> The former returns <code>None</code>; the latter panics because offset 2 lies inside <code>é</code>.</li><li><strong>Why can <code>first_word(&amp;owned)</code> return a &amp;str without a clone?</strong> It borrows a contiguous part of the caller's UTF-8 data.</li><li><strong>Can <code>chars()</code> reliably count how many letters a user sees?</strong> Not always. Combining scalar values can form one grapheme cluster.</li><li><strong>What does a half-open range <code>1..4</code> include?</strong> Positions 1, 2, and 3; index 4 is excluded.</li><li><strong>What sum results from <code>[3,5,8,13,21][1..4]</code>?</strong> 26.</li><li><strong>What must be true before keeping a borrowed slice?</strong> Its underlying data must remain valid for the borrow, subject to Rust's rules.</li><li><strong>Was Rust compilation verified by the publisher?</strong> No. UTF-8 byte calculations were independently verified, and the Rust source follows official references, but a Rust compiler was unavailable.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References and Further Study</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Primary references: <a href="https://doc.rust-lang.org/book/ch04-03-slices.html">The Rust Programming Language — The Slice Type</a>; <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">References and Borrowing</a>; <a href="https://doc.rust-lang.org/book/ch08-02-strings.html">Storing UTF-8 Encoded Text With Strings</a>; <a href="https://doc.rust-lang.org/std/primitive.str.html">Rust standard-library str documentation</a>; <a href="https://doc.rust-lang.org/std/primitive.slice.html">Rust primitive slice documentation</a>; and <a href="https://doc.rust-lang.org/cargo/commands/cargo-test.html">Cargo test documentation</a>. The logo's <a href="https://rust-lang.org/policies/media-guide">trademark and reuse policy</a> is maintained by the Rust Foundation. Earlier lessons include <a href="https://bitcoinversus.tech/2026/10/09/osrust-001-what-is-rust-rustup-rustc-cargo-ownership-first-program/">OSRust.001 on installing the toolchain</a> and <a href="https://bitcoinversus.tech/2026/11/01/osrust-006-ownership-moves-borrowing-references-memory-safety/">OSRust.006 on ownership</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A slice lets Rust code work with borrowed regions of memory without copying or taking ownership. Text slices add an essential restriction: valid UTF-8 must remain intact, and byte ranges cannot split a Unicode scalar. Safe optional indexing, borrowed function parameters, careful handling of Unicode and reproducible local tests form a foundation for future lessons on collections, structs and robust parser design.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSRust.007 continues the published OSRust.006 ownership lesson. The featured 1200 × 630 illustration depicts a fictional older South Asian female instructor, rotating the instructor representation from OSC.006's middle-aged male programming mentor. The Rust Foundation logo is genuine, credited and used without implying affiliation. Two original charts visualize independently checked UTF-8 byte and scalar-value calculations; they are explanatory graphics, not outputs of a Rust runtime. Because the available environment lacked rustc and cargo, no successful Rust compile or test execution is claimed. No unverified YouTube ID or video playback is included; independent public-browser pixel inspection remains separate from WordPress markup checks.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional donation QR for 5,000 satoshis" class="wp-image-24043" /><figcaption><em>Optional original BitcoinVersus.Tech 5,000-satoshi donation QR. Confirm the destination and amount before authorizing a transfer.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>On a mobile wallet, display the QR on another screen or use a supported saved-image scanner. Confirm the payment recipient and 5,000-satoshi amount before sending.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->

@@ -1,0 +1,74 @@
+{
+  "post_id": 30584,
+  "lesson_id": "OSDCTC.017",
+  "title": "OSDCTC.017: Condensation and Dew-Point Monitoring — Liquid-Cooled Rack Safety Checks",
+  "url": "https://bitcoinversus.tech/2026/11/07/osdctc-017-condensation-dew-point-monitoring-liquid-cooled-racks/",
+  "publication": "published",
+  "audit_date": "2026-11-07",
+  "subject": "data_center_technician",
+  "prior_lesson": "OSDCTC.016 — Liquid-Cooling Monitoring, WordPress #27601",
+  "wordpress_markup_length": 28831,
+  "featured_media": {
+    "id": 30579,
+    "width": 1200,
+    "height": 630,
+    "type": "original AI-generated illustration"
+  },
+  "in_story_media": [
+    {
+      "id": 30581,
+      "type": "official manufacturer equipment photo",
+      "credit": "Vertiv CoolChip CDU"
+    },
+    {
+      "id": 30580,
+      "type": "original source-derived line chart",
+      "description": "NOAA formula and ASHRAE 2°C buffer; hypothetical 24°C and varying RH"
+    },
+    {
+      "id": 30582,
+      "type": "official manufacturer rack photo",
+      "credit": "Vertiv"
+    },
+    {
+      "video_id": "el_6HLxh538",
+      "source": "Open Compute Project / Vertiv",
+      "title": "Liquid Cooling Controls — Presented by Vertiv"
+    },
+    {
+      "video_id": "A-tf6cFmvn8",
+      "source": "Open Compute Project / Boyd",
+      "title": "Accelerating Liquid Cooling Adoption: CDU Efficiency, Faster Deployments, and Smarter Site Prep"
+    }
+  ],
+  "internal_links": 5,
+  "external_primary_education": [
+    "ASHRAE TC 9.9 Water-Cooled Servers white paper 2019",
+    "OCP ACF Reference Design Guidance",
+    "OCP Cold Plate open resources",
+    "NOAA NDBC Handbook 2023 Appendix A",
+    "ASHRAE AI Data Center Energy Performance Framework"
+  ],
+  "model_math": {
+    "T_air_C": 24,
+    "RH_percent": 60,
+    "dewpoint_C": 15.931,
+    "ASHRAE_margin_C": 2,
+    "coolant_supply_C": 20,
+    "actual_margin_C": 4.069,
+    "reference_margin_C": 2.069,
+    "alternative_supply_C": 17,
+    "alternative_reference_margin_C": -0.931,
+    "method": "NOAA NDBC vapour-pressure approximation, Python verified",
+    "not_measured": true
+  },
+  "html_youtube_iframes": 2,
+  "live_playback": "unverified",
+  "screenshot_views": "WordPress mshots returned ready at 1280 px and 390 px, pixels not independently reviewed",
+  "physical_tests": "none",
+  "original_5000_sats_qr_id": 24043,
+  "fully_italic_editor_note": true,
+  "no_diagrams_or_schematics": true,
+  "subscriber_email_disabled": true,
+  "notes": "Reconciled previous OSDCTC.016 and topics. WordPress public rendered content confirms two youtube iframe blocks. Full Gutenberg content to be archived in three repositories."
+}

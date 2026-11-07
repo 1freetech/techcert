@@ -1,0 +1,270 @@
+<!-- wp:paragraph -->
+<p><strong>OSFEC.015</strong> examines how embedded firmware preserves configuration, calibration, counters, and event records when a power failure interrupts storage operations. Flash memory retains data without power, but an interrupted program or erase can leave a partially written record. A reliable design must retain a recoverable previous state, reject incomplete entries, control flash wear, and expose errors to the application instead of claiming an unsuccessful write succeeded.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The lesson advances from <a href="https://bitcoinversus.tech/2026/11/01/osfec-014-memory-protection-units-fault-containment-embedded-firmware/">OSFEC.014 on memory protection units</a>, which covered isolation and fault containment during execution. The related <a href="https://bitcoinversus.tech/2026/11/01/osftc-015-brownout-reset-diagnostics-embedded-firmware/">OSFTC.015 brownout lesson</a> explains power-related resets. <a href="https://bitcoinversus.tech/2026/10/29/osfec-013-hardware-in-the-loop-firmware-testing-test-rigs-fault-injection-ci/">OSFEC.013 hardware-in-the-loop testing</a> introduces controlled fault injection. Here, the central design question is which nonvolatile settings remain correct and retrievable after unexpected reset.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Define program/erase geometry, endurance, durable state, a logical commit, and recoverability.</li><li>Explain why a checksum alone does not make a flash write atomic.</li><li>Describe how Zephyr NVS orders payload and metadata writes and how its optional CRC affects migration.</li><li>Explain littlefs copy-on-write, metadata pairs, and the scope of its documented guarantees.</li><li>Calculate flash-wear sensitivity to write frequency using a published illustrative model.</li><li>Run a host-side interruption-and-corruption simulation with clear hardware limitations.</li><li>Prepare a board-specific power-loss testing and recovery plan using qualified procedures.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: MCU memory maps, reset causes, raw-flash constraints, CRC basics, and software error handling. The executable laboratory example uses Python 3.8+ on an ordinary computer, so no physical flash device is required. Consult the chip datasheet, flash-driver specification, and system's functional-safety documentation before applying any design to production hardware.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Flash Writes Have Physical Constraints</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Many NOR flash devices erase regions to logical ones, then program supported bits toward zero. Erasing again is necessary to restore ones, commonly at a coarser page or sector granularity than a program operation. The precise geometry, alignment, voltage requirements, and erase-cycle rating depend on the device. A CPU memory store and a durable flash transaction are not synonymous. Power can fail before a write, during payload programming, between data and commit metadata, or during garbage collection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A CRC detects many accidental changes but does not create redundancy or an indivisible update. Two copies are not necessarily independent if erasing a shared physical sector destroys both. A safe design must reason about actual erase blocks, program-unit atomicity, storage layout, and the recoverability of earlier data. The <a href="https://github.com/littlefs-project/littlefs/blob/master/DESIGN.md">open-source littlefs design guide</a> identifies power-loss resilience, wear leveling, and bounded RAM usage as central embedded-storage requirements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30764,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/nordic-nrf52840-dk-official-photograph.png" alt="Real blue Nordic nRF52840 development board with processor, headers, buttons and USB connectors" class="wp-image-30764" /><figcaption class="wp-element-caption"><em>Official Nordic Semiconductor nRF52840 DK photograph, sourced from Nordic Semiconductor Japan. Actual equipment for context, not a photograph of a test performed for this lesson.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Zephyr NVS: Preserve the Last Complete Entry</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://docs.zephyrproject.org/latest/services/storage/nvs/nvs.html">Zephyr Non-Volatile Storage (NVS)</a> stores numeric-ID and data pairs across circular flash sectors. Its update sequence writes data first and metadata afterward. Startup ignores entries with missing or invalid metadata rather than treating an interrupted payload as successfully saved. Metadata contains a CRC for the metadata itself; that CRC establishes metadata completeness and does <strong>not</strong> validate all the payload bytes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Zephyr offers <code>CONFIG_NVS_DATA_CRC</code> for optional CRC-32 protection of stored data. Enabling the data-CRC option on a previously populated store without CRCs can invalidate existing records, so deployment requires an explicit migration plan. The data CRC is verified for full-data reads rather than every partial read. Applications must check storage return codes and avoid silently treating a failed commit as success.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The NVS implementation needs at least two sectors and maintains a sector for copying live values during reclamation. Sector size follows erase geometry and implementation restrictions. NVS can avoid rewriting a value when the ID and data have not changed, reducing unnecessary wear. Its out-of-space protection avoids certain repeated-erase loops, but insufficient free space must still be handled as an operational failure. The official <a href="https://docs.zephyrproject.org/latest/samples/subsys/kvss/nvs/README.html">Zephyr NVS example</a> shows a reboot-persistent counter; the exact board target and sample output can change by release.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=Np8O-MjAeGU&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Nordic Semiconductor, “nRF Connect SDK hands-on, part 4: Storing data on non-volatile memory” (October 24, 2024). Official free educational tutorial covering persistent data on internal and external storage.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">When to Choose littlefs Instead</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://github.com/littlefs-project/littlefs">littlefs</a> provides a file and directory interface rather than only a small numeric-ID key/value store. Its design uses redundant checksummed metadata pairs and copy-on-write structures. New state can be prepared while previously committed structures remain recoverable, reducing the impact of interruption during a supported transaction. The design intentionally bounds RAM consumption and distributes erase activity.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Guarantees apply only when an appropriate block-device driver correctly implements read, program, erase, and synchronization. Code must observe the documented file close/sync and transaction scope; independent application changes across multiple files are not automatically one global atomic operation. <a href="https://nrfconnectdocs.nordicsemi.com/ncs/latest/nrf/app_dev/data_storage.html">Nordic's storage guide</a> describes settings backends such as NVS, ZMS, and a file-system backend. Select the backend based on application data, flash geometry, and deployed-board support.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>CRC-32 is an integrity check for accidental damage, not authentication against an attacker. Secure counters, credentials, or calibration settings may need authenticated storage, access restrictions, and anti-rollback policies. For a separate treatment of firmware signature checks, see <a href="https://bitcoinversus.tech/2026/10/13/osftc-013-firmware-image-integrity-hash-signature-verification/">OSFTC.013 image integrity</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Reproducible Host-Side Fault-Injection Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following Python 3.8+ program is a <strong>logical two-slot storage simulator</strong>. A record contains a four-byte sequence, four-byte value, CRC-32 and a final commit marker. Recovery selects the highest-sequence record with a valid CRC and commit marker. One test interrupts a new write before the commit marker is set, one finishes the write, and one corrupts a previously stored payload. All assertions were executed before preparing the lesson.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Safety and fidelity limitations:</strong> Python bytearrays are not NOR flash. The program assumes independently erasable slots and an indivisible final marker update; real silicon may require much larger erase blocks, different program alignment, may tear a marker write, or may share erases across records. Sequence wraparound and simultaneous corruption are also omitted. The code illustrates a recovery policy, <strong>not production firmware or a proven physically atomic storage implementation</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>&quot;&quot;&quot;Host-only teaching model of two independent transactional record slots.
+NOT a NOR flash driver, filesystem, or proof of hardware power-loss safety.
+&quot;&quot;&quot;
+import struct
+import zlib
+
+RECORD_SIZE = 13
+COMMIT = 0xA5
+
+def encode(sequence: int, value: int) -&gt; bytes:
+    data = struct.pack('&lt;II', sequence, value)
+    checksum = zlib.crc32(data) &amp; 0xffffffff
+    return data + struct.pack('&lt;I', checksum)
+
+def decode(slot: bytearray):
+    if len(slot) &lt; RECORD_SIZE or slot[12] != COMMIT:
+        return None
+    data = bytes(slot[:8])
+    crc_stored = struct.unpack('&lt;I', bytes(slot[8:12]))[0]
+    if (zlib.crc32(data) &amp; 0xffffffff) != crc_stored:
+        return None
+    return struct.unpack('&lt;II', data)
+
+def recover(slots):
+    valid = [entry for slot in slots if (entry := decode(slot)) is not None]
+    return max(valid, default=(0, 0), key=lambda entry: entry[0])
+
+def write_record(slots, sequence: int, value: int, power_cut: bool = False):
+    inactive = sequence % 2
+    # Independently erasable slots are an EXPLICIT SIMULATION assumption.
+    slots[inactive] = bytearray([0xff] * RECORD_SIZE)
+    slots[inactive][:12] = encode(sequence, value)
+    if not power_cut:
+        slots[inactive][12] = COMMIT
+
+def main():
+    slots = [bytearray([0xff] * RECORD_SIZE) for _ in range(2)]
+    write_record(slots, 1, 40)
+    assert recover(slots) == (1, 40)
+    print('initial recovery:', recover(slots))
+
+    write_record(slots, 2, 99, power_cut=True)
+    assert recover(slots) == (1, 40)
+    print('interrupted write:', recover(slots))
+
+    write_record(slots, 2, 99)
+    assert recover(slots) == (2, 99)
+    print('committed write:', recover(slots))
+
+    slots[0][4] ^= 0x01  # Corrupt stored value; CRC invalidates new record.
+    assert recover(slots) == (1, 40)
+    print('corrupt latest:', recover(slots))
+
+if __name__ == '__main__':
+    main()</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Save the code as <code>osfec_015_flash_recovery_sim.py</code> and run <code>python3 osfec_015_flash_recovery_sim.py</code> in a host terminal. The test was executed and its assertions passed with the following exact output:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>initial recovery: (1, 40)
+interrupted write: (1, 40)
+committed write: (2, 99)
+corrupt latest: (1, 40)</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>A power cut before the simulated marker preserves sequence 1; a complete later write supplies sequence 2; a flipped data bit makes sequence 2 invalid, so the old intact record remains. An engineer must separately test each physical flash program position, metadata updates, garbage collection, duplicate IDs, and wraparound before claiming reliable recovery on real hardware.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Flash Wear: A Source-Grounded Arithmetic Model</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Zephyr documents an illustrative NVS configuration with two 1,024-byte sectors, a four-byte value, eight bytes of metadata per entry, and an assumed erase endurance of 20,000 cycles per sector. The effective logical storage consumption per update is approximately 12 bytes. Using a simple uniform-usage model, the estimated time to reach the assumed number of sector erases varies inversely with write frequency.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Idealized lifetime in minutes ≈ (sector count × sector bytes × nominal erase cycles) ÷ (writes per minute × stored bytes per request).</strong> At one saved value per minute: 2 × 1,024 × 20,000 ÷ 12 = 3,413,333 minutes; divided by 525,600 minutes per 365-day year ≈ <strong>6.49 years</strong>. Saving every two, five or ten minutes produces about 12.99, 32.47 and 64.94 years in the same arithmetic model.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30761,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osfec-015-zephyr-nvs-write-interval-wear-chart.png" alt="Source-grounded vertical bar chart comparing modeled flash endurance for one-, two-, five- and ten-minute write intervals" class="wp-image-30761" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert Python chart using Zephyr NVS documentation assumptions: two 1,024-byte sectors, four data bytes, eight metadata bytes and 20,000 nominal erases. All values are illustrative calculations, never physical endurance measurements or projected device service life.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Those numbers are <em>not</em> warranted operating lifetimes. Real flash endurance depends on memory technology, sector cycling, write amplification, storage fullness, bad blocks, voltage, temperature, reclamation, system logging, and actual update distribution. A ten-minute model yielding decades is a warning against overinterpreting a simplified formula. Only the flash maker's endurance specification and workload qualification can support a real lifetime estimate.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Integrity, Atomicity, Durability and Security</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Integrity:</strong> an accidental corruption detector such as CRC-32 helps reject altered payloads; it is not cryptographic authentication.</li><li><strong>Atomicity:</strong> an update becomes visible as a complete logical state, or an earlier committed state is used after interruption, within the API's documented transaction boundary.</li><li><strong>Durability:</strong> completed updates survive a specified class of resets and physical failure conditions according to the driver's documented guarantee.</li><li><strong>Consistency:</strong> recovered state obeys application invariants, including schema version, valid ranges, associated calibration identifiers, and dependent settings.</li><li><strong>Authenticity/confidentiality:</strong> hostile modification, secret exposure, rollback, and key compromise require controls beyond a CRC.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The older <a href="https://bitcoinversus.tech/2026/10/13/osftc-013-firmware-image-integrity-hash-signature-verification/">OSFTC.013 integrity lesson</a> explains authenticated firmware images, while <a href="https://bitcoinversus.tech/2026/10/29/osftc-014-mcuboot-test-upgrades-image-confirmation-revert-recovery-validation/">OSFTC.014 MCUboot upgrade recovery</a> deals with image-selection state. Neither automatically provides application settings migration or a safe key/value transaction. Those requirements need their own data contract.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=CY0Vq_Lgs4k&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Nordic Semiconductor, “nRF Connect SDK hands-on, part 1: Rapid prototyping with nRF Connect SDK” (October 24, 2024). Official free introductory course video establishing the same development environment used by the series' storage lesson.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Engineering Fault-Injection Acceptance Plan</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Inventory MCU, memory type, storage partition, erase geometry, write-block size, supply limits, SDK/RTOS release, and data-format revision.</li><li>Choose a known-good test configuration and verify the prior record is recoverable before introducing failures.</li><li>Using an authorized bench and qualified personnel, test power interruptions before write, during payload programming, during metadata/commit programming, during garbage collection, and after API completion.</li><li>For every restart, check mount/recovery result, complete data checksum, record version, application bounds, error logging, and whether the old state remains valid.</li><li>Repeat at boundary conditions such as nearly full storage, minimal free sectors, repeated writes, schema changes, lower supply voltage, and prescribed temperature range.</li><li>Record scope precisely: a host simulation does not qualify hardware; a passing single power-cut test does not establish statistical reliability; a failed update must not be reported as successful.</li><li>Add supported tests to version-controlled CI and hardware-in-the-loop coverage. Never repeatedly interrupt production power or bypass protective circuitry for classroom demonstration.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>One documented <a href="https://github.com/zephyrproject-rtos/zephyr/issues/103029">Zephyr issue</a> describes an edge case around a partial final allocation-table entry at a sector boundary. Its existence is not evidence that every current Zephyr release fails in the same way; it is a useful reminder to verify the actual release, reproduction conditions, patch state, and boundary cases for an embedded product.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting Practical Examples</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Settings disappear after reboot:</strong> confirm that the storage API reported success, the partition is correct, and the application committed or synchronized data at the required boundary.</li><li><strong>Mount fails after power interruption:</strong> preserve the flash image when permitted, identify the exact software version and layout, and inspect source-defined recovery and sector transitions before attempting an erase.</li><li><strong>Unexpected high write rate:</strong> compare intended cadence with observed writes, unchanged-value suppression, logging, and application retry loops.</li><li><strong>Data appears valid but belongs to the wrong hardware:</strong> verify serialization and schema IDs, per-device calibration version, serialization endianness, and authentication where required.</li><li><strong>CRC errors after enabling a new option:</strong> investigate documented data-format compatibility and migration before treating all installed units as physically defective.</li><li><strong>MPU fault while writing internal flash:</strong> check the flash driver's MPU permissions and platform configuration. Zephyr documents a special internal-flash MPU consideration in its NVS troubleshooting guidance.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Documentation-Only Practical Exercises</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Run the complete Python simulation and verify all four printed lines, then record the Python interpreter version and script SHA-256 for reproducibility.</li><li>Add a simulated interruption after the first four payload bytes. Verify that incomplete data never passes the commit and CRC checks.</li><li>Modify the recovery logic to support three logical slots and describe how physical erase geometry changes the design.</li><li>Make the sequence counter wrap and investigate why ordinary numeric maximum is insufficient near wraparound.</li><li>Recalculate the chart for five-minute writes and explain why the apparent 32.47 years must not be advertised as product lifespan.</li><li>Write a test matrix for Zephyr NVS and littlefs on a specific supported board, including sector fullness, sync/close behavior, and migration failures.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check with Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Why can a normal memory write not simply stand in for a durable flash commit?</strong> Flash program and erase operations have special physical geometry and can be interrupted.</li><li><strong>What does NVS write before its metadata?</strong> Item data; a missing or invalid metadata entry is ignored on initialization.</li><li><strong>Does standard NVS metadata CRC also verify stored user payloads?</strong> No; optional data CRC is separately configured and checked.</li><li><strong>What is littlefs built to provide?</strong> A constrained, wear-aware and power-loss-resilient file-system model based on copy-on-write and checksummed metadata.</li><li><strong>What did the four-line simulation establish?</strong> That its prescribed logical parser selected recoverable records for four host-only scenarios, not that the flash hardware is safe.</li><li><strong>How many bytes does the illustrative Zephyr four-byte value consume per NVS entry?</strong> Twelve bytes: four data bytes and eight metadata bytes.</li><li><strong>Why should the 6.49-year estimate not be a maintenance interval?</strong> It is a simplified calculation that omits the real device's wear, error and environment profile.</li><li><strong>Does CRC prevent malicious configuration alteration?</strong> No; add appropriate authentication and access controls.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary Open Educational References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://docs.zephyrproject.org/latest/services/storage/nvs/nvs.html">Zephyr Project NVS technical documentation</a>; <a href="https://docs.zephyrproject.org/latest/samples/subsys/kvss/nvs/README.html">Zephyr NVS sample application</a>; <a href="https://nrfconnectdocs.nordicsemi.com/ncs/latest/nrf/app_dev/data_storage.html">Nordic Semiconductor data-storage guide</a>; <a href="https://github.com/littlefs-project/littlefs">littlefs open-source project</a>; <a href="https://github.com/littlefs-project/littlefs/blob/master/DESIGN.md">littlefs design reference</a>; and <a href="https://www.nordicsemi.com/Products/Development-hardware/nRF52840-DK">Nordic nRF52840 DK product documentation</a>. The in-story videos are official Nordic Semiconductor educational lessons.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Crash-consistent firmware depends on storage design from the flash controller through the application contract. Zephyr NVS and littlefs offer proven patterns for incomplete-write detection and recovery, but validation remains specific to the actual device, software version, block driver, state schema and failure conditions. Source-grounded calculations and host demonstrations are learning tools, not substitutes for physical qualification.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSFEC.015 follows the published OSFEC.014 Firmware Engineer lesson and was screened against WordPress and the GitHub curriculum for duplicates. The Python example was executed with all assertions passing; it is explicitly not a real flash or board test. The endurance chart is based on Zephyr's simplified example, not site telemetry or a manufacturer durability promise. The 1200 × 630 featured cover is an original AI-generated editorial illustration featuring a middle-aged male engineer, visibly different from the prior young woman technician cover. The nRF52840 DK image is an authentic Nordic manufacturer photograph. Both Nordic instructional videos are source-verified; actual playback and screenshot visual inspection are separate QA gates. No custom conceptual schematics are used.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original optional BitcoinVersus.Tech 5,000-sat donation QR. Confirm the recipient and amount in the wallet before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>To donate 5,000 sats, scan the QR from another screen with a compatible Bitcoin wallet or use a supported saved-image scanner. Confirm the recipient and amount before sending.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>Educational content is not a substitute for qualified hardware, safety and security engineering or device-specific validation.</em></p>
+<!-- /wp:paragraph -->

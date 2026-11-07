@@ -1,0 +1,228 @@
+<!-- wp:paragraph --><p><strong>OSC.006</strong> introduces C functions as named, reusable units of program behavior. A function can accept typed arguments, perform calculations or effects, and optionally return a value. Functions make large programs more understandable because a caller needs to know the function's contract without repeatedly rewriting its implementation. For systems programming, clear interfaces also provide an important boundary for reviewing assumptions, testing arithmetic, and controlling which symbols are visible to other source files.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The sequence follows <a href="https://bitcoinversus.tech/2026/11/01/osc-005-c-loops-for-while-do-while-break-continue/">OSC.005 on loops</a>, <a href="https://bitcoinversus.tech/2026/10/14/osc-004-c-control-flow-if-else-switch-ternary/">OSC.004 on decisions</a>, and <a href="https://bitcoinversus.tech/2026/10/14/osc-003-c-operators-and-expressions/">OSC.003 on expressions</a>. Students will reuse a <code>for</code> loop and <code>if</code> statements inside functions before advancing to pointers, arrays, dynamic memory, and more complex interfaces. Code examples target ISO C11, avoiding language-specific compiler extensions.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Distinguish a <strong>declaration</strong> or prototype from a <strong>definition</strong> and a function call.</li><li>Identify a function's return type, name, formal parameters, call arguments, and return statement.</li><li>Write <code>int</code> and <code>void</code> functions and forward declarations with <code>(void)</code> when there are no parameters.</li><li>Explain why normal C function arguments are <strong>passed by value</strong>, and why a parameter can change without changing the caller's variable.</li><li>Explain block scope, automatic local variables, file-scope <code>static</code> functions, and prototypes in a header.</li><li>Build and run a C11 program, compare its actual output with expected results, and test input boundaries.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: basic C syntax, arithmetic, conditional statements, loops, terminal navigation, and a working C compiler from <a href="https://bitcoinversus.tech/2026/10/09/osc-001-c-compiler-toolchain-gcc-preprocessing-compilation-assembly-linking-first-build/">OSC.001's compiler introduction</a>. Equipment: a computer with GCC or another conforming C11 compiler, a plain-text editor, and a terminal. The examples were compiled with GCC 14.2.0 in a Linux environment; learners using Windows can use a GCC-capable shell or adapt the build steps to a supported C toolchain.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Why Functions Matter in Systems Engineering</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>C developed alongside early UNIX systems work on computers such as Digital Equipment Corporation's PDP-11. The important historical connection is that a small, compiled programming language allowed operating-system software to be organized into separate routines and source files. A function can be compiled into machine instructions and called from another function, subject to the compiler and linker. The exact machine instructions and calling convention vary by target architecture.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30993,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osc-006-pdp-11-minicomputer-loz-pycock-cc-by-sa-2.jpg" alt="Photograph of DEC PDP-11 minicomputer cabinets and tape-drive peripherals at The National Museum of Computing" class="wp-image-30993" /><figcaption><em>Authentic historical-computer photograph by Loz Pycock, background modification by Pittigrilli / <a href="https://commons.wikimedia.org/wiki/File:DEC_PDP-11_Minicomputer_in_extended_variant_(edited).jpg">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>. Modern museum photograph, not an image of C code executing.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p>Modern compilers still use functions to organize device drivers, server code, command-line tools, and firmware. Although function calls are often associated with an execution stack, a language's observable behavior does not require one universal stack-frame layout. Compilers may optimize function calls, inline a function, or use architecture-specific registers. Therefore, avoid drawing definitive physical-memory conclusions from a source-level explanation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Function Declaration, Definition, and Call</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <strong>function declaration</strong> introduces its name and type. A declaration with parameter type information is commonly called a <strong>prototype</strong>. A <strong>definition</strong> includes the statements that implement the function. A <strong>call</strong> supplies argument expressions and transfers execution into the function. The name <code>add</code> below has two <code>int</code> parameters and returns <code>int</code>. Parameter names in a prototype are optional; they are required for parameter variables used in the definition.</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">int add(int left, int right);   /* prototype */
+
+int add(int left, int right)    /* definition */
+{
+    return left + right;
+}
+
+/* Calling add(10, 20) produces the int value 30. */</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>A forward declaration is especially helpful if <code>main</code> calls a function defined below it. Standard C11 does not support implicit function declarations as valid modern practice. If a function takes no arguments, write <code>int main(void)</code> or <code>int reset(void)</code>. In C11, an empty parameter list in a declaration has different historical meaning from a full no-argument prototype; later C standards have changed portions of that syntax. Using <code>(void)</code> is explicit and portable for the lesson.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A Complete C11 Program with Three Functions</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The following program combines a loop-based summation, a bounded percentage, and an output-only function. The <code>static</code> keyword at file scope gives the helper functions internal linkage: code in another separately compiled source file cannot refer to the same symbols as externally linked functions. The demonstration deliberately uses small integer values so that signed integer overflow is not possible for the shown calls.</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">#include &lt;stdio.h&gt;
+
+static int sum_inclusive(int first, int last);
+static int clamp_percent(int value);
+static void show_results(int sum, int percent);
+
+int main(void)
+{
+    int sum = sum_inclusive(1, 5);
+    int bounded = clamp_percent(125);
+    show_results(sum, bounded);
+    return 0;
+}
+
+static int sum_inclusive(int first, int last)
+{
+    int total = 0;
+    for (int n = first; n &lt;= last; ++n) {
+        total += n;
+    }
+    return total;
+}
+
+static int clamp_percent(int value)
+{
+    if (value &lt; 0) {
+        return 0;
+    }
+    if (value &gt; 100) {
+        return 100;
+    }
+    return value;
+}
+
+static void show_results(int sum, int percent)
+{
+    printf("sum(1..5) = %d\n", sum);
+    printf("clamped(125) = %d%%\n", percent);
+}</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>Save the source as <code>lesson06.c</code>. Compile in a GCC-capable shell with the warning flags below. The <code>-std=c11</code> option selects C11; <code>-Wall</code>, <code>-Wextra</code>, and <code>-Wpedantic</code> request diagnostic families; <code>-Werror</code> makes emitted warnings fail the build. Those switches are documented in the <a href="https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html">GCC warning-options manual</a>. Compiler flags diagnose many issues but do not prove freedom from all runtime defects.</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">gcc -std=c11 -Wall -Wextra -Wpedantic -Werror lesson06.c -o lesson06
+./lesson06</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p><strong>Verified output from GCC 14.2.0:</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">sum(1..5) = 15
+clamped(125) = 100%</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>The code is a teaching exercise rather than a general integer-range library. For large or untrusted <code>first</code> and <code>last</code> values, a robust summation routine must address invalid ranges, arithmetic overflow, and loop termination. Additional input validation belongs at the function boundary instead of being assumed safe because a classroom run succeeded.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Actual Compiler Test Evidence</h2><!-- /wp:heading -->
+
+<!-- wp:image {"id":30995,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osc-006-gcc-14-2-c11-functions-test-results.png" alt="Educational image displaying verified GCC C11 output for sum, clamping, by-value behavior and separate compilation" class="wp-image-30995" /><figcaption><em>Original educational visualization by BitcoinVersus.Tech, created from actual GCC 14.2.0 test outputs recorded November 7, 2026. The three example programs were compiled with strict C11 warnings and executed successfully; five assertion checks passed. Styled reconstruction of observed terminal text, not a screenshot of a live user-device terminal.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p>The recorded program outputs are: <code>sum(1..5) = 15</code>, <code>clamped(125) = 100%</code>, <code>inside = 15</code>, <code>outside = 10</code>, and <code>square_small(7) = 49</code>. An independent GCC execution in the working environment generated those values. Reproduction on a different platform remains a separate task, and results cannot be generalized to all C implementations without respecting the language standard.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Parameters Are Passed by Value</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>In ordinary C function calls, parameter objects receive the values of the corresponding argument expressions. Changing a parameter's local integer does not modify the caller's separate integer variable. Later pointer lessons will show how copying a pointer value allows a function to access caller-owned storage. That mechanism is sometimes informally described as pass-by-reference, but C's actual argument passing remains by value.</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">#include &lt;stdio.h&gt;
+
+static void add_five(int number)
+{
+    number += 5;
+    printf("inside = %d\n", number);
+}
+
+int main(void)
+{
+    int original = 10;
+    add_five(original);
+    printf("outside = %d\n", original);
+    return 0;
+}</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>The tested program printed <code>inside = 15</code> followed by <code>outside = 10</code>. The expression <code>number += 5</code> changes the parameter variable only. If a caller needs a modified value, a useful beginner pattern is to return the computed value and assign it explicitly, as in <code>original = add_five_and_return(original);</code>, where a separately defined function returns an <code>int</code>. Do not assume that an argument becomes mutable in its caller merely because the callee changes a similarly named variable.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Block Scope, Function Linkage, and Storage Duration</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A variable declared inside a block is visible from its declaration until the end of that block, subject to shadowing rules. An uninitialized automatic local integer has an indeterminate value and must not be read as though it were initialized to zero. The <a href="https://www.gnu.org/software/c-intro-and-ref/manual/html_node/Local-Variables.html">GNU C manual on local variables</a> explains that local names and storage duration are different concepts; optimized machines do not necessarily allocate every local value in a physical stack slot.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Block-scope automatic variable:</strong> an ordinary local such as <code>int total = 0;</code> exists for its relevant block execution and has no meaningful value before initialization.</li><li><strong>File-scope static function:</strong> a declaration such as <code>static int clamp_percent(int value);</code> names a helper with internal linkage for its translation unit.</li><li><strong>Static local variable:</strong> a separate construct, <code>static int count = 0;</code> inside a function, retains stored state between calls even though its name is only visible in its block.</li><li><strong>Global data:</strong> external-linkage file-scope objects can create shared mutable state; prefer explicit interfaces and small, testable functions when possible.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Avoid the claim that <code>static</code> always means one behavior. At file scope it can determine linkage; at block scope it changes an object's storage duration. Likewise, a function declared inside another function does not permit a nested definition in standard C11; nested function definitions are a GNU extension and are excluded from the portable examples.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Separate Compilation and Header Prototypes</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>As programs grow, definitions may reside in one C file while callers reside in another. An ordinary header can provide a shared declaration, reducing the risk that the caller assumes the wrong type. Create three small files in the same directory; the header guard prevents repeated inclusion of its declarations within one translation unit.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>File <code>metrics.h</code></strong></p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">#ifndef METRICS_H
+#define METRICS_H
+
+int square_small(int value);
+
+#endif</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p><strong>File <code>metrics.c</code></strong></p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">#include "metrics.h"
+
+int square_small(int value)
+{
+    return value * value;
+}</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p><strong>File <code>multi_main.c</code></strong></p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">#include &lt;stdio.h&gt;
+#include "metrics.h"
+
+int main(void)
+{
+    printf("square_small(7) = %d\n", square_small(7));
+    return 0;
+}</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>The code was compiled and linked using both source files, not by separately executing a header. The command and observed output are:</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">gcc -std=c11 -Wall -Wextra -Wpedantic -Werror multi_main.c metrics.c -o modular
+./modular
+square_small(7) = 49</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>A source file can include a header for the same function it defines, enabling the compiler to compare declared types with the definition. When a function should be private to <code>metrics.c</code>, use a file-scope <code>static</code> definition and do not put a public prototype for it in <code>metrics.h</code>. The shown <code>square_small</code> is intentionally public between the two files. Multiplying arbitrary large signed integers can overflow; the example is safe for the tested value 7, not for all possible <code>int</code> inputs.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Embedded Applications and Hardware Context</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Small microcontrollers often run programs written in C or related compiled languages. A function might read an input, limit a control value, compute a checksum, or update a state machine. Writing such tasks as testable functions separates algorithmic logic from hardware register access. Arduino sketches ordinarily use an Arduino C++-based build environment rather than pure ISO C11; therefore an Arduino board photograph demonstrates relevant hardware, not proof that a pure C11 file ran unchanged on the device.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30994,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osc-006-arduino-uno-board-jrawx-cc0.jpg" alt="Top view of genuine Arduino Uno microcontroller board on white background" class="wp-image-30994" /><figcaption><em>Arduino Uno circuit-board photograph by JrawX / <a href="https://commons.wikimedia.org/wiki/File:Arduino_Uno_board.jpg">Wikimedia Commons</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. Hardware application context only; no firmware flashing or device test performed for OSC.006.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p>Students who want a follow-on engineering context can compare the <a href="https://bitcoinversus.tech/2026/11/07/osftc-016-mcu-clock-source-diagnostics-oscillators-pll-clock-failure/">OSFTC.016 firmware clock-diagnostics lesson</a> with the present focus on interfaces. In a real embedded system, timing, register volatility, concurrency and memory-mapped hardware introduce requirements beyond an introductory host-side function exercise.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common Errors and Troubleshooting</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Implicit or conflicting declaration:</strong> a function is called before a matching prototype is visible. Add the correct declaration, include the right header, and rebuild with warnings.</li><li><strong>Undefined reference at link time:</strong> the caller compiles, but the object file defining the function was omitted or the symbol is not externally visible. Include the required source/object file and check linkage.</li><li><strong>Return-type mismatch:</strong> a <code>void</code> function is used like an integer-valued function or a return expression has an incompatible type. Align the prototype, definition and caller.</li><li><strong>Missing return value:</strong> a non-<code>void</code> path falls through without returning a usable value. Return a value along every reachable path that requires one.</li><li><strong>Stale state assumption:</strong> a local variable is treated as persistent between independent calls. Distinguish automatic locals from explicitly declared static locals.</li><li><strong>Wrong answer despite compilation:</strong> a tested range is invalid or integer arithmetic exceeds the type. Validate preconditions and use appropriate numeric types and checked arithmetic.</li><li><strong>Misleading portability claim:</strong> an example uses GCC-only nested functions or relies on one ABI's stack layout. Stay within standard C11 interfaces.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Hands-On Exercises</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Compile <code>lesson06.c</code> with the documented strict C11 command and confirm the sum and clamping output.</li><li>Change <code>sum_inclusive(1, 5)</code> to <code>sum_inclusive(1, 10)</code>. Before running, predict the return value. Expected sum: <strong>55</strong>.</li><li>Call <code>clamp_percent(-7)</code>, <code>clamp_percent(65)</code>, and <code>clamp_percent(120)</code>. Expected values: <strong>0, 65, 100</strong>.</li><li>Predict the output of the by-value program before compiling it. Explain why the caller still contains 10.</li><li>Move a function definition beneath <code>main</code> but keep its prototype above <code>main</code>. Observe why compilation succeeds.</li><li>Try compiling the multi-file example with only <code>multi_main.c</code>. Observe the missing definition at link time, then rebuild with <code>metrics.c</code>. Do not mistake a deliberate link failure for a compiler crash.</li></ol><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>For a repeatable assertion exercise, create an additional file named <code>test_functions.c</code> containing the function implementations and <code>assert</code> calls. An <code>assert</code> program exits successfully when its active assertions hold; however, the <code>NDEBUG</code> macro disables assertions, so assertions must not substitute for production input validation. Five checks passed on GCC 14.2.0 in the controlled test environment.</p><!-- /wp:paragraph -->
+
+<!-- wp:preformatted --><pre class="wp-block-preformatted" style="white-space:pre-wrap">#include &lt;assert.h&gt;
+
+static int sum_inclusive(int first, int last) {
+    int total = 0;
+    for (int n = first; n &lt;= last; ++n) total += n;
+    return total;
+}
+
+static int clamp_percent(int value) {
+    if (value &lt; 0) return 0;
+    if (value &gt; 100) return 100;
+    return value;
+}
+
+int main(void) {
+    assert(sum_inclusive(1, 5) == 15);
+    assert(sum_inclusive(5, 5) == 5);
+    assert(clamp_percent(-8) == 0);
+    assert(clamp_percent(73) == 73);
+    assert(clamp_percent(125) == 100);
+    return 0;
+}</pre><!-- /wp:preformatted -->
+
+<!-- wp:paragraph --><p>Build with <code>gcc -std=c11 -Wall -Wextra -Wpedantic -Werror test_functions.c -o test_functions</code> and run <code>./test_functions</code>. A successful run produces no standard output and exits with status 0. The five checks passed in the recorded test; students should add a failing assertion only in a disposable exercise to learn how diagnostics differ from actual program output.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check and Answers</h2><!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li><strong>What is a prototype?</strong> A function declaration specifying its callable type, including return and parameter types.</li><li><strong>How does a definition differ?</strong> It supplies the executable function body.</li><li><strong>What does <code>void</code> mean in <code>int reset(void)</code>?</strong> The function takes no arguments and returns an <code>int</code>.</li><li><strong>What does <code>static</code> mean for a helper function at file scope?</strong> It gives the function internal linkage within its translation unit.</li><li><strong>Why does the caller retain 10 after passing an integer to <code>add_five</code>?</strong> The callee changes its own parameter copy.</li><li><strong>Which values return from <code>clamp_percent(-7)</code> and <code>clamp_percent(120)</code>?</strong> 0 and 100.</li><li><strong>How does a header help?</strong> It shares consistent function declarations across source files.</li><li><strong>What causes an undefined-reference linker diagnostic?</strong> A required externally linked definition may be missing from the link or inaccessible under its linkage.</li><li><strong>Are all ordinary local integers initialized to zero?</strong> No. Uninitialized automatic locals have indeterminate values.</li><li><strong>Does a clean warning-enabled build prove security?</strong> No. Runtime assumptions, integer ranges, input validation and integration still require verification.</li></ol><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Authoritative References and Further Study</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Read the <a href="https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html">GNU C Reference Manual, Chapter 5: Functions</a>, the <a href="https://www.gnu.org/software/c-intro-and-ref/manual/html_node/Function-Definitions.html">GNU C Language Manual on function definitions</a>, the <a href="https://www.cppreference.com/c/language/function_declaration">cppreference function-declaration reference</a>, and the <a href="https://www.cppreference.com/c/language/function_definition">function-definition reference</a>. The <a href="https://gcc.gnu.org/onlinedocs/gcc/Standards.html">GCC standards guide</a> documents <code>-std=c11</code>, and the <a href="https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html">GCC warnings manual</a> explains build diagnostics. Source and license information for each photograph is linked in its caption. The compiler-output graphic derives from separately executed original C11 code, not external footage.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Functions turn repeated control-flow steps into reusable program interfaces. At the introductory level, the central engineering habits are to declare types explicitly, separate interface from implementation, initialize local variables, understand pass-by-value behavior, return coherent results and compile with meaningful diagnostics. The next progression can introduce C arrays and pointers without skipping the prerequisite distinction between a value and the storage that holds it.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSC.006 follows the verified OSC.005 loops lesson. The original 1200 × 630 cover depicts a fictional middle-aged male programming mentor in a conceptual lab; generated text and console graphics in the cover are decorative and must not be treated as actual captured source or execution evidence. The in-body PDP-11 and Arduino photos are real, individually credited and license-identified. An original output visualization is based on GCC 14.2.0 code execution; three C11 programs compiled with strict warnings and ran successfully, and five assertion checks passed. No cross-platform guarantee, device-firmware deployment, independent public-browser visual inspection or unverified video playback is claimed.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional donation QR for 5,000 satoshis" class="wp-image-24043" /><figcaption><em>Optional original BitcoinVersus.Tech 5,000-satoshi donation QR. Verify the destination and amount before authorizing any transfer.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>On a mobile wallet, display the QR on another screen or use a supported saved-image scanner. Confirm the payment recipient and 5,000-satoshi amount before sending.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->

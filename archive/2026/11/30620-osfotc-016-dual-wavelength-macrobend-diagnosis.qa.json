@@ -1,0 +1,68 @@
+{
+  "post_id": 30620,
+  "title": "OSFOTC.016: Fiber Macrobend and Microbend Diagnosis — 1310/1550 nm OTDR Comparisons",
+  "lesson_id": "OSFOTC.016",
+  "date": "2026-11-07",
+  "status": "published",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/osfotc-016-fiber-macrobend-microbend-dual-wavelength-otdr-diagnosis/",
+  "category_ids": [
+    2509703
+  ],
+  "featured_cover": {
+    "id": 30608,
+    "width": 1200,
+    "height": 630,
+    "type": "original conceptual AI editorial cover"
+  },
+  "media": [
+    {
+      "id": 30610,
+      "type": "authentic manufacturer instrument photo",
+      "credit": "EXFO"
+    },
+    {
+      "id": 30609,
+      "type": "original chart; Python synthetic data; not measured",
+      "deltas_db": [
+        0.02,
+        0.72,
+        0.04,
+        0.32
+      ]
+    },
+    {
+      "youtube_id": "urJ7namHVn4",
+      "title": "Using An OTDR",
+      "publisher": "Fiber Optic Association (thefoainc)",
+      "date": "2012-09-14"
+    },
+    {
+      "youtube_id": "3RRL9peZBQA",
+      "title": "EXFO Optical Explorer OX1 - How to Find Macrobends with Fault Explorer",
+      "publisher": "Specialized Products Company",
+      "date": "2024-09-06"
+    }
+  ],
+  "main_source_links": [
+    "https://www.thefoa.org/tech/ref/fiber/Microbending.html",
+    "https://www.thefoa.org/tech/ref/testing/OTDR/OTDR-FAQS.html",
+    "https://documents.exfo.com/Products/UserGuides/User_Guide_OTDR_English_%281068770%29.pdf",
+    "https://www.exfo.com/en/resources/glossary/optical-time-domain-reflectometer-otdr/"
+  ],
+  "word_count_approx": 2526,
+  "internal_links": 6,
+  "video_players_rendered": 2,
+  "video_playback": "not independently tested",
+  "desktop_screenshot": "WordPress ready at 1280px viewport; pixels not independently inspected",
+  "mobile_screenshot": "WordPress ready at 390px viewport; pixels not independently inspected",
+  "physical_testing": "none",
+  "math_verified": "Synthetic wavelength loss differences 0.02,0.72,0.04,0.32 dB; 0.72 dB differential corresponds to power ratio 10^(-0.072)≈0.847. Instrument 0.50 dB delta is configurable example, not universal acceptance limit.",
+  "footer": {
+    "donation_qr_media_id": 24043,
+    "editors_note_italic": true,
+    "approved_volunteer_text": true
+  },
+  "subscriber_email_disabled": true,
+  "source_characters": 24989,
+  "notes": "No invented field test, no conceptual schematics, photo credited to EXFO; illustration labeled. Screenshots ready not pixel inspected; player HTML rendered but playback unverified."
+}

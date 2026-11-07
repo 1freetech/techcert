@@ -1,0 +1,241 @@
+<!-- wp:paragraph -->
+<p><strong>OSREC.014</strong> introduces <strong>pose-graph simultaneous localization and mapping (SLAM)</strong>, a method for estimating a mobile robot's trajectory by jointly reconciling uncertain motion measurements and revisits to known places. Wheel encoders and inertial estimates drift as a robot moves; cameras or LiDAR can supply new geometric constraints when the robot recognizes a location again. A graph optimizer adjusts multiple earlier poses together, rather than merely correcting the latest position. This lesson continues <a href="https://bitcoinversus.tech/2026/10/31/osrec-013-robot-state-estimation-kalman-filters-sensor-fusion-uncertainty/">OSREC.013 on Kalman filtering and uncertainty</a> and extends individual state estimation into global trajectory consistency.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Describe a pose, motion constraint, prior factor, loop closure, and measurement covariance.</li><li>Explain why odometry drift accumulates and how a valid loop closure can constrain older estimates.</li><li>Distinguish graph construction, loop-closure detection, robust estimation, and optimization.</li><li>State the weighted least-squares objective and the significance of measurement uncertainty.</li><li>Reproduce a small numeric example using Python and verify its output.</li><li>Identify false loop closures, gauge freedom, poor initialization, and inconsistent sensor timestamps.</li><li>Explain the difference between a demonstration using synthetic measurements and a tested production SLAM deployment.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: coordinate frames and transforms, robot odometry, basic vectors and matrices, probability, and Python fundamentals. Review <a href="https://bitcoinversus.tech/2026/10/04/osrec-002-robot-jacobians-velocity-kinematics-singularities-differential-motion/">robot Jacobians</a>, <a href="https://bitcoinversus.tech/2026/10/05/osrec-003-inverse-kinematics-analytical-solutions-numerical-solvers-pseudoinverses-convergence/">inverse kinematics</a>, and the earlier state-estimation lesson as needed. The documentation-based lab requires Python 3 with NumPy; operating a real mobile robot is neither required nor authorized by the example.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview: Why Returning to the Same Place Matters</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine a wheeled robot that drives several meters around a room and eventually returns to its starting point. Its wheels report the distance they rotated, but small slips make the inferred path fail to close. The map may appear stretched or bent. If a LiDAR scan or a camera confidently recognizes the starting location, the robot has obtained a new observation connecting an earlier visit to its current position. The optimizer can distribute the correction over the trajectory according to the reliability of its measurements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A loop closure is a <em>constraint from place recognition and geometric verification</em>, not simply an instruction to reset the latest position to zero. Some apparent matches are false, especially in symmetric corridors, warehouse aisles, or repeated shelving. A bad match can deform the entire map, making validation and robust residual handling essential.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=saVZtgPyyJQ&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>MathWorks/MATLAB official educational video, “Understanding SLAM Using Pose Graph Optimization | Autonomous Navigation, Part 3,” published July 8, 2020 on YouTube. Explains accumulated uncertainty, pose constraints and optimization. Source: verified MATLAB channel; software instruction rather than footage of the lesson's synthetic experiment.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What Is in a Pose Graph?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>pose</strong> represents a robot's position and orientation at a selected instant. A planar pose can be written as <code>(x, y, θ)</code>; full spatial pose commonly involves a 3D position and 3D rotation. <strong>Nodes</strong> correspond to unknown poses. <strong>Factors</strong> describe observations that constrain one or more nodes: an initial pose prior, wheel-odometry transforms, scan-matching results, or a loop closure. An optimizer finds pose values that best reconcile the factors.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In GTSAM's <a href="https://borglab.github.io/gtsam/pose2slamexample/">official open-source Pose2 SLAM tutorial</a>, a <code>PriorFactorPose2</code> anchors the first pose, while <code>BetweenFactorPose2</code> connects successive poses and closes a loop to an earlier pose. The project distributes practical examples and documentation as part of the <a href="https://gtsam.org/tutorials/intro.html">GTSAM tutorial</a>. The principle is independent of whether measurements arrive from a wheel encoder, visual odometry, LiDAR matching, or another calibrated sensor pipeline.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The graph structure is <strong>not the occupancy map itself</strong>. Graph optimization estimates poses; an occupancy-grid system may then transform individual LiDAR scans using the corrected poses to update the map. The open-source <a href="https://index.ros.org/p/slam_toolbox/">ROS 2 SLAM Toolbox package</a> provides mapping, pose-graph serialization and localization capabilities. Its actual message interfaces and transforms must be interpreted using the selected ROS distribution's documentation, not by assuming that every SLAM package has identical behavior.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30556,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/nav2-ros-2-rviz-mapping-official-screenshot.png" alt="Actual ROS Nav2 RViz software display showing a mapping and localization example" class="wp-image-30556" /><figcaption class="wp-element-caption"><em>Official ROS Navigation2 educational screenshot of RViz mapping, from the project's open-source setup guide. It is a real software documentation image, not an original conceptual schematic. Credit: ROS Navigation2 project.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Optimization Objective and What the Weights Mean</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a collection of constraints, an optimizer compares each measured relative transform with the relative transform implied by its current pose estimates. The difference is called a <strong>residual</strong>. A standard maximum-likelihood formulation under independent Gaussian measurement assumptions minimizes a sum of squared, <em>whitened</em> residuals: <strong>J(x) = Σ r<sub>i</sub>(x)<sup>T</sup> Σ<sub>i</sub><sup>−1</sup> r<sub>i</sub>(x)</strong>, where Σ<sub>i</sub> is the residual covariance for factor i. A more confident measurement has a smaller covariance and normally a larger influence on the solution.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In two- or three-dimensional SLAM, transforms belong to SE(2) or SE(3), and the residual must account for rotation and translation consistently. This generally produces a <strong>nonlinear</strong> optimization problem solved with methods such as Gauss–Newton, Levenberg–Marquardt, or incremental smoothing. Rotational errors use appropriate units and manifold operations, not a naïve Euclidean subtraction of angles across a wrap boundary. <a href="https://gtsam.org/tutorials/intro.html">Frank Dellaert's GTSAM primer</a> discusses these modeling choices and gauge constraints.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A graph without an absolute reference can be shifted or rotated globally without changing its relative-motion measurements. This is called <strong>gauge freedom</strong>. An anchor factor or an appropriate fixed pose is used to define a coordinate frame. The anchor is a modeling choice; it does not magically establish an accurate geographic world coordinate.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked Example: Four Noisy Moves and One Loop Closure</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following teaching exercise deliberately reduces pose-graph optimization to <strong>one-dimensional linear least squares</strong>. It is easier to verify than a full SE(2) factor graph while preserving the central lesson: odometry alone accumulates drift, and a weighted closure constraint can distribute an adjustment across the path. It is not a physical robot log or a substitute for a 2D/3D GTSAM test.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Suppose the reference positions are [0, 2, 3, 1, 0] meters. Four hypothetical odometry readings are <strong>+2.0, +1.0, −1.9, −1.0 m</strong>. Accumulating the readings produces [0, 2.0, 3.0, 1.1, 0.1] m; the final estimate misses the intended return by 0.10 m. A separate loop observation says the final position coincides with the anchored start at 0 m, with a standard deviation of 0.05 m. Each odometry increment has an assumed standard deviation of 0.10 m. These are intentionally chosen synthetic values.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The unknown vector is [x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, x<sub>4</sub>] and the start x<sub>0</sub> is fixed to zero. Rows of matrix A represent changes between consecutive positions, while a final row constrains x<sub>4</sub> to zero. Minimizing ||W(Ax − b)||<sup>2</sup> with W<sub>ii</sub> = 1/σ<sub>i</sub> gives the weighted estimate. Unlike a hardware measurement, the result can be independently reproduced from the printed inputs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>import numpy as np
+
+# OSREC.014: synthetic 1D pose-graph teaching model (meters).
+# x0 is fixed to 0; unknowns are x1, x2, x3, x4.
+steps = np.array([2.0, 1.0, -1.9, -1.0])
+reference = np.array([0.0, 2.0, 3.0, 1.0, 0.0])
+odometry_path = np.r_[0.0, np.cumsum(steps)]
+
+# Four incremental measurements and a separate loop-closure x4 = 0.
+A = np.array([
+    [ 1.,  0.,  0.,  0.],
+    [-1.,  1.,  0.,  0.],
+    [ 0., -1.,  1.,  0.],
+    [ 0.,  0., -1.,  1.],
+    [ 0.,  0.,  0.,  1.],
+])
+b = np.r_[steps, 0.0]
+
+# Measurement standard deviations: 0.10m for odometry,
+# 0.05m for the loop constraint. W = diag(1 / sigma).
+sigma = np.array([0.10, 0.10, 0.10, 0.10, 0.05])
+W = 1.0 / sigma
+solution = np.linalg.lstsq(W[:, None] * A, W * b, rcond=None)[0]
+optimized_path = np.r_[0.0, solution]
+
+def rmse(estimated):
+    return float(np.sqrt(np.mean((estimated-reference)**2)))
+
+print(&quot;Odometry:&quot;, np.round(odometry_path, 6).tolist())
+print(&quot;Optimized:&quot;, np.round(optimized_path, 6).tolist())
+print(f&quot;RMSE before: {rmse(odometry_path):.6f} m&quot;)
+print(f&quot;RMSE after: {rmse(optimized_path):.6f} m&quot;)
+print(f&quot;Closure residual: {optimized_path[-1]:.6f} m&quot;)</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Save as <code>osrec_014_pose_graph.py</code>. Install NumPy into an isolated Python environment if necessary and run <code>python osrec_014_pose_graph.py</code>. The example uses <code>numpy.linalg.lstsq</code>; no external robot, ROS installation or GTSAM build is required. With NumPy installed, the expected rounded results are:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>Odometry: [0.0, 2.0, 3.0, 1.1, 0.1]
+Optimized: [0.0, 1.976471, 2.952941, 1.029412, 0.005882]
+RMSE before: 0.063246 m
+RMSE after: 0.027084 m
+Closure residual: 0.005882 m</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The loop closure does not force the last estimate to be <em>exactly</em> zero because the optimization balances all measurements by confidence. Its 5.9 mm remaining residual is smaller than the uncorrected 100 mm closing error. The sample RMSE against the synthetic reference falls from about <strong>0.0632 m</strong> to <strong>0.0271 m</strong>. These values are educational calculations, not a general claim that a particular robot's SLAM accuracy improves by the same percentage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30555,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osrec-014-loop-closure-1d-weighted-least-squares-chart-1.png" alt="Synthetic one-dimensional path positions before and after loop closure compared with a chosen reference path" class="wp-image-30555" /><figcaption class="wp-element-caption"><em>Original calculated data chart. Reference, odometry, and corrected paths use synthetic teaching values with assumed odometry σ=0.10 m and loop closure σ=0.05 m; not experimental robotics measurements. Generated and numerically checked with NumPy.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>An instructive variation is to increase the loop closure's assumed standard deviation from 0.05 m to 0.50 m, reducing its influence relative to odometry. The optimizer would then preserve more of the original drift. Conversely, making a false loop closure overly confident may distort many poses. Engineers should never treat a loop match's score as automatically calibrated covariance without validation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">From a Linear Teaching Model to Real Graph-Based SLAM</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Real mobile-robot SLAM includes orientation, sensor calibration and timestamping. A front end extracts relative-motion and possible loop constraints from encoders, inertial measurements, camera features or range scans. A back end optimizes accepted constraints. For example, two nearby-looking LiDAR scans may come from different locations with similar walls. A front end should verify a plausible geometric transform, useful overlap and consistency with other sensors before sending an edge to the back end.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>When optimizing a nonlinear graph, a good initial trajectory estimate helps solvers converge to a meaningful local solution. Robust loss functions can reduce the influence of some outlier factors, but they do not guarantee recovery from a severely wrong loop closure. Some systems use switchable constraints, consistency checks, or separate place-recognition thresholds. Every choice trades runtime, accuracy, memory and failure behavior.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>GTSAM offers batch nonlinear optimization and incremental approaches. ROS SLAM Toolbox provides mapping and serialization around pose-graph operations; its <a href="https://index.ros.org/r/slam_toolbox/">maintainer documentation</a> describes continuing to refine a saved pose graph. A production deployment must be evaluated on representative environments and sensors, with quantitative trajectory and map metrics measured against independently obtained references.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=uHbRKvD8TWg&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Cyrill Stachniss, “Graph-based SLAM using Pose Graphs,” university Mobile Robotics teaching lecture, published April 3, 2020. The University of Bonn's open training page lists the lecture. The presentation explains the graph model and optimization; it is distinct from the synthetic one-dimensional worked calculation.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab: Reproducing and Stress-Testing the Result</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Run the Python example exactly as shown and copy the five optimized positions. Check the return code and numerical output.</li><li>Repeat the run with all four odometry values unchanged but replace the loop-observation noise standard deviation 0.05 m with 0.50 m. Report how the final position changes and explain why.</li><li>Deliberately change the loop measurement from zero to +1.5 m and keep its high confidence. Observe whether the optimized path becomes less consistent with the known synthetic reference. Label that result a <em>false-loop-closure failure example</em>, not an actual SLAM attack.</li><li>Explain why the expected path RMSE here can be calculated only because the synthetic reference trajectory is known. A deployed robot usually lacks perfectly known ground truth.</li><li>Read the <a href="https://borglab.github.io/gtsam/pose2slamexample/">GTSAM Pose2 example</a>, identifying the prior, consecutive relative-pose measurements, loop closure and optimization call. Document which items are new relative to the one-dimensional model.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Diagnostic Checklist and Failure Modes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Odometry drift:</strong> compare predicted motion with independently observed positions, inspect wheel slip, encoder scaling and inertial bias; do not disguise a sensor fault by aggressive graph weighting.</li><li><strong>False place recognition:</strong> examine whether two visually similar locations were mistakenly equated, especially in repeating rows of shelves or corridors.</li><li><strong>Frame inconsistency:</strong> check the configured relationships among <code>map</code>, <code>odom</code>, <code>base_link</code> and the sensor frame using documented ROS tooling. Avoid mixing coordinates from different timestamps.</li><li><strong>Poor initialization:</strong> nonlinear optimization may settle at a poor local minimum when the starting pose guesses are severely inconsistent.</li><li><strong>Unanchored graph:</strong> gauge freedom can produce a rank-deficient system and nonunique global pose; use an appropriate prior or fixed reference.</li><li><strong>Unrealistic covariance:</strong> a small variance is not synonymous with trustworthy data, and tuning should reflect empirically validated sensor error.</li><li><strong>Latency and compute load:</strong> frequent graph updates may consume CPU and memory; record map size, pose count, processor, latency and actual error metrics before drawing performance conclusions.</li><li><strong>Map integrity:</strong> a numerically lower optimization objective is not proof of a correct map if the input constraints are wrong.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Safety, Deployment and Engineering Judgment</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Robot autonomy must never be enabled on a real platform solely because a synthetic optimization script behaves correctly. Commissioning requires separately verified localization, emergency-stop and safeguarding behavior, localization-loss responses, speed limits, obstacle detection and facility operating procedures. Simulated mapping tutorials do not override the robot manufacturer's safety manual. For a practical deployment, begin with logged sensor data or an approved simulation, then validate changes using a controlled testing plan.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Read <a href="https://bitcoinversus.tech/2026/10/31/osrtc-016-robot-conveyor-tracking-encoders-sensors-tracking-frames/">OSRTC.016 on encoder and tracking-frame diagnostics</a> for upstream motion errors, and <a href="https://bitcoinversus.tech/2026/10/08/osrec-006-robot-feedback-control-p-pi-pid-feedforward-trajectory-tracking-gain-tuning/">OSREC.006 on feedback control</a> for downstream motion control. An excellent map does not automatically create a safe navigation controller.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check and Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>What is a loop closure?</strong> A verified measurement relating a later robot pose to a previously visited pose or location.</li><li><strong>Why can a loop closure affect older poses?</strong> The optimizer jointly adjusts graph variables to reconcile multiple constraints rather than correcting one reading in isolation.</li><li><strong>What does a factor express?</strong> A probabilistic or weighted relationship involving one or more unknown quantities, such as a prior or relative motion.</li><li><strong>What is the final odometry estimate in the example?</strong> +0.10 m relative to the anchored origin.</li><li><strong>What is the optimized final estimate?</strong> About +0.005882 m under the stated weight assumptions.</li><li><strong>What changed in the error metric?</strong> Synthetic reference RMSE decreased from approximately 0.063246 m to 0.027084 m.</li><li><strong>Why is a false loop closure dangerous?</strong> It can pull multiple poses toward an incorrect alignment and corrupt the reconstructed trajectory and map.</li><li><strong>Why is a fixed first pose useful?</strong> It removes an otherwise arbitrary global translation/rotation freedom in relative-only pose estimation.</li><li><strong>Is this Python example a real robot benchmark?</strong> No. It is a reproducible linear least-squares exercise with invented measurement data.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary Educational References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Open-source and educational references: <a href="https://borglab.github.io/gtsam/pose2slamexample/">GTSAM — Pose2 SLAM Example</a>; <a href="https://gtsam.org/tutorials/intro.html">GTSAM — Factor Graphs and a Hands-on Introduction</a>; <a href="https://index.ros.org/p/slam_toolbox/">ROS 2 SLAM Toolbox package</a>; <a href="https://github.com/ros-navigation/docs.nav2.org/blob/rolling/docs/configuration_and_development/first_time_robot_setup_guide/sensors/mapping_localization.md">Navigation2 — Mapping and Localization setup</a>; <a href="https://www.ipb.uni-bonn.de/online-training-robotics/index.html">StachnissLab / University of Bonn — Online Mobile Robotics Lectures</a>; and <a href="https://www.mathworks.com/videos/series/autonomous-navigation.html">MathWorks — Autonomous Navigation educational video series</a>. The original graph-optimization model and numeric output were verified with a Python/NumPy calculation on November 7, 2026. Video titles, publishers and URLs were checked, but playback requires a separate player test.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Pose-graph optimization turns a sequence of uncertain local measurements into a globally more consistent trajectory when valid constraints tie past and present observations together. A defensible SLAM system distinguishes measured evidence, assumed noise, data association, the numerical solution and final physical validation. The lesson's small worked example makes the mathematics transparent without pretending to establish performance on real-world hardware.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSREC.014 follows published OSREC.013. The Python calculation and line chart use intentionally synthetic data and have been numerically checked, not measured on a robot. The featured 1200 × 630 image is original conceptual editorial artwork, not a documentary photograph. The in-story ROS image is a genuine official software documentation screenshot. No custom conceptual schematics or diagrams were produced. Educational video publishers and IDs were verified; live player rendering and playback are assessed separately.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech donation QR code. Verify the wallet destination and requested amount before paying.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>Mobile scanning: view the article on another screen and scan the QR code using a compatible Bitcoin wallet, or import the saved QR image if your wallet supports that workflow. Confirm the recipient and the 5,000-sat amount before authorizing a transaction.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech publishes independent technical education and journalism. No robotics safety certification or real-hardware performance test is implied.</em></p>
+<!-- /wp:paragraph -->

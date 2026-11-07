@@ -1,0 +1,68 @@
+{
+  "audit_date": "2026-11-07",
+  "wordpress_post_id": 30505,
+  "lesson_id": "OSSTC.016",
+  "title": "OSSTC.016: Vacuum Leak Detection — Rate-of-Rise, Helium Tracing, and Virtual Leaks",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/osstc-016-vacuum-leak-detection-rate-of-rise-helium-virtual-leaks/",
+  "status": "publish",
+  "subject": "semiconductor_technician",
+  "last_verified_predecessor": "OSSTC.015, WordPress #27535",
+  "wp_content_chars": 23341,
+  "featured_media": {
+    "id": 30499,
+    "width": 1200,
+    "height": 630,
+    "description": "Original AI-generated conceptual cleanroom image"
+  },
+  "in_story_media": [
+    {
+      "id": 30502,
+      "type": "conceptual chart",
+      "caption": "Pressure-rise illustrative traces, not measured data"
+    },
+    {
+      "id": 30503,
+      "type": "methods schematic",
+      "caption": "Vacuum tracer-spray versus pressurized-part sniffing; conceptual only"
+    },
+    {
+      "video_id": "BJfVgxFLdwY",
+      "type": "youtube",
+      "publisher": "Agilent Technologies",
+      "title": "Best Practices for Leak Testing Large Vacuum Chambers",
+      "published_date": "2022-04-06"
+    },
+    {
+      "video_id": "6uPzePpsxM8",
+      "type": "youtube",
+      "publisher": "Pfeiffer Vacuum+Fab Solutions",
+      "title": "Leak detection methods - part 1: Integral test of parts under vacuum in helium",
+      "published_date": "2018-05-25"
+    }
+  ],
+  "internal_link_count": 5,
+  "original_5000_sat_qr_id": 24043,
+  "editor_note_present": true,
+  "source_links": [
+    "https://www.leybold.com/content/leybold/en/knowledge/vacuum-fundamentals/leak-detection/pressure-rise-and-drop-tests.html",
+    "https://www.leybold.com/content/leybold/en/knowledge/vacuum-fundamentals/leak-detection/definition-and-measurement-of-vacuum-leaks.html",
+    "https://www.pfeiffervacuum.com/us/en/products/leak-detectors/leak-detection-technology/",
+    "https://www.agilent.com/en/solutions/vacuum-solutions/ultra-high-vacuum/2minutetutorialvideos"
+  ],
+  "math_checks": {
+    "hypothetical_vessel_volume_liters": 30,
+    "initial_mbar": 0.0002,
+    "final_mbar": 0.0008,
+    "seconds": 600,
+    "throughput_mbar_L_per_s": 0.00003,
+    "throughput_Pa_m3_per_s": 0.000003,
+    "verified": true,
+    "interpretation": "Apparent combined gas load, not evidence of a real leak alone"
+  },
+  "live_video_iframes": 2,
+  "video_playback": "not independently tested",
+  "screenshot_status": "WordPress 1280px and 390px capture links ready; pixels not independently reviewed",
+  "physical_chamber_test": "not performed",
+  "publication_email_to_subscribers": false,
+  "verification_note": "Exact WordPress Gutenberg source saved. Explicit distinction between experimental measurements, conceptual graphics, and manufacturer references."
+}

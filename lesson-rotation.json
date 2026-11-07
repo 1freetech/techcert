@@ -64,20 +64,26 @@
     ],
     "publication_status": "published",
     "verification_status": "published_gutenberg_exact_three_repos_two_iframes_present_playback_unverified",
-    "qa_status": "WordPress #30557 published, readback 25,523 chars; 1200×630 conceptual featured cover #30554, official ROS RViz software screenshot #30556, original synthetic line data chart #30555, MathWorks and University of Bonn videos rendered as 2 YouTube iframes. Five contextual internal links; Editor Note and original QR #24043 present. Python/NumPy weighted least squares values verified (RMSE 0.063246→0.027084 m). No physical robot tests; player playback and screenshot pixels unverified, although 1280px/390px captures returned ready. Archived exact WordPress source and QA in all 3 GitHub repos and confirmed identical. Separate WordPress draft #30558 has same title/lesson ID and was left unpublished for editorial review, not deleted. Next OS DCTC.017 verified unused; previous OSDCTC.016 published #27601; preserve 43 subjects and 20 coding tracks.",
+    "qa_status": "WordPress #30557 published, readback 25,523 chars; 1200×630 conceptual featured cover #30554, official ROS RViz software screenshot #30556, original synthetic line data chart #30555, MathWorks and University of Bonn videos rendered as 2 YouTube iframes. Five contextual internal links; Editor Note and original QR #24043 present. Python/NumPy weighted least squares values verified (RMSE 0.063246→0.027084 m). No physical robot tests; player playback and screenshot pixels unverified, although 1280px/390px captures returned ready. Archived exact WordPress source and QA in all 3 GitHub repos and confirmed identical. Assistant-created duplicate draft #30558 was moved to recoverable WordPress Trash; published post #30557 remains canonical. Next OS DCTC.017 verified unused; previous OSDCTC.016 published #27601; preserve 43 subjects and 20 coding tracks.",
     "featured_media_id": 30554,
     "body_video_ids": [
       "saVZtgPyyJQ",
       "uHbRKvD8TWg"
     ],
-    "code_executed": true
+    "code_executed": true,
+    "duplicate_draft_resolution": {
+      "id": 30558,
+      "status": "trash",
+      "date": "2026-11-07",
+      "reason": "Created in overlapping workflow; not published; canonical post #30557 remains live"
+    }
   },
   "next": {
     "subject": "data_center_technician",
     "lesson_number": 17,
     "title_format": "OSDCTC.017: {topic}",
     "public_title_format": "OSDCTC.017: {topic}",
-    "resolution_note": "OSREC.014 published Nov 7, 2026 WordPress #30557, Gutenberg source+QA archived in three repositories; do not publish unpublished duplicate draft #30558. WordPress verifies OSDCTC.016 already published #27601, OSDCTC.017 unused. Keep all 43 subjects, 20 coding tracks, education-first sourced media and no custom schematic rule."
+    "resolution_note": "OSREC.014 published Nov 7, 2026 WordPress #30557, Gutenberg source+QA archived in three repositories; assistant-created duplicate draft #30558 trashed; no duplicate publication. WordPress verifies OSDCTC.016 already published #27601, OSDCTC.017 unused. Keep all 43 subjects, 20 coding tracks, education-first sourced media and no custom schematic rule."
   },
   "next_after_current": "data_center_engineer",
   "track_state": {

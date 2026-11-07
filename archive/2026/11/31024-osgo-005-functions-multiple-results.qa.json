@@ -1,0 +1,104 @@
+{
+  "audit_date": "2026-11-07",
+  "post_id": 31024,
+  "lesson_id": "OSGo.005",
+  "title": "OSGo.005: Go Functions — Parameters, Multiple Results, and Error Returns",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/osgo-005-functions-parameters-multiple-results-error-returns/",
+  "previous_verified_lesson": "OSGo.004 WordPress #28259",
+  "preceding_rotation": "OSRust.007 WordPress #31011",
+  "cover": {
+    "id": 31021,
+    "dimensions": [
+      1200,
+      630
+    ],
+    "description": "Fictional mid-career male programming instructor; rotated from OSRust.007 older female mentor",
+    "artwork": "original AI editorial illustration"
+  },
+  "in_body_media": [
+    {
+      "id": 31023,
+      "type": "official Go Gopher mascot",
+      "attribution": "Renée French, CC BY 4.0"
+    },
+    {
+      "id": 31022,
+      "type": "calculated test-data chart",
+      "values": [
+        5,
+        4,
+        2,
+        1,
+        0
+      ],
+      "thresholds": [
+        0,
+        5,
+        10,
+        15,
+        20
+      ],
+      "underlying_data": [
+        2,
+        6,
+        8,
+        12,
+        18
+      ]
+    },
+    {
+      "video_id": "ypV7r1ODZCA",
+      "type": "YouTube",
+      "publisher": "Net Ninja",
+      "title": "Go (Golang) Tutorial #10 - Multiple Return Values",
+      "published": "2021-05-28"
+    },
+    {
+      "video_id": "YS4e4q9oBaU",
+      "type": "YouTube",
+      "publisher": "freeCodeCamp.org",
+      "title": "Learn Go Programming - Golang Tutorial for Beginners",
+      "published": "2019-06-20",
+      "functions_chapter": "approximately 4:21:30"
+    }
+  ],
+  "in_body_media_count": 4,
+  "contextual_internal_links": 4,
+  "code_blocks": 5,
+  "code": {
+    "host_toolchain": "go1.23.2 linux/amd64",
+    "local_go_run_output": [
+      "average: 20.00",
+      "minimum: 2, maximum: 15",
+      "above five: 2",
+      "empty input: at least one value is required"
+    ],
+    "unit_test_suites": [
+      "TestAverage",
+      "TestMinMax",
+      "TestCountAbove"
+    ],
+    "go_test": "passed",
+    "go_vet": "passed",
+    "physical_or_production_test": "not performed",
+    "source_file": "archive/2026/11/31024-osgo-005-functions-multiple-results.main.go",
+    "unit_tests_file": "archive/2026/11/31024-osgo-005-functions-multiple-results.main_test.go"
+  },
+  "featured_media_verified": true,
+  "rendered_iframe_count": 2,
+  "independent_playback": "unverified",
+  "live_html_readback": "verified WordPress rendered HTML",
+  "screenshots": {
+    "desktop": "WordPress screenshot request timed out; no pixel inspection",
+    "mobile": "WordPress screenshot request timed out; no pixel inspection"
+  },
+  "approved_footer": {
+    "editor_note": true,
+    "original_donation_qr_media_id": 24043,
+    "volunteer_disclaimer": true
+  },
+  "newsletter_suppressed": true,
+  "schematics": "none",
+  "archive_note": "Exact Gutenberg post source and extracted Go code and test file archived to three GitHub repositories"
+}

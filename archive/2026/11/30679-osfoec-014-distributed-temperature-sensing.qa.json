@@ -1,0 +1,75 @@
+{
+  "audit_date": "2026-11-07",
+  "lesson_id": "OSFOEC.014",
+  "subject": "fiber_optics_engineer",
+  "post_id": 30679,
+  "status": "published",
+  "title": "OSFOEC.014: Distributed Fiber-Optic Temperature Sensing — Raman Backscatter, Calibration, and Hotspot Localization",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/osfoec-014-distributed-fiber-optic-temperature-sensing-raman-calibration/",
+  "curriculum_rotation_subjects": 43,
+  "programming_tracks": 20,
+  "previous_lesson": "OSFOEC.013, post 27122",
+  "featured_cover": {
+    "id": 30659,
+    "width": 1200,
+    "height": 630,
+    "kind": "original AI equipment-only illustration",
+    "notes": "Not a genuine AP Sensing product photo. Cover rota changed from older technician to no people."
+  },
+  "in_body_media": [
+    {
+      "id": 30661,
+      "type": "authentic manufacturer instrument photo",
+      "publisher": "AP Sensing",
+      "source": "https://www.apsensing.com/en/product/dts-n45-series"
+    },
+    {
+      "id": 30660,
+      "type": "synthetic Python-calculated temperature profile chart",
+      "model": "Baseline near 24 Celsius with synthetic 14 Celsius Gaussian rise centered at 6.0 km; no field measurements"
+    },
+    {
+      "type": "video",
+      "youtube_id": "aFMpbD8wupw",
+      "title": "Distributed Temperature Sensing using Fiber Optics - The Basics!",
+      "author": "Scott Tyler (University of Nevada, Reno)",
+      "verified_via": "https://ctemps.org/instructional-videos"
+    },
+    {
+      "type": "video",
+      "youtube_id": "-tBazWiXDaY",
+      "title": "DTS Calibration: Challenges and Tools",
+      "author": "Scott Tyler (University of Nevada, Reno)",
+      "verified_via": "https://ctemps.org/instructional-videos"
+    }
+  ],
+  "sources": [
+    "https://www.epa.gov/environmental-geophysics/fiber-optic-distributed-temperature-sensing",
+    "https://ctemps.org/instructional-videos",
+    "https://www.apsensing.com/en/technology-and-products/distributed-temperature-sensing",
+    "https://www.apsensing.com/en/product/dts-n45-series",
+    "https://restservice.epri.com/publicdownload/000000000001024189/0/Product",
+    "https://doi.org/10.3390/S120505471"
+  ],
+  "internal_links": 4,
+  "approved_5000_sat_qr_image_id": 24043,
+  "editors_note_present": true,
+  "wordpress_gutenberg_saved_chars": 20956,
+  "youtube_rendered_iframes": 2,
+  "playback": "not independently tested",
+  "desktop_capture": "WordPress mshots reported ready at 1280px; screenshot pixels not independently reviewed",
+  "mobile_capture": "WordPress mshots reported ready at 390px; screenshot pixels not independently reviewed",
+  "physical_experiment": "not performed",
+  "calculation_checks": {
+    "n_group": 1.468,
+    "c_m_s": 299792458,
+    "return_us_at_0_5_km": 4.897,
+    "return_us_at_2_5_km": 24.484,
+    "return_us_at_6_km": 58.761,
+    "return_us_at_10_km": 97.934,
+    "chart_hotspot_C": 38,
+    "verified_with_python": true
+  },
+  "email_suppressed": true,
+  "notes": "Saved WordPress Gutenberg text is the archive source. Original 1200x630 image depicts simulated equipment only. No custom schematic or diagram. Educational science and calibration content traced to public university/government/manufacturer/research documentation. Two WordPress rendered iframe players confirmed; playback and screenshot pixel review explicitly unverified."
+}

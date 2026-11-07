@@ -1,0 +1,90 @@
+{
+  "audit_date": "2026-11-07",
+  "site": "bitcoinversus.tech",
+  "post_id": 30531,
+  "lesson_id": "OSHRE.006",
+  "status": "publish",
+  "title": "OSHRE.006: Hashboard Solder-Joint Inspection — Microscopy, Wetting Defects, and Rework Decisions",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/oshre-006-hashboard-solder-joint-inspection-microscopy-rework/",
+  "subject": "hashboard_repair",
+  "predecessor": "OSHRE.005, published WP #27871",
+  "featured_media": {
+    "id": 30524,
+    "exact_dimensions": [
+      1200,
+      630
+    ],
+    "type": "original conceptual AI-generated editorial cover",
+    "subject": "microscope inspection of PCB"
+  },
+  "in_body_media": [
+    {
+      "id": 30525,
+      "type": "authentic manufacturer photograph",
+      "credit": "Bitmain Support, S19k Pro aluminum hashboard",
+      "url": "https://support.bitmain.com/hc/en-us/articles/32404089992729-How-to-distinguish-S19k-Pro-hashboard-types-and-the-repair-related-precautions"
+    },
+    {
+      "id": 30526,
+      "type": "authentic manufacturer photograph",
+      "credit": "Bitmain Support, S19k Pro non-aluminum hashboard",
+      "url": "https://support.bitmain.com/hc/en-us/articles/32404089992729-How-to-distinguish-S19k-Pro-hashboard-types-and-the-repair-related-precautions"
+    },
+    {
+      "id": 30527,
+      "type": "original engineering calculation chart",
+      "formula": "P=I²R at I=20 A; mΩ [1,2,5,10] W [0.4,0.8,2.0,4.0]",
+      "note": "Hypothetical calculation, not actual hashboard measurements or temperature data"
+    },
+    {
+      "type": "youtube educational video",
+      "id": "rK38rpUy568",
+      "title": "iFixit's Soldering 101: Beginners Guide",
+      "publisher": "iFixit",
+      "published": "2024-03-28"
+    },
+    {
+      "type": "youtube educational video",
+      "id": "QKbJxytERvg",
+      "title": "Collin's Lab: Soldering",
+      "publisher": "Adafruit Industries",
+      "published": "2014-04-10"
+    }
+  ],
+  "conceptual_schematics_or_diagrams_count": 0,
+  "in_body_media_count": 5,
+  "QR_media_id": 24043,
+  "italic_editor_note": true,
+  "internal_context_links": 5,
+  "wordPress_saved_gutenberg_chars": 25142,
+  "public_rendered_youtube_iframe_count": 2,
+  "independent_playback": "not verified",
+  "desktop_screenshot": "1280px capture ready, pixel inspection unverified",
+  "mobile_screenshot": "390px capture ready, pixel inspection unverified",
+  "math_check": {
+    "current_amps": 20,
+    "resistances_milliohms": [
+      1,
+      2,
+      5,
+      10
+    ],
+    "powers_watts": [
+      0.4,
+      0.8,
+      2,
+      4
+    ],
+    "formula": "P=I^2 R",
+    "validated": true
+  },
+  "hardware_test": "No hashboard powered, disassembled or soldered; documentation-only",
+  "references": [
+    "https://sma.nasa.gov/sma-disciplines/workmanship",
+    "https://www.ifixit.com/soldering",
+    "https://learn.adafruit.com/adafruit-guide-excellent-soldering",
+    "https://support.bitmain.com/hc/en-us/articles/32404089992729-How-to-distinguish-S19k-Pro-hashboard-types-and-the-repair-related-precautions"
+  ],
+  "newsletter_email_disabled": true,
+  "status_note": "Published/read-back confirmed. 2 actual WordPress-rendered YouTube iframes confirmed; playback not independently verified. No invented diagram or schematic. In-story media image count excludes required donation QR."
+}

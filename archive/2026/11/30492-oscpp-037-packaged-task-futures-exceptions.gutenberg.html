@@ -1,0 +1,257 @@
+<!-- wp:paragraph -->
+<p><strong>OSC++.037</strong> explains <code>std::packaged_task</code>, a movable C++ standard-library wrapper that pairs an executable callable with a <code>std::future</code> for retrieving the result or an exception. When a program needs to transfer ownership of a job into a worker thread, the wrapper supplies a simple connection between the work and the eventual outcome. A packaged task does not start its own thread and does not schedule work automatically; the application decides when and where to invoke it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The lesson follows <a href="https://bitcoinversus.tech/2026/10/30/oscpp-036-std-move-only-function-cpp23-callbacks-resource-ownership/">OSC++.036 on <code>std::move_only_function</code></a>. That chapter showed how to own callbacks that cannot be copied. Here the move-only callable also produces a typed future result. Earlier lessons on <a href="https://bitcoinversus.tech/2026/10/06/oscpp-022-move-semantics-rvalue-references-std-move-move-constructors-move-assignment/">move semantics</a>, <a href="https://bitcoinversus.tech/2026/10/05/oscpp-021-smart-pointers-unique-ptr-shared-ptr-weak-ptr-ownership/">smart pointers and ownership</a>, and <a href="https://bitcoinversus.tech/2026/10/15/oscpp-032-std-function-callable-objects-functions-lambdas-functors-type-erasure-invocation/">callable objects</a> provide the prerequisites.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Define <code>std::packaged_task&lt;R(Args...)&gt;</code> and identify its <code>&lt;future&gt;</code> header and C++11 introduction.</li><li>Explain the callable, the shared result state, the associated <code>std::future&lt;R&gt;</code>, and explicit invocation.</li><li>Move a task into a <code>std::thread</code> without copying a <code>std::unique_ptr</code> captured by its callback.</li><li>Distinguish normal result delivery, stored exceptions, abandonment as <code>broken_promise</code>, and the <code>reset()</code> operation.</li><li>Compile and execute a complete program, compare observed output with predicted output, and diagnose blocking or invalid-state errors.</li><li>Describe why a future is not a cancellation mechanism and why a task queue still needs synchronization and shutdown policies.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites include functions and lambdas, C++ references, <code>std::move</code>, <code>std::unique_ptr</code>, and an introductory understanding of threads. Hardware requirements are minimal: a local desktop, laptop, or virtual machine with a C++20-capable compiler and a thread-enabled standard library. The APIs shown were introduced in C++11; the verified lab uses C++20 for a consistent compiler configuration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">From Callable to Shared State</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>std::packaged_task</code> is a class-template specialization with a function signature, for example <code>std::packaged_task&lt;int(int)&gt;</code>. It owns a callable compatible with that signature. The packaged task's <code>get_future()</code> method returns a <code>std::future&lt;int&gt;</code> tied to the same shared state. Invoking the task runs the callable and stores its return value or thrown exception. A waiting future becomes ready when its shared state is ready and may then retrieve that outcome through <code>get()</code>. <a href="https://eel.is/c++draft/futures.task.general">The C++ working draft</a> describes the state and callable ownership model.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30489,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oscpp-037-task-future-workflow.png" alt="Flow showing packaged task creation, future acquisition and explicit worker-thread invocation" class="wp-image-30489" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert diagram. Creating the future does not run the task; it observes a shared result state that becomes ready only after execution or abandonment.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>A <code>std::future</code> owns access to the result channel, but it does not own the same responsibilities as the execution wrapper. The task is <em>move-only</em>: it cannot be copied. The future is also move-only, and a conventional <code>future.get()</code> retrieves its result at most once. These constraints help define where work and its result are owned. A valid future is not proof that its task has been scheduled.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Difference Between packaged_task, function and async</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong><code>std::function</code>:</strong> copyable type-erased callable wrapper, suitable for copyable targets, without a built-in future result channel.</li><li><strong><code>std::move_only_function</code>:</strong> C++23 move-only callable wrapper whose signature and qualifiers govern invocation, but which does not automatically create a future.</li><li><strong><code>std::packaged_task</code>:</strong> move-only executable wrapper that owns a callable and provides a future for its returned value or exception; a scheduler is still needed.</li><li><strong><code>std::async</code>:</strong> launches or defers callable execution according to a launch policy and returns a future; the caller does not directly handle a packaged task.</li><li><strong><code>std::promise</code>:</strong> allows code to set a value or exception for a shared result state explicitly, without packaging a callable itself.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>A <a href="https://learn.microsoft.com/en-us/cpp/standard-library/packaged-task-class?view=msvc-170">Microsoft standard-library reference</a> describes <code>packaged_task</code> as an asynchronous provider and documents its members. Asynchronous retrieval means the result can be observed later; it does not imply the packaged task must run on a separate thread. It can be invoked immediately in the same thread, dispatched through a queue, or moved into a worker.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=3Oe98NzaZdU&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Jeevan Pant, “Modern C++: Multi-threading, packaged task, future” (March 17, 2024). The video demonstrates single-threaded and multithreaded <code>std::packaged_task</code> computation and moving tasks into <code>std::thread</code>. Source: creator's publicly listed YouTube tutorial.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Complete Compiled Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following program demonstrates four independently verifiable behaviors. A lambda takes exclusive ownership of a heap-allocated integer; a worker computes its value; another task deliberately throws an exception; a never-run task produces a broken promise; and a final task is reset and executed again. The code avoids shared mutable data, detached threads, unbounded waits and file access.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>#include &lt;chrono&gt;
+#include &lt;future&gt;
+#include &lt;iostream&gt;
+#include &lt;memory&gt;
+#include &lt;stdexcept&gt;
+#include &lt;thread&gt;
+#include &lt;utility&gt;
+
+int main() {
+    auto owned = std::make_unique&lt;int&gt;(40);
+    std::packaged_task&lt;int(int)&gt; task(
+        [resource = std::move(owned)](int increment) {
+            return *resource + increment;
+        });
+    std::future&lt;int&gt; result = task.get_future();
+
+    const bool pending =
+        result.wait_for(std::chrono::seconds(0)) == std::future_status::timeout;
+    std::thread worker(std::move(task), 2);
+    worker.join();
+    std::cout &lt;&lt; &quot;pending before invocation: &quot; &lt;&lt; std::boolalpha &lt;&lt; pending &lt;&lt; '\n';
+    std::cout &lt;&lt; &quot;worker result: &quot; &lt;&lt; result.get() &lt;&lt; '\n';
+
+    std::packaged_task&lt;int()&gt; failing([]() -&gt; int {
+        throw std::runtime_error(&quot;planned failure&quot;);
+    });
+    auto failure_future = failing.get_future();
+    failing(); // Exception is captured in the future, not thrown to this caller.
+    try {
+        (void)failure_future.get();
+    } catch (const std::runtime_error&amp; e) {
+        std::cout &lt;&lt; &quot;captured exception: &quot; &lt;&lt; e.what() &lt;&lt; '\n';
+    }
+
+    std::future&lt;int&gt; abandoned;
+    {
+        std::packaged_task&lt;int()&gt; never_run([] { return 1; });
+        abandoned = never_run.get_future();
+    } // Destroyed without invoking: broken_promise state.
+    try {
+        (void)abandoned.get();
+    } catch (const std::future_error&amp; e) {
+        std::cout &lt;&lt; &quot;broken promise: &quot;
+                  &lt;&lt; (e.code() == std::make_error_code(std::future_errc::broken_promise))
+                  &lt;&lt; '\n';
+    }
+
+    std::packaged_task&lt;int()&gt; reusable([] { return 7; });
+    auto first = reusable.get_future();
+    reusable();
+    std::cout &lt;&lt; &quot;first run: &quot; &lt;&lt; first.get() &lt;&lt; '\n';
+    reusable.reset(); // New shared state, same stored callable.
+    auto second = reusable.get_future();
+    reusable();
+    std::cout &lt;&lt; &quot;after reset: &quot; &lt;&lt; second.get() &lt;&lt; '\n';
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Save the source as <code>oscpp_037_packaged_task.cpp</code>, then compile it with the following commands in a POSIX shell with GCC and threading support. On Windows, select the equivalent C++20 language option and supported thread runtime in the IDE or compiler toolchain.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>g++ --version
+g++ -std=c++20 -O2 -Wall -Wextra -Wpedantic -pthread oscpp_037_packaged_task.cpp -o oscpp_037_packaged_task
+./oscpp_037_packaged_task</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The program was compiled and executed with <strong>GCC 14.2.0</strong> using the command shown. The observed output was:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>pending before invocation: true
+worker result: 42
+captured exception: planned failure
+broken promise: true
+first run: 7
+after reset: 7</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The first future is checked <em>before</em> thread creation, so <code>wait_for(0)</code> reports a timeout predictably. The owned integer begins as 40, and the worker adds 2. The calculation <code>40 + 2 = 42</code> is deterministic, even though the operating system chooses when the worker actually executes. The main thread joins the worker before reading the returned result, avoiding an unjoined-thread shutdown error.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exceptions Are Delivered Through the Future</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>When a packaged callable throws, <code>operator()</code> captures that exception in the associated shared state. The exception is rethrown when the consumer invokes <code>future.get()</code>. In the tested example, <code>failing()</code> does not throw <code>std::runtime_error</code> directly to its caller; the later <code>failure_future.get()</code> does. An application must still handle standard-library misuse errors, allocation failures and system failures where applicable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30490,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oscpp-037-task-outcomes.png" alt="Diagram comparing a returned value, an exception stored for future.get, and an unexecuted task causing broken_promise" class="wp-image-30490" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert outcome diagram. A ready future may hold a value, an exception, or a broken-promise error; readiness alone does not mean success.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>There is a critical difference between an exception <em>raised by the callable</em> and a <code>std::future_error</code> raised because the shared state was misused or abandoned. The C++ <a href="https://eel.is/c++draft/futures.task.members">packaged-task member specification</a> identifies errors such as <code>future_already_retrieved</code>, <code>promise_already_satisfied</code>, and <code>no_state</code>. If the packaged task is destroyed without running and a future still depends on its shared state, the future becomes ready with <code>future_errc::broken_promise</code>, not a successful default value.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Ownership and Lifetime Safety</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A task can capture a <code>std::unique_ptr</code> by move, as the lab does. A separate <code>std::thread</code> can then take ownership of the task by another move. No code should dereference the original unique pointer after it has been moved from; the program intentionally uses only the captured pointer. In contrast, capturing references to short-lived local variables can produce dangling references if a task is queued beyond the variables' lifetimes. Designing the lifetime boundary before launching work is essential.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <code>std::thread</code> object must be joined or detached before destruction; the example uses <code>join()</code> because task completion is required. A production queue could use a <code>std::jthread</code> or explicit task-worker lifecycle manager. Neither packaged tasks nor futures automatically serialize access to user-owned shared objects; use <code>std::mutex</code>, message passing or another appropriate synchronization strategy when resources are shared.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why get_future, operator() and reset Can Fail</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Calling <code>get_future()</code> twice for the same shared state:</strong> the second call throws <code>std::future_error</code> with <code>future_already_retrieved</code>.</li><li><strong>Invoking an already-completed task a second time:</strong> the task reports <code>promise_already_satisfied</code> unless it has been reset to a new shared state.</li><li><strong>Using a moved-from task:</strong> the source task no longer has a shared state after move construction. Check <code>valid()</code> before operations that require one.</li><li><strong>Forgetting to invoke work:</strong> the future can block indefinitely while the task still exists but has not been scheduled. Destroying an unsatisfied task makes a waiting future receive a broken promise.</li><li><strong>Resetting an unfinished task:</strong> <code>reset()</code> creates a new state and abandons the old one; consumers holding the old future may receive <code>broken_promise</code>. It is not a cancellation protocol.</li><li><strong>Reusing a future after <code>get()</code>:</strong> a normal <code>std::future</code> is single-consumption; use <code>std::shared_future</code> when a result must be observed by multiple consumers under its documented rules.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://en.cppreference.com/cpp/thread/packaged_task">cppreference overview</a> and its <a href="https://cppreference.com/cpp/thread/packaged_task/reset">reset reference</a> detail the contract. Do not use reset merely to “retry” a failed network or database operation without checking the semantics of the callable, ownership of its arguments, duplicate side effects, and whether the previous attempt actually completed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=4twJD5ezkag&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Mike Shah, “std::future and std::async in Modern cpp | Introduction to Concurrency in C++” (November 20, 2021). Background lecture on futures and deferred result retrieval; it covers <code>std::async</code> rather than presenting a packaged-task-specific lab.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Engineering Application: A Small Work Queue</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In a server application, a scheduler might accept tasks from producers, store them in a move-aware queue, then let worker threads run them. The submission side returns futures to callers; consumers wait only when their results are needed. One simple option is <code>std::queue&lt;std::packaged_task&lt;void()&gt;&gt;</code> for a homogeneous set of void-returning jobs. If multiple results have distinct types, the application may need a separate type-erasure strategy or task adapter rather than assuming arbitrary task signatures can inhabit one queue without conversion.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A correct worker queue also requires a mutex and condition variable for shared access, a carefully defined stop signal, policies for rejected submissions, exception reporting, and shutdown behavior for unexecuted work. Some workloads require backpressure, deadlines and cancellation. A <code>std::future</code> does not provide built-in cancellation; the producer and worker must cooperate through a separate mechanism. Thread count, latency and throughput cannot be inferred from this demonstration, because it only exercises one worker and no benchmark suite.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Exercises</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Change the owned value from 40 to 58 and the worker argument from 2 to 7. Predict the new worker result before compiling, then verify that it prints 65.</li><li>Write a simple task whose callable returns <code>std::string</code>. Change the signature and matching future type; verify that the returned text arrives through <code>get()</code>.</li><li>Add an explicit test for <code>get_future()</code> called twice. Catch <code>std::future_error</code> and check for <code>future_errc::future_already_retrieved</code>. Do not treat an exception message's English wording as a stable machine-readable error code.</li><li>Use a small bounded delay inside a disposable lab task and inspect <code>wait_for()</code> before and after execution. Explain why timing-dependent output should not be considered deterministic evidence of thread speed.</li><li>Explain how a program can avoid indefinite waiting when a queue stops accepting work and how a caller should be notified that submission failed.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check and Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Does creating a packaged task create a worker thread?</strong> No. Invocation or dispatch must be explicitly arranged.</li><li><strong>Which header declares <code>std::packaged_task</code>?</strong> <code>&lt;future&gt;</code>, introduced in C++11.</li><li><strong>What does <code>get_future()</code> return?</strong> A future sharing the packaged task's result state.</li><li><strong>What happens when the callable throws?</strong> The exception is stored and rethrown by the associated future's <code>get()</code>.</li><li><strong>Why does the example's worker compute 42?</strong> The owned integer is 40 and the worker supplies 2.</li><li><strong>What happens when the unexecuted task is destroyed?</strong> The future receives a broken-promise error because the promised result is abandoned.</li><li><strong>Can the same task's existing shared state be executed repeatedly?</strong> No. Calling <code>reset()</code> constructs a new shared state for another invocation.</li><li><strong>What extra mechanisms are needed for a production task queue?</strong> Safe synchronization, lifecycle management, backpressure and an explicit shutdown/error policy.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Official Technical References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The core semantics were cross-checked against the <a href="https://eel.is/c++draft/futures.task.general">C++ working draft, packaged_task general</a> and <a href="https://eel.is/c++draft/futures.task.members">member functions</a>; <a href="https://learn.microsoft.com/en-us/cpp/standard-library/packaged-task-class?view=msvc-170">Microsoft Learn, packaged_task class</a>; <a href="https://en.cppreference.com/cpp/thread/packaged_task">cppreference, std::packaged_task</a>; <a href="https://cppreference.com/cpp/thread/packaged_task/get_future">get_future reference</a>; and <a href="https://cppreference.com/cpp/thread/packaged_task/reset">reset reference</a>. Compiler execution occurred on November 6, 2026, using GCC 14.2.0 on a local Debian-based environment. Results describe that test configuration rather than every compiler implementation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The value of <code>std::packaged_task</code> is precise ownership: a movable callable supplies a result state while an independently managed execution mechanism determines when the work runs. Futures make eventual outcomes observable, including failure. Engineers who understand the difference between owning work, scheduling work and consuming its result can build safer background processing systems without confusing asynchronous interfaces with automatic concurrency.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSC++.037 follows the verified OSC++.036 chapter. The complete source example was compiled with GCC 14.2.0 in C++20 mode and executed; all six output lines were checked. The main example does not benchmark concurrency or demonstrate production system performance. Featured image is original AI-generated editorial art; the two diagrams are original educational illustrations, not screenshots of compiled software. Source video titles and publishers were checked; iframe rendering and live playback are separately audited.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>BitcoinVersus.Tech original 5,000-sat donation QR code. Verify the destination and amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>Mobile scanning: display the original QR code on a computer or second screen and scan it using a compatible Bitcoin wallet. Where supported, use the wallet's saved-image scan option on the same phone. Verify the destination and 5,000-sat amount before approving.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->

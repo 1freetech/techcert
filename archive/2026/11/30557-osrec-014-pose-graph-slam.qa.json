@@ -1,0 +1,77 @@
+{
+  "audit_date": "2026-11-07",
+  "post_id": 30557,
+  "lesson_id": "OSREC.014",
+  "title": "OSREC.014: Pose-Graph SLAM — Loop Closure, Factor Graphs, and Optimization",
+  "url": "https://bitcoinversus.tech/2026/11/07/osrec-014-pose-graph-slam-loop-closure-factor-graphs-optimization/",
+  "status": "publish",
+  "subject": "robotics_engineer",
+  "featured": {
+    "id": 30554,
+    "width": 1200,
+    "height": 630,
+    "kind": "AI-created conceptual editorial cover, not an actual named robot photo"
+  },
+  "in_story_media": [
+    {
+      "type": "original data chart",
+      "id": 30555,
+      "description": "1D synthetic weighted least squares path estimates, not robot experimental data"
+    },
+    {
+      "type": "genuine open-source software screenshot",
+      "id": 30556,
+      "source": "ROS Navigation2 mapping and localization official documentation"
+    },
+    {
+      "type": "youtube",
+      "id": "saVZtgPyyJQ",
+      "publisher": "MATLAB / MathWorks",
+      "title": "Understanding SLAM Using Pose Graph Optimization | Autonomous Navigation Part 3"
+    },
+    {
+      "type": "youtube",
+      "id": "uHbRKvD8TWg",
+      "publisher": "Cyrill Stachniss / University of Bonn open course",
+      "title": "Graph-based SLAM using Pose Graphs"
+    }
+  ],
+  "editor_note_present": true,
+  "original_donation_qr_id": 24043,
+  "contextual_internal_link_count": 5,
+  "code_blocks": 2,
+  "calculations": {
+    "odom": [
+      0,
+      2,
+      3,
+      1.1,
+      0.1
+    ],
+    "optimized": [
+      0,
+      1.976471,
+      2.952941,
+      1.029412,
+      0.005882
+    ],
+    "rmse_before_m": 0.06324555320336764,
+    "rmse_after_m": 0.02708438690169731,
+    "source": "NumPy linear weighted least squares calculated directly, synthetic one-dimensional data"
+  },
+  "educational_references": [
+    "https://borglab.github.io/gtsam/pose2slamexample/",
+    "https://gtsam.org/tutorials/intro.html",
+    "https://index.ros.org/p/slam_toolbox/",
+    "https://www.ipb.uni-bonn.de/online-training-robotics/index.html",
+    "https://www.mathworks.com/videos/series/autonomous-navigation.html"
+  ],
+  "no_conceptual_schematics": true,
+  "wp_rendered_iframe_count": 2,
+  "actual_video_playback": "not independently tested",
+  "desktop_screenshot": "mshots status ready 1280px; pixels not independently inspected",
+  "mobile_screenshot": "mshots status ready 390px; pixels not independently inspected",
+  "subscriber_email_suppressed": true,
+  "duplicate_management": "At time of publication WordPress showed separate unpublished duplicate draft #30558 with the same title. Deliberately did not publish or delete the other draft. Needs editorial review; avoid second public OSREC.014.",
+  "notes": "Gutenberg content saved and read back. Lesson is published; actual robotics hardware not tested. The 1D teaching model is not full nonlinear SE(2) SLAM."
+}

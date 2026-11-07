@@ -1,0 +1,75 @@
+{
+  "audit_date": "2026-11-07",
+  "wordpress_post_id": 30548,
+  "lesson_id": "OSRTC.017",
+  "subject": "robotics_technician",
+  "status": "publish",
+  "title": "OSRTC.017: Robot Payload and Center-of-Gravity Verification — Mass, Inertia, and Safe Pick Tests",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/osrtc-017-robot-payload-center-gravity-verification-inertia-safe-pick-tests/",
+  "previous_lesson_id": "OSRTC.016",
+  "previous_post_id": 27572,
+  "featured_media": {
+    "id": 30541,
+    "width": 1200,
+    "height": 630,
+    "description": "Original illustrative AI-generated cover; not documentary photo"
+  },
+  "in_story_media": [
+    {
+      "id": 30544,
+      "type": "genuine manufacturer photograph",
+      "credit": "Universal Robots",
+      "source": "https://www.universal-robots.com/blog/how-the-e-series-cobots-integrate-easily-into-modular-robot-cells/"
+    },
+    {
+      "id": 30545,
+      "type": "official interface screenshot",
+      "credit": "Universal Robots",
+      "source": "https://www.universal-robots.com/manuals/EN/HTML/SW5_25_1/Content/prod-usr-man/complianceUR3e/SW_sections/first_program/payload.htm"
+    },
+    {
+      "id": 30543,
+      "type": "calculated data chart",
+      "credit": "Open Source Tech Cert",
+      "formula": "tau=m*g*r",
+      "provenance": "ideal model only; no measured robot data"
+    },
+    {
+      "video_id": "YnC-ccytJlw",
+      "type": "official educational YouTube",
+      "publisher": "Universal Robots Academy",
+      "title": "Tool Configuration: TCP, orientation, payload & center of gravity",
+      "published": "2021-12-16"
+    },
+    {
+      "video_id": "l5QUDOjdMck",
+      "type": "official educational YouTube",
+      "publisher": "Universal Robots Academy",
+      "description": "Changing payload and center of gravity during program execution",
+      "published": "2021-09-27"
+    }
+  ],
+  "total_in_story_media": 5,
+  "internal_link_count": 7,
+  "qr_id": 24043,
+  "italic_editor_note": true,
+  "youtube_iframes_in_public_WordPress_view": 2,
+  "player_presence": "verified",
+  "interactive_playback": "not independently tested",
+  "desktop_mobile": "WordPress screenshot capture status ready at 1280 and 390 px, visual pixels not independently inspected",
+  "real_robot_test": "not performed",
+  "training_math": {
+    "empty_mass_kg": 0.8,
+    "part_mass_kg": 1.2,
+    "loaded_mass_kg": 2,
+    "gripper_CoG_mm": 80,
+    "part_CoG_mm": 250,
+    "combined_CoG_mm": 182,
+    "static_horizontal_gravity_moment_Nm": 2.943,
+    "point_mass_inertia_kg_m2": 0.045,
+    "checks": "arithmetic verified; ideal assumptions stated; not a robot rating"
+  },
+  "archive_scope": "Exact raw Gutenberg body plus QA record saved in all three GitHub repositories",
+  "editorial_policy": "No conceptual schematics; authentic manufacturer photo and interface screenshot, two official Academy videos, calculated chart; topic advanced beyond OSRTC.004 and nonduplicate of published vacuum-gripper evergreen.",
+  "newsletter_email_disabled": true
+}

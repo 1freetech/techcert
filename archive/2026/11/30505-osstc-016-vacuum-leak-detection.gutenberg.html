@@ -1,0 +1,195 @@
+<!-- wp:paragraph -->
+<p><strong>OSSTC.016</strong> introduces systematic leak diagnosis in semiconductor vacuum systems. A process chamber that cannot reach its required base pressure may have a physical leak, but moisture desorption, trapped gas, a contaminated gauge, an incorrectly positioned valve, or reduced pumping performance can produce similar symptoms. A technician should not label every pressure rise as a leak or begin applying tracer gas before confirming the equipment's safe maintenance state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The chapter follows <a href="https://bitcoinversus.tech/2026/10/31/osstc-015-chamber-pressure-control-vacuum-gauges-throttle-valves-pumpdown/">OSSTC.015, Chamber Pressure Control</a>, which examined pressure sensors, throttle valves and pumpdown diagnostics. Earlier <a href="https://bitcoinversus.tech/2026/10/05/osstc-003-semiconductor-vacuum-systems-roughing-pumps-turbomolecular-pumps-gauges-leak-checks/">OSSTC.003, Semiconductor Vacuum Systems</a> introduced roughing and high-vacuum hardware. The present lesson concentrates on distinguishing gas sources using pressure-rise trends and the fundamentals of tracer-gas leak detection rather than repeating pump construction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Define a real leak, outgassing, permeation, and a virtual leak in a vacuum installation.</li><li>Explain the meaning of total gas load and calculate an apparent gas throughput from the rate of pressure rise.</li><li>Keep millibar, liter, second, pascal, and cubic-meter units consistent in leak-rate calculations.</li><li>Compare an isolated chamber pressure-rise test with helium tracer-spray, sniffing and integral leak tests.</li><li>Recognize false diagnoses caused by gauge behavior, trapped volumes, unstable temperature, and contamination.</li><li>Create a safe, evidence-based diagnostic record, and distinguish observations from inferred causes.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites include basic pressure measurement, vacuum pump operation, cleanroom contamination control, and the relationship among chamber volume, gas load and pumping speed. This chapter is an intermediate conceptual treatment within the Open Source Semiconductor Technician track. It is not authorization to operate a helium detector, modify gas lines, open a vacuum chamber, or isolate a live process system. Only qualified personnel following site-specific procedures may perform equipment tests.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why an Elevated Base Pressure Is Not a Diagnosis</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The pressure inside a vacuum vessel is influenced by incoming gas and the effective speed with which pumps remove it. A large leak can introduce atmospheric gas through a flawed seal or flange, but a well-sealed chamber can also release molecules from its internal surfaces. Manufacturing environments add complications such as process residues, elastomer seals, foreline conditions, chamber heating, valve leakage, and earlier gas exposure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.leybold.com/content/leybold/en/knowledge/vacuum-fundamentals/leak-detection/definition-and-measurement-of-vacuum-leaks.html">Leybold vacuum fundamentals reference</a> defines leak rate as gas throughput and emphasizes that a chamber need not be absolutely leak-free; it must meet its own process-specific pressure and gas-tightness requirement. Comparing readings without knowing the target specification, gauge type, measured gas, and operating state is unreliable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A small real leak tends to add gas at a roughly steady rate when the external-to-internal pressure difference remains approximately fixed. <strong>Outgassing</strong> instead releases adsorbed or absorbed gas from surfaces and materials. <strong>Virtual leaks</strong> may result when pockets of trapped gas communicate only slowly with the main evacuated volume, such as behind an improperly vented blind hole or inside an inaccessible cavity. Permeation through a material can contribute gas load without a visible opening.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=BJfVgxFLdwY&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Agilent Technologies, “Best Practices for Leak Testing Large Vacuum Chambers,” published April 6, 2022. A manufacturer webinar explaining detector selection, connection principles, and controlled helium-tracer testing of large vacuum vessels. Classroom context only; use approved equipment-specific procedures for real tests.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Pressure Rise After Isolation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A pressure-rise or rate-of-rise test records chamber pressure after the vacuum volume has been placed in an <em>approved, safely isolated</em> condition. With a fixed chamber volume, approximately constant gas temperature, and no active pumping into or out of the isolated volume, the observed gas throughput is estimated by <strong>Q<sub>observed</sub> = V × (Δp / Δt)</strong>. Here V is the effective connected volume in liters, Δp the change in absolute pressure in millibar, and Δt the elapsed time in seconds. The answer has units of mbar·L/s.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Important distinction: <strong>Q<sub>observed</sub> includes all sources</strong> producing pressure rise. Only after excluding outgassing, virtual leaks and other contributions should it be interpreted as an actual leak rate Q<sub>leak</sub>. A pressure-rise test alone does not reveal where the leak is located. Leybold's <a href="https://www.leybold.com/content/leybold/en/knowledge/vacuum-fundamentals/leak-detection/pressure-rise-and-drop-tests.html">pressure-rise and pressure-drop reference</a> expressly distinguishes real leakage from gas released by the vessel walls.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked Calculation with Explicit Units</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a <strong>hypothetical</strong> isolated vessel with an effective volume of 30 L. Its pressure reading rises from 2.0 × 10<sup>−4</sup> mbar to 8.0 × 10<sup>−4</sup> mbar over 600 seconds. The initial and final pressures are measurements assumed for an exercise, not values from an actual semiconductor machine.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Pressure difference:</strong> Δp = (8.0 − 2.0) × 10<sup>−4</sup> mbar = 6.0 × 10<sup>−4</sup> mbar.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Average pressure-rise rate:</strong> Δp/Δt = (6.0 × 10<sup>−4</sup> mbar) / 600 s = 1.0 × 10<sup>−6</sup> mbar/s.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Apparent total gas throughput:</strong> Q<sub>observed</sub> = 30 L × 1.0 × 10<sup>−6</sup> mbar/s = <strong>3.0 × 10<sup>−5</sup> mbar·L/s</strong>. Using 1 mbar·L/s = 0.1 Pa·m<sup>3</sup>/s, the result is <strong>3.0 × 10<sup>−6</sup> Pa·m<sup>3</sup>/s</strong>. The arithmetic was independently recalculated from the stated assumptions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The figure is a <em>gas-load observation</em>, not proof of a 3.0 × 10<sup>−5</sup> mbar·L/s hole. A nonzero rate may be caused partly or entirely by water vapor leaving internal surfaces or gas escaping trapped voids. Chamber volume estimates must also include connected manifolds and instrument spaces as appropriate; using only the nominal wafer-chamber size can misstate the result.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30502,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osstc-016-pressure-rise-traces.png" alt="Conceptual pressure versus time graph comparing a steady ingress, declining outgassing, and their combination" class="wp-image-30502" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert conceptual line chart. Curves are illustrative mathematical examples, not measured traces from a semiconductor tool. Shapes depend on gas sources and operating conditions.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reading Pressure Curves without Overclaiming</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An approximately straight pressure-rise line over a suitable interval is <em>consistent</em> with a steady source, but it does not conclusively establish a real leak. A declining slope can be consistent with diminishing outgassing. A combination of leak influx and desorption can mimic a nearly linear trend over a short period. Temperature changes, nonuniform gas distribution, gauge warmup, sensor zero shift, and conductance restrictions may further distort interpretation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.agilent.com/en/solutions/vacuum-solutions/ultra-high-vacuum/2minutetutorialvideos">Agilent ultra-high vacuum education series</a> explicitly discusses differentiating virtual and real leaks, including desorption, trapped volumes, diffusion, and backstreaming. In a troubleshooting record, describe the observed curve first, then label the possible cause as a hypothesis pending confirmation. Avoid assigning an exact gas species from a pressure trend alone.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Helium Tracer Testing and Why the Method Matters</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Helium is widely used as a tracer for high-sensitivity vacuum leak detection because suitable mass-spectrometer detectors can distinguish a helium signal from ordinary chamber background. The detector responds to tracer gas transported to its analyzer through an approved connection or sampling arrangement. Detection sensitivity, measurement range and response time depend on the detector, plumbing conductance, test method, background helium and calibration conditions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A tracer <strong>spray method</strong> typically evaluates a component already under vacuum: tracer gas presented locally outside a suspected seam may enter through an actual leak and become detectable on the evacuated side. A <strong>sniffing method</strong> evaluates a component that has been approved for a tracer-gas pressure test: escaping gas can be sampled externally by a probe. An <strong>integral test</strong> measures leakage for an entire part or assembly using a defined enclosure or chamber, but may not localize the physical defect. These distinctions are documented by <a href="https://www.pfeiffervacuum.com/us/en/products/leak-detectors/leak-detection-technology/">Pfeiffer Vacuum's leak-detection methods reference</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30503,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osstc-016-helium-methods-schematic.png" alt="Educational schematic contrasting vacuum tracer spray and exterior sniffing of an approved pressure-test part" class="wp-image-30503" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert conceptual schematic. It depicts gas movement only; no piping layout, regulator setting, pressurization limit, detector connection, or field operating procedure is provided.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>The required direction of the pressure differential determines which tracer method is meaningful. A spray test conducted on a chamber that is not properly prepared for the method may produce misleading results. A sniff test carried out on equipment that is not rated for pressure can be dangerous. Helium detector use also raises operational issues involving background contamination, gas-cylinder handling, oxygen displacement in enclosed spaces, cleanroom compatibility and manufacturer limits. Only trained personnel following approved engineering procedures should operate the equipment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=6uPzePpsxM8&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Pfeiffer Vacuum+Fab Solutions, “Leak detection methods — part 1: Integral test of parts under vacuum in helium,” published May 25, 2018. Manufacturer animation of an integral helium method. Its method is not identical to local external spray testing or pressurized-part sniffing.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Safe Technician Evidence Workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Identify the applicable recipe and limit.</strong> Record the required pressure range, chamber ID, process state, sensor type, firmware or controller revision, and applicable maintenance instruction. Do not infer one universal acceptable leak threshold for every semiconductor process.</li><li><strong>Review historic operating data.</strong> Compare the latest pumpdown trace with a baseline from the same tool configuration, including gauge, pump, throttle valve, <a href="https://bitcoinversus.tech/2026/10/29/osstc-014-mass-flow-controller-setpoint-tracking-zero-drift-response-time/">MFC behavior</a>, and foreline conditions.</li><li><strong>Check for confounding sources.</strong> Review whether recent venting, solvent exposure, cleaning, process-gas residue, maintenance, temperature transitions or chamber opening could increase outgassing or change gauge response.</li><li><strong>Plan any approved diagnostic test.</strong> Only qualified technicians should authorize isolation, gauge range verification, pump configuration, tracer methods and pressure limits through the equipment procedure. Never defeat interlocks for the lesson.</li><li><strong>Record the test in units.</strong> Preserve timestamps, absolute pressure units, effective volume, sensor status, elapsed time, and the presence of any active pumping or gas injection. A trend calculated without a correct system boundary may be meaningless.</li><li><strong>Escalate with evidence.</strong> If the outcome remains ambiguous, request a qualified vacuum specialist's targeted leak test. A physical repair should follow confirmed localization, component instructions and production change control.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common False Positives, False Negatives, and Failure Modes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Virtual leak or trapped gas:</strong> a pocket empties slowly into the system, giving an apparent leak signal without a direct connection to atmosphere.</li><li><strong>Moisture or contamination:</strong> water or process deposits release vapor from surfaces after venting or cleaning; the apparent gas load changes with time and temperature.</li><li><strong>Wrong gauge regime:</strong> a Pirani sensor's gas dependence or an instrument outside its valid operating range can compromise a comparison with another gauge.</li><li><strong>Valve or bypass leakage:</strong> an isolation valve that is assumed shut may connect the chamber to a different volume, affecting the pressure-rise boundary.</li><li><strong>Helium background:</strong> residual tracer gas can raise baseline signal and create false positives in subsequent checks.</li><li><strong>Slow detector response:</strong> long lines, restricted conductance or a large chamber can delay arrival of tracer gas, making an operator miss or misattribute a signal.</li><li><strong>Overpressurization:</strong> vacuum flanges, windows, bellows or chamber vessels may not be designed for positive internal pressure; a pressurized sniff test requires separate engineering authorization.</li><li><strong>Confusing total gas load with a leak:</strong> the equation Q = VΔp/Δt does not independently separate genuine leakage, outgassing and virtual leaks.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Cleanliness and process compatibility are especially important in semiconductor equipment. The earlier <a href="https://bitcoinversus.tech/2026/10/27/osstc-013-particle-contamination-process-chambers/">OSSTC.013 chamber-contamination lesson</a> explains why an apparently harmless diagnostic intervention can introduce particles. The <a href="https://bitcoinversus.tech/2026/10/06/osstc-004-semiconductor-gas-delivery-systems-mfc-regulators-valves-purge-interlocks/">OSSTC.004 gas-delivery lesson</a> explains why process gas distribution and purge interlocks need separate consideration. Neither training article substitutes for authorized tool service procedures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Documentation-Only Practical Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use a spreadsheet, calculator or notebook instead of a physical chamber. Create three fictional data sets for a 30 L vessel: one approximately linear pressure rise, one with a decreasing slope, and one mixed pattern. Document the assumed pressure samples and calculate the apparent gas throughput for an interval in each. Then write a brief fault classification: “compatible with steady ingress,” “compatible with changing gas evolution,” or “insufficient evidence.” Do not equate these descriptions with confirmed leak locations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For the original worked example, reproduce 30 L × [(8.0 × 10<sup>−4</sup> − 2.0 × 10<sup>−4</sup>) mbar / 600 s] and verify the result of 3.0 × 10<sup>−5</sup> mbar·L/s. Convert the result to Pa·m<sup>3</sup>/s using the factor 0.1. Repeat the calculation after doubling the assumed volume to observe why volume knowledge matters: at the same observed pressure slope, calculated throughput doubles.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check and Explained Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>What is a real vacuum leak?</strong> A physical flow path permitting gas to enter or escape the vacuum boundary under the relevant pressure differential.</li><li><strong>Why is a high base pressure not by itself evidence of a hole?</strong> Gas desorption, trapped volumes, permeation, pump performance and gauge faults may also affect pressure.</li><li><strong>What does the pressure-rise calculation measure?</strong> The apparent total gas throughput of the assumed isolated volume under the stated conditions.</li><li><strong>What is the hypothetical result for a 30 L chamber and a 6 × 10<sup>−4</sup> mbar rise in 600 seconds?</strong> 3 × 10<sup>−5</sup> mbar·L/s.</li><li><strong>When is helium tracer spray conceptually appropriate?</strong> For an approved evacuated system where incoming tracer can be detected through a physical leak path.</li><li><strong>What does a sniffer measure?</strong> A tracer signal sampled outside an approved, suitably pressurized part when tracer is escaping.</li><li><strong>Why does a nearly straight pressure curve not prove leakage?</strong> Some outgassing processes and temperature-dependent effects can approximate steady rates over limited periods.</li><li><strong>Should a technician raise chamber pressure or disable an interlock to perform a classroom check?</strong> No. All physical testing requires applicable engineering approval, equipment limits and qualified personnel.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References and Next Lesson</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary vacuum-technology documentation: <a href="https://www.leybold.com/content/leybold/en/knowledge/vacuum-fundamentals/leak-detection/pressure-rise-and-drop-tests.html">Leybold, Pressure Rise and Drop Tests</a>; <a href="https://www.leybold.com/content/leybold/en/knowledge/vacuum-fundamentals/leak-detection/definition-and-measurement-of-vacuum-leaks.html">Leybold, Definition and Measurement of Vacuum Leaks</a>; <a href="https://www.pfeiffervacuum.com/us/en/products/leak-detectors/leak-detection-technology/">Pfeiffer Vacuum, Leak Detection Technology</a>; and <a href="https://www.agilent.com/en/solutions/vacuum-solutions/ultra-high-vacuum/2minutetutorialvideos">Agilent, UHV Tutorial Series</a>. All formulas and demonstrations must be applied using the manufacturer's current model-specific instructions and the facility's operating limits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The next semiconductor-engineering track lesson is selected separately through the live curriculum inventory. Readers should retain one central distinction from OSSTC.016: an observed pressure symptom, a hypothesized cause and a confirmed physical defect are three different levels of evidence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSSTC.016 follows the published OSSTC.015 chapter. The 30 L worked example and unit conversion were independently recalculated; no chamber was isolated, no detector operated, and no helium gas was released for this lesson. The 1200 × 630 featured cover is a conceptual AI-generated editorial illustration, not an equipment test photograph. Both in-story diagrams are original educational graphics, not process traces or installation procedures. The video titles, publishers and dates were reviewed against available source records; live playback requires separate verification.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR code for a voluntary 5,000-satoshi donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-satoshi donation QR. Verify the recipient and amount in the wallet before sending funds.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>To scan the 5,000-sat donation QR on a phone, open the article on a computer or second screen and scan it using a compatible Bitcoin wallet. Some wallets support scanning an image stored on the same phone. Always verify the destination before authorizing payment.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

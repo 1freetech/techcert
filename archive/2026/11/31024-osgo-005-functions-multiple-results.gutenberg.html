@@ -1,0 +1,181 @@
+<!-- wp:paragraph --><p><strong>OSGo.005</strong> introduces functions as named, reusable units of Go code. The central language features are typed parameters, multiple returned values, variadic inputs, and explicit <code>error</code> results. A function can perform a small, testable operation and report whether its result is valid. Understanding the contract between a caller and a function makes programs easier to read, test, and troubleshoot without relying on global variables or unexplained failure values.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>OSGo.005 advances <a href="https://bitcoinversus.tech/2026/11/01/osgo-004-control-flow-if-switch-for-range-break-continue/">OSGo.004 on control flow</a>. Earlier <a href="https://bitcoinversus.tech/2026/10/14/osgo-003-operators-expressions-arithmetic-comparison-logic-assignment-bitwise/">operators and expressions</a>, <a href="https://bitcoinversus.tech/2026/10/10/osgo-002-variables-constants-zero-values-and-basic-types-var-int-float64-bool-string-byte-and-rune/">variables and types</a>, and <a href="https://bitcoinversus.tech/2026/10/08/osgo-001-what-is-go-packages-toolchain-go-run-go-build-first-program/">toolchain fundamentals</a> are prerequisites. The lesson uses the official <a href="https://go.dev/tour/basics/4">Go Tour's introduction to functions</a>, the <a href="https://go.dev/ref/spec">Go language specification</a>, and the Go team's published tutorial on <a href="https://go.dev/doc/tutorial/handle-errors">error results</a>.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+<!-- wp:list --><ul class="wp-block-list"><li>Read and write a typed function declaration with named input parameters.</li><li>Explain that Go arguments are passed by value, while some values contain references to underlying data.</li><li>Use functions that return one value, multiple values, and an explicit error.</li><li>Use a variadic parameter ending in <code>...T</code> and expand a slice with <code>...</code> at a call site.</li><li>Distinguish named result parameters from a recommended explicit return.</li><li>Run a complete example, unit tests, and static analysis without external dependencies.</li><li>Explain why ordinary data-validation failures should be returned as errors rather than hidden in a magic output.</li></ul><!-- /wp:list -->
+<!-- wp:paragraph --><p>Requirements: a working Go toolchain (the local examples were run with <strong>go1.23.2 linux/amd64</strong>), a text editor, and a terminal. Current supported Go releases may differ; check <a href="https://go.dev/dl/">the official downloads page</a> before installing. No third-party modules, credentials, network access, or elevated privileges are needed for the exercises.</p><!-- /wp:paragraph -->
+<!-- wp:image {"id":31023,"sizeSlug":"medium","linkDestination":"none"} --><figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/go-gopher-official-mascot-renee-french-cc-by.png" alt="Blue Go programming language gopher mascot created by Renée French" class="wp-image-31023" /><figcaption class="wp-element-caption"><em>Go project's Gopher mascot by Renée French, licensed Creative Commons Attribution 4.0 under the <a href="https://go.dev/brand">official Go brand guidance</a>. Real project artwork, not a custom technical schematic or an endorsement of the lesson.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:heading --><h2 class="wp-block-heading">Functions Package Behavior into Named Operations</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A Go function declaration begins with <code>func</code>, followed by the function name, a parenthesized parameter list, an optional return type or result list, and a body. For example, <code>func double(n int) int { return n * 2 }</code> accepts an integer and returns another integer. A declaration can group adjacent parameters of the same type, as in <code>func add(a, b int) int</code>. The caller supplies values in the declared order, and the compiler checks their types.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Go evaluates function arguments and passes values. Copying an <code>int</code> gives the callee an independent integer. Copying a slice value copies its slice header rather than duplicating all underlying elements; both values can refer to the same backing array. Passing a pointer also copies the pointer value, not the pointed-to object. Those distinctions are explained by the official <a href="https://go.dev/doc/faq#pass_by_value">Go FAQ</a> and are important when functions modify data.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Parameter names are local to their function. A function must not assume that a caller's local variable exists inside it. Return values provide an explicit path for sending computed results back to the caller. As programs grow, carefully named functions make implementation details easier to replace while preserving a stable external contract.</p><!-- /wp:paragraph -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=ypV7r1ODZCA&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Net Ninja, “Go (Golang) Tutorial #10 — Multiple Return Values,” May 28, 2021. Public educational programming tutorial; the title, channel and video ID were verified before embedding. This is a community instructor, not an official Go project release.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Multiple Results and Named Result Parameters</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Go lets a function return more than one result without constructing a separate struct or using an output pointer. The <a href="https://go.dev/tour/basics/6">official Go Tour's multiple-results exercise</a> demonstrates a function returning two strings. A common production signature returns a value plus an <code>error</code>, making both the result and its validity visible to the caller. By convention, successful operations return a nil error, and failed operations return an informative non-nil error.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Result parameters may be named, such as <code>func minMax(values []int) (minimum, maximum int, err error)</code>. They begin with their type's zero value and are local variables within the function. A bare <code>return</code> is permitted when all results are named, but the official guidance recommends explicit results for clarity, especially as functions grow. The example below uses named results to clarify meaning while still explicitly returning the values.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>When a function cannot satisfy its contract, return an error rather than an arbitrary number whose meaning is ambiguous. The <code>average</code> function must reject an empty input because the requested average would require dividing by zero. <code>minMax</code> similarly rejects an empty slice because no minimum or maximum exists. Both return typed results plus errors; the caller examines <code>err</code> before using a result.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Variadic Parameters and Slice Expansion</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>A final function parameter written as <code>values ...float64</code> accepts zero or more <code>float64</code> arguments. Inside the function, <code>values</code> behaves like a slice. Variadic parameters must be last. A preexisting slice can be passed as individual arguments using an ellipsis at the call site, such as <code>measurements := []int{2, 6, 8}</code> followed by <code>countAbove(5, measurements...)</code>. The function still receives ordinary typed values, and its logic must decide whether empty input is valid.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><strong>Go does not require a function's variadic input to contain any elements.</strong> In the example, <code>countAbove</code> returns zero for an empty value list, which is meaningful. <code>average</code> returns an error for an empty list, because a mean is undefined. Function contracts, not the ellipsis syntax alone, define correct error behavior.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Complete Executable Program</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>The following source combines single and multiple returned results, a variadic parameter, named results, explicit error checks, and a controlled fallback for invalid input. No external dependencies are used. Place it in a file named <code>main.go</code>. The results presented below were obtained with the locally installed Go 1.23.2 compiler and standard library.</p><!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>package main
+
+import (
+    &quot;errors&quot;
+    &quot;fmt&quot;
+)
+
+// average accepts zero or more float64 arguments and returns a value or error.
+func average(values ...float64) (float64, error) {
+    if len(values) == 0 {
+        return 0, errors.New(&quot;at least one value is required&quot;)
+    }
+    var sum float64
+    for _, value := range values {
+        sum += value
+    }
+    return sum / float64(len(values)), nil
+}
+
+// minMax returns two results and an error; named results aid documentation.
+func minMax(values []int) (minimum, maximum int, err error) {
+    if len(values) == 0 {
+        return 0, 0, errors.New(&quot;cannot inspect an empty slice&quot;)
+    }
+    minimum, maximum = values[0], values[0]
+    for _, v := range values[1:] {
+        if v &lt; minimum {
+            minimum = v
+        }
+        if v &gt; maximum {
+            maximum = v
+        }
+    }
+    return minimum, maximum, nil
+}
+
+// countAbove places the variadic parameter last, as Go requires.
+func countAbove(threshold int, values ...int) int {
+    count := 0
+    for _, v := range values {
+        if v &gt; threshold {
+            count++
+        }
+    }
+    return count
+}
+
+func main() {
+    mean, err := average(10, 20, 30)
+    if err != nil {
+        fmt.Println(&quot;average error:&quot;, err)
+        return
+    }
+    fmt.Printf(&quot;average: %.2f\n&quot;, mean)
+
+    lo, hi, err := minMax([]int{9, 2, 15, 7})
+    if err != nil {
+        fmt.Println(&quot;range error:&quot;, err)
+        return
+    }
+    fmt.Printf(&quot;minimum: %d, maximum: %d\n&quot;, lo, hi)
+    fmt.Printf(&quot;above five: %d\n&quot;, countAbove(5, 2, 6, 8, 1))
+
+    if _, err := average(); err != nil {
+        fmt.Println(&quot;empty input:&quot;, err)
+    }
+}</code></pre>
+<!-- /wp:code -->
+<!-- wp:paragraph --><p>To run it from a new directory, create a module and execute the program. The module name is an example, not a network dependency:</p><!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>go mod init example.com/osgo005
+go run .</code></pre>
+<!-- /wp:code -->
+<!-- wp:paragraph --><p>Locally observed standard output after running the program:</p><!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>average: 20.00
+minimum: 2, maximum: 15
+above five: 2
+empty input: at least one value is required</code></pre>
+<!-- /wp:code -->
+<!-- wp:paragraph --><p>The <code>average</code> function evaluates (10 + 20 + 30) ÷ 3 = 20.00. <code>minMax</code> identifies 2 and 15 from a four-value slice. <code>countAbove</code> counts the elements 6 and 8, which are strictly greater than five. The final call demonstrates normal error handling for an empty input; no panic or stack trace is required.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Unit Tests, Go Vet, and Reproducible Results</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Place the following tests alongside <code>main.go</code> in a file named <code>main_test.go</code>. Tests check successful inputs, errors on empty input, and five variadic threshold cases. The values are fully synthetic educational inputs, not measured service traffic or production telemetry.</p><!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>package main
+
+import &quot;testing&quot;
+
+func TestAverage(t *testing.T) {
+    got, err := average(10, 20, 30)
+    if err != nil || got != 20 {
+        t.Fatalf(&quot;average = %v, %v; want 20, nil&quot;, got, err)
+    }
+    if _, err := average(); err == nil {
+        t.Fatal(&quot;average without values should return an error&quot;)
+    }
+}
+
+func TestMinMax(t *testing.T) {
+    low, high, err := minMax([]int{9, 2, 15, 7})
+    if err != nil || low != 2 || high != 15 {
+        t.Fatalf(&quot;minMax = %d, %d, %v; want 2, 15, nil&quot;, low, high, err)
+    }
+    if _, _, err := minMax(nil); err == nil {
+        t.Fatal(&quot;minMax empty input should return an error&quot;)
+    }
+}
+
+func TestCountAbove(t *testing.T) {
+    data := []int{2, 6, 8, 12, 18}
+    for _, tc := range []struct{ threshold, want int }{
+        {0, 5}, {5, 4}, {10, 2}, {15, 1}, {20, 0},
+    } {
+        got := countAbove(tc.threshold, data...)
+        if got != tc.want {
+            t.Errorf(&quot;countAbove(%d) = %d; want %d&quot;, tc.threshold, got, tc.want)
+        }
+    }
+}</code></pre>
+<!-- /wp:code -->
+<!-- wp:paragraph --><p>Run <code>go test -v ./...</code> and <code>go vet ./...</code>. Both commands completed successfully in the local Go 1.23.2 environment. The three test groups were <code>TestAverage</code>, <code>TestMinMax</code>, and <code>TestCountAbove</code>. A passing result verifies the listed cases only; it does not guarantee correctness for all possible floating-point values, untrusted input, or future modifications.</p><!-- /wp:paragraph -->
+<!-- wp:code -->
+<pre class="wp-block-code"><code>go test -v ./...
+go vet ./...</code></pre>
+<!-- /wp:code -->
+<!-- wp:heading --><h2 class="wp-block-heading">A Chart Tied to the Actual Test Cases</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>The last test evaluates <code>countAbove</code> on values <code>[2, 6, 8, 12, 18]</code>. For thresholds 0, 5, 10, 15, and 20, the expected counts are <strong>5, 4, 2, 1, and 0</strong>. All five assertions passed. The chart represents these deliberately chosen function test inputs and outputs. It is not a benchmark, external dataset, or measurement of Go program performance.</p><!-- /wp:paragraph -->
+<!-- wp:image {"id":31022,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osgo-005-variadic-function-count-above-test-chart.png" alt="Bar chart of countAbove tested values: thresholds 0, 5, 10, 15, and 20 produce counts 5, 4, 2, 1, and 0" class="wp-image-31022" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert computed chart, drawn from the Go <code>TestCountAbove</code> unit-test cases. Data are synthetic and asserted in the included source. No performance or runtime measurements are claimed.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:paragraph --><p>Changing the threshold tests an important detail of the function contract: the comparison is <code>v &gt; threshold</code>, not <code>v &gt;= threshold</code>. A value exactly equal to the threshold must not be counted. Boundary cases such as equality, an empty slice, negative values, and repeated values are valuable additions to a larger test suite.</p><!-- /wp:paragraph -->
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=YS4e4q9oBaU&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>freeCodeCamp.org, “Learn Go Programming — Golang Tutorial for Beginners,” June 20, 2019. Verified public nonprofit educational course by Michael Van Sickle. The functions section begins around 4:21:30; use that chapter rather than treating the entire six-hour course as a focused lesson on functions.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and Defensive Contracts</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>If a caller receives a compile error such as <code>not enough arguments in call</code>, compare the argument list with the function declaration and distinguish required parameters from a final variadic parameter. A mismatch such as passing <code>[]int</code> directly to <code>...int</code> requires a slice expansion where appropriate: <code>items...</code>. When Go reports a wrong number of returned values, check whether the function supplies one result, a tuple-like result list, or a value-plus-error pair.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>For an unexpected result, inspect the loop comparison and the values passed to it. For example, <code>countAbove(5, 5)</code> is zero because the comparison is strictly greater. When testing floating-point functions, use a defined tolerance for results that cannot be represented exactly in binary; the present average uses exact small integer-valued floats, making a direct equality check acceptable for the stated case. Do not silently extend that assumption to every decimal input.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Use error values to describe predictable invalid input. Avoid a panic for routine validation failures, and avoid discarding errors with the blank identifier merely to make a program compile. For code handling external measurements, add validation for NaN, infinities, out-of-range inputs, and limits on the number of elements. A variadic function receiving a very large slice may also create work and memory pressure if the application blindly trusts caller-supplied data.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Security considerations include protecting secrets in function parameters, avoiding unbounded allocations, returning errors that inform the caller without leaking sensitive paths or tokens, and not logging confidential input values. The present standalone example does not perform network access, write files, or require additional privileges, but those constraints must be revisited when adapting it to real service or monitoring software.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Guided Practice Exercises</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Write a <code>square(n int) int</code> function and call it with 4 and -3. Predict the returned results.</li><li>Modify <code>average</code> to accept <code>values := []float64{10, 20, 30}</code> using <code>average(values...)</code>. Explain what the final ellipsis does.</li><li>Call <code>minMax(nil)</code> and confirm the caller handles the returned error before displaying a minimum or maximum.</li><li>Extend the unit tests with <code>countAbove(5, 5)</code> and a negative threshold; explain strict versus non-strict comparison.</li><li>Add a new <code>sum(values ...int) int</code> function. Decide whether the empty argument list should produce zero or an error, and justify the contract.</li><li>Use the official Go Tour to compare named result parameters with a function that returns values explicitly. Keep the resulting code readable.</li><li>Run <code>go test -v ./...</code> after each change and document the compiler and test version rather than assuming all tools behave identically across releases.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check and Answers</h2><!-- /wp:heading -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li><strong>How are Go function parameters declared?</strong> With names and types in parentheses after the function name.</li><li><strong>Can a Go function return two values?</strong> Yes. The declaration supplies a parenthesized result list, and the caller can assign the returned values to two variables.</li><li><strong>What is the conventional second result for a failing operation?</strong> An <code>error</code>, with <code>nil</code> indicating success.</li><li><strong>Are Go function arguments passed by value?</strong> Yes. Some copied values contain references to shared underlying objects, such as slice descriptors and pointers.</li><li><strong>Where must a variadic parameter appear?</strong> Last in the function's parameter list.</li><li><strong>What does <code>values...</code> do at a variadic call site?</strong> It passes a compatible slice's elements as variadic arguments.</li><li><strong>What does <code>average()</code> return in the example?</strong> The zero value with a non-nil error explaining that at least one value is required.</li><li><strong>What is the main output for <code>average(10, 20, 30)</code>?</strong> 20.00, formatted to two decimal places.</li><li><strong>Why does <code>countAbove(5, 5)</code> return zero?</strong> Because the test is <code>&gt;</code>, not <code>&gt;=</code>.</li><li><strong>Did passing local tests prove every possible input is safe?</strong> No. Only the documented cases were executed; input and security requirements must be extended for production use.</li></ol><!-- /wp:list -->
+<!-- wp:heading --><h2 class="wp-block-heading">Primary Documentation and Educational References</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p><a href="https://go.dev/tour/basics/4">A Tour of Go — Functions</a>; <a href="https://go.dev/tour/basics/6">A Tour of Go — Multiple Results</a>; <a href="https://go.dev/ref/spec">Go Language Specification</a>; <a href="https://go.dev/doc/effective_go">Effective Go</a>; <a href="https://go.dev/doc/tutorial/handle-errors">Go Tutorial — Return and Handle an Error</a>; <a href="https://go.dev/doc/faq#pass_by_value">Go FAQ — Pass by Value</a>; <a href="https://go.dev/brand">Go Brand and Gopher Attribution</a>; and the verified Net Ninja and freeCodeCamp.org educational videos embedded above. The Go project website is the primary source for syntax and language semantics.</p><!-- /wp:paragraph -->
+<!-- wp:heading --><h2 class="wp-block-heading">Conclusion</h2><!-- /wp:heading -->
+<!-- wp:paragraph --><p>Functions provide Go programs with reusable operations and explicit contracts. Typed inputs, multiple return values, variadic parameters, and returned errors allow a caller to understand not only a computed result but also whether the operation succeeded. Tested examples and carefully explained error paths build a foundation for methods, interfaces, packages, and more complex Go systems later in the curriculum.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSGo.005 follows verified OSGo.004 and the published OSRust.007 lesson in the broader subject rotation. The 1200 × 630 featured image is original AI-generated editorial artwork showing a fictional mid-career male Go instructor; the preceding Rust lesson portrayed an older female mentor. The Go Gopher is genuine official mascot artwork by Renée French, credited under CC BY 4.0. The chart plots synthetic input values whose exact counts passed local Go tests. The embedded videos are authentic educational tutorials from Net Ninja and freeCodeCamp.org, not recordings made for this publication. The source and tests were executed with go1.23.2 on Linux, and go vet completed successfully. No video playback, network service, or production software workload is represented as tested without independent evidence.</em></p><!-- /wp:paragraph -->
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech voluntary donation QR code for 5000 satoshis" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-sat donation QR. Verify the payment recipient and amount before confirming any transfer.</em></figcaption></figure><!-- /wp:image -->
+<!-- wp:paragraph --><p><em>To donate using a mobile wallet, display the original QR on another device or use your wallet's supported saved-image scanner. Verify the recipient and the 5,000-satoshi amount before sending funds.</em></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech presents open educational programming material and does not provide a production deployment or security certification. Review official project documentation and test code in the intended environment.</em></p><!-- /wp:paragraph -->

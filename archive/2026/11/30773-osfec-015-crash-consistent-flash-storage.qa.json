@@ -1,0 +1,96 @@
+{
+  "audit_date": "2026-11-07",
+  "wp_post_id": 30773,
+  "lesson_id": "OSFEC.015",
+  "title": "OSFEC.015: Crash-Consistent Flash Storage — Zephyr NVS, littlefs, and Power-Loss Recovery",
+  "url": "https://bitcoinversus.tech/2026/11/07/osfec-015-crash-consistent-flash-storage-zephyr-nvs-littlefs-power-loss-recovery/",
+  "status": "publish",
+  "category_ids": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "featured_image": {
+    "id": 30760,
+    "width": 1200,
+    "height": 630,
+    "type": "original AI editorial image",
+    "subject": "middle-aged male firmware engineer, salt-and-pepper hair and beard; rotated from prior young female technician"
+  },
+  "in_story_media": [
+    {
+      "id": 30764,
+      "type": "official Nordic development-board image",
+      "credit": "Nordic Semiconductor Japan"
+    },
+    {
+      "id": 30761,
+      "type": "Python-calculated bar chart",
+      "source": "Zephyr NVS 2x1024 B sectors,4 B data,8 B metadata,20000 assumed erases"
+    },
+    {
+      "youtube": "Np8O-MjAeGU",
+      "publisher": "Nordic Semiconductor",
+      "title": "nRF Connect SDK hands-on, part 4: Storing data on non-volatile memory"
+    },
+    {
+      "youtube": "CY0Vq_Lgs4k",
+      "publisher": "Nordic Semiconductor",
+      "title": "nRF Connect SDK hands-on, part 1: Rapid prototyping with nRF Connect SDK"
+    }
+  ],
+  "media_types": "2 in-body images + 2 educational videos; no conceptual schematics",
+  "internal_links": 6,
+  "wordpress_saved_gutenberg_characters": 26578,
+  "video_shortcodes": 2,
+  "live_rendered_video_iframes": 2,
+  "video_playback": "not independently tested",
+  "screenshots": "WordPress public screenshot captures for 1280px and 390px ready; pixels not independently inspected",
+  "code": {
+    "language": "Python 3.8+",
+    "artifact_filename": "osfec_015_flash_recovery_sim.py",
+    "sha256": "ff7fe5d8805be4494384e0f6b0f463cf72d0dc5c014614c269486bf7a78620b1",
+    "executed": true,
+    "output": [
+      "initial recovery: (1, 40)",
+      "interrupted write: (1, 40)",
+      "committed write: (2, 99)",
+      "corrupt latest: (1, 40)"
+    ],
+    "scope": "host-only two-slot model, not real hardware flash validation"
+  },
+  "math": {
+    "model": "Zephyr NVS documentation example",
+    "sector_count": 2,
+    "sector_bytes": 1024,
+    "erase_cycle_assumption": 20000,
+    "payload_bytes": 4,
+    "metadata_bytes": 8,
+    "modeled_years_by_minutes": {
+      "1": 6.49,
+      "2": 12.99,
+      "5": 32.47,
+      "10": 64.94
+    },
+    "warning": "calculated illustrative endurance, not service-life prediction"
+  },
+  "sources": [
+    "https://docs.zephyrproject.org/latest/services/storage/nvs/nvs.html",
+    "https://docs.zephyrproject.org/latest/samples/subsys/kvss/nvs/README.html",
+    "https://github.com/littlefs-project/littlefs/blob/master/DESIGN.md",
+    "https://nrfconnectdocs.nordicsemi.com/ncs/latest/nrf/app_dev/data_storage.html"
+  ],
+  "footer": {
+    "original_qr_media_id": 24043,
+    "editor_note_present": true,
+    "approved_volunteer_statement_present": true
+  },
+  "subscriber_email_disabled": true,
+  "limitations": [
+    "Physical NOR write-interruption and endurance tests not performed",
+    "live YouTube playback not independently tested",
+    "Desktop/mobile screenshots ready but pixels not viewed"
+  ],
+  "lesson_next_after": "history_money_technology_bitcoin"
+}

@@ -1,0 +1,79 @@
+{
+  "track_id": "OSC.006",
+  "subject": "c",
+  "post_id": 31001,
+  "title": "OSC.006: C Functions — Prototypes, Parameters, Return Values, and Scope",
+  "url": "https://bitcoinversus.tech/2026/11/07/osc-006-c-functions-prototypes-parameters-return-values-scope/",
+  "status": "publish",
+  "wordpress_get_saved_markup_verified": true,
+  "published_at": "2026-11-07",
+  "featured_media_id": 30991,
+  "featured_dimensions": [
+    1200,
+    630
+  ],
+  "cover_subject": "fictional middle-aged male C mentor, rotating from younger female technician; original AI-created 1200x630 cover",
+  "media": [
+    {
+      "id": 30993,
+      "source": "https://commons.wikimedia.org/wiki/File:DEC_PDP-11_Minicomputer_in_extended_variant_(edited).jpg",
+      "credit": "Loz Pycock; retouch Pittigrilli",
+      "license": "CC BY-SA 2.0"
+    },
+    {
+      "id": 30995,
+      "source": "GCC 14.2.0 C11 code execution in current tool container, 2026-11-07",
+      "credit": "Original output visualization from execution, not terminal screenshot",
+      "license": "original"
+    },
+    {
+      "id": 30994,
+      "source": "https://commons.wikimedia.org/wiki/File:Arduino_Uno_board.jpg",
+      "credit": "JrawX",
+      "license": "CC0 1.0"
+    }
+  ],
+  "in_body_media_count": 3,
+  "code_blocks_maintained": 10,
+  "code_executed": true,
+  "compiler": "gcc (Debian 14.2.0-19) 14.2.0",
+  "compiler_flags": "-std=c11 -Wall -Wextra -Wpedantic -Werror -O0",
+  "tested_programs": [
+    {
+      "file": "lesson06.c",
+      "output": "sum(1..5) = 15\\nclamped(125) = 100%"
+    },
+    {
+      "file": "by_value.c",
+      "output": "inside = 15\\noutside = 10"
+    },
+    {
+      "files": [
+        "multi_main.c",
+        "metrics.c",
+        "metrics.h"
+      ],
+      "output": "square_small(7) = 49"
+    }
+  ],
+  "assert_tests": 5,
+  "assert_tests_passed": true,
+  "external_hardware_tested": false,
+  "independent_public_browser_fetch": false,
+  "wordpress_view_rendered_count": 4,
+  "desktop_mobile_captures": "ready",
+  "desktop_mobile_screenshot_pixels_inspected": false,
+  "youtube_embeds": 0,
+  "youtube_playback_verified": false,
+  "qr_media_id": 24043,
+  "original_footer": true,
+  "editor_note_italic": true,
+  "newsletter_disabled": true,
+  "seo_saved": true,
+  "limits": [
+    "WordPress view proves rendered HTML and markup, not physical device playback or visual pixel inspection",
+    "The original featured image is a conceptual illustration, not captured program output",
+    "C11 tests run on the specified GCC environment only, not every target toolchain"
+  ],
+  "resolution": "OSC.006 verified unused before publication; archive identical saved markup to three repositories"
+}

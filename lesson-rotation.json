@@ -64,13 +64,13 @@
     ],
     "publication_status": "published",
     "verification_status": "WordPress publish confirmed; two rendered YouTube iframes, three byte-exact GitHub Gutenberg archives; live playback and screenshot pixels unverified",
-    "qa_status": "Published #30738 November 7 2026. WordPress saved source 23,253 chars matched exactly in all 3 archives. Featured image #30732 is original 1200x630 AI editorial cover depicting younger woman technician for demographic/person rotation. Real Open-CMSIS Pack NUCLEO-L476RG board photo #30734; calculated AHB prescaler chart #30733; official ST educational videos _ZfUwAzGLWE and o4R2VNzeDhY rendered as 2 iframes in WordPress view, playback not tested. 4 contextual internal links, original QR #24043, italic Editor Note, subscriber email suppressed. Desktop 1280 and mobile 390 screenshot links ready; pixel inspection not performed. No physical clock tests, no custom conceptual schematics. WordPress confirms OSFEC.014 #27837 published and OSFEC.015 unused. All 43 subjects and 20 programming tracks retained.",
+    "qa_status": "Published #30738 November 7 2026. WordPress saved source 23,253 chars matched exactly in all 3 archives. Featured image #30732 is original 1200x630 AI editorial cover depicting younger woman technician for demographic/person rotation. Real Open-CMSIS Pack NUCLEO-L476RG board photo #30734; calculated AHB prescaler chart #30733; official ST educational videos _ZfUwAzGLWE and o4R2VNzeDhY rendered as 2 iframes in WordPress view, playback not tested. 4 contextual internal links, original QR #24043, italic Editor Note, subscriber email suppressed. Desktop 1280 and mobile 390 screenshot links ready; pixel inspection not performed. No physical clock tests, no custom conceptual schematics. WordPress confirms OSFEC.014 #27837 published and OSFEC.015 unused. All 43 subjects and 20 programming tracks retained. The Python clock-divider snippet was subsequently run and matched both expected output lines; all three QA archives updated.",
     "featured_media_id": 30732,
     "body_video_ids": [
       "_ZfUwAzGLWE",
       "o4R2VNzeDhY"
     ],
-    "code_executed": false
+    "code_executed": true
   },
   "next": {
     "subject": "firmware_engineer",

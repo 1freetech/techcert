@@ -76,21 +76,35 @@
   "desktop_screenshot": "capture ready; pixel inspection unverified",
   "mobile_screenshot": "capture ready; pixel inspection unverified",
   "contextual_internal_links": 4,
-  "code_blocks": 6,
+  "code_blocks": 0,
   "editor_note": true,
   "original_donation_qr_media_id": 24043,
   "subscriber_email_suppressed": true,
   "custom_diagrams": "none",
-  "final_source_readback": "Updated archive matches revised live Gutenberg source after code-box styling repair.",
+  "final_source_readback": "WordPress no longer contains any code/pre boxes. Article links to unchanged, verified source and test archives. GitHub Gutenberg snapshot updated to exact current live source.",
   "video_revision_2026_11_07": "Replaced original unverified Microsoft Developer ID oWzCvL35d0c with independently sourced Bro Code video 9dr2mHYYoug; retained Kunal Kushwaha n60Dn0UsbEk. Both render in WordPress; playback remains unverified.",
   "verified_full_current_gutenberg": true,
   "layout_repair": {
     "date": "2026-11-07",
-    "request": "Fix text boxes",
     "post_id": 31058,
-    "changed": "Replaced six visually boxed Gutenberg code blocks with transparent, borderless monospaced HTML pre blocks with mobile text wrapping",
-    "preserved": "Java source, nine tests, instructional chart, video iframes, internal links, Editor Note, donation QR, SEO and categories",
-    "verified": "WordPress source and rendered HTML show six transparent borderless pre blocks with pre-wrap; two YouTube iframe players remain; mobile/desktop screenshot captures are available but pixels not visually inspected",
-    "source_archive_path": "archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.gutenberg.html"
+    "request": "Remove text boxes altogether",
+    "outcome": "All six embedded pre/code displays and all remaining inline code elements removed from WordPress article. Replaced with ordinary paragraphs, explicit verified outputs, and links to complete archived Java source and test files.",
+    "live_validation": {
+      "status": "publish",
+      "code_blocks": 0,
+      "pre_elements": 0,
+      "inline_code_elements": 0,
+      "custom_html_code_boxes": 0,
+      "youtube_iframes": 2,
+      "source_link_in_article": true,
+      "test_link_in_article": true,
+      "qr_preserved": true,
+      "desktop_mobile_screenshots": "Capture-ready, pixel inspection not performed"
+    },
+    "full_code_archives_unchanged": [
+      "archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.ArrayLab.java",
+      "archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.ArrayLabTest.java"
+    ],
+    "repaired_gutenberg_source": "archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.gutenberg.html"
   }
 }

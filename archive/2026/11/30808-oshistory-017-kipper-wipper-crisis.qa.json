@@ -1,0 +1,75 @@
+{
+  "audit_date": "2026-11-07",
+  "wp_post_id": 30808,
+  "lesson_id": "OSHistory.017",
+  "title": "OSHistory.017: The Kipper und Wipper Monetary Crisis — Coin Debasement, Inflation, and the Thirty Years' War",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/oshistory-017-kipper-wipper-monetary-crisis-1619-1623-coin-debasement-inflation/",
+  "status": "publish",
+  "category_ids": [
+    2509703
+  ],
+  "previous": "OSHistory.016 Philip II 1575 credit freeze — WordPress #27887",
+  "next": "OSHE.005 History of Engineering, WordPress archive search no matching published or draft",
+  "in_story_media": [
+    {
+      "id": 30805,
+      "type": "authentic museum coin photograph",
+      "source": "Staatliche Museen zu Berlin Münzkabinett, 1621 Brunswick-Wolfenbüttel Kipper 12 kreuzer; photographer Christian Stoess"
+    },
+    {
+      "id": 30804,
+      "type": "source-grounded historical exchange bar chart",
+      "source": "Staatliche Museen zu Berlin Münzkabinett 2021 regional example, 90 vs more than 390 kreuzer per full Reichstaler"
+    },
+    {
+      "youtube_id": "cDunojy_y1A",
+      "type": "educational video",
+      "publisher": "Staatliche Museen zu Berlin",
+      "title": "Münzkabinett | National Museums in Berlin (DE/EN)",
+      "released": "2011-04-06"
+    },
+    {
+      "youtube_id": "V3fdX-yAUj0",
+      "type": "educational video",
+      "publisher": "Staatliche Museen zu Berlin",
+      "title": "Allein im Museum | Münzkabinett mit Bernhard Weisser",
+      "released": "2020-04-08"
+    }
+  ],
+  "featured_cover": {
+    "id": 30803,
+    "width": 1200,
+    "height": 630,
+    "type": "original conceptual AI historical still life",
+    "subject": "coinage workshop objects only; no people, rotated from prior middle-aged male engineer cover"
+  },
+  "internal_links": 5,
+  "source_articles": [
+    "https://www.smb.museum/en/whats-new/detail/muenzkabinett-acquires-kipper-und-wipper-coins-from-the-balan-collection/",
+    "https://libertystreeteconomics.newyorkfed.org/2013/06/crisis-chronicles-300-years-of-financial-crises-1620-1920/",
+    "https://pecunia.zaw.uni-heidelberg.de/NumiScience/materielle-zeugnisse-der-kipper-und-wipperzeit",
+    "https://www.bundesbank.de/de/bundesbank/geldmuseum"
+  ],
+  "math": {
+    "prewar_kreuzer_per_good_reichstaler_approx": 90,
+    "end_1621_kreuzer_per_good_reichstaler": ">390",
+    "relative_increase": ">4.333333 times",
+    "remaining_small_coin_relative_value": "<23.08% of initial full-coin benchmark",
+    "warning": "Regional historical exchange valuation, not measured consumer price inflation"
+  },
+  "images_in_body": [
+    30805,
+    30804,
+    24043
+  ],
+  "wordPress_saved_markup_characters": 22049,
+  "video_shortcodes": 2,
+  "public_rendered_youtube_iframes": 2,
+  "independent_playback": "not tested",
+  "browser_captures": "WordPress ready public site screenshot at 1280px and 390px; pixels not independently inspected",
+  "conceptual_schematics": "none",
+  "original_donation_qr_media_id": 24043,
+  "editor_note_present": true,
+  "volunteer_disclaimer_present": true,
+  "no_newsletter": true
+}

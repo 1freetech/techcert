@@ -1,0 +1,63 @@
+{
+  "audit_date": "2026-11-07",
+  "wp_post_id": 30915,
+  "lesson_id": "OSHMS.002",
+  "title": "OSHMS.002: Early Lime Plaster — Fire, Chemistry, and Neolithic Materials Engineering",
+  "url": "https://bitcoinversus.tech/2026/11/07/oshms-002-early-lime-plaster-pyrotechnology-neolithic-materials/",
+  "status": "publish",
+  "subject": "history_materials_science",
+  "previous_lesson": "OSHMS.001, WordPress #28058",
+  "featured_cover": {
+    "media_id": 30911,
+    "dimensions": [
+      1200,
+      630
+    ],
+    "original_ai_illustration": true,
+    "depicted_profile": "Younger male materials researcher, different from preceding mature female field engineer"
+  },
+  "media": [
+    {
+      "id": 30912,
+      "type": "calculated bar chart",
+      "topic": "ideal CaCO3 -> CaO + CO2 stoichiometry",
+      "not_measurement": true
+    },
+    {
+      "id": 30913,
+      "type": "authentic museum artifact photograph",
+      "subject": "Ain Ghazal plaster statue",
+      "credit": "Zunkir, Wikimedia Commons, CC BY-SA 4.0"
+    },
+    {
+      "id": 30914,
+      "type": "authentic museum artifact photograph",
+      "subject": "Jericho plastered skull",
+      "credit": "Mary Harrsch, Wikimedia Commons, CC BY 2.0"
+    }
+  ],
+  "in_story_media_count": 3,
+  "video_count": 0,
+  "video_note": "No suitable exact verified educational video; no invented embed",
+  "calcination_mass_balance_g": {
+    "CaCO3": 100.0869,
+    "CaO": 56.0774,
+    "CO2": 44.0095,
+    "complete_ideal_reaction": true,
+    "field_measured": false
+  },
+  "source_links": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC10427327/",
+    "https://sites.utexas.edu/dsb/ain-ghazal/murals-and-floor-paintings-at-ain-ghazal/",
+    "https://www.ashmolean.org/jericho-skull",
+    "https://www.journals.uchicago.edu/doi/10.2307/506791"
+  ],
+  "contextual_internal_links": 4,
+  "approved_footer_and_original_5000_sat_qr": true,
+  "editor_note": true,
+  "newsletter_email_disabled": true,
+  "live_wordpress_readback": true,
+  "desktop_and_mobile_screenshot_capture": "WordPress capture status ready at 1280px and 390px; pixels not independently inspected",
+  "actual_video_playback": "Not applicable",
+  "archival_validation": "Exact live WordPress Gutenberg source recorded and checked across all three repositories."
+}

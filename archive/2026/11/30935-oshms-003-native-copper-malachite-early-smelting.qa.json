@@ -1,0 +1,47 @@
+{
+  "post_id": 30935,
+  "track_id": "OSHMS.003",
+  "title": "OSHMS.003: From Native Copper to Smelting — Malachite, Reduction, and Early Metallurgy",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/oshms-003-native-copper-malachite-reduction-early-smelting/",
+  "post_status": "publish",
+  "subject": "history_materials_science",
+  "previous_lesson": "OSHMS.002 (early lime plaster), WordPress #30915",
+  "publication_date": "2026-11-07",
+  "exact_gutenberg_readback": true,
+  "wordpress_featured_media": 30917,
+  "featured_media_px": [
+    1200,
+    630
+  ],
+  "cover_type": "original AI illustration of older Black male materials scientist; not real person",
+  "in_story_photographs": [
+    30919,
+    30918,
+    30920
+  ],
+  "in_story_media_count": 3,
+  "credited_photo_licenses": [
+    "public domain",
+    "public domain",
+    "CC BY-SA 4.0"
+  ],
+  "internal_links_verified_count": 5,
+  "donation_qr_media": 24043,
+  "editor_note_italic": true,
+  "original_footer": true,
+  "links": [
+    "https://www.ucl.ac.uk/social-historical-sciences/archaeology/research/research-directory/material-worlds/rise-metallurgy-eurasia",
+    "https://discovery.ucl.ac.uk/id/eprint/10059796/",
+    "https://www.sciencedirect.com/science/article/pii/S0305440310001986",
+    "https://pubchem.ncbi.nlm.nih.gov/compound/Malachite"
+  ],
+  "technical_calculation": "57.48% theoretical elemental copper in pure malachite; 100 g gives 57.48 g (ideal); 80% and 70% are hypothetical teaching recoveries",
+  "wp_view_rendered_images": 4,
+  "video_embeds": 0,
+  "video_playback_tested": false,
+  "independent_public_browser_fetch": false,
+  "desktop_screenshot_pixels_inspected": false,
+  "mobile_screenshot_pixels_inspected": false,
+  "qa_status": "WordPress publish and rendered view confirmed; independent live mobile/desktop screenshots and public browser fetch unavailable; no unverified video embedded.",
+  "collision_resolution": "Concurrent WordPress post #30915 first published as OSHMS.002; this publication was renumbered to unused OSHMS.003 and predecessor linked. Outdated OSHMS.002 archival traces of post #30935 will be removed."
+}

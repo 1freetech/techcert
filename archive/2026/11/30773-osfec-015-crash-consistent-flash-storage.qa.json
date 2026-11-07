@@ -50,7 +50,6 @@
   "code": {
     "language": "Python 3.8+",
     "artifact_filename": "osfec_015_flash_recovery_sim.py",
-    "sha256": "ff7fe5d8805be4494384e0f6b0f463cf72d0dc5c014614c269486bf7a78620b1",
     "executed": true,
     "output": [
       "initial recovery: (1, 40)",
@@ -58,7 +57,17 @@
       "committed write: (2, 99)",
       "corrupt latest: (1, 40)"
     ],
-    "scope": "host-only two-slot model, not real hardware flash validation"
+    "scope": "host-only two-slot model, not real hardware flash validation",
+    "archived_source_path": "archive/2026/11/30773-osfec-015-flash-recovery-simulation.py",
+    "archived_source_git_blob_sha1": "bb1a64d564f2763ffe80e2f1c79f8b923000d068",
+    "source_checksum_correction": "The earlier standalone SHA-256 was not reproducible from the published WordPress code block and has been superseded by the verified Git blob SHA-1 of its exact archived text. Prior recorded value: ff7fe5d8805be4494384e0f6b0f463cf72d0dc5c014614c269486bf7a78620b1",
+    "source_readback_verified": true,
+    "source_reproduced_output": [
+      "initial recovery: (1, 40)",
+      "interrupted write: (1, 40)",
+      "committed write: (2, 99)",
+      "corrupt latest: (1, 40)"
+    ]
   },
   "math": {
     "model": "Zephyr NVS documentation example",

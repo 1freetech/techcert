@@ -1,0 +1,60 @@
+{
+  "post_id": 30492,
+  "title": "OSC++.037: std::packaged_task — Move-Only Tasks, Futures, Exceptions, and Controlled Execution",
+  "live_url": "https://bitcoinversus.tech/2026/11/06/oscpp-037-std-packaged-task-move-only-futures-exceptions/",
+  "lesson_id": "OSC++.037",
+  "subject": "cpp",
+  "status": "published",
+  "audit_date": "2026-11-06",
+  "previous_lesson": "OSC++.036 — std::move_only_function, WordPress 27485",
+  "published_wordpress_content_length": 23925,
+  "featured_media_id": 30487,
+  "featured_cover_dimensions": [
+    1200,
+    630
+  ],
+  "original_body_media": [
+    {
+      "type": "diagram",
+      "id": 30489
+    },
+    {
+      "type": "diagram",
+      "id": 30490
+    },
+    {
+      "type": "youtube",
+      "id": "3Oe98NzaZdU",
+      "title": "Modern C++: Multi-threading, packaged task, future",
+      "publisher": "Jeevan Pant"
+    },
+    {
+      "type": "youtube",
+      "id": "4twJD5ezkag",
+      "title": "std::future and std::async in Modern cpp",
+      "publisher": "Mike Shah"
+    }
+  ],
+  "internal_link_count": 4,
+  "original_donation_qr_media_id": 24043,
+  "editor_note_present": true,
+  "site_rendered_iframes": 2,
+  "live_player_rendering": "confirmed through WordPress public-rendered HTML",
+  "independent_playback": "not tested",
+  "screenshots": "WordPress public screenshot links returned ready at 1280px and 390px; pixels not independently inspected",
+  "compiler": "GCC 14.2.0 C++20 -pthread, Debian-based container",
+  "compiled_and_executed": true,
+  "source_program": "oscpp_037_packaged_task.cpp",
+  "observed_output": [
+    "pending before invocation: true",
+    "worker result: 42",
+    "captured exception: planned failure",
+    "broken promise: true",
+    "first run: 7",
+    "after reset: 7"
+  ],
+  "test_limits": "not a concurrency benchmark; no Windows/MSVC compile or stress test performed",
+  "source_standard": "https://eel.is/c++draft/futures.task.general",
+  "source_microsoft": "https://learn.microsoft.com/en-us/cpp/standard-library/packaged-task-class?view=msvc-170",
+  "notes": "Native Gutenberg code blocks plus YouTube shortcodes. All content published with newsletter email disabled. Full 43-subject rotation and 20 coding tracks preserved."
+}

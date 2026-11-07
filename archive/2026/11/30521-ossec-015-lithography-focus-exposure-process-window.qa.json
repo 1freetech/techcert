@@ -1,0 +1,72 @@
+{
+  "post_id": 30521,
+  "lesson_id": "OSSEC.015",
+  "title": "OSSEC.015: Lithography Focus–Exposure Process Windows — FEM, Bossung Curves, and Depth of Focus",
+  "status": "published",
+  "url": "https://bitcoinversus.tech/2026/11/07/ossec-015-lithography-focus-exposure-process-windows-fem-depth-of-focus/",
+  "verification_date": "2026-11-07",
+  "category_ids": [
+    284207,
+    2509703,
+    6
+  ],
+  "previous_lesson": "OSSEC.014 WP #27553",
+  "featured_image_id": 30517,
+  "featured_image_dimensions": [
+    1200,
+    630
+  ],
+  "content_length": 26029,
+  "internal_links": 6,
+  "body_media": [
+    {
+      "type": "official_photograph",
+      "id": 30519,
+      "credit": "ASML",
+      "source": "https://www.asml.com/en/technology/how-we-innovate/fellows"
+    },
+    {
+      "type": "data_bar_chart",
+      "id": 30518,
+      "credit": "Open Source Tech Cert; source data UCSB Nanofab Wiki",
+      "educational_example_not_measurement": true,
+      "source": "https://wiki.nanofab.ucsb.edu/wiki/Lithography_Calibration_-_Analyzing_a_Focus-Exposure_Matrix"
+    },
+    {
+      "type": "verified_youtube",
+      "id": "B2482h_TNwg",
+      "title": "The $200M Machine that Prints Microchips: The EUV Photolithography System",
+      "publisher": "Branch Education",
+      "published": "2025-08-30"
+    },
+    {
+      "type": "verified_youtube",
+      "id": "bcQCYsItVjM",
+      "title": "Holistic lithography: Optimizing chipmaking from design to mass production",
+      "publisher": "ASML",
+      "published": "2026-06-23"
+    }
+  ],
+  "no_conceptual_schematics_or_diagrams": true,
+  "chart_published_example": "Pass counts from UCSB educational matrix by focus offset: 0, 1, 4, 5, 5, 3, 0",
+  "math_checked": {
+    "cd_nm_rounded": 50,
+    "na_ratio": 0.6888888888888889,
+    "dof_ratio": 0.4745679012345679,
+    "dose_pm_percentage": 5
+  },
+  "footer_5000_sat_QR_id": 24043,
+  "editor_note_italic": true,
+  "newsletter_email_suppressed": true,
+  "word_count_reporting_approx": 2362,
+  "live_html_youtube_iframes": 2,
+  "interactive_video_playback": "unverified",
+  "screenshot_links": "WordPress screenshot captures status ready for 1280px and 390px; pixel-level inspection pending",
+  "physical_tool_test": "none",
+  "sources": [
+    "https://wiki.nanofab.ucsb.edu/wiki/Lithography_Calibration_-_Analyzing_a_Focus-Exposure_Matrix",
+    "https://ocw.mit.edu/courses/6-152j-micro-nano-processing-technology-fall-2005/",
+    "https://www.asml.com/en/technology/lithography-principles/rayleigh-criterion"
+  ],
+  "verification_note": "The chart is teaching data, not a fabricated experimental dataset; official ASML photograph credited; no synthetic process schematic. Source and QA archived."
+}

@@ -73,5 +73,14 @@
   "mobile_screenshot": "mshots status ready 390px; pixels not independently inspected",
   "subscriber_email_suppressed": true,
   "duplicate_management": "At time of publication WordPress showed separate unpublished duplicate draft #30558 with the same title. Deliberately did not publish or delete the other draft. Needs editorial review; avoid second public OSREC.014.",
-  "notes": "Gutenberg content saved and read back. Lesson is published; actual robotics hardware not tested. The 1D teaching model is not full nonlinear SE(2) SLAM."
+  "notes": "Gutenberg content saved and read back. Lesson is published; actual robotics hardware not tested. The 1D teaching model is not full nonlinear SE(2) SLAM.",
+  "duplicate_resolution": {
+    "canonical_published_post_id": 30557,
+    "duplicate_draft_post_id": 30558,
+    "duplicate_draft_status": "trash",
+    "action": "Recovered-draft-safe trash of assistant-created duplicate draft",
+    "date": "2026-11-07",
+    "published_article_unchanged": true,
+    "reason": "Prevent publication of second OSREC.014"
+  }
 }

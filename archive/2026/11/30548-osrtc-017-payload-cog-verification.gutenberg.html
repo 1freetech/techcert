@@ -1,0 +1,211 @@
+<!-- wp:paragraph -->
+<p><strong>OSRTC.017</strong> extends introductory robot tool configuration into the technician's task of verifying the mass, center of gravity (CoG), and inertia of a robot's end-of-arm load. A robot carrying a gripper and a workpiece does not experience the same loading as the same arm with an empty gripper. Incorrect load data can undermine motion performance, cause nuisance protective stops, distort dynamic compensation, and conceal a physical tooling problem. An apparently correct tool center point (TCP) does not guarantee the payload model is correct.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The preceding <a href="https://bitcoinversus.tech/2026/10/31/osrtc-016-robot-conveyor-tracking-encoders-sensors-tracking-frames/">OSRTC.016 conveyor-tracking lesson</a> examined position and timing of moving workpieces. <a href="https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/">OSRTC.004</a> introduced end-effectors, TCPs and basic payload settings. The present lesson concentrates on <strong>quantitative load verification, separate empty/loaded states, documented estimation, and fault discrimination</strong> rather than re-teaching the basic TCP wizard. The practical references are the free <a href="https://academy.universal-robots.com/free-e-learning/e-series-e-learning/e-series-core-track/">Universal Robots Academy core track</a> and its manufacturer's user manuals.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain the difference among tool center point, payload mass, center of gravity, and rotational inertia.</li><li>Account for the end effector, adapters, permanently attached tooling and the carried workpiece in combined payload data.</li><li>Calculate a combined center of mass for two known components and a simple gravity moment using clearly defined axes.</li><li>Read manufacturer payload and CoG interfaces and recognize that coordinate conventions and software versions vary.</li><li>Describe how a vendor-supported payload estimation wizard can be used during a qualified, safeguarded setup.</li><li>Distinguish a configuration problem from a mechanical interference, cable snag, misplaced part or unstable gripping condition.</li><li>Write an auditable empty-versus-loaded payload verification plan without moving a real robot.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: <a href="https://bitcoinversus.tech/2026/10/04/osrtc-001-industrial-robot-safety-e-stops-safeguarding-safe-workcell-entry/">industrial robot safeguarding</a>, end-effector setup, mass and gravity, basic coordinate frames and awareness of <a href="https://bitcoinversus.tech/2026/10/29/osrtc-015-robotic-tool-changer-inspection-lock-sensors-docking-utility-couplers/">tool-change verification</a>. Equipment for the classroom exercise: calculator or spreadsheet, a vendor manual, and fictional component dimensions. No energized robot, teach-pendant motion or load experiment is required.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Mechanical Meaning of Payload</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The robot does not merely lift kilograms; it must accelerate an extended body whose mass is distributed in space. Payload mass describes how much load is attached, whereas the <strong>center of gravity</strong> is the weighted average location of that mass. A long, light gripper can demand different wrist performance from a compact gripper of equal mass. Rotational inertia adds a further constraint: spreading mass away from a rotation axis makes it harder to start or stop angular motion.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30544,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/universal-robots-eseries-teach-pendant-official.jpg" alt="Real Universal Robots industrial cobot beside a technician using a teach pendant" class="wp-image-30544" /><figcaption class="wp-element-caption"><em>Official Universal Robots photograph accompanying its modular robot-cell article. Actual equipment and programming interface; credit: Universal Robots.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>A robot's published payload maximum is <em>not</em> permission to suspend that mass at any center-of-gravity offset, orientation, speed or reach. Robot-specific manufacturer payload diagrams, flange moment limits, permissible inertia, mounting and duty conditions are decisive. For example, <a href="https://www.universal-robots.com/manuals/EN/HTML/SW10_15/Content/prod-usr-man/complianceUR3e/PolyX_SW/polyX-PayloadRange.htm">Universal Robots' payload-range documentation</a> describes model-specific restrictions combining mass and CoG; setting a plausible kilogram value does not by itself validate the whole load.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Official Training — Tool, TCP, and CoG</h2>
+<!-- /wp:heading -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=YnC-ccytJlw&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Universal Robots Academy, “Tool Configuration: TCP, orientation, payload &amp; center of gravity,” published December 16, 2021. The official free video demonstrates entering and checking the tool configuration; the payload/CoG segment begins about 2:40. Instructions and screens depend on the robot/software version.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The video makes a critical distinction: TCP location and orientation describe <em>where the tool works</em>, while CoG describes <em>where the combined weight acts</em>. Two values can differ substantially. Do not copy a TCP Z coordinate into the CoG Z field merely because both are expressed in millimeters. The approved installation reference frame, origin and axis directions must come from the correct manufacturer's manual.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reading the Manufacturer's Payload Screen</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":30545,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/universal-robots-polyscope-payload-screen-official.png" alt="Official Universal Robots PolyScope screen with payload mass, CX CY CZ and inertia settings" class="wp-image-30545" /><figcaption class="wp-element-caption"><em>Screenshot from Universal Robots' PolyScope payload manual. Credit: Universal Robots. A real interface illustration, not a custom schematic; displayed values are screen examples, not validated load settings.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>The official <a href="https://www.universal-robots.com/manuals/EN/HTML/SW5_25_1/Content/prod-usr-man/complianceUR3e/SW_sections/first_program/payload.htm">PolyScope 5 payload reference</a> describes mass, CoG coordinates <code>CX</code>, <code>CY</code> and <code>CZ</code>, and optional custom inertia matrix terms. In that implementation, the inertia reference is centered at the payload CoG and aligned with the tool-flange axes. Other robot controllers or PolyScope X versions may use different screens, field names or workflows. A technician should record software version, selected installation, active payload profile and units rather than relying on a screenshot alone.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A sensor reading or a completed wizard does not replace a mechanical inventory. The payload model should include gripper mass, adapters, attached fixtures, and the workpiece currently held. It should exclude a component that is mounted to the stationary cell rather than the moving flange. Flexible hoses and cables can introduce forces that are not modeled accurately as a rigid mass: identify unsupported strain and routing separately, following <a href="https://bitcoinversus.tech/2026/10/25/osrtc-012-robot-dress-pack-inspection-cable-routing-bend-radius-wear/">OSRTC.012 on robot dress packs</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked Example — Combined Center of Gravity</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Suppose an illustrative robot flange carries a <strong>0.80 kg gripper</strong> with its CoG <strong>80 mm</strong> along the positive local Z axis. It picks up a <strong>1.20 kg carton</strong> whose CoG is <strong>250 mm</strong> along the same axis. Assume both component centers lie on the local Z axis, and the mass and distances were correctly identified from the flange origin. These are hypothetical classroom values, not a measured robot setup.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Total mass:</strong> m = 0.80 kg + 1.20 kg = <strong>2.00 kg</strong>. The coordinate of the combined center is the mass-weighted average: <strong>z<sub>CoG</sub> = (0.80 × 80 + 1.20 × 250) / 2.00 = (64 + 300) / 2 = 182 mm</strong> from the chosen flange origin.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The empty-gripper state is <strong>0.80 kg, Z = 80 mm</strong>. The loaded state is <strong>2.00 kg, Z = 182 mm</strong>. A program that changes tools or picks up and releases workpieces may need an appropriately selected payload state at each stage. The <a href="https://www.universal-robots.com/manuals/EN/HTML/SW5_25_1/Content/prod-usr-man/complianceUR3e/SW_sections/first_program/payload.htm">manufacturer's manual</a> explicitly supports multiple payload definitions and active selection. A nominal CoG is not automatically equal to the payload's highest point or its gripper TCP.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Gravity Moment Depends on Offset and Orientation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a simplified static load whose CoG is displaced horizontally from a chosen flange reference, the magnitude of the gravity moment is <strong>τ = m g r<sub>⊥</sub></strong>, where m is combined mass (kg), g ≈ 9.81 m/s² and r<sub>⊥</sub> (m) is the shortest perpendicular distance from the reference axis to the weight's line of action. For a 2.00 kg payload with a 0.15 m horizontal offset, <strong>τ = 2.00 × 9.81 × 0.15 = 2.943 N·m</strong>. Its direction changes with arm orientation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30543,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osrtc-017-static-payload-gravity-moment-chart.png" alt="Grouped vertical bars of ideal gravitational moment versus horizontal center-of-gravity offset for 1, 2 and 3 kg loads" class="wp-image-30543" /><figcaption class="wp-element-caption"><em>Original calculated engineering chart, using τ = mgr at g = 9.81 m/s² and a static horizontal offset. The values are arithmetic examples, not observed robot data, joint-torque limits or model-specific rated payload curves.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>The chart illustrates why two apparently similar tools can impose different moments. It does not predict permissible payload, protective-stop thresholds, motor thermal limits or safe acceleration for any named robot. Actual joint loading depends on the complete kinematic chain, arm pose, acceleration, tool inertia, gravity direction and mechanical configuration; robot manufacturer data must govern the final selection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inertia Is Not the Same as Weight</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a mathematical point mass at distance r from a rotation axis, the moment of inertia is <strong>I = m r²</strong>. A 2 kg point mass concentrated 0.15 m from that axis would contribute 2 × (0.15)² = <strong>0.045 kg·m²</strong>. A real gripper or carton is not a point mass: it also has its own distributed inertia about its center. The parallel-axis relationship adds the translation term to that body inertia. These calculations explain the concept but cannot replace manufacturer CAD mass properties, properly calibrated estimation, or the robot's actual allowable inertia.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.universal-robots.com/manuals/EN/HTML/SW5_25_1/Content/prod-usr-man/complianceUR3e/SW_sections/first_program/payload.htm">PolyScope documentation</a> names tensor entries <code>IXX</code>, <code>IYY</code>, <code>IZZ</code>, <code>IXY</code>, <code>IXZ</code>, and <code>IYZ</code>. Inputting guessed inertias can be more misleading than carefully using a supported approximation; an authorized engineer should decide whether custom inertia data is required and ensure that units and axes match the software.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Manufacturer's Estimation Wizard — What It Establishes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Universal Robots documents a payload-estimation wizard that observes the load from several sufficiently different robot poses. The <a href="https://www.universal-robots.com/manuals/EN/HTML/SW10_10/Content/prod-usr-man/software/PolyScopeX/polyx-application/polyx-TCP_Payload_CenterofGravity.htm">PolyScope X guide</a> describes an estimation from four different taught poses and alerts users when the positions lack adequate variety. The tool is intended for trained personnel using the exact robot model and software revision with the cell risk assessment, safety systems and clearances in force.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Verify the robot's mounting orientation, installation profile and flange reference before interpreting the result.</li><li>Record whether the measured state is empty tooling, tooling plus workpiece, or another removable assembly.</li><li>Use the authorized workflow and approved safe positions; never move a robot solely to recreate classroom documentation.</li><li>Repeat an approved measurement if the manufacturer reports insufficient pose diversity, inconsistent results or suspected external forces.</li><li>Do not pull on the gripper, snag its cables, or apply an uncontrolled force while the system estimates weight.</li><li>Verify the estimated values against an independent mass inventory and the manufacturer payload envelope before production release.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The wizard provides <em>an estimate</em> under its assumptions. It does not independently certify flange bolts, gripper retention, handling stability, risk assessment, safety-rated speed or the carried part's mechanical integrity.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Changing the Load During a Pick-and-Place Cycle</h2>
+<!-- /wp:heading -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=l5QUDOjdMck&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>Universal Robots Academy, educational video explaining how to change payload and center of gravity during program execution, published September 27, 2021. The video provides manufacturer background; specific commands and interfaces vary with PolyScope generation.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A pick cycle changes load state when the robot successfully acquires or releases a part. The robot controller or application should use the correct payload data at appropriate verified transitions. A command to close a gripper is not itself proof of successful acquisition. Where the gripper supports part-present feedback, the machine should verify the relevant sensor state before relying on a loaded payload profile; the exact state-transition design belongs to the controlled automation program.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Incorrect load-state timing can affect motion compensation and monitoring. For instance, a dropped part may leave the program using a loaded model while the real tool is empty. Conversely, a program carrying a part with an empty-tool model is inconsistent with the physical assembly. The safe response is to stop, retain diagnostic evidence, and determine what actually occurred—not to force a more generous motion or protective-stop threshold.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Diagnosing Apparent Payload Problems</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Repeated protective stops after a heavier part:</strong> compare recorded loaded mass and CoG with actual tooling and workpiece; also inspect collision, acceleration and force interaction rather than assuming a single cause. <a href="https://www.universal-robots.com/articles/ur/robot-care-maintenance/understanding-protective-stops/">Universal Robots explicitly recommends checking payload, TCP and CoG</a>.</li><li><strong>Stops following a tool change:</strong> check the active tool identity, secure coupling, mass profile and <a href="https://bitcoinversus.tech/2026/10/29/osrtc-015-robotic-tool-changer-inspection-lock-sensors-docking-utility-couplers/">coupler interlocks</a>.</li><li><strong>Motion-dependent deviation:</strong> consider orientation, CoG offset, inertia and cable loading before asserting the motor or encoder is defective.</li><li><strong>Part falls or twists after pickup:</strong> check gripping or vacuum confirmation, actual part mass, friction, surface and trajectory; payload tuning does not repair weak retention. The earlier <a href="https://bitcoinversus.tech/2026/10/27/osrtc-014-industrial-robot-gripper-inspection-jaw-wear-pneumatics/">gripper-inspection lesson</a> addresses mechanical and pneumatic faults.</li><li><strong>Estimator inconsistent between trials:</strong> review active tool and part, pose diversity, mounting configuration, contact with fixtures, and hoses exerting forces; preserve logs and vendor error messages.</li><li><strong>Mismatch after software maintenance:</strong> verify restored installation and active payload records, software version, and any authorized change request before approving operation.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Never respond to an unexplained protective stop by bypassing the safeguard or increasing safety limits. The correct process follows the robot's functional-safety instructions and site-specific risk assessment. Motor current, torque and protective-stop messages can be useful evidence, but no single log value alone proves payload misconfiguration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Documentation-Only Practical Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Record the fictional gripper and workpiece as separate entries: 0.80 kg at local Z = 80 mm and 1.20 kg at Z = 250 mm.</li><li>Calculate the empty and loaded combined mass and CoG, and write the units beside every value.</li><li>Read the official PolyScope screenshot and identify where mass, <code>CX</code>, <code>CY</code>, <code>CZ</code> and inertia fields appear. Identify the software version shown in the documentation and do not assume another product has identical menus.</li><li>Use the plotted gravity-moment chart to find the 2 kg, 15 cm example and verify 2.943 N·m directly from τ = mgr.</li><li>Explain why the 182 mm local Z CoG from the first calculation does not automatically imply a 0.182 m <em>horizontal</em> gravity lever arm in every robot pose.</li><li>Prepare a two-state record of empty and loaded tooling, with a field for operator approval, vendor document revision, risk assessment and measured evidence.</li><li>Describe how the part-present sensor, gripper-status signal and payload-state transition would be reviewed safely without moving real equipment.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check and Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Is payload mass identical to CoG?</strong> No. Mass is scalar; CoG is a position in a defined coordinate system.</li><li><strong>Does a correct TCP certify load configuration?</strong> No. TCP describes the tool's working reference, whereas mass, CoG and inertia describe its loading.</li><li><strong>What is the total mass of a 0.80 kg gripper and 1.20 kg part?</strong> 2.00 kg.</li><li><strong>What is their combined local Z center for the stated example?</strong> 182 mm from the designated tool-flange origin.</li><li><strong>What is the ideal static gravity moment for 2 kg at 0.15 m perpendicular offset?</strong> 2.943 N·m.</li><li><strong>Why does CoG offset matter at fixed mass?</strong> Larger offset can increase moment and alter load distribution, and may reduce permissible operation.</li><li><strong>Can a payload wizard certify the whole robotic application?</strong> No. It estimates load properties; approved engineering verification is still required.</li><li><strong>Is a gripper-close command proof that a part is held?</strong> No. Confirm acquisition through relevant validated feedback.</li><li><strong>Should a technician defeat safety limits to avoid a protective stop?</strong> No. Preserve the diagnostic evidence and follow the manufacturer's safety procedures.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Official Educational References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary references: <a href="https://academy.universal-robots.com/video-tutorials/">Universal Robots Academy free video tutorials</a>; <a href="https://academy.universal-robots.com/free-e-learning/e-series-e-learning/e-series-core-track/">free e-Series core training, Tool Setup</a>; <a href="https://www.universal-robots.com/manuals/EN/HTML/SW5_25_1/Content/prod-usr-man/complianceUR3e/SW_sections/first_program/payload.htm">PolyScope 5 Payload user manual</a>; <a href="https://www.universal-robots.com/manuals/EN/HTML/SW10_10/Content/prod-usr-man/software/PolyScopeX/polyx-application/polyx-TCP_Payload_CenterofGravity.htm">PolyScope X CoG wizard guide</a>; <a href="https://www.universal-robots.com/manuals/EN/HTML/SW10_15/Content/prod-usr-man/complianceUR3e/PolyX_SW/polyX-PayloadRange.htm">payload-range safety information</a>; and <a href="https://www.universal-robots.com/articles/ur/robot-care-maintenance/understanding-protective-stops/">Understanding Protective Stops</a>. All manufacturer-specific settings require confirmation against the actual robot and current software revision.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Payload verification is a controlled engineering activity, not an exercise in entering the largest permissible kilogram number. The technician's contribution is to confirm the actual assembly, define the coordinate origin, document the loaded and empty states, understand the significance of CoG and inertia, preserve diagnostic evidence and escalate any difference between the physical machine and its controller configuration. Correct data supports repeatable operation, but does not replace mechanical integrity or functional safety validation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSRTC.017 builds on the verified OSRTC.016 conveyor-tracking lesson and OSRTC.004 introductory tool configuration. Calculations (2.00 kg, 182 mm CoG, 2.943 N·m gravity moment and 0.045 kg·m² ideal point-mass inertia) were independently checked. No actual robot was moved, programmed, calibrated or load-tested. The featured image is original AI-generated conceptual editorial photography, not a documentary equipment photo. In-body media includes a genuine Universal Robots photograph, official PolyScope screenshot, calculated chart and two official Academy videos. There are no custom conceptual schematics. YouTube playback and independent desktop/mobile image inspection are separately audited.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000-satoshi donation QR image" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-sat donation QR. Verify the recipient and amount before authorizing payment.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>To scan the QR code from a phone, view the lesson on a separate computer or screen and use a compatible Bitcoin wallet to scan the image. Some wallets support image import from the same phone. Verify the destination and 5,000-sat amount before sending.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech supplies educational and journalistic information, not individualized electrical, industrial-safety or financial advice.</em></p>
+<!-- /wp:paragraph -->

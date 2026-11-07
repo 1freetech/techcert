@@ -2,147 +2,58 @@
 
 <!-- wp:paragraph --><p>The lesson follows <a href="https://bitcoinversus.tech/2026/11/01/osjava-005-java-strings-literals-immutability-equals-length-substring/">OSJava.005 on immutable Strings</a>, which introduced accessing text but not storing many independent values in an array. Earlier <a href="https://bitcoinversus.tech/2026/11/01/osjava-004-control-flow-if-switch-for-while-do-while-break-continue/">OSJava.004 on control flow</a> supplied the loop syntax used here. Review <a href="https://bitcoinversus.tech/2026/10/10/osjava-002-primitive-types-variables-byte-short-int-long-float-double-boolean-char-literals-local-variables/">OSJava.002 on types and variables</a> and <a href="https://bitcoinversus.tech/2026/10/08/osjava-001-what-is-java-source-code-bytecode-jvm-jdk-first-program/">OSJava.001 on the JDK and compiler</a> when needed. The core syntax is documented in the open <a href="https://dev.java/learn/language/constructs/basics/arrays/">dev.java arrays tutorial</a>.</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
-<!-- wp:list --><ul class="wp-block-list"><li>Declare and initialize one-dimensional Java arrays of primitive or reference types.</li><li>Explain zero-based element indexing and the legal range <code>0</code> through <code>length - 1</code>.</li><li>Use an indexed <code>for</code> loop and an enhanced <code>for</code> loop appropriately.</li><li>Distinguish an array alias from a new array created by <code>Arrays.copyOf</code>.</li><li>Copy a half-open range and interpret the inclusive start and exclusive end.</li><li>Describe jagged arrays and use each row's actual length.</li><li>Recognize invalid index access, null arrays, arithmetic overflow, and unsafe assumptions.</li><li>Run the example with OpenJDK, verify nine test cases, and distinguish correct output from unmeasured performance.</li></ul><!-- /wp:list -->
-<!-- wp:paragraph --><p>Prerequisites: <code>int</code>, variables, <code>if</code>, loops, methods, and basic command-line use. The sample was compiled and run with <strong>OpenJDK 21.0.12.1</strong> on Linux. Use an installed JDK or the officially maintained Java downloads and documentation; no external dependencies, network credentials, or elevated privileges are required.</p><!-- /wp:paragraph -->
+<!-- wp:list --><ul class="wp-block-list"><li>Declare and initialize one-dimensional Java arrays of primitive or reference types.</li><li>Explain zero-based element indexing and the legal range 0 through length - 1.</li><li>Use an indexed for loop and an enhanced for loop appropriately.</li><li>Distinguish an array alias from a new array created by Arrays.copyOf.</li><li>Copy a half-open range and interpret the inclusive start and exclusive end.</li><li>Describe jagged arrays and use each row's actual length.</li><li>Recognize invalid index access, null arrays, arithmetic overflow, and unsafe assumptions.</li><li>Run the example with OpenJDK, verify nine test cases, and distinguish correct output from unmeasured performance.</li></ul><!-- /wp:list -->
+<!-- wp:paragraph --><p>Prerequisites: int, variables, if, loops, methods, and basic command-line use. The sample was compiled and run with <strong>OpenJDK 21.0.12.1</strong> on Linux. Use an installed JDK or the officially maintained Java downloads and documentation; no external dependencies, network credentials, or elevated privileges are required.</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Creating a Fixed-Length Array</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>A declaration such as <code>int[] values;</code> names a variable that can refer to an array; it does not create the array. <code>values = new int[4];</code> allocates an array with four integer slots, initially all zero. The initializer syntax <code>int[] values = {4, 7, 9, 12};</code> creates and fills the array in one expression. Its length is <code>values.length</code>, a field—not a method call such as <code>values.length()</code>. Once an array is allocated, its length cannot be resized; a new array can be created and references reassigned.</p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p>Elements are accessed with square brackets. For four values, the valid indexes are <strong>0, 1, 2, and 3</strong>. Index 0 holds 4 and index 2 holds 9. Attempting index 4 or index -1 throws an <code>ArrayIndexOutOfBoundsException</code> during execution. Iterating with <code>for (int i = 0; i &lt; values.length; i++)</code> prevents a common off-by-one error, provided that the array reference is non-null.</p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p>An enhanced <code>for (int value : values)</code> loop visits each element without exposing its index. Use it when the current position does not matter. An indexed loop remains useful when examining neighboring elements, assigning to a particular element, or recording an element's position. Java array elements of reference types default to null when initialized with <code>new</code>; using one without first assigning a suitable object can cause a <code>NullPointerException</code>.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>A declaration such as int[] values; names a variable that can refer to an array; it does not create the array. values = new int[4]; allocates an array with four integer slots, initially all zero. The initializer syntax int[] values = {4, 7, 9, 12}; creates and fills the array in one expression. Its length is values.length, a field—not a method call such as values.length(). Once an array is allocated, its length cannot be resized; a new array can be created and references reassigned.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Elements are accessed with square brackets. For four values, the valid indexes are <strong>0, 1, 2, and 3</strong>. Index 0 holds 4 and index 2 holds 9. Attempting index 4 or index -1 throws an ArrayIndexOutOfBoundsException during execution. Iterating with for (int i = 0; i &lt; values.length; i++) prevents a common off-by-one error, provided that the array reference is non-null.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>An enhanced for (int value : values) loop visits each element without exposing its index. Use it when the current position does not matter. An indexed loop remains useful when examining neighboring elements, assigning to a particular element, or recording an element's position. Java array elements of reference types default to null when initialized with new; using one without first assigning a suitable object can cause a NullPointerException.</p><!-- /wp:paragraph -->
 <!-- wp:shortcode -->
 [youtube https://www.youtube.com/watch?v=9dr2mHYYoug&amp;w=640&amp;h=360]
 <!-- /wp:shortcode -->
 <!-- wp:paragraph --><p><em>Bro Code, “Learn Java arrays in 9 minutes! 🍎,” December 5, 2024. A publicly identified Java tutorial covering fixed-length arrays, element access, iteration, and basic array operations. <a href="https://www.youtube.com/watch?v=9dr2mHYYoug">Official video page</a>. Embedding is present in WordPress, but independent end-to-end playback has not been tested.</em></p><!-- /wp:paragraph -->
 
 <!-- wp:heading --><h2 class="wp-block-heading">Copying an Array Is Not the Same as Aliasing</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>Assignment such as <code>int[] alias = values;</code> copies the reference to an array, not its entire contents. Mutating an element using either variable changes the same underlying object. To create an independent one-dimensional array of integers, <code>Arrays.copyOf(values, values.length)</code> allocates a new array and copies the element values. After <code>copy[1] = 20</code>, the copied array is <code>[4, 20, 9, 12]</code>, while the original remains <code>[4, 7, 9, 12]</code>.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Assignment such as int[] alias = values; copies the reference to an array, not its entire contents. Mutating an element using either variable changes the same underlying object. To create an independent one-dimensional array of integers, Arrays.copyOf(values, values.length) allocates a new array and copies the element values. After copy[1] = 20, the copied array is [4, 20, 9, 12], while the original remains [4, 7, 9, 12].</p><!-- /wp:paragraph -->
 <!-- wp:paragraph --><p>The distinction depends on element type. Copying an array of primitive values copies those primitive values. Copying an array of references copies references to the same underlying objects: the result is a <strong>shallow copy</strong>, not a deep clone of all referenced objects. This matters for arrays of mutable custom objects. Refer to Oracle's <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Arrays.html">Java SE 21 Arrays class documentation</a> for exact method semantics.</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Half-Open Ranges and Standard Array Utilities</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>The call <code>Arrays.copyOfRange(values, 1, 3)</code> copies indexes 1 and 2, yielding <code>[7, 9]</code>. It uses the half-open interval <strong>[from, to)</strong>: the first index is included and the last index is excluded. The returned array has length <code>to - from</code>. For some primitive overloads, a valid <code>to</code> beyond the source length pads with a primitive zero value; the method is not a universal substitute for strict range validation.</p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p><code>Arrays.toString(values)</code> returns a human-readable representation of a one-dimensional array. <code>Arrays.equals(a, b)</code> compares corresponding primitive elements, unlike <code>a == b</code>, which compares array references. <code>Arrays.sort(values)</code> sorts an array in place, so use a copy to preserve the original order. <code>Arrays.binarySearch</code> requires the searched range to be sorted according to its documented ordering; a matching element's index is returned, while a missing element yields a negative result encoding the insertion point. Binary search on an unsorted array is not a reliable way to find an element.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>The call Arrays.copyOfRange(values, 1, 3) copies indexes 1 and 2, yielding [7, 9]. It uses the half-open interval <strong>[from, to)</strong>: the first index is included and the last index is excluded. The returned array has length to - from. For some primitive overloads, a valid to beyond the source length pads with a primitive zero value; the method is not a universal substitute for strict range validation.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Arrays.toString(values) returns a human-readable representation of a one-dimensional array. Arrays.equals(a, b) compares corresponding primitive elements, unlike a == b, which compares array references. Arrays.sort(values) sorts an array in place, so use a copy to preserve the original order. Arrays.binarySearch requires the searched range to be sorted according to its documented ordering; a matching element's index is returned, while a missing element yields a negative result encoding the insertion point. Binary search on an unsorted array is not a reliable way to find an element.</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Arrays of Arrays and Unequal Row Lengths</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>Java supports an <code>int[][]</code> value as an array whose elements are references to <code>int[]</code> row arrays. The example <code>{{4, 7}, {9}, {12, 15, 18}}</code> has row lengths 2, 1, and 3. It is therefore called <strong>jagged</strong>, or irregular. It is not necessary for each row to have equal length. When iterating rows, use <code>rows[i].length</code> after ensuring the row is non-null, rather than assuming the first row's length applies to every row.</p><!-- /wp:paragraph -->
-<!-- wp:paragraph --><p>For a rectangular numeric grid, it can be useful to enforce equal row lengths as an application-level contract, but the Java language does not require the property. These nested arrays are distinct objects; <code>clone()</code> or <code>Arrays.copyOf()</code> of the outer array does not deep-copy every inner array.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Java supports an int[][] value as an array whose elements are references to int[] row arrays. The example {{4, 7}, {9}, {12, 15, 18}} has row lengths 2, 1, and 3. It is therefore called <strong>jagged</strong>, or irregular. It is not necessary for each row to have equal length. When iterating rows, use rows[i].length after ensuring the row is non-null, rather than assuming the first row's length applies to every row.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>For a rectangular numeric grid, it can be useful to enforce equal row lengths as an application-level contract, but the Java language does not require the property. These nested arrays are distinct objects; clone() or Arrays.copyOf() of the outer array does not deep-copy every inner array.</p><!-- /wp:paragraph -->
 
 <!-- wp:heading --><h2 class="wp-block-heading">Complete Executable Example</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>Save the complete source below as <code>ArrayLab.java</code>. It uses only the Java standard library. <code>readAt</code> applies an explicit index check and throws an informative exception when a caller requests an invalid position. <code>sum</code> uses <code>Math.addExact</code>, allowing integer overflow to be detected rather than silently wrapping in the exercise.</p><!-- /wp:paragraph -->
-<!-- wp:html -->
-<pre style="display:block;max-width:100%;white-space:pre-wrap;margin:1.1em 0;padding:0;border:0;box-shadow:none;background:transparent;color:inherit;line-height:1.5"><code style="font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;font-size:0.88em;line-height:inherit;color:inherit;background:transparent;border:0;box-shadow:none;padding:0">import java.util.Arrays;
-import java.util.Objects;
-
-/** Beginner exercise: fixed-length arrays, copies, and safe index access. */
-public class ArrayLab {
-    static int readAt(int[] values, int index) {
-        Objects.requireNonNull(values, &quot;values&quot;);
-        if (index &lt; 0 || index &gt;= values.length) {
-            throw new IndexOutOfBoundsException(&quot;index &quot; + index + &quot;, length &quot; + values.length);
-        }
-        return values[index];
-    }
-
-    static int sum(int[] values) {
-        Objects.requireNonNull(values, &quot;values&quot;);
-        int total = 0;
-        for (int value : values) {
-            total = Math.addExact(total, value); // report overflow instead of wrapping
-        }
-        return total;
-    }
-
-    public static void main(String[] args) {
-        int[] original = {4, 7, 9, 12};
-        int[] alias = original;
-        int[] copy = Arrays.copyOf(original, original.length);
-        copy[1] = 20;
-
-        System.out.println(&quot;original: &quot; + Arrays.toString(original));
-        System.out.println(&quot;copy: &quot; + Arrays.toString(copy));
-        System.out.println(&quot;alias shares array: &quot; + (alias == original));
-        System.out.println(&quot;index 2: &quot; + readAt(original, 2));
-        System.out.println(&quot;sum: &quot; + sum(original));
-        System.out.println(&quot;range [1, 3): &quot; + Arrays.toString(Arrays.copyOfRange(original, 1, 3)));
-
-        int[][] rows = {{4, 7}, {9}, {12, 15, 18}};
-        System.out.println(&quot;row lengths: &quot; + Arrays.toString(new int[] {
-            rows[0].length, rows[1].length, rows[2].length
-        }));
-
-        int[] sorted = Arrays.copyOf(original, original.length);
-        Arrays.sort(sorted);
-        System.out.println(&quot;sorted index of 9: &quot; + Arrays.binarySearch(sorted, 9));
-    }
-}</code></pre>
-<!-- /wp:html -->
+<!-- wp:paragraph --><p>Save the complete source below as ArrayLab.java. It uses only the Java standard library. readAt applies an explicit index check and throws an informative exception when a caller requests an invalid position. sum uses Math.addExact, allowing integer overflow to be detected rather than silently wrapping in the exercise.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>The complete executable program is available as <a href="https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.ArrayLab.java">ArrayLab.java in the OpenCert GitHub archive</a>. It includes array indexing, independent copying, checking bounds, summing values, jagged arrays, and binary search. The source remains available to read, copy, and download without a boxed code display.</p>
+<!-- /wp:paragraph -->
 <!-- wp:paragraph --><p>From a terminal in the source file's directory, compile and execute the file:</p><!-- /wp:paragraph -->
-<!-- wp:html -->
-<pre style="display:block;max-width:100%;white-space:pre-wrap;margin:1.1em 0;padding:0;border:0;box-shadow:none;background:transparent;color:inherit;line-height:1.5"><code style="font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;font-size:0.88em;line-height:inherit;color:inherit;background:transparent;border:0;box-shadow:none;padding:0">javac -Xlint:all ArrayLab.java
-java ArrayLab</code></pre>
-<!-- /wp:html -->
+<!-- wp:paragraph -->
+<p>Compile the downloaded file in a terminal with <strong>javac -Xlint:all ArrayLab.java</strong>. Run it with <strong>java ArrayLab</strong>. The filename and the public Java class name must match.</p>
+<!-- /wp:paragraph -->
 <!-- wp:paragraph --><p>The locally observed output under <strong>OpenJDK 21.0.12.1</strong> is:</p><!-- /wp:paragraph -->
-<!-- wp:html -->
-<pre style="display:block;max-width:100%;white-space:pre-wrap;margin:1.1em 0;padding:0;border:0;box-shadow:none;background:transparent;color:inherit;line-height:1.5"><code style="font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;font-size:0.88em;line-height:inherit;color:inherit;background:transparent;border:0;box-shadow:none;padding:0">original: [4, 7, 9, 12]
-copy: [4, 20, 9, 12]
-alias shares array: true
-index 2: 9
-sum: 32
-range [1, 3): [7, 9]
-row lengths: [2, 1, 3]
-sorted index of 9: 2</code></pre>
-<!-- /wp:html -->
+<!-- wp:paragraph -->
+<p>Verified output: the original array is [4, 7, 9, 12]; the independent copy is [4, 20, 9, 12]; the alias comparison is true; index 2 contains 9; the sum is 32; the half-open range [1, 3) contains [7, 9]; the jagged row lengths are [2, 1, 3]; and the binary search for 9 returns index 2.</p>
+<!-- /wp:paragraph -->
 <!-- wp:paragraph --><p>Each line reinforces a specific concept: copying does not mutate the original, aliases refer to a shared object, indexes start at zero, sum is 32, the second position is excluded from a half-open range's end, and jagged rows have different lengths. The binary-search result is valid because the copied array was sorted before searching. These are locally executed example outputs, not simulated performance results.</p><!-- /wp:paragraph -->
 
 <!-- wp:heading --><h2 class="wp-block-heading">Nine Reproducible Array Checks</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>Save the second file as <code>ArrayLabTest.java</code> in the same directory. Its independent assertions cover unchanged source data after copying, modified copied data, a successful index access, sum, range selection, two out-of-bounds positions, null input, and integer overflow. It does not require JUnit or an external test runner.</p><!-- /wp:paragraph -->
-<!-- wp:html -->
-<pre style="display:block;max-width:100%;white-space:pre-wrap;margin:1.1em 0;padding:0;border:0;box-shadow:none;background:transparent;color:inherit;line-height:1.5"><code style="font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;font-size:0.88em;line-height:inherit;color:inherit;background:transparent;border:0;box-shadow:none;padding:0">import java.util.Arrays;
-
-/** Self-contained assertions: run with java -ea ArrayLabTest. */
-public class ArrayLabTest {
-    private static int passed = 0;
-
-    private static void check(boolean condition, String message) {
-        if (!condition) throw new AssertionError(message);
-        passed++;
-    }
-
-    private static void expect(Class&lt;? extends Throwable&gt; kind, Runnable action) {
-        try {
-            action.run();
-        } catch (Throwable thrown) {
-            check(kind.isInstance(thrown), &quot;Expected &quot; + kind + &quot; but got &quot; + thrown);
-            return;
-        }
-        throw new AssertionError(&quot;Expected &quot; + kind + &quot; but no exception occurred&quot;);
-    }
-
-    public static void main(String[] args) {
-        int[] original = {4, 7, 9, 12};
-        int[] copy = Arrays.copyOf(original, original.length);
-        copy[1] = 20;
-        check(Arrays.equals(original, new int[]{4, 7, 9, 12}), &quot;copy changed original&quot;);
-        check(Arrays.equals(copy, new int[]{4, 20, 9, 12}), &quot;copy values&quot;);
-        check(ArrayLab.readAt(original, 2) == 9, &quot;readAt index 2&quot;);
-        check(ArrayLab.sum(original) == 32, &quot;sum&quot;);
-        check(Arrays.equals(Arrays.copyOfRange(original, 1, 3), new int[]{7, 9}), &quot;range&quot;);
-        expect(IndexOutOfBoundsException.class, () -&gt; ArrayLab.readAt(original, -1));
-        expect(IndexOutOfBoundsException.class, () -&gt; ArrayLab.readAt(original, 4));
-        expect(NullPointerException.class, () -&gt; ArrayLab.readAt(null, 0));
-        expect(ArithmeticException.class, () -&gt; ArrayLab.sum(new int[]{Integer.MAX_VALUE, 1}));
-        System.out.println(&quot;PASS: &quot; + passed + &quot; array checks&quot;);
-    }
-}</code></pre>
-<!-- /wp:html -->
-<!-- wp:paragraph --><p>Compile both files and enable Java assertions with <code>-ea</code>:</p><!-- /wp:paragraph -->
-<!-- wp:html -->
-<pre style="display:block;max-width:100%;white-space:pre-wrap;margin:1.1em 0;padding:0;border:0;box-shadow:none;background:transparent;color:inherit;line-height:1.5"><code style="font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;font-size:0.88em;line-height:inherit;color:inherit;background:transparent;border:0;box-shadow:none;padding:0">javac -Xlint:all ArrayLab.java ArrayLabTest.java
-java -ea ArrayLabTest</code></pre>
-<!-- /wp:html -->
+<!-- wp:paragraph --><p>Save the second file as ArrayLabTest.java in the same directory. Its independent assertions cover unchanged source data after copying, modified copied data, a successful index access, sum, range selection, two out-of-bounds positions, null input, and integer overflow. It does not require JUnit or an external test runner.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>The complete standalone test program is available as <a href="https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.ArrayLabTest.java">ArrayLabTest.java in the OpenCert GitHub archive</a>. It verifies that the original remains unchanged, copying works, valid and invalid index accesses behave correctly, and null input and integer overflow are handled explicitly.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>Compile both files and enable Java assertions with -ea:</p><!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>To run the nine checks, save both Java files in the same folder, compile with <strong>javac -Xlint:all ArrayLab.java ArrayLabTest.java</strong>, then execute <strong>java -ea ArrayLabTest</strong>. The -ea option enables standard Java assertions.</p>
+<!-- /wp:paragraph -->
 <!-- wp:paragraph --><p>Observed test output:</p><!-- /wp:paragraph -->
-<!-- wp:html -->
-<pre style="display:block;max-width:100%;white-space:pre-wrap;margin:1.1em 0;padding:0;border:0;box-shadow:none;background:transparent;color:inherit;line-height:1.5"><code style="font-family:ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;font-size:0.88em;line-height:inherit;color:inherit;background:transparent;border:0;box-shadow:none;padding:0">PASS: 9 array checks</code></pre>
-<!-- /wp:html -->
-<!-- wp:paragraph --><p>All nine assertions passed locally. The test program explicitly throws <code>AssertionError</code> when a requirement fails, rather than hiding a failure. Standard Java assertions also depend on the runtime's <code>-ea</code> flag; the explicit <code>check</code> helper and exception checks remain active, but the documented command deliberately enables assertions for clarity.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Locally verified result: <strong>PASS: 9 array checks</strong>. The provided test file contains all nine checks and can be extended for the exercises below.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>All nine assertions passed locally. The test program explicitly throws AssertionError when a requirement fails, rather than hiding a failure. Standard Java assertions also depend on the runtime's -ea flag; the explicit check helper and exception checks remain active, but the documented command deliberately enables assertions for clarity.</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Chart of Original Versus Copied Values</h2><!-- /wp:heading -->
-<!-- wp:paragraph --><p>At indexes 0 through 3, the original array contains <strong>[4, 7, 9, 12]</strong>. The copy is created with <code>Arrays.copyOf</code>, then only its element at index 1 is changed to 20, producing <strong>[4, 20, 9, 12]</strong>. The following original chart plots those exact test-case values. It visualizes element data rather than memory layout, a conceptual schematic, or program speed.</p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p>At indexes 0 through 3, the original array contains <strong>[4, 7, 9, 12]</strong>. The copy is created with Arrays.copyOf, then only its element at index 1 is changed to 20, producing <strong>[4, 20, 9, 12]</strong>. The following original chart plots those exact test-case values. It visualizes element data rather than memory layout, a conceptual schematic, or program speed.</p><!-- /wp:paragraph -->
 <!-- wp:image {"id":31057,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osjava-006-arrays-original-vs-copy-verified-chart.png" alt="Bar chart comparing four Java original array values 4,7,9,12 with copied values 4,20,9,12 at matching indexes" class="wp-image-31057" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert chart using data verified by the locally executed Java source and nine passing checks on OpenJDK 21. No runtime latency, memory consumption, or performance benchmarks are inferred.</em></figcaption></figure><!-- /wp:image -->
 <!-- wp:shortcode -->
 [youtube https://www.youtube.com/watch?v=n60Dn0UsbEk&amp;w=640&amp;h=360]
@@ -150,18 +61,18 @@ java -ea ArrayLabTest</code></pre>
 <!-- wp:paragraph --><p><em>Kunal Kushwaha, “Introduction to Arrays and ArrayList in Java,” August 10, 2021. A public independent programming education lesson with timestamped sections covering array indexes, input, looping and multidimensional arrays. ArrayList is discussed as a separate, dynamically resizable collection type and is not equivalent to the fixed-length arrays taught here.</em></p><!-- /wp:paragraph -->
 
 <!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting, Safety, and Performance Boundaries</h2><!-- /wp:heading -->
-<!-- wp:list --><ul class="wp-block-list"><li><strong>ArrayIndexOutOfBoundsException:</strong> an index is negative or at least the array's length. Print or log the index and length in a development environment, then correct the loop condition or input validation.</li><li><strong>NullPointerException:</strong> the array variable or a referenced element is null. Initialize before use and validate external inputs rather than assume non-null values.</li><li><strong>ArrayStoreException:</strong> an array with a reference-element runtime type receives an incompatible object. Arrays are covariant in Java; such stores may compile through a broader reference type but fail at runtime.</li><li><strong>Unexpected changes:</strong> determine whether two variables alias one array or whether a shallow copy still shares mutable elements.</li><li><strong>Incorrect search results:</strong> sort the searched range before calling <code>Arrays.binarySearch</code> and interpret a negative result as an insertion-point code, not necessarily an ordinary -1.</li><li><strong>Overflow:</strong> a sum of many integers can exceed 32-bit range. The exercise uses <code>Math.addExact</code> to fail visibly; a production system may need a <code>long</code>, exact arithmetic, or explicit bounds.</li></ul><!-- /wp:list -->
+<!-- wp:list --><ul class="wp-block-list"><li><strong>ArrayIndexOutOfBoundsException:</strong> an index is negative or at least the array's length. Print or log the index and length in a development environment, then correct the loop condition or input validation.</li><li><strong>NullPointerException:</strong> the array variable or a referenced element is null. Initialize before use and validate external inputs rather than assume non-null values.</li><li><strong>ArrayStoreException:</strong> an array with a reference-element runtime type receives an incompatible object. Arrays are covariant in Java; such stores may compile through a broader reference type but fail at runtime.</li><li><strong>Unexpected changes:</strong> determine whether two variables alias one array or whether a shallow copy still shares mutable elements.</li><li><strong>Incorrect search results:</strong> sort the searched range before calling Arrays.binarySearch and interpret a negative result as an insertion-point code, not necessarily an ordinary -1.</li><li><strong>Overflow:</strong> a sum of many integers can exceed 32-bit range. The exercise uses Math.addExact to fail visibly; a production system may need a long, exact arithmetic, or explicit bounds.</li></ul><!-- /wp:list -->
 <!-- wp:paragraph --><p>Do not convert out-of-range access into blanket exception suppression. It is usually better to validate an untrusted position before reading the array and to treat impossible internal indexes as programming defects. Check input sizes before allocating large arrays to prevent resource exhaustion. A fixed number of elements does not imply a fixed memory footprint for arrays of reference types or nested arrays. This lesson measures values and behavior only, not allocation overhead, execution timing, or garbage-collector performance.</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Guided Exercises</h2><!-- /wp:heading -->
-<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Declare <code>double[] temperatures = {22.5, 23.0, 24.25};</code> and display its length and the value at index 2. Explain why index 3 is invalid.</li><li>Change only the copied integer array's index 0 to 99. Predict both arrays before running the program.</li><li>Replace an indexed loop with an enhanced <code>for</code> loop to calculate a sum. Explain when the enhanced loop would be less useful.</li><li>Evaluate <code>Arrays.copyOfRange(original, 0, 2)</code> and <code>Arrays.copyOfRange(original, 2, 4)</code>. Identify included and excluded indexes.</li><li>Add a fourth row of length zero to the jagged array, then print the length of every row safely.</li><li>Extend the tests to cover an empty array, a value exactly at the last valid index, and a null row in a two-dimensional array.</li><li>Modify the sum method to return a <code>long</code>. Explain which overflow risks change and which remain possible for extreme input.</li></ol><!-- /wp:list -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li>Declare double[] temperatures = {22.5, 23.0, 24.25}; and display its length and the value at index 2. Explain why index 3 is invalid.</li><li>Change only the copied integer array's index 0 to 99. Predict both arrays before running the program.</li><li>Replace an indexed loop with an enhanced for loop to calculate a sum. Explain when the enhanced loop would be less useful.</li><li>Evaluate Arrays.copyOfRange(original, 0, 2) and Arrays.copyOfRange(original, 2, 4). Identify included and excluded indexes.</li><li>Add a fourth row of length zero to the jagged array, then print the length of every row safely.</li><li>Extend the tests to cover an empty array, a value exactly at the last valid index, and a null row in a two-dimensional array.</li><li>Modify the sum method to return a long. Explain which overflow risks change and which remain possible for extreme input.</li></ol><!-- /wp:list -->
 <!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check and Answer Key</h2><!-- /wp:heading -->
-<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li><strong>What is the first legal index of a Java array?</strong> Zero.</li><li><strong>What is the last legal index when the array length is 4?</strong> Three.</li><li><strong>Does an array resize when assigned a longer sequence?</strong> No. Its length is fixed; create another array.</li><li><strong>Does <code>int[] b = a</code> make an independent copy?</strong> No. It assigns another reference to the same array object.</li><li><strong>Does <code>Arrays.copyOf</code> deep-copy referenced objects?</strong> No. It creates another array and copies element values, which can be references.</li><li><strong>What does <code>Arrays.copyOfRange(a, 1, 3)</code> include?</strong> Indexes 1 and 2, with 3 excluded.</li><li><strong>Why can jagged arrays have different row lengths?</strong> Each row is a separate array and may have its own length.</li><li><strong>What must be true before calling <code>Arrays.binarySearch</code>?</strong> The searched range must be sorted according to the relevant ordering.</li><li><strong>How many local array test checks passed?</strong> Nine, using OpenJDK 21.0.12.1 and the explicitly supplied test harness.</li><li><strong>Does the chart establish Java array-copying speed?</strong> No. It only plots the tested values.</li></ol><!-- /wp:list -->
+<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><li><strong>What is the first legal index of a Java array?</strong> Zero.</li><li><strong>What is the last legal index when the array length is 4?</strong> Three.</li><li><strong>Does an array resize when assigned a longer sequence?</strong> No. Its length is fixed; create another array.</li><li><strong>Does int[] b = a make an independent copy?</strong> No. It assigns another reference to the same array object.</li><li><strong>Does Arrays.copyOf deep-copy referenced objects?</strong> No. It creates another array and copies element values, which can be references.</li><li><strong>What does Arrays.copyOfRange(a, 1, 3) include?</strong> Indexes 1 and 2, with 3 excluded.</li><li><strong>Why can jagged arrays have different row lengths?</strong> Each row is a separate array and may have its own length.</li><li><strong>What must be true before calling Arrays.binarySearch?</strong> The searched range must be sorted according to the relevant ordering.</li><li><strong>How many local array test checks passed?</strong> Nine, using OpenJDK 21.0.12.1 and the explicitly supplied test harness.</li><li><strong>Does the chart establish Java array-copying speed?</strong> No. It only plots the tested values.</li></ol><!-- /wp:list -->
 <!-- wp:heading --><h2 class="wp-block-heading">Official and Educational References</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p><a href="https://dev.java/learn/language/constructs/basics/arrays/">Oracle Java Learning — Creating Arrays in Your Programs</a>; <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Arrays.html">Java SE 21 — java.util.Arrays API</a>; <a href="https://docs.oracle.com/javase/specs/jls/se21/html/jls-10.html">Java Language Specification, Chapter 10 — Arrays</a>; <a href="https://dev.java/learn/language/annotations-exceptions/exceptions/">Java Learning — Exceptions</a>; <a href="https://learn.microsoft.com/en-us/shows/java-for-beginners/">Microsoft Learn — Java for Beginners</a>; and two attributed educational YouTube lessons from Bro Code and Kunal Kushwaha. All example outputs were captured from the locally executed OpenJDK source code, not copied from a theoretical document.</p><!-- /wp:paragraph -->
 <!-- wp:heading --><h2 class="wp-block-heading">Conclusion</h2><!-- /wp:heading -->
 <!-- wp:paragraph --><p>Java arrays are fixed-length objects with predictable typed element access and runtime-checked indexes. The most important beginner distinctions are zero-based positions, the difference between an alias and a real copy, and the proper treatment of array lengths and bounds. Combining verified examples with explicit error tests prepares students for collections, data processing, sorting, and safe application input handling.</p><!-- /wp:paragraph -->
 
-<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSJava.006 follows the verified published OSJava.005. The 1200 × 630 featured cover is original AI-generated educational editorial art of a Java development workstation, not a real software screenshot, and contains no person because the lesson is about code rather than a human instructor. The in-story chart was generated from actual Java example values with nine passing checks on OpenJDK 21.0.12.1; it is not a benchmark or an engineering schematic. The two video references are publicly identifiable educational lessons from Bro Code and Kunal Kushwaha, but independent end-to-end playback and visual mobile inspection require separate verification. The full sample program and standalone test harness were compiled and executed locally with <code>javac -Xlint:all</code> and <code>java -ea</code>. No enterprise deployment, security certification, or production performance testing occurred.</em></p><!-- /wp:paragraph -->
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSJava.006 follows the verified published OSJava.005. The 1200 × 630 featured cover is original AI-generated educational editorial art of a Java development workstation, not a real software screenshot, and contains no person because the lesson is about code rather than a human instructor. The in-story chart was generated from actual Java example values with nine passing checks on OpenJDK 21.0.12.1; it is not a benchmark or an engineering schematic. The two video references are publicly identifiable educational lessons from Bro Code and Kunal Kushwaha, but independent end-to-end playback and visual mobile inspection require separate verification. The full sample program and standalone test harness were compiled and executed locally with javac -Xlint:all and java -ea. No enterprise deployment, security certification, or production performance testing occurred.</em></p><!-- /wp:paragraph -->
 <!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-sat donation QR. Verify the destination and amount in your wallet before authorizing payment.</em></figcaption></figure><!-- /wp:image -->
 <!-- wp:paragraph --><p><em>For mobile scanning, display the original QR on a second screen or use a compatible wallet's saved-image reader. Confirm the intended recipient and 5,000-sat amount before sending funds.</em></p><!-- /wp:paragraph -->
 <!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->

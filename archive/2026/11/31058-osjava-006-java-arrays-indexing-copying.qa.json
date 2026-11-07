@@ -81,7 +81,16 @@
   "original_donation_qr_media_id": 24043,
   "subscriber_email_suppressed": true,
   "custom_diagrams": "none",
-  "final_source_readback": "WordPress saved Gutenberg source updated after publisher/ID correction; synchronized across opencert.tech, techcert, Bitcoinversus.tech repositories. Confirm each archive readback before reporting.",
+  "final_source_readback": "Updated archive matches revised live Gutenberg source after code-box styling repair.",
   "video_revision_2026_11_07": "Replaced original unverified Microsoft Developer ID oWzCvL35d0c with independently sourced Bro Code video 9dr2mHYYoug; retained Kunal Kushwaha n60Dn0UsbEk. Both render in WordPress; playback remains unverified.",
-  "verified_full_current_gutenberg": true
+  "verified_full_current_gutenberg": true,
+  "layout_repair": {
+    "date": "2026-11-07",
+    "request": "Fix text boxes",
+    "post_id": 31058,
+    "changed": "Replaced six visually boxed Gutenberg code blocks with transparent, borderless monospaced HTML pre blocks with mobile text wrapping",
+    "preserved": "Java source, nine tests, instructional chart, video iframes, internal links, Editor Note, donation QR, SEO and categories",
+    "verified": "WordPress source and rendered HTML show six transparent borderless pre blocks with pre-wrap; two YouTube iframe players remain; mobile/desktop screenshot captures are available but pixels not visually inspected",
+    "source_archive_path": "archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.gutenberg.html"
+  }
 }

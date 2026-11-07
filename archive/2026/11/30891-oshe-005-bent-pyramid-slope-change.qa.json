@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-07",
+  "post_id": 30891,
+  "lesson_id": "OSHE.005",
+  "title": "OSHE.005: Sneferu's Bent Pyramid — Changing Slope During Construction",
+  "url": "https://bitcoinversus.tech/2026/11/07/oshe-005-sneferu-bent-pyramid-dahshur-changing-slope-engineering/",
+  "status": "publish",
+  "previous": "OSHE.004, WordPress 27944",
+  "cover": {
+    "id": 30861,
+    "dimensions": [
+      1200,
+      630
+    ],
+    "type": "Original AI editorial illustration",
+    "subject": "Mature female engineer; rotating cover profile"
+  },
+  "in_body_media": [
+    {
+      "id": 30864,
+      "type": "Genuine Bent Pyramid photo",
+      "credit": "Lexie, CC BY 2.0"
+    },
+    {
+      "id": 30862,
+      "type": "Calculated bar chart",
+      "source": "Egyptian Ministry approximate 55 and 43 degree slopes"
+    },
+    {
+      "id": 30865,
+      "type": "Genuine entrance photo",
+      "credit": "Ivrienen, CC BY 3.0"
+    }
+  ],
+  "media_count": 3,
+  "verified_youtube_players": 0,
+  "video_note": "No suitable institution-verified video used",
+  "math": {
+    "rise_m": 10,
+    "lower_angle_deg": 55,
+    "upper_angle_deg": 43,
+    "run_lower_m": 7.0020753821,
+    "run_upper_m": 10.7236871002,
+    "horizontal_increase_percent": 53.1501235714,
+    "physical_measurement": false
+  },
+  "internal_links": 5,
+  "original_donation_QR_id": 24043,
+  "editor_note": true,
+  "newsletter_disabled": true,
+  "desktop_mobile_screenshots": "WordPress capture-ready at 1280px and 390px, pixels not independently inspected",
+  "site_visit": "Not performed",
+  "video_playback": "Not applicable",
+  "source_text": "Exact published Gutenberg markup archived in three repositories"
+}

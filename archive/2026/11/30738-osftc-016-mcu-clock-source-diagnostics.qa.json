@@ -1,0 +1,76 @@
+{
+  "audit_date": "2026-11-07",
+  "post_id": 30738,
+  "lesson_id": "OSFTC.016",
+  "subject": "firmware_technician",
+  "status": "published",
+  "title": "OSFTC.016: MCU Clock Source Diagnostics — Oscillators, PLL Lock, and Clock-Failure Recovery",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/osftc-016-mcu-clock-source-diagnostics-oscillators-pll-clock-failure/",
+  "predecessor": "OSFTC.015, WP #27772",
+  "numbering_check": "WordPress OSFTC.016 search returned no earlier published/draft/future/pending record",
+  "cover": {
+    "id": 30732,
+    "width": 1200,
+    "height": 630,
+    "description": "Original AI-generated editorial image of young woman electronics technician; waveforms and lab readings are illustrative, not real measurements",
+    "rotation": "Prior featured subject equipment-only; cover now portrays a person"
+  },
+  "in_body_media": [
+    {
+      "id": 30734,
+      "type": "genuine equipment photo",
+      "credit": "Open-CMSIS-Pack ST NUCLEO-L476RG_BSP public educational repo"
+    },
+    {
+      "id": 30733,
+      "type": "calculated chart",
+      "description": "Synthetic 16 and 80 MHz clock/prescaler comparison, not measured MCU data"
+    },
+    {
+      "video_id": "_ZfUwAzGLWE",
+      "publisher": "STMicroelectronics",
+      "title": "STM32Cube tools in practice - STM32CubeMX, STM32CubeIDE - clock tree",
+      "published": "2022-06-20"
+    },
+    {
+      "video_id": "o4R2VNzeDhY",
+      "publisher": "STMicroelectronics",
+      "title": "STM32CubeMX basics: 03.1 STM32CubeMX clock configuration tab - Basics",
+      "published": "2019-03-27"
+    }
+  ],
+  "approved_donation_qr_id": 24043,
+  "editors_note": true,
+  "internal_link_count": 4,
+  "source_refs": [
+    "https://www.st.com/resource/en/reference_manual/dm00151940-stm32l41xxx42xxx43xxx44xxx45xxx46xxx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf",
+    "https://developerhelp.microchip.com/xwiki/bin/view/products/mcu-mpu/dspic/33a/osc-dd/fail-safe-clock-monitor/",
+    "https://github.com/Open-CMSIS-Pack/ST_NUCLEO-L476RG_BSP"
+  ],
+  "math_checks": {
+    "hsi16_dividers": [
+      16,
+      8,
+      4,
+      2
+    ],
+    "illustrative80mhz_dividers": [
+      80,
+      40,
+      20,
+      10
+    ],
+    "period_16mhz_ns": 62.5,
+    "method": "Arithmetic independently verified in Python; no physical MCU test"
+  },
+  "public_youtube_iframes": 2,
+  "video_playback": "not independently tested",
+  "desktop_screenshot": "capture ready at 1280px, screenshot pixels not visually inspected",
+  "mobile_screenshot": "capture ready at 390px, pixels not visually inspected",
+  "published_markup_length": 23253,
+  "no_custom_schematics": true,
+  "physical_hardware_testing": false,
+  "subscriber_email_disabled": true,
+  "next_unique_lesson": "OSFEC.015 Firmware Engineer, WordPress checked OSFEC.014 published and OSFEC.015 unused",
+  "note": "Primary ST and Microchip technical sources; genuine board photo, one derived chart and two official ST educational videos. No new external hardware claims or execution fabricated."
+}

@@ -1,0 +1,193 @@
+<!-- wp:paragraph -->
+<p><strong>OSFTC.016</strong> teaches the field diagnosis of microcontroller clock-source problems, including internal and external oscillators, phase-locked loops (PLLs), clock-ready flags, clock security and startup timing. A board can have a stable supply yet communicate at an unexpected serial baud rate, miss deadlines or fail to initialize a peripheral because its active clock differs from the firmware's assumptions. An engineer or technician must establish <em>which clock source was requested, which clock source became ready, and which clock actually drives the core and peripherals</em>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The lesson follows <a href="https://bitcoinversus.tech/2026/11/01/osftc-015-brownout-reset-diagnostics-embedded-firmware/">OSFTC.015, Brownout Reset Diagnostics</a>, which distinguishes supply-voltage faults from software resets. Clock faults demand a different evidence trail. Earlier <a href="https://bitcoinversus.tech/2026/10/13/osftc-010-firmware-crash-logs-fault-recovery/">firmware crash-log training</a> and <a href="https://bitcoinversus.tech/2026/10/08/osftc-006-hardware-firmware-compatibility-board-revisions-device-ids-bootloaders-peripherals-field-validation/">hardware–firmware compatibility checks</a> explain why a missing peripheral response or unexpected boot sequence should not automatically trigger reflashing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain HSI, HSE, LSI, LSE, PLL, SYSCLK, HCLK and peripheral clock domains without assuming that all MCU families implement identical clocks.</li><li>Identify clock startup, oscillator-ready flags, PLL lock, clock-switch confirmation, and clock security system (CSS) behavior.</li><li>Use device documentation and read-only register inspection to differentiate a source that never stabilized from a source that was never selected.</li><li>Calculate clock-divider outputs and compare expected timing with hypothetical observations.</li><li>Understand why voltage scaling, Flash wait states, clock tolerances and board revision affect valid configurations.</li><li>Document safe technician escalation when a missing clock, broken crystal, corrupt firmware setting or peripheral timing error is suspected.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: basic CPU architecture, timing units (hertz, microseconds, milliseconds), microcontroller reset causes, voltage measurement and UART diagnosis. No physical fault injection is necessary. The illustrated reference family is <strong>STM32L4</strong>, using STMicroelectronics reference manual RM0394, but all physical tests and register names must be checked for the exact part number and silicon revision.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Clock Sources and Their Different Jobs</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A clock is a repeating timing signal used to sequence digital circuits. Some clocks run the CPU; others drive peripherals or low-power functions. An <strong>internal RC oscillator</strong> is built inside the MCU and often supports fast startup without a crystal. An <strong>external oscillator input</strong> may use a crystal resonator or a compatible external clock supplied by hardware. A <strong>PLL</strong> uses a reference clock to synthesize another frequency, subject to specific input, VCO and output limits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>HSI:</strong> high-speed internal oscillator. The STM32L4 reference family provides an HSI16 oscillator nominally at 16 MHz. Accuracy and trimming must be evaluated for the actual device and environment.</li><li><strong>HSE:</strong> high-speed external clock path; may be a crystal circuit or bypassed external clock on a permitted board configuration.</li><li><strong>LSI and LSE:</strong> low-frequency sources typically relevant to functions such as the independent watchdog and RTC; a 32.768 kHz LSE crystal is common but not guaranteed to be populated on every design.</li><li><strong>SYSCLK:</strong> selected source for the system clock; after reset an STM32L4 device may initially use an internal MSI configuration before the application requests another source.</li><li><strong>HCLK and PCLK:</strong> downstream domain clocks determined by divider and bus configuration; individual peripheral kernel clocks may use additional independent selectors.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.st.com/resource/en/reference_manual/dm00151940-stm32l41xxx42xxx43xxx44xxx45xxx46xxx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf">ST RM0394 reset and clock control chapter</a> specifies source selection, ready flags, PLL behavior and allowed operating frequencies for the L4 subfamilies it covers. The device family matters: a clock source or fallback used by one STM32 is not automatically available on another. A general <a href="https://bitcoinversus.tech/2026/10/09/what-is-a-clock-signal-how-computers-keep-billions-of-operations-in-step/">BitcoinVersus.Tech introduction to clock signals</a> provides broader background; the current chapter concentrates on hardware verification and technician diagnostics.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30734,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/open-cmsis-st-nucleo-l476rg-board-photo.png" class="wp-image-30734" alt="Genuine STM32 NUCLEO-L476RG development board from Open-CMSIS-Pack, showing its silicon, headers and debug section" /><figcaption class="wp-element-caption"><em>Actual NUCLEO-L476RG development board image, credited to the public Open-CMSIS-Pack ST_NUCLEO-L476RG_BSP repository. Hardware population and oscillator routing may vary with the board revision; not a photograph of any experiment performed for the lesson.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Startup Flags and the Crucial Distinction Between Ready and Selected</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>When firmware enables an oscillator, it should allow the source to settle and wait for a model-specific ready indication. A PLL likewise needs a valid input reference and a locked state before its output can be relied upon. A request to switch the system clock is not itself proof the switch occurred. The technician should compare the <em>requested selection</em>, the <em>ready state</em>, and the <em>current source status</em> documented for the chip.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For the STM32L4 device family in RM0394, the startup clock can be an internal MSI source. A target selection that is not yet ready may be held until the source becomes ready, and status bits identify the selected system clock. Avoid interpreting an incorrect baud rate or slow LED blink as proof the HSE crystal failed; peripheral prescalers, the firmware's clock-variable calculation, timer configuration, serial framing and interrupt latency can produce similar symptoms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=_ZfUwAzGLWE&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>STMicroelectronics, “STM32Cube tools in practice — STM32CubeMX, STM32CubeIDE — clock tree,” June 20, 2022. Official, freely available manufacturer training demonstrating clock configuration. The video uses teaching UI from its release period, which may differ from newer Cube tools.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Clock Security, PLL Fallback and Safe States</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A clock security system monitors selected clock sources on supported devices. ST's <a href="https://community.st.com/stm32-mcus-60/part-2-introduction-to-the-stm32-microcontroller-clock-system-125853">STM32 clock-system education</a> describes HSE clock-failure detection and a possible automatic switch to an internal source. RM0394 documents a nonmaskable interrupt (NMI) linked to HSE CSS, along with MCU-specific flag-clearing requirements and restrictions. If HSE is the PLL's input and fails, the PLL output may also be disabled. Recovery behavior, safe shutdown of motors and communications, and the fault record require application design, not a technician's ad hoc configuration change.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Other vendors use different terminology. <a href="https://developerhelp.microchip.com/xwiki/bin/view/products/mcu-mpu/dspic/33a/osc-dd/fail-safe-clock-monitor/">Microchip's Fail-Safe Clock Monitor training</a> documents clock-generator and PLL monitoring on its covered dsPIC family and the corresponding backup-clock and interrupt behavior. It should not be treated as a register guide for STM32 hardware. Neither clock security nor a watchdog guarantees that a safety-critical controller can continue safe control at the original timing performance after a fallback.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A clock problem may look like intermittent UART errors, inaccurate timestamping, missed watchdog servicing, a failed USB enumeration, or a peripheral that will not start. Some peripherals rely on clock domains independent of the CPU clock, and a fallback that saves code execution may still disrupt those peripherals. A correct incident report separates clock faults from voltage faults, software configuration defects, wiring faults and attached-device failures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Calculate the Clock-Divider Effects</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a simplified bus divider, <strong>f<sub>AHB</sub> = f<sub>SYSCLK</sub> / D</strong>, where D is an allowed AHB divider. In an illustrative STM32L4 calculation, compare a 16 MHz internal HSI16 reference with an 80 MHz system-clock configuration that is within the specified maximum for an appropriate supported voltage-scaling range. At divider values 1, 2, 4 and 8, 16 MHz becomes 16, 8, 4 and 2 MHz, while 80 MHz becomes 80, 40, 20 and 10 MHz.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30733,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osftc-016-clock-source-ahb-prescaler-comparison-chart.png" class="wp-image-30733" alt="Vertical grouped bar chart comparing calculated AHB bus clocks for prescalers 1, 2, 4 and 8 at nominal 16 and 80 MHz system clock" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert calculated bar chart. Inputs follow the documented STM32L4 clock range in ST RM0394; values are mathematical examples, not actual clock measurements or proof a particular board is configured at 80 MHz.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>The chart illustrates a diagnostic trap: a correct 16 MHz oscillator may be followed by a divider of eight, producing a 2 MHz AHB clock. A sluggish application therefore cannot be assigned to a defective oscillator until the full clock-tree configuration is reviewed. An 80 MHz clock plan is not a license to run any device at 80 MHz; verify supply voltage, power mode, Flash latency and model-specific maxima before deployment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Repeatable Calculation Exercise</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Technicians without hardware can reproduce the calculations using a standard Python 3 interpreter. The program accepts two hypothetical system-clock sources and computes divider outputs. The source below uses no hardware registers, test probes or board libraries; it is a documentation-only learning aid.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>prescalers = (1, 2, 4, 8)
+for source_mhz in (16, 80):
+    print(f"{source_mhz} MHz SYSCLK:",
+          [source_mhz / divide for divide in prescalers])</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Expected output after running the program in Python 3:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>16 MHz SYSCLK: [16.0, 8.0, 4.0, 2.0]
+80 MHz SYSCLK: [80.0, 40.0, 20.0, 10.0]</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The calculations were independently verified against the chart values. They do not prove which clock a live device is using. To verify actual hardware, a technician needs approved, board-specific readings from a debugger or a manufacturer-supported measurement point, and an instrument appropriate for the signal's frequency and electrical level.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=o4R2VNzeDhY&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>STMicroelectronics, “STM32CubeMX basics: 03.1 STM32CubeMX clock configuration tab — Basics,” March 27, 2019. An official educational walkthrough of STM32CubeMX clock configuration and its prerequisite toolchain. Settings and UI reflect the original training release.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read-Only Field Diagnosis Workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Record identity before testing:</strong> obtain the full MCU order code, board revision, current firmware/build identifier, supply design and clock design documents. Note whether HSE comes from a crystal or an external clock output.</li><li><strong>Verify the symptom and state:</strong> record power-up pattern, reset causes, UART/USB/network behavior, error timestamps, environmental conditions and any peripherals failing to initialize.</li><li><strong>Review the firmware's intended clocks:</strong> identify oscillator choices, PLL settings, multipliers, dividers, voltage scaling, flash wait states and peripheral clock selectors in its configuration or generated initialization code.</li><li><strong>Read clock status without modifying it:</strong> if supported and permitted, record the relevant RCC source-selection, ready, PLL lock and CSS diagnostic flags. A debug connection may itself affect timing or low-power behavior.</li><li><strong>Compare expected and observed timebases:</strong> measure a manufacturer-approved MCO or other permitted frequency output only if qualified, using suitable high-impedance equipment. Avoid probing crystal terminals merely because they look accessible.</li><li><strong>Separate failure classes:</strong> distinguish never-ready external source, PLL lock failure, wrong system-clock selector, bus-divider mismatch, peripheral kernel-clock selection or supply-related reset.</li><li><strong>Preserve the evidence:</strong> attach device ID, register snapshot, log excerpt, voltage state, toolchain version, clock configuration, instrument settings and change-control number to the fault report.</li><li><strong>Escalate safely:</strong> recommend manufacturer-guided analysis and firmware/hardware review rather than bypassing the clock security system or substituting an unapproved external clock.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common Failure Patterns and Diagnostic Limits</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>HSERDY never asserts:</strong> possible disabled HSE, absent oscillator hardware, incorrect crystal/load network, unsuitable external-clock mode or faulty hardware; the symptom is not proof of a cracked crystal.</li><li><strong>PLLRDY does not assert:</strong> check the reference source, divider/multiplier plan, permitted frequency ranges and firmware initialization sequence.</li><li><strong>HSERDY ready but SYSCLK unexpected:</strong> the source may be stable but not selected; inspect the confirmed clock switch status rather than the enable bit alone.</li><li><strong>UART is unreliable:</strong> compare actual peripheral clock, baud generator, terminal settings and frequency tolerance before replacing a crystal.</li><li><strong>CPU seems slow:</strong> verify AHB and APB prescalers, active clock source and low-power mode; not every apparent speed loss is a reset or oscillator problem.</li><li><strong>RTC drifts or stops:</strong> distinguish LSE/LSI selection and calibration from the main HSE/PLL clock path; low-speed clocks may continue independently.</li><li><strong>CSS fault occurred:</strong> document the triggering source, current fallback, clock-dependent peripherals, and safe-state behavior before any recovery intervention.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>An inactive CPU clock is not a reason to attach a scope probe to a crystal pin: added probe capacitance may disturb or stop oscillation. Work only on isolated training hardware under approved engineering procedures; any contact with energized systems, industrial control equipment, or oscillator networks needs suitable supervision and tools. <a href="https://www.st.com/en/evaluation-tools/nucleo-l476rg">ST's NUCLEO-L476RG product page</a> and <a href="https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf">board manual UM1724</a> supply real board identification resources.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Lab and Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Documentation-only lab: examine the hypothetical chart and identify the resulting AHB clock when a nominal 80 MHz system clock is divided by four. Answer: <strong>20 MHz</strong>. Calculate a nominal 16 MHz clock's period: <strong>1/16,000,000 seconds = 62.5 nanoseconds</strong>. Then write a mock technician ticket for a board that announces an HSE timeout but continues on HSI. List at least three possible causes and the evidence necessary to distinguish them without making a register write.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Does HSERDY prove that HSE drives SYSCLK?</strong> No. Ready status and active-source status are distinct.</li><li><strong>Does a working 16 MHz HSI prove an external crystal works?</strong> No. These are separate sources.</li><li><strong>What does PLL lock indicate?</strong> The synthesizer is ready under the device's documented lock definition; it does not establish that every peripheral is timed correctly.</li><li><strong>Can CSS fallback preserve every timing function?</strong> No. Some peripherals and real-time constraints may no longer be satisfied.</li><li><strong>What is 80 MHz ÷ 8?</strong> 10 MHz; confirm the AHB divider actually equals eight before using that value.</li><li><strong>Why must exact device documentation be used?</strong> Clock options, register flags, startup clocks, limitations and failover behavior vary among MCU families and revisions.</li><li><strong>Is reflashing a firmware image the correct first diagnostic step for a suspected bad crystal?</strong> Not automatically. Preserve evidence and examine actual clock selection, board population, voltage and logs.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Official and Open Educational References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://www.st.com/resource/en/reference_manual/dm00151940-stm32l41xxx42xxx43xxx44xxx45xxx46xxx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf">STMicroelectronics, STM32L4 reference manual RM0394</a>; <a href="https://community.st.com/stm32-mcus-60/part-2-introduction-to-the-stm32-microcontroller-clock-system-125853">ST educational clock-security article</a>; <a href="https://www.st.com/en/evaluation-tools/nucleo-l476rg">ST NUCLEO-L476RG product page</a>; <a href="https://developerhelp.microchip.com/xwiki/bin/view/products/mcu-mpu/dspic/33a/osc-dd/fail-safe-clock-monitor/">Microchip Developer Help, Fail-Safe Clock Monitor</a>; and <a href="https://github.com/Open-CMSIS-Pack/ST_NUCLEO-L476RG_BSP">Open-CMSIS-Pack board-support repository</a>. The embedded STM32Cube training videos are official public instruction, not recordings of the present laboratory example.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Reliable clock diagnostics begin with an exact hardware identity and end with a verified distinction among oscillator startup, PLL lock, active selection, divider configuration and peripheral timing. Clock failures and power resets can have overlapping symptoms; the evidence should be recorded separately. Correct diagnosis protects functioning hardware from unnecessary reflash, replacement and unapproved modification.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSFTC.016 follows the published brownout diagnostics lesson OSFTC.015. The 1200 × 630 featured image is original conceptual AI editorial art featuring a younger technician to rotate the cover roster; its waveforms and instrument readings are fictional, not measured board values. The genuine NUCLEO-L476RG equipment photograph is sourced to the Open-CMSIS-Pack board repository. The engineering bar chart uses calculated frequencies derived from stated ST RM0394 assumptions, not a live device. The Python calculation was checked, while no microcontroller registers were read or altered and no oscilloscope measurement or clock failure was conducted. The two videos are historical official STMicroelectronics educational material; rendered player presence and live playback are audited separately.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" class="wp-image-24043" alt="Original BitcoinVersus.Tech 5,000-satoshi donation QR code" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech voluntary donation QR. Confirm the wallet address and payment amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>On a phone, display the QR on a second screen or use a compatible wallet's saved-image scanner where supported. Verify the recipient and 5,000-satoshi amount before authorizing the optional donation.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech offers educational information, not individualized electrical or safety certification. Live testing must follow site procedures and qualified supervision.</em></p>
+<!-- /wp:paragraph -->

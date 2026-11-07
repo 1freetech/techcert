@@ -1,0 +1,56 @@
+{
+  "lesson_id": "OSITC.013",
+  "subject": "information_technology",
+  "wp_id": 30956,
+  "title": "OSITC.013: Windows Disk Performance Diagnostics — Latency, IOPS, and Queue Depth",
+  "url": "https://bitcoinversus.tech/2026/11/07/ositc-013-windows-disk-performance-latency-iops-queue-depth/",
+  "post_status": "publish",
+  "featured_media_id": 30955,
+  "featured_image_dimensions": [
+    1200,
+    630
+  ],
+  "featured_cover": "Fictional young adult East Asian woman IT technician, after older male researcher cover; AI illustration, not real photo or measured trace",
+  "in_body_media": [
+    {
+      "id": 30952,
+      "source": "https://commons.wikimedia.org/wiki/File:Open_hard-drive.jpg",
+      "license": "Public domain"
+    },
+    {
+      "id": 30953,
+      "source": "https://commons.wikimedia.org/wiki/File:1TB_2280_NVME_SSD.jpg",
+      "license": "CC0 1.0"
+    },
+    {
+      "id": 30954,
+      "source": "https://commons.wikimedia.org/wiki/File:2025-02-28_09_15_10-Auslastung_Laufwerk_C_Greenshot_crop.png",
+      "license": "Wikimedia Commons public domain simple UI"
+    }
+  ],
+  "in_body_media_count": 3,
+  "has_real_media_credits": true,
+  "code_examples_saved": 3,
+  "code_execution_verified": false,
+  "math_examples": "1,000 IOPS x 4 KiB = 3.90625 MiB/s, 240 IOPS x 12 ms = 2.88 outstanding I/O under steady state; theoretical only",
+  "contextual_internal_link_count_at_least": 5,
+  "all_media_alt_text_saved": true,
+  "editor_note_italic": true,
+  "donation_qr_id": 24043,
+  "approved_footer": true,
+  "seo_saved": true,
+  "newsletter_disabled": true,
+  "wordpress_rendered_image_tags": 4,
+  "wordpress_rendered_iframes": 0,
+  "youtube_status": "No videos embedded because accessible verified playable examples not established",
+  "wordpress_screenshot_capture": {
+    "desktop": "ready",
+    "mobile": "ready",
+    "visual_pixel_inspection": false
+  },
+  "public_web_browser_fetch": "not accessible to independent web fetch",
+  "mobile_responsive_visual_verified": false,
+  "desktop_visual_verified": false,
+  "qa_status": "Published and WordPress edit/view readback verified; capture ready, no pixel inspection or playback or Windows execution claims.",
+  "last_verified": "2026-11-07"
+}

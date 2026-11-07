@@ -48,38 +48,38 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results.",
   "last_completed": {
-    "subject": "semiconductor_engineer",
-    "lesson_number": 15,
-    "track_id": "OSSEC.015",
-    "title": "OSSEC.015: Lithography Focus–Exposure Process Windows — FEM, Bossung Curves, and Depth of Focus",
-    "public_title": "OSSEC.015: Lithography Focus–Exposure Process Windows — FEM, Bossung Curves, and Depth of Focus",
-    "wordpress_post_id": 30521,
-    "live_url": "https://bitcoinversus.tech/2026/11/07/ossec-015-lithography-focus-exposure-process-windows-fem-depth-of-focus/",
-    "archive_path": "archive/2026/11/30521-ossec-015-lithography-focus-exposure-process-window.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/30521-ossec-015-lithography-focus-exposure-process-window.qa.json",
+    "subject": "hashboard_repair",
+    "lesson_number": 6,
+    "track_id": "OSHRE.006",
+    "title": "OSHRE.006: Hashboard Solder-Joint Inspection — Microscopy, Wetting Defects, and Rework Decisions",
+    "public_title": "OSHRE.006: Hashboard Solder-Joint Inspection — Microscopy, Wetting Defects, and Rework Decisions",
+    "wordpress_post_id": 30531,
+    "live_url": "https://bitcoinversus.tech/2026/11/07/oshre-006-hashboard-solder-joint-inspection-microscopy-rework/",
+    "archive_path": "archive/2026/11/30531-oshre-006-solder-joint-inspection.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/30531-oshre-006-solder-joint-inspection.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
     "publication_status": "published",
-    "verification_status": "published_wordpress_readback_two_youtube_iframes_confirmed_playback_unverified",
-    "qa_status": "WordPress #30521 published. Cover #30517 verified exact 1200x630. In-story official ASML equipment photo #30519, data bar chart #30518 grounded in UCSB Nanofab open educational example (not measured fabrication data), two verified Branch Education and ASML videos via shortcode rendering two iframe players in public HTML. Six contextual internal links, original donation QR #24043 and fully italicized Editor Note. No custom conceptual schematics or diagrams. Math independently verified (Rayleigh CD 50.0nm example; ratios 0.689 and 0.475; ±5% dose); no physical fab test. Desktop/mobile WordPress screenshot captures ready, pixel-level inspection not verified. Interactive video playback not independently verified. Exact Gutenberg and QA source archived in 3 repos and original readback matches in all 3. Next OSHRE.006 checked unused in WordPress, OSHRE.005 #27871 published. All 43 subjects and 20 programming tracks preserved.",
-    "featured_media_id": 30517,
+    "verification_status": "published_wordpress_readback_two_youtube_iframes_present_interactive_playback_unverified",
+    "qa_status": "WP #30531 published, exact saved Gutenberg 25,142 chars read back and archived identically in all three repositories. Exact 1200x630 illustrated cover #30524. In-body genuine manufacturer Bitmain S19k Pro hashboard images #30525/#30526, original modeled I²R heating bar chart #30527 (not measured), two verified education videos from iFixit and Adafruit rendered as two iframes. Five contextual internal links and original QR #24043 with fully italicized Editor's Note. No custom conceptual schematics or diagrams. Calculations [0.4,0.8,2,4] W at 20A for [1,2,5,10] milliohms checked; no real hardware test. WordPress desktop and mobile capture links ready, pixels not independently inspected, and interactive video playback unverified. OSRTC.016 WP #27572 is published and OSRTC.017 no published/draft match. Preserved 43 subjects and 20 programming tracks.",
+    "featured_media_id": 30524,
     "body_video_ids": [
-      "B2482h_TNwg",
-      "bcQCYsItVjM"
+      "rK38rpUy568",
+      "QKbJxytERvg"
     ],
     "code_executed": false
   },
   "next": {
-    "subject": "hashboard_repair",
-    "lesson_number": 6,
-    "title_format": "OSHRE.006: {topic}",
-    "public_title_format": "OSHRE.006: {topic}",
-    "resolution_note": "OSSEC.015 published Nov 7 2026 as WP #30521 and archived identically in all 3 repositories. Live WordPress confirms OSHRE.005 #27871 latest, and OSHRE.006 unused. Continue 43-subject rotation and 20 programming tracks. Honor new media policy: no conceptual schematics or diagrams; prefer official/open educational sources, credited real photos and source-grounded charts."
+    "subject": "robotics_technician",
+    "lesson_number": 17,
+    "title_format": "OSRTC.017: {topic}",
+    "public_title_format": "OSRTC.017: {topic}",
+    "resolution_note": "OSHRE.006 published November 7, WordPress #30531, and archived exact source + QA in all three repositories. Live WordPress confirms OSRTC.016 published #27572; OSRTC.017 unused. Education-first media: no conceptual diagrams, use authentic credited vendor photos, open-education videos and source-grounded charts."
   },
-  "next_after_current": "robotics_technician",
+  "next_after_current": "robotics_engineer",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -240,7 +240,9 @@
     },
     "robotics_technician": {
       "acronym": "OSRTC",
-      "next_lesson_number": 13
+      "next_lesson_number": 17,
+      "last_published_lesson_number": 16,
+      "last_wordpress_post_id": 27572
     },
     "robotics_engineer": {
       "acronym": "OSREC",
@@ -271,9 +273,9 @@
     },
     "hashboard_repair": {
       "acronym": "OSHRE",
-      "next_lesson_number": 6,
-      "last_published_lesson_number": 5,
-      "last_wordpress_post_id": 27871,
+      "next_lesson_number": 7,
+      "last_published_lesson_number": 6,
+      "last_wordpress_post_id": 30531,
       "photo_uniqueness_required": true
     },
     "history_of_engineering": {

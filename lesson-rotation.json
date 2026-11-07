@@ -48,34 +48,34 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations.",
   "last_completed": {
-    "subject": "history_of_engineering",
-    "lesson_number": 5,
-    "track_id": "OSHE.005",
-    "title": "OSHE.005: Sneferu's Bent Pyramid — Changing Slope During Construction",
-    "public_title": "OSHE.005: Sneferu's Bent Pyramid — Changing Slope During Construction",
-    "wordpress_post_id": 30891,
-    "live_url": "https://bitcoinversus.tech/2026/11/07/oshe-005-sneferu-bent-pyramid-dahshur-changing-slope-engineering/",
-    "archive_path": "archive/2026/11/30891-oshe-005-bent-pyramid-slope-change.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/30891-oshe-005-bent-pyramid-slope-change.qa.json",
+    "subject": "history_materials_science",
+    "lesson_number": 2,
+    "track_id": "OSHMS.002",
+    "title": "OSHMS.002: Early Lime Plaster — Fire, Chemistry, and Neolithic Materials Engineering",
+    "public_title": "OSHMS.002: Early Lime Plaster — Fire, Chemistry, and Neolithic Materials Engineering",
+    "wordpress_post_id": 30915,
+    "live_url": "https://bitcoinversus.tech/2026/11/07/oshms-002-early-lime-plaster-pyrotechnology-neolithic-materials/",
+    "archive_path": "archive/2026/11/30915-oshms-002-early-lime-plaster.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/30915-oshms-002-early-lime-plaster.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
-    "publication_status": "publish",
-    "featured_media_id": 30861,
+    "publication_status": "published",
+    "featured_media_id": 30911,
     "body_video_ids": [],
-    "verification_status": "Published WordPress, identical GitHub markup in three repos, screenshot captures ready but pixels uninspected",
-    "qa_status": "Original 1200x630 rotated female field engineer cover; genuine licensed pyramid and entrance photos; calculated 55°/43° bar chart; 3 in-body media; 5 contextual internal links, original donation QR and fully italic Editor Note. No suitable verified video embedded. Site inspection not performed. 43 curriculum subjects, 20 coding tracks retained."
+    "verification_status": "Published via WordPress, exact archive matches three repositories, screenshot captures ready, pixel inspection unverified",
+    "qa_status": "Original 1200x630 rotated younger male researcher cover; two genuine licensed museum object photos; calculated chemistry chart; 3 relevant media; four contextual internal links; original 5k sat QR and italic Editor Note. No custom schematic or unverified video. 2340 approx words. No physical chemical tests conducted."
   },
   "next": {
-    "subject": "history_materials_science",
-    "lesson_number": 2,
-    "title_format": "OSHMS.002: {topic}",
-    "public_title_format": "OSHMS.002: {topic}",
-    "resolution_note": "OSHE.005 published Nov 7 WordPress #30891; exact source archived three GitHub repositories. WordPress confirms OSHMS.001 already published #28058 and OSHMS.002 currently unused. Preserve all subjects and coding tracks."
+    "subject": "information_technology",
+    "lesson_number": 13,
+    "title_format": "OSITC.013: {topic}",
+    "public_title_format": "OSITC.013: {topic}",
+    "resolution_note": "OSHMS.002 published on November 7, 2026 WordPress #30915; exact Gutenberg and QA archived in three GitHub repositories. WordPress confirms OSITC.012 published #28161 and OSITC.013 unused. Preserve 43 rotation subjects, 20 programming tracks and education-first visual policy."
   },
-  "next_after_current": "information_technology",
+  "next_after_current": "c",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -296,9 +296,9 @@
     },
     "history_materials_science": {
       "acronym": "OSHMS",
-      "next_lesson_number": 2,
-      "last_published_lesson_number": 1,
-      "last_wordpress_post_id": 28058
+      "next_lesson_number": 3,
+      "last_published_lesson_number": 2,
+      "last_wordpress_post_id": 30915
     },
     "csharp": {
       "acronym": "OSC#",

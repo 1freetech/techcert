@@ -61,7 +61,13 @@
       10
     ],
     "period_16mhz_ns": 62.5,
-    "method": "Arithmetic independently verified in Python; no physical MCU test"
+    "method": "Arithmetic independently verified in Python; no physical MCU test",
+    "code_snippet_executed": true,
+    "python_output": [
+      "16 MHz SYSCLK: [16.0, 8.0, 4.0, 2.0]",
+      "80 MHz SYSCLK: [80.0, 40.0, 20.0, 10.0]"
+    ],
+    "environment": "Python interpreter, host-only calculation, no microcontroller attached"
   },
   "public_youtube_iframes": 2,
   "video_playback": "not independently tested",

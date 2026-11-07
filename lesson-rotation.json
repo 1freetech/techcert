@@ -65,11 +65,11 @@
     "publication_status": "publish",
     "featured_media_id": 31056,
     "body_video_ids": [
-      "oWzCvL35d0c",
+      "9dr2mHYYoug",
       "n60Dn0UsbEk"
     ],
-    "verification_status": "Published WordPress; two YouTube players rendered; exact source matches three repositories; screenshot captures ready with no visual inspection; video playback unverified",
-    "qa_status": "Topic-specific code-first 1200x630 no-person cover; one chart from compiled Java output, two verified educational videos; OpenJDK 21.0.12.1, 9 passing Java checks; six Gutenberg code blocks, four contextual links, original donation QR, italic Editor Note, no diagrams. Exact Go-style source archive approach reused for Java. Preserve 43 subjects and 20 coding tracks."
+    "verification_status": "Published WordPress; 2 YouTube player iframes rendered; separately verified current video titles/IDs for Bro Code and Kunal Kushwaha; actual playback unverified. Desktop/mobile screenshot captures ready; pixel inspection unverified. Gutenberg exact source synchronized across 3 GitHub archives.",
+    "qa_status": "Original equipment-only 1200x630 Java workstation cover; one original tested-input chart, two independently identified tutorial videos; OpenJDK 21.0.12.1 nine passing checks, six code blocks, four contextual links, original 5k sats QR, italicized Editor's Note. Replaced an unverified Microsoft Developer video ID with verified Bro Code 9dr2mHYYoug; synced GitHub canonical archives."
   },
   "next": {
     "subject": "javascript",
@@ -380,29 +380,28 @@
     }
   },
   "last_published": {
-    "subject": "rust",
-    "lesson_number": 7,
-    "track_id": "OSRust.007",
-    "title": "OSRust.007: Rust Slices and UTF-8 — Borrowed Text, Byte Boundaries, and Safe Indexing",
-    "public_title": "OSRust.007: Rust Slices and UTF-8 — Borrowed Text, Byte Boundaries, and Safe Indexing",
-    "wordpress_post_id": 31011,
-    "live_url": "https://bitcoinversus.tech/2026/11/07/osrust-007-slices-utf8-borrowed-text-byte-boundaries-safe-indexing/",
-    "archive_path": "archive/2026/11/31011-osrust-007-slices-utf8-safe-indexing.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/31011-osrust-007-slices-utf8-safe-indexing.qa.json",
+    "subject": "java",
+    "lesson_number": 6,
+    "track_id": "OSJava.006",
+    "title": "OSJava.006: Java Arrays — Indexing, Bounds, and Copying",
+    "public_title": "OSJava.006: Java Arrays — Indexing, Bounds, and Copying",
+    "wordpress_post_id": 31058,
+    "live_url": "https://bitcoinversus.tech/2026/11/07/osjava-006-java-arrays-indexing-bounds-copying/",
+    "archive_path": "archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
     "publication_status": "publish",
-    "featured_media_id": 31003,
-    "in_body_media_ids": [
-      31006,
-      31004,
-      31005
+    "featured_media_id": 31056,
+    "body_video_ids": [
+      "9dr2mHYYoug",
+      "n60Dn0UsbEk"
     ],
-    "verification_status": "WordPress published/rendered HTML checked; three identical Gutenberg and QA GitHub archive readbacks; independent screenshot pixels and Rust code execution unavailable",
-    "qa_status": "Original 1200x630 older female instructor cover, 3 credited in-story media (logo and two UTF-8 charts), 9 preformatted code sections, 5 contextual internal links, original donation QR 24043, italic Editor's Note. Rust toolchain absent; code expected outputs calculated/documentation-checked, not run. No video embedded."
+    "verification_status": "Published WordPress; 2 YouTube player iframes rendered; separately verified current video titles/IDs for Bro Code and Kunal Kushwaha; actual playback unverified. Desktop/mobile screenshot captures ready; pixel inspection unverified. Gutenberg exact source synchronized across 3 GitHub archives.",
+    "qa_status": "Original equipment-only 1200x630 Java workstation cover; one original tested-input chart, two independently identified tutorial videos; OpenJDK 21.0.12.1 nine passing checks, six code blocks, four contextual links, original 5k sats QR, italicized Editor's Note. Replaced an unverified Microsoft Developer video ID with verified Bro Code 9dr2mHYYoug; synced GitHub canonical archives."
   },
   "pending_publication_qa": [
     {
@@ -1166,5 +1165,16 @@
       "No independent desktop/mobile screenshot pixel inspection",
       "No video embeds or playback"
     ]
+  },
+  "lesson_repairs_2026_11_07_osjava006_video": {
+    "post_id": 31058,
+    "original_unverified_id": "oWzCvL35d0c",
+    "verified_replacement_id": "9dr2mHYYoug",
+    "retained_id": "n60Dn0UsbEk",
+    "reason": "No reliable evidence tying the original id to stated Microsoft Developer video. Replaced with independently identified Bro Code video on Java arrays.",
+    "wp_saved_rendered": true,
+    "playback_independently_tested": false,
+    "github_archives_exact_match": true,
+    "corrected_repo_count": 3
   }
 }

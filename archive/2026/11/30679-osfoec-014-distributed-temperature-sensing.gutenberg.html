@@ -1,0 +1,199 @@
+<!-- wp:paragraph -->
+<p><strong>OSFOEC.014</strong> explains how fiber-optic cables become distributed temperature sensors across kilometers of an industrial route. A distributed temperature sensing (DTS) interrogator launches light into glass and analyzes backscattered photons whose spectral properties contain temperature information. Engineers must transform the signals into calibrated measurements, connect optical distance to actual infrastructure coordinates, and verify the meaning of alarms before declaring a physical hotspot.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The chapter advances beyond <a href="https://bitcoinversus.tech/2026/10/29/osfoec-013-bidirectional-otdr-engineering-gainers-event-loss-trace-validation/">OSFOEC.013 on bidirectional OTDR</a>. Ordinary telecom OTDR measures reflections and attenuation; Raman-DTS infers temperature using different parts of the scattered spectrum. Previous chapters on <a href="https://bitcoinversus.tech/2026/10/27/osfoec-012-optical-reflectance-return-loss-engineering/">reflectance and return loss</a>, <a href="https://bitcoinversus.tech/2026/10/09/osfoec-007-fiber-nonlinearities-kerr-spm-xpm-fwm-sbs-srs-launch-power/">optical scattering and nonlinear effects</a> and <a href="https://bitcoinversus.tech/2026/10/05/osfotc-003-otdr-field-testing-launch-receive-fibers-range-pulse-width-events-dead-zones-fault-location/">OTDR field testing</a> provide the scientific and measurement prerequisites.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives and prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Describe Raman Stokes and anti-Stokes scattering, their optical energy shifts, and their relation to temperature.</li><li>Distinguish Raman-DTS, Brillouin temperature-and-strain sensing and Rayleigh distributed acoustic sensing.</li><li>Calculate the approximate round-trip optical delay for a known fiber length.</li><li>Separate sample spacing, spatial resolution, location accuracy, temperature accuracy, and integration time.</li><li>Explain why reference-temperature calibration, differential attenuation and surveyed route locations matter.</li><li>Interpret simulated temperature profiles without mistaking them for physical test results.</li><li>Produce an evidence-based engineering report with fault hypotheses, uncertainty and safe escalation requirements.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The necessary background includes single-mode fiber propagation, optical attenuation, OTDR event tables and basic statistics. For a documentation-only lesson, a calculator, spreadsheet or standard Python 3 environment is sufficient. Do not connect or disconnect optical fibers or manipulate installed power cable monitoring without approved procedures and qualified supervision.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Fiber as a distributed temperature instrument</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Unlike a discrete thermometer installed at one enclosure, a suitable sensing fiber can report temperatures at many positions along its cable route. The <a href="https://www.epa.gov/environmental-geophysics/fiber-optic-distributed-temperature-sensing">U.S. Environmental Protection Agency's open fiber-optic DTS tutorial</a> describes pulsed measurement, calibrated temperature and the difference between optical and mapped physical distances. Real applications range from environmental research to monitoring buried electrical cables and pipelines.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>DTS technologies are not interchangeable. Raman systems primarily derive temperature from Stokes and anti-Stokes intensity relationships. Brillouin frequency shifts respond to strain as well as temperature; separating those contributions may require an additional reference or experimental model. Rayleigh-based techniques can be used for acoustic or other sensing modalities depending on the interrogator. Published instrument features and certifications must be checked for the selected product, not assumed for every sensing fiber.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30661,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img class="wp-image-30661" src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ap-sensing-n45-dts-official-instrument-photo.jpg" alt="Official AP Sensing N45 commercial DTS interrogator front-panel photograph" /><figcaption class="wp-element-caption"><em>Official AP Sensing N45-series temperature sensing interrogator, credited to AP Sensing. Authentic equipment photograph, not an image from the lesson's fictional data.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The physics of Raman temperature measurement</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The launch laser excites microscopic vibrations in silica. A small portion of the returned light experiences inelastic Raman scattering. Stokes photons carry lower optical frequency than the laser, while anti-Stokes photons carry higher frequency. The population of excited vibrational states depends on temperature, so the ratio of anti-Stokes to Stokes intensity contains a temperature-dependent exponential term.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A simplified conceptual dependence is exp(−γ/T), with absolute temperature T in kelvin and gamma related to the Raman energy shift and Boltzmann's constant. The real measurement is more complicated: detectors have wavelength-dependent responses, Stokes and anti-Stokes light attenuate differently, and instrument gains can drift. An isolated temperature estimate cannot be accepted without calibration. The <a href="https://www.nature.com/articles/s41377-022-00811-x">accessible technical review of Raman distributed optical sensing</a> describes the underlying physics and implementation challenges.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The manufacturer <a href="https://www.apsensing.com/en/technology-and-products/distributed-temperature-sensing">AP Sensing</a> explains Raman and Brillouin approaches and the significance of strain cross-sensitivity. Its N45 series advertises a model-dependent reach up to 70 km and best-case short-range spatial resolution down to 0.5 m. Those are product claims, not universal DTS specifications and not independently benchmarked by the present lesson.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=aFMpbD8wupw&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Scott Tyler (University of Nevada, Reno), Distributed Temperature Sensing Using Fiber Optics — The Basics, linked from Oregon State University CTEMPs.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Determine optical location from pulse travel time</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For an idealized uniform fiber, the time delay between an outgoing laser pulse and its returned backscatter can be approximated by Δt = 2 n_g d / c. Here d is the optical distance in meters, n_g is the group refractive index, and c is the vacuum speed of light, 299,792,458 m/s. The factor of two represents the outward and return travel paths.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Assume n_g = 1.468. For a scattering location 6,000 m away, the modeled return time is 2 × 1.468 × 6,000 / 299,792,458 = approximately <strong>58.76 microseconds</strong>. For a 2,500 m location the result is <strong>24.48 microseconds</strong>. Other classroom distances yield 4.897 microseconds at 0.5 km and 97.934 microseconds at 10 km.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>These results refer to propagation through the fiber and do not identify a point on a geographical map. Cable slack, splice trays, vault coils and changes in route can make 6 km optical distance correspond to a different surveyed ground distance. The engineering handoff must include an as-built route model, segment identifiers and the uncertainty of locating the sensor next to an actual cable or pipe.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Illustrative hotspot temperature profile</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A mathematical example assigns a roughly 24°C temperature baseline to a fictional ten-kilometer sensing fiber. A Gaussian-shaped feature of 14°C amplitude is added near 6.0 km, making an approximately 38°C modeled peak. The selected width parameter is 0.25 km solely for visualization; it is not an interrogator's measured spatial resolution.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30660,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img class="wp-image-30660" src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osfoec-014-synthetic-dts-temperature-profile-chart.png" alt="Synthetic temperature line chart with approximately 24 degree baseline and hypothetical 38 degree hotspot at 6 kilometer fiber distance" /><figcaption class="wp-element-caption"><em>Original Python-calculated illustrative graph; all temperatures are synthetic teaching examples rather than site or product measurements.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>The chart is synthetic training data, not a recorded industrial fiber measurement, not a manufacturer specification, and not proof of cable overheating. Real traces respond to measurement averaging, changing optical attenuation, temperature coupling and instrument response. A sensing cable mounted outside a power cable sheath does not automatically measure the buried conductor temperature; heat-transfer modeling and field corroboration may be required.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Precision, resolution and accuracy</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>**Sample spacing** is the distance between displayed temperature values. Closely spaced readings may not be statistically independent.</li><li>**Spatial resolution** describes the minimum distance scale over which the chosen system distinguishes thermal changes under specified conditions.</li><li>**Temperature resolution** is the smallest temperature change discernible under stated noise, time and distance averaging.</li><li>**Accuracy** concerns agreement with a suitable calibrated thermometer, accounting for bias and uncertainty.</li><li>**Integration time** specifies how long weak backscatter is collected. Longer averaging can improve precision but delay detection of rapid events.</li><li>**Geographic localization** depends on actual cable geometry; even accurate optical positions may be mapped to the wrong asset.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The EPA's educational reference notes that precision can improve with greater spatial or temporal averaging. The improvement trades against location granularity and time response. Engineers must document those choices rather than quote a single “resolution” number without a test condition.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Differential attenuation and reference calibration</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Stokes and anti-Stokes photons occupy different optical wavelengths. They therefore suffer different attenuation along the sensing fiber. Raw intensity ratios can change with distance even when the cable remains at constant temperature. Splice locations, bend damage, connectors and mode coupling can introduce abrupt differences that resemble temperature features.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A defensible calibration uses reference cable sections held at known temperatures, checks independent thermometers, records the calibration interval, and estimates uncertainty due to optical loss and channel drift. Single-ended acquisition measures from one side; appropriate double-ended methods combine observations from opposite fiber ends to improve correction of some differential-attenuation effects.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The peer-reviewed <a href="https://doi.org/10.3390/S120505471">open-access double-ended Raman-DTS calibration research</a> reviews those issues. The <a href="https://ctemps.org/instructional-videos">Oregon State University CTEMPs education library</a> also links university lectures specifically on calibration tools and practical uncertainty.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=-tBazWiXDaY&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Scott Tyler (University of Nevada, Reno), DTS Calibration: Challenges and Tools, linked from Oregon State University CTEMPs.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Engineering applications and design constraints</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://restservice.epri.com/publicdownload/000000000001024189/0/Product">Electric Power Research Institute's underground power-cable DTS application guide</a> covers practical fiber sensing use in electrical infrastructure. Asset-monitoring applications can include underground cables, substations and industrial busways, along with pipelines and water-related environmental research. The benefit is extended spatial temperature visibility relative to sparsely placed point sensors; the cost includes sensing cable integration, mapping, commissioning, data validation and maintenance complexity.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A DTS installation is not automatically approved for fire detection or other safety-critical use. Engineering teams must select listed equipment, verify all required standards, test alarms at the system level, and document the response-time and location uncertainty. Vendor-advertised measurement range is not proof of identical accuracy and responsiveness along an entire deployed route.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Failure modes and diagnostic judgment</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>A consistent offset across the trace can indicate reference-probe error, calibration drift or incorrect channel configuration.</li><li>A step coinciding with a splice may reflect differential optical attenuation rather than an actual temperature discontinuity.</li><li>Increased noise at long ranges may result from reduced backscatter and unsuitable averaging or pulse settings.</li><li>A hotspot that appears to move after cable maintenance may reflect revised cable length or inaccurate route records.</li><li>Contradictory measurements from Raman and Brillouin instruments may require a review of strain sensitivity.</li><li>A missing history or delayed alert could originate in the telemetry network, historian or clock synchronization rather than the optical sensor.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Engineers should record which observations were directly measured, which are interpreted and which remain hypotheses. Before moving cabling or changing alert thresholds, collect trace metadata, reference temperatures, instrument identity, acquisition intervals, maintenance history and relevant independent asset readings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Documentation-only lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Reproduce the optical round-trip times for 0.5, 2.5, 6.0 and 10.0 km using n_g = 1.468. Answers are 4.897, 24.484, 58.761 and 97.934 microseconds.</li><li>Generate an illustrative 24°C baseline and an artificial 38°C peak at 6.0 km. Mark all values “synthetic” and describe the assumed spatial shape.</li><li>A reference thermometer records 25.0°C while the interrogator shows 26.7°C. Record the discrepancy as +1.7°C and state which calibration checks should precede any correction.</li><li>Explain why 6.0 km optical distance cannot, without route documentation, be assumed to indicate a ground location 6.0 km from the equipment room.</li><li>Draft an engineering handoff with fiber ID, optical distance, surveyed location, uncertainty, reference calibration, alarm timestamp, measurement settings and authorized follow-up steps.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge check and answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>**What supports temperature measurement in Raman-DTS?** A calibrated relationship between Stokes and anti-Stokes backscatter intensities.</li><li>**What does return delay locate?** A position along the optical fiber, not automatically a geographical coordinate.</li><li>**Why is the optical distance formula divided by two?** The measured pulse and return signal travel outward and back.</li><li>**What is the 6 km example's round-trip delay?** Approximately 58.76 microseconds for the assumed group refractive index.</li><li>**Can every distributed fiber sensor separate temperature from strain?** No. The technology and compensation model matter.</li><li>**Is 0.5 m sample spacing equivalent to 0.5 m spatial resolution?** Not necessarily.</li><li>**Why can a splice appear to cause a temperature jump?** Stokes and anti-Stokes attenuation may differ.</li><li>**Does a peak alone prove a physical cable fault?** No; calibration, mapping, uncertainty and corroborating evidence remain necessary.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Sources and further learning</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The lesson draws on the <a href="https://www.epa.gov/environmental-geophysics/fiber-optic-distributed-temperature-sensing">U.S. EPA's open DTS tutorial</a>, the <a href="https://ctemps.org/instructional-videos">Oregon State University CTEMPs instructional library</a>, <a href="https://www.apsensing.com/en/technology-and-products/distributed-temperature-sensing">AP Sensing's DTS principles</a>, the <a href="https://www.apsensing.com/en/product/dts-n45-series">AP Sensing N45 series reference</a>, EPRI's openly available underground-cable application guide, and the peer-reviewed double-ended calibration research cited above. Vendor-specific specifications and safety classifications must be reviewed against the equipment actually installed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Distributed fiber-optic temperature sensing links Raman physics, optical time of flight, controlled reference calibration and physical route mapping. Reliable engineering practice separates the appearance of a temperature trace from validated evidence about the asset being monitored. The synthetic calculations and chart illustrate the method without claiming field measurements or a demonstrated commercial performance result.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSFOEC.014 follows published OSFOEC.013. The featured 1200×630 image is an original AI-generated equipment-only illustration; the in-story AP Sensing photograph is authentic manufacturer imagery. The temperature chart and timing examples are synthetic, independently calculated classroom models; no DTS or fiber hardware was tested. Educational video titles and URLs are listed by Oregon State University CTEMPs. Rendering and playback require separate checks.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img class="wp-image-24043" src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5000 satoshi donation QR" /><figcaption class="wp-element-caption"><em>Original voluntary 5,000-satoshi donation QR; verify recipient and amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>On mobile, display the QR on a second screen or use your wallet's image scanning feature. Confirm the destination and 5,000 sat amount before authorizing payment.</em></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech publishes educational material; electrical, optical-laser and safety engineering decisions require qualified personnel and approved procedures.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,81 @@
+{
+  "audit_date": "2026-11-07",
+  "post_id": 31058,
+  "lesson_id": "OSJava.006",
+  "title": "OSJava.006: Java Arrays — Indexing, Bounds, and Copying",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/osjava-006-java-arrays-indexing-bounds-copying/",
+  "previous_subject_lesson": "OSJava.005 WordPress #28323",
+  "cover": {
+    "id": 31056,
+    "width": 1200,
+    "height": 630,
+    "subject": "Java arrays editor on workstation; no person",
+    "type": "Original AI editorial illustration; not authenticated IDE screenshot"
+  },
+  "in_body_media": [
+    {
+      "id": 31057,
+      "type": "calculated chart from real local example",
+      "original": [
+        4,
+        7,
+        9,
+        12
+      ],
+      "copy": [
+        4,
+        20,
+        9,
+        12
+      ],
+      "note": "Not a runtime benchmark"
+    },
+    {
+      "youtube_id": "oWzCvL35d0c",
+      "publisher": "Microsoft Developer",
+      "topic": "Arrays in Java | Java for Beginners"
+    },
+    {
+      "youtube_id": "n60Dn0UsbEk",
+      "publisher": "Kunal Kushwaha",
+      "topic": "Introduction to Arrays and ArrayList in Java"
+    }
+  ],
+  "in_body_media_count": 3,
+  "language": "Java",
+  "tested_environment": "OpenJDK 21.0.12.1",
+  "compile_command": "javac -Xlint:all ArrayLab.java ArrayLabTest.java",
+  "run_command": "java ArrayLab",
+  "test_command": "java -ea ArrayLabTest",
+  "observed_test_output": "PASS: 9 array checks",
+  "test_result": "Nine local checks passed",
+  "source_file": "archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.ArrayLab.java",
+  "test_file": "archive/2026/11/31058-osjava-006-java-arrays-indexing-copying.ArrayLabTest.java",
+  "example_output": [
+    "original: [4, 7, 9, 12]",
+    "copy: [4, 20, 9, 12]",
+    "alias shares array: true",
+    "index 2: 9",
+    "sum: 32",
+    "range [1, 3): [7, 9]",
+    "row lengths: [2, 1, 3]",
+    "sorted index of 9: 2"
+  ],
+  "sources": [
+    "https://dev.java/learn/language/constructs/basics/arrays/",
+    "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Arrays.html",
+    "https://docs.oracle.com/javase/specs/jls/se21/html/jls-10.html"
+  ],
+  "wordpress_rendered_iframe_count": 2,
+  "actual_video_playback": "not independently verified",
+  "desktop_screenshot": "capture ready; pixel inspection unverified",
+  "mobile_screenshot": "capture ready; pixel inspection unverified",
+  "contextual_internal_links": 4,
+  "code_blocks": 6,
+  "editor_note": true,
+  "original_donation_qr_media_id": 24043,
+  "subscriber_email_suppressed": true,
+  "custom_diagrams": "none",
+  "final_source_readback": "Exact published WordPress Gutenberg markup archived and compared with three GitHub copies"
+}

@@ -9,10 +9,12 @@
     2509703
   ],
   "featured_cover": {
-    "id": 30608,
+    "id": 30623,
     "width": 1200,
     "height": 630,
-    "type": "original conceptual AI editorial cover"
+    "type": "original conceptual AI editorial cover",
+    "visible_person": "Older male-presenting fiber technician in safety eyewear and navy workwear; rotated age/person profile from recent lessons",
+    "word_press_media_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osfotc-016-cover-senior-fiber-technician-1200x630-1.jpg"
   },
   "media": [
     {
@@ -64,5 +66,14 @@
   },
   "subscriber_email_disabled": true,
   "source_characters": 24989,
-  "notes": "No invented field test, no conceptual schematics, photo credited to EXFO; illustration labeled. Screenshots ready not pixel inspected; player HTML rendered but playback unverified."
+  "notes": "No invented field test, no conceptual schematics, photo credited to EXFO; illustration labeled. Screenshots ready not pixel inspected; player HTML rendered but playback unverified. Featured cover changed Nov 7 to 1200x630 #30623 (older male technician) for person/age rotation. Published Gutenberg body unchanged; WordPress read-back retained two YouTube iframes.",
+  "cover_rotation_revision": {
+    "date": "2026-11-07",
+    "action": "Replaced featured cover #30608 with #30623 on published WordPress #30620",
+    "reason": "User requested rotation of demographic/person type; older technician selected to vary adjacent lessons",
+    "source_image_verified": true,
+    "live_wordpress_featured_media_verified": true,
+    "desktop_mobile_captures": "ready but image pixels not visually inspected",
+    "article_body_unchanged": true
+  }
 }

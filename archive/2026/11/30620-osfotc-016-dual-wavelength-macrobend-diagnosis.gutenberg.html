@@ -1,0 +1,234 @@
+<!-- wp:paragraph -->
+<p><strong>OSFOTC.016</strong> teaches fiber-optic technicians how to distinguish suspected macrobend loss from microbend-induced stress, ordinary splice attenuation, and misleading OTDR measurements. The focus is <strong>dual-wavelength, single-mode optical time-domain reflectometry (OTDR)</strong>: comparing the apparent loss of a physical event at 1310 nm and 1550 nm while preserving the test configuration, uncertainty, and cable records. A large loss difference may help locate a bend, but it is not a stand-alone diagnosis or a universal pass/fail limit.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The preceding <a href="https://bitcoinversus.tech/2026/10/31/osfotc-015-passive-optical-splitter-field-testing-pon-power-otdr/">OSFOTC.015</a> addressed splitters, PON optical-power budgets, and OTDR limitations. <a href="https://bitcoinversus.tech/2026/10/11/osfotc-008-fiber-troubleshooting-restoration/">OSFOTC.008</a> introduced broad fault restoration. The new chapter examines differential event-loss calculations, test uncertainty, field evidence, and when a trace justifies escalation. <a href="https://www.thefoa.org/tech/ref/fiber/Microbending.html">The Fiber Optic Association (FOA)</a>, a nonprofit educational organization, provides an open explanation of macro- and microbending.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives, Background and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list">
+<li>Define macrobending, microbending, wavelength-dependent attenuation, and an OTDR event.</li>
+<li>Explain why single-mode bending commonly causes a larger incremental event loss at 1550 nm than at 1310 nm.</li>
+<li>Calculate the differential event loss <strong>ΔL = L<sub>1550</sub> − L<sub>1310</sub></strong> and interpret an instrument-specific warning threshold correctly.</li>
+<li>Identify reasons a wavelength comparison can mislead: launch mismatch, pulse-width changes, reflective dead zones, noise, and fiber properties.</li>
+<li>Distinguish a suspected macro bend from a confirmed cable defect and avoid inferring microbending from one measurement.</li>
+<li>Complete a safe, documentation-only review of an event table and specify the next approved field test.</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: single-mode fiber basics, optical power in decibels, connectors, launch and receive cords, and elementary OTDR traces. Review <a href="https://bitcoinversus.tech/2026/10/06/osfotc-004-fiber-connector-types-polarity-lc-sc-upc-apc-mpo-mtp-tx-rx-vfl-verification/">OSFOTC.004 on connector types</a>, <a href="https://bitcoinversus.tech/2026/10/05/osfotc-003-otdr-field-testing-launch-receive-fibers-range-pulse-width-events-dead-zones-fault-location/">OSFOTC.003 on OTDR setup</a>, and <a href="https://bitcoinversus.tech/2026/10/09/osfotc-007-fiber-cable-installation-routing-bend-radius-pulling-tension-conduit-trays-slack-acceptance/">OSFOTC.007 on installation and bend radius</a>. No energized testing or physical fiber manipulation is necessary for the classroom laboratory.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Physics of Bending Stress</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Macrobending</strong> occurs when fiber follows a relatively large geometric curve, such as a sharp corner or an overly tight loop in a cassette or patch panel. Curvature may allow some guided light to leak out of the core/cladding structure, increasing attenuation. The wavelength and the fiber's construction matter, and the exact relationship is not a fixed number applicable to every cable. The FOA distinguishes these installation-scale bends from <strong>microbending</strong>, in which small deformations or pressures perturb the fiber over much shorter distances.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Microbending may be associated with localized compression, cable construction, temperature changes, tight tie-downs, or stresses from nearby components. A microbend need not have a visible sharp loop. The FOA notes that a simple, reproducible standard test specifically for microbending is not available, so a technician should not assume that all wavelength-sensitive loss represents the same physical mechanism.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Bend-insensitive single-mode fiber designed to ITU-T G.657 categories can improve resilience to tight routes, but the installed <em>cable</em>, connector, jacket, pulling-tension specification, and manufacturer minimum bend radius still govern safe handling. A bend-insensitive fiber is not a license to kink a cable. The <a href="https://www.thefoa.org/tech/ref/fiber/BIfiber.html">FOA's bend-insensitive-fiber lesson</a> summarizes the distinction between conventional and improved-bend fiber.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why Compare 1310 nm and 1550 nm?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In many conventional single-mode fiber systems, ordinary distributed attenuation per kilometer is lower at 1550 nm than at 1310 nm. However, a <em>localized bending event</em> can show the opposite wavelength trend: a larger extra loss at 1550 nm. These two statements describe different effects and must not be confused. Comparing two event losses at the same <strong>distance</strong> removes much of the long-span attenuation context and helps the operator search for a wavelength-sensitive feature.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The FOA's <a href="https://www.thefoa.org/tech/ref/testing/OTDR/OTDR-FAQS.html">OTDR field-test examples</a> show a physically introduced bend that produces a substantial nonreflective step at 1550 nm and little corresponding feature at 1310 nm. EXFO's <a href="https://documents.exfo.com/Products/UserGuides/User_Guide_OTDR_English_%281068770%29.pdf">OTDR user guide (macrobend parameters, printed page 40)</a> documents a software rule that requires both a larger loss at the longer wavelength and a loss difference greater than a configured delta. Its illustrative default is <strong>0.50 dB</strong>, but the setting can be changed and must not be represented as a universal industry limit.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30610,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/exfo-maxtester-d-series-otdr-official-equipment-photo.png" alt="EXFO manufacturer photo of a blue MaxTester D-series OTDR showing its fiber-link interface" class="wp-image-30610" /><figcaption class="wp-element-caption"><em>Authentic EXFO MaxTester D-series instrument photograph. Credit: EXFO, <a href="https://www.exfo.com/en/products/field-network-testing/otdr-iolm/d-series-otdr-line/">official product imagery</a>. The photograph identifies a test instrument, not the example losses used below.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=urJ7namHVn4&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Fiber Optic Association, “Using An OTDR,” September 14, 2012. Open educational demonstration of instrument setup and the effects of test parameters on OTDR traces. Source: thefoainc official education channel.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reading an OTDR Event Without Inventing a Defect</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An OTDR sends optical test pulses and measures returning backscatter and reflections to infer distance, splice attenuation, and changes along a fiber. A sharp <em>nonreflective</em> step can indicate a fusion splice, stressed bend, or other nonreflective loss event. A strong reflection peak more often indicates a connector, a mechanical interface, or a break. The event table is not a substitute for map and work-order evidence: use the same fiber ID, launch configuration, known routing, and local acceptance criteria as the baseline test.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A bent cable can be close to the start of a spool, behind a patch tray, in an enclosure, or at an over-tight service loop. However, a suspected event's reported distance can be offset by the instrument's refractive-index setting and the physical route of the cable. Technician records should distinguish <em>optical distance</em> from a proven cabinet, splice tray, or pedestal location. Refer to the <a href="https://www.thefoa.org/tech/ref/testing/OTDR/OTDR.html">FOA OTDR reference</a> for backscatter, event loss, and instrument uncertainty.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked Example: Four Hypothetical Events at Two Wavelengths</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following four event-loss pairs are <strong>synthetic classroom numbers</strong>, not field measurements by EXFO or the FOA. Assume event positions have been aligned and the two test captures have comparable settings and adequate signal-to-noise ratio. For every event, calculate <strong>ΔL = L<sub>1550</sub> − L<sub>1310</sub></strong>. Positive ΔL indicates more apparent event loss at the longer wavelength.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30609,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osfotc-016-dual-wavelength-macrobend-event-loss-chart.png" alt="Grouped bar chart of four hypothetical OTDR loss events at 1310 and 1550 nm with a pronounced difference at event B" class="wp-image-30609" /><figcaption class="wp-element-caption"><em>Original Open Source Tech Cert data chart generated with Python. All four event values are synthetic teaching examples, not instrument measurements. The 0.50 dB difference criterion discussed in the article is a configurable EXFO example.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:list -->
+<ul class="wp-block-list">
+<li><strong>Event A, splice-like:</strong> 0.10 dB at 1310 nm and 0.12 dB at 1550 nm. ΔL = <strong>+0.02 dB</strong>; little wavelength separation is visible.</li>
+<li><strong>Event B, suspected macrobend:</strong> 0.16 dB at 1310 nm and 0.88 dB at 1550 nm. ΔL = <strong>+0.72 dB</strong>, exceeding a hypothetical 0.50 dB software threshold.</li>
+<li><strong>Event C, connector-like:</strong> 0.36 dB at 1310 nm and 0.40 dB at 1550 nm. ΔL = <strong>+0.04 dB</strong>; the absolute loss and reflectance still require inspection.</li>
+<li><strong>Event D, marginal difference:</strong> 0.12 dB at 1310 nm and 0.44 dB at 1550 nm. ΔL = <strong>+0.32 dB</strong>; this does not exceed the example 0.50 dB flag, but the event is not automatically healthy.</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>For Event B, 0.88 − 0.16 = <strong>0.72 dB</strong>. A 0.72 dB <em>additional</em> loss corresponds to a relative power ratio of 10<sup>−0.72/10</sup> ≈ <strong>0.847</strong>, or approximately <strong>15.3%</strong> less transmitted power than a reference with only the 1310 nm event loss, under the mathematical comparison's assumptions. That is not a claim about actual transmitted power in a live PON; many other losses exist along a real link.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The four deltas were checked in Python as 0.02, 0.72, 0.04 and 0.32 dB. A software flag tells the operator where to investigate, not what replacement is authorized. It is particularly important to separate the <strong>macrobend detection setting</strong> from the cable plant's approved <strong>insertion-loss budget</strong>. A pass in one category does not establish a pass in the other.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical Differences Between Macrobend and Microbend</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Macrobends are often associated with visible routing geometry: a tight loop in a fiber tray, a low-radius corner, a sharp cabinet entry, or cable storage that violates the cable manufacturer's requirements. Their signatures may be wavelength sensitive. Microbending can arise from small distributed stresses that are harder to localize visually and may change as temperature, cable pressure or strain change. A technician should compare affected fibers and environmental history before concluding that an invisible microbend is present.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The manufacturer's published cable or fiber bend-performance data is relevant. For example, Corning's <a href="https://www.corning.com/oem-solutions/worldwide/en/home/products-solutions/optical-communication-components/specialty-fiber/reduced-clad-bend-incentive-fiber.html">bend-insensitive fiber technical information</a> contains geometry and bend-loss specifications for particular specialized products. Such specifications describe test conditions, not a promise that any finished field cable can be forced around a 5 mm bend radius.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why Two Captures Can Disagree for the Wrong Reason</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list">
+<li><strong>Different pulse widths:</strong> one acquisition may resolve a narrow event while another merges it with a neighboring connector or dead zone. Compare stored acquisition settings rather than looking only at two loss numbers.</li>
+<li><strong>Wrong launch or receive cable:</strong> deteriorated or incompatible reference connectors can raise initial loss, increase reflection, or hide nearby events.</li>
+<li><strong>Instrument uncertainty:</strong> small event-loss differences may fall within measurement uncertainty or depend on backscatter coefficient changes.</li>
+<li><strong>Different fiber ID or distance scale:</strong> two traces from the wrong port or a different index-of-refraction setting cannot be safely compared event-for-event.</li>
+<li><strong>Reflective-event saturation:</strong> a large peak may distort the apparent step and subsequent events; a short pulse or adjusted setup may be required under an approved procedure.</li>
+<li><strong>Different fiber construction:</strong> G.657 bend-insensitive fibers and conventional G.652 spans may respond differently to tight routing.</li>
+<li><strong>Active-service conflicts:</strong> an OTDR connected to a live optical path without an appropriate rated filtered live-fiber port may produce invalid results or damage test equipment.</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The FOA cautions that OTDRs are not direct insertion-loss meters. Link attenuation acceptance is typically verified with an optical light source and power meter or an approved optical-loss test set (OLTS), while an OTDR is used to localize events and characterize fiber features. Use <a href="https://bitcoinversus.tech/2026/10/12/osfotc-009-fiber-optic-link-testing-certification/">OSFOTC.009</a> to review certification versus fault-location roles.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=3RRL9peZBQA&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Specialized Products Company, “EXFO Optical Explorer OX1 — How to Find Macrobends with Fault Explorer,” September 6, 2024. Public instructional product demonstration using 1310/1550 nm and event-location reporting; the video is from an equipment reseller, not FOA or EXFO's official channel.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Safety Before Any Real Fiber Test</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Never look into a fiber end or microscope that is not specifically safe for optical inspection, and never assume a connector is dark simply because no visible light is present. In particular, optical communication wavelengths such as 1310 nm and 1550 nm are invisible to the human eye. Confirm the assigned circuit, maintenance authorization, and optical-source state before handling or disconnecting any path. Use suitable power detection and the specific manufacturer's safety instructions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://knowledge.exfo.com/kb?id=kb_article_view&amp;sysparm_article=KB0011418">EXFO live-fiber warning article</a> identifies incorrect port selection and input optical power as causes of invalid acquisitions and possible instrument damage. Never add a bend, kink or unapproved mandrel wrap to an unidentified active cable to see whether an alarm changes. Any physical re-routing, cleaning, splicing or replacement belongs under an authorized site procedure and change-control record.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Safe Engineering Review and Escalation Workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list">
+<li><strong>Establish scope.</strong> Record the work order, fiber pair, circuit or PON branch, service impact, current route drawings, known splice locations and previous acceptance results.</li>
+<li><strong>Verify authorized status.</strong> Classify the optical path as dark or operational, confirm whether a live-fiber-capable filtered test port is specified, and follow site lockout and optical-safety rules.</li>
+<li><strong>Preserve baseline traces.</strong> Keep the original raw test files, wavelength, acquisition time, pulse width, index of refraction, launch/receive fiber length and software revision.</li>
+<li><strong>Compare matched events.</strong> Align event positions, calculate L<sub>1550</sub> − L<sub>1310</sub>, and check whether any alert is an instrument default or a documented project-specific setting.</li>
+<li><strong>Evaluate uncertainty.</strong> Review source noise, reflective-event dead zones, test-port cleanliness, backscatter differences, and expected wavelength-dependent fiber attenuation.</li>
+<li><strong>Correlate with physical records.</strong> Determine whether the suspect distance corresponds to an approved service loop, splice closure, tray, duct transition or another documented route element.</li>
+<li><strong>Escalate findings.</strong> Have a qualified team approve any hands-on inspection, repair or re-test. Preserve before/after results and the exact component ID in the handoff record.</li>
+</ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Documentation-Only Practical Lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Download or review the FOA's publicly available <a href="https://www.thefoa.org/tech/ref/testing/OTDR/OTDR-FAQS.html">kink and wavelength-sensitivity example</a>, and watch the two educational videos. Without attaching a test instrument or touching any live fiber, build a four-row spreadsheet using the synthetic Event A–D values above. Compute ΔL and add columns for “suspected fault type,” “measured or simulated,” “threshold source,” and “evidence still needed.”</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For Event B, calculate 0.72 dB and note that the illustrative 0.50 dB rule would flag the event. For Event D, calculate 0.32 dB and explain why it still deserves review when service budgets, original traces, or local acceptance criteria indicate a problem. Write a five-sentence service ticket that cites the synthetic nature of the numbers, the wavelength difference, unknown route location, and the need for authorized physical confirmation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check and Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list">
+<li><strong>What is the practical distinction between macro- and microbending?</strong> Macrobending involves larger-radius routing curvature or kinks; microbending involves small-scale deformation or pressure along the fiber.</li>
+<li><strong>Why is 1550 nm useful for diagnosing many single-mode bends?</strong> Incremental bend loss can be greater at longer wavelengths, even though normal span attenuation may be lower at 1550 nm.</li>
+<li><strong>What is ΔL for Event B?</strong> 0.88 dB − 0.16 dB = 0.72 dB.</li>
+<li><strong>Does a 0.72 dB difference prove a cable is kinked?</strong> No. It indicates a wavelength-dependent loss difference that should be correlated with physical routing and valid captures.</li>
+<li><strong>Is 0.50 dB a universal fiber acceptance threshold?</strong> No. The figure is a configurable example in EXFO's macrobend detection rule, distinct from project specifications.</li>
+<li><strong>Can an OTDR replace end-to-end insertion-loss certification?</strong> Not universally. A source/power-meter or OLTS test is commonly used for direct insertion-loss acceptance.</li>
+<li><strong>What does a missing alert at Event D establish?</strong> Only that the chosen example threshold was not crossed; the event may still merit investigation.</li>
+<li><strong>What is the safest first action when the test fiber may be active?</strong> Stop before connecting or disconnecting, identify the service and approved live-test configuration, and follow the facility's qualified optical-safety process.</li>
+</ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">References and Further Study</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://www.thefoa.org/tech/ref/fiber/Microbending.html">Fiber Optic Association: Macro- and Micro-Bending Fiber</a>; <a href="https://www.thefoa.org/tech/ref/testing/OTDR/OTDR-FAQS.html">FOA: OTDR Questions and Real Test Examples</a>; <a href="https://www.thefoa.org/tech/ref/testing/OTDR/OTDR.html">FOA: Optical Time Domain Reflectometers</a>; <a href="https://www.thefoa.org/tech/ref/fiber/BIfiber.html">FOA: Bend-Insensitive Fiber</a>; <a href="https://documents.exfo.com/Products/UserGuides/User_Guide_OTDR_English_%281068770%29.pdf">EXFO: OTDR User Guide, Macrobend Detection Section</a>; <a href="https://www.exfo.com/en/resources/glossary/optical-time-domain-reflectometer-otdr/">EXFO: OTDR Glossary</a>; and <a href="https://knowledge.exfo.com/kb?id=kb_article_view&amp;sysparm_article=KB0011418">EXFO: Live Fiber Detected Guidance</a>. Device-specific manuals and site standards take priority over the general examples.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In OSFOTC.016, the engineering distinction is between a <strong>screening observation</strong>, a <strong>probable bend-related hypothesis</strong>, and a <strong>confirmed physical route fault</strong>. Wavelength comparisons support fault localization, but correct test settings, uncertainty review, existing records and safe site procedures determine what can responsibly be concluded.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSFOTC.016 follows published OSFOTC.015. The 1200 × 630 cover is an original conceptual AI-generated editorial image, not a documentary photo. The EXFO instrument photo is manufacturer imagery. The grouped bar chart contains four explicitly synthetic examples and was calculated in Python; no real field OTDR readings were acquired or cables physically manipulated. The FOA education video and the independent EXFO-equipment demonstration are credited to their actual uploaders. Video iframe presence can be checked through rendered WordPress HTML; live playback and pixel-level visual checks require separate confirmation.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original QR code for a voluntary 5,000-satoshi donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-sat donation QR. Confirm wallet destination and amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>To scan on a mobile device, open the lesson on a second screen and scan the QR with a compatible Bitcoin wallet, or use a wallet's saved-image QR scanner if available. Verify the receiving address and 5,000-sat amount before authorizing a payment.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech provides educational and technical reporting. Optical-network service, laser safety and maintenance decisions must follow qualified personnel and applicable equipment procedures.</em></p>
+<!-- /wp:paragraph -->

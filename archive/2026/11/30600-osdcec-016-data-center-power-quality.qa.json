@@ -1,0 +1,68 @@
+{
+  "audit_date": "2026-11-07",
+  "lesson_id": "OSDCEC.016",
+  "wordpress_post_id": 30600,
+  "title": "OSDCEC.016: Data Center Power Quality Engineering — Voltage Sags, Harmonics, THD, and UPS Coordination",
+  "live_url": "https://bitcoinversus.tech/2026/11/07/osdcec-016-data-center-power-quality-voltage-sags-harmonics-thd-ups/",
+  "status": "published",
+  "previous": "OSDCEC.015, WordPress #27635",
+  "category_ids": [
+    5177360,
+    2509703
+  ],
+  "featured_cover": {
+    "id": 30594,
+    "width": 1200,
+    "height": 630,
+    "type": "original conceptual AI educational art, not documentary photography"
+  },
+  "body_media": [
+    {
+      "id": 30596,
+      "type": "genuine manufacturer equipment photo",
+      "credit": "Eaton Power Xpert"
+    },
+    {
+      "id": 30595,
+      "type": "original Python educational chart",
+      "source": "synthetic independent harmonic RMS values, Eaton THD method, not measured"
+    },
+    {
+      "type": "educational video",
+      "id": "q4VjsHq4LOk",
+      "publisher": "Schneider Electric",
+      "title": "Understanding Power Quality",
+      "date": "2018-09-07"
+    },
+    {
+      "type": "educational video",
+      "id": "Xi66DL0xF9w",
+      "publisher": "Eaton",
+      "title": "How do you calculate total harmonic distortion or THD and total demand distortion or TDD?",
+      "date": "2021-01-20"
+    }
+  ],
+  "videos_rendered_as_iframes": 2,
+  "live_video_playback": "not independently tested",
+  "desktop_mobile_capture": "ready at 1280px and 390px; pixels not visually inspected",
+  "internal_link_count": 6,
+  "qr_media_id": 24043,
+  "editor_note_present": true,
+  "newsletter_email_disabled": true,
+  "code_math_verified": {
+    "data": "I1=100A, I3=12A, I5=8A, I7=6A",
+    "current_THD_percent": 15.620499351813308,
+    "total_RMS_amperes": 101.21264743103995,
+    "sag": "480V to 408V for 8 cycles at 60Hz",
+    "sag_per_unit": 0.85,
+    "sag_depth_percent": 15,
+    "duration_ms": 133.33333333333334
+  },
+  "hardware_test": "not performed",
+  "no_conceptual_diagrams": true,
+  "source_links": [
+    "https://www.se.com/us/en/download/document/998-23590151/",
+    "https://ias.ieee.org/wp-content/uploads/2025/06/Power-Quality-Challenges-Data-Centers-Face-Today-and-How-to-Address-These-Issues-7x24-June-Ver.pdf",
+    "https://www.eaton.com/us/en-us/products/controls-drives-automation-sensors/harmonics/harmonics-faq-video-library.html"
+  ]
+}

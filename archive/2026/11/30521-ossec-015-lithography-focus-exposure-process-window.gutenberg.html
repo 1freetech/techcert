@@ -1,0 +1,193 @@
+<!-- wp:paragraph -->
+<p><strong>OSSEC.015</strong> examines the lithography <strong>focus–exposure process window</strong>: the combinations of optical focus and exposure dose that print semiconductor features within an established dimensional and defect tolerance. Correct alignment of one patterned layer to another does not guarantee acceptable linewidth or resist shape. A photolithography exposure may align perfectly while printing features too wide, too narrow, incompletely developed, or distorted by defocus. Engineers therefore evaluate dose and focus together, rather than independently optimizing only one control.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The chapter follows <a href="https://bitcoinversus.tech/2026/10/31/ossec-014-lithography-overlay-engineering-alignment-metrology-correction/">OSSEC.014, Lithography Overlay Engineering</a>. It also builds on <a href="https://bitcoinversus.tech/2026/10/13/osstc-009-photolithography-equipment-basics/">OSSTC.009, Photolithography Equipment Basics</a> and the <a href="https://bitcoinversus.tech/2026/10/12/osstc-008-semiconductor-metrology-inspection-basics/">semiconductor metrology chapter</a>. The central educational source is the openly accessible <a href="https://wiki.nanofab.ucsb.edu/wiki/Lithography_Calibration_-_Analyzing_a_Focus-Exposure_Matrix">University of California, Santa Barbara (UCSB) Nanofab focus–exposure calibration tutorial</a>, supplemented by <a href="https://ocw.mit.edu/courses/6-152j-micro-nano-processing-technology-fall-2005/">MIT OpenCourseWare's Micro/Nano Processing Technology</a> and ASML's public technical documentation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives and prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Define critical dimension (CD), exposure dose, focus offset, depth of focus, exposure latitude, process window, and focus–exposure matrix (FEM).</li><li>Explain why a single “best-looking” die can be less valuable than a broad region of acceptable lithographic outcomes.</li><li>Extract acceptable settings from an educational FEM and identify candidate operating points.</li><li>Interpret the meaning and limits of a Bossung plot without presenting simulated or teaching data as experimental metrology.</li><li>Apply the simplified Rayleigh resolution equation with consistent wavelength and numerical-aperture units.</li><li>Recognize likely causes of CD drift and plan a documentation-only diagnostic review using real facility safeguards.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: basic semiconductor patterning, photoresist processing, wafer alignment, optical measurements, measurement uncertainty, and elementary algebra. An exposure tool, resist chemistry, SEM, and physical wafer are <strong>not required</strong> for the classroom exercises. Only qualified fab personnel may change scanner recipes or operate lithography hardware under site-approved procedures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What focus and exposure control</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <strong>critical dimension</strong> is the specified width or other characteristic size of a patterned feature, often measured in nanometers (nm). <strong>Exposure dose</strong> is the light energy delivered per unit area to the resist, commonly expressed as mJ/cm² in an engineering measurement. Some equipment teaching examples label their local recipe dose with shorthand such as “mJ”; the unit reported by a particular instrument must be retained without silently converting it. <strong>Focus offset</strong> describes an intentional displacement relative to a reference focal position, often expressed in micrometers (µm).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Photolithography projects a reticle pattern onto a photosensitive material. Optics define the aerial image, while resist absorption, chemistry, post-exposure bake and development convert that optical energy into a physical feature. As focus moves away from the most suitable position, the aerial image can lose contrast or change shape. Changing dose alters the resist's chemical response and therefore the measured CD. The direction and magnitude of CD variation depend on pattern geometry, positive or negative resist, stack reflections, numerical aperture and process chemistry. No universal rule says every feature gets wider as dose rises.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30519,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/asml-exe5200b-cleanroom-official-photo.jpg" alt="Official ASML image of cleanroom technicians alongside a high-NA lithography system" class="wp-image-30519" /><figcaption class="wp-element-caption"><em>Official ASML cleanroom equipment photograph. Source and credit: <a href="https://www.asml.com/en/technology/how-we-innovate/fellows">ASML</a>. Hardware illustration only; the pictured system is not the UCSB tutorial's tool.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>The university's training material emphasizes that focus and exposure interact. A favorable dose at one focus setting may fail at a nearby setting. A favorable focus at one dose may fail when a photoresist coating, illumination or process variable changes. Engineers must evaluate operating margin across both axes, not merely whether a nominal test exposure succeeds.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=B2482h_TNwg&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Branch Education, “The $200M Machine that Prints Microchips: The EUV Photolithography System,” August 30, 2025. Independent educational production supported by detailed technical explanations and ASML input. Relevant portions discuss projection optics, the Rayleigh criterion, alignment and photoresist. The video is not an FEM measurement demonstration.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Focus–exposure matrices and pass/fail criteria</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>focus–exposure matrix</strong>, also called an FEM or focus–exposure array, is an arranged set of exposures made with different focus and dose settings. For each exposed field, an operator or engineer assesses whether the relevant features meet the predetermined acceptance criteria. Such criteria may include printed CD tolerance, resist clearing, line continuity, profile shape, defect count, and metrology repeatability. A field that passes one dimension requirement may still fail a separate electrical or patterning requirement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>UCSB Nanofab's public <a href="https://wiki.nanofab.ucsb.edu/wiki/Lithography_Calibration_-_Analyzing_a_Focus-Exposure_Matrix">FEM tutorial</a> shows a teaching example with eight labeled dose settings (11 through 18 mJ in its local examples) and seven focus offsets from −0.2 µm to +0.4 µm. The source identifies a contiguous pass region around its nominal settings. It recommends choosing an operating point toward the <em>interior</em> of the acceptable region rather than the best-looking die near a pass/fail boundary. The values are educational examples, not production data from an identified customer wafer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":30518,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ossec-015-ucsb-focus-window-passing-doses-chart.png" alt="Bar chart of acceptable dose-setting counts by focus offset from UCSB Nanofab's teaching focus-exposure matrix" class="wp-image-30518" /><figcaption class="wp-element-caption"><em>Open Source Tech Cert bar chart of the <strong>UCSB Nanofab Wiki's illustrative</strong> FEM acceptance table: zero, one, four, five, five, three and zero passing dose settings at successive focus offsets. Chart independently reconstructed from university teaching data; not measured fab results. Source: <a href="https://wiki.nanofab.ucsb.edu/wiki/Lithography_Calibration_-_Analyzing_a_Focus-Exposure_Matrix">UCSB Nanofab</a>.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>For example, the teaching table has <strong>five</strong> accepted dose settings at +0.1 µm focus and <strong>five</strong> at +0.2 µm. At the two outermost focus offsets, no listed dose setting passes. The pass count is a useful visual summary of the example's window, but it is not a substitute for inspecting the entire two-dimensional matrix. Different rows can have the same number of passing doses while accepting different dose ranges.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The UCSB article suggests a candidate operating center of approximately <strong>14 mJ</strong> in its example's dose notation and <strong>+0.15 µm</strong> focus offset. Its approximate exposure and focus tolerance figures are pedagogical guidance, not guaranteed machine capability. A more precise choice requires a <em>fine</em> FEM, measurements of the particular pattern, a defined CD target and an explicit error budget. The coarse table cannot establish a continuous acceptance window between measured points.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Process window, exposure latitude and depth of focus</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <strong>process window</strong> is the set of focus–dose conditions meeting the chosen acceptance specifications. <strong>Exposure latitude</strong> is the dose range tolerated around a selected operating point under defined focus and process conditions; an engineer may report its absolute range, or normalize it to a nominal dose to express a percentage. <strong>Depth of focus (DOF)</strong>, for a particular feature and process criterion, describes the acceptable focus span at a selected exposure dose or within a specified dose variation. DOF is not simply the physical thickness of the photoresist, and optical depth-of-focus scaling alone does not establish a manufacturing process window.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Suppose a hypothetical resist recipe is qualified from <strong>19 to 21 mJ/cm²</strong> at the selected focus, around a 20 mJ/cm² target. Its <em>two-sided</em> exposure range is 2 mJ/cm². The nominal-relative deviation is ±(1/20) × 100% = <strong>±5%</strong>; the full span is 10% of nominal. A separate hypothetical focus range from 0.00 to +0.20 µm has a span of 0.20 µm around +0.10 µm. Such arithmetic does not demonstrate that every combination of the two ranges passes: only the observed or validated joint window supports that conclusion.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How resolution and focus tolerance trade off</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An often-used simplified optical-resolution expression is <strong>CD ≈ k₁ × λ / NA</strong>, where λ is the exposure wavelength, NA is numerical aperture, and k₁ aggregates many aspects of the imaging and resist process. ASML explains the relationship in its <a href="https://www.asml.com/en/technology/lithography-principles/rayleigh-criterion">public Rayleigh-criterion teaching resource</a>. Shorter wavelengths and larger numerical apertures can support smaller patterns, but real process performance requires calibration and advanced imaging methods.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>As a <strong>mathematical example only</strong>, choosing λ = 193 nm, NA = 1.35 and k₁ = 0.35 gives CD ≈ (0.35 × 193)/1.35 ≈ <strong>50.0 nm</strong>. The arithmetic illustrates the equation; it does not represent an independently verified feature printed on a specified scanner. Under a separate simplified depth-of-focus scaling, <strong>DOF ∝ k₂ × λ / NA²</strong>, increased NA can reduce focus latitude when other factors are held fixed. The proportionality is a design heuristic, not a substitute for a measured resist process window.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If NA changes from 0.93 to 1.35 while λ and the factors are assumed fixed, the illustrative CD ratio becomes 0.93/1.35 ≈ 0.689. The idealized DOF ratio becomes (0.93/1.35)² ≈ 0.475. Both ratios are dimensionless comparisons under assumptions, not a forecast for commercial high-NA equipment. Immersion imaging, resist properties, computational corrections and application-specific constraints change practical results.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What a Bossung curve contributes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>Bossung curve</strong> presents measured or modeled critical dimension as a function of focus offset for a fixed dose. Multiple dose curves together show how critical dimension responds to the joint process variables. Flat regions may be useful because CD changes relatively little with focus; strong curvature, asymmetric response or shifts between curves may reduce usable process margin. A Bossung plot must identify its feature type, data source, dose values, focus units, metrology method and whether the traces are measured or simulated.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://wiki.nanofab.ucsb.edu/wiki/Lithography_Calibration_-_Analyzing_a_Focus-Exposure_Matrix">UCSB Nanofab lesson</a> teaches the acceptance-window approach from a matrix of patterned fields. For advanced study, <a href="https://ocw.mit.edu/courses/6-152j-micro-nano-processing-technology-fall-2005/">MIT's freely accessible micro/nanofabrication course</a> provides foundational lithography process material. The two resources serve different purposes: one supports calibration decisions, while the other establishes the fabrication fundamentals. Neither should be presented as a measured performance report for a modern customer-specific process.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=bcQCYsItVjM&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>ASML, “Holistic lithography: Optimizing chipmaking from design to mass production,” June 23, 2026. Official manufacturer educational explanation of modeling, optical metrology, e-beam inspection and process control. The video provides production context; it is not a public dataset of the UCSB FEM example.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How focus and dose excursions affect yield</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Excess exposure variation can shift patterned dimensions away from their target; an unacceptable CD can contribute to timing, leakage, contact resistance or pattern-transfer errors depending on the feature. Focus errors can reduce optical contrast and create defects, resist-profile problems or bridging and breaks. A scanner can still have acceptable overlay while the printed dimensions are outside control limits. The preceding <a href="https://bitcoinversus.tech/2026/10/31/ossec-014-lithography-overlay-engineering-alignment-metrology-correction/">overlay engineering lesson</a> explains the positional error axis, while <a href="https://bitcoinversus.tech/2026/10/27/ossec-012-semiconductor-yield-defect-density-die-area-wafer-maps/">OSSEC.012 on yield and defect density</a> explains why several independent defects can affect an overall yield calculation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Focus and dose variations may be affected by scanner performance, wafer height maps, substrate topography, coating thickness, bake drift, alignment history, optics, reticle patterns and wafer-to-wafer differences. Root-cause analysis should correlate metrology, sensor status, maintenance changes and wafer maps rather than attributing every CD excursion to the exposure source alone. The <a href="https://bitcoinversus.tech/2026/10/29/ossec-013-statistical-process-control-control-charts-cp-cpk-semiconductor-drift/">semiconductor statistical process-control chapter</a> describes how time trends and capability metrics help identify process shifts without confusing observed correlation with proven causation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A disciplined engineering workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Establish the specification.</strong> Identify the CD target, acceptable range, defect limits, feature geometry and applicable measurement uncertainty. Document substrate stack and resist processing, not only scanner settings.</li><li><strong>Validate the data source.</strong> Determine whether a matrix contains measured CDs, simulation, published educational pass/fail examples or production qualification records. Do not merge those evidence categories.</li><li><strong>Inspect all dimensions of the matrix.</strong> Find contiguous passing regions in both dose and focus, and identify boundaries where additional test exposures may be required.</li><li><strong>Choose margin rather than an isolated optimum.</strong> Prefer a setting with verified tolerance to ordinary process variation. A single successful die on a boundary does not demonstrate a robust recipe.</li><li><strong>Validate nearby conditions.</strong> Use a finer matrix and repeated metrology where authorized. Check for differences among fields, wafers, feature orientations and process stages.</li><li><strong>Assess the full process chain.</strong> Include resist preparation, coating, exposure, baking, development and downstream pattern transfer, with contamination and tool safety controls.</li><li><strong>Record decision and residual uncertainty.</strong> Store process window boundaries, instrument and recipe identifiers, dates, acceptance metrics, review approvals and unresolved issues.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>A university teaching example is not a tool qualification recipe. In a real laboratory, sample preparation, solvent exposure, laser safety, chemical handling, electrical systems and expensive exposure equipment require training and facility authorization. The <a href="https://wiki.nanofab.ucsb.edu/wiki/ASML_Stepper_3_Standard_Operating_Procedure">UCSB ASML Stepper SOP</a> is a tool-specific educational reference, not permission to operate hardware at another institution.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Documentation-only lab: reading the UCSB matrix</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Open the UCSB Nanofab FEM tutorial and copy the example's seven focus offsets and eight dose-column labels to a notebook or spreadsheet. Keep the source's shorthand dose notation, and separately note that physical radiant exposure is commonly specified per unit area.</li><li>Mark a field as 1 if the university example labels it within tolerance and 0 otherwise. Count passing settings in each focus row. Confirm the sequence 0, 1, 4, 5, 5, 3, 0 shown in the bar chart.</li><li>Compare the +0.1 and +0.2 µm rows. Both have five passing doses, but the accepted columns matter more than their count alone. Locate an overlapping interior set of acceptable dose/focus combinations.</li><li>Explain why +0.15 µm is only an approximate interpolated focus center when the chart and source matrix sample discrete 0.1 µm steps. Propose an authorized finer experiment that would check the interpolation.</li><li>Calculate the hypothetical Rayleigh CD using λ = 193 nm, NA = 1.35 and k₁ = 0.35. State the assumptions and distinguish the calculated ~50.0 nm from a measured critical dimension.</li><li>Prepare a one-paragraph engineering review: which operating point would be considered, what evidence supports it, which constraints are unresolved, and which qualified metrology steps must precede any production approval.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge check with explained answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Why are focus and dose analyzed together?</strong> Both influence aerial-image and resist outcomes, so a setting acceptable for one dose may fail at another focus.</li><li><strong>What does a focus–exposure matrix show?</strong> A set of exposed fields with varied focus and dose, classified or measured against defined feature specifications.</li><li><strong>What is the process window?</strong> The combination of settings that meet the chosen quality criteria, not a universal machine rating.</li><li><strong>Why can a single “best die” be a poor recipe choice?</strong> It may be close to a failure boundary and have little margin for normal variation.</li><li><strong>What does the UCSB teaching bar chart show at +0.1 µm?</strong> Five acceptable dose settings from its eight labeled columns; the example is not a measured production experiment.</li><li><strong>What is the nominal-relative dose tolerance from 19 to 21 mJ/cm² around 20 mJ/cm²?</strong> ±5% around nominal; 10% is the total span as a fraction of nominal.</li><li><strong>Does CD ≈ k₁λ/NA guarantee a printed CD?</strong> No. It is simplified imaging guidance and omits important process-specific effects.</li><li><strong>What does a Bossung curve plot?</strong> CD versus focus at a fixed dose; multiple curves can compare several doses.</li><li><strong>Does passing a CD test prove acceptable overlay?</strong> No. CD and overlay are different dimensions of patterning quality.</li><li><strong>Can an open university tutorial be used as an unmodified fab operating procedure?</strong> No. Site-authorized procedures and equipment-specific safety requirements are mandatory.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Open educational sources and technical references</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://wiki.nanofab.ucsb.edu/wiki/Lithography_Calibration_-_Analyzing_a_Focus-Exposure_Matrix">UCSB Nanofab Wiki, “Lithography Calibration — Analyzing a Focus-Exposure Matrix”</a> (open university teaching resource, October 22, 2024); <a href="https://wiki.nanofab.ucsb.edu/wiki/Tutorials">UCSB Nanofab tutorial index</a>; <a href="https://ocw.mit.edu/courses/6-152j-micro-nano-processing-technology-fall-2005/">MIT OpenCourseWare, 6.152J Micro/Nano Processing Technology</a>; <a href="https://www.asml.com/en/technology/lithography-principles/rayleigh-criterion">ASML, Rayleigh Criterion for Resolution</a>; <a href="https://www.asml.com/en/technology/lithography-principles">ASML, Lithography Principles</a>; and <a href="https://www.asml.com/en/technology/lithography-principles/lenses-and-mirrors">ASML, Lenses and Mirrors</a>. The cited university and manufacturer resources are used for education and technical context; the original teaching chart retains its stated limitations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A viable lithography recipe is not simply an exposure with the sharpest-looking feature. It requires a defensible acceptance window in dose and focus, correctly interpreted metrology, documented uncertainty and sufficient operating margin. An FEM identifies candidate regions, Bossung analysis characterizes CD response, and qualified engineering validation determines whether the process is stable enough for its intended application. The next curriculum subject is determined from live WordPress and GitHub inventory, not from an assumed topic sequence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSSEC.015 follows the confirmed OSSEC.014 chapter. Technical explanations draw primarily on the open UCSB Nanofab training wiki, MIT OpenCourseWare and ASML. The illustrated bar chart is independently plotted from UCSB's educational pass/fail example; it is not experimental fab data. The featured cover is original, photorealistic AI editorial imagery, and the in-story cleanroom photograph is from ASML. No custom schematic or conceptual diagram was produced. Arithmetic examples were checked separately; no lithography tool was operated, wafer exposed or CD measured for the article. Both videos were verified against their publisher descriptions. Live video playback and visual responsive rendering are audited separately.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>The original BitcoinVersus.Tech donation QR code. Verify the payment destination and 5,000-sat amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>To scan the 5,000-sat donation QR on a phone, open the article on a separate screen and scan with a compatible Bitcoin wallet, or use a saved-image scan in wallets supporting that feature. Confirm the destination before paying.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech provides educational and journalistic information and is not a financial advisor.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,169 @@
+<!-- wp:paragraph --><p><strong>PowerShell arrays and hashtables</strong> organize related values for scripts, reports, and infrastructure administration. An array keeps a sequence of elements accessible by position; a hashtable associates a key with a value. Both structures can hold actual PowerShell objects rather than only text. <strong>OSPowerShell.005</strong> introduces creation, indexing, safe iteration, filtering, ordered dictionaries, and an educational equipment inventory built entirely from fictional data.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The preceding <a href='https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/'>OSPowerShell.004 on variables and scope</a> explained how one name refers to a value. Collections extend the concept so one name can refer to multiple devices or a set of named properties. Earlier <a href='https://bitcoinversus.tech/2026/10/10/ospowershell-002-objects-properties-methods-types-get-member/'>OSPowerShell.002 on objects</a> and <a href='https://bitcoinversus.tech/2026/10/19/ospowershell-003-the-pipeline-object-flow-filtering-sorting-parameter-binding/'>OSPowerShell.003 on the pipeline</a> provide essential background. No actual devices are accessed in the lab.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives and prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Create arrays with the comma operator and <code>@(...)</code> syntax; distinguish empty, one-item, and multi-item collections.</li><li>Read array positions using zero-based indexes, negative indexes, and <code>.Count</code>.</li><li>Create hashtables with <code>@{...}</code>, retrieve a named value using brackets, and safely check whether a key exists.</li><li>Explain the difference between a regular hashtable and an <code>[ordered]</code> dictionary.</li><li>Store records as <code>[pscustomobject]</code> values in an array, access their properties, and filter them through a pipeline.</li><li>Compare <code>-contains</code> and <code>-in</code> with the <code>-eq</code> filtering behavior of collections.</li><li>Interpret the effect of pipeline enumeration and use the array subexpression operator when zero or one result must remain countable.</li><li>Run a three-file training lab and understand exactly which validation claims have and have not been independently tested.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: basic cmdlets, variables, object properties and a local PowerShell 7 installation. The lab is designed for Windows, Linux and macOS under PowerShell 7 with ordinary user privileges. It imports only a supplied local module and does not require administrator rights, network access, service control, cloud credentials or an external package. The current preparation environment did not contain <code>pwsh</code>; the source files and expected results are supplied for reader-side runtime verification.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Create an array and access items by position</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A PowerShell array is an indexed collection. The first element has position <code>0</code>, not <code>1</code>. A comma-separated expression can construct an array, and the array subexpression operator <code>@(...)</code> is especially useful when collecting pipeline output into an array. Array contents are not restricted to one value type; items may be strings, numbers, or structured objects.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PowerShell code and learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.15em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>$devices = @('router-a', 'switch-b', 'server-c')
+$devices[0]     # router-a
+$devices[1]     # switch-b
+$devices[-1]    # server-c (last item)
+$devices.Count  # 3</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Negative array positions count backward from the end: <code>-1</code> selects the last element. An index outside the array boundary is not a sound validation strategy; check the expected range rather than silently relying on a missing result. Arrays may contain zero elements, such as <code>@()</code>, or a single one, such as <code>@('router-a')</code>. Microsoft’s <a href='https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_arrays?view=powershell-7.5'>PowerShell arrays reference</a> describes construction, indexing, methods, and collection behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Why @() matters when a query returns zero or one result</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>PowerShell commonly enumerates values flowing through a pipeline. Depending on a command’s output, assigning directly from a pipeline can produce no value, one scalar value, or an array. If the next statement expects a reliably countable collection, wrap the pipeline in <code>@(...)</code>. The operator collects its output into an array, even when the pipeline emits zero or one item.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PowerShell code and learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.15em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>$servers = @('router-a', 'server-c')
+$found = @($servers | Where-Object { $_ -eq 'router-a' })
+$found.Count  # 1
+
+$none = @($servers | Where-Object { $_ -eq 'missing' })
+$none.Count   # 0</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The special variable <code>$_</code> represents the current pipeline item inside <code>Where-Object</code>. The expression is a predicate: only items for which it evaluates true are passed forward. Use <code>@(...)</code> when the consumer expects a collection and test zero-result behavior, not only the typical multi-row case. The <a href='https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.5'>PowerShell operators reference</a> documents array-subexpression syntax and related operators.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=ZOoCaWyifmI&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em><a href='https://www.youtube.com/watch?v=ZOoCaWyifmI'>PowerShell Engineer — Learn PowerShell in Less Than 2 Hours</a>, published November 9, 2022. Relevant chapters introduce arrays at 29:18 and hashtables at 33:52. Source: PowerShell Engineer’s public educational YouTube video. Video identity was checked; end-to-end playback within the published article is not independently confirmed.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use a hashtable for key-value information</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A hashtable connects a key such as <code>'Name'</code> with a value such as <code>'Rack A'</code>. Unlike an array index, the key is a label rather than a sequence position. Hashtables are useful for short configuration records, quick lookups, grouped counts and data that does not have to preserve a particular order. A normal PowerShell hashtable generally uses case-insensitive string-key comparisons, but callers should never rely on arbitrary enumeration order.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PowerShell code and learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.15em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>$rack = @{
+    Name = 'Rack A'
+    Location = 'Hall 1'
+    Count = 2
+}
+$rack['Name']       # Rack A
+$rack['Count']      # 2
+$rack.ContainsKey('Name')  # True</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Bracket access is particularly reliable when a key contains spaces or overlaps with a member name. For example, <code>$rack['Count']</code> means the value stored under the key <code>Count</code>; other member-access forms can lead to confusion with a dictionary’s own properties. A new item can be added by assigning a previously absent key: <code>$rack['Status'] = 'Training'</code>. In a real administrative script, validate the source of those values before using them to configure systems. See Microsoft’s <a href='https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_hash_tables?view=powershell-7.5'>about_Hash_Tables</a> documentation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Ordered dictionaries have a predictable enumeration order</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The literal <code>[ordered]@{...}</code> creates an ordered dictionary, retaining the sequence in which its keys were declared. A regular <code>@{...}</code> does not promise the same enumeration order. Preserved order can make a human-readable report easier to follow, although access by key remains the primary way to retrieve a specific value.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PowerShell code and learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.15em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>$rackCounts = [ordered]@{
+    'Rack A' = 2
+    'Rack B' = 1
+}
+$rackCounts['Rack A']  # 2
+$rackCounts.Keys       # Rack A, Rack B</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Ordering a dictionary is different from sorting records. A dictionary stores keys and values; an array stores ordered elements; and <code>Sort-Object</code> can sort objects by named properties. Use the appropriate structure for the question being answered instead of using the same syntax for all tasks.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Store multiple fields in one object</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>[pscustomobject]</code> gives each inventory record named properties. An array of objects therefore represents an inventory more naturally than several parallel arrays, because each device keeps its name, rack and illustrative power reading together. The property names express meaning and support <code>Select-Object</code>, <code>Where-Object</code>, and <code>Measure-Object</code> without parsing text columns.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PowerShell code and learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.15em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>$devices = @(
+    [pscustomobject]@{ Name='router-a'; Rack='Rack A'; PowerWatts=12 }
+    [pscustomobject]@{ Name='switch-b'; Rack='Rack A'; PowerWatts=24 }
+    [pscustomobject]@{ Name='server-c'; Rack='Rack B'; PowerWatts=150 }
+)
+$devices[0].Name       # router-a
+$devices[1].PowerWatts # 24
+$devices.Count         # 3</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The three readings are fabricated whole-watt examples. Their arithmetic sum, <strong>12 + 24 + 150 = 186 W</strong>, is a calculation over the instructional sample, not a real rack’s measured instantaneous load or energy usage. Power is measured in watts; energy over time requires units such as watt-hours. No vendor rating or operational threshold can be inferred from these values.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Filter collections and compare membership</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>Where-Object</code> tests each object against a condition and outputs matching objects. For example, the command below selects the two sample devices with a power value at least 20 W. In contrast, <code>-contains</code> asks whether a collection includes a specified item and always returns a Boolean; <code>-in</code> reverses the operand positions. The expression <code>$devices.Name</code> uses member-access enumeration to retrieve a sequence of names from the collection.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PowerShell code and learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.15em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>$atLeast20 = @($devices | Where-Object { $_.PowerWatts -ge 20 })
+$atLeast20.Name -join ', '   # switch-b, server-c
+
+$devices.Name -contains 'router-a' # True
+'router-a' -in $devices.Name        # True</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>A subtle difference matters when writing tests. With a scalar on the left, <code>-eq</code> returns a Boolean. With a collection on the left, <code>-eq</code> returns matching elements. By comparison, <code>-contains</code> always returns a Boolean. The <a href='https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.5'>Microsoft comparison operators guide</a> explains the distinction and documents case-sensitive variants such as <code>-ccontains</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=-hsaUC-OfwM&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em><a href='https://www.youtube.com/watch?v=-hsaUC-OfwM'>PowerShellNerd — Learn Arrays and Hashtables</a>, published June 3, 2025. The tutorial demonstrates array creation and indexing, <code>foreach</code>, dictionary access, updates and key iteration. Source: PowerShellNerd’s public educational YouTube channel. The video page was identified; actual published-page playback has not been independently tested.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete executable equipment-inventory module</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The teaching lab separates reusable operations from the script that prints the report. Download <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/ospowershell-005-collections/InventoryLab.psm1'>InventoryLab.psm1</a>, <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/ospowershell-005-collections/Run-TrainingInventory.ps1'>Run-TrainingInventory.ps1</a> and <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/ospowershell-005-collections/Test-TrainingInventory.ps1'>Test-TrainingInventory.ps1</a> into the same directory. The module exports three commands: <code>Get-TrainingInventory</code>, <code>Get-TrainingSummary</code>, and <code>Get-TrainingAboveThreshold</code>. They handle fixed sample data only and do not open external connections.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><code>Get-TrainingSummary</code> checks that each supplied record includes an integer <code>PowerWatts</code> property and refuses negative example values. It accumulates a long-integer sum while returning a structured summary object. <code>Get-TrainingAboveThreshold</code> accepts a nonnegative numeric threshold and returns the qualifying records. Validation here concerns the sample’s data shape; it does not prove any input came from an actual sensor.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PowerShell code and learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.15em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Import-Module (Join-Path $PSScriptRoot 'InventoryLab.psm1') -Force
+$devices = @(Get-TrainingInventory)
+$summary = Get-TrainingSummary -Devices $devices
+$above = @(Get-TrainingAboveThreshold -Devices $devices -MinimumWatts 20)
+
+$summary.DeviceCount  # Expected: 3
+$summary.TotalWatts   # Expected: 186
+$above.Name -join ', ' # Expected: switch-b, server-c</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The import path uses <code>$PSScriptRoot</code> to resolve files relative to the demo script instead of whichever directory the terminal happens to be using. <code>Import-Module</code> executes the module in the current PowerShell process, so only import code from trusted sources and inspect it first. In the provided module, there is no filesystem deletion, configuration change, network access or privileged action.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Running the lab and interpreting its output</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Open PowerShell 7 on Windows, Linux or macOS. Verify the version using <code>$PSVersionTable.PSVersion</code>, inspect the three scripts, and run the sample with <code>pwsh -NoProfile -File ./Run-TrainingInventory.ps1</code>. On systems where <code>pwsh</code> is already the active interactive shell, <code>./Run-TrainingInventory.ps1</code> may also work under the applicable execution policy. The example’s expected output is:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PowerShell code and learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.15em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>First device: router-a
+Rack A count: 2
+Device count: 3
+Illustrative power sum: 186 W
+At least 20 W: switch-b, server-c</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p><strong>Output status:</strong> those lines are predicted from the reviewed source and sample values; they have <strong>not been captured from a locally executed PowerShell runtime</strong> in the preparation environment. The values 2, 3 and 186 can be confirmed by inspecting the invented data and independently checking the arithmetic. Execution should be verified by readers with PowerShell 7 before treating the script as tested on their target platform.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Test harness, source verification and quality gates</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/ospowershell-005-collections/Test-TrainingInventory.ps1'>standalone test harness</a> defines <code>Assert-Equal</code> and <code>Assert-Throws</code> helpers and contains <strong>28 intended assertions</strong> covering indexes, negative indexing, hashtable values and order, the 186 W sum, filtering, zero-result behavior, invalid records and negative thresholds. Run it after placing all three files in one directory:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PowerShell code and learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.15em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>pwsh -NoProfile -File ./Run-TrainingInventory.ps1
+pwsh -NoProfile -File ./Test-TrainingInventory.ps1
+# Expected if all assertions pass:
+# PASS: 28 PowerShell assertions</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The preparation environment did not have <code>pwsh</code>, so <strong>no PowerShell execution, runtime syntax validation or actual 28-assertion result is claimed</strong>. A separate Node.js review passed <strong>25 of 25 static source checks</strong>, verifying file presence, expected function definitions, representative data, critical type guards, safe command exclusions, the intended assertion count, and numerical sample logic. Static source review cannot certify PowerShell parser acceptance, cross-platform behavior, or a runtime test result.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Safe expansion to real administration</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>For larger inventories, arrays can become expensive to expand repeatedly with <code>+=</code>, since normal arrays have fixed size and repeated concatenation may create copies. Consider streaming pipeline output or <code>System.Collections.Generic.List[T]</code> when building a large collection. For larger lookup maps, select dictionary types and key-comparison policies deliberately, especially if case-sensitive identifiers are important.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Use <code>Get-Member</code> to inspect an unknown record before relying on specific property names. Validate units, timestamps, source provenance, authorization and the meaning of missing values when combining real monitoring data. Never publish raw credentials, internal host details, or personal information from PowerShell objects. Avoid <code>Invoke-Expression</code> on untrusted collection values; transforming a string into executable commands is not required for this lab.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and knowledge assessment</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Cannot index an expected item:</strong> inspect the collection with <code>.Count</code> and verify zero-based positions before selecting an index.</li><li><strong>Array becomes a scalar:</strong> wrap a pipeline result in <code>@(...)</code> when zero or one returned item should remain a countable array.</li><li><strong>Unexpected dictionary order:</strong> use <code>[ordered]@{...}</code> where insertion order is required; do not rely on regular hashtable iteration order.</li><li><strong>Hashtable key collides with a member:</strong> use bracketed key access such as <code>$rack['Keys']</code> when accessing an actual dictionary entry.</li><li><strong>Comparison returns a value rather than True/False:</strong> distinguish the collection-filter behavior of <code>-eq</code> from the Boolean result of <code>-contains</code>.</li><li><strong>Unexpected total:</strong> check whether values are numeric objects rather than textual representations and whether missing or negative values should be rejected.</li><li><strong>PowerShell command not found:</strong> install or locate the official PowerShell 7 runtime and verify <code>pwsh</code> is available on the system PATH.</li><li><strong>Import or execution policy issue:</strong> verify file locations, inspect code before import, and follow organization-approved execution policies rather than disabling security protections system-wide.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Practice: create a four-item array and return its first and last entries; build a hashtable mapping two fictional rack names to counts; convert one map into an ordered dictionary; select every sample record with power at least 20 W; test the zero-result case with a threshold of 151 W; add a fourth 40 W example record and compute the new total of 226 W; explain why a four-item inventory's total is not evidence of an electrical meter reading. These exercises require no real hardware.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Assessment answers:</strong> indexes begin at zero; <code>-1</code> indexes the last array item; hashtable brackets reference keys, not numeric positions; <code>[ordered]</code> preserves key insertion order; threshold 20 W selects two sample records, threshold 151 W selects none; 186 + 40 = 226 W for the expanded fictitious inventory. PowerShell type checks and source validation can reject malformed values but cannot authenticate measurements.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Official references and curriculum continuation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Primary references: <a href='https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_arrays?view=powershell-7.5'>Microsoft Learn — about_Arrays</a>; <a href='https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_hash_tables?view=powershell-7.5'>about_Hash_Tables</a>; <a href='https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.5'>about_Comparison_Operators</a>; and <a href='https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators?view=powershell-7.5'>about_Operators</a>. Related instruction includes <a href='https://bitcoinversus.tech/2026/10/09/ospowershell-001-cmdlets-verb-noun-get-command-get-help-first-workflow/'>OSPowerShell.001</a> and <a href='https://bitcoinversus.tech/2026/11/08/osbash-006-bash-functions-arguments-scope-exit-codes/'>OSBash.006: Functions and Exit Codes</a>, which provides a useful contrast with PowerShell’s object pipeline.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Arrays answer 'which item is at a particular position?' Hashtables answer 'what value is associated with a particular key?' Arrays of structured objects combine positional organization with descriptive fields. Knowing the distinction helps administrators build scripts that remain understandable and testable as inventory reports expand.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSPowerShell.005 follows the verified OSPowerShell.004. The original 1200 × 630 featured cover is an AI-generated educational illustration and not an authentic PowerShell screenshot. The exact neon-green “Bitcoinversus.Tech” signature is positioned bottom-left, using a nominal 10-point size at 96 DPI. Example devices, rack names and watt values are invented. The PowerShell scripts and 28-assertion test harness were authored but could not be executed because the PowerShell runtime was unavailable in the preparation environment; only 25 separate static Node.js source checks were locally executed and passed. The two educational videos were identified from their public YouTube pages, but end-to-end live player playback and mobile pixel inspection remain unverified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000-satoshi optional donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional original BitcoinVersus.Tech donation QR for 5,000 sats. Verify the recipient and amount inside a trusted wallet before payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the QR on a second screen or use a wallet’s saved-image scanning feature. Confirm the receiving address and requested satoshi amount before authorizing a transaction.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Educational examples do not replace verified production configuration, source inspection, cybersecurity review or authorized operational procedures.</em></p><!-- /wp:paragraph -->

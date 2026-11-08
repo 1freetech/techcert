@@ -48,37 +48,37 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "javascript",
-    "lesson_number": 5,
-    "track_id": "OSJavaScript.005",
-    "title": "OSJavaScript.005: JavaScript Control Flow — Conditions, Loops, Break, and Continue",
-    "public_title": "OSJavaScript.005: JavaScript Control Flow — Conditions, Loops, Break, and Continue",
-    "wordpress_post_id": 31261,
-    "live_url": "https://bitcoinversus.tech/2026/11/08/osjavascript-005-javascript-control-flow-conditions-loops-break-continue/",
-    "archive_path": "archive/2026/11/31261-osjavascript-005-control-flow.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/31261-osjavascript-005-control-flow.qa.json",
-    "verified_repositories": [
-      "1freetech/opencert.tech",
-      "1freetech/techcert",
-      "1freetech/Bitcoinversus.tech"
-    ],
-    "publication_status": "publish",
-    "featured_media_id": 31257,
-    "body_video_ids": [
-      "PgUXiprlg1k",
-      "Zi-Q0t4gMC8"
-    ],
-    "verification_status": "WordPress published and saved Gutenberg content read back; server-rendered two iframe YouTube players; end-to-end playback and mobile pixel checks unverified. Exact Gutenberg source archived in three repositories.",
-    "qa_status": "Original AI-illustrated 1200x630 JavaScript workstation cover with 10pt bottom-left neon-green branding; two video iframes; Node.js v22.16.0 18/18 local tests passed; seven unboxed code examples; four contextual internal links; original QR and editor note."
-  },
-  "next": {
     "subject": "html",
     "lesson_number": 5,
-    "title_format": "OSHTML.005: {topic}",
-    "public_title_format": "OSHTML.005: {topic}",
-    "resolution_note": "OSJavaScript.005 published Nov 8, 2026 WordPress #31261, code/tests archived with exact published Gutenberg across all three repositories; advance to HTML .005 unless live WordPress has a more recent verified lesson."
+    "track_id": "OSHTML.005",
+    "title": "OSHTML.005: HTML Tables — Structure, Headers, and Accessibility",
+    "public_title": "OSHTML.005: HTML Tables — Structure, Headers, and Accessibility",
+    "wordpress_post_id": 31296,
+    "live_url": "https://bitcoinversus.tech/2026/11/08/oshtml-005-html-tables-structure-headers-accessibility/",
+    "archive_path": "archive/2026/11/31296-oshtml-005-html-tables-accessibility.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/31296-oshtml-005-html-tables-accessibility.qa.json",
+    "verified_repositories": [
+      "1freetech/Bitcoinversus.tech",
+      "1freetech/opencert.tech",
+      "1freetech/techcert"
+    ],
+    "publication_status": "publish",
+    "featured_media_id": 31293,
+    "body_video_ids": [
+      "e23RA_Uo99o",
+      "iuSKGuWWNGA"
+    ],
+    "verification_status": "Published WordPress, raw Gutenberg markup and rendered iframe identities confirmed. Full video playback, desktop/mobile pixel checks and independent web fetch unverified.",
+    "qa_status": "Original 1200x630 educational HTML table cover with small neon-green bottom-left Bitcoinversus.Tech brand; full standalone HTML sample; 18/18 Node.js structural checks; 2 rendered YouTube iframes; a responsive example table; six contextual internal lesson links; QR and editor footer."
   },
-  "next_after_current": "php",
+  "next": {
+    "subject": "php",
+    "lesson_number": 6,
+    "title_format": "OSPHP.006: {topic}",
+    "public_title_format": "OSPHP.006: {topic}",
+    "resolution_note": "OSHTML.005 published Nov 8, 2026 on WordPress post #31296. Published markup, HTML sample, 18 structural checks, and QA archived in three repositories. Verify live WordPress and archives before OSPHP.006 publication."
+  },
+  "next_after_current": "solidity",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -169,9 +169,11 @@
     },
     "html": {
       "acronym": "OSHTML",
-      "next_lesson_number": 5,
-      "last_published_lesson_number": 4,
-      "last_wordpress_post_id": 28421
+      "next_lesson_number": 6,
+      "last_published_lesson_number": 5,
+      "last_wordpress_post_id": 31296,
+      "last_published_title": "OSHTML.005: HTML Tables — Structure, Headers, and Accessibility",
+      "verification_status": "published_archived_server_render_checked"
     },
     "php": {
       "acronym": "OSPHP",

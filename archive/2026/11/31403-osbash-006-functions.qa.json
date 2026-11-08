@@ -1,0 +1,48 @@
+{
+  "lesson": "OSBash.006",
+  "title": "OSBash.006: Bash Functions — Arguments, Scope, and Exit Codes",
+  "wordpress_post_id": 31403,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/08/osbash-006-bash-functions-arguments-scope-exit-codes/",
+  "featured_media_id": 31400,
+  "cover": {
+    "width": 1200,
+    "height": 630,
+    "url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osbash-006-bash-functions-cover-1200x630-1.jpg",
+    "brand_text": "Bitcoinversus.Tech",
+    "brand_color": "#39FF14",
+    "brand_placement": "bottom-left",
+    "size": "approximately 10 pt after downsampling; raster size not independently measurable to precise typographic points",
+    "ai_illustrated": true
+  },
+  "saved_gutenberg_source": true,
+  "source_characters": 29361,
+  "html_code_examples": 9,
+  "internal_lesson_links": 5,
+  "editor_note": true,
+  "donation_qr": true,
+  "footer": true,
+  "video_ids": [
+    "tK9Oc6AEnR4",
+    "mSQM8Xo78Wc"
+  ],
+  "video_iframes_rendered": true,
+  "video_playback_verified": false,
+  "source_paths": [
+    "archive/2026/11/osbash-006-functions/device_report.sh",
+    "archive/2026/11/osbash-006-functions/verify_device_report.sh"
+  ],
+  "tests": {
+    "runtime": "GNU Bash 5.2.37",
+    "syntax": "bash -n passed on both files",
+    "assertions_passed": 27,
+    "assertions_total": 27,
+    "production_testing": false
+  },
+  "subscriber_email_suppressed": true,
+  "limitations": [
+    "Standalone end-to-end YouTube playback not verified",
+    "Pixel-level mobile screenshot inspection not independently performed",
+    "Bash tests check input validation, not real electrical telemetry"
+  ]
+}

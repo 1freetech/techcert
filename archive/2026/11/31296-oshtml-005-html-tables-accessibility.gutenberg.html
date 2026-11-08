@@ -1,0 +1,174 @@
+<!-- wp:paragraph --><p>An HTML <strong>data table</strong> describes relationships between values arranged in rows and columns. The correct markup does more than draw a grid: it identifies header cells, names the data, and supplies row–column relationships that assistive technologies can interpret. <strong>OSHTML.005</strong> teaches semantic table structure, accessible headers, grouped rows, responsive layout, and practical validation using a small equipment-power example.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The lesson advances the published <a href='https://bitcoinversus.tech/2026/11/01/oshtml-004-html-forms-labels-inputs-fieldsets-submission-validation/'>OSHTML.004: Forms</a>. Earlier lessons covered <a href='https://bitcoinversus.tech/2026/10/09/oshtml-001-document-structure-doctype-html-head-body-metadata-first-page/'>document structure</a>, <a href='https://bitcoinversus.tech/2026/10/10/oshtml-002-elements-start-tags-end-tags-void-elements-nesting-semantic-structure/'>element nesting</a>, and <a href='https://bitcoinversus.tech/2026/10/15/oshtml-003-attributes-names-values-global-boolean-element-specific-configuration/'>attributes</a>. The goal is readable, standards-based markup—not a decorative grid or layout table.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Objectives and prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Recognize when tabular information belongs in <code>&lt;table&gt;</code> instead of a list, paragraph, or CSS layout container.</li><li>Build rows using <code>&lt;tr&gt;</code>, data cells using <code>&lt;td&gt;</code>, and headers using <code>&lt;th&gt;</code>.</li><li>Label an entire table with <code>&lt;caption&gt;</code> and group rows with <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;tfoot&gt;</code>.</li><li>Assign <code>scope="col"</code> and <code>scope="row"</code> to distinguish column and row headers.</li><li>Explain when complex header relationships require <code>id</code> and <code>headers</code> or grouping attributes.</li><li>Create a readable mobile presentation without destroying table semantics.</li><li>Run a complete HTML sample and 18 structural checks with Node.js.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: an editor, browser, and the HTML fundamentals in OSHTML.001–004. Node.js is needed only for the optional structural test harness. No external packages, credentials, paid services, or administrative privileges are required. The teaching example uses fabricated equipment values and is <strong>not a live site measurement</strong>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">When to use a table</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A table is appropriate when values become meaningful through their intersection with row and column headings. A device-power report may describe a router, switch, and server, along with power and operational state. A list would be more appropriate for a few standalone troubleshooting instructions. Layout tables built to position a page header, sidebar, and footer are discouraged because their cell semantics can confuse assistive technologies and often perform poorly on narrow screens.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The <a href='https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_table_basics'>MDN HTML table basics tutorial</a> treats tables as a representation of tabular data, not page layout. The <a href='https://www.w3.org/WAI/tutorials/tables/'>W3C Web Accessibility Initiative tables tutorial</a> emphasizes programmatically determinable header–cell relationships.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Rows, header cells, and data cells</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The outer <code>&lt;table&gt;</code> element contains the grid. Each <code>&lt;tr&gt;</code> defines a row. The cells in that row are <code>&lt;th&gt;</code> when they name a row or column, or <code>&lt;td&gt;</code> when they contain regular data. Using <code>&lt;th&gt;</code> only to make text bold is incorrect; use CSS when visual emphasis is required without a heading relationship.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="HTML source code sample" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;border-radius:0!important;white-space:pre-wrap!important;line-height:1.55!important;max-width:100%!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important;color:inherit!important"><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope="col"&gt;Device&lt;/th&gt;
+    &lt;th scope="col"&gt;Power (W)&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th scope="row"&gt;Router&lt;/th&gt;
+    &lt;td&gt;12&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p><code>scope="col"</code> states that a header applies to cells in its column. <code>scope="row"</code> states that a header applies to cells in its row. For the router’s value, the useful context is both “Router” and “Power (W).” A screen reader can use semantic headers to provide the same context that a visual reader infers from a grid. Simple tables may be understandable without <code>scope</code>, but explicitly setting it makes the relationship clear.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Caption, thead, tbody, and tfoot</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>&lt;caption&gt;</code> is a visible title associated with its table; it must appear as the first child of <code>&lt;table&gt;</code>. A caption such as “Illustrative equipment power readings, watts (W)” explains the dataset and the unit. Use a page heading separately if the document needs a broader title.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="HTML source code sample" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;border-radius:0!important;white-space:pre-wrap!important;line-height:1.55!important;max-width:100%!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important;color:inherit!important"><code>&lt;table&gt;
+  &lt;caption&gt;Example equipment power (W)&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Equipment&lt;/th&gt;
+      &lt;th scope="col"&gt;Power (W)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;th scope="row"&gt;Router&lt;/th&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope="row"&gt;Switch&lt;/th&gt;&lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;th scope="row"&gt;Total&lt;/th&gt;&lt;td&gt;36&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p><code>&lt;thead&gt;</code> groups header rows, <code>&lt;tbody&gt;</code> contains the primary data, and <code>&lt;tfoot&gt;</code> contains supplementary rows such as a total. Browsers may insert an implicit <code>&lt;tbody&gt;</code> when a table is written without one. Explicit grouping makes author intent clearer and simplifies later CSS selection. The example total of 36 W comes only from 12 + 24 W in the two-row example.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=e23RA_Uo99o&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Dave Gray, <a href='https://www.youtube.com/watch?v=e23RA_Uo99o'>“How to Create Tables in HTML | HTML5 Table Tutorial”</a>, January 11, 2022. Relevant chapters explain table headers, captions, rowspan/colspan, row groups, and <code>scope</code>. Source: the creator’s YouTube channel. The video reference was identified, but end-to-end playback on the published page remains unverified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete illustrated equipment example</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The following sample demonstrates three columns, labeled row headers, a table caption, and a summary footer. All values are made-up training inputs rather than actual measurements or manufacturer specifications. Watts (W) measure power; watt-hours (Wh) measure energy over an interval. An apparent 186 W total does not establish a real facility load or an energy-consumption reading.</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<div class="oshtml005-table-scroll" role="region" aria-label="Illustrative power sample data" tabindex="0" style="max-width:100%">
+<table style="width:100%;min-width:320px;border-collapse:collapse">
+<caption style="text-align:left;font-weight:700;padding:0.4em 0">Illustrative equipment power readings, watts (W)</caption>
+<thead><tr><th scope="col" style="padding:0.6em;text-align:left;border-bottom:2px solid currentColor">Equipment</th><th scope="col" style="padding:0.6em;text-align:left;border-bottom:2px solid currentColor">Power (W)</th><th scope="col" style="padding:0.6em;text-align:left;border-bottom:2px solid currentColor">State</th></tr></thead>
+<tbody>
+<tr><th scope="row" style="padding:0.6em;text-align:left;border-bottom:1px solid #888">Router</th><td style="padding:0.6em;border-bottom:1px solid #888">12</td><td style="padding:0.6em;border-bottom:1px solid #888">Online</td></tr>
+<tr><th scope="row" style="padding:0.6em;text-align:left;border-bottom:1px solid #888">Switch</th><td style="padding:0.6em;border-bottom:1px solid #888">24</td><td style="padding:0.6em;border-bottom:1px solid #888">Online</td></tr>
+<tr><th scope="row" style="padding:0.6em;text-align:left;border-bottom:1px solid #888">Server</th><td style="padding:0.6em;border-bottom:1px solid #888">150</td><td style="padding:0.6em;border-bottom:1px solid #888">Standby</td></tr>
+</tbody>
+<tfoot><tr><th scope="row" style="padding:0.6em;text-align:left;border-top:2px solid currentColor">Total</th><td style="padding:0.6em;border-top:2px solid currentColor">186</td><td style="padding:0.6em;border-top:2px solid currentColor">Illustrative</td></tr></tfoot>
+</table>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p><em>Illustrative HTML example. The values 12 W, 24 W and 150 W total 186 W. The scrollable wrapper protects narrow layouts while the header semantics remain intact. Editorial example data, not field observations.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The full offline source is available in <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/oshtml-005-accessible-tables/DeviceTable.html'>DeviceTable.html</a>. Its CSS uses <code>border-collapse</code>, spacing, and a scrollable wrapper. Display formatting is separate from the underlying HTML semantics. No network requests, JavaScript libraries, or outside stylesheets are needed.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Responsive tables without inaccessible layouts</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A three-column table may fit a phone, while a larger schedule may not. Common approaches include fewer columns, shorter values, and a horizontally scrollable region. A wrapping region with <code>max-width:100%</code> and <code>overflow-x:auto</code> can preserve row–column associations rather than converting every cell into a disconnected visual card.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="HTML source code sample" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;border-radius:0!important;white-space:pre-wrap!important;line-height:1.55!important;max-width:100%!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important;color:inherit!important"><code>&lt;div class="table-scroll"
+     role="region"
+     aria-label="Equipment power table"
+     tabindex="0"&gt;
+  &lt;table&gt;...&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.table-scroll:focus-visible {
+  outline: 2px solid #2563eb;
+}
+&lt;/style&gt;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>A focusable scroll region can assist keyboard access to wide content, but unnecessary tab stops should be avoided for tables that never overflow. Always test at narrow widths, higher zoom, keyboard navigation, and screen-reader navigation. The <a href='https://www.w3.org/WAI/tutorials/tables/tips/'>W3C responsive table tips</a> recommend retaining structural relationships through alternate presentations. CSS styling belongs in a stylesheet in larger projects; the sample intentionally keeps a short self-contained lesson.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Spanning cells and complex headers</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>colspan</code> lets a cell extend across multiple columns, while <code>rowspan</code> extends a cell down multiple rows. Both affect the implied grid. A row with one header spanning two columns does not contain an extra, independent third column unless another cell is provided. Incorrect spans can associate data with the wrong headers, making the table hard to interpret.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="HTML source code sample" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;border-radius:0!important;white-space:pre-wrap!important;line-height:1.55!important;max-width:100%!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important;color:inherit!important"><code>&lt;table&gt;
+  &lt;caption&gt;Two-zone equipment sample&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Zone&lt;/th&gt;
+      &lt;th scope="col"&gt;Device&lt;/th&gt;
+      &lt;th scope="col"&gt;Power (W)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th scope="rowgroup" rowspan="2"&gt;A&lt;/th&gt;
+      &lt;th scope="row"&gt;Router&lt;/th&gt;&lt;td&gt;12&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;&lt;th scope="row"&gt;Switch&lt;/th&gt;&lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The two-zone example shows <code>rowspan="2"</code> and a row-group header. Its grid structure should be tested with assistive technology; grouping boundaries and spans can be harder to interpret than ordinary one-header rows. More complex matrices may need explicit header identifiers such as <code>&lt;th id="power"&gt;</code> together with <code>&lt;td headers="device-a power"&gt;</code> so an assistive technology can identify the correct labels. Avoid complexity when multiple small tables would be clearer. See <a href='https://www.w3.org/WAI/tutorials/tables/'>W3C’s table-header patterns</a> and <a href='https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Table_accessibility'>MDN table accessibility</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=iuSKGuWWNGA&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Dani Krossing, <a href='https://www.youtube.com/watch?v=iuSKGuWWNGA'>“27 | HOW TO CREATE &amp; STYLE TABLES IN HTML | 2023”</a>, February 19, 2023. The independent tutorial demonstrates HTML table construction and visual styling. Source: the creator’s YouTube channel. The video identity was checked; in-page playback has not been independently verified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Runnable files and structural verification</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Download <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/oshtml-005-accessible-tables/DeviceTable.html'>DeviceTable.html</a> and <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/oshtml-005-accessible-tables/check-table.cjs'>check-table.cjs</a> into one directory. Open the HTML file directly in a desktop or mobile browser to inspect the example. From a terminal, run the following commands with a local Node.js installation:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="HTML source code sample" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;border-radius:0!important;white-space:pre-wrap!important;line-height:1.55!important;max-width:100%!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important;color:inherit!important"><code>node --check check-table.cjs
+node --test check-table.cjs</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The test harness uses only built-in Node.js modules and checks document type, language, viewport, descriptive heading, caption placement, table sections, column scopes, row scopes, expected body rows, numeric total, responsive wrapper, and a visible disclaimer for fabricated readings. On the lesson preparation system, <strong>18 of 18 structural tests passed under Node.js v22.16.0</strong>. The source also parsed as one table with three data rows in an independent local HTML parser.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The tests are an educational structural checklist. They are not a full WHATWG conformance validator, do not exercise a real screen reader, and cannot guarantee mobile visual appearance or WCAG compliance. To extend QA, run the page through the <a href='https://validator.w3.org/nu/'>Nu HTML Checker</a> and perform manual keyboard, zoom, and assistive-technology checks.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Debugging and safe publication</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Header association missing:</strong> ensure column headers use <code>&lt;th scope="col"&gt;</code> and row labels use <code>&lt;th scope="row"&gt;</code>.</li><li><strong>No table title:</strong> include a meaningful <code>&lt;caption&gt;</code> rather than substituting only a heading outside the table.</li><li><strong>Wrong values under a heading:</strong> inspect <code>rowspan</code>, <code>colspan</code>, row group boundaries, and actual cell counts.</li><li><strong>Mobile overflow:</strong> remove avoidable columns, shorten labels, or wrap the grid in a tested scrolling region.</li><li><strong>Misleading measurements:</strong> include units, sample dates, source attribution, and calculated versus observed labels whenever real telemetry is published.</li><li><strong>Injection and unsafe markup:</strong> escape untrusted text before placing it into an HTML table; never concatenate user-controlled data into HTML without context-appropriate encoding.</li><li><strong>Accessibility assumed from color:</strong> do not rely on green/red cell shading alone to communicate equipment status; provide status text.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>A table’s structure describes relationships, not the accuracy of the underlying data. Real energy and operations reports must distinguish instantaneous power from accumulated energy, explain sampling periods, and use verified telemetry. In a production project, validate the source values separately from verifying their HTML presentation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Exercises and knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Build a two-row table with an appropriate caption and two scoped column headers.</li><li>Convert one device name from <code>&lt;td&gt;</code> to a row-scoped <code>&lt;th&gt;</code>. Explain which relationship changed.</li><li>Add a fourth illustrative device with power 40 W and update the example total from 186 W to 226 W.</li><li>Create separate <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;tfoot&gt;</code> sections, then inspect the browser’s document tree.</li><li>Try a narrow viewport, keyboard navigation, and 200% zoom. Record any horizontal scrolling and whether each heading remains understandable.</li><li>Describe the difference between <code>rowspan</code> and <code>colspan</code>, and one case where <code>headers</code> may help.</li><li>Run the 18 tests, then intentionally remove one <code>scope</code> attribute in a throwaway copy. Explain the failing assertion.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> a caption names the dataset; a row-scoped <code>th</code> identifies related cells across the row; 186 + 40 = 226 W for the expanded fictional example; header/body/footer grouping clarifies section roles; <code>rowspan</code> covers rows whereas <code>colspan</code> covers columns; explicit <code>headers</code> associations can clarify complex tables; and removing a required scope violates the sample’s tested structural contract. A passing script does not replace manual accessibility review.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References and next steps</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Authoritative sources: <a href='https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_table_basics'>MDN — HTML Table Basics</a>; <a href='https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Table_accessibility'>MDN — Table Accessibility</a>; <a href='https://www.w3.org/WAI/tutorials/tables/'>W3C WAI — Tables Tutorial</a>; <a href='https://www.w3.org/WAI/WCAG22/Techniques/html/H63'>W3C — Scope and Header Associations</a>; <a href='https://www.w3.org/WAI/tutorials/tables/tips/'>W3C — Responsive Table Tips</a>; and the two attributed public educational videos above. Continue into <a href='https://bitcoinversus.tech/2026/11/05/oscss-001-css-selectors-types-classes-ids-attributes-relationships/'>OSCSS.001: CSS Selectors</a> for broader presentation rules or <a href='https://bitcoinversus.tech/2026/11/08/osjavascript-005-javascript-control-flow-conditions-loops-break-continue/'>OSJavaScript.005</a> for programming behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A well-built HTML table makes the data understandable both visually and programmatically. Captions define the subject, header scopes describe relationships, row groups organize the dataset, and responsive presentation preserves usability at different display sizes. Test both the source structure and the experience of someone navigating without a mouse.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSHTML.005 follows the verified OSHTML.004 in the Open CERT / TechCert curriculum. The 1200 × 630 featured cover is original AI-generated educational artwork, not a captured browser screenshot. It carries the small neon-green “Bitcoinversus.Tech” signature at the bottom-left. The table’s 12 W, 24 W, and 150 W values are fabricated instruction data, not equipment measurements. The standalone HTML file and 18 Node.js checks were run locally. Both cited videos were identified from their public YouTube entries; actual end-to-end playback and mobile pixel-level inspection remain unverified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional donation QR for 5,000 satoshis" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional original BitcoinVersus.Tech 5,000-satoshi donation QR. Verify the recipient and amount in your wallet before authorizing a payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>To scan on mobile, open the QR on a second screen or use a wallet's saved-image scanning feature. Confirm the receiving address and requested amount yourself before sending funds.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Educational exercises do not replace independently verified technical or operational procedures.</em></p><!-- /wp:paragraph -->

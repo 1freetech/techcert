@@ -1,0 +1,205 @@
+<!-- wp:paragraph --><p>A Bash function groups related shell commands behind a reusable name. Functions reduce repeated code in system administration, automate validation, and let a larger script express individual operations clearly. <strong>OSBash.006</strong> explains defining functions, passing arguments, protecting local variables, distinguishing printed output from return status, and handling invalid inputs without calling external services or modifying real equipment.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The lesson builds directly on <a href='https://bitcoinversus.tech/2026/11/02/bash-loops-for-while-until-break-continue-safe-file-iteration/'>OSBash.005 — Loops and Safe Iteration</a>. Earlier lessons established <a href='https://bitcoinversus.tech/2026/10/09/osbash-001-shell-script-basics-bash-shebang-chmod-first-script/'>the shebang and first script</a>, <a href='https://bitcoinversus.tech/2026/10/15/osbash-003-variables-expansion-assignment-parameter-expansion-quoting-environment-command-substitution/'>variables and quoting</a>, and <a href='https://bitcoinversus.tech/2026/10/18/osbash-004-conditional-tests-if-then-else-fi-and/'>conditional tests</a>. They are prerequisites for understanding the new examples.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Objectives and prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Define a Bash function using <code>name() { ...; }</code> and invoke it by name.</li><li>Explain how <code>$1</code>, <code>$2</code>, <code>$#</code>, and quoted <code>"$@"</code> behave inside a function.</li><li>Protect a function's working variables using <code>local</code> and explain Bash's dynamic scope.</li><li>Use <code>return</code> for a command status, not as an arbitrary data-return mechanism.</li><li>Send useful output to standard output and diagnostics to standard error.</li><li>Validate untrusted arguments before arithmetic or displaying results.</li><li>Use <code>if command; then ... else ... fi</code> to inspect statuses safely and understand why <code>set -e</code> has exceptions.</li><li>Execute a safe equipment-reporting example and reproduce 27 local tests.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites are a Bash-compatible terminal, a text editor, and the earlier Bash lessons. The lab was locally executed under <strong>GNU Bash 5.2.37</strong> on Linux. It requires no root permissions, network access, external packages, connected sensors or database. The device names and watt values below are <strong>fictional training inputs</strong>, not engineering specifications or site telemetry.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Declaring and calling a function</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>In Bash, a function definition associates a name with a command list. The shell runs that command list when the function name is used as a command. The definition alone does not execute the body. A function normally executes in the calling shell context rather than starting a separate shell process; therefore, a simple assignment within a function can change a caller-visible variable unless the name is declared <code>local</code>. The <a href='https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html'>GNU Bash Shell Functions manual</a> is the primary reference.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Bash code and expected output example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.2em 0!important;max-width:100%!important;white-space:pre-wrap!important;line-height:1.55!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>greet() {
+  local name=$1
+  printf 'Hello, %s\n' "$name"
+}
+greet 'Linux engineer'
+# Expected output: Hello, Linux engineer</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Use whitespace or a semicolon before the closing brace; <code>{</code> and <code>}</code> are reserved words in the common Bash function syntax. A named function is called with arguments, not by adding parentheses to the invocation. The example prints one line and succeeds if <code>printf</code> succeeds.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Arguments and positional parameters</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>When a function is called, Bash temporarily assigns its arguments to numbered parameters. <code>$1</code> names the first argument, <code>$2</code> the second, and <code>$#</code> counts arguments. After the function completes, the caller's positional parameters are restored. Quoted <code>"$@"</code> expands each input argument separately and preserves spaces in its contents. The unquoted version can split fields and expand wildcard patterns, which is generally dangerous for user-supplied values.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Bash code and expected output example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.2em 0!important;max-width:100%!important;white-space:pre-wrap!important;line-height:1.55!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>show_args() {
+  printf 'Argument count: %s\n' "$#"
+  local item
+  for item in "$@"; do
+    printf 'One argument: &lt;%s&gt;\n' "$item"
+  done
+}
+show_args 'rack A' 'rack B'
+# Argument count: 2
+# One argument: &lt;rack A&gt;
+# One argument: &lt;rack B&gt;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p><code>"$*"</code> is not a substitute for <code>"$@"</code> when forwarding multiple inputs: under normal settings it creates a single joined word. Function arguments are not automatically typed. A string containing digits remains shell text until code validates it and explicitly performs arithmetic. Refer to the <a href='https://www.gnu.org/software/bash/manual/html_node/Positional-Parameters.html'>GNU positional parameters reference</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=tK9Oc6AEnR4&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>freeCodeCamp.org, <a href='https://www.youtube.com/watch?v=tK9Oc6AEnR4'>“Bash Scripting Tutorial for Beginners”</a> (April 11, 2023). The tutorial introduces positional arguments at 14:55, functions at 36:03, and exit codes at 41:31. Source: freeCodeCamp.org's public video. Video identity verified; published-page playback is not independently confirmed.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Local scope and avoiding hidden state</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Bash function variables are not automatically private. <code>local</code> creates a variable whose scope is limited to a function invocation and nested calls. Bash also uses <strong>dynamic scoping</strong>: a function called by another function may access the caller's local variables unless names are carefully controlled. Avoid depending on hidden scope as a design strategy; pass arguments explicitly, and assign intermediate values to <code>local</code> names.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Bash code and expected output example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.2em 0!important;max-width:100%!important;white-space:pre-wrap!important;line-height:1.55!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>device='outside'
+change_example() {
+  local device='inside'
+  printf 'During call: %s\n' "$device"
+}
+change_example
+printf 'After call: %s\n' "$device"
+# During call: inside
+# After call: outside</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The word <code>local</code> is a Bash builtin, not part of portable POSIX <code>sh</code>. State the expected shell in the shebang: <code>#!/usr/bin/env bash</code>. If the script is invoked with <code>sh script.sh</code>, Bash-specific expressions such as <code>[[ ... ]]</code> may fail or behave differently. The <a href='https://www.gnu.org/software/bash/manual/html_node/Bash-Builtins.html'>GNU Bash builtin reference</a> documents <code>local</code>, <code>return</code> and related commands.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Return status is not returned text</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Each shell command produces an exit status. By convention, status <code>0</code> denotes success and a nonzero status denotes failure or another documented outcome. In a function, <code>return N</code> stops the function and supplies that status to its caller, limited to the low eight bits of the numeric argument. It does <strong>not</strong> return the number N as a normal data object. To return a text value, print it to standard output and capture that output using command substitution.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Bash code and expected output example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.2em 0!important;max-width:100%!important;white-space:pre-wrap!important;line-height:1.55!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>get_name() {
+  printf '%s\n' 'Training A'
+}
+name=$(get_name)
+printf '%s\n' "$name"
+# Training A
+
+is_valid() {
+  [[ $1 =~ ^[A-Z]$ ]] || return 2
+}
+if is_valid A; then
+  printf 'valid\n'
+fi
+# valid</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The temporary special parameter <code>$?</code> holds the most recent command's status; it is easy to overwrite by running another command. Prefer checking a command directly in an <code>if</code> when possible. When a result is assigned from command substitution, separately declare the variable with <code>local result</code> and then perform <code>if result=$(some_function); then ...</code>. Writing <code>local result=$(some_function)</code> may report the declaration command's success rather than the failure of the substituted command.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">stdout and stderr separate data from diagnostics</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Standard output, commonly called <strong>stdout</strong>, can carry data that a program or caller intends to use. Standard error, <strong>stderr</strong>, can carry diagnostics without contaminating a command-substitution result. The redirection <code>&gt;&amp;2</code> sends text to standard error. For a monitoring program, treat failed validation as a real failure and do not print a fabricated numeric success value.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Bash code and expected output example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.2em 0!important;max-width:100%!important;white-space:pre-wrap!important;line-height:1.55!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>validate_one() {
+  local raw=$1
+  if [[ ! $raw =~ ^[0-9]+$ ]]; then
+    printf 'Expected digits.\n' &gt;&amp;2
+    return 3
+  fi
+  printf '%s\n' "$raw"
+}
+if watts=$(validate_one 150); then
+  printf 'Accepted: %s\n' "$watts"
+else
+  printf 'Rejected\n' &gt;&amp;2
+fi</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Shell expansion still matters: quote expansions such as <code>"$raw"</code> and <code>"$watts"</code> when passing them as arguments. Never put an untrusted string inside <code>eval</code> or interpolate it into executable shell commands. <code>printf '%s\n' "$value"</code> is safer for arbitrary strings than constructing a shell command with data inserted into its syntax.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A complete safe equipment-reporting script</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The fully executable <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/osbash-006-functions/device_report.sh'>device_report.sh</a> accepts two command-line arguments: a device label and an illustrative whole-watt input. It validates that the label contains 1–32 ASCII letters, digits, periods, underscores, or hyphens. It requires a numeric input with 1–4 decimal digits, converts the input with an explicit base-10 prefix to avoid interpreting leading zeroes as octal, and applies an arbitrary classroom upper limit of 1,000 W.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The script defines <code>usage()</code>, <code>valid_label()</code>, <code>parse_watts()</code>, <code>report_device()</code>, and <code>main()</code>. It calls <code>main</code> only when executed as a script rather than sourced as a library. The <code>report_device()</code> function returns distinct nonzero statuses for incorrect argument or label format, malformed watt values, and values beyond the artificial upper limit.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Bash code and expected output example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.2em 0!important;max-width:100%!important;white-space:pre-wrap!important;line-height:1.55!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>#!/usr/bin/env bash
+set -u
+set -o pipefail
+
+valid_label() {
+  local label=${1-}
+  [[ $label =~ ^[A-Za-z0-9._-]+$ ]] &amp;&amp; (( ${#label} &lt;= 32 ))
+}
+parse_watts() {
+  local raw=${1-}
+  [[ $raw =~ ^[0-9]{1,4}$ ]] || return 3
+  local watts=$((10#$raw))
+  (( watts &lt;= 1000 )) || return 4
+  printf '%d\n' "$watts"
+}
+# The linked complete source also defines usage(), report_device(),
+# main(), and clear diagnostics for every rejected input.</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The excerpt shows core validation only. Download the <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/osbash-006-functions/device_report.sh'>complete file</a> rather than trying to run the shortened listing by itself. The script is non-destructive: it never reads a sensor, scans a network, writes a file, invokes a privileged command, sends telemetry, or attempts remote execution. The 1,000 W limit is invented solely for a numeric-validation exercise, not a miner rating or electrical operating threshold.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Run the program and interpret exit codes</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Download the complete script and the accompanying <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/osbash-006-functions/verify_device_report.sh'>verify_device_report.sh</a> into the same directory. Commands below use a Bash interpreter explicitly; making the source file executable is optional. A missing-arguments call returns status 2, malformed numeric input returns 3, and an out-of-range number returns 4. The successful call exits with status zero.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Bash code and expected output example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.2em 0!important;max-width:100%!important;white-space:pre-wrap!important;line-height:1.55!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>bash --version
+bash -n device_report.sh
+bash device_report.sh miner-01 150
+# Device: miner-01
+# Power (illustrative): 150 W
+
+bash device_report.sh miner-01 1001
+# Out of range: the teaching limit is 1000 W.
+# exit status 4</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The successful result uses an illustrative 150 W, and the failure is caused by the exercise's intentionally restrictive input policy. A caller can detect failure directly: <code>if bash device_report.sh miner-01 150; then ... else ... fi</code>. Avoid using <code>|| true</code> indiscriminately, since it can conceal important status information when running a job or automated health check.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">set -u, pipefail, and the limits of set -e</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The example enables <code>set -u</code> and <code>set -o pipefail</code>. <code>set -u</code> reports attempts to expand certain unset variables; defensive <code>${1-}</code> expansions are used where absent arguments are permitted during validation. <code>pipefail</code> changes a pipeline's exit status so failures in earlier pipeline stages can be surfaced instead of always returning the last command's status.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The lab deliberately does not enable <code>set -e</code>, which asks the shell to exit on failures in specific circumstances. The behavior has significant exceptions in <code>if</code> tests, <code>while</code> conditions, most elements of <code>&amp;&amp;</code>/<code>||</code> lists, and function calls in contexts where failure is being tested. A script should not treat <code>set -e</code> as comprehensive exception handling. Official documentation: <a href='https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html'>GNU Bash set builtin</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Bash code and expected output example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.2em 0!important;max-width:100%!important;white-space:pre-wrap!important;line-height:1.55!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>if result=$(parse_watts "$raw_watts"); then
+  printf 'Accepted: %s\n' "$result"
+else
+  status=$?
+  printf 'Power input failed with status %s\n' "$status" &gt;&amp;2
+  return "$status"
+fi</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>When designing larger automation, decide which errors are recoverable and which require terminating the job. Preserve diagnostics and the failing command's status. Sensitive information should not be printed to shared CI logs or exposed by shell tracing. <code>set -x</code> can leak environment variables, tokens, or command arguments and should not be used casually in production environments.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=mSQM8Xo78Wc&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>ProgrammingKnowledge, <a href='https://www.youtube.com/watch?v=mSQM8Xo78Wc'>“Bash Scripting Tutorial for Beginners | Bash Scripting Full Course 3 Hours”</a> (February 17, 2024). Function declarations are covered at 02:24:12, nested functions at 02:36:49, and globals at 02:41:58. Original educational upload; in-page playback remains unverified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Twenty-seven locally executed checks</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The independent <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/osbash-006-functions/verify_device_report.sh'>test harness</a> launches the Bash program with controlled arguments and examines both its exit status and a relevant output fragment. Tests cover zero, a 1,000 W boundary, leading zeroes, valid names, incorrect argument counts, negative values, decimals, scientific notation, invalid labels, overlong strings, and literal shell metacharacters. A final test sources the file and verifies that importing its function definitions does not run the main program.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Execution on the preparation system reported <strong>GNU Bash 5.2.37</strong>, with both scripts accepted by <code>bash -n</code>, and <strong>PASS: 27 checks</strong>. The test suite uses only Bash and does not require Bats, ShellCheck, Python, network permissions, or a real Linux infrastructure environment. Passing the tests verifies the listed inputs and script behavior; it is not a security certification or evidence that the program controls hardware.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Bash code and expected output example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.2em 0!important;max-width:100%!important;white-space:pre-wrap!important;line-height:1.55!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>bash -n device_report.sh
+bash -n verify_device_report.sh
+bash verify_device_report.sh
+# Observed on GNU Bash 5.2.37:
+# PASS: 27 checks</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>To extend the lab, add tests for unusual Unicode input, maximum-length labels, two device arguments containing whitespace, or a simulated log file in a disposable working directory. If building a real telemetry importer, change the data contract to include source authentication, timestamp, unit, transport validation, secure logging, and explicit failure behavior rather than treating a string that looks numeric as a trustworthy physical measurement.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and security boundaries</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Function appears not to run:</strong> confirm the definition is evaluated before the call and the script is actually executed with Bash rather than another shell.</li><li><strong>An expected status disappears:</strong> avoid inserting another command between the failed operation and capturing <code>$?</code>; use a direct if/else check.</li><li><strong>Values leak between calls:</strong> declare temporary working variables with <code>local</code> and pass dependencies explicitly.</li><li><strong>Arguments containing spaces split unexpectedly:</strong> use quoted <code>"$@"</code> for argument forwarding and quote ordinary variable expansions.</li><li><strong>Numbers beginning with 0 behave unexpectedly:</strong> Bash arithmetic can treat such values as octal; validate decimal text and convert using an intentional base-10 expression.</li><li><strong>Script exits at the wrong point:</strong> inspect interaction with <code>set -e</code>, <code>pipefail</code>, functions used in conditions, and traps instead of assuming global error propagation.</li><li><strong>Unexpected shell execution:</strong> ensure user input is treated only as data; do not call <code>eval</code> or assemble commands from untrusted strings.</li><li><strong>Production limit confusion:</strong> arbitrary lab thresholds are not site policies, manufacturer specifications, or safe electrical limits.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice exercises and knowledge assessment</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Modify <code>greet()</code> to accept two arguments and print both without losing spaces.</li><li>Write a function that reports <code>$#</code> and prints each value from <code>"$@"</code> on a separate line.</li><li>Remove <code>local</code> from a disposable version of a sample and explain why a caller's variable changes.</li><li>Call <code>device_report.sh</code> with <code>0008</code> and predict its normalized numeric value.</li><li>Compare running <code>parse_watts 1001</code> with running <code>parse_watts abc</code>. Explain their different return statuses.</li><li>Describe why <code>local result=$(command)</code> may fail to preserve the command status.</li><li>Test a literal string <code>$(echo INJECTED)</code> as the numeric argument and explain why the shell never executes the embedded text.</li><li>Extend the harness with one new rejected label and one successfully normalized numeric string.</li><li>Explain why <code>set -e</code> should not replace explicit handling in a program intended to continue after a recoverable failure.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> quote each input when printing it; quoted <code>"$@"</code> preserves argument boundaries; <code>local</code> prevents an assignment from overwriting the caller's same-named variable; <code>0008</code> becomes decimal 8; 1001 produces an out-of-range status 4 whereas alphabetic input yields malformed-input status 3; a combined declaration and assignment can mask command-substitution failure; quoted literal input is passed as a string and rejected by the digit validator instead of executed; and <code>set -e</code> has documented contexts where a nonzero command status does not automatically stop the shell.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Official references and curriculum continuation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Primary technical sources: <a href='https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html'>GNU Bash — Shell Functions</a>; <a href='https://www.gnu.org/software/bash/manual/html_node/Positional-Parameters.html'>Positional Parameters</a>; <a href='https://www.gnu.org/software/bash/manual/html_node/Special-Parameters.html'>Special Parameters</a>; <a href='https://www.gnu.org/software/bash/manual/html_node/Bash-Builtins.html'>Bash Builtins</a>; and <a href='https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html'>The Set Builtin</a>. The <a href='https://bitcoinversus.tech/2026/10/10/osbash-002-commands-paths-pwd-ls-cd-absolute-relative-paths-path/'>OSBash.002 commands-and-paths lesson</a> explains shell execution environments. The two credited video lessons demonstrate functions and related mechanisms in practice.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Bash functions support small, testable automation units when their inputs, outputs and failure behavior are explicit. Quoted parameters protect argument boundaries, <code>local</code> limits unintended state mutation, printed output carries results, and return statuses communicate success or failure. The prepared shell script is an instructional starting point; future lessons can extend the same approach to argument parsing, files, traps, and operational safety.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSBash.006 follows the verified published Bash loops lesson. The 1200 × 630 featured cover is original AI-generated educational artwork depicting a Linux scripting workstation, not an actual terminal capture. The small exact “Bitcoinversus.Tech” signature is neon green and positioned at the bottom-left, at approximately 10-point visual size. All example device labels, power limits and wattage inputs are fictional. The source and test harness were executed locally under GNU Bash 5.2.37, with 27 passing checks and successful syntax checks. Video identities were verified, but actual end-to-end WordPress playback and mobile visual inspection require separate verification.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5,000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech optional 5,000-sat donation QR. Verify recipient and amount in your wallet before sending money.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the QR on a separate screen or use a compatible wallet's saved-image scanning feature. Confirm the recipient and requested amount in the wallet before authorizing any payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Educational command-line examples are not a substitute for verified production procedures, safety controls, or infrastructure security review.</em></p><!-- /wp:paragraph -->

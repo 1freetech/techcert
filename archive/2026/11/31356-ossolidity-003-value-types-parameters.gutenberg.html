@@ -1,0 +1,157 @@
+<!-- wp:paragraph --><p><strong>OSSolidity.003</strong> introduces the elementary data types and function parameters used to build Ethereum smart contracts. Solidity is statically typed: a variable's type is specified, rather than inferred dynamically at every assignment. Integer values, booleans, Ethereum addresses, and string data represent different kinds of information, while function visibility and mutability determine how contract functions may be called and whether they can read or change state. The lesson uses a local Remix VM, with no real funds or public-chain deployment.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Earlier <a href='https://bitcoinversus.tech/2026/10/08/ossolidity-001-evm-smart-contracts/'>OSSolidity.001</a> introduced the Ethereum Virtual Machine. <a href='https://bitcoinversus.tech/2026/11/02/ossolidity-002-contract-structure-spdx-pragma-state-variables-functions-remix/'>OSSolidity.002</a> introduced compiler pragmas, state variables and simple functions. The next step is recognizing which values belong in storage, which arrive through a function call, and how type declarations constrain operations. <strong>Solidity 0.8.38</strong>, released October 22, 2026, is the pinned reference version for the supplied sample. <a href='https://www.soliditylang.org/blog/2026/10/22/solidity-0.8.38-release-announcement/'>Official release announcement</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives and prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Distinguish value types such as <code>uint256</code>, <code>bool</code> and <code>address</code> from reference types such as <code>string</code>.</li><li>Identify a parameter in a function declaration and an argument supplied by a caller.</li><li>Explain <code>storage</code>, <code>memory</code> and <code>calldata</code> without confusing temporary data with persistent blockchain state.</li><li>Compare <code>external</code>, <code>public</code>, <code>internal</code> and <code>private</code> visibility.</li><li>Distinguish <code>pure</code>, <code>view</code> and a state-changing function.</li><li>Describe a basic access-control check using <code>msg.sender</code>, and distinguish visibility from confidentiality.</li><li>Compile and interact with a teaching contract using an offline/local Remix VM.</li><li>Inspect seven self-check functions and identify which results can be verified only after execution.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: Solidity source-file structure from OSSolidity.002, function calls, elementary integer arithmetic and command-line or browser-based editor use. The separate <a href='https://bitcoinversus.tech/2026/11/08/osphp-006-php-exceptions-try-catch-finally-safe-error-handling/'>PHP error-handling lesson</a> provides a useful comparison between validation failures in off-chain software and on-chain transaction reverts, but PHP is not required for Solidity study.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What Solidity value types represent</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A Solidity <strong>value type</strong> is copied when assigned or passed as a normal argument. <code>bool</code> stores <code>true</code> or <code>false</code>. <code>uint256</code> is a nonnegative unsigned integer with 256 bits; <code>int256</code> represents signed integers. More narrowly sized forms such as <code>uint8</code> are also supported, but selecting smaller widths does not automatically reduce execution gas in all contexts. <code>address</code> represents an Ethereum address and is not interchangeable with a text label.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Solidity source example" tabindex="0" style="background:transparent!important;background-color:transparent!important;max-width:100%!important;white-space:pre-wrap!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:1.1em 0!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>uint256 public lastWatts;  // Nonnegative integer
+bool public hasReading;     // Explicit validity/recorded flag
+address public immutable instructor; // Deploying account</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>In the example, a zero reading is a valid integer value, so <code>hasReading</code> distinguishes 'nothing recorded yet' from 'recorded zero'. State variables normally receive default values if not explicitly initialized, but those defaults do not establish that valid external data was received. The <a href='https://docs.soliditylang.org/en/v0.8.38/types.html'>Solidity 0.8.38 type reference</a> defines these elementary types and explains value-copy semantics.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Solidity deliberately lacks general-purpose floating-point arithmetic. A hardware reading that contains decimal fractions needs an explicit fixed-unit representation, for example storing <code>1250</code> as 1,250 milliwatts rather than pretending a floating-point watt value exists. The teaching contract uses whole watts solely to focus on types and calls. Applications must separately document units, precision, rounding and input provenance.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=jcgfQEbptdo&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Dapp University, <a href='https://www.youtube.com/watch?v=jcgfQEbptdo'>“Learn Blockchain &amp; Solidity Development — Full Course 2024”</a>, published December 28, 2023. See the variables and data types chapter beginning at approximately 17:23; remaining chapters include much more advanced financial examples not needed for the current lesson. Video identity and publisher verified from the public listing; embedding playback is not independently confirmed.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>When data begins in a web interface, a browser <a href="https://bitcoinversus.tech/2026/11/01/oshtml-004-html-forms-labels-inputs-fieldsets-submission-validation/">HTML form</a> can collect a device label or reading, but neither client-side validation nor a friendly input widget proves its accuracy. A smart contract must independently validate arguments before recording values, and any connection between a website and an Ethereum wallet requires additional authorization and transaction safeguards.</p><!-- /wp:paragraph --><!-- wp:heading --><h2 class="wp-block-heading">Strings and the three data locations</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>string</code>, arrays and structs are reference types: their location matters. Solidity differentiates <code>storage</code> (persistent state), <code>memory</code> (temporary mutable data during a call), and <code>calldata</code> (non-modifiable input data, generally supplied with an external call). Data copied from temporary input into storage may incur persistent-state write costs. A copied string is not equivalent to its original location or lifetime.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Solidity source example" tabindex="0" style="background:transparent!important;background-color:transparent!important;max-width:100%!important;white-space:pre-wrap!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:1.1em 0!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>string private _deviceLabel;
+
+constructor(string memory initialLabel) {
+    _deviceLabel = initialLabel;
+}
+
+function rename(string calldata nextLabel) external {
+    _deviceLabel = nextLabel;
+}
+
+function summary() external view returns (string memory) {
+    return _deviceLabel;
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The excerpt illustrates data location but omits authorization and input validation; use the complete secure-for-teaching version later in the lesson. The constructor receives a temporary <code>memory</code> string, <code>rename</code> receives read-only <code>calldata</code> input, and <code>summary</code> returns a value in <code>memory</code>. The official <a href='https://docs.soliditylang.org/en/v0.8.38/types.html#data-location'>data-location specification</a> explains the differences. No claim that every <code>calldata</code> parameter is cheaper is made; performance depends on ABI encoding and how data is used.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Function parameters, arguments and returns</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <strong>parameter</strong> is the named typed input in a function declaration; an <strong>argument</strong> is the actual value the caller supplies. For example, <code>twice(uint256 watts)</code> declares a parameter named <code>watts</code>. Calling <code>twice(75)</code> supplies the argument 75. The <code>returns (uint256)</code> clause declares the output type; 150 is the expected arithmetic result for the example.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Solidity source example" tabindex="0" style="background:transparent!important;background-color:transparent!important;max-width:100%!important;white-space:pre-wrap!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:1.1em 0!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>function twice(uint256 watts) external pure returns (uint256) {
+    if (watts &gt; 1000) revert ReadingTooLarge(watts);
+    return watts * 2;
+}
+// Expected result for twice(75): 150
+// Expected behavior for twice(1001): revert</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The limit is a deliberately arbitrary <strong>classroom value</strong>, not a genuine ASIC rating, data-center operating setpoint or safety threshold. For nonnegative values up to 1,000, multiplying by two stays far below the maximum <code>uint256</code> value. Solidity 0.8.x normally checks arithmetic overflow and reverts rather than wrapping silently. Typed parameters improve predictability but do not authenticate the original measurement or decide whether an input is safe.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Visibility and state mutability</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Solidity has different function visibility options. <code>external</code> functions are called through the external interface; <code>public</code> functions can also be called internally; <code>internal</code> functions are accessible to the contract and derived contracts; <code>private</code> functions are limited to the declaring contract. A <code>public</code> state variable generally gets a compiler-generated external getter. None of these keywords encrypt on-chain storage or prevent a blockchain observer from examining published transactions and data.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Function state mutability is a separate concept. <code>view</code> denotes that a function may read state but not modify it, while <code>pure</code> denotes that it should neither read nor change contract state. An ordinary state-changing function can write persistent variables and normally requires a transaction. Read-only calls through an off-chain provider need not create an on-chain transaction or incur a gas payment, while equivalent on-chain execution still consumes gas. Consult the <a href='https://docs.soliditylang.org/en/v0.8.38/contracts.html'>official contracts reference</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Solidity source example" tabindex="0" style="background:transparent!important;background-color:transparent!important;max-width:100%!important;white-space:pre-wrap!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:1.1em 0!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>function summary()
+    external view
+    returns (string memory label, uint256 watts, bool recorded)
+{
+    return (_deviceLabel, lastWatts, hasReading);
+}
+
+// record(...) is external but state-changing:
+// it writes lastWatts and hasReading.</code></pre><!-- /wp:html -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The full ReadingBook teaching contract</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The complete <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/ossolidity-003-types-parameters/ReadingBook.sol'>ReadingBook.sol</a> file creates a tiny classroom ledger for invented equipment readings. The deployer becomes the immutable <code>instructor</code> address. Two state fields represent the most recent whole-watt value and whether a reading has been recorded. The persistent device label is a <code>string</code>, protected from changes by other callers. Public blockchain records remain observable even if a state variable is marked <code>private</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A <code>record(uint256 watts)</code> call verifies <code>msg.sender</code> matches <code>instructor</code>, rejects a value above the deliberately fictional training limit, stores the accepted value and emits a <code>ReadingRecorded</code> event. <code>rename(string calldata nextLabel)</code> similarly restricts caller identity and checks the label length. <code>summary()</code> reads the stored label, numeric value and recorded flag, while <code>twice()</code> computes an isolated result.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Solidity source example" tabindex="0" style="background:transparent!important;background-color:transparent!important;max-width:100%!important;white-space:pre-wrap!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:1.1em 0!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>// SPDX-License-Identifier: MIT
+pragma solidity 0.8.38;
+
+contract ReadingBook {
+    uint256 public constant TRAINING_LIMIT_WATTS = 1000;
+    address public immutable instructor;
+    uint256 public lastWatts;
+    bool public hasReading;
+    string private _deviceLabel;
+
+    error Unauthorized(address caller);
+    error ReadingTooLarge(uint256 supplied);
+    error InvalidLabelLength(uint256 length);
+    event ReadingRecorded(address indexed operator, uint256 watts);
+
+    constructor(string memory initialLabel) {
+        uint256 labelBytes = bytes(initialLabel).length;
+        if (labelBytes == 0 || labelBytes &gt; 40)
+            revert InvalidLabelLength(labelBytes);
+        instructor = msg.sender;
+        _deviceLabel = initialLabel;
+    }
+    // Full verified source link above includes all function bodies.
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The abbreviated listing shows the contract layout, not a complete executable file. Use <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/ossolidity-003-types-parameters/ReadingBook.sol'>the full source</a> for compiling. It contains no payable function, fund transfer, oracle connector, token balance or production telemetry collector. It also does not implement a robust user-role system or upgrade mechanism. An event supplies an externally queryable log, but it is not a substitute for the stored <code>lastWatts</code> getter.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Local Remix VM compilation and execution</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Open the official <a href='https://remix.ethereum.org'>Remix IDE</a> in a trusted browser. Create <code>ReadingBook.sol</code> and paste the full repository code. Select the Solidity compiler labeled <strong>0.8.38</strong>, matching the exact <code>pragma solidity 0.8.38;</code>, and compile. In Deploy &amp; Run, choose the local <strong>Remix VM</strong> rather than a public network or wallet connection. Do not attach real funds. Remix's <a href='https://remix-ide.readthedocs.io/en/latest/run.html'>official Deploy &amp; Run documentation</a> explains local deployment and contract interactions.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Supply the constructor argument <code>"miner-a"</code>. After successful local deployment, the expected initial values are <code>lastWatts = 0</code> and <code>hasReading = false</code>. Call <code>record(125)</code> from the deploying account, and read back <code>lastWatts = 125</code> with <code>hasReading = true</code>. Calling <code>twice(75)</code> should return 150 without changing storage. <strong>These are predicted results from the source, not outputs observed in an executed EVM session.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Change to another Remix VM account and attempt <code>record(75)</code>. The transaction is expected to revert with <code>Unauthorized</code>. Switch back to the deployer and call <code>record(1001)</code>; the transaction is expected to revert with <code>ReadingTooLarge</code>. For the classroom example, the original 125 reading should remain unchanged after either revert. Reverts roll back the failing call's state changes, subject to ordinary EVM transaction semantics.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Test harness and verification boundaries</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The companion <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/ossolidity-003-types-parameters/ReadingBookChecks.sol'>ReadingBookChecks.sol</a> is an isolated self-check contract. Import the file into the same Remix workspace and compile it alongside <code>ReadingBook.sol</code>. Deploy <code>ReadingBookChecks</code> into the Remix VM and call the seven public check functions separately. Each check creates a fresh classroom contract and returns <code>true</code> only if its assertions do not revert.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><code>checkDefaults()</code> — constructor arguments, defaults, owner and training limit.</li><li><code>checkRecordAndZero()</code> — distinguish a recorded zero from an untouched default, then store 125.</li><li><code>checkPureFunction()</code> — confirm doubled values for the input examples.</li><li><code>checkRename()</code> — verify a permitted label change.</li><li><code>checkUnauthorizedCaller()</code> — test a write attempted by a separate contract.</li><li><code>checkReadingLimit()</code> — test rejection above the classroom limit.</li><li><code>checkEmptyConstructorLabel()</code> — test rejection of an empty initial label.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>A separate <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/ossolidity-003-types-parameters/static-review.js'>static-review.js</a> file checks source-text structure with Node.js. The locally executed <code>node --test static-review.js</code> command passed <strong>18 of 18 structural assertions</strong>, including type declarations, visibility markers, authorization checks, imports, and the existence of the seven Remix tests. The environment did <strong>not</strong> contain the Solidity compiler or a working EVM runtime; Solidity compilation and all seven Remix test results remain <strong>unverified</strong>. Structural checks cannot detect every compiler rejection or runtime security defect.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=5dcRMHUhA20&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Chainlink, <a href='https://www.youtube.com/watch?v=5dcRMHUhA20'>“Solidity Basics and Remix Tutorial — Lesson #1”</a>, January 21, 2022. Patrick Collins demonstrates introductory Solidity concepts with the Remix IDE. The educational demonstration predates compiler 0.8.38, so the current Solidity manual controls syntax and security guidance. Video identified from the creator's YouTube page; saved iframe playback is not independently confirmed.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Security and engineering limitations</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Contract visibility is not data secrecy:</strong> private variables still reside in observable blockchain state; do not put confidential credentials or unencrypted user secrets on chain.</li><li><strong>Caller authorization is necessary but not comprehensive:</strong> protecting <code>record</code> and <code>rename</code> does not make the example audited or production-ready.</li><li><strong>Calldata is not persistent storage:</strong> the input label is copied into <code>_deviceLabel</code>; the variable does not simply point to transaction calldata after execution.</li><li><strong>Pure/view is not an audit guarantee:</strong> compiler restrictions do not establish safe behavior for every integration or data source.</li><li><strong>Measurements require provenance:</strong> caller-submitted whole-watt numbers are not authenticated sensor telemetry; blockchain permanence cannot prove that submitted inputs were physically measured.</li><li><strong>Transactions have gas consequences:</strong> local VM work is instructional; real deployments and state-changing transactions may cost cryptocurrency and expose persistent records.</li><li><strong>Unchecked copy/paste is dangerous:</strong> version pinning, test coverage, threat modeling, access-control review and independent audits are necessary before any real-value or public-chain application.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>The October 22, 2026 <a href='https://www.soliditylang.org/blog/2026/10/22/solidity-0.8.38-release-announcement/'>Solidity 0.8.38 release notes</a> identify a Yul optimizer correctness fix affecting some earlier releases. Pinning the intended compiler version is therefore more than a formatting preference. A production build should also preserve compiler settings, target EVM, dependency revisions and source provenance.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Guided exercises and assessment</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Explain why <code>uint256</code> is appropriate for the whole-watt example and why a negative value does not fit that type.</li><li>Change the sample to use <code>bool hasReading</code> and explain why zero alone cannot establish whether data was recorded.</li><li>Identify the argument and parameter in <code>twice(75)</code> and predict the result.</li><li>Describe the lifetime and mutability differences between a <code>memory</code> constructor string and a <code>calldata</code> external string.</li><li>Explain why <code>private</code> does not protect a stored label's confidentiality.</li><li>Determine which calls change state and which are read-only, and why that affects transaction behavior.</li><li>In the local Remix VM only, verify that a caller other than the deployer cannot record a reading.</li><li>Test the upper boundary with 1,000 and 1,001 whole watts, then justify the chosen validation rule.</li><li>Read each of the seven self-checks and state whether it measures a runtime behavior, a source property or both.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> <code>uint256</code> is unsigned and accepts nonnegative whole numbers; the recorded flag distinguishes default zero from a real zero; <code>watts</code> is the parameter and 75 is the argument, yielding 150; <code>memory</code> is temporary mutable data while <code>calldata</code> is a non-modifiable call-data location; private limits source-level access rather than blockchain visibility; <code>record</code> and <code>rename</code> write state while <code>summary</code> reads and <code>twice</code> is pure; only the deployer should be authorized to record; 1,000 is permitted and 1,001 is expected to revert. Expected runtime outcomes must still be checked by compiling and executing in Remix.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Sources and curriculum continuation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Primary references include <a href='https://docs.soliditylang.org/en/v0.8.38/types.html'>Solidity 0.8.38 Types</a>, <a href='https://docs.soliditylang.org/en/v0.8.38/contracts.html'>Contracts and Function Mutability</a>, <a href='https://docs.soliditylang.org/en/v0.8.38/cheatsheet.html'>Solidity Cheatsheet</a>, <a href='https://remix-ide.readthedocs.io/en/latest/run.html'>Remix Deploy &amp; Run</a>, and the <a href='https://www.soliditylang.org/blog/2026/10/22/solidity-0.8.38-release-announcement/'>Solidity compiler release statement</a>. The two attributed videos provide additional introductory teaching rather than primary authority for the current compiler.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Data types specify the meaning and limits of values; parameter declarations define function inputs; visibility defines which calls are available; mutability describes interactions with state. Together, the concepts establish the first enforceable interfaces for a Solidity program. The next lessons can develop arrays, structs, mappings, events, and stronger access-control patterns without treating the introductory example as a deployed product.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSSolidity.003 follows the published OSSolidity.002. The 1200 × 630 branded cover is original AI-generated editorial illustration, not an authentic compiler screenshot. Any displayed on-screen code is illustrative and is not the canonical full contract source. The small neon-green Bitcoinversus.Tech label appears at the bottom-left at approximately 10-point visual size. The linked source and seven Remix VM test functions were prepared for learner execution. Only the separate 18-case static Node.js review was executed locally and passed; Solidity 0.8.38 compilation, EVM deployment, Solidity test results, video playback, and mobile pixel inspection remain unverified. The device readings and thresholds are illustrative, not measured. No tokens, funds, or public-chain transactions were used.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional donation QR code for 5000 satoshis" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech optional 5,000-sat donation QR. Confirm recipient and amount in a wallet before authorizing a payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>To scan on mobile, display the QR on a separate screen or use a compatible wallet's saved-image QR reader. Verify the destination and amount independently before sending funds.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech provides educational programming material and is not a financial advisor or source of audited production smart contracts.</em></p><!-- /wp:paragraph -->

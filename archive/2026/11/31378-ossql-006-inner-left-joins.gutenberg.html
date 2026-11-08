@@ -1,0 +1,169 @@
+<!-- wp:paragraph --><p><strong>SQL JOIN</strong> combines rows from related database tables by evaluating a condition between their columns. Data-center inventories, manufacturing applications, business records and monitoring databases often separate equipment information from racks, facilities and other reference data. A <strong>foreign key</strong> can represent the relationship without repeating the entire rack description on every equipment record. OSSQL.006 explains how to retrieve matching data, preserve unmatched records, and avoid accidental row loss.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The lesson follows <a href='https://bitcoinversus.tech/2026/11/02/ossql-005-limit-offset-sql-pagination-order-by-pages/'>OSSQL.005 on LIMIT and OFFSET</a>. That lesson used one fictional equipment table; joining expands a query beyond a single table. Review <a href='https://bitcoinversus.tech/2026/10/09/ossql-001-relational-databases-and-tables/'>OSSQL.001: Relational Databases</a> if primary keys and table relationships are unfamiliar. The new laboratory uses SQLite 3 with entirely invented records. The example training model labels and nominal terahashes-per-second values are <strong>not manufacturer specifications, installed hardware, or observed production measurements</strong>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives and prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Describe primary keys, foreign keys and one-to-many relationships between tables.</li><li>Use explicit <code>INNER JOIN ... ON</code> to return matching records.</li><li>Use <code>LEFT JOIN ... ON</code> to retain every left-side record and display <code>NULL</code> when no right-side match exists.</li><li>Explain table aliases, qualified column names, join multiplicity and why output order still requires <code>ORDER BY</code>.</li><li>Identify unassigned equipment and empty racks with <code>LEFT JOIN</code> and <code>IS NULL</code>.</li><li>Distinguish conditions inside <code>ON</code> from row filtering inside <code>WHERE</code>.</li><li>Count related records correctly with <code>COUNT(child.id)</code>, enable SQLite foreign-key enforcement, and run parameterized filters.</li><li>Execute a complete SQLite training database and reproduce 24 automated assertions.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, comparison operators, basic schema concepts, and the ability to run Python 3. The SQL files are compatible with SQLite 3. The verified local test environment used <strong>Python 3.13.5 and SQLite 3.46.1</strong>. No external Python packages, credentials, network access, or administrator privileges are required.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Why databases separate equipment from rack descriptions</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A rack inventory can assign one numeric <code>rack_id</code> to each rack, while a miner record refers to that identifier. Storing a rack name and location only once reduces repeated text and supports consistent updates. A <strong>primary key</strong> identifies each rack row uniquely. A <strong>foreign key</strong> connects a device to an existing rack, or can remain <code>NULL</code> when the schema permits an unassigned device. The latter is a valid relationship state, not necessarily a corrupt record.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="SQL or Python learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:1.2em 0!important;padding:0!important;white-space:pre-wrap!important;max-width:100%!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>CREATE TABLE racks (
+  rack_id INTEGER PRIMARY KEY,
+  rack_name TEXT NOT NULL UNIQUE,
+  location TEXT NOT NULL
+);
+CREATE TABLE miners (
+  miner_id INTEGER PRIMARY KEY,
+  model TEXT NOT NULL,
+  rack_id INTEGER REFERENCES racks(rack_id),
+  rated_hashrate_th INTEGER NOT NULL
+);</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The full laboratory file includes a positive-value <code>CHECK</code> constraint and an optional index on the child-side rack identifier. SQLite foreign keys must be explicitly enabled on each database connection unless configured otherwise; execute <code>PRAGMA foreign_keys = ON;</code> outside any open transaction and verify its value. A foreign-key declaration alone should not be assumed to enforce every reference. Consult the <a href='https://www.sqlite.org/foreignkeys.html'>official SQLite foreign-key documentation</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The source provides <strong>four racks and seven miners</strong>. Rack A has two miners, Rack B has one, Rack C has two, and Rack D has none. Two miners deliberately have <code>rack_id = NULL</code>. The relationship is one rack to potentially many miners, so a rack's name may legitimately appear in more than one joined output row. The lab's data is synthetic, and the shown numerical rates are not measured.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">INNER JOIN returns only matches</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>INNER JOIN</code>, often written simply as <code>JOIN</code>, returns matching pairs of rows satisfying an <code>ON</code> expression. With the training data, five miners have a rack assignment. The two unassigned miners do not match any rack because an equality comparison involving SQL <code>NULL</code> is not true. Column qualification makes the query readable when identifiers have similar names in multiple tables.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="SQL or Python learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:1.2em 0!important;padding:0!important;white-space:pre-wrap!important;max-width:100%!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>SELECT m.miner_id, m.model, r.rack_name
+FROM miners AS m
+INNER JOIN racks AS r
+  ON m.rack_id = r.rack_id
+ORDER BY m.miner_id;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p><strong>Observed test result:</strong> five rows, for miner IDs 1001, 1002, 1003, 1005 and 1006. Miner 1004 and 1007 do not appear. <code>m</code> and <code>r</code> are local table aliases; they do not rename the actual tables. The official <a href='https://www.postgresql.org/docs/18/tutorial-join.html'>PostgreSQL joins tutorial</a> shows the same relational behavior with a weather-and-cities example. <a href='https://bitcoinversus.tech/2026/10/09/ossql-002-select-choosing-columns-reading-rows-select-star-from/'>OSSQL.002 on SELECT and FROM</a> provides more background on choosing result columns.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=9URM1_2S0ho&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Alex The Analyst, <a href='https://www.youtube.com/watch?v=9URM1_2S0ho'>“Intermediate SQL Tutorial | Inner/Outer Joins | Use Cases”</a>, March 19, 2020. An independently identified instructional video covering combined-table queries and join types. Examples may use a different SQL engine. End-to-end playback in the published article has not been independently verified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">LEFT JOIN preserves the left-hand side</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>LEFT JOIN</code> retains every left-side row at least once, even when no matching right-side record exists. Where no rack matches a miner, its rack columns are presented as <code>NULL</code>. The original miner fields remain present. A LEFT JOIN can still return more rows than its left table if a left record matches multiple right records; preserving left rows is not a promise of exactly one output row per record.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="SQL or Python learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:1.2em 0!important;padding:0!important;white-space:pre-wrap!important;max-width:100%!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>SELECT m.miner_id, m.model, r.rack_name
+FROM miners AS m
+LEFT JOIN racks AS r
+  ON m.rack_id = r.rack_id
+ORDER BY m.miner_id;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p><strong>Observed test result:</strong> all seven miner records appear. Rows 1004 and 1007 have a <code>NULL</code> rack name. SQL NULL does not mean an empty string, zero, or a literal text value reading “NULL”; it means the queried value is missing or unknown. The <a href='https://www.sqlite.org/lang_select.html'>SQLite SELECT reference</a> explains when outer-join NULL values are added.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Finding unassigned equipment</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <strong>left anti-join</strong> pattern identifies left-side records that have no match on the right. It uses a LEFT JOIN followed by a check for a right-side non-nullable key. Since <code>r.rack_id</code> is the primary key, a null result for it demonstrates the missing match. Be careful when checking an optional right-side column instead: a matched row might contain a NULL in a nullable field.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="SQL or Python learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:1.2em 0!important;padding:0!important;white-space:pre-wrap!important;max-width:100%!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>SELECT m.miner_id, m.model
+FROM miners AS m
+LEFT JOIN racks AS r
+  ON m.rack_id = r.rack_id
+WHERE r.rack_id IS NULL
+ORDER BY m.miner_id;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p><strong>Observed test result:</strong> miner IDs 1004 and 1007. To find unused racks, reverse the roles: begin with <code>racks AS r LEFT JOIN miners AS m</code>, then filter on <code>m.miner_id IS NULL</code>. That returns Rack D in the sample. A real inventory query would need to define how it treats retired equipment, scheduled assignments, missing telemetry and inventory cutoffs, rather than inferring operational outages from a NULL relationship.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">ON and WHERE are not interchangeable in an outer join</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>For an INNER JOIN, a matching filter in <code>ON</code> is often logically equivalent to applying it later in <code>WHERE</code>. A LEFT JOIN behaves differently. <code>ON</code> determines which right-side records are eligible to match; <code>WHERE</code> filters the joined results, including any null-padded rows. Placing a condition for the right table in <code>WHERE</code> can accidentally remove the very unmatched rows that a LEFT JOIN was intended to retain.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="SQL or Python learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:1.2em 0!important;padding:0!important;white-space:pre-wrap!important;max-width:100%!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>-- Seven left-side miners remain; only Hall 1 racks match.
+SELECT m.miner_id, r.rack_name
+FROM miners AS m
+LEFT JOIN racks AS r
+  ON m.rack_id = r.rack_id AND r.location = 'Hall 1'
+ORDER BY m.miner_id;
+
+-- Only three matching miners remain.
+SELECT m.miner_id, r.rack_name
+FROM miners AS m
+LEFT JOIN racks AS r ON m.rack_id = r.rack_id
+WHERE r.location = 'Hall 1'
+ORDER BY m.miner_id;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p><strong>Observed test results:</strong> the first query returns seven miners, with NULL rack fields for Hall 2 miners and unassigned miners. The second returns only IDs 1001, 1002 and 1003, three rows. SQLite's documentation explicitly distinguishes these processing stages. The <a href='https://bitcoinversus.tech/2026/10/10/ossql-003-where-filtering-rows-conditions-and-or-not/'>WHERE conditions lesson</a> provides the foundation for reasoning about the filter.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=xkYpNfpmbGY&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Chandoo, <a href='https://www.youtube.com/watch?v=xkYpNfpmbGY'>“SQL Joins — Beginner to PRO Masterclass with 10 Examples”</a>, March 12, 2024. At approximately 6:28, the lesson compares filtering in JOIN versus WHERE; at approximately 12:51 it introduces outer joins and at 17:29 an anti-join. Independently identified video; successful playback in the published page remains unverified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Counting equipment by rack</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Joining from the <code>racks</code> table toward the <code>miners</code> table makes it possible to report an empty rack. Group by the rack's identity and count only the matched miner IDs. <code>COUNT(m.miner_id)</code> ignores NULL values; <code>COUNT(*)</code> counts the null-padded outer-join row as an output row. An empty Rack D therefore produces zero with the first count but one with the second.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="SQL or Python learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:1.2em 0!important;padding:0!important;white-space:pre-wrap!important;max-width:100%!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>SELECT r.rack_name,
+       COUNT(m.miner_id) AS miner_count
+FROM racks AS r
+LEFT JOIN miners AS m
+  ON m.rack_id = r.rack_id
+GROUP BY r.rack_id, r.rack_name
+ORDER BY r.rack_id;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p><strong>Observed test result:</strong> Rack A = 2, Rack B = 1, Rack C = 2, Rack D = 0. Grouping also illustrates why a join does not automatically deduplicate parent records. A rack assigned to two miners participates in two matching pairs. Use <code>COUNT(DISTINCT ...)</code> only when the distinct business entity being counted is defined clearly and the additional operation is appropriate.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Reproducible SQL and automated tests</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Download the complete standalone <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/ossql-006-joins/join_lab.sql'>join_lab.sql</a> and <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/ossql-006-joins/verify_joins.py'>verify_joins.py</a> into the same local directory. The SQL file creates the training tables, inserts seven fake miner records and four fake racks, creates an optional join-key index, and runs six example queries. The Python verification program uses only built-in <code>sqlite3</code> and <code>unittest</code>, constructs an in-memory SQLite database for each test, and checks the exact results.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="SQL or Python learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:1.2em 0!important;padding:0!important;white-space:pre-wrap!important;max-width:100%!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>python3 --version
+python3 verify_joins.py
+
+# If the SQLite command-line tool is installed:
+sqlite3 :memory: &lt; join_lab.sql</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The test program was executed locally on <strong>Python 3.13.5 / SQLite 3.46.1</strong>. Recorded result: <strong>Ran 24 tests — OK</strong>. The checks include foreign-key enforcement, invalid reference rejection, five INNER JOIN matches, seven LEFT JOIN results, two unassigned miners, one empty rack, ON-versus-WHERE row counts, ordering, optional child indexing assumptions, and parameterized filtering. The lab has no external service or application credential dependency.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The SQL file contains <code>DROP TABLE IF EXISTS</code> commands to reset its own named training tables. Never run it against a production database or an existing database that contains valuable tables named <code>miners</code> or <code>racks</code>. Running through <code>sqlite3 :memory:</code> creates a disposable memory database; the Python harness also uses in-memory databases and is safer for repeated exercises. No claim of performance benchmarking or live hardware validation is made.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Parameterization, indexes, and realistic limits</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>When an application searches by rack location, pass the location as a bound parameter rather than concatenating untrusted input into SQL. The harness uses <code>WHERE r.location = ?</code> with a bound value of <code>'Hall 2'</code>, returning miner IDs 1005 and 1006. Placeholders differ across drivers, so use the binding syntax provided by the actual database API.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="SQL or Python learning example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:1.2em 0!important;padding:0!important;white-space:pre-wrap!important;max-width:100%!important;line-height:1.55!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>import sqlite3
+connection = sqlite3.connect(":memory:")
+connection.execute("PRAGMA foreign_keys = ON")
+# After creating the lab schema:
+hall = "Hall 2"
+rows = connection.execute(
+    """SELECT m.miner_id
+       FROM miners AS m
+       JOIN racks AS r ON m.rack_id = r.rack_id
+       WHERE r.location = ?
+       ORDER BY m.miner_id""",
+    (hall,)
+).fetchall()
+# Expected: [(1005,), (1006,)]</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Indexes on join keys can improve selected workloads, but their benefit depends on table sizes, cardinality, query plans, statistics and the chosen optimizer. Use <code>EXPLAIN QUERY PLAN</code> for SQLite and equivalent tools for other systems before claiming a measured speed improvement. Join type alone does not determine performance. The <a href='https://www.postgresql.org/docs/18/queries-table-expressions.html'>PostgreSQL 18 table-expression reference</a> provides a broader formal explanation of inner and outer joins.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and assessment</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Missing rows after joining:</strong> determine whether an INNER JOIN intentionally excludes unmatched records, whether a LEFT JOIN has a right-table predicate in WHERE, and whether the key values really match.</li><li><strong>Unexpected row multiplication:</strong> check whether the relationship is one-to-many or many-to-many; do not assume the joined result has the same row count as either source table.</li><li><strong>NULL surprises:</strong> use <code>IS NULL</code> and <code>IS NOT NULL</code>; <code>= NULL</code> does not test missing values correctly.</li><li><strong>Ambiguous column:</strong> use qualified names like <code>m.rack_id</code> and <code>r.rack_id</code> rather than relying on an unqualified shared name.</li><li><strong>Foreign key not enforcing:</strong> inspect <code>PRAGMA foreign_keys</code> on the same SQLite connection, outside an open transaction.</li><li><strong>Incorrect counts:</strong> distinguish counting output rows with <code>COUNT(*)</code> from counting non-null matched IDs with <code>COUNT(m.miner_id)</code>.</li><li><strong>Unstable report order:</strong> add an explicit, sufficiently deterministic <code>ORDER BY</code>; a join does not guarantee natural row order.</li><li><strong>Untrusted inputs:</strong> use parameter binding and permissions appropriate to the database; do not assemble arbitrary SQL from a request string.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Practice problems: replace the INNER JOIN with LEFT JOIN and predict the additional two records. Reverse the LEFT JOIN to identify Rack D. Rewrite the location filter first inside ON and then inside WHERE, explaining the seven-versus-three row difference. Add one additional synthetic miner to Rack B and identify which row counts change. Demonstrate the effect of <code>COUNT(*)</code> for an empty rack. Finally, attempt to insert an invalid rack reference and explain why foreign-key enforcement prevents it.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Answers:</strong> LEFT JOIN retains miner IDs 1004 and 1007 with missing rack values. Reversing the join reveals Rack D as unused. Restricting Hall 1 matches within ON preserves all seven left-side miners, while WHERE eliminates Hall 2 and unmatched rows, leaving three. A new Rack B assignment increases its count by one and increases the total assigned-miner count by one. <code>COUNT(*)</code> sees one null-padded Rack D row, while <code>COUNT(m.miner_id)</code> sees zero matched miner IDs. A foreign key to rack 999 is rejected when enforcement is enabled and that parent is absent.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Official documentation and continuation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Primary references: <a href='https://www.sqlite.org/lang_select.html'>SQLite SELECT and JOIN semantics</a>; <a href='https://www.sqlite.org/foreignkeys.html'>SQLite Foreign Keys</a>; <a href='https://www.postgresql.org/docs/18/tutorial-join.html'>PostgreSQL 18 Joins Tutorial</a>; <a href='https://www.postgresql.org/docs/18/queries-table-expressions.html'>PostgreSQL 18 Table Expressions</a>. Related Open CERT lessons: <a href='https://bitcoinversus.tech/2026/10/15/ossql-004-order-by-sorting-rows-asc-desc-multiple-columns-null-placement/'>OSSQL.004 ORDER BY</a> and <a href='https://bitcoinversus.tech/2026/11/08/oshtml-005-html-tables-structure-headers-accessibility/'>OSHTML.005 on presenting accessible tables</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A reliable join report begins with the correct relationship, an explicit condition, a deliberate choice between matching-only and left-preserving rows, and an understanding of NULL. SQL joins are central to infrastructure, finance, manufacturing and application reporting; their accuracy depends as much on defining the question as on writing syntactically valid statements.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSSQL.006 follows the published OSSQL.005 in the Open CERT / TechCert rotation. The 1200 × 630 original cover is AI-generated educational illustration, not a photograph of a production database or an authentic screenshot. The exact small “Bitcoinversus.Tech” branding is neon green (#39FF14), at the lower-left, nominally 10 pt at 96 dpi. All rack and miner records are fabricated training inputs, not equipment specifications or operational measurements. The executable SQL examples passed 24 locally executed Python/SQLite checks; no production deployment or query performance benchmark occurred. Both educational video identities were verified from their public YouTube listings, but end-to-end playback and mobile pixel-level inspection of the published post remain independently unverified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original optional BitcoinVersus.Tech 5,000-satoshi donation QR. Verify the recipient and amount within the wallet before authorizing any payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the QR on a second screen or use a compatible wallet's saved-image scanner. Confirm the destination and 5,000-satoshi amount before sending funds.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech teaches technical concepts for informational purposes; examples are not production operating procedures or security guarantees.</em></p><!-- /wp:paragraph -->

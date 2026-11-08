@@ -1,0 +1,64 @@
+{
+  "id": "OSPHP.006",
+  "title": "OSPHP.006: PHP Exceptions — try, catch, finally, and Safe Error Handling",
+  "wordpress_post_id": 31335,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/08/osphp-006-php-exceptions-try-catch-finally-safe-error-handling/",
+  "featured_media_id": 31324,
+  "cover": {
+    "dimensions_px": [
+      1200,
+      630
+    ],
+    "type": "AI-generated illustrative editorial artwork",
+    "brand_text": "Bitcoinversus.Tech",
+    "brand_color": "#39FF14",
+    "brand_location": "bottom-left",
+    "font_size": "10 pt nominal at 96 DPI, generated as 13 px; exact point precision not independently measured in the raster",
+    "cover_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osphp-006-php-exceptions-error-handling-cover-1200x630-1.jpg"
+  },
+  "code": {
+    "runtime": "PHP 8.4.24 CLI",
+    "syntax_checks": "Passed on both source and test harness",
+    "tests_passed": 30,
+    "tests_total": 30,
+    "expected_output": [
+      "Accepted: 3",
+      "Rejected: 2",
+      "Processed: 5",
+      "Total watts (illustrative): 155.50",
+      "Finally on success: try > success > finally",
+      "Finally on failure: try > catch > finally",
+      "PASS: 30 checks"
+    ],
+    "input_nature": "invented example wattage values; not observed production data"
+  },
+  "published_source_checks": {
+    "saved_readback": true,
+    "raw_characters": 27197,
+    "code_examples": 8,
+    "internal_lesson_links": 6,
+    "qr_present": true,
+    "editors_note_present": true,
+    "disclaimer_present": true
+  },
+  "videos": {
+    "source_verified_ids": [
+      "rQntgj7yink",
+      "XQ5Pd-6Hnjk"
+    ],
+    "rendered_iframes_verified": true,
+    "actual_playback_verified": false
+  },
+  "archives": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ],
+  "limitations": [
+    "Server-rendered iframes are not proof of successful video playback",
+    "Live desktop/mobile visual QA screenshots not independently checked",
+    "Full HTML validation is not a substitute for end-to-end security review"
+  ],
+  "next_subject_on_publication": "solidity"
+}

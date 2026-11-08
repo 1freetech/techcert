@@ -1,0 +1,61 @@
+{
+  "lesson_id": "OSSolidity.003",
+  "title": "OSSolidity.003: Solidity Value Types, Parameters, and Data Locations",
+  "wordpress_post_id": 31356,
+  "publication_status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/ossolidity-003-value-types-function-parameters-data-locations/",
+  "featured_media_id": 31346,
+  "cover_dimensions_px": [
+    1200,
+    630
+  ],
+  "brand": {
+    "text": "Bitcoinversus.Tech",
+    "color": "neon green #39FF14",
+    "position": "bottom-left",
+    "point_size": "approximately 10pt visual at 1200x630; no independent typographic point-size measurement"
+  },
+  "cover_type": "original AI illustration; depicted on-screen code not canonical compiler output",
+  "published_content": {
+    "raw_gutenberg_readback": true,
+    "character_count": 27963,
+    "contextual_internal_links": 4,
+    "code_examples": 5,
+    "qr_present": true,
+    "editor_note_present": true,
+    "footer_present": true,
+    "newsletter_email_suppressed": true
+  },
+  "videos": {
+    "ids": [
+      "jcgfQEbptdo",
+      "5dcRMHUhA20"
+    ],
+    "rendered_iframes": true,
+    "full_playback_verified": false
+  },
+  "code_verification": {
+    "compiler_version_declared": "0.8.38",
+    "official_release_verified": "October 22, 2026 Solidity team",
+    "source": "archive/2026/11/ossolidity-003-types-parameters/ReadingBook.sol",
+    "test_source": "archive/2026/11/ossolidity-003-types-parameters/ReadingBookChecks.sol",
+    "local_static_review": "18/18 structural Node.js checks passed",
+    "local_compiler_available": false,
+    "solidity_compilation_verified": false,
+    "remix_vm_test_functions_written": 7,
+    "remix_vm_tests_executed": 0,
+    "solidity_runtime_passed": null
+  },
+  "limitations": [
+    "Remix compilation and runtime checks were not executed",
+    "Video iframe presence does not establish actual playback",
+    "Desktop/mobile screenshot pixel-level QA not completed",
+    "Static source inspection is not Solidity parsing, compilation or a security audit"
+  ],
+  "archives": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ],
+  "next_subject": "sql"
+}

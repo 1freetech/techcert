@@ -1,0 +1,50 @@
+{
+  "lesson_id": "OSHTML.005",
+  "title": "OSHTML.005: HTML Tables — Structure, Headers, and Accessibility",
+  "wordpress_post_id": 31296,
+  "publication_status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/oshtml-005-html-tables-structure-headers-accessibility/",
+  "featured_media_id": 31293,
+  "featured_image_dimensions": [
+    1200,
+    630
+  ],
+  "featured_image_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oshtml-005-cover-1200x630-final.jpg",
+  "brand_text": "Bitcoinversus.Tech",
+  "brand_color": "neon green #39FF14",
+  "brand_placement": "bottom-left",
+  "brand_nominal_size": "10 pt requested; visual generated artwork, no embedded font metadata to independently measure precise point size",
+  "gutenberg_saved_readback": true,
+  "source_chars": 24886,
+  "in_story_media": {
+    "youtube_ids": [
+      "e23RA_Uo99o",
+      "iuSKGuWWNGA"
+    ],
+    "server_rendered_iframes": true,
+    "original_donation_qr_media_id": 24043
+  },
+  "article_checks": {
+    "responsive_table_saved": true,
+    "caption_and_scoped_headers": true,
+    "four_or_more_contextual_internal_links": true,
+    "qr_present": true,
+    "editor_note_present": true,
+    "editorial_footer_present": true,
+    "transparent_code_examples": 5
+  },
+  "example_validation": {
+    "runtime": "Node.js v22.16.0",
+    "test_file": "archive/2026/11/oshtml-005-accessible-tables/check-table.cjs",
+    "source_file": "archive/2026/11/oshtml-005-accessible-tables/DeviceTable.html",
+    "observed_result": "18/18 structural checks passed",
+    "independent_lxml_parse": "one data table, three body rows, three column headers",
+    "limitations": "Source structure and arithmetic tests, not a full HTML conformance or WCAG certification"
+  },
+  "verification_limits": [
+    "Independent public-site fetch using web tool was inaccessible",
+    "No true embedded YouTube playback confirmation",
+    "No desktop/mobile screenshot pixel inspection",
+    "Exact 10pt size of generated raster lettering is nominal and not separately measured"
+  ]
+}

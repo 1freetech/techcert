@@ -1,0 +1,57 @@
+{
+  "lesson_id": "OSSolidity.003",
+  "title": "OSSolidity.003: Solidity Value Types, Parameters, and Data Locations",
+  "wordpress_post_id": 31356,
+  "publication_status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/ossolidity-003-value-types-function-parameters-data-locations/",
+  "featured_media_id": 31346,
+  "cover": {
+    "dimensions_px": [
+      1200,
+      630
+    ],
+    "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ossolidity-003-value-types-parameters-cover-1200x630-1.jpg",
+    "alt_text": "Original AI-illustrated Solidity programming workstation with Ethereum symbol, value types and function parameter code, and small neon-green Bitcoinversus.Tech signature at bottom-left",
+    "brand_text": "Bitcoinversus.Tech",
+    "brand_color": "#39FF14",
+    "brand_placement": "bottom-left",
+    "nominal_size": "10 pt (actual point size in generated raster not separately measurable)",
+    "type": "AI-generated editorial illustration; screen code is not a validated compiler capture"
+  },
+  "saved_gutenberg_verified": true,
+  "saved_chars": 27963,
+  "video_ids": [
+    "jcgfQEbptdo",
+    "5dcRMHUhA20"
+  ],
+  "server_rendered_iframe_for_each": true,
+  "end_to_end_playback_verified": false,
+  "internal_links": 4,
+  "visible_code_examples": 5,
+  "qr_present": true,
+  "editors_note_present": true,
+  "footer_present": true,
+  "source_paths": [
+    "archive/2026/11/ossolidity-003-types-parameters/ReadingBook.sol",
+    "archive/2026/11/ossolidity-003-types-parameters/ReadingBookChecks.sol",
+    "archive/2026/11/ossolidity-003-types-parameters/static-review.js"
+  ],
+  "tests": {
+    "local_node_static_checks": {
+      "passed": 18,
+      "total": 18
+    },
+    "solidity_compiler": "not installed in available local environment; compilation unverified",
+    "remix_vm_checks": {
+      "defined": 7,
+      "executed": 0,
+      "status": "unverified"
+    }
+  },
+  "limitations": [
+    "No independent live embedded-video playback check",
+    "No independently inspected mobile screenshots",
+    "The 18 Node checks assert source structure, not EVM behavior or Solidity compilation"
+  ],
+  "newsletter_email_suppressed": true
+}

@@ -55,12 +55,12 @@
     "public_title": "OSSolidity.003: Solidity Value Types, Parameters, and Data Locations",
     "wordpress_post_id": 31356,
     "live_url": "https://bitcoinversus.tech/2026/11/08/ossolidity-003-value-types-function-parameters-data-locations/",
-    "archive_path": "archive/2026/11/31356-ossolidity-003-value-types-parameters.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/31356-ossolidity-003-value-types-parameters.qa.json",
+    "archive_path": "archive/2026/11/31356-ossolidity-003-types-parameters.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/31356-ossolidity-003-types-parameters.qa.json",
     "verified_repositories": [
-      "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
-      "1freetech/techcert"
+      "1freetech/techcert",
+      "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
     "featured_media_id": 31346,
@@ -68,15 +68,15 @@
       "jcgfQEbptdo",
       "5dcRMHUhA20"
     ],
-    "verification_status": "WordPress published; saved Gutenberg markup exact-readback; two server-rendered YouTube iframes verified; no playback test or mobile screenshot",
-    "qa_status": "1200x630 neon-green small bottom-left signature; 18/18 local static-review checks passed, seven Remix runtime checks authored but unexecuted; compiler unavailable; four contextual links; five unboxed code examples; original QR and footer"
+    "verification_status": "Published WordPress and archived exact readback in 3 repos; server-rendered iframe players confirmed; end-to-end playback and mobile visual inspection not verified. No Solidity compiler or EVM testing conducted.",
+    "qa_status": "Original 1200x630 subject-first AI cover with neon green bottom-left Bitcoinversus.Tech mark; 18/18 Node structural tests passed, 7 Solidity Remix VM checks authored but unexecuted; 4 contextual internal links, 2 video iframes, editor note, QR and disclaimer."
   },
   "next": {
     "subject": "sql",
     "lesson_number": 6,
     "title_format": "OSSQL.006: {topic}",
     "public_title_format": "OSSQL.006: {topic}",
-    "resolution_note": "OSSolidity.003 published Nov 8, 2026 WordPress #31356; exact Gutenberg, classroom Solidity examples, static tests and QA archived across three repositories. Validate live WordPress/archives before choosing new SQL .006 topic."
+    "resolution_note": "OSSolidity.003 published Nov 8, 2026 WordPress #31356; exact Gutenberg source, QA, static checks and Remix VM test definitions archived across 3 repositories. Verify SQL published count and prevent duplicate before the next activation."
   },
   "next_after_current": "bash",
   "track_state": {
@@ -284,7 +284,7 @@
       "last_wordpress_post_id": 31356,
       "source_resolution": "WordPress published OSSolidity.001 EVM and Smart Contracts Oct 8 2026 (post 22233), no OSSolidity.002 found Nov 1.",
       "last_published_title": "OSSolidity.003: Solidity Value Types, Parameters, and Data Locations",
-      "verification_status": "published_archived_static_review_passed_runtime_unverified"
+      "verification_status": "published_archived_server_render_checked_solidity_compilation_unverified"
     },
     "pcb_engineering": {
       "acronym": "OSPCB",

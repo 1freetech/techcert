@@ -1,0 +1,53 @@
+{
+  "lesson": "OSPowerShell.005",
+  "title": "OSPowerShell.005: Arrays and Hashtables — Collections, Indexing, and Key-Value Data",
+  "wordpress_post_id": 31438,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/08/ospowershell-005-arrays-hashtables-collections-indexing-key-value/",
+  "featured_media_id": 31431,
+  "cover": {
+    "dimensions_px": [
+      1200,
+      630
+    ],
+    "url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ospowershell-005-arrays-hashtables-1200x630-1.jpg",
+    "type": "original AI editorial illustration, not a genuine screen capture",
+    "branding": "Bitcoinversus.Tech",
+    "color": "#39FF14",
+    "location": "bottom-left",
+    "size": "13 px on 1200x630 output; approximately 10pt at 96dpi"
+  },
+  "saved_gutenberg_verified": true,
+  "saved_content_length": 29004,
+  "internal_links": 5,
+  "unboxed_code_examples": 9,
+  "video_ids": [
+    "ZOoCaWyifmI",
+    "-hsaUC-OfwM"
+  ],
+  "video_iframes_rendered": true,
+  "video_playback_verified": false,
+  "qr_present": true,
+  "editor_note_present": true,
+  "footer_present": true,
+  "subscriber_email_suppressed": true,
+  "source_paths": [
+    "archive/2026/11/ospowershell-005-collections/InventoryLab.psm1",
+    "archive/2026/11/ospowershell-005-collections/Run-TrainingInventory.ps1",
+    "archive/2026/11/ospowershell-005-collections/Test-TrainingInventory.ps1"
+  ],
+  "tests": {
+    "node_version": "22.16.0",
+    "static_checks_passed": 25,
+    "static_checks_total": 25,
+    "powershell_runtime": "not installed",
+    "powershell_test_assertions_authored": 28,
+    "powershell_test_assertions_executed": 0,
+    "powershell_compilation_or_syntax_execution": "not verified"
+  },
+  "known_limitations": [
+    "No PowerShell runtime available for full syntax/execution QA",
+    "No independent end-to-end YouTube playback testing",
+    "No independent pixel-level desktop/mobile page screenshot inspection"
+  ]
+}

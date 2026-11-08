@@ -48,37 +48,37 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "sql",
+    "subject": "bash",
     "lesson_number": 6,
-    "track_id": "OSSQL.006",
-    "title": "OSSQL.006: SQL Joins — INNER JOIN, LEFT JOIN, and Missing Matches",
-    "public_title": "OSSQL.006: SQL Joins — INNER JOIN, LEFT JOIN, and Missing Matches",
-    "wordpress_post_id": 31378,
-    "live_url": "https://bitcoinversus.tech/2026/11/08/ossql-006-inner-left-joins-missing-matches/",
-    "archive_path": "archive/2026/11/31378-ossql-006-inner-left-joins.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/31378-ossql-006-inner-left-joins.qa.json",
+    "track_id": "OSBash.006",
+    "title": "OSBash.006: Bash Functions — Arguments, Scope, and Exit Codes",
+    "public_title": "OSBash.006: Bash Functions — Arguments, Scope, and Exit Codes",
+    "wordpress_post_id": 31403,
+    "live_url": "https://bitcoinversus.tech/2026/11/08/osbash-006-bash-functions-arguments-scope-exit-codes/",
+    "archive_path": "archive/2026/11/31403-osbash-006-functions.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/31403-osbash-006-functions.qa.json",
     "verified_repositories": [
       "1freetech/opencert.tech",
       "1freetech/techcert",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 31371,
+    "featured_media_id": 31400,
     "body_video_ids": [
-      "9URM1_2S0ho",
-      "xkYpNfpmbGY"
+      "tK9Oc6AEnR4",
+      "mSQM8Xo78Wc"
     ],
-    "verification_status": "Published and server-rendered two video iframes; exact Gutenberg and QA archived in 3 repos; independent playback and mobile visuals unverified.",
-    "qa_status": "Original 1200x630 SQL JOIN cover with small bottom-left neon green Bitcoinversus.Tech signature, 24/24 local SQLite tests, eight transparent code blocks, six internal links, QR and editor note."
+    "verification_status": "Published WordPress; saved exact Gutenberg source across 3 archives, two iframe players rendered. Actual playback and mobile pixel review unverified.",
+    "qa_status": "1200x630 original cover with small neon-green bottom-left Bitcoinversus.Tech branding; 27/27 GNU Bash 5.2.37 checks passed, nine unboxed examples, five contextual internal links, original donation QR/editor note."
   },
   "next": {
-    "subject": "bash",
-    "lesson_number": 6,
-    "title_format": "OSBash.006: {topic}",
-    "public_title_format": "OSBash.006: {topic}",
-    "resolution_note": "OSSQL.006 published November 8, 2026 (WP 31378) and final source/QA archived in three repositories; verify Bash.005 and reserve .006."
+    "subject": "powershell",
+    "lesson_number": 5,
+    "title_format": "OSPowerShell.005: {topic}",
+    "public_title_format": "OSPowerShell.005: {topic}",
+    "resolution_note": "OSBash.006 published Nov 8, 2026 as WordPress #31403 and exact published content, tests and QA archived in three repos. Verify published PowerShell lesson count before activation."
   },
-  "next_after_current": "powershell",
+  "next_after_current": "csharp",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -195,11 +195,12 @@
     },
     "bash": {
       "acronym": "OSBash",
-      "next_lesson_number": 6,
-      "last_published_lesson_number": 5,
-      "last_wordpress_post_id": 28650,
-      "last_published_title": "Bash Loops — for, while, until, break, continue, and Safe Iteration",
-      "source_resolution": "OSBash.004 WP 26059 is predecessor; OSBash.005 WP 28650 published and identical Gutenberg archived across three repos on November 2, 2026."
+      "next_lesson_number": 7,
+      "last_published_lesson_number": 6,
+      "last_wordpress_post_id": 31403,
+      "last_published_title": "OSBash.006: Bash Functions — Arguments, Scope, and Exit Codes",
+      "source_resolution": "OSBash.004 WP 26059 is predecessor; OSBash.005 WP 28650 published and identical Gutenberg archived across three repos on November 2, 2026.",
+      "verification_status": "published_archived_server_render_checked"
     },
     "powershell": {
       "acronym": "OSPowerShell",

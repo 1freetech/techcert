@@ -1,0 +1,167 @@
+<!-- wp:paragraph --><p><strong>OSCSS.002</strong> explains how browsers choose a CSS property value when several rules match the same HTML element. It continues <a href="https://bitcoinversus.tech/2026/11/05/oscss-001-css-selectors-types-classes-ids-attributes-relationships/">OSCSS.001 on selectors</a>. The cascade considers relevance, origin and importance, layers, specificity, scoping proximity and source order. Inheritance supplies values for selected properties when no winning declaration explicitly sets them.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Explain why matching selectors can produce competing declarations.</li><li>Compare origin, <code>!important</code>, cascade layers, specificity and source order.</li><li>Calculate ordinary selector specificity using ID–class–type tuples.</li><li>Predict the result of layered and unlayered author styles.</li><li>Distinguish naturally inherited properties from non-inherited properties.</li><li>Check predicted results with browser developer tools and <code>getComputedStyle()</code>.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: <a href="https://bitcoinversus.tech/2026/10/09/oshtml-001-document-structure-doctype-html-head-body-metadata-first-page/">HTML document structure</a>, <a href="https://bitcoinversus.tech/2026/10/10/oshtml-002-elements-start-tags-end-tags-void-elements-nesting-semantic-structure/">HTML elements</a>, and basic CSS selectors. The lab requires only a modern browser and a plain-text editor. No network connection, libraries or privileged commands are required.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <a href="https://bitcoinversus.tech/2026/10/06/easy-tech-read-what-happens-when-you-type-a-website-into-your-browser/">web page</a> can contain several instructions that set the same text color. The browser needs a consistent way to choose one instruction. CSS uses a sorting system called the <strong>cascade</strong>. Some instructions have higher priority because of where they came from or how they are organized; only after checking priority does the browser compare which selector is more specific.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Some visual properties can also pass from a parent element to its children. Text color normally works this way. That separate behavior is called <strong>inheritance</strong>. Understanding both ideas makes browser styling easier to predict.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=_yC24JH71r4","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=_yC24JH71r4
+</div><figcaption class="wp-element-caption"><em>Chrome for Developers, “058: Cascade layers — The CSS Podcast” (September 20, 2022). Official educational discussion of the CSS <code>@layer</code> system; identity verified, embedded playback not independently confirmed.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The Cascade Decision Process</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The browser first filters declarations that do not apply, including selectors that do not match and conditional rules whose media queries do not pass. The applicable declarations are then ranked by <strong>origin and importance</strong>, including cascade layers. Only among the remaining comparable rules does selector <strong>specificity</strong> matter. Where applicable, <code>@scope</code> proximity breaks certain ties, followed by source order. A more specific selector cannot defeat a declaration from a higher-priority origin or layer. See the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction">MDN cascade algorithm</a> and <a href="https://www.w3.org/TR/css-cascade-5/">W3C CSS Cascading and Inheritance Level 5</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Normal styles generally increase in priority from browser (user-agent) rules to user rules to author rules. Among important declarations, that origin ordering is reversed: browser-important can outrank user-important, which can outrank author-important. Animations and transitions have special cascade positions; in particular, active transitions can outrank important declarations. The exercises focus on author styles unless otherwise stated.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Specificity and Selector Weight</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>For ordinary selectors, calculate a three-part specificity tuple: <strong>ID selectors</strong>, <strong>class/attribute/pseudo-class selectors</strong>, and <strong>type/pseudo-element selectors</strong>. Examples: <code>#message</code> is <code>1-0-0</code>, <code>.notice</code> is <code>0-1-0</code>, and <code>p.notice</code> is <code>0-1-1</code>. Compare columns from left to right. Do not treat them as decimal digits. Inline <code>style</code> attributes have their own priority treatment and are not simply ordinary ID selectors.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Consider one paragraph carrying both an ID and a class. Two matching unlayered normal author styles compete for its color:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="CSS specificity example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>&lt;p id="message" class="notice"&gt;System status&lt;/p&gt;
+
+p.notice { color: teal; }  /* 0-1-1 */
+#message { color: navy; }  /* 1-0-0 */</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The predicted color is <strong>navy</strong>, because the ID selector is more specific when all earlier cascade steps are tied. Advanced functional pseudo-classes have special specificity behavior: <code>:where()</code> contributes zero specificity, while <code>:is()</code> and <code>:not()</code> use specificity derived from their arguments. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity">MDN Specificity</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Source Order Resolves Ties</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A later declaration wins only when origin, importance, layer, specificity and any applicable scoping comparison are tied. For example, the following selectors are identical and both set the same property:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Source order example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>.notice { color: teal; }
+.notice { color: purple; }
+/* Expected color: purple */</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Source order is a tie-breaker rather than the beginning of the cascade. Declaring a rule later does not guarantee priority over a stronger layer or important declaration.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Cascade Layers Set Author Priorities</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <code>@layer</code> rule explicitly orders groups of author styles. For normal declarations within an origin, later-declared layers outrank earlier layers, regardless of selector specificity across layers. Normal <strong>unlayered</strong> author styles outrank normal layered author styles. Layers allow projects to organize resets, components and utilities without inflating selector weight.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>In this example, the lower-specificity class rule in the later utilities layer wins over an ID selector in the earlier base layer:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Layer precedence example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>@layer base, utilities;
+
+@layer base {
+  #message { color: navy; }
+}
+@layer utilities {
+  .notice { color: teal; }
+}
+/* Expected color: teal */</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>An ordinary unlayered rule changes the result once more. Add this declaration after the preceding rules:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Unlayered declaration example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>.notice { color: purple; }
+/* Expected color: purple */</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The unlayered normal author declaration wins despite its modest specificity. Inside any single layer, specificity still matters among otherwise equal declarations. The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40layer">MDN @layer reference</a> documents layer creation and ordering.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jhjVKZB9yc0","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=jhjVKZB9yc0
+</div><figcaption class="wp-element-caption"><em>Kevin Powell, “These CSS features give us more control on the cascade and specificity” (April 9, 2024). Covers specificity, cascade layers, importance and scope; video identity verified, live playback not independently confirmed.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Important Rules Reverse Layer Order</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <code>!important</code> flag changes the cascade priority. Within one origin, important declarations reverse the normal order of named layers: earlier layers outrank later layers, and important layered author declarations outrank important unlayered declarations. Important inline author styles have their own high priority within the author origin, but user-important or user-agent-important rules can still outrank them. Avoid using <code>!important</code> as the default response to style conflicts.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Both competing declarations below are author-important. The earlier base layer wins:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Important layer reversal example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>@layer base, components;
+@layer base {
+  .notice { color: red !important; }
+}
+@layer components {
+  .notice { color: blue !important; }
+}
+/* Expected color: red */</code></pre><!-- /wp:html -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Inheritance Is Not the Cascade</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>After a declaration is chosen, the browser resolves property values. Properties such as <code>color</code> and <code>font-family</code> normally inherit from the parent; box-model properties such as <code>border</code>, <code>margin</code> and <code>padding</code> normally do not. A child can override an inherited value with its own declaration. Inheritance does not copy every style from a parent.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The paragraph inherits the text color of its section, but does not automatically inherit the parent border or padding:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="CSS inheritance example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>&lt;section class="panel"&gt;&lt;p&gt;Inherited text&lt;/p&gt;&lt;/section&gt;
+
+.panel {
+  color: darkgreen;
+  border: 2px solid gray;
+  padding: 16px;
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The keywords <code>inherit</code>, <code>initial</code>, <code>unset</code>, <code>revert</code>, and <code>revert-layer</code> are distinct. <code>unset</code> acts like <code>inherit</code> for inherited properties and like <code>initial</code> for others. <code>revert</code> and <code>revert-layer</code> roll back declarations at different cascade boundaries; neither simply means “erase every style.”</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Hands-On Browser Lab</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Create a local file named <code>cascade-lab.html</code> containing this complete example. The browser can open the file without an HTTP server:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Complete standalone cascade lab" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;CSS Cascade Lab&lt;/title&gt;
+  &lt;style&gt;
+    @layer base, components, utilities;
+    @layer base {
+      body { font-family: system-ui, sans-serif; }
+      .notice { color: #1f2937; }
+    }
+    @layer components {
+      #message { color: #0057b8; }
+    }
+    @layer utilities {
+      .notice { color: #087f5b; }
+    }
+    .notice { color: #7c2d12; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main&gt;
+    &lt;p id="message" class="notice"&gt;Cascade experiment&lt;/p&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Open the file in a current browser and inspect the paragraph. The unlayered normal declaration should win with computed <code>color</code> equal to <code>rgb(124, 45, 18)</code>, representing <code>#7c2d12</code>. In the developer-tools console, query the actual result:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Browser computed-style test" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>getComputedStyle(document.querySelector("#message")).color
+// Expected: "rgb(124, 45, 18)"</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Delete only the final unlayered <code>.notice</code> declaration, save, and refresh. Now the later <code>utilities</code> layer should win with <code>rgb(8, 127, 91)</code>, despite the ID selector in <code>components</code>. The expected outputs are spec-derived predictions, not claimed runtime results from the authoring environment.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and Common Mistakes</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>No visual change:</strong> check stylesheet loading, selector matching, valid syntax, and refreshed content.</li><li><strong>A specific rule loses:</strong> inspect origin, importance and layer before comparing specificity.</li><li><strong>A late rule loses:</strong> source order resolves only genuine ties.</li><li><strong>An inherited property surprises you:</strong> inspect the child’s declarations and the property definition.</li><li><strong>An important layer behaves backward:</strong> important layer priority reverses normal priority.</li><li><strong>Layout overflows:</strong> inspect the rendered code examples on narrow screens; avoid boxed or fixed-width code components.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Exercises and Assessment</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Predict the winning color for <code>p.notice</code> versus <code>#message</code> in one normal unlayered author stylesheet.</li><li>Remove the unlayered declaration in the lab. Which layer wins and why?</li><li>Mark the color declaration in the <code>base</code> layer <code>!important</code>. Predict the result.</li><li>Give the parent <code>main</code> a font family and a border. Which values normally inherit?</li><li>Propose an ordering for reset, components and utilities, then explain the advantage of simple class selectors.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> The ID selector wins an equal-priority specificity comparison. With the unlayered rule removed, the utilities layer wins because normal later layers outrank earlier layers. An important base-layer color outranks all remaining normal author declarations. A child normally inherits <code>font-family</code>, not <code>border</code>. An order such as <code>@layer reset, components, utilities;</code> gives later normal utility styles predictable priority.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Authoritative References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://www.w3.org/TR/css-cascade-5/">W3C — CSS Cascading and Inheritance Level 5</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction">MDN — CSS Cascade</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity">MDN — Specificity</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40layer">MDN — @layer</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Cascade_layers">MDN — Cascade Layers</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The CSS cascade decides which styling instruction wins when several apply to the same property. It checks priority groups before it compares selector specificity or order. Layers help developers organize priorities, and inheritance allows some values, such as text color, to pass from parent to child. A browser inspection shows which value actually wins.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor’s Note:</strong> OSCSS.002 follows the published OSCSS.001 curriculum. Code outcomes are predictions derived from the cited standards; the authoring environment did not independently execute a browser test. The original featured image is a conceptual editorial illustration, not a screenshot of a verified browser session. Video identities were checked; successful live playback has not yet been independently established.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5,000 satoshi donation QR code" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code. Verify the recipient and amount in your wallet before sending funds.</em></p><!-- /wp:paragraph -->

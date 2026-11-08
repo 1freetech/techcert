@@ -1,0 +1,23 @@
+'use strict';
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const { classifyTemperature, priority, scanSamples, cappedAttempts, atLeastOnce, sumOdd } = require('./ControlFlowLab');
+
+test('temperature threshold ALERT', () => assert.equal(classifyTemperature(85), 'ALERT'));
+test('temperature threshold WATCH', () => assert.equal(classifyTemperature(70), 'WATCH'));
+test('normal temperature', () => assert.equal(classifyTemperature(55), 'NORMAL'));
+test('reject string sensor data', () => assert.throws(() => classifyTemperature('85'), TypeError));
+test('reject NaN sensor data', () => assert.throws(() => classifyTemperature(NaN), TypeError));
+test('switch chooses ALERT priority', () => assert.equal(priority('ALERT'), 3));
+test('switch chooses NORMAL priority', () => assert.equal(priority('NORMAL'), 1));
+test('switch rejects unknown status', () => assert.throws(() => priority('MISSING'), RangeError));
+test('for loop filters NaN and stops on first critical', () => assert.deepEqual(scanSamples([NaN, 70, 82, 94, 99]), {validCount:3,total:246,firstCritical:{index:3,value:94}}));
+test('for loop with no critical sample', () => assert.deepEqual(scanSamples([50, 60]), {validCount:2,total:110,firstCritical:null}));
+test('for loop with empty data', () => assert.deepEqual(scanSamples([]), {validCount:0,total:0,firstCritical:null}));
+test('while stops when ready', () => assert.equal(cappedAttempts(2, 5), 2));
+test('while respects attempt cap', () => assert.equal(cappedAttempts(10, 3), 3));
+test('while skips at zero cap', () => assert.equal(cappedAttempts(2, 0), 0));
+test('do...while executes at least once', () => assert.equal(atLeastOnce(0), 1));
+test('do...while reaches limit', () => assert.equal(atLeastOnce(3), 3));
+test('for...of and continue skip evens', () => assert.equal(sumOdd([2, 3, 4, 5]), 8));
+test('reject fractional integers', () => assert.throws(() => sumOdd([1.5]), TypeError));

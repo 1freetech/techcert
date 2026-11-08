@@ -1,0 +1,46 @@
+{
+  "lesson_id": "OSJavaScript.005",
+  "title": "OSJavaScript.005: JavaScript Control Flow — Conditions, Loops, Break, and Continue",
+  "wordpress_post_id": 31261,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/08/osjavascript-005-javascript-control-flow-conditions-loops-break-continue/",
+  "featured_media_id": 31257,
+  "cover_size_px": [
+    1200,
+    630
+  ],
+  "cover_brand": "Bitcoinversus.tech; neon green #39FF14; 10-point rendered as 13-pixel font at 96DPI; bottom-left",
+  "saved_gutenberg_readback": true,
+  "source_length_characters": 21851,
+  "in_story_media": {
+    "video_ids": [
+      "PgUXiprlg1k",
+      "Zi-Q0t4gMC8"
+    ],
+    "rendered_iframes": true,
+    "donation_qr_id": 24043
+  },
+  "code": {
+    "runtime": "Node.js v22.16.0",
+    "syntax_check": "passed",
+    "automated_tests": 18,
+    "passing_tests": 18,
+    "measured_results": "test assertions and sample output only; no performance benchmark"
+  },
+  "verification_limits": [
+    "Direct public-page retrieval through web tool failed",
+    "Independent end-to-end YouTube playback not performed",
+    "Desktop/mobile screenshot pixel inspection not performed",
+    "Video iframe width is 640 in server-rendered HTML; mobile fit not independently verified"
+  ],
+  "source_paths": [
+    "archive/2026/11/osjavascript-005-control-flow/ControlFlowLab.js",
+    "archive/2026/11/osjavascript-005-control-flow/ControlFlowLab.test.js"
+  ],
+  "editorial": {
+    "internal_links": 4,
+    "editor_note": true,
+    "qr_footer": true,
+    "unboxed_code_snippets": 7
+  }
+}

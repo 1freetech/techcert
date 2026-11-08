@@ -1,0 +1,45 @@
+{
+  "lesson_id": "OSCSS.002",
+  "post_id": 31553,
+  "title": "OSCSS.002: CSS Cascade — Specificity, Layers, Importance, and Inheritance",
+  "publication_status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/oscss-002-css-cascade-specificity-layers-importance-inheritance/",
+  "featured_media_id": 31545,
+  "featured_media_dimensions": [
+    1200,
+    630
+  ],
+  "cover_branding": "Bitcoinversus.tech / #39FF14 / approximately 10pt / bottom-left",
+  "published_source_length": 21290,
+  "source_checks": {
+    "gutenberg_embed_count": 2,
+    "verified_video_ids": [
+      "_yC24JH71r4",
+      "jhjVKZB9yc0"
+    ],
+    "code_samples": 8,
+    "boxed_code_blocks": 0,
+    "internal_links": 4,
+    "original_qr": true,
+    "featured_cover_duplicated_in_body": false
+  },
+  "render_qa": {
+    "cms_rendered_iframe_count": 2,
+    "live_browser_playback": "not independently verified",
+    "live_visual_desktop_mobile": "not independently verified",
+    "lab_browser_test": "expected results sourced from W3C and MDN; not independently executed"
+  },
+  "sources": [
+    "https://www.w3.org/TR/css-cascade-5/",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/%40layer"
+  ],
+  "next_subject": "chef",
+  "generated_at": "2026-11-08",
+  "archived_repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ]
+}

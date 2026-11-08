@@ -1,0 +1,191 @@
+<!-- wp:paragraph --><p><strong>Control flow</strong> determines which instructions a C# program executes, how many times work repeats, and when a program deliberately stops or skips an operation. An <code>if</code> statement makes a Boolean decision; a <code>switch</code> selects one of several cases; and <code>for</code>, <code>foreach</code>, <code>while</code>, and <code>do</code> loops repeat tasks under defined conditions. <strong>OSC#.005</strong> connects those fundamentals to a small monitoring-data exercise that runs without hardware, network access, privileged commands, or real production telemetry.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The lesson follows <a href='https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/'>OSC#.004 on C# strings</a> and builds on <a href='https://bitcoinversus.tech/2026/10/14/oscsharp-003-csharp-operators-expressions-precedence/'>OSC#.003 on operators and expressions</a>. A comparison such as <code>watts &gt;= 90</code> evaluates to <code>true</code> or <code>false</code>, while a larger program decides what to do with the result. The exact thresholds and wattage samples in the lab are invented educational values, not electrical safety limits or validated device specifications.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives and prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Construct <code>if</code>, <code>else if</code>, and <code>else</code> branches with explicit Boolean conditions.</li><li>Use a <code>switch</code> statement for named statuses and explain why C# prevents accidental fall-through between nonempty case bodies.</li><li>Choose between <code>for</code> for indexed repetition, <code>foreach</code> for collection values, <code>while</code> for a pre-tested condition, and <code>do...while</code> for a post-tested condition.</li><li>Describe what <code>break</code>, <code>continue</code>, and <code>return</code> do to control flow.</li><li>Validate nullable and out-of-range measurements before arithmetic; understand how a checked integer sum can fail rather than silently overflow.</li><li>Build and run a sample application with the supported .NET 10 SDK, and use its separately authored 32-case self-test.</li><li>Identify infinite-loop risks, off-by-one mistakes, untrusted input handling, and the limits of toy monitoring examples.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites are variables, primitive types, strings, comparisons and basic console output. Review <a href='https://bitcoinversus.tech/2026/10/14/oscsharp-002-csharp-variables-built-in-types-var-const/'>OSC#.002 on built-in types</a> if <code>int?</code>, <code>bool</code> or integer arithmetic is unfamiliar. For the executable project, use an ordinary user account and the <a href='https://dotnet.microsoft.com/en-us/download/dotnet/10.0'>official .NET 10 SDK</a>. Microsoft lists .NET 10 as an actively supported LTS release through November 14, 2028, whereas .NET 8 and 9 approach end-of-support in November 2026. The project's target framework is <code>net10.0</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Making decisions with if and else</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An <code>if</code> branch runs its block when the condition is true. The optional <code>else if</code> branches are checked in order only after earlier tests fail; the optional final <code>else</code> handles remaining cases. C# conditions require Boolean expressions, not arbitrary integers. Braces make the scope of each block visible, which is especially important when another condition is added later.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="C sharp source code example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>int watts = 80;
+if (watts &gt;= 90)
+{
+    Console.WriteLine("ALERT");
+}
+else if (watts &gt;= 70)
+{
+    Console.WriteLine("WATCH");
+}
+else
+{
+    Console.WriteLine("NORMAL");
+}
+// Expected output: WATCH</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The order of comparisons matters. Checking <code>watts &gt;= 70</code> before <code>watts &gt;= 90</code> would classify 95 as WATCH unless the higher-priority condition were handled separately. Use a domain-specific range check first; a negative or extraordinarily large number should not be accepted as genuine equipment telemetry merely because it satisfies a comparison. The <a href='https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements'>official C# selection-statements reference</a> documents the syntax and evaluation rules.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=GLzAkJb0eoA&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Microsoft .NET, <a href='https://www.youtube.com/watch?v=GLzAkJb0eoA'>“Branching and While Loops [Pt 10] | C# for Beginners”</a>, published November 10, 2023. Scott Hanselman and David Fowler demonstrate branching and repeating statements. Official .NET educational video; embedded playback on the final WordPress page has not been independently verified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Choosing among cases with switch</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>switch</code> statement selects the first applicable case for a value or pattern. A status string such as ALERT, WATCH or NORMAL can be mapped to an integer priority. A <code>default</code> branch handles every value not explicitly recognized. The example deliberately throws <code>ArgumentException</code> for unknown statuses so an unexpected value cannot be mistaken for a normal state.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="C sharp source code example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>static int Priority(string status)
+{
+    switch (status)
+    {
+        case "ALERT": return 3;
+        case "WATCH": return 2;
+        case "NORMAL": return 1;
+        default: throw new ArgumentException("Unknown status.");
+    }
+}
+Console.WriteLine(Priority("WATCH")); // 2</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Unlike C, JavaScript, and some other languages, C# does not allow implicit fall-through from a nonempty <code>switch</code> case to the next case. A case must transfer control using a construct such as <code>break</code>, <code>return</code>, <code>throw</code>, or an explicit permitted <code>goto</code>. Several adjacent case labels may intentionally share one body. The shorter <code>switch</code> expression is another tool, particularly when the goal is to return one value. The lab teaches the statement form first.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Repeating work with for</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An ordinary <code>for</code> loop has an initializer, a Boolean continuation condition, and an update expression. Arrays and most indexed collections use zero-based positions. The condition <code>index &lt; readings.Length</code> visits every legal index while avoiding a one-past-the-end access. <code>index &lt;= readings.Length</code> would be incorrect for an array indexed from zero to <code>Length - 1</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="C sharp source code example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>int?[] readings = [35, 70, null, 92, 80];
+for (int index = 0; index &lt; readings.Length; index++)
+{
+    Console.WriteLine($"Position {index}: {readings[index]}");
+}
+// Five iterations: positions 0 through 4</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Use <code>for</code> when the index itself is important, for example when a report needs the exact position of a first abnormal reading. Keep the loop's stopping condition and index update easy to audit. A loop that never advances can run indefinitely, wasting CPU and delaying work elsewhere.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Iterating values with foreach</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <code>foreach</code> statement retrieves each value from a collection without manually handling numeric indexes. It is usually the clearer option for examining device records when an index is unnecessary. Empty collections produce zero iterations. Calling <code>foreach</code> on a null reference is not the same as iterating an empty collection; validate the collection first or use a non-null type contract.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="C sharp source code example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>string[] devices = ["router-a", "switch-b", "server-c"];
+foreach (string device in devices)
+{
+    Console.WriteLine(device);
+}
+// router-a
+// switch-b
+// server-c</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The loop variable represents the current element. In a monitoring pipeline, a <code>foreach</code> might assign a classification to every measurement, whereas a <code>for</code> loop is convenient when tracking the index of a first alert. Both are valid tools, but the iteration goal should determine the choice. The <a href='https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements'>Microsoft C# iteration reference</a> documents their supported semantics.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Comparing while and do...while</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>while</code> loop checks its condition before running its body, so the body can execute zero times. A <code>do...while</code> loop evaluates the condition after the body, so the body executes at least once. Neither construct creates a delay by itself. In real polling software, a busy loop can consume CPU and block useful work; asynchronous timers, cancellation and bounded retry policies may be more appropriate.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="C sharp source code example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>int attempts = 0;
+while (attempts &lt; 3)
+{
+    attempts++;
+    if (attempts == 2) break;
+}
+Console.WriteLine(attempts); // 2
+
+int checks = 0;
+do
+{
+    checks++;
+} while (checks &lt; 0);
+Console.WriteLine(checks); // 1</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The first sample stops when a fictitious condition becomes ready after two attempts. The second executes once even though <code>checks &lt; 0</code> is false on the first condition evaluation. The full lab explicitly caps retry attempts at 10,000 for educational input safety; production systems need policy-specific timeouts and cancellation handling as well.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=Z5JS36NlJiU&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Microsoft .NET, <a href='https://www.youtube.com/watch?v=Z5JS36NlJiU'>“C# for Beginners | Full 2-hour course”</a>, published February 9, 2022. Relevant chapter markers: branches at 33:10, loops at 50:29, and combining branches and loops at 57:42. The official video teaches general C# concepts, while the current written lesson uses .NET 10. Embedded playback has not been independently verified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Break, continue, and return</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>break</code> exits the nearest enclosing loop or <code>switch</code>, <code>continue</code> skips the remaining statements in the current iteration and begins the next iteration, and <code>return</code> exits the current function. In nested loops, understand which loop receives the jump. An early <code>break</code> may be exactly right for finding the first alert, but wrong for calculating a total across every measurement.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="C sharp source code example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>int totalOdd = 0;
+foreach (int value in new int[] { 2, 3, 4, 5 })
+{
+    if (value % 2 == 0) continue;
+    totalOdd += value;
+}
+Console.WriteLine(totalOdd); // 8</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The example skips even values and adds only 3 and 5. The <a href='https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements'>Microsoft jump-statements reference</a> explains all three transfers. Be wary of unexplained <code>continue</code> statements in a data pipeline: skipping bad data may protect a calculation, but a separate rejected-reading count or log is often necessary to preserve accountability.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Full lab: classify fictional readings</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The complete <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/oscsharp-005-control-flow/Program.cs'>Program.cs</a> creates the five-element array <code>[35, 70, null, 92, 80]</code>. The null entry represents a missing measurement, and the numbers are invented whole-watt training values. The <code>Classify</code> function labels null as MISSING, numbers outside 0–1,000 as INVALID, values at least 90 as ALERT, values at least 70 as WATCH, and remaining valid values as NORMAL.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="C sharp source code example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>public static string Classify(int? watts)
+{
+    if (watts is null) return "MISSING";
+    if (watts.Value is &lt; 0 or &gt; 1000) return "INVALID";
+    if (watts.Value &gt;= 90) return "ALERT";
+    if (watts.Value &gt;= 70) return "WATCH";
+    return "NORMAL";
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Because <code>int?</code> is nullable, the first check distinguishes a missing value from a genuine zero. The range check is a classroom rule, not a manufacturer-recommended operating limit. Notice the use of whole watts; a floating-point or decimal measurement would need a separately specified precision, parsing procedure, and unit policy.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The <code>ScanUntilAlert</code> function uses a <code>for</code> loop to inspect values by position. It increments a skipped counter for null or invalid values and uses <code>continue</code> rather than adding them. It accumulates accepted values using <code>checked</code> arithmetic, and stops using <code>break</code> after the first value at least 90. The final value, 80, is never visited by that function, even though a separate complete classification pass does inspect it.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="C sharp source code example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>// Input: [35, 70, null, 92, 80]
+// Values visited by ScanUntilAlert: 35, 70, null, 92
+// Anticipated summary:
+// Accepted before stop: 3
+// Skipped before stop: 1
+// Sum before stop: 197 W (illustrative)
+// First alert index: 3</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Those totals follow directly from the sample: <code>35 + 70 + 92 = 197</code>. The index of 92 is three because the array is zero-based. The lab uses a <code>ScanResult</code> record structure to return the valid count, skipped count, sum and first-alert index together. Recorded summary values in the article are <strong>analytically derived expectations, not captured output from a compiled C# program</strong>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Build and run the reproducible project</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Download the two files <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/oscsharp-005-control-flow/Program.cs'>Program.cs</a> and <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/oscsharp-005-control-flow/ControlFlowLab.csproj'>ControlFlowLab.csproj</a> into the same local directory. A third <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/oscsharp-005-control-flow/README.md'>README.md</a> provides the commands and test limitations. Use the .NET 10 SDK. The project requires no external NuGet packages and the source does not access files, the network, attached devices or process control APIs.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="C sharp source code example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>dotnet --version
+dotnet build ControlFlowLab.csproj
+dotnet run --project ControlFlowLab.csproj
+dotnet run --project ControlFlowLab.csproj -- --test</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The double dash <code>--</code> separates arguments intended for the application from options understood by <code>dotnet run</code>, as described in the <a href='https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-run'>official .NET CLI documentation</a>. A successful build creates an executable console program. The normal run prints classifications and the summary. The <code>--test</code> mode calls an in-project <code>SelfTests</code> method, which counts passing checks and prints <code>PASS: 32 C# checks</code> only if every test condition succeeds.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What is tested and what remains unverified</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The authored self-test contains <strong>32 runtime assertions</strong> covering missing and invalid readings, 69/70 and 89/90 boundary cases, priority mapping, early termination, skipped counts, checked totals, full-array classification, even-number skipping, bounded while iterations, do-while behavior, and expected exceptions. The assertions reside in the source repository and are intended for execution with the command above.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Execution status:</strong> The authoring environment did not have the .NET SDK or C# compiler. Therefore, the project has <strong>not been compiled or run</strong> in the authoring session and none of the 32 C# runtime assertions have been counted as passed. A separate static audit passed <strong>24 of 24 source-level checks</strong> for required constructs, project settings, no file/network execution APIs, the existence of 32 tests, and deterministic sample arithmetic. A static audit cannot certify compilation, runtime behavior, complete API safety or a cross-platform deployment.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and engineering safety</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Build command not found:</strong> install the supported .NET SDK, not merely the runtime, and confirm <code>dotnet --version</code> from the same terminal.</li><li><strong>Off-by-one exception:</strong> use <code>index &lt; readings.Length</code>, not <code>index &lt;= readings.Length</code>, when visiting array positions.</li><li><strong>Invalid data reaches totals:</strong> check <code>HasValue</code> or a null pattern, validate the numeric domain and count rejected values separately.</li><li><strong>Unexpected loop duration:</strong> ensure the condition can change and enforce limits for retries or external operations.</li><li><strong>Unintended switch behavior:</strong> understand that C# blocks implicit fall-through between nonempty cases and handle unexpected values with a deliberate default.</li><li><strong>Misleading summary:</strong> the lab stops at the first alert; its sum is not the sum of the complete five-element array.</li><li><strong>Overflow handling:</strong> use checked arithmetic where appropriate; tested sample values are small, but an unbounded sum must have an intentional overflow policy.</li><li><strong>Safety and security:</strong> do not connect the toy thresholds to production electrical controls, expose private logs, or treat command-line data as authenticated sensor measurements.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Exercises and assessment</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Change 69 to 70 and 89 to 90. Identify which classification changes occur at each boundary.</li><li>Move the first alert to array position zero and predict the resulting valid count and sum.</li><li>Remove the <code>break</code> from a disposable copy of the scan, then explain why the final 80 would enter the total.</li><li>Compare a zero-limit <code>while</code> loop and a zero-limit <code>do...while</code> loop.</li><li>Use <code>foreach</code> to print all five statuses, including the missing measurement.</li><li>Create a switch case for an additional status and define what an unknown status should do.</li><li>Add an intentionally invalid negative sample and predict how the skipped counter changes.</li><li>Run the 32-check self-test on a supported .NET 10 installation and record its actual output before claiming the runtime test passed.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> 70 is WATCH and 90 is ALERT; when an alert is first, scanning stops after one valid item; removing the break includes any later valid values; while can execute zero times whereas do-while executes at least once; complete foreach classification includes every supplied element; unknown statuses should not silently become NORMAL; rejected values should be counted rather than included in sums. After editing code, predicted behavior should be confirmed through compilation and execution.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Sources and next steps</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Primary references are <a href='https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements'>Microsoft Learn — Selection Statements</a>, <a href='https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements'>Iteration Statements</a>, <a href='https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements'>Jump Statements</a>, <a href='https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-run'>dotnet run</a>, and <a href='https://dotnet.microsoft.com/en-us/platform/support/policy'>.NET Support Policy</a>. The Microsoft .NET videos above supply additional visual instruction. Related courses include <a href='https://bitcoinversus.tech/2026/11/08/osbash-006-bash-functions-arguments-scope-exit-codes/'>OSBash.006 on functions and exit statuses</a>, highlighting similarities and differences across programming environments.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>C# control flow combines comparisons with deliberate program behavior. Safe loops have understandable stopping conditions, branches account for valid and invalid inputs, and early exits clearly identify which work was skipped. The self-contained exercise provides a basis for later collections, functions, exception handling and application debugging.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSC#.005 follows the verified published OSC#.004. The original 1200 × 630 illustrated cover uses a small bottom-left neon-green <strong>Bitcoinversus.Tech</strong> label at approximately 10 pt. The graphic is AI-generated editorial artwork, not a screenshot of an actual compiled program. All example equipment readings and thresholds are fictional. The C# files and 32-case self-test were prepared for execution on the .NET 10 SDK, but the .NET SDK was unavailable in the authoring environment; therefore runtime compilation and all 32 test results are unverified. The 24 source-level checks passed. Video identities were verified from Microsoft .NET's official channel, while published-page playback and independent mobile visual inspection remain unverified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original optional BitcoinVersus.Tech donation QR for 5,000 sats. Verify the recipient and amount in a wallet before authorizing any payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the QR on another screen or use a compatible wallet's saved-image scanner. Verify the receiving address and requested amount independently before sending funds.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Educational examples do not replace validated engineering controls, security review, or production operating procedures.</em></p><!-- /wp:paragraph -->

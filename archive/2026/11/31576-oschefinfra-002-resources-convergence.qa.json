@@ -1,0 +1,59 @@
+{
+  "track": "Chef Infra automation, distinct from Chef esoteric programming language",
+  "lesson_id": "OSChefInfra.002",
+  "post_id": 31576,
+  "title": "OSChefInfra.002: Chef Infra Recipes — Resources, Convergence, and Notifications",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/oschefinfra-002-chef-infra-recipes-resources-convergence-notifications/",
+  "status": "publish",
+  "published_at": "2026-11-08",
+  "original_cover": {
+    "media_id": 31564,
+    "width": 1200,
+    "height": 630,
+    "signature": "Bitcoinversus.tech",
+    "signature_hex": "#39FF14",
+    "signature_position": "bottom-left",
+    "signature_size": "approximately 10pt at publication target resolution",
+    "is_editorial_illustration": true,
+    "cover_repeated_in_body": false
+  },
+  "verification": {
+    "chef_client_runtime_available": false,
+    "ruby_syntax_check": "ruby -c: Syntax OK; recipe syntax only, not Chef compilation",
+    "chef_execution": "not executed",
+    "sample_drift_test": "not executed",
+    "saved_gutenberg": "checked",
+    "native_youtube_embeds": 2,
+    "renderer_iframes": 2,
+    "video_titles_channels": "checked against official Progress Chef listings and prior published official walkthrough",
+    "video_playback": "not independently verified",
+    "mobile_viewport": "not independently inspected"
+  },
+  "checks": {
+    "saved_length": 27750,
+    "unboxed_code_examples": 7,
+    "boxed_code_blocks": 0,
+    "internal_links": 4,
+    "has_editor_note": true,
+    "has_qr": true,
+    "cover_duplicate": false
+  },
+  "body_video_ids": [
+    "_pUdL4w9E7k",
+    "lqMijB1JIuU"
+  ],
+  "primary_sources": [
+    "https://docs.chef.io/versions/",
+    "https://docs.chef.io/client/19/cookbooks/",
+    "https://docs.chef.io/client/19/resources/common_functionality/",
+    "https://docs.chef.io/client/19/reference/ctl_chef_client/",
+    "https://docs.chef.io/workstation/26.0/tools/ctl_chef/"
+  ],
+  "archived_repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ],
+  "next_lesson": "OSShakespeare.003",
+  "limitations": "CMS rendered 2 iframe elements, but actual video playback and visual mobile QA could not be established."
+}

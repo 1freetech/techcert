@@ -1,0 +1,37 @@
+{
+  "lesson_id": "OSChefInfra.002",
+  "post_id": 31576,
+  "title": "OSChefInfra.002: Chef Infra Recipes — Resources, Convergence, and Notifications",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/oschefinfra-002-chef-infra-recipes-resources-convergence-notifications/",
+  "featured_media_id": 31564,
+  "featured_dimensions": "1200x630",
+  "source_characters": 27750,
+  "gutenberg_embed_blocks": 2,
+  "video_ids": [
+    "_pUdL4w9E7k",
+    "lqMijB1JIuU"
+  ],
+  "youtube_source_status": "Progress Chef official 2021 video verified; historical 2014 Chef video ID corroborated by third-party bibliography, direct playback not verified",
+  "code_examples": 7,
+  "boxed_code_blocks": 0,
+  "internal_links": 4,
+  "qr_present": true,
+  "cover_reused_in_body": false,
+  "ruby_syntax_check": "ruby 3.3.8: Syntax OK for sample recipe and client config; actual Chef Infra Client unavailable",
+  "rendered_iframe_count": 2,
+  "live_video_playback": "unverified",
+  "live_mobile_desktop_visual": "unverified",
+  "actual_convergence": "unverified",
+  "reference_urls": [
+    "https://docs.chef.io/versions/",
+    "https://docs.chef.io/client/19/resources/common_functionality/",
+    "https://docs.chef.io/client/19/reference/ctl_chef_client/"
+  ],
+  "checked_date": "2026-11-08",
+  "archived_repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ]
+}

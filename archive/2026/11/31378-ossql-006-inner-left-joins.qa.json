@@ -1,0 +1,29 @@
+{
+  "lesson": "OSSQL.006",
+  "wordpress_post_id": 31378,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/08/ossql-006-inner-left-joins-missing-matches/",
+  "cover_id": 31371,
+  "saved_source_chars": 26097,
+  "iframed_video_ids": [
+    "9URM1_2S0ho",
+    "xkYpNfpmbGY"
+  ],
+  "iframe_rendered": true,
+  "video_playback_verified": false,
+  "internal_links": 6,
+  "examples": 8,
+  "qr": true,
+  "footer": true,
+  "local_tests": {
+    "runtime": "Python 3.13.5, SQLite 3.46.1",
+    "passed": 24,
+    "total": 24
+  },
+  "source": "archive/2026/11/ossql-006-joins/join_lab.sql",
+  "test_file": "archive/2026/11/ossql-006-joins/verify_joins.py",
+  "limitations": [
+    "No independent video playback testing",
+    "No pixel-verified mobile screenshot inspection"
+  ]
+}

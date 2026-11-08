@@ -1,0 +1,51 @@
+{
+  "wp_id": 31359,
+  "lesson_id": "OSSolidity.004",
+  "title": "OSSolidity.004: Can 200ms Blocks Break Smart-Contract Deadlines?",
+  "permalink": "https://bitcoinversus.tech/2026/11/08/ossolidity-004-base-denim-200ms-blocks-time-locks-solidity/",
+  "featured_media_id": 31351,
+  "cover_size": "1200x630",
+  "published": "2026-11-08",
+  "gutenberg_characters": 20785,
+  "media_in_body": [
+    31352,
+    31353,
+    31354,
+    24043
+  ],
+  "chart_ids": [
+    31352,
+    31353,
+    31354
+  ],
+  "internal_links_count": 5,
+  "code_block_count": 3,
+  "method": "Base Nov 5 2026 scheduled 2s->200ms, fixed block counts converted arithmetically, no transaction throughput inference",
+  "tests": {
+    "arithmetic_assertions": 9,
+    "arithmetic_passed": 9,
+    "solidity_compiled": false,
+    "evm_run": false
+  },
+  "checks": {
+    "published": true,
+    "correct_unique_id": true,
+    "cover_assigned": true,
+    "all_images": true,
+    "rendered_images": true,
+    "code_blocks": true,
+    "contextual_links": true,
+    "editor_note": true,
+    "qr": true,
+    "volunteer_footer": true,
+    "math_disclosed": true,
+    "runtime_disclosed": true,
+    "source_disclosed": true
+  },
+  "unresolved": [
+    "Independent public webpage fetch inaccessible via browser retrieval",
+    "No device-level mobile viewport screenshot inspection",
+    "No Solidity compiler or EVM binary available; code tests provided but unexecuted"
+  ],
+  "source_archive_path": "archive/2026/11/31359-ossolidity-004-denim-time-locks.gutenberg.html"
+}

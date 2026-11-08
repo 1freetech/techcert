@@ -1,0 +1,186 @@
+<!-- wp:paragraph --><p>An exception is an object that signals a failure outside the normal path of program execution. A PHP function can <code>throw</code> an exception; a caller can use <code>try</code> and <code>catch</code> to handle a known failure, while <code>finally</code> supplies cleanup or bookkeeping during ordinary control-flow unwinding. <strong>OSPHP.006</strong> introduces the underlying mechanisms and applies them to a small, fully tested input-validation exercise.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The prior <a href='https://bitcoinversus.tech/2026/11/01/osphp-005-functions-parameters-return-values-scope-type-declarations/'>OSPHP.005: Functions</a> established typed arguments, returns, and local scope. The <a href='https://bitcoinversus.tech/2026/10/15/osphp-004-arrays-indexed-associative-nested-access-update-iteration/'>arrays lesson</a> established collections and iteration. PHP exceptions connect those foundations to deliberate failure handling: instead of returning a fabricated numeric value after invalid input, a function can state why normal processing cannot continue.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives and prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Distinguish a thrown <code>Exception</code> from an <code>Error</code> and from an ordinary diagnostic warning.</li><li>Write <code>throw</code>, <code>try</code>, <code>catch</code>, and <code>finally</code> statements in PHP 8.</li><li>Explain matching catch types, multiple catch clauses, and union catches.</li><li>Use specific standard exception classes for input validation and domain constraints.</li><li>Predict how exceptions propagate through functions, and explain why a global handler cannot resume execution.</li><li>Apply defensive input validation to invented wattage readings without implying real equipment measurements.</li><li>Run the complete PHP CLI lab, interpret its output, and reproduce 30 automated checks.</li><li>Handle failure without revealing credentials, stack traces, or raw sensitive inputs to users.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: PHP syntax, conditionals, arrays, loops and functions; a local PHP CLI and terminal are helpful. Review <a href='https://bitcoinversus.tech/2026/10/09/osphp-001-php-runtime-cli-php-v-running-scripts-built-in-development-server/'>OSPHP.001: PHP Runtime</a> and <a href='https://bitcoinversus.tech/2026/10/10/osphp-003-variables-prefix-assignment-naming-reassignment-dynamic-types/'>OSPHP.003: Variables</a> where needed. The complete example was tested with <strong>PHP 8.4.24 CLI</strong>; it uses only PHP's built-in standard facilities and requires no external packages, database, web server or administrator privileges.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Throwing an exception changes the execution path</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A PHP exception object carries a class, message, optional numeric code, and trace information. When a function executes <code>throw</code>, the remaining statements on that path are skipped. PHP searches the call stack for a compatible <code>catch</code>; if no catch matches, the exception remains unhandled and the script normally terminates or reaches a registered global exception handler. The official <a href='https://www.php.net/manual/en/language.exceptions.php'>PHP exceptions manual</a> defines the behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PHP source code example" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>&lt;?php
+declare(strict_types=1);
+
+function divide(int $numerator, int $denominator): float {
+    if ($denominator === 0) {
+        throw new InvalidArgumentException('Denominator cannot be zero.');
+    }
+    return $numerator / $denominator;
+}
+
+try {
+    echo divide(12, 3) . PHP_EOL; // 4
+    echo divide(12, 0) . PHP_EOL;
+    echo "Unreachable after throw" . PHP_EOL;
+} catch (InvalidArgumentException $e) {
+    echo 'Invalid input' . PHP_EOL;
+}
+// Output:
+// 4
+// Invalid input</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>A caught exception does not retroactively run code that was skipped. Execution continues after the handling construct unless the handler throws again, exits, or otherwise changes control flow. A deliberately specific exception class tells the caller which sort of failure it should expect, avoiding ambiguous return values such as <code>-1</code> or <code>0</code> when those might be legitimate results.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Understanding PHP's two throwable families</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>Throwable</code> is the interface implemented by both <code>Exception</code> and <code>Error</code>. Standard classes such as <code>InvalidArgumentException</code>, <code>DomainException</code>, and <code>RuntimeException</code> extend <code>Exception</code>. Type mismatches may raise <code>TypeError</code>, which extends <code>Error</code>. A <code>catch (Exception $e)</code> does not catch every <code>TypeError</code>. By contrast, <code>catch (Throwable $e)</code> catches both families, although indiscriminately treating programming errors as recoverable can hide defects.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Consult the <a href='https://www.php.net/manual/en/language.error-handling.php'>PHP error-handling overview</a> and <a href='https://www.php.net/manual/en/spl.exceptions.php'>standard exception hierarchy</a>. PHP diagnostics such as notices and warnings use another reporting mechanism: they do not automatically become catchable <code>Exception</code> objects. An application may install an error handler to convert selected diagnostics into <code>ErrorException</code>, but many critical startup and compile-time failures cannot be converted that way.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=rQntgj7yink&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Program With Gio, <a href='https://www.youtube.com/watch?v=rQntgj7yink'>“PHP Error Handling &amp; Error Handlers — Full PHP 8 Tutorial”</a>, February 1, 2021. Source: the creator's public YouTube lesson. Explains diagnostic categories and handlers before the more advanced exception tutorial. Video identity checked; actual embedded playback has not been independently tested.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Catching only failures a program can handle</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>catch</code> declaration matches the first compatible exception class. More specific catches should come before broader handlers. Since PHP 7.1, a union catch can use <code>|</code> to handle related exception classes with the same response. PHP 8 also permits omitting the caught variable when its details are unnecessary.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PHP source code example" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>try {
+    $watts = parseWattReading($text, 1000.0);
+} catch (InvalidArgumentException | DomainException $e) {
+    // Show a safe public message, not raw exception internals.
+    echo "Reading rejected." . PHP_EOL;
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The lesson's <code>parseWattReading()</code> function is a controlled example. It rejects malformed numeric text with <code>InvalidArgumentException</code> and values beyond an invented training limit with <code>DomainException</code>. No industrial setpoint, miner power rating, or approved facility operating limit is implied. The validation policy accepts nonnegative decimal strings with at most two fractional digits; scientific notation, commas, negative signs, and leading zeroes are rejected intentionally.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Finally executes during ordinary exception unwinding</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>finally</code> block is useful for releasing temporary resources, recording an attempt, or restoring state whether the protected operation succeeds or throws. In normal exception control flow, PHP executes <code>finally</code> after the <code>try</code> or matching <code>catch</code> and before execution resumes. A sudden process termination, machine failure, or forced kill should not be treated as a guaranteed opportunity for cleanup.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PHP source code example" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>$events = [];
+try {
+    $events[] = 'try';
+    throw new RuntimeException('Teaching example');
+} catch (RuntimeException $e) {
+    $events[] = 'catch';
+} finally {
+    $events[] = 'finally';
+}
+
+echo implode(' &gt; ', $events);
+// try &gt; catch &gt; finally</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Do not return a replacement value from <code>finally</code> as a general pattern. A return there can override a return computed earlier, and a new exception thrown inside <code>finally</code> may replace the propagated exception. The <a href='https://www.php.net/manual/en/language.exceptions.php'>official exception documentation</a> explains those interactions. Production cleanup should be designed around the actual resource lifetime and failure semantics, not around an assumption that every error leaves time for recovery.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete wattage-input exercise</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The standalone <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/osphp-006-exceptions/ExceptionLab.php'>ExceptionLab.php</a> file contains <code>parseWattReading()</code>, <code>summarizeReadings()</code> and <code>illustrateFinally()</code>. A simple training array contains <code>'120'</code>, <code>'35.50'</code>, <code>'oops'</code>, <code>'1200'</code>, and <code>'0'</code>. The upper limit is an invented 1,000 W per reading. The lab accepts three values and rejects two, then reports a total of 155.50 W from accepted values. The numbers are fabricated input examples, not data-center measurements.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PHP source code example" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>function parseWattReading(string $raw, float $upperLimit = 1000.0): float {
+    if (!is_finite($upperLimit) || $upperLimit &lt;= 0.0) {
+        throw new InvalidArgumentException('The limit must be positive.');
+    }
+    $text = trim($raw);
+    if (strlen($text) &gt; 24 ||
+        preg_match('/\A(?:0|[1-9][0-9]*)(?:\.[0-9]{1,2})?\z/D', $text) !== 1) {
+        throw new InvalidArgumentException('Invalid decimal input.');
+    }
+    $watts = (float) $text;
+    if (!is_finite($watts) || $watts &gt; $upperLimit) {
+        throw new DomainException('Outside example range.');
+    }
+    return $watts;
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Input format and policy must be defined before validation. The code avoids blindly applying <code>(float)</code> to arbitrary text; many strings would otherwise convert to misleading numbers. It also bounds the length of accepted strings, checks for finite numeric results, and validates the example limit. The complete repository version additionally caps batches at 10,000 entries and checks the resulting aggregate for a finite value. PHP <code>strlen</code> counts bytes, which is suitable for the deliberately ASCII-only numeric format.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The iterator uses a union <code>catch</code> for expected invalid measurements and increments the processed counter in <code>finally</code>. A <code>TypeError</code> from passing a non-string item is intentionally not swallowed. An invalid configured limit is rejected before the per-reading loop, so a configuration defect cannot masquerade as multiple bad readings.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PHP source code example" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>foreach ($rawReadings as $raw) {
+    try {
+        $value = parseWattReading($raw, $upperLimit);
+        $accepted++;
+        $total += $value;
+    } catch (InvalidArgumentException | DomainException $e) {
+        $rejected++;
+    } finally {
+        $processed++;
+    }
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The complete runnable source includes an array of accepted/rejected decisions and a <code>finally</code> demonstration for success and failure. The small excerpt above illustrates the central idea; use the linked <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/osphp-006-exceptions/ExceptionLab.php'>complete file</a> for reproducible execution rather than combining excerpts into a new script with missing variables.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Running and testing the exercise</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Download <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/osphp-006-exceptions/ExceptionLab.php'>ExceptionLab.php</a> and <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/osphp-006-exceptions/ExceptionLabTest.php'>ExceptionLabTest.php</a> into the same local directory. Use PHP 8.4 or another compatible PHP 8 release. No database or network service is needed. From the directory containing both files, execute:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PHP source code example" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>php -v
+php -l ExceptionLab.php
+php -l ExceptionLabTest.php
+php ExceptionLab.php
+php ExceptionLabTest.php</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The preparation environment used <strong>PHP 8.4.24 CLI</strong>. Both lint commands reported no syntax errors. The recorded exercise output was:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PHP source code example" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Accepted: 3
+Rejected: 2
+Processed: 5
+Total watts (illustrative): 155.50
+Finally on success: try &gt; success &gt; finally
+Finally on failure: try &gt; catch &gt; finally
+PASS: 30 checks</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The independent test harness uses 30 assertions covering integer and decimal inputs, whitespace, zero, boundaries, invalid characters, non-finite limits, overflow-domain rejection, batch counts, decision ordering, empty input, incorrect types, a batch-length cap, and normal/error <code>finally</code> behavior. All <strong>30 of 30 checks passed</strong> locally. Those checks establish observed behavior for the supplied cases, not formal proof of completeness, API safety, or production reliability.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=XQ5Pd-6Hnjk&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Program With Gio, <a href='https://www.youtube.com/watch?v=XQ5Pd-6Hnjk'>“OOP Error Handling in PHP — Exceptions &amp; Try Catch Finally Blocks”</a>, June 4, 2021. Source: the creator's public YouTube tutorial. Discusses throwing at 01:15, catches at 07:15, finally at 11:21, and global handlers at 14:12. Video identity checked; independent embedded playback remains unverified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Propagating, logging, and safely presenting errors</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>When an exception cannot be handled at the current layer, allowing it to propagate—or wrapping it with a more specific exception while preserving the previous cause—can be safer than returning made-up success data. The constructor for standard <code>Exception</code> accepts a previous throwable, retrievable with <code>getPrevious()</code>. Reserve detailed traces, file paths, SQL statements, and secrets for secure development diagnostics. A public HTTP response should generally expose a safe status message and an appropriate status code without internals.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="PHP source code example" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.94em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>try {
+    throw new InvalidArgumentException('Bad training input');
+} catch (InvalidArgumentException $previous) {
+    throw new RuntimeException('Input processing failed', 0, $previous);
+}
+// At an appropriate outer boundary, handle the RuntimeException.
+// $e-&gt;getPrevious() identifies the original cause.</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>A global handler installed with <code>set_exception_handler()</code> can log an uncaught throwable and return a controlled failure response, but ordinary execution does not resume afterward. A diagnostic handler installed with <code>set_error_handler()</code> is different. In a production web environment, display detailed errors only in a protected development context, keep <code>display_errors</code> disabled for public users, and configure protected logging. See <a href='https://www.php.net/manual/en/function.set-exception-handler.php'>PHP's global exception handler</a> and <a href='https://www.php.net/manual/en/errorfunc.configuration.php'>error reporting configuration</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting, risk, and engineering boundaries</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Uncaught throwable terminates the script:</strong> inspect the originating stack trace in a secure development environment, identify the proper handling boundary, and avoid blanket catch-and-ignore.</li><li><strong>Exception catch does not intercept a TypeError:</strong> <code>TypeError</code> belongs to the <code>Error</code> family; repair the caller, rather than quietly classifying all programming defects as user input problems.</li><li><strong>Warnings still appear:</strong> many diagnostics are reported through <code>error_reporting</code> and an error handler, not automatically through <code>catch</code>.</li><li><strong>Accidental data disclosure:</strong> avoid echoing <code>$e-&gt;getMessage()</code> or traces to public users when those may contain sensitive details.</li><li><strong>Configuration error treated as bad row:</strong> validate configuration before entering a batch-level <code>try/catch</code> loop.</li><li><strong>Unbounded memory or CPU use:</strong> place explicit limits on input size, batch length, and retry behavior. Exception handling alone does not protect against resource exhaustion.</li><li><strong>Incorrect engineering inference:</strong> the example's watt values do not imply measured instantaneous load, device specifications, or energy use over time.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Real systems should distinguish telemetry validation from equipment safety controls. A parsing exception is not an electrical interlock. Safe operational design may require independent hardware protections, protected logs, retry caps, and verifiable configuration management.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Exercises and assessment</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Change the training limit from 1,000 W to 200 W. Predict which of the five entries pass, then confirm with the code.</li><li>Add a new reading <code>'4.75'</code>; determine the new accepted count and total.</li><li>Explain why <code>TypeError</code> may propagate through <code>catch (InvalidArgumentException | DomainException)</code>.</li><li>Remove the <code>finally</code> block from a disposable copy; identify the counter that will stop increasing for rejected inputs.</li><li>Use one <code>catch</code> for two related exception classes and a separate handler for a different recoverable class. Explain matching order.</li><li>Demonstrate the difference between a warning reported by the engine and an intentionally thrown <code>Exception</code>.</li><li>Write a short rule for deciding whether an error should be caught locally, propagated, or handled at the application boundary.</li><li>Explain why a successful test suite is not evidence that malformed external inputs are handled in every possible case.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> under a 200 W limit the same three numeric entries (120, 35.50 and 0) remain accepted, because 1,200 W was already rejected; adding 4.75 raises the sum from 155.50 to 160.25 W and the accepted count from three to four. <code>TypeError</code> is an <code>Error</code>, not one of the caught exception subclasses. Without <code>finally</code> the processed count in the example would not be updated for rejected rows unless moved to another safe location. Broad handlers must come after specific ones. Successful test results apply only to the tested inputs.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Verified references and curriculum continuation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Technical references: <a href='https://www.php.net/manual/en/language.exceptions.php'>PHP Manual — Exceptions</a>, <a href='https://www.php.net/manual/en/language.error-handling.php'>Error Handling</a>, <a href='https://www.php.net/manual/en/spl.exceptions.php'>Standard Exception Classes</a>, <a href='https://www.php.net/manual/en/class.invalidargumentexception.php'>InvalidArgumentException</a>, <a href='https://www.php.net/manual/en/function.set-exception-handler.php'>set_exception_handler()</a>, and <a href='https://www.php.net/manual/en/function.set-error-handler.php'>set_error_handler()</a>. For related curriculum, review <a href='https://bitcoinversus.tech/2026/11/01/oshtml-004-html-forms-labels-inputs-fieldsets-submission-validation/'>OSHTML.004 — Forms</a> and <a href='https://bitcoinversus.tech/2026/11/08/osjavascript-005-javascript-control-flow-conditions-loops-break-continue/'>OSJavaScript.005 — Control Flow</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Deliberate error handling separates normal results from failed operations. PHP's exception mechanism supports precise failure reporting, typed handling, propagation, and cleanup during normal unwinding. Validated numeric inputs and tested exception boundaries are transferable techniques for backend APIs, data pipelines, and monitoring software.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSPHP.006 follows OSPHP.005 in the verified Open CERT / TechCert rotation. The 1200 × 630 featured image is original AI-generated educational art, not a photograph of an operating system or an actual live software capture; the small bottom-left neon-green “Bitcoinversus.Tech” signature is applied to the cover. All wattage inputs and thresholds are fabricated teaching values. The PHP 8.4.24 CLI example passed syntax checks and 30 locally executed assertions. The two externally sourced educational video identities were verified, but actual playback and pixel-level mobile inspection of the final published page were not independently tested.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original optional BitcoinVersus.Tech 5,000-satoshi donation QR. Verify the recipient and amount before making a payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the original QR on a second screen or use a compatible wallet's saved-image scanning feature. Confirm the destination address and 5,000-satoshi amount inside your wallet before authorizing payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech educational lessons do not replace engineering validation, formal safety procedures, secure deployment review, or applicable regulatory requirements.</em></p><!-- /wp:paragraph -->

@@ -1,0 +1,226 @@
+<!-- wp:paragraph -->
+<p><strong>OSSolidity.004</strong> investigates a recently demonstrated smart-contract risk: Base’s Denim upgrade moved from one canonical block every 2 seconds to one every 200 milliseconds. A timer based on a fixed number of blocks could consequently finish <strong>10 times sooner</strong> than its author intended. The danger is not that Solidity became faster; it is that block counts were mistaken for elapsed time.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The official <a href="https://www.base.org/blog/denim">Base engineering announcement, November 5, 2026</a>, confirms the live mainnet change. BitcoinVersus.Tech previously covered the <a href="https://bitcoinversus.tech/2026/11/07/base-denim-200ms-canonical-blocks-flashblocks-november-2026/">Denim rollout as technology news</a>. The present lesson is a practical programming exercise, not a repeat of the news report.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives and prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain the differences among a canonical block, a block number, an on-chain timestamp, and transaction finality.</li><li>Calculate block cadence, time-to-deadline, relative changes and their units without mistaking estimates for observations.</li><li>Read and write <code>uint256</code>, <code>bool</code>, constructor parameters, conditional expressions and <code>require</code> statements.</li><li>Recognize a block-count timing anti-pattern and build a safer timestamp-based contract.</li><li>Compile and exercise the code in a local Remix VM and record expected results and failure cases.</li><li>Identify the limitations of timestamp precision, sequencer behavior and final settlement.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: <a href="https://bitcoinversus.tech/2026/10/08/ossolidity-001-evm-smart-contracts/">OSSolidity.001: EVM and Smart Contracts</a> and <a href="https://bitcoinversus.tech/2026/11/02/ossolidity-002-contract-structure-spdx-pragma-state-variables-functions-remix/">OSSolidity.002: Contract Structure</a>. A browser with the <a href="https://remix.ethereum.org/">Remix IDE</a> is sufficient. Select Solidity compiler <strong>0.8.38</strong>, officially released October 22, 2026. No mainnet wallet, ETH or external dependency is necessary.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The claim: 200 ms blocks are ten times as frequent</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>canonical block</strong> is part of the chain’s current accepted history and carries a number, hash, state and transaction receipts. A <strong>block interval</strong> describes how frequently scheduled blocks appear. A <strong>block timestamp</strong> is an integer representation of time within that block. <strong>Finality</strong> is a stronger settlement guarantee: Base blocks become safe after their batches reach Ethereum and finalized when Ethereum finalizes those batches. Faster inclusion is not immediate Ethereum finality.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Calculate the rate: <code>blocks per minute = 60 seconds ÷ seconds per block</code>. Before Denim, <code>60 / 2 = 30 blocks/minute</code>. After Denim, <code>60 / 0.2 = 300 blocks/minute</code>. Therefore <code>300 / 30 = 10×</code>. The increase in block count is <code>(300 − 30) / 30 × 100 = 900%</code>. Neither number is a measured transaction-per-second rate; empty blocks, gas limits and workload affect transaction throughput.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":31352,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ossolidity003-chart-blocks-per-minute.png" alt="Two zero-baseline vertical columns compare nominal 30 and 300 Base canonical blocks per minute before and after Denim." class="wp-image-31352" style="width:100%;height:auto;max-width:100%" loading="lazy" /><figcaption class="wp-element-caption"><em>Calculated from <a href='https://www.base.org/blog/denim'>Base's November 5, 2026 specification</a>. Protocol-schedule arithmetic, not observed transactions per second. Chart: BitcoinVersus.Tech.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A smart-contract deadline can shrink from 60 to 6 minutes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Suppose a developer assumes a two-second interval and writes a rule allowing an action after 1,800 blocks. The old expected elapsed time was <code>1,800 × 2 = 3,600 seconds = 60 minutes</code>. At 200 ms per block, the equivalent period is <code>1,800 × 0.2 = 360 seconds = 6 minutes</code>. The deadline becomes 90% shorter, a critical difference for governance delays, auctions, vesting and withdrawal cooldowns.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Runnable Solidity source" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;padding:0!important;font-size:0.95em;line-height:1.5"><code>// Anti-pattern: not a duration-safe deadline on Base.
+// Assume the author intended 1,800 x 2 seconds = 1 hour.
+uint256 public unlockBlock = block.number + 1800;
+
+function unlocked() external view returns (bool) {
+    return block.number &gt;= unlockBlock;
+}</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The anti-pattern compiles as Solidity code, but <code>block.number</code> counts chain progress; it is not a portable clock. Existing contracts cannot be assumed safe after an upgrade merely because their code remains unchanged. A contract whose threshold was established before Denim requires specific migration analysis rather than blindly multiplying remaining blocks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":31353,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ossolidity003-chart-timelock-duration.png" alt="Signed vertical lollipop comparison showing an 1800 block threshold corresponds to 60 minutes at 2 seconds per block or 6 minutes at 200 milliseconds per block." class="wp-image-31353" style="width:100%;height:auto;max-width:100%" loading="lazy" /><figcaption class="wp-element-caption"><em>Calculated from fixed cadence assumptions. Both elapsed durations are engineering models, not guaranteed inclusion or settlement times. Chart: BitcoinVersus.Tech.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Beginner Solidity: choose the correct types</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://docs.soliditylang.org/en/v0.8.38/units-and-global-variables.html">Solidity 0.8.38 reference</a> defines <code>block.number</code> as an unsigned integer giving the block height and <code>block.timestamp</code> as an unsigned integer counting Unix seconds. A <code>uint256</code> stores non-negative integers. A <code>bool</code> stores <code>true</code> or <code>false</code>. A constructor parameter such as <code>uint256 delaySeconds</code> supplies the wait interval when deploying the contract. The unit suffix <code>365 days</code> is a compile-time conversion to seconds; it is not a calendar-aware year.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Base’s new <code>BaseTime</code> feature offers optional millisecond resolution, but ordinary <code>block.timestamp</code> still changes in whole seconds. Five consecutive 200 ms blocks can share the same timestamp. A basic one-hour or one-day deadline should use second-based time comparisons; millisecond operations require explicit Base-specific logic and additional testing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">SafeDeadline.sol — complete runnable classroom contract</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Create a file named <code>SafeDeadline.sol</code> and paste the following source. The contract has no deposit or token-transfer functions, so a classroom exercise cannot inadvertently move cryptocurrency. The event gives a record of successful completion; the separate preview method only explores hypothetical timestamps and never bypasses access control.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Runnable Solidity source" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;padding:0!important;font-size:0.95em;line-height:1.5"><code>// SPDX-License-Identifier: MIT
+pragma solidity 0.8.38;
+
+contract SafeDeadline {
+    uint256 public immutable unlockAt;
+    bool public completed;
+
+    event Completed(address indexed caller, uint256 time);
+
+    constructor(uint256 delaySeconds) {
+        require(
+            delaySeconds &gt; 0 &amp;&amp; delaySeconds &lt;= 365 days,
+            "invalid delay"
+        );
+        unlockAt = block.timestamp + delaySeconds;
+    }
+
+    function ready() public view returns (bool) {
+        return block.timestamp &gt;= unlockAt;
+    }
+
+    function remainingSeconds() external view returns (uint256) {
+        if (ready()) return 0;
+        return unlockAt - block.timestamp;
+    }
+
+    function finish() external {
+        require(!completed, "already completed");
+        require(ready(), "deadline not reached");
+        completed = true;
+        emit Completed(msg.sender, block.timestamp);
+    }
+
+    // Classroom-only probe; it never authorizes finish().
+    function previewAt(uint256 pretendTime)
+        external view returns (bool)
+    {
+        return pretendTime &gt;= unlockAt;
+    }
+}</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The <code>immutable</code> keyword makes <code>unlockAt</code> fixed after deployment. <code>require</code> rejects invalid durations, early execution and repeated execution. <code>ready()</code> compares the actual blockchain timestamp with the stored deadline. Solidity 0.8.x checks ordinary integer overflow. The <code>finish()</code> function modifies contract state only after both conditions pass.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Remix lab: compile, deploy and test</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Open <a href="https://remix-ide.readthedocs.io/en/latest/run.html">Remix's official Deploy &amp; Run guide</a> and choose the <strong>Remix VM</strong> environment, not a public blockchain or wallet extension.</li><li>Choose compiler <strong>0.8.38</strong>, compile <code>SafeDeadline.sol</code>, select <code>SafeDeadline</code> and deploy with constructor argument <code>3600</code>.</li><li>Read the automatically generated <code>unlockAt()</code> getter and record its integer timestamp as <code>D</code>. Read <code>ready()</code> immediately; expected result is <code>false</code> unless the clock has advanced an hour.</li><li>Call <code>previewAt(D − 1)</code>. Expected: <code>false</code>. Call <code>previewAt(D)</code>. Expected: <code>true</code>. These probes test boundary logic, not the live VM clock.</li><li>Call <code>finish()</code> before the real deadline. Expected: transaction reverts with <code>deadline not reached</code>.</li><li>Try deploying with <code>0</code> or <code>31536001</code> seconds. Both constructors should revert with <code>invalid delay</code>.</li><li>After advancing the VM clock through supported test tooling past the deadline, call <code>finish()</code> once (expected success and <code>completed() == true</code>) and call again (expected <code>already completed</code> revert). No claim is made that the final time-advancement test was executed here.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Numerical unit tests and expected output</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following pure function can be added inside <code>SafeDeadline</code> for a classroom self-check. Its returned boolean should be <code>true</code> in Remix; it performs arithmetic without using live blockchain state. Seven independent arithmetic assertions covering the same formulas were executed separately during preparation; Solidity compilation and EVM execution were not available in the authoring environment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Runnable Solidity source" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;padding:0!important;font-size:0.95em;line-height:1.5"><code>// Independent classroom arithmetic checks; no blockchain calls.
+function cadenceMath() external pure returns (bool) {
+    uint256 beforePerMinute = 60 / 2;        // 30
+    uint256 afterPerMinute = 60_000 / 200;   // 300
+    uint256 oldSeconds = 1800 * 2;           // 3600
+    uint256 newSeconds = 1800 * 200 / 1000;  // 360
+    return beforePerMinute == 30
+        &amp;&amp; afterPerMinute == 300
+        &amp;&amp; oldSeconds == 3600
+        &amp;&amp; newSeconds == 360;
+}</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>Expected numeric outputs: before <strong>30 blocks/min</strong>, after <strong>300 blocks/min</strong>, old 1,800-block duration <strong>3,600 seconds</strong>, and new duration <strong>360 seconds</strong>. The plot below shows additional threshold values. Larger block counts produce longer nominal waits, but every matched fixed count becomes one tenth as long under a tenfold higher block cadence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":31354,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ossolidity003-chart-deadline-sensitivity.png" alt="Two-line chart comparing modeled fixed block-count deadline durations for thresholds 300, 900, 1800, and 3600 before and after Base Denim." class="wp-image-31354" style="width:100%;height:auto;max-width:100%" loading="lazy" /><figcaption class="wp-element-caption"><em>Values derived from <a href='https://www.base.org/blog/denim'>Base's published protocol intervals</a>. The chart models scheduled time; it is not measured transaction latency. Chart: BitcoinVersus.Tech.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting and security</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Compilation fails:</strong> verify <code>pragma solidity 0.8.38;</code> matches the selected compiler exactly and all braces and semicolons are present.</li><li><strong>The deadline looks enormous:</strong> Unix timestamps are seconds since January 1, 1970, not human-readable dates. Convert only for display; retain integer seconds for comparisons.</li><li><strong><code>ready()</code> stays false:</strong> the local VM time has not reached the deadline. A hypothetical <code>previewAt()</code> call does not advance blockchain time.</li><li><strong>Fast blocks appear final:</strong> canonical inclusion and Ethereum settlement are separate stages. Sensitive withdrawals should explicitly define the required confirmation and finality policy.</li><li><strong>A time rule works only on Base:</strong> do not treat <code>block.number</code> or proprietary <code>BaseTime</code> behavior as portable to every Ethereum-compatible network.</li><li><strong>Contract accepts funds:</strong> do not add deposits, withdrawals, privileged actions or arbitrary token transfers to a classroom example without audited permission checks, reentrancy controls and independent tests.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The advanced lesson is about dependency management: block production cadence can change through network upgrades. Time-based policies should be modeled in seconds, tested at boundaries and audited when protocol parameters change. For a comparison of infrastructure upgrade stages, review the <a href="https://bitcoinversus.tech/2026/10/11/ethereum-glamsterdam-upgrade-live-sepolia/">Ethereum Glamsterdam testnet coverage</a> and the underlying <a href="https://bitcoinversus.tech/2026/10/08/it-what-is-virtual-machine-vm-how-it-works/">virtual-machine fundamentals</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Assessment</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>A Base contract counts 3,600 blocks to represent two hours at 2 seconds per block. How long would the same count take at a scheduled 200 ms interval?</li><li>Why does a 200 ms block interval not prove 200 ms transaction finality?</li><li>What is the difference between <code>uint256</code> and <code>bool</code> in <code>SafeDeadline</code>?</li><li>Why might five consecutive Base blocks report the same ordinary <code>block.timestamp</code>?</li><li>What happens when <code>finish()</code> runs before <code>unlockAt</code> or after <code>completed</code> becomes true?</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A 3,600-block interval is <strong>12 minutes</strong> at 200 ms/block. Canonical inclusion is weaker than Ethereum settlement. <code>uint256</code> stores integer time values, while <code>bool</code> stores a true/false state. Ordinary EVM timestamps retain one-second precision despite five scheduled blocks per second. <code>finish()</code> reverts before the deadline and reverts again once already completed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">References and next lesson</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary references: <a href="https://www.base.org/blog/denim">Base Engineering Team, November 5, 2026</a>; <a href="https://docs.soliditylang.org/en/v0.8.38/units-and-global-variables.html">Solidity 0.8.38 units and global variables</a>; <a href="https://www.soliditylang.org/blog/2026/10/22/solidity-0.8.38-release-announcement/">October 22 compiler release</a>; <a href="https://remix-ide.readthedocs.io/en/latest/run.html">Remix Deploy &amp; Run</a>; and <a href="https://docs.soliditylang.org/en/v0.8.38/security-considerations.html">Solidity security considerations</a>. The next subject in the full curriculum rotation is SQL. The following Solidity-track installment can deepen integer types, arithmetic, input validation and guarded state changes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Editor’s Note</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><em>The 200 ms block interval, the 2-second predecessor and associated clock behavior come from the Base team's November 5, 2026 mainnet announcement. All charts are deterministic calculations from those published protocol values, not network throughput benchmarks. Seven independent numerical assertions passed in the preparation environment. The Solidity code is designed for Remix compiler 0.8.38 but was not compiled or executed in a Solidity environment during publication preparation; exercise outputs are expected results, not verified runtime logs. The featured image is an AI-generated editorial illustration, not a documentary equipment photo.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Support BitcoinVersus.Tech</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>To support free educational materials, scan the original BitcoinVersus.Tech donation QR using a compatible Bitcoin wallet for an optional <strong>5,000-satoshi</strong> contribution. On mobile, show the code on another device or use supported wallet image-scanning features. Verify the receiving address and amount before sending.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original approved BitcoinVersus.Tech donation QR code for 5000 satoshis" class="wp-image-24043" style="width:100%;height:auto;max-width:100%" loading="lazy" /><figcaption class="wp-element-caption"><em>Original donation QR image. Credit: BitcoinVersus.Tech.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan QR code.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,148 @@
+<!-- wp:paragraph --><p><strong>OSJavaScript.005</strong> explains how a JavaScript program chooses which instructions run, repeats work over data, and stops safely. Conditions and loops are used in browser applications, scripts, automated tests, monitoring systems, and command-line tools. Control flow is the order in which a program executes statements; sound control-flow design makes decisions explicit and prevents accidental infinite loops.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The previous lesson, <a href='https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining/'>OSJavaScript.004: Operators and Coercion</a>, established comparisons, truthy values, and strict equality. Those expressions become decision conditions here. The examples below use illustrative temperature readings, not measurements from a real operating facility or safety-approved equipment thresholds.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives and prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Construct <code>if</code>, <code>else if</code>, and <code>else</code> branches with deliberate comparisons.</li><li>Describe <code>switch</code> matching, <code>default</code>, and fall-through.</li><li>Choose between <code>for</code>, <code>while</code>, <code>do...while</code>, and <code>for...of</code>.</li><li>Explain the difference between <code>break</code> and <code>continue</code>.</li><li>Build a bounded monitoring example, inspect expected output, and run 18 automated assertions.</li><li>Identify wrong data types, off-by-one errors, unsafe loop conditions, and unintended branch execution.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: variables, primitive values, logical comparisons, and a terminal or JavaScript console. Review <a href='https://bitcoinversus.tech/2026/10/15/osjavascript-003-variables-constants-let-const-var-reassignment-scope-temporal-dead-zone/'>OSJavaScript.003: Variables and Scope</a> before using <code>let</code> inside a loop. The executable lab was run locally with <strong>Node.js v22.16.0</strong> and requires no external packages, network access, credentials, or administrator privileges.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Conditional branches with if, else if, and else</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An <code>if</code> condition is evaluated first. When it is truthy, its block runs and the remaining branches of the same chain are skipped. When it is falsy, JavaScript checks the next <code>else if</code>; a final <code>else</code> provides a fallback. Use braces even for single statements to make branch boundaries obvious. Numeric zero and an empty string are falsy; an empty array is truthy. An explicit check such as <code>Number.isFinite(value)</code> is better than relying on truthiness when sensor input must be numeric.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="JavaScript source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>const temperature = 85;
+if (temperature &gt;= 85) {
+  console.log("ALERT");
+} else if (temperature &gt;= 70) {
+  console.log("WATCH");
+} else {
+  console.log("NORMAL");
+}
+// Expected output: ALERT</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The illustrative example uses 85 and 70 degrees Celsius only as teaching thresholds, not manufacturer limits, industrial trip settings, or a recommendation for equipment operation. Validate external data before selecting a branch; <code>"85"</code> is a string rather than a verified measurement. Read the <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling'>MDN JavaScript control-flow guide</a> for conditional semantics and the distinction between a block and a function scope.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=PgUXiprlg1k&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Bro Code, “If statements in JavaScript are easy,” published October 21, 2023. Public tutorial covering if, else if, booleans, and branching. <a href='https://www.youtube.com/watch?v=PgUXiprlg1k'>Official YouTube page</a>. Video identity was checked; end-to-end embedded playback was not independently verified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Selecting a case with switch</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>switch</code> compares one discriminant against cases using strict equality semantics. In the example, a string status maps to an integer severity. A <code>break</code> exits the switch after the matching case; without it, execution may continue into later cases even when their labels do not match. A <code>default</code> branch handles unknown values.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="JavaScript source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>const status = "WATCH";
+let priority;
+switch (status) {
+  case "ALERT": priority = 3; break;
+  case "WATCH": priority = 2; break;
+  case "NORMAL": priority = 1; break;
+  default: throw new RangeError("Unknown status");
+}
+console.log(priority); // 2</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>A case labeled <code>3</code> does not match the string <code>"3"</code>. Intentional fall-through is valid JavaScript, but it should be documented because unintended fall-through is a common defect. For more examples, review <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch'>MDN switch documentation</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Counting iterations with for</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The traditional <code>for</code> statement has an initializer, a condition checked before each iteration, and an update expression. An index typically begins at zero, and <code>index &lt; samples.length</code> visits every valid array index without reading beyond the array. Using <code>&lt;=</code> here would attempt one extra position. Keep the loop's terminating condition visible.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="JavaScript source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>const samples = [70, 82, 94];
+for (let index = 0; index &lt; samples.length; index++) {
+  console.log(index, samples[index]);
+}
+// 0 70
+// 1 82
+// 2 94</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>An index declared with <code>let</code> inside the loop header is block-scoped. The <a href='https://bitcoinversus.tech/2026/10/10/osjavascript-002-values-primitive-types-string-number-boolean-null-undefined-bigint-symbol-typeof/'>earlier primitive-values lesson</a> explains numbers, booleans, <code>null</code>, <code>undefined</code>, and <code>NaN</code>; the distinction matters because invalid readings must be recognized before arithmetic.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">While and do...while</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>while</code> loop evaluates its condition before the first pass, so it can execute zero times. A <code>do...while</code> loop evaluates the condition after the body, so it executes at least once. Neither form automatically guarantees termination. For retries, polling, or queue processing, include an attempt limit, a timeout, or another well-defined exit condition. A bounded loop is not the same as a real timer or asynchronous polling delay.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="JavaScript source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>let attempts = 0;
+while (attempts &lt; 3) {
+  attempts++;
+  if (attempts === 2) break;
+}
+console.log(attempts); // 2
+
+let checks = 0;
+do {
+  checks++;
+} while (checks &lt; 0);
+console.log(checks); // 1</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The second loop still runs once even though <code>checks &lt; 0</code> is false. For actual asynchronous hardware or network operations, an additional delay or event mechanism may be required; a tight loop can block the Node.js event loop. The <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration'>MDN loops-and-iteration guide</a> documents both forms.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">For...of, break, and continue</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>for...of</code> visits values from an iterable such as an array. In contrast, <code>for...in</code> enumerates property keys and is generally not the correct default for numeric array values. <code>continue</code> skips the remainder of the current iteration, while <code>break</code> exits the nearest enclosing loop or switch. When either is nested, identify precisely which statement it applies to.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="JavaScript source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>let total = 0;
+for (const value of [2, 3, 4, 5]) {
+  if (value % 2 === 0) continue;
+  total += value;
+}
+console.log(total); // 8</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>If a reading is invalid, continuing to the next sample can be a deliberate data-cleaning policy. If a critical threshold is reached, breaking immediately can be a deliberate policy too—but either choice needs to be explicit. Silent data omission can conceal a sensor defect; real systems should record invalid readings separately. A loop is not a substitute for manufacturer interlocks, alarms, or certified protective controls.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=Zi-Q0t4gMC8&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>freeCodeCamp.org, “JavaScript Course for Beginners,” published May 13, 2024. Control-flow chapter begins at 56:31 and includes if/else, switch, for, while, do...while, and break/continue. <a href='https://www.youtube.com/watch?v=Zi-Q0t4gMC8'>Official YouTube page</a>. Video identification was checked, but end-to-end embedded playback remains unverified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete runnable monitoring lab</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/osjavascript-005-control-flow/ControlFlowLab.js'>complete ControlFlowLab.js source</a> implements six short functions. It classifies readings, assigns priorities, skips non-finite measurements, stops at the first critical value, caps polling attempts, demonstrates a loop that runs once, and sums odd integers. It uses the Node.js CommonJS module system so the accompanying test program can import the functions. Neither file reads a device, accesses the network, nor controls actual hardware.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Save <strong>ControlFlowLab.js</strong> and <a href='https://github.com/1freetech/opencert.tech/blob/main/archive/2026/11/osjavascript-005-control-flow/ControlFlowLab.test.js'>ControlFlowLab.test.js</a> in the same directory. Run the commands below in a terminal with Node.js 22 or a compatible supported Node.js release. The test runner is built into Node; no <code>npm install</code> step is required.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="JavaScript source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>node --check ControlFlowLab.js
+node ControlFlowLab.js
+node --test ControlFlowLab.test.js</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Observed local output from <strong>Node.js v22.16.0</strong> is listed below. The array scan deliberately ignores <code>NaN</code>, accepts valid values 70, 82, and 94, totals 246, and stops before reading the final 99. Those values are constructed sample inputs, not production observations.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="JavaScript source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>85 C: ALERT
+70 C: WATCH
+55 C: NORMAL
+ALERT priority: 3
+Scan: {"validCount":3,"total":246,"firstCritical":{"index":3,"value":94}}
+Polls before ready: 2
+do...while with limit 0: 1
+Sum of odd values: 8</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The test harness exercises correct branches, type rejection, invalid status handling, empty arrays, early termination, bounded attempts, mandatory first execution for <code>do...while</code>, and odd-number filtering. All <strong>18 of 18 automated tests passed</strong> locally with Node.js v22.16.0. Passing unit tests verify the specific inputs covered; they do not prove every input safe, certify a program for industrial operations, or benchmark performance. See <a href='https://nodejs.org/api/test.html'>Node.js test-runner documentation</a> and <a href='https://nodejs.org/api/cli.html'>Node command-line documentation</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and safety</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Loop never exits:</strong> make sure the counter changes, the condition can become false, and externally driven loops have a finite cap or cancellation route.</li><li><strong>Unexpected branch:</strong> inspect the value and its type; prefer <code>===</code> and explicit number validation over accidental coercion.</li><li><strong>Switch runs extra cases:</strong> confirm <code>break</code>, <code>return</code>, or intended documented fall-through after each match.</li><li><strong>Last array element is undefined:</strong> correct a likely <code>&lt;= length</code> error to <code>&lt; length</code> if traversing zero-based indexes.</li><li><strong>Missing or skipped data:</strong> inspect the <code>continue</code> policy; report invalid measurements instead of treating silence as a normal sensor reading.</li><li><strong>Heavy CPU use:</strong> avoid tight infinite polling. Use event-driven I/O or timers for actual asynchronous work, not a busy wait.</li><li><strong>Integer precision:</strong> validate and constrain numeric inputs; values beyond safe integer precision can produce misleading sums.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Do not copy illustrative thresholds into facility control systems. Field deployments require validated instruments, authorized setpoints, change control, independent safety interlocks, and failure-response testing. The lab is educational; it does not connect to a PLC, sensor network, or production equipment.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Guided practice and knowledge assessment</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Change the temperature to 69, 70, and 85. Identify which branch executes at every boundary.</li><li>Remove one <code>break</code> from a safe local <code>switch</code> example. Predict which later statements run, then restore it.</li><li>Change the array loop condition to <code>index &lt;= samples.length</code> in a throwaway test. Explain the final <code>undefined</code> element.</li><li>Demonstrate <code>while</code> at zero attempts and <code>do...while</code> at zero limits; explain why their counts differ.</li><li>In <code>scanSamples</code>, replace <code>break</code> with <code>continue</code>. Predict how <code>validCount</code> and <code>total</code> change.</li><li>Extend the test harness with <code>Infinity</code>, a negative sample, and an unknown status. Document expected behavior before running.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> 69 is NORMAL, 70 is WATCH, and 85 is ALERT; removing <code>break</code> allows case fall-through; index equal to <code>length</code> is out of range; <code>while</code> can run zero times while <code>do...while</code> runs once; removing the scan's early <code>break</code> permits later valid readings to be counted, with consequences for the meaning of first-critical detection; <code>Infinity</code> is rejected as a non-finite reading, negative finite input currently classifies as NORMAL unless the caller adds a domain constraint, and an unknown priority status throws <code>RangeError</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Authoritative references and continuation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Primary technical sources: <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling'>MDN Control Flow and Error Handling</a>, <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration'>MDN Loops and Iteration</a>, <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch'>MDN switch</a>, <a href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/do...while'>MDN do...while</a>, and <a href='https://nodejs.org/api/test.html'>Node.js Testing Documentation</a>. The <a href='https://bitcoinversus.tech/2026/10/08/osjavascript-001-what-is-javascript-where-it-runs-what-it-does-first-console-log/'>JavaScript series introduction</a> explains the browser and server-side runtimes. The next lesson in this track can advance to arrays, functions, and structured program composition.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Control flow connects expressions to practical program behavior. A readable program makes conditions, repetition, exit conditions, and error-handling rules visible. Branches should reflect validated data; loops should make progress or end deliberately. The executable lab and reproducible tests provide a foundation for larger web applications and infrastructure scripts.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSJavaScript.005 follows the published OSJavaScript.004. The original 1200 × 630 featured art is an AI illustration of a JavaScript workstation, not an actual software screenshot; the small neon-green Bitcoinversus.tech signature is part of the graphic. Educational video pages were identified independently; live in-page playback and visual mobile behavior have not been independently confirmed. The Node.js example and all 18 tests were executed locally using Node.js v22.16.0. Example temperatures, thresholds, and scan readings are simulated training inputs. No actual physical monitoring equipment was tested.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original optional BitcoinVersus.Tech 5,000-sat donation QR. Verify recipient and payment amount inside the wallet before sending funds.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the QR code on another screen or use a wallet's saved-image scanner. Always confirm the address and amount before authorizing a payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech educational lessons do not substitute for independently validated engineering procedures or operational safety controls.</em></p><!-- /wp:paragraph -->

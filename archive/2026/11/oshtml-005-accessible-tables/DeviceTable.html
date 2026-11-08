@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accessible HTML Equipment Table — OSHTML.005</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 56rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.55; }
+    .table-scroll { max-width: 100%; overflow-x: auto; }
+    .table-scroll:focus-visible { outline: 2px solid #2563eb; }
+    table { border-collapse: collapse; width: 100%; min-width: 25rem; }
+    caption { text-align: left; font-weight: 700; margin-bottom: .5rem; }
+    th, td { padding: .65rem; text-align: left; border-bottom: 1px solid #888; }
+    thead { border-bottom: 2px solid currentColor; }
+    tfoot { font-weight: 700; border-top: 2px solid currentColor; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Equipment power — illustrative data</h1>
+  <p>Training values only; not readings from operating hardware or a recommended equipment specification.</p>
+  <div class="table-scroll" role="region" aria-label="Illustrative equipment power data table" tabindex="0">
+    <table>
+      <caption>Example device power readings, watts (W)</caption>
+      <thead>
+        <tr>
+          <th scope="col">Equipment</th>
+          <th scope="col">Power (W)</th>
+          <th scope="col">State</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Router</th><td>12</td><td>Online</td></tr>
+        <tr><th scope="row">Switch</th><td>24</td><td>Online</td></tr>
+        <tr><th scope="row">Server</th><td>150</td><td>Standby</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><th scope="row">Total</th><td>186</td><td>Illustrative</td></tr>
+      </tfoot>
+    </table>
+  </div>
+  <p>The total is the arithmetic sum of three made-up sample values. Watts measure power, not energy.</p>
+</main>
+</body>
+</html>

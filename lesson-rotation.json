@@ -48,37 +48,37 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "html",
-    "lesson_number": 5,
-    "track_id": "OSHTML.005",
-    "title": "OSHTML.005: HTML Tables — Structure, Headers, and Accessibility",
-    "public_title": "OSHTML.005: HTML Tables — Structure, Headers, and Accessibility",
-    "wordpress_post_id": 31296,
-    "live_url": "https://bitcoinversus.tech/2026/11/08/oshtml-005-html-tables-structure-headers-accessibility/",
-    "archive_path": "archive/2026/11/31296-oshtml-005-html-tables-accessibility.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/31296-oshtml-005-html-tables-accessibility.qa.json",
+    "subject": "php",
+    "lesson_number": 6,
+    "track_id": "OSPHP.006",
+    "title": "OSPHP.006: PHP Exceptions — try, catch, finally, and Safe Error Handling",
+    "public_title": "OSPHP.006: PHP Exceptions — try, catch, finally, and Safe Error Handling",
+    "wordpress_post_id": 31335,
+    "live_url": "https://bitcoinversus.tech/2026/11/08/osphp-006-php-exceptions-try-catch-finally-safe-error-handling/",
+    "archive_path": "archive/2026/11/31335-osphp-006-exceptions.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/31335-osphp-006-exceptions.qa.json",
     "verified_repositories": [
       "1freetech/Bitcoinversus.tech",
       "1freetech/opencert.tech",
       "1freetech/techcert"
     ],
     "publication_status": "publish",
-    "featured_media_id": 31293,
+    "featured_media_id": 31324,
     "body_video_ids": [
-      "e23RA_Uo99o",
-      "iuSKGuWWNGA"
+      "rQntgj7yink",
+      "XQ5Pd-6Hnjk"
     ],
-    "verification_status": "Published WordPress, raw Gutenberg markup and rendered iframe identities confirmed. Full video playback, desktop/mobile pixel checks and independent web fetch unverified.",
-    "qa_status": "Original 1200x630 educational HTML table cover with small neon-green bottom-left Bitcoinversus.Tech brand; full standalone HTML sample; 18/18 Node.js structural checks; 2 rendered YouTube iframes; a responsive example table; six contextual internal lesson links; QR and editor footer."
+    "verification_status": "Published on WordPress; exact Gutenberg source archived in 3 repositories; 2 server-rendered YouTube iframes confirmed; end-to-end playback and mobile screenshot unverified.",
+    "qa_status": "Original 1200×630 cover with neon-green small bottom-left Bitcoinversus.Tech text; 30/30 locally executed PHP 8.4.24 assertions; 8 unboxed code examples, 6 internal lesson links, original donation QR and editor footer."
   },
   "next": {
-    "subject": "php",
-    "lesson_number": 6,
-    "title_format": "OSPHP.006: {topic}",
-    "public_title_format": "OSPHP.006: {topic}",
-    "resolution_note": "OSHTML.005 published Nov 8, 2026 on WordPress post #31296. Published markup, HTML sample, 18 structural checks, and QA archived in three repositories. Verify live WordPress and archives before OSPHP.006 publication."
+    "subject": "solidity",
+    "lesson_number": 3,
+    "title_format": "OSSolidity.003: {topic}",
+    "public_title_format": "OSSolidity.003: {topic}",
+    "resolution_note": "OSPHP.006 published Nov 8, 2026 as WordPress post 31335, with PHP source/tests and the exact Gutenberg body archived in three GitHub repositories. Verify current WordPress and archives before beginning next Solidity lesson."
   },
-  "next_after_current": "solidity",
+  "next_after_current": "sql",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -177,10 +177,12 @@
     },
     "php": {
       "acronym": "OSPHP",
-      "next_lesson_number": 6,
-      "last_published_lesson_number": 5,
-      "last_wordpress_post_id": 28458,
-      "source_resolution": "WordPress published OSPHP.004 Arrays post 25689 Oct 15, 2026; next unique PHP lesson OSPHP.005."
+      "next_lesson_number": 7,
+      "last_published_lesson_number": 6,
+      "last_wordpress_post_id": 31335,
+      "source_resolution": "WordPress published OSPHP.004 Arrays post 25689 Oct 15, 2026; next unique PHP lesson OSPHP.005.",
+      "last_published_title": "OSPHP.006: PHP Exceptions — try, catch, finally, and Safe Error Handling",
+      "verification_status": "published_archived_server_render_checked"
     },
     "sql": {
       "acronym": "OSSQL",

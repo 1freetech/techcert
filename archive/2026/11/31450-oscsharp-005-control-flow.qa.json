@@ -1,0 +1,60 @@
+{
+  "lesson_id": "OSC#.005",
+  "title": "OSC#.005: C# Control Flow — Conditions, Switch, and Loops",
+  "wordpress_post_id": 31450,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/08/oscsharp-005-csharp-control-flow-conditions-switch-loops/",
+  "featured_media_id": 31442,
+  "cover": {
+    "dimensions_px": [
+      1200,
+      630
+    ],
+    "url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oscsharp-005-control-flow-cover-1200x630-1.jpg",
+    "original_ai_art": true,
+    "brand_text": "Bitcoinversus.Tech",
+    "brand_color": "#39FF14",
+    "brand_location": "bottom-left",
+    "font_size": "13 pixels on final raster, approximately 10 pt at 96dpi"
+  },
+  "saved_gutenberg_readback": true,
+  "source_chars": 28237,
+  "videos": {
+    "ids": [
+      "GLzAkJb0eoA",
+      "Z5JS36NlJiU"
+    ],
+    "server_rendered_iframes": true,
+    "embedded_playback_verified": false
+  },
+  "content_checks": {
+    "internal_links": 4,
+    "unboxed_code_examples": 9,
+    "original_donation_qr": true,
+    "editors_note": true,
+    "volunteer_footer": true,
+    "runtime_test_limitations_disclosed": true
+  },
+  "source_paths": [
+    "archive/2026/11/oscsharp-005-control-flow/Program.cs",
+    "archive/2026/11/oscsharp-005-control-flow/ControlFlowLab.csproj",
+    "archive/2026/11/oscsharp-005-control-flow/README.md"
+  ],
+  "tests": {
+    "target_framework": "net10.0",
+    "authoring_environment_dotnet_sdk_installed": false,
+    "static_assertions_passed": 24,
+    "static_assertions_total": 24,
+    "csharp_self_test_assertions_authored": 32,
+    "csharp_self_test_assertions_executed": 0,
+    "compiled_or_runtime_qa_verified": false,
+    "arithmetic_example": "35+70+92=197; visited indices 0,1,2,3; final value 80 not processed by first-alert scan"
+  },
+  "subscriber_email_suppressed": true,
+  "remaining_limits": [
+    "Independent live webpage browser fetch not completed",
+    "Embedded videos observed as server-rendered iframes; playback not verified",
+    "Mobile screenshot pixel-level layout not independently verified",
+    "Runtime compilation and 32 C# tests await a .NET 10 SDK environment"
+  ]
+}

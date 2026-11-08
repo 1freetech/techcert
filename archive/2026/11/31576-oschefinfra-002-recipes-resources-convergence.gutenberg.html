@@ -1,0 +1,153 @@
+<!-- wp:paragraph --><p><strong>Chef Infra</strong> manages the desired state of computers through cookbooks and recipes. A recipe declares resources such as directories, files, services, and packages; Chef Infra Client then compares those declarations with a node’s observed state and takes corrective action where needed. <strong>OSChefInfra.002</strong> follows <a href="https://bitcoinversus.tech/2026/11/05/oschefinfra-001-chef-infra-architecture-workstation-cookbooks-nodes-convergence/">OSChefInfra.001 on workstations, cookbooks and nodes</a>, introducing the resource lifecycle, idempotence, guards, notifications, and a small test cookbook. The curriculum identifier refers to <em>Progress Chef Infra automation</em>, not the unrelated Chef esoteric programming language.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Read a Ruby-based Chef Infra recipe and distinguish resource type, name, property, and action.</li><li>Explain the compile phase, converge phase, desired state, idempotence, and drift correction.</li><li>Use the built-in <code>directory</code>, <code>file</code>, and <code>log</code> resources in an isolated Linux lab.</li><li>Explain why <code>notifies</code> triggers dependent work only when an originating resource updates.</li><li>Distinguish <code>not_if</code> and <code>only_if</code> guards from declarative state checks.</li><li>Predict first-run, second-run, and deliberately drifted outcomes, then inspect real logs before declaring success.</li><li>Describe code review, privilege boundaries, version selection, and the deprecation of legacy Chef Infra Server.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: the prior Chef Infra architecture lesson, elementary <a href="https://bitcoinversus.tech/2026/10/09/osbash-001-shell-script-basics-bash-shebang-chmod-first-script/">Linux shell commands</a>, basic filesystem permissions, and an isolated Linux virtual machine or container designed for administration labs. Chef Workstation and Chef Infra Client must already be legitimately installed and licensed as required by their respective terms. Do not run the cookbook on a production workstation or an unknown shared host.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Imagine keeping ten classroom computers organized. Each needs a particular folder, a settings file, and the correct permissions. Instead of checking and repairing every machine by hand, an administrator writes down the desired conditions in a recipe. Chef Infra Client reads the recipe, checks the machine, and applies changes only when a managed resource differs from the intended state.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A recipe is not necessarily a line-by-line script that runs every command every time. Most standard Chef resources are designed to be <strong>idempotent</strong>: repeating them when the desired state already exists should not create additional changes. If a managed file changes, a notification can tell another resource to perform a related action. The two key ideas are defining the destination and checking whether a change is necessary.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=_pUdL4w9E7k","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=_pUdL4w9E7k
+</div><figcaption class="wp-element-caption"><em>Progress Chef, <a href="https://www.youtube.com/watch?v=_pUdL4w9E7k">“How Chef Infra Works”</a> (September 25, 2014). Historical vendor introduction to infrastructure as code; the broad principles remain useful although its interface and deployment examples are dated. Actual embedded playback requires live verification.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Historical Background and Supported Components</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Chef originated during the growth of infrastructure-as-code systems, which made server configuration versionable and repeatable instead of relying only on handwritten operations. Modern Chef products distinguish authoring and testing tools, local client convergence, and central enterprise platforms. According to Progress Chef’s <a href="https://docs.chef.io/versions/">supported-version register</a> checked November 8, 2026, <strong>Chef Infra Client 19.x</strong> and <strong>Chef Workstation 26.x</strong> are generally available, while Infra Client 18.x is deprecated. Version ranges are not interchangeable with feature compatibility; verify the release and OS platform for any real deployment.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The older <strong>Chef Infra Server 15.x</strong> is deprecated with an announced November 30, 2026 end-of-life date; Progress directs customers toward <a href="https://docs.chef.io/server/">Chef 360 Platform</a>. The cookbook exercise below uses <strong>local mode</strong>, which does not require a running Infra Server or a Chef 360 deployment. Learning the resource model does not constitute a recommendation to install a nearly end-of-life server.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Anatomy of a Chef Resource</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The Chef Infra language is Ruby-based. A resource block identifies a managed object, the properties that specify its desired state, and an action that Chef should execute if that object needs correction. The following example manages one directory in a disposable Linux environment:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Chef directory resource" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>directory '/tmp/opencert-chef-lab' do
+  mode '0755'
+  action :create
+end</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Here <code>directory</code> is the resource type, the quoted path identifies its target, <code>mode</code> specifies POSIX permission bits, and <code>:create</code> is the action symbol. A quoted mode such as <code>0755</code> gives owner read/write/execute and other users read/execute. Directory access also depends on the enclosing directory permissions and operating-system security controls. The <a href="https://docs.chef.io/client/19/resources/bundled/directory/">official Chef directory resource reference</a> documents actions, properties, and platform differences.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Compile and Converge Phases</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Chef Infra Client processes a run in conceptually separate phases. During compilation, it loads recipes and builds a collection of resource declarations; during convergence, it evaluates and executes the collected resources to satisfy their intended states. Ruby expressions in recipes can run at compile time, but most standard resource actions occur during the converge phase. Confusing these phases can cause incorrect dynamic values or resource ordering assumptions.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>An <strong>idempotent</strong> resource should leave an already compliant object unchanged. If a managed file contains the correct bytes and permissions, a second convergence should normally not rewrite the file. This property is essential for scheduled management of large fleets, where unnecessary writes or restarts would impose operational cost. Idempotence is a behavior of the whole resource action in its actual environment, not proof that every Ruby statement or shell command is harmless.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Managing Files and Triggering Notifications</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <code>file</code> resource checks a file’s existence, content, and declared properties. It can create a missing file or replace content that differs. A notification can trigger a related <code>log</code> resource when the file updates. This deliberately small example avoids privileged service restarts and demonstrates delayed event handling:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Complete Chef Infra recipe, default.rb" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>directory '/tmp/opencert-chef-lab' do
+  mode '0755'
+  action :create
+end
+
+file '/tmp/opencert-chef-lab/status.txt' do
+  content &quot;managed by Chef Infra\n&quot;
+  mode '0644'
+  action :create
+  notifies :write, 'log[status_file_changed]', :delayed
+end
+
+log 'status_file_changed' do
+  message 'Status file was created or updated'
+  level :info
+  action :nothing
+end</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The directory resource runs before the file resource, ensuring the parent path exists. The file is created with one line of sample content and mode <code>0644</code>. When the file resource reports an update, it queues a delayed <code>log[status_file_changed]</code> action, ordinarily executed toward the end of the run. On a subsequent compliant run the file resource should report no update and therefore send no such notification. The <a href="https://docs.chef.io/client/19/resources/bundled/file/">official file resource</a>, <a href="https://docs.chef.io/client/19/resources/bundled/log/">log resource</a>, and <a href="https://docs.chef.io/client/19/resources/common_functionality/">notification reference</a> define the behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>An optional real-world variation would notify a <code>service</code> resource to reload configuration after a template changes. Service reload and restart actions can interrupt application sessions and should be tested in staging with backups and rollback procedures. The introductory lab intentionally logs a message instead of touching a service.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=lqMijB1JIuU","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=lqMijB1JIuU
+</div><figcaption class="wp-element-caption"><em>Progress Chef, <a href="https://www.youtube.com/watch?v=lqMijB1JIuU">“How to Set Up Chef Workstation, Create a Cookbook and Get Started with Compliance”</a> (August 2021). Official historical walkthrough of authoring cookbooks and testing configuration; its legacy server setup should not be reproduced without checking current lifecycle notices. Live playback remains a separate QA check.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Guards and Imperative Operations</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <strong>guard</strong> adds a condition to a resource action. <code>only_if</code> permits the action when its predicate succeeds; <code>not_if</code> blocks the action when its predicate succeeds. Guards can be Ruby blocks or shell commands, with differing evaluation semantics. They are particularly important around resources that launch commands, because an arbitrary <code>execute</code> resource does not automatically know whether a shell command has already accomplished its job.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The following toy example demonstrates a Ruby-block guard for a log entry, not an application configuration change:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Chef only_if guard example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>log 'demo_status_exists' do
+  message 'Managed status file is present'
+  level :info
+  only_if { ::File.exist?('/tmp/opencert-chef-lab/status.txt') }
+end</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The guard is evaluated when Chef considers running the resource. If the file does not exist, the log action is skipped. The guard does not create the file; the earlier <code>file</code> resource does that. A manually added Ruby guard is not a replacement for a resource’s built-in state comparison. Prefer standard declarative resources to custom shell commands whenever the desired state can be expressed directly.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Hands-On Local-Mode Cookbook Lab</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Use a disposable Linux VM or container. First confirm the installed tools and review the vendor license notice. Chef Workstation provides <code>chef generate cookbook</code>, while Chef Infra Client 19 provides the documented <code>-z</code> local-mode and <code>-c</code> custom-config options. From your own user account, create a new lab cookbook; avoid running these instructions on systems that manage real services or sensitive files:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Workstation and cookbook creation commands" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>chef --version
+chef-client --version
+mkdir -p &quot;$HOME/chef-course/cookbooks&quot;
+cd &quot;$HOME/chef-course/cookbooks&quot;
+chef generate cookbook oc_demo</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The generated cookbook includes <code>recipes/default.rb</code> and a <code>metadata.rb</code> file. Depending on the workstation release, the generator may also create Policyfile and testing scaffolds. Replace only the generated <code>recipes/default.rb</code> with the complete directory/file/log example above. Inspect the generated metadata name and make sure it is <code>oc_demo</code>; the test command uses that cookbook name.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For an explicit local-mode cookbook path, create <code>$HOME/chef-course/client.rb</code> with the following Ruby configuration. The sample keeps Chef’s local data within the disposable project directory rather than relying on a global production configuration:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Local Chef client configuration" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>chef_repo_path File.expand_path('~/chef-course')
+cookbook_path [File.expand_path('~/chef-course/cookbooks')]
+file_cache_path File.expand_path('~/chef-course/.cache')
+node_path File.expand_path('~/chef-course/nodes')</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>In a Linux terminal, return to the <code>chef-course</code> directory. The first command uses the Chef Infra Client why-run planning mode; then, only after reviewing the proposed changes on your disposable VM, run the local recipe for real:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Chef Infra local mode lab commands" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>cd &quot;$HOME/chef-course&quot;
+chef-client -z -c &quot;$HOME/chef-course/client.rb&quot; -o 'recipe[oc_demo::default]' -W
+chef-client -z -c &quot;$HOME/chef-course/client.rb&quot; -o 'recipe[oc_demo::default]'
+cat /tmp/opencert-chef-lab/status.txt
+stat /tmp/opencert-chef-lab/status.txt</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The expected first successful convergence creates the lab directory and text file, then emits a delayed change notification. A second local-mode run using the same recipe should ordinarily report the directory and file as already compliant, with no file-change log notification. These are <strong>expected results</strong>, not observed Chef Infra execution results in the authoring environment. Review the actual exit code, resource summary, permissions, and log before recording a pass. The vendor <a href="https://docs.chef.io/client/19/reference/ctl_chef_client/">chef-client command reference</a> documents the local and why-run options.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Testing Idempotence and Configuration Drift</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Repeat the local-mode command without changing any files. Write down how many resources report an update. Then, in the disposable lab only, change the contents of <code>/tmp/opencert-chef-lab/status.txt</code> and rerun the same Chef recipe. The client should restore the declared text and queue the notification because the file no longer matches the desired state.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Deliberate lab-only drift correction test" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>printf 'deliberately modified\n' &gt; /tmp/opencert-chef-lab/status.txt
+chef-client -z -c &quot;$HOME/chef-course/client.rb&quot; -o 'recipe[oc_demo::default]'
+cat /tmp/opencert-chef-lab/status.txt</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Compare three states: initial creation, unchanged rerun, and recovery after deliberate drift. State the expected update counts only after you have real client output, because exact resource summaries can vary with environment, package version, permissions, and generated cookbook scaffolding. Tests should also verify that only the intended disposable paths changed.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Security, Platform Limits and Operational Safety</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Privilege control:</strong> Chef can make privileged filesystem and service changes. Use a throwaway VM, audited code, least privilege, and a narrowly scoped target path.</li><li><strong>Trust and provenance:</strong> review cookbooks, dependencies, downloaded archives and package sources before running them; do not execute unreviewed infrastructure code from strangers.</li><li><strong>Secrets:</strong> never place real passwords, private keys or authentication tokens in plain recipes, logs, examples or Git repositories.</li><li><strong>Idempotence:</strong> inspect custom commands and side effects; executing a script repeatedly can remain destructive even when adjacent Chef resources are idempotent.</li><li><strong>Version and lifecycle:</strong> target supported Infra Client and Workstation releases; do not assume a legacy Infra Server deployment remains appropriate after its published end-of-life date.</li><li><strong>Rollback:</strong> test failure paths, retain snapshots/backups and confirm that removing a cookbook does not automatically undo all changes it previously made.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Chef can manage both <a href="https://bitcoinversus.tech/2026/10/11/osdctc-008-server-network-configuration-validation/">server networking configuration</a> and local operating-system resources, but changing production network or identity settings could cause lockout. For cross-platform context, review <a href="https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/">PowerShell variable and scope fundamentals</a>; Chef recipes use Ruby semantics, not PowerShell syntax.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Unknown cookbook:</strong> check the directory name, <code>metadata.rb</code> cookbook name and <code>cookbook_path</code> location.</li><li><strong>Permission denied:</strong> run in a correctly provisioned disposable VM, verify ownership, and do not escalate privileges on a production host merely to suppress errors.</li><li><strong>Notification not emitted:</strong> confirm the source file resource actually reported an update; a compliant file will not notify on every run.</li><li><strong>Surprising update on every run:</strong> inspect current content, file mode, encodings, ownership rules and other processes that may be changing the file.</li><li><strong>License/version error:</strong> use the vendor-supported installer and a valid entitlement; do not bypass licensing.</li><li><strong>Legacy server instructions:</strong> identify whether the guide predates the November 2026 deprecation boundary and consult current Progress Chef documentation.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice and Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Explain the difference between a recipe’s declared desired state and the observed current state.</li><li>Name the resource type, name, two properties and action in the status-file example.</li><li>Why does the log notification normally run on creation but not on an unchanged second pass?</li><li>What distinguishes <code>:immediate</code> from <code>:delayed</code> notifications?</li><li>Why is a raw <code>execute</code> resource often harder to make idempotent than a native file resource?</li><li>What risk arises if a cookbook changes a production network or SSH configuration without a rollback path?</li><li>Which client and workstation major versions are listed as GA by Progress as of November 8, 2026?</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answers:</strong> Desired state is the configuration described by resources; current state is what the node actually has. The file resource identifies a path, declares content and mode, and applies <code>:create</code>. Notifications are triggered when a source resource updates. Immediate notifications run during convergence as the source resource changes; delayed notifications run toward the end of the Chef Client run. Arbitrary commands may have hidden or recurring side effects; native resources can compare managed state. Network misconfiguration can disconnect administrators or workloads. Progress lists Chef Infra Client 19.x and Chef Workstation 26.x as generally available.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References and Further Study</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://docs.chef.io/versions/">Progress Chef — Supported Versions and Lifecycle</a> (checked November 8, 2026).</li><li><a href="https://docs.chef.io/platform_overview/">Progress Chef — Platform Overview</a>.</li><li><a href="https://docs.chef.io/client/19/cookbooks/">Progress Chef — Cookbook Structure</a>.</li><li><a href="https://docs.chef.io/client/19/resources/bundled/directory/">Progress Chef — Directory Resource</a>; <a href="https://docs.chef.io/client/19/resources/bundled/file/">File Resource</a>; <a href="https://docs.chef.io/client/19/resources/bundled/log/">Log Resource</a>.</li><li><a href="https://docs.chef.io/client/19/resources/common_functionality/">Progress Chef — Common Resource Functionality and Notifications</a>.</li><li><a href="https://docs.chef.io/client/19/reference/ctl_chef_client/">Progress Chef — chef-client CLI and Local Mode</a>.</li><li><a href="https://docs.chef.io/workstation/26.0/tools/ctl_chef/">Progress Chef — Chef Workstation 26 CLI</a>.</li><li><a href="https://docs.chef.io/server/">Progress Chef — Legacy Infra Server Lifecycle Warning</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A Chef Infra cookbook explains how a computer should be configured. Resources describe folders, files and other parts of the machine, while Chef Infra Client decides whether they need changes. Idempotence helps keep repeated runs safe when nothing has changed. Notifications coordinate dependent actions, and guards provide extra conditions. By testing an isolated cookbook twice and then deliberately changing a sample file, learners can see the basic logic behind automated configuration management.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor’s Note:</strong> OSChefInfra.002 follows the verified published OSChefInfra.001 lesson. The separate OSChef.001–.003 series describes an unrelated esoteric language. Official release and deprecation information was consulted November 8, 2026. The Ruby recipe was checked for syntax using Ruby, but Chef Infra Client is not installed in the authoring runtime and the sample convergence, why-run, idempotence and drift tests were not executed. Embedded video identities are sourced; playable website iframes and mobile layout require post-publication inspection. The original 1200 × 630 branded artwork is a conceptual illustration, not an actual screenshot of executed Chef logs.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech donation QR code for a voluntary donation of 5,000 sats" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional BitcoinVersus.Tech donation QR. Verify the amount and destination independently before paying.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code. For mobile scanning, display the QR on another screen or use a compatible wallet’s saved-image scanner.</em></p><!-- /wp:paragraph -->

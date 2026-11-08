@@ -1,0 +1,27 @@
+'use strict';
+const fs = require('node:fs');
+const assert = require('node:assert/strict');
+const test = require('node:test');
+const html = fs.readFileSync('DeviceTable.html', 'utf8');
+const all = re => [...html.matchAll(re)];
+const bodySection = html.match(/<tbody>([\s\S]*?)<\/tbody>/i)?.[1] || '';
+const footerSection = html.match(/<tfoot>([\s\S]*?)<\/tfoot>/i)?.[1] || '';
+
+test('HTML5 doctype', () => assert.match(html, /^<!doctype html>/i));
+test('declares English language', () => assert.match(html, /<html lang="en">/i));
+test('uses UTF-8 encoding', () => assert.match(html, /<meta charset="utf-8">/i));
+test('declares a mobile viewport', () => assert.match(html, /name="viewport" content="width=device-width, initial-scale=1"/));
+test('has descriptive document title', () => assert.match(html, /<title>Accessible HTML Equipment Table/));
+test('has main landmark and a heading', () => { assert.match(html, /<main>/); assert.match(html, /<h1>/); });
+test('contains exactly one data table', () => assert.equal(all(/<table(?:\s|>)/g).length, 1));
+test('contains a meaningful direct table caption', () => assert.match(html, /<table>\s*<caption>[^<]+<\/caption>/));
+test('has header, body, and footer row groups', () => { for (const n of ['thead','tbody','tfoot']) assert.match(html, new RegExp('<'+n+'>[\\s\\S]*?<\\/'+n+'>')); });
+test('column headings are th with scope col', () => assert.equal(all(/<th scope="col">/g).length, 3));
+test('row headings are th with scope row', () => assert.equal(all(/<th scope="row">/g).length, 4));
+test('has exactly three sample body rows', () => assert.equal(all(/<tr>/g).length, 5));
+test('each body row has one header and two data cells', () => { for (const row of bodySection.match(/<tr>[\s\S]*?<\/tr>/g)||[]) { assert.equal((row.match(/<th scope="row">/g)||[]).length,1); assert.equal((row.match(/<td>/g)||[]).length,2); } });
+test('sample watt values are 12, 24 and 150', () => { const watts = [...bodySection.matchAll(/<th scope="row">[^<]+<\/th>\s*<td>(\d+)<\/td>/g)].map(x=>Number(x[1])); assert.deepEqual(watts, [12,24,150]); });
+test('total matches computed illustrative watts', () => { const watts = [...bodySection.matchAll(/<th scope="row">[^<]+<\/th>\s*<td>(\d+)<\/td>/g)].map(x=>Number(x[1])); const total=Number(footerSection.match(/<td>(\d+)<\/td>/)?.[1]); assert.equal(total,watts.reduce((a,b)=>a+b,0)); });
+test('responsive wrapper offers keyboard focus and horizontal scroll', () => { assert.match(html,/class="table-scroll" role="region" aria-label="[^"]+" tabindex="0"/); assert.match(html,/overflow-x:\s*auto/); });
+test('visible notes disclose fictional samples and correct units', () => { assert.match(html,/Training values only/);assert.match(html,/Watts measure power, not energy/); });
+test('does not use table for page layout', () => {assert.doesNotMatch(html,/role="presentation"/);assert.equal(all(/<table(?:\s|>)/g).length,1);});

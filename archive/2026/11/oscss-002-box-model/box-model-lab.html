@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OSCSS.002 | CSS Box Model Laboratory</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; }
+    body { margin: 0; color: #172033; background: #f3f6fb; line-height: 1.5; }
+    main { box-sizing: border-box; max-width: 860px; margin-inline: auto; padding: 20px; }
+    h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.2; }
+    h2 { font-size: 1.2rem; }
+    .intro { max-width: 65ch; }
+    .examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 18px; }
+    .panel { box-sizing: border-box; min-width: 0; padding: 16px; border: 1px solid #b9c7dc; border-radius: 12px; background: white; }
+    .viewport { max-width: 100%; overflow-x: auto; padding-block: 4px; }
+    .viewport:focus-visible { outline: 3px solid #2442c1; outline-offset: 2px; }
+    .sample { display: block; padding: 20px; border: 4px solid #6547d6; margin: 16px 0; background: #eee9ff; }
+    #content-example { box-sizing: content-box; width: 240px; height: 96px; }
+    #border-example { box-sizing: border-box; width: 240px; height: 144px; }
+    .notes { font-size: .92rem; }
+    code { font-family: ui-monospace, Consolas, monospace; overflow-wrap: anywhere; }
+    .margin-demo { padding: 12px; border: 1px solid #879ab9; background: white; }
+    .margin-one, .margin-two { box-sizing: border-box; height: 26px; padding-inline: 8px; background: #dbeafe; }
+    .margin-one { margin: 0 0 24px; }
+    .margin-two { margin: 12px 0 0; }
+    footer { margin-block-start: 24px; font-size: .9rem; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>OSCSS.002 — The CSS Box Model</h1>
+  <p class="intro">Compare two boxes with different <code>box-sizing</code> rules. The displayed dimensions are calculated examples; inspect the elements in browser Developer Tools to see the actual rendered sizes.</p>
+  <section class="examples" aria-label="Comparing content-box and border-box sizing">
+    <article class="panel">
+      <h2>content-box</h2>
+      <p class="notes"><code>width: 240px; height: 96px; padding: 20px; border: 4px;</code></p>
+      <div class="viewport" role="region" tabindex="0" aria-label="Scrollable content-box example">
+        <div class="sample" id="content-example">The width applies to the content. Padding and borders increase the outside size.</div>
+      </div>
+      <p class="notes">Expected border-edge size: <strong>288 × 144 px</strong>.</p>
+    </article>
+    <article class="panel">
+      <h2>border-box</h2>
+      <p class="notes"><code>width: 240px; height: 144px; padding: 20px; border: 4px;</code></p>
+      <div class="viewport" role="region" tabindex="0" aria-label="Scrollable border-box example">
+        <div class="sample" id="border-example">The declared width includes padding and borders. The content width is 192 px.</div>
+      </div>
+      <p class="notes">Expected border-edge size: <strong>240 × 144 px</strong>.</p>
+    </article>
+  </section>
+  <section aria-label="Adjacent vertical margins">
+    <h2>Adjacent vertical margins</h2>
+    <p>In normal block flow, a 24 px bottom margin and 12 px top margin on adjacent blocks collapse to a 24 px gap, not 36 px.</p>
+    <div class="margin-demo">
+      <div class="margin-one" id="margin-one">First block</div>
+      <div class="margin-two" id="margin-two">Second block</div>
+    </div>
+  </section>
+  <footer>Standalone educational page: no network calls, external dependencies, personal data, or physical device measurements.</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "post_id": 31676,
+  "lesson_id": "OSShakespeare.003",
+  "title": "OSShakespeare.003: Arithmetic Expressions — Sums, Products, and Numeric Output",
+  "published_url": "https://bitcoinversus.tech/2026/11/08/osshakespeare-003-arithmetic-expressions-sums-products-numeric-output/",
+  "published_status": "publish",
+  "featured_media_id": 31666,
+  "featured_media_dimensions": [
+    1200,
+    630
+  ],
+  "featured_branding": "Bitcoinversus.tech in neon green #39FF14 bottom-left; original illustrated cover, not in article body",
+  "source_character_count": 26102,
+  "source_video_blocks": 2,
+  "video_ids": [
+    "nO6rvqxj5kY",
+    "6avJHaC3C2U"
+  ],
+  "rendered_iframes": 2,
+  "unboxed_code_examples": 6,
+  "boxed_code_blocks": 0,
+  "internal_links": 4,
+  "original_donation_qr": true,
+  "cover_duplicated_in_body": false,
+  "math_trace": {
+    "starting": 0,
+    "after_first": 4,
+    "after_sum": 6,
+    "after_product": 12,
+    "after_difference": 11,
+    "expected_numeric_output": 11,
+    "math_assertions_passed": true
+  },
+  "spl_interpreter_execution": "not executed; shakespearelang unavailable in runtime",
+  "cli_reference": "https://shakespearelang.com/1.0/CLI/ confirms shakespeare run FILE",
+  "primary_language_specification": "https://krayon.github.io/shakespearelang/docs/shakespeare.html",
+  "video_playback": "not independently verified",
+  "responsive_screenshot": "not independently verified",
+  "editorial_status": "WordPress published, saved Gutenberg markup and WordPress-rendered two iframes confirmed",
+  "verified_date": "2026-11-08",
+  "archive_paths": {
+    "gutenberg": "archive/2026/11/31676-osshakespeare-003-arithmetic-output.gutenberg.html",
+    "spl": "archive/2026/11/31676-osshakespeare-003-arithmetic-output.spl",
+    "qa": "archive/2026/11/31676-osshakespeare-003-arithmetic-output.qa.json"
+  }
+}

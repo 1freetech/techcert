@@ -1,0 +1,58 @@
+{
+  "lesson_id": "OSNTC.039",
+  "post_id": 31837,
+  "title": "OSNTC.039: Precision Time Protocol — IEEE 1588, Grandmasters, and Troubleshooting",
+  "publication_status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/08/osntc-039-precision-time-protocol-ieee-1588-grandmasters-hardware-timestamps-troubleshooting/",
+  "featured_media_id": 31835,
+  "cover_size": [
+    1200,
+    630
+  ],
+  "diagram_media_id": 31836,
+  "diagram_size": [
+    1200,
+    720
+  ],
+  "branding": "Exact Bitcoinversus.tech, neon green #39FF14, lower-left, approximately 10 pt on cover and in-body diagram",
+  "source_characters": 28781,
+  "source_embed_blocks": 2,
+  "rendered_iframe_count": 2,
+  "video_ids": [
+    "DWulalw5v0U",
+    "3ljTrWAJ72Y"
+  ],
+  "in_story_original_diagram": true,
+  "code_examples": 6,
+  "boxed_code_blocks": 0,
+  "internal_links": 6,
+  "qr_present": true,
+  "cover_duplicated_in_body": false,
+  "math_verification": {
+    "t1": 1000000000,
+    "t2": 1000001600,
+    "t3": 1000020000,
+    "t4": 1000021400,
+    "offset_ns": 100,
+    "mean_delay_ns": 1500,
+    "python_assertions_run": "passed locally"
+  },
+  "live_ptp_runtime": "not tested: no real clock or timing traffic",
+  "live_youtube_playback": "not independently verified",
+  "visual_desktop_mobile": "not independently verified",
+  "original_cover_and_diagram": "conceptual original media, not actual hardware screenshots",
+  "references": [
+    "https://standards.ieee.org/ieee/1588/6825/",
+    "https://standards.ieee.org/ieee/802.1AS/11968/",
+    "https://www.linuxptp.org/documentation/ptp4l/",
+    "https://www.linuxptp.org/documentation/pmc/",
+    "https://www.linuxptp.org/documentation/phc2sys/"
+  ],
+  "archive_paths": {
+    "gutenberg": "archive/2026/11/31837-osntc-039-ptp.gutenberg.html",
+    "python": "archive/2026/11/31837-osntc-039-ptp/ptp_offset_check.py",
+    "worksheet": "archive/2026/11/31837-osntc-039-ptp/read_only_diagnostics.md",
+    "qa": "archive/2026/11/31837-osntc-039-ptp.qa.json"
+  },
+  "date": "2026-11-08"
+}

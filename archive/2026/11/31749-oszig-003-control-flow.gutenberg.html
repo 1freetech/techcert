@@ -1,0 +1,226 @@
+<!-- wp:paragraph --><p><strong>OSZig.003</strong> explains how the Zig programming language chooses between alternative code paths. A Boolean <code>if</code> handles comparisons and thresholds; <code>switch</code> matches known states or integer cases; and optional capture, using a type such as <code>?u32</code>, safely distinguishes a missing measurement from the number zero. The lesson follows <a href="https://bitcoinversus.tech/2026/11/05/oszig-002-variables-types-const-var-mutability/">OSZig.002 on const, var, and value types</a> and uses the official <strong>Zig 0.17.1</strong> reference. A complete local practice program tests simulated device states, without accessing actual hardware or modifying system configuration.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Construct Boolean conditions with <code>if</code>, <code>else if</code>, and <code>else</code>.</li><li>Explain why an <code>if</code> expression can produce a value without a separate ternary operator.</li><li>Write an exhaustive <code>switch</code> expression over an enum and describe compiler-checked missing cases.</li><li>Use an optional <code>?u32</code> and <code>|value|</code> capture to handle a missing reading.</li><li>Trace inclusive threshold boundaries and distinguish strict <code>&gt;</code> from <code>&gt;=</code>.</li><li>Build and run a standalone Zig source file, then execute its embedded <code>test</code> declarations.</li><li>Identify type, integer range, invalid sensor data, and operational safety limitations.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: <a href="https://bitcoinversus.tech/2026/10/08/oszig-001-what-is-zig-source-files-toolchain-first-program/">OSZig.001 on toolchains and source files</a> and the previous lesson on Zig variables and types. For the executable lab, install Zig 0.17.1 from the <a href="https://ziglang.org/download/">official Zig download page</a> for your operating system. Use a text editor and a nonprivileged account in a temporary study directory; do not connect the educational classifier to actual electrical controls.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A program often needs to decide what to do when it sees a number. For example, a fictional device might be labeled NORMAL below 70 watts, WATCH from 70 through 89 watts, and ALERT at 90 watts or higher. A conditional asks a yes-or-no question and runs the matching instructions. More than one alternative can be tested in sequence, but the program should select the appropriate outcome consistently.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Zig also makes the difference between a missing number and zero explicit. If no reading arrives, the program should report MISSING rather than pretending the measurement was zero. A clear decision tree helps technicians and software developers see exactly how data moves from input through comparisons to an output label.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=UAS0f42_3uU","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=UAS0f42_3uU
+</div><figcaption class="wp-element-caption"><em>Coding with Tom, <a href="https://www.youtube.com/watch?v=UAS0f42_3uU">“Zig Programming Language - Beginner’s Guide”</a> (January 18, 2026). Its control-flow discussion begins near 53:08, followed by optionals near 1:17:16. The recording predates Zig 0.17.1, so the lesson examples are grounded separately in current official documentation.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The Version and Technical Background</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Zig is a compiled, statically typed systems programming language designed to make control flow explicit and avoid hidden memory allocations. The current stable release checked for the lesson is <strong>0.17.1</strong>, announced in early November 2026 as a bug-fix update after 0.17.0. Its official <a href="https://ziglang.org/documentation/0.17.1/">language reference</a> provides executable specification examples for <code>if</code>, <code>switch</code>, optional types, and error handling. The exact API behavior of the standard library can evolve between releases; examples here avoid advanced I/O and allocator APIs for that reason.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Zig deliberately separates <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-002-csharp-variables-built-in-types-var-const/">types and assignments</a> from flow-control constructs. A value declared <code>const</code> cannot be reassigned, but can still be tested by an <code>if</code>. A value declared <code>var</code> may change, yet the conditions used to choose a branch must still have appropriate types. Zig does not implicitly accept an integer wherever a Boolean is required.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Boolean If, Else If, and Else</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A Zig <code>if</code> uses a Boolean condition in parentheses followed by one expression or block. An <code>else if</code> is checked only after earlier conditions fail; an <code>else</code> handles all remaining cases. Condition order matters. Placing the threshold 70 before 90 would incorrectly select WATCH for a reading of 95 if the 70 case returned immediately.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A classifier returning a string slice can be written as one <code>if</code> expression, with the more severe threshold first. For a cross-language comparison, review <a href="https://bitcoinversus.tech/2026/11/08/oscsharp-005-csharp-control-flow-conditions-switch-loops/">C# branching and loops</a>:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Zig conditional classifier" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>fn classify(watts: u32) []const u8 {
+    return if (watts &gt;= 90)
+        "ALERT"
+    else if (watts &gt;= 70)
+        "WATCH"
+    else
+        "NORMAL";
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The return type <code>[]const u8</code> is a read-only byte slice. The string literals are backed by static immutable bytes, and Zig can coerce each branch to the declared slice type. With 69 watts the result is NORMAL; at 70 it is WATCH; at 89 it remains WATCH; at 90 it becomes ALERT. These toy watt limits are not manufacturer thresholds, electrical safety settings, or validated equipment telemetry.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">If Is an Expression</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Unlike languages where conditional blocks are only statements, Zig allows <code>if</code> to produce a result. All reachable value-producing branches must be compatible with the expected type. As the <a href="https://ziglang.org/documentation/0.17.1/#if">official reference</a> explains, a value can be assigned directly from a condition, without a separate <code>?:</code> ternary operator.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For example, this complete function returns the larger of two unsigned integers:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Zig if expression returning a u32" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>fn larger(a: u32, b: u32) u32 {
+    return if (a &gt;= b) a else b;
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>For <code>larger(12, 9)</code>, the result is 12. Equal values return either matching number, with no special case needed. A missing <code>else</code> is valid for a normal conditional action that does not need to yield a value, but a value-producing <code>if</code> expression needs a consistent result on all possible paths.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Using Switch for Discrete States</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>When a variable represents one of several well-defined states, <code>switch</code> is often clearer than a long chain of comparisons. Each <em>prong</em> associates a pattern with an expression. Prongs do not fall through as in some C-language switch statements. If all enum possibilities are covered, Zig can prove the switch is exhaustive; omitting an enum case without an appropriate fallback causes a compile-time error.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Define a typed enum for three fictional operating states, then return its label:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Exhaustive Zig enum switch" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>const PowerState = enum {
+    running,
+    standby,
+    offline,
+};
+
+fn powerStateName(state: PowerState) []const u8 {
+    return switch (state) {
+        .running =&gt; "RUNNING",
+        .standby =&gt; "STANDBY",
+        .offline =&gt; "OFFLINE",
+    };
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Enum literals such as <code>.running</code> gain their type from the surrounding <code>PowerState</code> context. The final comma is conventional and valid. If the enum later gains <code>maintenance</code>, the switch should be updated to handle the new state explicitly. For a small, closed enum, a catch-all <code>else</code> is often less useful because it can hide the need for deliberate handling of newly introduced values.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Switching on Integer Cases and Ranges</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>switch</code> can also match integer values, groups, and inclusive ranges. The range syntax <code>3...10</code> matches every integer from 3 through 10, including both endpoints. An <code>else</code> prong is needed when other integer values remain possible.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Here, numeric status codes are examples only; no standard device protocol is implied:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Zig switch with integer ranges" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>fn statusCodeName(code: u8) []const u8 {
+    return switch (code) {
+        0 =&gt; "IDLE",
+        1, 2 =&gt; "ACTIVE",
+        3...10 =&gt; "BUSY",
+        else =&gt; "UNKNOWN",
+    };
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The mapping gives 0 as IDLE; codes 1 and 2 as ACTIVE; codes 3 through 10 as BUSY; and all other <code>u8</code> values as UNKNOWN. A <code>u8</code> can hold integers from 0 through 255. If an external message contains values outside its range, validating them before conversion is essential; a successful switch does not make untrusted input safe.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=V4KWHKu7ksg","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=V4KWHKu7ksg
+</div><figcaption class="wp-element-caption"><em>Adebayo, <a href="https://www.youtube.com/watch?v=V4KWHKu7ksg">“7. Conditionals (if and switch) | Zig Programming Language Tutorials”</a> (December 4, 2022). Demonstrates the core conditional concepts. Syntax and standard-library details are version-sensitive; the article uses the Zig 0.17.1 reference as the authoritative source.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Optional Values Are Not Zero</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A type written <code>?u32</code> means either a 32-bit unsigned integer or <code>null</code>. It is not the same as a Boolean and is not shorthand for a numeric value of zero. Some systems use missing values when a sensor times out or a network message does not contain the expected field; software must not silently substitute a valid reading.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The optional capture form <code>if (reading) |watts| ... else ...</code> binds the non-null payload to the name <code>watts</code>. The captured value is a plain <code>u32</code> inside the successful branch, while the fallback handles null:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Optional Zig if payload capture" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>fn classifyReading(reading: ?u32) []const u8 {
+    return if (reading) |watts| classify(watts) else "MISSING";
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>For <code>classifyReading(null)</code>, the result is MISSING. For <code>classifyReading(0)</code>, the result is NORMAL, demonstrating that null and zero are distinct. The <a href="https://ziglang.org/documentation/0.17.1/#if-with-Optionals">official optional-if examples</a> also cover pointer captures, which can permit modification of mutable payloads when such changes are deliberately required.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Boolean Logic and Evaluation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>For plain Boolean conditions Zig uses <code>and</code>, <code>or</code>, and <code>!</code>. Logical AND requires both operands to be true, while OR requires at least one true. Short-circuit evaluation skips evaluating a second operand when the first already determines the result. These operations differ from integer bitwise operators.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A conditional checking whether a known reading lies between 70 inclusive and 90 exclusive could be written as:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Logical and for an interval" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>fn isWatchRange(watts: u32) bool {
+    return watts &gt;= 70 and watts &lt; 90;
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The function returns true for 70 and 89, false for 69 and 90. Parenthesize expressions when doing so helps readers understand precedence. Safe real-world software also validates the provenance, units, and permitted range of each measurement before applying decision thresholds.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete Local Practice Program</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Create a file named <code>control_flow.zig</code> in a disposable study directory. The following complete program defines a reading classifier, an exhaustive enum switch, an optional-value handler, three diagnostic output lines, and eleven unit assertions. All sample numbers and power states are fictional. The code does not read from real sensors or interact with hardware.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Complete control_flow.zig source including main and tests" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>const std = @import("std");
+
+const PowerState = enum {
+    running,
+    standby,
+    offline,
+};
+
+fn classify(watts: u32) []const u8 {
+    return if (watts &gt;= 90)
+        "ALERT"
+    else if (watts &gt;= 70)
+        "WATCH"
+    else
+        "NORMAL";
+}
+
+fn powerStateName(state: PowerState) []const u8 {
+    return switch (state) {
+        .running =&gt; "RUNNING",
+        .standby =&gt; "STANDBY",
+        .offline =&gt; "OFFLINE",
+    };
+}
+
+fn classifyReading(reading: ?u32) []const u8 {
+    return if (reading) |watts| classify(watts) else "MISSING";
+}
+
+pub fn main() void {
+    std.debug.print("80 watts: {s}\n", .{classifyReading(80)});
+    std.debug.print("State: {s}\n", .{powerStateName(.running)});
+    std.debug.print("No reading: {s}\n", .{classifyReading(null)});
+}
+
+test "classification boundaries" {
+    try std.testing.expectEqualStrings("NORMAL", classify(0));
+    try std.testing.expectEqualStrings("NORMAL", classify(69));
+    try std.testing.expectEqualStrings("WATCH", classify(70));
+    try std.testing.expectEqualStrings("WATCH", classify(89));
+    try std.testing.expectEqualStrings("ALERT", classify(90));
+    try std.testing.expectEqualStrings("ALERT", classify(120));
+}
+
+test "every enum case" {
+    try std.testing.expectEqualStrings("RUNNING", powerStateName(.running));
+    try std.testing.expectEqualStrings("STANDBY", powerStateName(.standby));
+    try std.testing.expectEqualStrings("OFFLINE", powerStateName(.offline));
+}
+
+test "missing and zero readings differ" {
+    try std.testing.expectEqualStrings("MISSING", classifyReading(null));
+    try std.testing.expectEqualStrings("NORMAL", classifyReading(0));
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The <code>pub fn main() void</code> function is the executable entry point. It uses <code>std.debug.print</code>, which writes diagnostic text to <strong>standard error</strong>, not standard output. The <code>{s}</code> format specifier prints a byte slice as text. Test declarations are evaluated when running <code>zig test</code>; they are not automatically executed by <code>zig run</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">How to Run and Test the Example</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Verify that the official Zig 0.17.1 compiler is on your shell’s path, then use the built-in runner and test command. Only local source code is executed; no special administrator privileges are required:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Zig version verification, run, and test commands" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>zig version
+zig run control_flow.zig
+zig test control_flow.zig</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>If compilation and execution succeed, the expected diagnostic messages from <code>zig run</code> are:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Expected diagnostics written to standard error" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>80 watts: WATCH
+State: RUNNING
+No reading: MISSING</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The test block labeled <code>classification boundaries</code> checks six input values; the enum test checks three cases; the optional test checks two cases. Eleven assertions are therefore expected across three named test blocks. The exact test runner progress text can vary by platform or compiler version. <strong>No Zig compiler execution is claimed in the publication environment</strong>; the compiler download attempt failed, so examples are source-reviewed expectations rather than an observed successful build.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Reasoning Through Every Boundary</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The thresholds can be checked without a compiler by applying the comparison rules. With 69, neither <code>watts &gt;= 90</code> nor <code>watts &gt;= 70</code> is true, so NORMAL results. At 70, the second comparison is true and WATCH results. At 89, the same branch remains selected. At 90, the first comparison becomes true and ALERT results. With missing data, the optional handler returns MISSING without attempting a numeric comparison.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>That explicit distinction is important in operational code. A missing measurement should not be interpreted as a healthy zero-power reading. A production monitoring system would additionally need authenticated inputs, timestamp validation, range limits, sensor-fault handling, alarming requirements, and independently approved engineering thresholds.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and Safety</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Compiler version mismatch:</strong> compare <code>zig version</code> to the official 0.17.1 language reference. Older Zig examples can differ, particularly in their standard-library I/O usage.</li><li><strong>Nonexhaustive switch:</strong> ensure every enum value has an explicit prong, or add a deliberately justified fallback for an open set of values.</li><li><strong>Unexpected threshold category:</strong> check the order of comparisons and distinguish <code>&gt;</code> from <code>&gt;=</code>.</li><li><strong>Optional capture fails:</strong> a <code>|watts|</code> binding after <code>if (reading)</code> requires an optional payload; ordinary integers are not optional types.</li><li><strong>Output appears on stderr:</strong> <code>std.debug.print</code> emits diagnostic text, so shell redirects that capture only stdout can miss it.</li><li><strong>Wrong type or overflow:</strong> ensure input values can be represented as <code>u32</code>; external negative or oversized numbers must be validated before conversion.</li><li><strong>Code blocks overflow on mobile:</strong> present long code with preserved line breaks and wrapping, not boxed fixed-width components.</li><li><strong>Safety:</strong> example thresholds are invented; never deploy them as mining hardware, server power, industrial or electrical protection limits.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice and Assessment</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Predict the output of <code>classify(69)</code>, <code>classify(70)</code>, <code>classify(89)</code>, and <code>classify(90)</code>. Explain the two boundary transitions.</li><li>Add a <code>maintenance</code> value to <code>PowerState</code> without changing <code>powerStateName</code>. What should the exhaustive switch check report?</li><li>Add the missing enum prong and a new test for the maintenance label.</li><li>Change <code>classifyReading(null)</code> to <code>classifyReading(0)</code>. Explain the different returned strings.</li><li>Predict <code>statusCodeName(2)</code>, <code>statusCodeName(8)</code>, and <code>statusCodeName(200)</code>.</li><li>Explain why diagnostic output from <code>std.debug.print</code> may not appear in a pipeline reading stdout only.</li><li>Run the tests in Zig 0.17.1, capture real exit statuses, and compare the observed outcomes with the expected results.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> The boundary outputs are NORMAL, WATCH, WATCH, and ALERT. A newly added enum value makes a formerly exhaustive switch incomplete until its handler is added. Null yields MISSING while zero is an actual value classified NORMAL. Status code 2 is ACTIVE, 8 is BUSY, and 200 is UNKNOWN. <code>std.debug.print</code> writes to stderr. Actual test execution must be documented separately; correct predictions are not equivalent to compiler verification.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Authoritative References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://ziglang.org/download/">Zig — Official Download Page and Latest Stable Version</a>.</li><li><a href="https://ziglang.org/news/0.17.1-released/">Zig — 0.17.1 Release Announcement</a>.</li><li><a href="https://ziglang.org/documentation/0.17.1/#if">Zig Language Reference 0.17.1 — If Expressions</a>.</li><li><a href="https://ziglang.org/documentation/0.17.1/#switch">Zig Language Reference 0.17.1 — Switch</a>.</li><li><a href="https://ziglang.org/documentation/0.17.1/#if-with-Optionals">Zig Language Reference 0.17.1 — Optional Capture</a>.</li><li><a href="https://ziglang.org/documentation/0.17.1/#test">Zig Language Reference 0.17.1 — Tests</a>.</li><li><a href="https://ziglang.org/learn/">Zig — Official Learning Resources</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Zig makes code decisions visible. An <code>if</code> expression checks a Boolean condition, a <code>switch</code> matches a known set of values, and an optional type distinguishes a missing value from a real number. By studying exact boundaries and using tests, a learner can predict what a program should do before trusting it to manage any information. The practice example classifies made-up readings safely without changing real systems.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor’s Note:</strong> OSZig.003 follows the published OSZig.002 lesson. Examples follow the official Zig 0.17.1 language reference and use fictional monitoring values. The source program and eleven assertions were written and examined against the documentation; the Zig compiler could not be installed in the current authoring environment, so actual compilation, runtime output, and test execution remain unverified. The original 1200 × 630 branded cover is conceptual editorial art rather than a screenshot of tested Zig code. Video identities and educational relevance were checked through published video listings; successful public playback and viewport screenshots must be verified separately.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional donation QR code for 5,000 sats" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code. Verify the destination and amount independently before donating.</em></p><!-- /wp:paragraph -->

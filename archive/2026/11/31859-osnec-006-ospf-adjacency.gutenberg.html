@@ -1,0 +1,218 @@
+<!-- wp:paragraph --><p><strong>OSNEC.006</strong> teaches how a network engineer diagnoses a failing Open Shortest Path First version 2 (OSPFv2) neighbor relationship. An Ethernet interface may be up while OSPF remains in INIT, EXSTART, EXCHANGE, or LOADING. The engineer must distinguish Hello packet validation, normal designated-router behavior, database-description synchronization, and path MTU problems. The lesson continues <a href="https://bitcoinversus.tech/2026/11/06/osnec-005-ospf-link-state-advertisements-lsdb-spf-path-calculation/">OSNEC.005 on LSAs, LSDBs and SPF</a>, focusing on why peers sometimes fail to exchange the topology needed for path calculation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Describe the Down, Init, 2-Way, ExStart, Exchange, Loading, Full and special Attempt states.</li><li>Explain why a DROTHER-to-DROTHER neighbor on a broadcast network may legitimately remain 2-Way.</li><li>Check matching area/area-type, Hello and Dead intervals, subnet masks where applicable, unique router IDs, and authentication.</li><li>Recognize a DBD exchange failure and describe how MTU differences can interfere with OSPF adjacency.</li><li>Identify safe read-only Cisco, Arista and Juniper diagnostics and the purpose of IP protocol 89.</li><li>Interpret two fictional fault scenarios without changing production network configuration.</li><li>Prepare an evidence-based handoff with recovery criteria, rollback, and authorized change ownership.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: <a href="https://bitcoinversus.tech/2026/10/02/osnec-001-ospf-fundamentals/">OSNEC.001 OSPF Fundamentals</a>, <a href="https://bitcoinversus.tech/2026/10/11/osnec-004-ospf-areas-abrs-area-0-inter-area-routing-verification/">OSNEC.004 OSPF Areas and ABRs</a>, and an ability to interpret IPv4 interface details. For capturing evidence, review <a href="https://bitcoinversus.tech/2026/10/25/osntc-035-switch-port-mirroring-span-packet-capture/">OSNTC.035 on SPAN and packet capture</a>. The exercises are simulated and read-only; no running router, real OSPF session, routing service, or interface is changed.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Think of two routers as people trying to share maps. First they need to hear each other, agree which community they belong to, and recognize their partner. Then they compare map summaries and obtain missing information. A network cable can work while that conversation fails. OSPF neighbor states identify how far the discussion reached, helping engineers select the next piece of evidence rather than guessing.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A neighbor does not always need to reach Full. On an Ethernet segment with a Designated Router (DR) and Backup Designated Router (BDR), two routers that are neither—the DROTHER peers—can remain at 2-Way with each other by design. A point-to-point relationship, in contrast, normally proceeds to Full. Network type and the relevant DR/BDR roles are therefore essential context.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=wITAeO8i9U4","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=wITAeO8i9U4
+</div><figcaption class="wp-element-caption"><em>Practical Networking, <a href="https://www.youtube.com/watch?v=wITAeO8i9U4">“OSPF Hello Packets: Area Types (Stub/NSSA), BDR/DR”</a> (March 17, 2022). Teaches neighbor recognition, Hello fields and DR elections. Identity verified; live embedded playback independently unverified.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Protocol History and Primary Specification</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>OSPFv2 is specified by <a href="https://www.rfc-editor.org/rfc/rfc2328">RFC 2328 (April 1998)</a>, a standards-track IETF specification for link-state routing with IPv4. OSPF is carried as <strong>IP protocol 89</strong>, not TCP port 89 or UDP port 89. On ordinary broadcast and physical point-to-point links, the AllSPFRouters multicast address is <code>224.0.0.5</code>. The DR/BDR exchange uses the AllDRouters address <code>224.0.0.6</code> where appropriate. Underlying IP, routing instance, topology and software behavior still matter.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Each OSPF router uses LSAs to describe relevant topology and an LSDB to build its SPF model. A neighbor state problem is about the communication and database exchange needed to sustain that model. Full adjacency is not proof that every expected prefix has been originated or installed into the route table; engineers verify actual routing and forwarding separately.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Neighbor State Machine — From Down to Full</h2><!-- /wp:heading -->
+
+<!-- wp:html --><pre aria-label="OSPFv2 state progression simplified from RFC 2328" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>DOWN -&gt; INIT -&gt; 2-WAY -&gt; EXSTART -&gt; EXCHANGE -&gt; LOADING -&gt; FULL
+
+DOWN      No recent accepted Hello from the neighbor
+INIT      Hello received; mutual recognition not confirmed
+2-WAY     Mutual recognition via Hello neighbor lists
+EXSTART   Establish DBD roles and initial sequence numbers
+EXCHANGE  Compare link-state database summaries via DBDs
+LOADING   Request and receive missing LSAs
+FULL      Link-state databases synchronized for adjacency
+
+Exceptions:
+- 2-WAY is normal between some DROTHER peers on multiaccess networks.
+- ATTEMPT is used with configured NBMA neighbors.
+- State can move backward after timeout or sequence failure.</code></pre><!-- /wp:html -->
+
+<!-- wp:image {"id":31856,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osnec-006-ospf-neighbor-state-diagram-1200x720-1.png" alt="OSPFv2 neighbor states Down, Init, 2-Way, ExStart, Exchange, Loading, Full with DROTHER exception" class="wp-image-31856" /><figcaption class="wp-element-caption"><em>Original OSNEC.006 technical diagram using the simplified RFC 2328 progression. Two DROTHERs may remain 2-Way by design. Diagram is conceptual, not live router output. Bitcoinversus.tech branding appears at bottom-left.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p>Section 10 of RFC 2328 defines state changes and exception paths. INIT means a Hello was accepted but the router has not confirmed two-way communication. In EXSTART the peers decide the initial database-description sequence; in EXCHANGE they trade summaries. LOADING requests missing LSAs. A neighbor staying at any transitional state for an extended period requires diagnosis, although short transitions during initial startup are normal.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Hello Intervals, Dead Timers and Compatibility</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Hello packets advertise HelloInterval, RouterDeadInterval, network mask, router priority, DR and BDR choices, and lists of recently seen peers; their OSPF packet headers carry area and authentication context. RFC 2328 Section 10.5 specifies receive checks: Hello/Dead intervals must match for normal neighbor formation, and advertised network masks are checked except on point-to-point and virtual links. Area and applicable option compatibility, including stub-area E-bit behavior, also matter. Duplicate router IDs can disrupt neighbor identification.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A common example uses 10-second Hellos and a 40-second Dead interval. That pair is not universal to every network type and device. The Dead interval measures time since the last accepted Hello; it is not necessarily the number of seconds from a user-visible incident to service recovery.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Example of OSPF Hello and Dead interval mismatches" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Fictional neighbors on one shared segment
+
+             R1           R2
+Hello        10 seconds   5 seconds
+Dead         40 seconds   20 seconds
+Area         0.0.0.0      0.0.0.0
+
+Hello match? 10 = 5   -&gt; No
+Dead match?  40 = 20  -&gt; No
+
+RFC 2328 Hello checks reject incompatible intervals.
+No production timer changes are authorized by this example.</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>An engineer should compare both interface settings before proposing a correction. Router priority affects DR eligibility on multiaccess networks and is not itself an ordinary requirement for two neighbors to match. The physical IP mask check has important exceptions on point-to-point and virtual links; a diagnosis that ignores network type can produce incorrect recommendations.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">When 2-Way Is Correct</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>On a broadcast network, an elected DR and BDR reduce the number of full adjacencies. DROTHER peers normally form full adjacencies toward the DR/BDR while remaining 2-Way with one another. A priority of zero prevents a router from being elected DR or BDR but does not automatically prevent adjacency with an elected DR or BDR. On point-to-point interfaces, a persistent 2-Way state is normally not the intended endpoint.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Before classifying a 2-Way listing as a fault, capture router IDs, network type, DR/BDR elections, interface names and the exact relationship being examined. Do not clear neighbors simply to force a state transition. <a href="https://www.rfc-editor.org/rfc/rfc2328">RFC 2328 Sections 9.5 and 10.4</a> define the applicable relationship rules.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">ExStart and Exchange — Database Description and MTU</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>In EXSTART, neighbors negotiate database-description (DBD) roles and an initial sequence number. In EXCHANGE, they summarize LSDB contents through DBD packets. Persistent EXSTART/EXCHANGE indicates a stalled exchange, not necessarily an area or authentication mismatch. Cisco documents an interface IP MTU mismatch as a common cause: a router may reject a DBD packet whose advertised interface MTU exceeds what it can accept.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Other causes include duplicate router IDs, unexpected sequence numbers, interrupted unicast/multicast delivery, ACL filtering, topology or tunneling faults, and software issues. Cisco documents <code>ip ospf mtu-ignore</code> for exceptional circumstances but recommends investigating mismatched MTUs rather than bypassing the check. Ignoring the check can conceal actual packet-size problems and is not the default repair method. <a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html">Cisco ExStart/Exchange troubleshooting</a> gives the detailed mechanism.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Loading — Missing LSAs and Retransmissions</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A router in LOADING requests link-state records identified during database comparison and not yet held locally. Persistent LOADING can be associated with failed Link-State Requests or Updates, retransmission problems, corrupt records, or resource constraints. Read applicable logs and neighbor-specific LSDB counters before drawing a conclusion. A momentary LOADING state during normal synchronization is not a fault.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=X0OBAPc3dpM","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=X0OBAPc3dpM
+</div><figcaption class="wp-element-caption"><em>Practical Networking, <a href="https://www.youtube.com/watch?v=X0OBAPc3dpM">“OSPF Neighbor Adjacency States”</a> (March 22, 2022). Walks through Down, Init, 2-Way, ExStart, Exchange, Loading and Full. Identity verified; live embedded playback independently unverified.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Vendor-Aware Read-Only Commands</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Use the actual router make, model, release, VRF and management role to select appropriate commands. Cisco IOS/IOS XE, Arista EOS and Juniper Junos expose common OSPF concepts through different operational interfaces. Listed commands are observational; no reset, authentication change or interface reconfiguration is part of the exercise.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Read-only OSPF commands, platform dependent" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Cisco IOS / IOS XE:
+  show ip ospf
+  show ip ospf neighbor
+  show ip ospf neighbor detail
+  show ip ospf interface
+  show interfaces
+  show logging
+
+Arista EOS (check VRF and release):
+  show ip ospf neighbor
+  show ip ospf neighbor detail
+  show ip ospf interface
+  show interfaces
+  show logging
+
+Juniper Junos:
+  show ospf neighbor
+  show ospf interface
+  show interfaces terse
+  show log messages</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Cisco’s <a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13699-29.html">neighbor troubleshooting guide</a> maps symptoms to CLI observations. <a href="https://www.arista.com/en/um-eos/eos-open-shortest-path-first-version-2">Arista EOS</a> documents <code>show ip ospf neighbor</code> with optional VRF detail. <a href="https://www.juniper.net/documentation/us/en/software/junos/ospf/topics/topic-map/verifying-and-monitoring-ospf-configuration.html">Juniper</a> documents <code>show ospf neighbor</code> and interface checks. Use a controlled, permitted capture rather than enabling high-volume debugging on busy production routers.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">State-First Diagnostic Checklist</h2><!-- /wp:heading -->
+
+<!-- wp:html --><pre aria-label="Neighbor-state to next read-only check decision tree" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>No neighbor / DOWN
+  Link, VLAN, interface OSPF, subnet/area, protocol 89,
+  unique router IDs, authentication, Hello/Dead settings.
+
+INIT
+  Was our Router ID seen in the peer's Hello neighbor list?
+
+2-WAY
+  Check broadcast/NBMA network type, DR/BDR and DROTHER.
+  A stable two-way relationship may be correct.
+
+EXSTART / EXCHANGE
+  Verify actual interface/path MTUs, DBD sequence numbers,
+  router IDs, packet delivery and retransmission logs.
+
+LOADING
+  Inspect missing LSA requests, updates and acknowledgments.
+
+FULL
+  Check route installation and path stability separately.</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>All findings should be time-bounded. A state observed once during boot is different from a state persisting through repeated checks. Correlate logs, protocol events, interface errors and maintenance records. The state tells an engineer where progress stopped; the evidence determines why.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Hands-On Tabletop — An MTU Discrepancy</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The following observations are entirely fictional. R1 and R2 are two intended OSPF point-to-point neighbors. Their interface MTUs differ and database-description sequence events appear repeatedly. The table supports an MTU hypothesis but does not prove that a particular DBD packet was discarded.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Fictional R1 and R2 MTU / DBD mismatch scenario" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Fictional evidence                R1              R2
+Interface                         up              up
+Area                              0.0.0.0         0.0.0.0
+Router ID                         10.255.0.1      10.255.0.2
+Hello / Dead                      10 / 40 s       10 / 40 s
+Network type                      point-to-point  point-to-point
+IP interface MTU                  1500 bytes      9000 bytes
+Neighbor state                    EXSTART         EXCHANGE
+DBD retransmission indicators     yes             yes
+Confirmed cause                   unknown         unknown
+
+No packet capture, live router or actual users exist.</code></pre><!-- /wp:html -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Identify the confirmed MTU difference and explain why MTU incompatibility is plausible.</li><li>List read-only steps to verify the effective MTU through interfaces, VLANs, tunnels and encapsulation.</li><li>Name evidence that could connect a rejected DBD packet to the observed neighbor states.</li><li>Explain why bypassing an MTU check is not the same as fixing forwarding consistency.</li><li>Propose the necessary change owner, approval, rollback and end-to-end verification plan.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Expected reasoning: the advertised interface settings differ by 7,500 bytes; that numerical difference alone is not a measured drop. Examine both effective interfaces and actual DBD exchange before proposing a correction. Restoring Full adjacency is only one verification point; LSDB agreement, route installation and real application forwarding still need confirmation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Hands-On Tabletop — Two Hello Intervals</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>For R1 with 10/40-second Hello/Dead values and R2 with 5/20 seconds, RFC 2328 receive rules describe incompatibility. A read-only audit should confirm actual interface and packet values, network type and current state. The numbers are hypothetical; an engineer must not copy the example values to operating equipment. The ratio between 40 and 10 is four, but matching ratio alone is insufficient: the absolute Hello and Dead values must agree.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Operational Safety, Security and Change Control</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Never clear OSPF neighbors, restart the routing process, disable an interface or change MTUs during a learning exercise on a live network.</li><li>Protect routing authentication keys and logs containing sensitive addresses; do not publish secrets in diagrams or GitHub.</li><li>Before a production change, identify impacted prefixes, alternative routes, area boundaries, VRFs and change approvers.</li><li>Retain approved snapshots of current neighbor state, interface MTUs, retransmission logs and related interface counters.</li><li>Define the expected success: stable correct adjacency, consistent topology, correct selected routes, and forwarding checks over an agreed observation period.</li><li>Define rollback and escalation conditions before the change, including what to do if a newly formed adjacency shifts traffic onto an unexpected path.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Engineering Handoff Template</h2><!-- /wp:heading -->
+
+<!-- wp:html --><pre aria-label="OSPF neighbor incident handoff worksheet" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Incident ID / timestamp and time zone:
+Device, model, OS version, VRF and interface:
+Expected peer address and Router ID:
+Observed state, duration and history:
+Interface link state, errors, IP and mask:
+Area ID, area type and authentication status:
+Network type and DR/BDR roles:
+Hello / Dead values in seconds:
+Interface and path MTU in bytes:
+DBD, LSR and retransmission evidence:
+What is known / unknown / hypothesized:
+Next permitted read-only step:
+Change owner, approver, rollback and stop criteria:
+LSDB, route and forwarding verification:
+Next update time / receiving engineer:</code></pre><!-- /wp:html -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Assessment and Answer Key</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Why is protocol 89 not TCP or UDP port 89?</li><li>List the standard OSPFv2 neighbor-state progression.</li><li>On what type of relationship can 2-Way be a correct final state?</li><li>Which Hello fields must normally agree, and what is the point-to-point mask exception?</li><li>How can MTU cause EXSTART/EXCHANGE problems?</li><li>Does a Full state guarantee every expected route is installed?</li><li>Why do 10/40 and 5/20 values not become compatible merely because both share a 4:1 ratio?</li><li>What belongs in an authorized, evidence-based handoff?</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> OSPFv2 is carried as IP protocol 89; no TCP/UDP port is involved. States are Down, Init, 2-Way, ExStart, Exchange, Loading and Full, with Attempt used for NBMA cases. Two DROTHERs on eligible multiaccess networks may remain 2-Way. Matching Hello/Dead intervals, area and relevant options, security and applicable masks matter; RFC 2328 exempts point-to-point and virtual-link masks from the ordinary Hello receive comparison. An incompatible MTU may stall DBD processing. Full means synchronization of the adjacency, not a guarantee of desired route presence. Timers must match in absolute seconds. A complete handoff includes peer identity, evidence, uncertainties, permissible next checks, approval, rollback and recovery verification.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Fourteen-Point Self-Assessment</h2><!-- /wp:heading -->
+
+<!-- wp:html --><pre aria-label="OSPF engineering tabletop scoring rubric" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.5 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>0 = missing; 1 = partial; 2 = clear and evidenced
+Scoped neighbor, interface and expected state        __/2
+State + DR/DROTHER exceptions correctly interpreted  __/2
+Timers, area, router IDs, security checked            __/2
+MTU/DBD facts distinguished from hypotheses           __/2
+Read-only checks chosen, safe action boundaries       __/2
+Change approval, rollback, recovery tests defined     __/2
+Handoff timestamp, evidence and next owner recorded   __/2
+Total                                                 __/14</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The rubric evaluates the written reasoning of an educational exercise, not readiness to perform a production router change or an official vendor certification.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Primary References and Further Reading</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://www.rfc-editor.org/rfc/rfc2328">IETF RFC 2328 — OSPF Version 2</a>, especially Sections 9 and 10.</li><li><a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13699-29.html">Cisco — Troubleshoot OSPF Neighbor Problems</a>.</li><li><a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html">Cisco — ExStart / Exchange Problems and MTU</a>.</li><li><a href="https://www.arista.com/en/um-eos/eos-open-shortest-path-first-version-2">Arista EOS — OSPFv2 Reference</a>.</li><li><a href="https://www.juniper.net/documentation/us/en/software/junos/ospf/topics/topic-map/verifying-and-monitoring-ospf-configuration.html">Juniper — OSPF Verification and Monitoring</a>.</li><li><a href="https://www.youtube.com/watch?v=wITAeO8i9U4">Practical Networking — OSPF Hello Packets</a>; <a href="https://www.youtube.com/watch?v=X0OBAPc3dpM">Practical Networking — Neighbor States</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An OSPF neighbor problem can often be narrowed by locating the state transition that failed. Hello parameters and routing identities govern discovery; network type and DR election determine whether a full adjacency is required; and DBD exchange, MTU and LSA synchronization influence ExStart, Exchange and Loading. Reliable engineers gather read-only evidence, keep hypotheses distinct from confirmed facts, and verify forwarding and route installation before declaring recovery.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor’s Note:</strong> OSNEC.006 follows published OSNEC.005. Protocol details were checked against RFC 2328, Cisco, Arista and Juniper documentation. All router outputs, timers and MTU scenarios are fictional. No actual router command was executed, no routing configuration was changed, and no production recovery was performed. The original 1200 × 630 featured illustration and separate 1200 × 720 technical diagram are branded “Bitcoinversus.tech” in neon green at bottom-left. The two Practical Networking videos are embedded as native Gutenberg video blocks; actual playback and mobile viewport appearance require independent confirmation.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional donation QR for 5000 satoshis" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code. Independently verify the destination and amount before donating.</em></p><!-- /wp:paragraph -->

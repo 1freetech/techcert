@@ -1,0 +1,173 @@
+<!-- wp:paragraph --><p><strong>OSDotNet.004</strong> explains how modern <strong>SDK-style .NET projects</strong> connect source files, target frameworks, NuGet dependencies, and MSBuild tasks into a repeatable build. The <code>.csproj</code> file is an XML-based specification of what an application is and how tools should process it; <code>dotnet restore</code> resolves dependency assets, <code>dotnet build</code> compiles a program, and <code>dotnet publish</code> prepares deployment output. The lesson follows <a href="https://bitcoinversus.tech/2026/11/05/osdotnet-003-cil-assemblies-intermediate-language-metadata-manifests/">OSDotNet.003 on CIL, metadata, and assembly manifests</a>, moving from the inside of a compiled binary to the project and build system that produces it.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Identify the project file, source files, generated folders, and compiled outputs in an SDK-style .NET application.</li><li>Explain the roles of <code>Project</code>, <code>PropertyGroup</code>, <code>ItemGroup</code>, <code>TargetFramework</code>, and <code>OutputType</code>.</li><li>Distinguish the .NET SDK selected to perform a build from the target framework the compiled application uses.</li><li>Describe how MSBuild evaluates properties, imports SDK targets, and executes a dependency-based build.</li><li>Compare dependency restore, build, run, and publish, including when restore happens implicitly.</li><li>Run a .NET 10 console example and examine its <code>bin</code> and <code>obj</code> artifacts.</li><li>Explain <code>PackageReference</code>, version selection, security audits, and optional SDK version pinning with <code>global.json</code>.</li><li>Predict expected output and safely troubleshoot build errors without installing unverified packages.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: <a href="https://bitcoinversus.tech/2026/10/08/osdotnet-001-what-is-dotnet-platform-runtime-sdk-libraries/">OSDotNet.001 on the platform, runtime and SDK</a>, <a href="https://bitcoinversus.tech/2026/10/08/osdotnet-002-what-common-language-runtime-does/">OSDotNet.002 on the common language runtime</a>, and elementary knowledge of <a href="https://bitcoinversus.tech/2026/10/09/oscsharp-001-dotnet-sdk-compiler-install-verify-create-build-run-csharp-toolchain/">the .NET compiler and CLI</a>. For hands-on work, install a supported <strong>.NET 10 SDK</strong> from Microsoft and use an ordinary user account with an empty practice directory. No third-party package is needed for the primary exercise.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A program is more than the lines of code its author types. A computer needs to know which files belong together, which version of .NET the program targets, and how to turn those files into something runnable. A project file is the instruction sheet. The SDK includes the tools that read the sheet. MSBuild coordinates the work, and NuGet finds additional software libraries if the project needs them.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The process resembles preparing a school science project: the source code is the work, the project file is the assignment checklist, restoring dependencies gathers required materials, building assembles the result, and publishing packages it for delivery. A program can sometimes run without a project file under .NET 10, but projects remain useful when code, dependencies, tests, or deployment requirements become more complex.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=98MizuB7i-w","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=98MizuB7i-w
+</div><figcaption class="wp-element-caption"><em>Microsoft Developer, <a href="https://www.youtube.com/watch?v=98MizuB7i-w">“No projects just C# with dotnet run app.cs | DEM518”</a>, Microsoft Build 2025 (May 23, 2025). Explains .NET 10 file-based programs and when a conventional project becomes useful. Official Microsoft presentation; playback must be verified independently.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">How .NET Project Files Developed</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Earlier Microsoft .NET projects often required long explicit lists of source files and build settings. Modern <strong>SDK-style</strong> projects introduced a shorter XML format that imports common build logic and includes ordinary source files automatically. They use the <a href="https://learn.microsoft.com/en-us/dotnet/core/project-sdk/overview">Microsoft.NET.Sdk project SDK</a> for a typical class library or console application, while <code>Microsoft.NET.Sdk.Web</code> adds ASP.NET Core web build conventions. Both rely on MSBuild, Microsoft’s extensible build engine. The project format and compiled assembly serve different purposes: the first describes the build, while the latter contains the result.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>As of November 8, 2026, Microsoft lists <strong>.NET 10</strong> as a supported long-term-support release through November 2028. .NET 8 and .NET 9 approach their November 2026 end-of-support dates. Use a supported target framework for new examples, but verify precise deadlines in the <a href="https://learn.microsoft.com/en-us/dotnet/core/releases-and-support">current Microsoft lifecycle documentation</a> before planning production upgrades. Building a target does not guarantee deployment machines have its required runtime.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The Smallest Useful SDK-Style Project File</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An SDK-style C# project is normally stored in a file ending with <code>.csproj</code>. Its outer <code>Project</code> element names the SDK, and the inner <code>PropertyGroup</code> collects settings. Here is a minimal executable project targeting .NET 10:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Complete sample ProjectLab.csproj XML" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+  &lt;PropertyGroup&gt;
+    &lt;OutputType&gt;Exe&lt;/OutputType&gt;
+    &lt;TargetFramework&gt;net10.0&lt;/TargetFramework&gt;
+    &lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+  &lt;/PropertyGroup&gt;
+&lt;/Project&gt;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p><code>OutputType</code> with value <code>Exe</code> requests an executable application rather than a reusable library. <code>TargetFramework</code> tells the build which API contract and target framework to use. <code>ImplicitUsings</code> enables automatically generated common namespace imports; <code>Nullable</code> turns on C# nullable-reference analysis. <code>TargetFramework</code> is not a request to download a particular SDK installer. It also differs from a runtime identifier, such as <code>linux-x64</code>, which describes deployment architecture and operating system.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The SDK-style project implicitly imports <code>Sdk.props</code> before user project content and <code>Sdk.targets</code> afterward. Those imports supply properties, tasks, targets, and standard file inclusion rules. <a href="https://learn.microsoft.com/en-us/dotnet/core/project-sdk/overview">Microsoft’s SDK reference</a> documents the implicit imports; they should not normally be copied verbatim into the short project file.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Properties and Items Play Different Roles</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>MSBuild separates <strong>properties</strong>, which are named values used to configure the build, from <strong>items</strong>, which represent files or other inputs. A property such as <code>TargetFramework</code> defines a build configuration. An item such as <code>PackageReference</code> requests an external dependency. A <code>ProjectReference</code> item instead identifies another local project. The XML element names and capitalization matter.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For example, a separate class-library project may be included with a project reference. The path shown below is illustrative and would require the referenced file to exist:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="ProjectReference item example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>&lt;ItemGroup&gt;
+  &lt;ProjectReference Include="../SharedLib/SharedLib.csproj" /&gt;
+&lt;/ItemGroup&gt;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>For external packages, NuGet uses <code>PackageReference</code> items with package IDs and version ranges. The next fragment illustrates the structure with a fictional package identifier, <strong>not</strong> something to paste into the runnable lab:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Illustrative fictional NuGet PackageReference; do not execute" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>&lt;ItemGroup&gt;
+  &lt;PackageReference Include="Example.NotARealPackage" Version="1.2.3" /&gt;
+&lt;/ItemGroup&gt;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>In a real project, select a verified package from a trusted repository, examine publisher identity, license, transitive dependencies, maintained versions, and security advisories. See <a href="https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files">Microsoft’s PackageReference reference</a>. The absence of a <code>PackageReference</code> item does not mean a .NET project lacks any framework assemblies: the target framework and SDK provide implicit references.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What NuGet Restore Actually Does</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>dotnet restore</code> reads project and NuGet configuration, resolves the dependency graph, obtains necessary package assets, and generates files used by later build stages. Dependency resolution can include direct and transitive packages. A typical generated file is <code>obj/project.assets.json</code>, which records resolved compile and runtime assets. Package files are usually cached in the user’s global NuGet packages directory; a project is not required to copy every restored package into its source folder.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Several common commands, including <code>dotnet build</code>, <code>dotnet run</code>, and <code>dotnet publish</code>, perform restore implicitly when needed. Explicit <code>dotnet restore</code> remains useful in CI pipelines where dependency resolution is audited and separated from compilation. The <code>--no-restore</code> flag skips that step, so it should only be used when a compatible restore already succeeded. Microsoft also documents NuGet vulnerability auditing during restore; security warnings should be evaluated rather than hidden. <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-restore">Official restore reference</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">MSBuild Evaluates a Dependency Graph</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>MSBuild reads project XML, imports SDK build targets, evaluates properties and items, and then runs requested targets and dependent targets in the correct order. A build is not simply one compiler invocation. Targets may generate code, resolve references, compile source, copy resources, emit runtime configuration, and populate output directories. The build engine also supports incremental behavior: it can skip certain work when inputs and outputs show that the result is still current.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>To inspect the complete XML project after imports, use <code>dotnet msbuild -preprocess</code>. To view a particular evaluated MSBuild property, use <code>dotnet msbuild -getProperty:TargetFramework</code> with a supported MSBuild version. The property command returns the project’s evaluated target framework, whereas preprocessing shows the imported build definitions. Source expansion is documentation, not a build itself.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Inspect MSBuild imports and an evaluated property" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>dotnet msbuild -preprocess:expanded.xml
+dotnet msbuild -getProperty:TargetFramework</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Projects can also control behavior by configuration, most commonly <code>Debug</code> and <code>Release</code>. The project’s <code>bin</code> folder holds compiled outputs for a configuration and target framework, while <code>obj</code> holds intermediate assets and generated metadata. Avoid committing these generated directories as ordinary source code; configure repository ignore patterns accordingly.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=uBeDp8kt6z0","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=uBeDp8kt6z0
+</div><figcaption class="wp-element-caption"><em>Microsoft Visual Studio, an official <a href="https://www.youtube.com/watch?v=uBeDp8kt6z0">MSBuild fundamentals demonstration</a> with Kevin Bost and Leslie Richardson (February 6, 2024). Explores how MSBuild evaluates projects and supports customizable workflows. Identity and channel confirmed; actual player playback is not independently tested.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Create and Inspect a .NET 10 Console Application</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Open a terminal and confirm the installed SDK. The laboratory is intended for Windows, macOS, or Linux with the supported .NET 10 SDK. Run the following commands in a new disposable working directory. They create a conventional project with a <code>.csproj</code> file rather than a single file-based program:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Create the ProjectLab console project" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>dotnet --info
+dotnet new console --name ProjectLab --framework net10.0
+cd ProjectLab</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The template normally creates <code>ProjectLab.csproj</code>, <code>Program.cs</code>, and generated directories after restore. Inspect the project file in a text editor. Template defaults can vary across SDK versions, so compare the actual generated XML with the earlier illustrative project file rather than assuming every line is identical.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Replace <code>Program.cs</code> with the following deliberately simple program, which writes exactly one message to standard output when the application starts:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Complete Program.cs file" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Console.WriteLine("Project build pipeline ready.");</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Now restore explicitly, compile without another restore, and run the already-built Debug result. The command sequence keeps dependency resolution and compilation visible as separate actions for learning:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Restore, build, and run the sample" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>dotnet restore
+dotnet build --no-restore
+dotnet run --no-build</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The expected application output is <code>Project build pipeline ready.</code> following build and command-line diagnostics. The output line is deterministic for the provided source, but the build has <strong>not</strong> been executed in the authoring environment because the .NET SDK is absent. Actual verification requires the learner to record SDK version, command exit statuses, output, and compiled file locations.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Inspect the Intermediate and Final Files</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The build typically creates <code>obj/Debug/net10.0/</code> and <code>bin/Debug/net10.0/</code>. In the latter directory, a standard console app generally contains the application assembly <code>ProjectLab.dll</code>, an executable launcher for the current platform in suitable configurations, plus <code>ProjectLab.deps.json</code> and <code>ProjectLab.runtimeconfig.json</code>. Exact file sets depend on SDK and host platform. <code>.deps.json</code> records runtime dependencies, and <code>.runtimeconfig.json</code> describes runtime framework requirements.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Review the <code>obj/project.assets.json</code> file only to understand resolution metadata; it is generated and should not be edited by hand. To understand the assembly itself, revisit <a href="https://bitcoinversus.tech/2026/11/05/osdotnet-003-cil-assemblies-intermediate-language-metadata-manifests/">OSDotNet.003 on CIL and manifests</a>. The difference is important: the <code>.csproj</code> specifies how to build, the <code>.dll</code> contains compiled managed code, and <code>project.assets.json</code> helps the tooling locate dependencies.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Build Versus Publish</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>dotnet build</code> produces artifacts suitable for building and running the project during development. <code>dotnet publish</code> produces a deployment-oriented output folder, with accompanying dependencies and configuration appropriate to publishing options. A <strong>framework-dependent</strong> publish expects a compatible shared .NET runtime on the destination; a <strong>self-contained</strong> publish includes the necessary runtime components for a selected platform and can be considerably larger. Self-contained does not automatically mean a single executable file.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>On the practice project, build and publish a Release configuration without third-party packages. Inspect the contents of the created folder before distributing anything:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Release build and framework-dependent publish lab" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>dotnet build --configuration Release
+dotnet publish --configuration Release --output ./publish
+dotnet ./publish/ProjectLab.dll</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The final command assumes the published output is framework-dependent and that a compatible runtime is installed. Use the official <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish">publish command documentation</a> to control runtime identifiers and deployment modes. Never infer that a binary from one operating system and CPU architecture will automatically run everywhere.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">SDK Version Selection with global.json</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>global.json</code> file can control which installed .NET SDK performs build operations. It does <strong>not</strong> change the application’s target framework. For reproducible builds, a repository can specify an SDK version and a roll-forward policy. The example below asks for .NET SDK feature band <code>10.0.100</code> or a later compatible 10.0 feature band when installed. An environment without a matching SDK will fail rather than silently use a completely different major version:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Example global.json SDK selection file" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>{
+  "sdk": {
+    "version": "10.0.100",
+    "rollForward": "latestFeature",
+    "allowPrerelease": false
+  }
+}</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>A project can target <code>net10.0</code> even when built with a later feature band of the .NET 10 SDK. A toolchain lock should be reviewed when security fixes or supported SDK updates arrive; strict pinning is a reproducibility tool, not permission to operate an outdated SDK indefinitely. See <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/global-json">Microsoft’s global.json reference</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Multi-Targeting and Compatibility</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Libraries sometimes compile against more than one framework using the plural <code>TargetFrameworks</code> property with a semicolon-separated list. A typical example could combine <code>net10.0</code> and <code>netstandard2.0</code> when the project’s APIs permit both, but additional package compatibility and target-specific build checks are required. The lab remains single-targeted to keep its outputs deterministic. <code>TargetFrameworks</code> should not be combined casually with the singular <code>TargetFramework</code> setting: the SDK interprets the latter as a single target if both are present.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Illustrative library multi-targeting property" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>&lt;PropertyGroup&gt;
+  &lt;TargetFrameworks&gt;net10.0;netstandard2.0&lt;/TargetFrameworks&gt;
+&lt;/PropertyGroup&gt;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Do not paste that snippet into the sample executable: it is intended to illustrate library compatibility, not a guaranteed supported console application configuration. Framework-specific APIs and third-party dependencies can fail to compile or restore for one target while working for another. Microsoft’s <a href="https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props">MSBuild property reference</a> documents framework properties.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Security and Operational Considerations</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Trust boundaries:</strong> NuGet packages and MSBuild targets can influence a developer or CI environment. Review untrusted project files before executing builds.</li><li><strong>Dependencies:</strong> use established package feeds, review authors and licensing, avoid secrets in project XML, and investigate NuGet audit warnings.</li><li><strong>Reproducibility:</strong> control dependency versions and restore policies; consider <code>packages.lock.json</code> and locked restore for projects that require stricter repeatability.</li><li><strong>Credentials:</strong> never commit personal access tokens, private feed passwords or cloud keys into <code>NuGet.Config</code>, source files or command history.</li><li><strong>Configuration:</strong> distinguish build-time values from runtime environment variables and confidential deployment configuration.</li><li><strong>Deployment:</strong> test target OS, processor, runtime availability and dependency packaging before distributing binaries.</li><li><strong>Code provenance:</strong> the cover is a conceptual illustration; it must not be interpreted as proof that the example compiled successfully.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting Common Failures</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>SDK not found:</strong> run <code>dotnet --list-sdks</code> and compare the installed versions with any <code>global.json</code> requirements.</li><li><strong>Unsupported target:</strong> verify that the installed SDK supports the <code>net10.0</code> target and required reference packs.</li><li><strong>Restore failure:</strong> inspect NuGet sources, authentication, package compatibility, proxies, and network access; do not hide audit findings to force success.</li><li><strong>Build succeeds but run fails:</strong> distinguish the generated DLL, launcher, runtime configuration, and whether the destination has the required .NET runtime.</li><li><strong>Unexpected compile input:</strong> inspect SDK default file inclusion rules and the complete preprocessed MSBuild project.</li><li><strong>Stale outputs:</strong> review generated <code>bin</code> and <code>obj</code> artifacts, then use <code>dotnet clean</code> or a controlled rebuild if appropriate.</li><li><strong>Release versus Debug:</strong> make sure the configuration and directory being inspected match the build command that actually ran.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice and Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Which file specifies the project SDK and target framework?</li><li>Explain the difference between <code>dotnet restore</code> and <code>dotnet build</code>. Why does build sometimes perform restore without a separate command?</li><li>Why is <code>TargetFramework</code> different from the selected SDK version?</li><li>What is the purpose of <code>ProjectReference</code>, compared with <code>PackageReference</code>?</li><li>Which generated folder normally contains <code>project.assets.json</code>, and should it be edited manually?</li><li>Compare a framework-dependent publish with a self-contained publish.</li><li>What happens if <code>dotnet build --no-restore</code> runs before a suitable restore?</li><li>How can <code>global.json</code> improve repeatability, and what happens if the selected SDK is unavailable?</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> A <code>.csproj</code> project file describes project-level SDK and build properties. Restore resolves dependency assets, while build compiles and packages project outputs; build normally restores implicitly. The target framework selects API and runtime contracts, whereas the SDK selects the development toolchain. <code>ProjectReference</code> points to another project, while <code>PackageReference</code> points to NuGet package dependencies. <code>obj/project.assets.json</code> is generated restore metadata, not a hand-maintained source file. Framework-dependent publishing requires a compatible installed runtime; self-contained output includes an appropriate runtime. <code>--no-restore</code> can fail without matching assets. <code>global.json</code> constrains toolchain selection and can cause a deliberate failure if no compatible SDK is installed.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Official Documentation and Further Reading</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://learn.microsoft.com/en-us/dotnet/core/project-sdk/overview">Microsoft Learn — .NET project SDK overview</a>.</li><li><a href="https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props">Microsoft Learn — SDK-style MSBuild properties</a>.</li><li><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-restore">Microsoft Learn — dotnet restore</a>.</li><li><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build">Microsoft Learn — dotnet build</a>.</li><li><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish">Microsoft Learn — dotnet publish</a>.</li><li><a href="https://learn.microsoft.com/en-us/dotnet/core/tools/global-json">Microsoft Learn — global.json SDK version selection</a>.</li><li><a href="https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files">Microsoft Learn — NuGet PackageReference</a>.</li><li><a href="https://learn.microsoft.com/en-us/dotnet/core/releases-and-support">Microsoft Learn — .NET lifecycle and support</a>.</li><li><a href="https://learn.microsoft.com/en-us/shows/dotnet-package-management-with-nuget-for-beginners/installing-a-nuget-package-using-the-dotnet-cli-nuget-for-beginners">Microsoft Learn video — Installing a NuGet Package using the .NET CLI</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The .NET project file is a concise build instruction sheet, not the application itself. The SDK reads that sheet, NuGet gathers dependencies, MSBuild organizes compilation, and the resulting assembly contains executable managed code. A project can be built locally, run for development, and published for deployment with different commands. Learning these distinctions helps developers locate errors, explain generated files, and keep repeatable software builds organized.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor’s Note:</strong> OSDotNet.004 continues the verified OSDotNet.003 curriculum. Sources are official Microsoft Learn documentation, supplemented by two Microsoft educational videos. The standalone console program and project XML have been prepared for .NET 10; the local authoring environment does not have the .NET SDK, so compiling, running, and publishing the project have not been independently executed. The expected console output is a prediction, not a claimed test pass. The featured 1200 × 630 cover is original branded editorial art, not a genuine test screenshot. The two YouTube embed identities are sourced; rendered-player presence and live playback require separate verification.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original optional 5,000-satoshi donation QR code" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code. Verify the recipient and amount independently before making a payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>The programming lab is educational. Revalidate commands, package sources, and target framework support in your own environment before deploying to shared or production systems.</em></p><!-- /wp:paragraph -->

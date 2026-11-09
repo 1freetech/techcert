@@ -1,0 +1,166 @@
+<!-- wp:paragraph --><p><strong>OSEmojicode.003</strong> teaches how programs choose between alternative instructions in <strong>Emojicode 1.0 beta 2</strong>. Emojicode is a compiled, strongly typed language whose control structures use emoji tokens. The official reference defines <code>↪️</code> for an <em>if</em> branch, <code>🙅</code> for <em>else</em>, and <code>🙅↪️</code> for an additional conditional branch. A comparison produces a Boolean value, <code>👍</code> or <code>👎</code>, which determines which block runs. The lesson follows <a href="https://bitcoinversus.tech/2026/11/05/osemojicode-002-variables-types-constants-mutation-scope/">OSEmojicode.002 on constants, mutation, and scope</a>, progressing from storing values to making decisions using those values.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Explain how Boolean values <code>👍</code> and <code>👎</code> control a conditional block.</li><li>Write a documented <code>↪️</code> branch with an <code>🙅</code> fallback.</li><li>Use <code>🙅↪️</code> to distinguish greater-than, equal-to, and lower-than cases.</li><li>Interpret <code>▶️</code>, <code>◀️</code>, and <code>🙌</code> in comparisons and distinguish them from value assignment.</li><li>Combine Boolean expressions using short-circuit AND <code>🤝</code> and OR <code>👐</code>.</li><li>Trace program execution and expected output for different input values.</li><li>Compile a standalone <code>.emojic</code> example on a supported installation and record compiler results rather than presuming success.</li><li>Explain the security and reliability limits of example numeric thresholds.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites include <a href="https://bitcoinversus.tech/2026/10/08/osemojicode-001-what-is-emojicode-how-emoji-become-programming-syntax/">OSEmojicode.001 on program structure</a> and the preceding variables lesson. Knowledge of <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-002-csharp-variables-built-in-types-var-const/">C# variables and Boolean types</a> can provide a useful comparison. Learners need a UTF-8 text editor and, for compilation, the compiler and C++ toolchain described by <a href="https://www.emojicode.org/docs/guides/install">Emojicode’s official installation guide</a>. The example values are fictional programming data, not validated temperature, electrical, industrial, or health thresholds.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A computer program often has to answer a yes-or-no question. Is a number greater than a limit? Does a name match the expected text? Has a requested task completed? A conditional expression answers such a question with one of two Boolean results, usually called true or false. In Emojicode those values are represented by thumbs-up <code>👍</code> and thumbs-down <code>👎</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>When the answer is true, an <em>if</em> block runs. An optional <em>else</em> block runs when the earlier tests are false. The program does not execute every alternative; it chooses the path permitted by the condition. Braces in many other languages serve the same grouping function as Emojicode’s grape <code>🍇</code> and watermelon <code>🍉</code> block delimiters.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=grmVLN4_Ztg","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=grmVLN4_Ztg
+</div><figcaption class="wp-element-caption"><em>Codecademy, <a href="https://www.youtube.com/watch?v=grmVLN4_Ztg">“World Emoji Day Celebration!”</a> (July 17, 2020). A public educational demonstration of the Emojicode course with language creator Theo B. Weidmann; the course includes a conditionals unit. Historical context and course demonstration, not a verified recording of the exact lab below.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Origins and Version Scope</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Emojicode was conceived by Theo B. Weidmann and publicly released in the mid-2010s as an experiment in a programming language that uses emoji as syntactic markers. It supports conventional software concepts, including types, methods, conditional logic, optionals, and collections. The official site currently presents <strong>Emojicode 1.0 beta 2</strong> and supplies language-reference documentation rather than a verified newly released stable 2026 edition. Examples are deliberately scoped to that documented beta; a future compiler could change token handling or installation details. <a href="https://www.emojicode.org/docs/">Official documentation</a> describes the language version.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A conditional in Emojicode works much like the corresponding statement in <a href="https://bitcoinversus.tech/2026/11/08/oscsharp-005-csharp-control-flow-conditions-switch-loops/">C# control-flow programming</a>. The tokens are different, but the engineering goal is the same: evaluate a Boolean expression, perform exactly the applicable actions, and handle the remaining cases without ambiguity.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Boolean Values and Comparison Operators</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A comparison such as <code>temperature ▶️ 80</code> asks whether the numeric value of <code>temperature</code> is strictly greater than eighty. For a value of 82, the expression is <code>👍</code>. For a value of 80, the result is <code>👎</code> because strict greater-than excludes equality. The related <code>◀️</code> operator checks strict less-than, while <code>🙌</code> compares for equality. Emojicode uses separate assignment operators, so <code>🙌</code> must not be confused with the arrow <code>➡️</code> that declares a constant.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The comparison forms below show their mathematical counterparts. Each is an expression fragment for teaching, not a complete executable program:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Emojicode comparison expressions and expected results" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>82 ▶️ 80    -&gt; 👍  (82 &gt; 80)
+82 ◀️ 80    -&gt; 👎  (82 &lt; 80)
+80 🙌 80    -&gt; 👍  (80 equals 80)
+80 ▶️ 80    -&gt; 👎  (strictly greater excludes equality)
+80 ◀️ 80    -&gt; 👎  (strictly less excludes equality)</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The official <a href="https://www.emojicode.org/docs/reference/operators">operator reference</a> documents comparison symbols, precedence, and Boolean operators. Evaluate the expression against its actual type: arbitrary strings and unrelated objects cannot be ordered numerically without an operation provided for those types.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Writing an If Block</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An <code>↪️</code> statement evaluates the expression immediately following it. When the result is <code>👍</code>, statements inside <code>🍇</code> and <code>🍉</code> run. If the result is <code>👎</code>, that block is skipped. For example, a local constant holding 82 can be checked against an educational threshold of 80:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="One-branch Emojicode if example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>🏁 🍇
+  82 ➡️ temperature
+  ↪️ temperature ▶️ 80 🍇
+    😀 🔤High reading🔤❗️
+  🍉
+🍉</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The expected output is <code>High reading</code>. The starting <code>🏁</code> marks the entry point, <code>➡️</code> declares a value, and the <code>😀</code> call prints a string. Copying the proper emoji code points matters: visually similar replacement symbols or text-only approximations may not be recognized by the compiler. The <a href="https://www.emojicode.org/docs/reference/controlflow">official control-flow chapter</a> supplies the statement grammar.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">If and Else Form a Two-Path Decision</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <code>🙅</code> fallback executes when the preceding <code>↪️</code> condition and any intervening conditional alternatives do not match. It does not have a separate Boolean test. For each evaluation of the complete if/else structure, one of the two branches below is chosen:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Complete Emojicode if/else conditional program" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>🏁 🍇
+  82 ➡️ temperature
+  ↪️ temperature ▶️ 80 🍇
+    😀 🔤High reading🔤❗️
+  🍉
+  🙅 🍇
+    😀 🔤Normal reading🔤❗️
+  🍉
+🍉</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>For <code>temperature = 82</code>, the expected result is <strong>High reading</strong>. Change the constant to 80, save the file and recompile: <code>temperature ▶️ 80</code> becomes false, so the fallback should print <strong>Normal reading</strong>. Both outcomes are predictions derived from the language specification, not evidence of an executed compiler test in the authoring environment.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Else-If Selects Among Three Cases</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The <code>🙅↪️</code> form is an additional conditional alternative. The first successful condition wins and later alternatives are skipped; if none matches, the final <code>🙅</code> block runs. The next example distinguishes a number above, equal to, or below 80. The form follows the <a href="https://www.emojicode.org/docs/reference/controlflow">official multi-branch example</a>:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Three-branch Emojicode conditional example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>🏁 🍇
+  80 ➡️ temperature
+  ↪️ temperature ▶️ 80 🍇
+    😀 🔤Above threshold🔤❗️
+  🍉
+  🙅↪️ temperature 🙌 80 🍇
+    😀 🔤At threshold🔤❗️
+  🍉
+  🙅 🍇
+    😀 🔤Below threshold🔤❗️
+  🍉
+🍉</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The expected message is <strong>At threshold</strong> for the assigned value 80. At 81 the first branch should print <strong>Above threshold</strong>, and at 79 the fallback should print <strong>Below threshold</strong>. Equal-to does not mean “less than or equal”; the equality branch has been specified explicitly. The exact code-point sequence for <code>🙅↪️</code> is worth copying from the official reference if a particular keyboard or font changes its representation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Short-Circuit Boolean Logic</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Emojicode uses <code>🤝</code> for logical AND and <code>👐</code> for logical OR. AND is true only when both conditions are true; OR is true when at least one is true. They are <strong>short-circuit</strong> operators: AND does not evaluate its second operand if the first is false, and OR does not evaluate its second operand if the first is true. Short-circuiting can avoid unnecessary work, but it must not be relied on as the only protection for security-sensitive input.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The following truth table is written as unboxed code so each result remains readable on narrow screens:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="AND and OR truth table" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>👍 🤝 👍  -&gt; 👍    👍 👐 👍  -&gt; 👍
+👍 🤝 👎  -&gt; 👎    👍 👐 👎  -&gt; 👍
+👎 🤝 👍  -&gt; 👎    👎 👐 👍  -&gt; 👍
+👎 🤝 👎  -&gt; 👎    👎 👐 👎  -&gt; 👎</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>For example, a hypothetical monitored reading can be classified only when both numeric conditions are met. The sample is educational and does not measure physical sensors:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Complete Emojicode Boolean AND example" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>🏁 🍇
+  82 ➡️ temperature
+  45 ➡️ humidity
+  ↪️ temperature ▶️ 80 🤝 humidity ◀️ 50 🍇
+    😀 🔤Both conditions satisfied🔤❗️
+  🍉
+  🙅 🍇
+    😀 🔤Conditions not both satisfied🔤❗️
+  🍉
+🍉</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>With temperature 82 and humidity 45, both comparisons should be true, giving the expected message <strong>Both conditions satisfied</strong>. Changing humidity to 50 makes the strict less-than test false and selects the fallback. Logical operators operate on Boolean expressions, not arbitrary integers; comparing a number first creates the Boolean needed by the operator.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=tJcZx8mz7lo","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=tJcZx8mz7lo
+</div><figcaption class="wp-element-caption"><em>Alfredo Sequeida, <a href="https://www.youtube.com/watch?v=tJcZx8mz7lo">“Coding using EMOJIS!”</a> (December 8, 2020). Demonstrates programming with Emojicode in a hands-on walkthrough. The historical video supports introductory workflow, while the current article’s syntax is checked against the official 1.0 beta 2 reference.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Precedence and Grouping Matter</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>In Emojicode, numeric comparisons generally bind more tightly than logical AND, and logical AND binds more tightly than logical OR. Without parentheses, a combination of comparisons and logical operators follows the precedence listed by the language specification. Explicit grouping uses <code>🤜</code> and <code>🤛</code>. Grouping makes the intended condition clear and helps code reviewers avoid misreading expressions.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For example, a condition testing whether an observed number falls into a two-sided range can use logical AND. A value must pass both tests for the result to be true:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Boolean interval comparison, explanatory fragment" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>70 ◀️ temperature 🤝 temperature ◀️ 90</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The interval expression is a fragment rather than a complete program. Its meaning is (70 &lt; temperature) AND (temperature &lt; 90); the result is expected to be <code>👍</code> when temperature is 82. To write comments inside an actual Emojicode file, use the documented <code>💭</code> form instead of comment markers borrowed from another language.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A Small Decision-Making Lab</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Create a file named <code>conditional.emojic</code> and paste the complete if/else example shown earlier. The program uses one constant and has no user input, network calls, or external dependencies beyond the Emojicode compiler toolchain. On a Linux or macOS-style terminal with the official 1.0 beta 2 compiler installed and a supported C++ linker available, the documented workflow is:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Emojicode compiler and local executable commands" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>emojicodec conditional.emojic
+./conditional</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Compilation should produce a native executable named <code>conditional</code> on a compatible supported platform, and running it should print <code>High reading</code>. Check the compiler exit code and actual output before marking the exercise successful. The <a href="https://www.emojicode.org/docs/guides/compile-and-run">official compile-and-run guide</a> documents the <code>emojicodec</code> command and executable invocation. Executable names and suffixes differ on some operating systems, so follow the compiler output rather than assuming Unix-style paths work on Windows.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>After verifying the first case, change 82 to 80 and rebuild. Predict that the message changes to <code>Normal reading</code>. Then substitute the three-branch example and vary the constant among 79, 80 and 81. Record each actual output and compare it with the predicted branch. Preserve the exact file in version control only after confirming its syntax on the intended compiler.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Guarding Optional Values</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Beyond plain Boolean comparisons, the official documentation allows certain assignments in the condition of an <code>↪️</code> statement. If the source expression is an optional, a successful conditional assignment unwraps its value into a variable scoped to the true branch. If no value is present, the branch is skipped. The <a href="https://www.emojicode.org/docs/guides/compile-and-run">official guide’s dictionary lookup demonstration</a> shows a safe way to check that a key exists before using its result. That technique is more robust than assuming a returned value must always exist.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Optional-value checks are distinct from a generic truthiness rule. Emojicode is strongly typed: a condition ordinarily evaluates to its Boolean type, and conditional assignment has special explicitly documented optional semantics. A missing value should be handled through those language rules rather than by treating arbitrary numbers, strings, or references as interchangeable Booleans.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and Reliability</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Unexpected branch:</strong> distinguish <code>▶️</code> from <code>◀️</code>, and check whether the comparison is strict or includes equality.</li><li><strong>Compiler rejects an emoji:</strong> verify exact Unicode characters, variation selectors, and the documented Emojicode compiler version; fonts may display equivalent-looking but distinct sequences.</li><li><strong>Else never runs:</strong> check that the if expression can actually become false, and that the else block is attached directly to the correct conditional.</li><li><strong>Multiple competing rules:</strong> order conditional alternatives from the most specific case to a general fallback; only the first matching branch in a chain runs.</li><li><strong>Type mismatch:</strong> compare compatible values and use Boolean operators on conditions that produce the documented Boolean type.</li><li><strong>Missing compiler or linker:</strong> the official beta installer requires a working C++ compiler such as Clang or GCC; do not run unreviewed remote installation scripts with elevated privileges.</li><li><strong>Real telemetry:</strong> never promote the exercise’s invented limits to electrical, medical, or environmental safety thresholds. Production systems require independently validated limits, alarms, test coverage, and a safe failure state.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice and Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>With <code>temperature = 80</code>, which branch of the complete if/else program runs and why?</li><li>With <code>temperature = 79</code>, which branch of the three-case chain prints a message?</li><li>Is <code>80 ▶️ 80</code> true? How would you test equality instead?</li><li>Evaluate <code>👍 🤝 👎</code> and <code>👍 👐 👎</code>.</li><li>Why does short-circuit AND sometimes skip its second expression?</li><li>What is the difference between a Boolean condition and optional conditional assignment?</li><li>What tools are required to compile the sample from the official beta source and run the resulting native executable?</li><li>How would you confirm that a compiler result, rather than a hand prediction, is correct?</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> At 80, the fallback prints Normal reading because 80 is not strictly greater than 80. At 79, the three-case program prints Below threshold. <code>80 ▶️ 80</code> is false; <code>80 🙌 80</code> checks equality and is true. True AND false is false, while true OR false is true. AND skips a second operand when the first is false because the final result is already known. Ordinary conditions evaluate Boolean expressions; special optional conditional assignment unwraps a present value in a successful branch. Compilation needs the Emojicode compiler and a compatible C++ linker, followed by actual execution and comparison against predicted output.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Primary References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://www.emojicode.org/docs/">Emojicode — official 1.0 beta 2 reference index</a>.</li><li><a href="https://www.emojicode.org/docs/reference/controlflow">Emojicode — Control Flow: If, Else, Else-If, Blocks</a>.</li><li><a href="https://www.emojicode.org/docs/reference/operators">Emojicode — Operators, Precedence and Short-Circuit Logic</a>.</li><li><a href="https://www.emojicode.org/docs/reference/syntax">Emojicode — Source Syntax and Statement Grammar</a>.</li><li><a href="https://www.emojicode.org/docs/guides/compile-and-run">Emojicode — Compile and Run Your First Program</a>.</li><li><a href="https://www.emojicode.org/docs/guides/install">Emojicode — Installing 1.0 beta 2</a>.</li><li><a href="https://www.codecademy.com/resources/docs/emojicode/conditionals">Codecademy — Emojicode Conditionals</a>.</li><li><a href="https://www.codecademy.com/learn/learn-emojicode">Codecademy — Learn Emojicode (includes conditionals)</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Emojicode uses the same decision-making ideas found in other programming languages. A comparison answers a question with a thumbs-up or thumbs-down Boolean value. The <code>↪️</code> instruction chooses a true branch; <code>🙅</code> handles the fallback; and <code>🙅↪️</code> introduces more choices. Logical AND and OR combine conditions, sometimes avoiding unnecessary work. The essential skill is to predict which statements run, then confirm that prediction by compiling and testing an actual program.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor’s Note:</strong> OSEmojicode.003 advances the published OSEmojicode.002 curriculum and references the official Emojicode 1.0 beta 2 language documentation. The executable examples and expected output were checked against the published grammar, but the Emojicode compiler is not installed in the authoring environment; compilation and execution have not been independently performed. The original 1200 × 630 featured image is conceptual artwork, not an actual compiler screenshot. The two selected YouTube videos were identified through their public pages; rendering an iframe does not establish live playback or mobile visual compliance.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR code for optional 5,000-satoshi donation" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code. Always verify the destination and requested amount in your wallet before sending funds.</em></p><!-- /wp:paragraph -->

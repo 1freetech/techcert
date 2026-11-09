@@ -1,0 +1,52 @@
+{
+  "lesson_id": "OSNTC.040",
+  "post_id": 31847,
+  "title": "OSNTC.040: Ethernet Storm Control — Broadcast, Multicast, and Unknown Unicast",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/osntc-040-ethernet-storm-control-broadcast-multicast-unknown-unicast/",
+  "slug": "osntc-040-ethernet-storm-control-broadcast-multicast-unknown-unicast",
+  "featured_media_id": 31853,
+  "featured_dimensions": [
+    1200,
+    630
+  ],
+  "reconciliation": "Two OSNTC.039 topics were created concurrently November 8. PTP is canonical OSNTC.039, WordPress #31837. Storm Control has been renumbered OSNTC.040, WordPress #31847; title, slug, leading ID, featured cover and archives reconciled without changing the PTP lesson.",
+  "canonical_previous_lesson": {
+    "id": "OSNTC.039",
+    "subject": "Precision Time Protocol — IEEE 1588",
+    "wordpress_post_id": 31837,
+    "url": "https://bitcoinversus.tech/2026/11/08/osntc-039-precision-time-protocol-ieee-1588-grandmasters-hardware-timestamps-troubleshooting/"
+  },
+  "cover": "Original generated storm-control illustration with accurate read-only panel and exact 10pt-equivalent neon-green Bitcoinversus.tech text at lower left. Diagram conceptual, not device output.",
+  "source_length": 31293,
+  "youtube_blocks": 2,
+  "rendered_iframes": 2,
+  "video_ids": [
+    "6MW5P6Ci7lw",
+    "-PLkjumshjY"
+  ],
+  "unboxed_examples": 6,
+  "boxed_code": 0,
+  "contextual_internal_links": 6,
+  "qr": true,
+  "cover_repeated_in_body": false,
+  "calculations": {
+    "ten_gbps_one_percent_mbps": 100,
+    "five_thousand_frames_800_bytes_mbps": 32,
+    "peak_hypothetical_broadcast_mbps": 220
+  },
+  "vendor_sources": [
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/flowcontrol-stormcontrol/flow-control-and-storm-control-configuration-guide/m-storm-control.html",
+    "https://www.arista.com/en/um-eos/eos-data-transfer",
+    "https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/statement/storm-control-edit-interfaces.html"
+  ],
+  "physical_test": "not performed: no switch touched, no generated storm",
+  "video_playback": "not independently verified",
+  "responsive_visual": "not independently verified",
+  "archives": {
+    "source": "archive/2026/11/31847-osntc-040-storm-control.gutenberg.html",
+    "worksheet": "archive/2026/11/31847-osntc-040-storm-control.worksheet.md",
+    "qa": "archive/2026/11/31847-osntc-040-storm-control.qa.json"
+  },
+  "date": "2026-11-08"
+}

@@ -1,0 +1,43 @@
+{
+  "lesson_id": "OSEmojicode.003",
+  "wordpress_post_id": 31720,
+  "title": "OSEmojicode.003: Conditionals — If, Else, Comparisons, and Boolean Logic",
+  "publication_status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/osemojicode-003-conditionals-if-else-comparisons-boolean-logic/",
+  "featured_media_id": 31717,
+  "featured_media_size": [
+    1200,
+    630
+  ],
+  "featured_artwork": "Original conceptual illustration, neon-green Bitcoinversus.tech mark in lower-left; not a verified compiler screenshot",
+  "gutenberg_source_characters": 27110,
+  "native_video_blocks": 2,
+  "video_ids": [
+    "grmVLN4_Ztg",
+    "tJcZx8mz7lo"
+  ],
+  "wordpress_rendered_iframes": 2,
+  "unboxed_code_examples": 8,
+  "boxed_code_blocks": 0,
+  "contextual_internal_links": 4,
+  "original_donation_qr": true,
+  "cover_duplicated_in_body": false,
+  "published_source_built_against": "Emojicode 1.0 beta 2 official reference",
+  "static_logic_assertions": "82 > 80 true; 80 > 80 false; branches at 79/80/81 and AND/OR truth tables checked mathematically",
+  "runtime_compilation": "unverified: emojicodec executable not installed in current runtime",
+  "runtime_execution": "unverified",
+  "video_playback": "unverified: public YouTube identities checked; WordPress iframe rendering confirmed",
+  "mobile_desktop_visual_inspection": "unverified",
+  "principal_sources": [
+    "https://www.emojicode.org/docs/reference/controlflow",
+    "https://www.emojicode.org/docs/reference/operators",
+    "https://www.emojicode.org/docs/guides/compile-and-run",
+    "https://www.codecademy.com/resources/docs/emojicode/conditionals"
+  ],
+  "archive_paths": {
+    "html": "archive/2026/11/31720-osemojicode-003-conditionals.gutenberg.html",
+    "example_directory": "archive/2026/11/31720-osemojicode-003-conditionals/",
+    "qa": "archive/2026/11/31720-osemojicode-003-conditionals.qa.json"
+  },
+  "date": "2026-11-08"
+}

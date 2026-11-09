@@ -1,0 +1,59 @@
+{
+  "lesson_id": "OSNEC.006",
+  "post_id": 31859,
+  "title": "OSNEC.006: OSPF Neighbor Adjacency — Hello Timers, States, and MTU Troubleshooting",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/09/osnec-006-ospf-neighbor-adjacency-hello-timers-states-mtu-troubleshooting/",
+  "slug": "osnec-006-ospf-neighbor-adjacency-hello-timers-states-mtu-troubleshooting",
+  "featured_media_id": 31855,
+  "featured_dimensions_px": [
+    1200,
+    630
+  ],
+  "in_body_technical_diagram_media_id": 31856,
+  "diagram_dimensions_px": [
+    1200,
+    720
+  ],
+  "branding": "Both original images carry exact Bitcoinversus.tech signature in neon-green #39FF14, bottom-left, ~10pt at 96dpi; cover and diagram are conceptual illustrations, not actual router output.",
+  "saved_gutenberg_chars": 28314,
+  "native_youtube_blocks": 2,
+  "rendered_youtube_iframe_count": 2,
+  "video_ids": [
+    "wITAeO8i9U4",
+    "X0OBAPc3dpM"
+  ],
+  "unboxed_examples": 7,
+  "boxed_code_blocks": 0,
+  "contextual_internal_links": 4,
+  "donation_qr_present": true,
+  "diagram_present_in_body": true,
+  "featured_cover_duplicate_in_body": false,
+  "source_date": "2026-11-08 local; WordPress site publication date 2026-11-09",
+  "static_cases": {
+    "hello_R1_s": 10,
+    "hello_R2_s": 5,
+    "dead_R1_s": 40,
+    "dead_R2_s": 20,
+    "hello_match": false,
+    "dead_match": false,
+    "mtu_R1_bytes": 1500,
+    "mtu_R2_bytes": 9000,
+    "mtu_difference_bytes": 7500
+  },
+  "physical_router_test": "none; read-only examples and fictional data, no actual packet capture or configuration operation",
+  "live_player_playback": "not independently verified; CMS emitted iframe elements",
+  "desktop_mobile_viewport": "not independently verified",
+  "primary_sources": [
+    "https://www.rfc-editor.org/rfc/rfc2328",
+    "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13699-29.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html",
+    "https://www.arista.com/en/um-eos/eos-open-shortest-path-first-version-2",
+    "https://www.juniper.net/documentation/us/en/software/junos/ospf/topics/topic-map/verifying-and-monitoring-ospf-configuration.html"
+  ],
+  "archive_paths": {
+    "source": "archive/2026/11/31859-osnec-006-ospf-adjacency.gutenberg.html",
+    "worksheet": "archive/2026/11/31859-osnec-006-ospf-adjacency.worksheet.md",
+    "qa": "archive/2026/11/31859-osnec-006-ospf-adjacency.qa.json"
+  }
+}

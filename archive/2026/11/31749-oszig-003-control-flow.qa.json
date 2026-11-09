@@ -1,0 +1,65 @@
+{
+  "lesson_id": "OSZig.003",
+  "post_id": 31749,
+  "title": "OSZig.003: Zig Control Flow — If, Switch, and Optional Values",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/oszig-003-zig-control-flow-if-switch-optional-values/",
+  "featured_media_id": 31745,
+  "cover_size": [
+    1200,
+    630
+  ],
+  "cover_branding": "Bitcoinversus.tech in neon green (#39FF14), approximately 10 pt, lower left; conceptual artwork, not a real Zig compiler screenshot",
+  "source_characters": 28743,
+  "native_youtube_blocks": 2,
+  "wordpress_rendered_iframes": 2,
+  "video_ids": [
+    "UAS0f42_3uU",
+    "V4KWHKu7ksg"
+  ],
+  "code_examples": 9,
+  "boxed_code_blocks": 0,
+  "contextual_internal_links": 4,
+  "donation_qr": true,
+  "cover_duplicated_in_body": false,
+  "boundary_expectations": [
+    [
+      69,
+      "NORMAL"
+    ],
+    [
+      70,
+      "WATCH"
+    ],
+    [
+      89,
+      "WATCH"
+    ],
+    [
+      90,
+      "ALERT"
+    ],
+    [
+      120,
+      "ALERT"
+    ]
+  ],
+  "assertions_in_standalone_file": 11,
+  "zig_runtime": "unavailable; Zig 0.17.1 official binary download attempt failed; no compiled/tested claim",
+  "compiler_run": "not executed",
+  "test_run": "not executed",
+  "live_video_playback": "unverified; WordPress shows iframes",
+  "responsive_viewports": "unverified; no independent browser viewport",
+  "external_page_fetch": "failed through external web tool; WordPress publish/read API confirmed",
+  "source_urls": [
+    "https://ziglang.org/download/",
+    "https://ziglang.org/news/0.17.1-released/",
+    "https://ziglang.org/documentation/0.17.1/"
+  ],
+  "archive_paths": {
+    "gutenberg": "archive/2026/11/31749-oszig-003-control-flow.gutenberg.html",
+    "program": "archive/2026/11/31749-oszig-003-control-flow/control_flow.zig",
+    "qa": "archive/2026/11/31749-oszig-003-control-flow.qa.json"
+  },
+  "date": "2026-11-08"
+}

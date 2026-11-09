@@ -1,0 +1,48 @@
+{
+  "lesson_id": "OSLTC.006",
+  "wordpress_post_id": 31833,
+  "title": "OSLTC.006: Leading Technical Incidents — Roles, Escalation, Communication, and Recovery",
+  "publication_status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/osltc-006-leading-technical-incidents-roles-escalation-communication-recovery/",
+  "featured_media_id": 31829,
+  "featured_media_size_px": [
+    1200,
+    630
+  ],
+  "cover_branding": "Bitcoinversus.tech, neon green (#39FF14), bottom left, approximately 10pt; generated editorial illustration",
+  "in_body_cover_duplicate": false,
+  "saved_gutenberg_length": 35359,
+  "saved_embed_blocks": 2,
+  "wordpress_rendered_iframes": 2,
+  "video_ids": [
+    "n4y9dwinPBQ",
+    "UBe7U2b3tsA"
+  ],
+  "unboxed_examples": 7,
+  "boxed_code_blocks": 0,
+  "contextual_internal_links": 4,
+  "original_donation_qr_present": true,
+  "static_calculations": {
+    "failed_probe_percent": 25,
+    "alert_to_green_minutes": 28,
+    "declaration_to_green_minutes": 24
+  },
+  "field_evidence": "All timeline events, users and incidents are invented, no real event or service restoration is claimed",
+  "video_identity": "Two official Google Cloud Tech YouTube video titles and IDs verified against public search results",
+  "live_video_playback": "not independently tested",
+  "mobile_desktop_viewport": "not independently tested",
+  "actual_team_tabletop": "not performed",
+  "source_urls": [
+    "https://sre.google/sre-book/managing-incidents/",
+    "https://sre.google/workbook/incident-response/",
+    "https://sre.google/workbook/postmortem-culture/",
+    "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+  ],
+  "archive_paths": {
+    "gutenberg": "archive/2026/11/31833-osltc-006-incident-leadership.gutenberg.html",
+    "worksheet": "archive/2026/11/31833-osltc-006-incident-leadership.tabletop.md",
+    "qa": "archive/2026/11/31833-osltc-006-incident-leadership.qa.json"
+  },
+  "archive_note": "WordPress rendered iframe presence does not establish playback permissions or successful video playback",
+  "date": "2026-11-08"
+}

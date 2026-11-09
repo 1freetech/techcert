@@ -1,0 +1,163 @@
+<!-- wp:paragraph --><p><strong>OSShakespeare.003</strong> examines arithmetic expressions and output in the <strong>Shakespeare Programming Language (SPL)</strong>, an experimental language that makes code resemble a stage play. Characters are integer-valued variables, speeches perform computations, and the listener receives assignments. The lesson builds on <a href="https://bitcoinversus.tech/2026/11/05/osshakespeare-002-characters-variables-values-dialogue-stage-addressing/">OSShakespeare.002 on characters, variables and stage addressing</a>. Learners will construct and trace sums, differences, products and quotient expressions, then use a complete miniature play to produce a numerical result.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Explain how the original SPL vocabulary assigns integer values to nouns and adjectives.</li><li>Translate the arithmetic phrases <code>the sum of</code>, <code>the difference between</code>, <code>the product of</code>, and <code>the quotient between</code> into arithmetic operations.</li><li>Recognize unary <code>the square of</code>, <code>the cube of</code>, and <code>twice</code> expressions.</li><li>Distinguish the value of the speaker (<code>myself</code>) from the value of the listener (<code>thyself</code>).</li><li>Trace successive assignments to a character and explain the meaning of <code>Open your heart</code> versus <code>Speak your mind</code>.</li><li>Identify grammar, stage, arithmetic-domain and integer-range errors, and validate an example with an actual SPL interpreter when available.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: SPL titles, character declarations, act and scene headings, entrances, and listener addressing from <a href="https://bitcoinversus.tech/2026/10/08/osshakespeare-001-how-a-shakespeare-program-is-structured/">OSShakespeare.001 on program structure</a> and OSShakespeare.002. A reader should be comfortable with addition, subtraction, multiplication, division, and signed integers. The practical exercise uses a plain-text editor; an SPL interpreter is optional for manual tracing but necessary to establish actual runtime behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Imagine a play in which each actor carries a number rather than a prop. One actor speaks to another, giving the listener a new number. A compliment can mean a positive number, an insult can mean a negative number, and special phrases can add, subtract, multiply, or divide numbers. A wordy speech that sounds like literature can therefore contain a short mathematical instruction.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For example, <code>a flower</code> represents one, while <code>a big flower</code> represents two. Placing another allowed adjective before the same noun doubles the value again. A phrase such as <code>the sum of thyself and a big flower</code> adds two to the listener’s current number. The stage directions determine which character is listening.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=nO6rvqxj5kY","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=nO6rvqxj5kY
+</div><figcaption class="wp-element-caption"><em>Ted Neward, <a href="https://www.youtube.com/watch?v=nO6rvqxj5kY">“Busy Developer’s Guide to Esoteric Languages”</a>, Voxxed Days Crete 2025; the Shakespeare language segment begins around 23:36. Conference source: <a href="https://confpad.io/conferences/voxxed-days-crete-2025/busy-developer-s-guide-to-esoteric-languages">confpad.io</a>. Historical and conceptual context, not a substitute for the original grammar; playback not independently verified.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The 2001 Language Specification</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>SPL was described by Karl Hasselström and Jon Åslund in documentation last rebuilt August 21, 2001. The authors used a translator from SPL to C and defined precise token and grammar rules. Not every English word, theatrical flourish, or mathematically understandable phrase is recognized by an interpreter. The <a href="https://krayon.github.io/shakespearelang/docs/shakespeare.html">original specification</a> remains the primary reference for the examples here. Contemporary independent implementations, including <a href="https://shakespearelang.com/">shakespearelang</a>, can offer more convenient interactive tools but may differ in setup and diagnostics.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The underlying language is designed for experimenting with parsing and programming-language design rather than replacing production languages. Its unusual syntax illustrates a central computer-science principle: a formal grammar can attach precise computational meaning to text that also carries an artistic interpretation. Readers interested in other experimental syntax can compare <a href="https://bitcoinversus.tech/2026/10/08/osemojicode-001-what-is-emojicode-how-emoji-become-programming-syntax/">Emojicode</a> and the unrelated <a href="https://bitcoinversus.tech/2026/10/08/oschef-001-program-structure-ingredients-mixing-bowls-methods-and-serves/">Chef culinary programming language</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">From Nouns and Adjectives to Integer Values</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>In the original SPL model, a recognized positive or neutral noun represents <code>+1</code>, whereas a recognized negative noun represents <code>-1</code>. Every valid adjective placed before a noun doubles the magnitude. The rule can be expressed as <strong>value = sign × 2<sup>n</sup></strong>, where <code>n</code> is the number of recognized adjectives and <code>sign</code> depends on the noun class. In the core example, <code>flower</code> is a positive noun and <code>big</code> is a neutral adjective.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The following expression values follow directly from that rule:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Noun and adjective arithmetic reference" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>a flower             -&gt; +1
+a big flower         -&gt; +2
+a big big flower     -&gt; +4
+a pig                -&gt; -1
+a big pig            -&gt; -2
+
+value = noun_sign * (2 ** adjective_count)</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Word recognition is finite: adding an unsupported word does not necessarily create a longer valid number phrase. The syntactic role of “big” as a recognized adjective matters more than how natural the sentence sounds. As a practical habit, check proposed adjectives and nouns against the compiler’s vocabulary, the original lexicon, or successful published examples.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Basic Arithmetic Phrases</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Arithmetic operates on expressions, which may be simple numerical phrases, the current values of characters, or nested expressions. SPL uses fixed English-shaped constructs rather than symbolic operators such as <code>+</code> and <code>*</code>. The major binary forms are <code>the sum of A and B</code>, <code>the difference between A and B</code>, <code>the product of A and B</code>, and <code>the quotient between A and B</code>. The original grammar also includes a remainder form.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For clarity, the next examples use small operands and show their equivalent calculations. They are expression fragments, not complete runnable plays:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="SPL basic arithmetic expression fragments" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>the sum of a big flower and a flower
+  -&gt; 2 + 1 = 3
+
+the difference between a big big flower and a flower
+  -&gt; 4 - 1 = 3
+
+the product of a big flower and a big big flower
+  -&gt; 2 * 4 = 8
+
+the quotient between a big big flower and a big flower
+  -&gt; 4 / 2 = 2</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Each phrase names the operation and supplies two arguments. The order of subtraction matters: <code>A − B</code> is generally different from <code>B − A</code>. Division requires care because SPL characters hold integers, and implementations may use integer-division semantics rather than producing floating-point fractions. Never divide by zero; it is not a meaningful numeric result in the reference model. Prefer exact divisions in an introductory lab to avoid rounding and compatibility ambiguity.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Unary Operations and Nested Expressions</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Unary operators work on a single operand. The original language includes <code>twice</code>, <code>the square of</code>, <code>the cube of</code>, <code>the square root of</code>, and <code>the factorial of</code>. Square and cube mean powers of two and three, respectively, rather than multiplication by two and three. Square root and factorial raise additional domain and integer-overflow questions, so they should be tested within well-defined small inputs.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Consider the positive expression <code>a big flower</code>, which equals two. The following fragments have these values:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Unary arithmetic fragments" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>twice a big flower               -&gt; 2 * 2 = 4
+the square of a big flower       -&gt; 2 ** 2 = 4
+the cube of a big flower         -&gt; 2 ** 3 = 8
+the factorial of a big flower    -&gt; 2! = 2</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Expressions may be nested. The phrase <code>the sum of the square of a big flower and a flower</code> represents <code>2² + 1 = 5</code>. Parentheses are a useful device in an explanatory translation to ordinary mathematics, but are not a substitute for SPL’s specific expression grammar. The original <a href="https://krayon.github.io/shakespearelang/docs/shakespeare.html">authors’ worked example</a> also demonstrates nesting squares, differences, and cubes.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Speakers, Listeners, and Reassignment</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A phrase beginning <code>You are as good as</code> is an assignment to the person being addressed, not to the speaker. If Romeo and Juliet are the two characters on stage and Romeo speaks, Juliet is the listener. Inside Romeo’s speech, <code>thyself</code> refers to Juliet’s present value. In a speaker-relative expression, <code>myself</code> refers to Romeo’s value. The actor addresses the listener while the arithmetic updates that listener.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A complete program therefore needs a title, supported character declarations, an act and scene, stage entrances, and valid dialogue. Assignments on subsequent sentences use the listener’s newly updated value. The language’s literary punctuation is part of parsing; do not assume a dialogue sentence without terminal punctuation is accepted.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A Complete Program That Prints an Integer</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Save the following play as <code>arithmetic.spl</code> using a plain-text editor. It declares two variables, places them on stage, performs four assignments to Juliet while Romeo speaks, and emits Juliet’s final number using <code>Open your heart</code>. There is no input, network access, file modification, or privileged operation:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Complete runnable Shakespeare Programming Language arithmetic lesson" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>A Calculation in Two Voices.
+
+Romeo, a young man of Verona.
+Juliet, a gracious lady of Verona.
+
+Act I: A Lesson in Numbers.
+Scene I: The Arithmetic of the Heart.
+
+[Enter Romeo and Juliet]
+
+Romeo:
+ You are as good as a big big flower.
+ You are as good as the sum of thyself and a big flower.
+ You are as good as the product of thyself and a big flower.
+ You are as good as the difference between thyself and a flower.
+ Open your heart.
+
+[Exeunt]</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The initial Romeo and Juliet values are zero in the reference model. The first assignment sends Juliet a positive noun modified by two neutral adjectives, producing four. The second adds two to Juliet’s current four, the third multiplies the resulting six by two, and the fourth subtracts one from twelve. <code>Open your heart</code> then requests a decimal numeric representation of the addressee’s current value, rather than converting it into a character.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Manual Execution Trace and Expected Result</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The sequence can be checked with ordinary integer arithmetic. It is a prediction based on the reference specification until an interpreter runs the complete program:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Step-by-step value trace" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Juliet starts with             0
+big big flower          -&gt;   4
+sum of thyself and 2    -&gt;   6
+product of thyself and 2 -&gt; 12
+difference of thyself and 1 -&gt; 11
+Open your heart        -&gt;  11 (decimal output)</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>A separate arithmetic sanity check evaluates the same sequence using conventional calculations. Its value is eleven: <code>((4 + 2) × 2) − 1 = 11</code>. That check establishes the intended mathematics, but does not prove the entire SPL file parses or runs on a specific interpreter.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=6avJHaC3C2U","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=6avJHaC3C2U
+</div><figcaption class="wp-element-caption"><em>NDC Conferences, Dylan Beattie, <a href="https://www.youtube.com/watch?v=6avJHaC3C2U">“The Art of Code”</a>, published February 26, 2020. The discussion of the Shakespeare Programming Language begins around 36:34; the talk situates SPL among artistic and esoteric languages. <a href="https://confpad.io/conferences/ndc-london-2020/the-art-of-code">Conference listing</a>. Playback and embedding permission require live testing.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Numeric Output Versus Character Output</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>SPL provides two different output commands. <code>Open your heart</code> outputs the listener’s value as a number; <code>Speak your mind</code> outputs the character corresponding to the listener’s numeric code, as interpreted by the runtime’s character encoding. A character code such as 65 might correspond to <code>A</code> in an ASCII-compatible environment, but its exact interpretation follows the runtime. Confusing these forms is a common reason a program prints a letter where a number was expected.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For a first lab, use <code>Open your heart</code> to avoid character encoding complications. If you replace the final output sentence with <code>Speak your mind</code>, Juliet’s value of eleven is typically a control-code value, not the visible string <code>11</code>. The two commands should never be treated as interchangeable text formatting options.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Running the Play and Recording Evidence</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The original 2001 system translates SPL into C, then uses a C compiler to produce an executable. Its documented <code>spl2c</code> pipeline assumes that the historical translator and runtime library have been built correctly for the local machine. A newer interpreter such as the independently maintained <a href="https://shakespearelang.com/">shakespearelang</a> package may offer a simpler workflow and interactive debugging. Vendor packages, licenses, and install commands should be checked against their current official project documentation.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>With the modern interpreter already installed in a disposable environment, first inspect the available command help, then run a local file using the documented command form. Do not run unfamiliar downloaded code with elevated privileges:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Interpreter command example; check installed version" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>shakespeare --help
+shakespeare run arithmetic.spl</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>If the installed implementation uses a different invocation, follow its current help text rather than copying a command blindly. Record the interpreter version, exit status, diagnostics, and actual output. A correct run should emit the decimal value eleven, although terminal formatting and whitespace may vary. The source and manual trace do not establish an executed result; no SPL interpreter run is represented as having occurred here.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and Common Errors</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Unexpected value:</strong> count adjectives before each noun and check the noun’s positive or negative class. One extra adjective doubles magnitude.</li><li><strong>Wrong assignment target:</strong> verify which character speaks and who is the other character currently on stage. The listener receives the value.</li><li><strong>Unknown token or syntax error:</strong> compare the exact noun, adjective, operator phrase, punctuation, and stage heading against the original specification.</li><li><strong>Incorrect output type:</strong> use <code>Open your heart</code> for a decimal integer; <code>Speak your mind</code> for a character code.</li><li><strong>Division problems:</strong> avoid zero denominators; investigate integer truncation, negative values, and implementation-specific overflow behavior.</li><li><strong>Unexpected stage error:</strong> ensure the declared speaker and addressee are both present, and avoid extraneous actors that make addressing ambiguous.</li><li><strong>Tool version mismatch:</strong> the reference translator, independent modern interpreter, and educational ports do not all share identical installation and diagnostic behavior.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Exercises and Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Change the first assignment from <code>a big big flower</code> to <code>a big flower</code>. Predict the new final numeric output.</li><li>Replace the final difference with <code>the sum of thyself and a flower</code>. What value would the original four-step program then produce?</li><li>Explain why multiplying <code>a big flower</code> by <code>a big big flower</code> yields eight.</li><li>Explain the difference between the value of <code>thyself</code> and <code>myself</code> when Romeo is speaking to Juliet.</li><li>Describe when the phrase <code>the quotient between A and B</code> differs from floating-point division.</li><li>Explain why an interpreter test is necessary even after the mathematical trace is correct.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> The modified first assignment begins at two, so the remaining changes yield <code>((2 + 2) × 2) − 1 = 7</code>. Replacing the last subtraction with addition yields <code>((4 + 2) × 2) + 1 = 13</code>. Multiplication of two by four yields eight. With Romeo speaking, <code>thyself</code> refers to Juliet and <code>myself</code> to Romeo. Integer quotients may discard fractional parts according to runtime semantics. A mathematical trace cannot detect an invalid lexeme, malformed sentence, or interpreter compatibility defect.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Primary Sources and Further Reading</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://krayon.github.io/shakespearelang/docs/shakespeare.html">Karl Hasselström and Jon Åslund — The Shakespeare Programming Language (original 2001 documentation)</a>.</li><li><a href="https://krayon.github.io/shakespearelang/docs/shakespeare.pdf">Original Shakespeare Programming Language specification (PDF copy)</a>.</li><li><a href="https://shakespearelang.com/">shakespearelang — modern open-source interpreter, interactive console and debugger</a>.</li><li><a href="https://confpad.io/conferences/voxxed-days-crete-2025/busy-developer-s-guide-to-esoteric-languages">Voxxed Days Crete 2025 — Ted Neward’s esoteric languages talk</a>.</li><li><a href="https://confpad.io/conferences/ndc-london-2020/the-art-of-code">NDC London 2020 — Dylan Beattie’s The Art of Code</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>SPL can express real arithmetic using ordinary-looking theatrical sentences. Recognized adjectives double the number represented by a noun, while certain phrases add, subtract, multiply, or divide values. The person being spoken to receives the new number. In the example play, Juliet’s value moves from four to six to twelve to eleven, and the final speech asks the computer to print eleven as a number. The same logic can be understood in conventional arithmetic, but a running program must still be tested with a compatible interpreter.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor’s Note:</strong> OSShakespeare.003 follows the verified published OSShakespeare.002 curriculum and uses the original 2001 specification as its primary technical reference. The numeric output <strong>11</strong> is a mathematically checked, specification-derived expectation; SPL interpreter execution has not been independently demonstrated. The original 1200 × 630 featured image depicts fictional stage characters and is labeled conceptual editorial illustration, not an interpreter screenshot. The two conference videos were matched to published programs and their reported Shakespeare segments, but embedded playback and mobile appearance remain subject to live inspection.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR code for an optional 5,000 satoshi donation" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code. Before making any payment, independently verify the receiving address and requested amount in your wallet.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Educational examples are provided for learning programming-language syntax and are not intended for production infrastructure or security-sensitive applications.</em></p><!-- /wp:paragraph -->

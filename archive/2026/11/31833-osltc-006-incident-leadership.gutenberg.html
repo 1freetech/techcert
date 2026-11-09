@@ -1,0 +1,208 @@
+<!-- wp:paragraph --><p><strong>OSLTC.006</strong> teaches how a technical leader coordinates a service incident without attempting to do every job personally. Incident leadership converts incomplete evidence into safe, time-stamped decisions while responders diagnose a problem, communications personnel share verified information, and the team preserves a record for recovery and learning. The lesson advances <a href="https://bitcoinversus.tech/2026/11/06/osltc-005-delegation-accountability-technical-teams/">OSLTC.005 on delegation and accountability</a> into an urgent, changing situation. Learners will use a fictional data-center service outage to practice command roles, escalation thresholds, recovery verification, and a blameless after-action review.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Distinguish incident detection, declaration, mitigation, recovery, resolution, and follow-up.</li><li>Assign an incident commander, operations lead, communications lead, and planning or scribe role without confusing operational expertise with decision authority.</li><li>Write an initial incident assessment that separates observations, hypotheses, and unknowns.</li><li>Choose an escalation path using safety, affected service, uncertainty, and organizational authorization.</li><li>Build a timestamped incident log and calculate measured durations and observation-based impact ratios.</li><li>Deliver a concise, truthful status update and hand off command using explicit acknowledgment.</li><li>Verify recovery with agreed evidence rather than equating an attempted fix with restored service.</li><li>Create a blameless postmortem with a bounded corrective action, owner, due date, and acceptance test.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: <a href="https://bitcoinversus.tech/2026/10/08/osltc-002-how-to-set-clear-expectations/">OSLTC.002 on clear expectations</a>, <a href="https://bitcoinversus.tech/2026/10/09/osltc-003-leadership-through-listening-active-listening-adaptive-feedback-responding-to-what-you-hear/">OSLTC.003 on active listening</a>, and the prior delegation lesson. Familiarity with an incident ticket, telemetry dashboard, or shift handoff is helpful; no programming language or privileged system access is needed. The tabletop lab must not issue commands to production systems.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Imagine a school server stops serving classes in part of a building. One technician checks the network, another reviews application logs, and a supervisor calls the service provider. If all three modify the system independently, actions may conflict and nobody knows what changed first. Incident leadership creates a shared plan: one person coordinates, authorized operators perform changes, another person communicates, and everyone records what they know.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A leader does not need to know the answer immediately. A good early statement may be, “Monitoring shows failures on twelve endpoints; customer impact is still unknown.” Clear uncertainty is more useful than a confident but unsupported diagnosis. Once the service recovers, a review identifies how detection, coordination, tooling, and safeguards can improve.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=n4y9dwinPBQ","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=n4y9dwinPBQ
+</div><figcaption class="wp-element-caption"><em>Google Cloud Tech, <a href="https://www.youtube.com/watch?v=n4y9dwinPBQ">“Incident Management (class SRE implements DevOps)”</a>, October 2, 2018. Official Google instruction on assigning incident roles and avoiding multiple uncoordinated operators. Video identity verified; playable embed status requires independent browser testing.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Origins and Scope of Incident Command</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Google’s <a href="https://sre.google/sre-book/managing-incidents/">Site Reliability Engineering chapter on managing incidents</a> adapts a role-based model influenced by the Incident Command System. Its purpose is not to impose a law on every software team. It provides a repeatable way to coordinate people who must respond while facts are incomplete. Command can start with one person and split into specialized roles as the incident grows.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For cybersecurity incidents, the authoritative U.S. publication is <a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final">NIST SP 800-61 Revision 3, finalized April 3, 2025</a>, which replaced Revision 2. NIST maps security response into the broader Cybersecurity Framework 2.0: Govern, Identify, and Protect support preparedness; Detect, Respond, and Recover cover the response life cycle; Improvement feeds lessons back into organizational risk management. A routine service outage is not automatically a security incident, and NIST’s cybersecurity scope should not be misrepresented as a universal facilities emergency plan.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A physical incident, including fire, electric shock risk, chemical leakage, or imminent injury, requires the organization’s approved emergency and safety procedures, not an improvised software playbook. The incident commander described here coordinates service recovery but does not gain permission to override lockout/tagout, access control, electrical safety, emergency authority, or statutory reporting rules.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The Four Roles That Keep a Response Organized</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Google SRE describes incident command, operational work, communications, and planning as separable responsibilities. In a small incident, one trained person may temporarily hold multiple roles. As complexity increases, roles should be delegated explicitly and the channel should record who now owns each responsibility.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Incident commander (IC):</strong> declares the response structure, keeps the high-level picture, sets immediate priorities, appoints role owners, and resolves coordination issues within authorized limits. The IC need not be the hands-on technician.</li><li><strong>Operations lead:</strong> coordinates evidence gathering, tests plausible hypotheses, proposes safe mitigations, and directs only approved changes. Operators—not observers—control the live system.</li><li><strong>Communications lead:</strong> produces internal and external updates from verified facts, clearly labels uncertainty, records the next update time, and follows approved disclosure channels.</li><li><strong>Planning/scribe:</strong> maintains the timeline, incident state, proposed actions, resourcing needs, and handoff details. In a longer incident the planning function can coordinate later shifts and follow-up work.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>A decision-maker may be separate from the IC. For example, a production rollback or facility shutdown may require an authorized change approver. The <a href="https://sre.google/workbook/incident-response/">Google SRE Workbook incident-response chapter</a> emphasizes coordination, communication, and control. Role labels alone never replace a written authority boundary. The <a href="https://bitcoinversus.tech/2026/10/10/osltc-004-how-to-give-corrective-feedback-without-making-it-personal/">OSLTC.004 feedback lesson</a> also provides a foundation for addressing unsafe conduct without personal attacks.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Detect, Declare, Contain, Recover, Learn</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Detection is the moment evidence indicates something may be wrong; declaration is the explicit decision to manage it as an incident. Those timestamps can differ. Containment or mitigation reduces harm while the team investigates. Recovery means required service behavior is restored and verified, not merely that an action has been attempted. Final resolution includes records, any necessary follow-up, and an owner for unresolved risks.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A useful triage note identifies the affected service, observations, time range, possible user impact, unknowns, immediate safety concerns, and operational owners. The team should distinguish a symptom (failed checks) from a hypothesis (perhaps a recent deployment caused the failures) and a confirmed cause (established with evidence). Avoid presenting the hypothesis as a fact.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Before any production change, check whether the team is facing a safety hazard, security compromise, data-integrity risk, or a routine availability fault. In particular, suspected compromise may demand evidence preservation and security-led containment before restoration, while a hardware electrical hazard demands the qualified safety response. Service recovery speed does not justify destroying critical evidence or placing workers at risk.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Build an Escalation Decision Before You Need It</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Severity levels, response windows, and approval thresholds differ across organizations. The following <strong>fictional training rubric</strong> is not a NIST, Google, OSHA, or industry-wide severity standard; replace it with the local incident policy before operational use.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Illustrative severity and escalation rubric" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Training only: illustrative severity decision
+HIGH    Potential injury, confirmed active compromise,
+        uncontrolled critical service loss, or data loss
+        -&gt; Follow emergency/security response and page duty lead.
+MEDIUM  Partial production degradation or uncertain scope
+        -&gt; Declare service incident; name IC and ops lead.
+LOW     Limited, noncritical symptom with clear ownership
+        -&gt; Track with escalation trigger and review interval.
+
+Escalate whenever a safety stop rule is triggered,
+evidence is contradictory, impact grows, or the assigned
+team lacks authority or expertise to proceed.</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>A supervisor should state who can authorize a rollback, who can restrict service, how a security or safety specialist is summoned, and when to stop an investigation for fresh approval. An escalation trigger should be observable: for example, “if any additional monitored service group fails, page the service owner and raise the incident level.” An ambiguous instruction such as “escalate if it looks bad” is not a testable operating rule.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use a Single Incident State and Decision Log</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A shared incident state document avoids competing stories across calls, chats, and dashboards. Keep the current status, latest verified impact, immediate objective, role assignments, open decisions, next update time, and chronological activity near the top. Record actions with a common time zone and an evidence link where permitted. Use restricted channels for sensitive details, credentials, customer information, or potential attack evidence.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The following timeline is <strong>fabricated training data</strong> from a simulated service outage. No physical or cyber incident occurred, and the listed rollback is hypothetical:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Fictional incident timeline for the tabletop exercise" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>14:03  Monitoring alerts: 12 of 48 endpoints failing
+14:07  Incident declared; scope not yet confirmed
+14:08  Incident commander assigned; roles announced
+14:11  First stakeholder update: impact and uncertainty
+14:14  Ops compares recent changes and service telemetry
+14:20  Approved rollback begins; change owner recorded
+14:25  Endpoint probes improve; partial mitigation only
+14:31  Full recovery checks pass; 48 of 48 probes healthy
+14:40  Incident commander records handoff to follow-up owner</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The distinction between an action and a verification matters. At 14:20 a rollback begins; at 14:25 monitoring improves but full recovery has not been established. At 14:31 every configured probe is green under the exercise assumptions. A real service must also verify application behavior, user paths, and agreed health checks before declaring a return to service.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Calculate Impact Without Exaggerating It</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The simulated monitoring system reports 12 failures among 48 configured endpoints at detection. The observed failing fraction is <strong>12 ÷ 48 = 0.25, or 25%</strong> of those endpoints. That percentage does <em>not</em> establish that 25% of users, transactions, capacity, or network bandwidth were affected. Only data for those distinct populations could establish their respective impacts.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The simulated interval from first alert at 14:03 to verified green probes at 14:31 is <strong>28 minutes</strong>. The interval from incident declaration at 14:07 to the same checkpoint is <strong>24 minutes</strong>. Report which clock starts the measurement: detection-to-recovery and declaration-to-recovery are not interchangeable. A single example duration is not a fleetwide mean time to recovery. Never call a simulation an observed reliability metric.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Scope and elapsed-time calculation check" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Failing endpoints = 12 / 48 = 25% of configured probes
+Alert -&gt; verified probes green = 14:31 - 14:03 = 28 min
+Declare -&gt; verified probes green = 14:31 - 14:07 = 24 min
+
+Not justified:
+  &quot;25% of customers were affected&quot;
+  &quot;MTTR is 28 minutes&quot;
+  &quot;Rollback alone proved service healthy&quot;</code></pre><!-- /wp:html -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Communicate With Facts, Uncertainty, and a Deadline</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Stakeholder updates should answer what is known, what is not yet known, what team is doing next, and when readers can expect another update. They should not speculate about cause, imply certainty about user impact, or expose private infrastructure details. The communications lead should validate the message with the IC or approved incident policy before distribution.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The sample message below is an <strong>illustrative internal update</strong> and is not suitable for forwarding unchanged to customers:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Fictional internal stakeholder update template" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>INCIDENT: INC-2026-TRAINING-006 [SIMULATION]
+As of 14:11 local | Next update: 14:21 local
+Impact: 12/48 monitoring endpoints show failed probes.
+User impact: not yet established; investigation underway.
+Safety: no physical work or live equipment changes authorized.
+Command: Incident Commander (IC); Ops Lead owns diagnostics.
+Actions: change freeze for affected service; compare last deploy.
+Decision needed: approve or reject controlled rollback.
+Evidence: monitoring snapshots and timestamped event log.
+Do not assume endpoints represent customers or traffic.</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>A message that merely says “engineers are investigating” does not help a decision-maker understand impact, urgency, or when to check again. However, publication of detailed exploit indicators or security artifacts may increase risk; use the organization’s approved security and legal communication pathways in those cases. Google’s <a href="https://sre.google/sre-book/managing-incidents/">incident management guidance</a> calls for a dedicated communications function when response complexity warrants it.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=UBe7U2b3tsA","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=UBe7U2b3tsA
+</div><figcaption class="wp-element-caption"><em>Google Cloud Tech, <a href="https://www.youtube.com/watch?v=UBe7U2b3tsA">“Postmortems and Retrospectives (class SRE implements DevOps)”</a>, October 9, 2018. Official discussion of learning from service incidents through blameless reviews and follow-up. Identity verified; playback on the public page remains a separate QA check.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Control Changes and Verify Recovery</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Only authorized operators should modify the affected service. Before a significant action, the operations lead states the expected benefit, prerequisites, evidence of current state, expected rollback method, and stop criteria. One change at a time, where feasible, improves the ability to attribute outcomes; concurrent changes may be justified in emergencies but require explicit coordination and logging.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Before:</strong> freeze unrelated changes when policy permits, preserve required evidence, identify the change owner, and confirm approver and rollback path.</li><li><strong>During:</strong> timestamp the action, coordinate with other operators, monitor the agreed service and safety signals, and halt at predefined stop criteria.</li><li><strong>After:</strong> test representative user journeys, service health, error rates, dependencies, and data integrity as appropriate; record what was actually measured.</li><li><strong>Close:</strong> announce current condition and remaining uncertainty, explicitly transition to watch or follow-up mode, and name the owner of outstanding work.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Recovering enough probes for a dashboard to become green is not proof of complete business recovery. For example, application traffic might still fail while network health checks succeed. A production exercise should define measurable exit criteria before an incident and require the appropriate service owner to sign off. Follow the <a href="https://sre.google/sre-book/managing-incidents/">Google SRE prioritization principle</a> of stabilizing service while preserving evidence needed to understand the incident.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Hand Off Command Without Losing Context</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A long event often outlasts one shift. The outgoing IC must explain the current severity, known facts, active hypotheses, safety/authority limits, people in roles, open decisions, pending actions, update deadline, and next escalation trigger. The incoming IC repeats back critical facts and explicitly accepts command. A shared channel then records the change of command so two people are not simultaneously acting as the only decision owner.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Explicit incident-command handoff checklist" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Handoff briefing — training template
+Incident ID and current state:
+Latest verified impact and timestamp:
+Immediate hazards or security restrictions:
+Incident commander / operations / communications owners:
+Changes performed and their verification:
+Open decisions and required approver:
+Customer/stakeholder update deadline:
+Remaining risks and next action:
+Incoming IC acknowledgment: &quot;I accept command at ____.&quot;
+Outgoing IC acknowledgment: &quot;Command transferred at ____.&quot;</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>A handoff is not complete merely because a chat message was posted. The receiving leader must acknowledge responsibility and understand active work. If the outgoing person becomes unavailable unexpectedly, follow the organization’s designated succession and escalation procedure.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Blameless Reviews Still Require Accountability</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>After stabilization, conduct a review that describes what happened and why the system and organization behaved as they did. “Blameless” means avoiding personal humiliation and unsupported assumptions about intent. It does <em>not</em> mean ignoring intentional misconduct, falsified evidence, or mandatory reporting; such concerns should proceed through established safety, security, personnel, or legal processes.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Google’s <a href="https://sre.google/workbook/postmortem-culture/">SRE Workbook on postmortem culture</a> recommends documenting contributing factors, incident impact, mitigation, and specific corrective actions. Root cause may be a combination of design, process, testing, training, change-control, monitoring, and coordination issues rather than a single technician. A named owner and acceptance criterion help the review become real engineering work instead of a meeting that merely records regret.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Example corrective action with ownership and acceptance criteria" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Action ID: INC-006-A1
+Finding: Runbook lacked explicit rollback ownership.
+Change: Add named approver, stop rule, and verification tests.
+Owner: Reliability team lead
+Due: 2026-11-20 (fictional)
+Acceptance test: Tabletop participant can identify approval
+  owner and stop rule in under two minutes.
+Evidence: linked runbook revision and drill observation.
+Status: proposed; not verified or completed.</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>An honest postmortem distinguishes what was verified from what remains speculative. For the fictional outage, a finding such as “the team lacked an explicit rollback approver in the documented runbook” is a useful process gap; “the on-call technician caused the outage” would be unsupported without direct evidence and context. The reviewer should inspect how a safer system would prevent or limit recurrence. See <a href="https://sre.google/sre-book/postmortem-culture/">Google SRE’s blameless postmortem guidance</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Tabletop Lab: Lead a Fictional Data-Center Outage</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>This is a paper, whiteboard, or shared-document exercise. Do not intentionally trigger outages or change real infrastructure. Form a team of four participants, or have one learner role-play four separate roles sequentially. Assign an IC, operations lead, communications lead, and scribe. Present only the 14:03 alert initially; reveal later events one step at a time rather than handing the entire timeline to participants.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Phase 1, detect and declare:</strong> state the observable symptom, explicitly label unknown impact, decide whether to declare, and announce the IC.</li><li><strong>Phase 2, role and authority:</strong> delegate diagnostics, updates, and documentation; identify the approver for any proposed rollback.</li><li><strong>Phase 3, decision:</strong> compare at least two hypotheses, choose a safe next diagnostic step, name a stop rule, and record the decision.</li><li><strong>Phase 4, communication:</strong> draft an internal update by 14:11 and declare the time of the next update.</li><li><strong>Phase 5, recovery:</strong> list the tests that must pass before declaring restoration, and compute duration without overstating customer impact.</li><li><strong>Phase 6, handoff and review:</strong> transfer command explicitly, then write two contributing factors and at least one assigned corrective action.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>After the exercise, score each criterion from zero to two. The rubric is a <strong>teaching tool</strong>, not a validated measure of real incident leadership ability or a professional certification assessment:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Fourteen-point tabletop assessment rubric" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.93em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>0 = missing, unsafe, or unsupported
+1 = present but incomplete or ambiguous
+2 = clear, correctly scoped, and evidenced
+
+Incident declared with scope and uncertainty      __ / 2
+Named IC and delegated operations/comms roles      __ / 2
+Authority limits and safety stop rules             __ / 2
+Timestamped state and decision log                 __ / 2
+Appropriate stakeholder update and next check-in   __ / 2
+Verified recovery criteria and explicit handoff    __ / 2
+Blameless review with owned corrective action      __ / 2
+
+Total                                           __ / 14</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Have peers review the score against concrete evidence in the incident log. An unrecorded but verbally claimed action should not be counted as fully evidenced. Repeat the tabletop with a different IC and a surprise inject, such as new monitoring faults or a necessary security escalation, to evaluate whether the process survives changes in scope.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common Failure Modes and Safety Boundaries</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>No named commander:</strong> multiple teams act without a shared priority; explicitly appoint the IC and announce role boundaries.</li><li><strong>Everyone on the keyboard:</strong> independent responders apply conflicting fixes; designate a qualified operations lead and log approved changes.</li><li><strong>Communication claims too much:</strong> estimated scope becomes a confident public fact; separate observed evidence, hypotheses, and unknowns.</li><li><strong>Premature recovery announcement:</strong> one green dashboard hides failing customer journeys; verify agreed end-to-end service criteria.</li><li><strong>No updated incident log:</strong> later decisions are made from memory; maintain timestamps, state, action owners, and evidence links.</li><li><strong>Unsafe urgency:</strong> staff bypass electrical or operational protections to restore service faster; follow qualified safety and emergency procedures regardless of outage severity.</li><li><strong>Missed security containment:</strong> suspicious access is treated solely as availability work; invoke the security-response plan and preserve evidence when indicated.</li><li><strong>Blame-focused review:</strong> employees conceal weak signals; examine contributing conditions and assign tangible improvements, without excusing deliberate violations.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check and Answers</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>What is the difference between detecting an incident and declaring one?</li><li>Who normally owns operational changes during an incident, and who keeps the high-level incident state?</li><li>Why does 12 failed probes among 48 not prove 25% of customers were affected?</li><li>Using the tabletop timestamps, calculate alert-to-verified-restoration and declaration-to-verified-restoration duration.</li><li>What additional checks should precede an announcement that service has recovered?</li><li>What does a live handoff require beyond leaving notes in a shared channel?</li><li>What distinguishes a useful corrective action from an unowned promise to “improve training”?</li><li>How should the team act if a suspected cyber compromise or electrical hazard appears during an availability incident?</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> Detection identifies evidence of a possible problem; declaration starts an organized response. Operations performs authorized changes, and the IC coordinates priorities, roles, and the state of the event. The 25% ratio describes configured probes only. Durations are 28 minutes from alert and 24 minutes from declaration. Recovery requires defined service and user-path verification, not an attempted rollback alone. Handoff requires explicit receipt and acknowledgment of command. A good action has an owner, deliverable, deadline, and test. Cybersecurity or physical hazards trigger their respective approved escalation and safety processes.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Primary References and Further Study</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://sre.google/sre-book/managing-incidents/">Google SRE Book — Managing Incidents</a>, incident commander, operational work, communications, planning, and handoff.</li><li><a href="https://sre.google/workbook/incident-response/">Google SRE Workbook — Incident Response</a>, coordination, communication, and control.</li><li><a href="https://sre.google/sre-book/postmortem-culture/">Google SRE Book — Postmortem Culture: Learning from Failure</a>.</li><li><a href="https://sre.google/workbook/postmortem-culture/">Google SRE Workbook — Postmortem Culture</a>, review quality and corrective actions.</li><li><a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final">NIST SP 800-61 Revision 3, Final (April 2025)</a>, cybersecurity incident response and risk-management integration.</li><li><a href="https://csrc.nist.gov/projects/incident-response">NIST Incident Response project</a>, final lifecycle context and supplemental guidance.</li><li><a href="https://cloud.google.com/blog/topics/developers-practitioners/cloud-reliability-incident-handling-best-practices">Google Cloud — Cloud Reliability Incident Handling Best Practices</a>, playbooks, telemetry, simulations, and clear responsibilities.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A technical incident leader gives the team a clear structure when a system fails. One person coordinates, authorized operators troubleshoot and restore service, communications staff share verified updates, and a scribe preserves the record. Leaders escalate hazards and unclear authority rather than rushing into unsafe fixes. After recovery has been measured and verified, the team studies what happened and assigns improvements with accountable owners. Practicing these steps before a real incident makes an organized response more likely when pressure rises.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor’s Note:</strong> OSLTC.006 follows the published OSLTC.005 lesson on delegation. Primary material includes Google SRE guidance and final NIST SP 800-61 Rev. 3; the NIST document addresses cybersecurity response rather than every kind of facilities or service outage. The incident timeline, staff roles, numbers, severity rubric, decisions, message, and postmortem action are entirely fictional educational examples. Calculations were independently checked, but no actual outage, team drill, or production recovery was performed. The original 1200 × 630 featured illustration is not a photo of a real incident. Both YouTube video identities were verified; playback and mobile layout require separate live validation.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original optional donation QR for BitcoinVersus.Tech, 5000 satoshis" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code. Verify the destination and amount independently before donating.</em></p><!-- /wp:paragraph -->

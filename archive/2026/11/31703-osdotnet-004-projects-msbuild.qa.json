@@ -1,0 +1,47 @@
+{
+  "lesson_id": "OSDotNet.004",
+  "wordpress_post_id": 31703,
+  "title": "OSDotNet.004: SDK-Style Projects — Target Frameworks, Restore, and MSBuild",
+  "publication_status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/08/osdotnet-004-sdk-style-projects-target-frameworks-restore-msbuild/",
+  "featured_media_id": 31699,
+  "featured_media_dimensions": [
+    1200,
+    630
+  ],
+  "branding": "Bitcoinversus.tech in #39FF14 lower-left, approximately 10pt (13px at 96dpi)",
+  "original_cover": "Original illustration; not a screenshot of executed CLI output",
+  "source_len": 34157,
+  "source_video_blocks": 2,
+  "youtube_ids": [
+    "98MizuB7i-w",
+    "uBeDp8kt6z0"
+  ],
+  "wp_rendered_iframes": 2,
+  "code_examples": 10,
+  "boxed_code_blocks": 0,
+  "internal_links": 5,
+  "qr_present": true,
+  "cover_duplicated_in_body": false,
+  "csproj_static_structure_valid": true,
+  "global_json_valid": true,
+  "expected_console_message": true,
+  "actual_dotnet_sdk_available": false,
+  "actual_compilation": "not executed",
+  "actual_nuget_restore": "not executed",
+  "actual_app_run": "not executed",
+  "video_playback": "not independently verified",
+  "mobile_and_desktop_screenshot": "not independently verified",
+  "sources": [
+    "https://learn.microsoft.com/en-us/dotnet/core/project-sdk/overview",
+    "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-restore",
+    "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-build",
+    "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish"
+  ],
+  "archive_paths": {
+    "gutenberg": "archive/2026/11/31703-osdotnet-004-projects-msbuild.gutenberg.html",
+    "code_directory": "archive/2026/11/31703-osdotnet-004-projects-msbuild/",
+    "qa": "archive/2026/11/31703-osdotnet-004-projects-msbuild.qa.json"
+  },
+  "date": "2026-11-08"
+}

@@ -1,0 +1,160 @@
+<!-- wp:paragraph --><p><strong>OSNTC.039</strong> introduces the <strong>Precision Time Protocol (PTP)</strong>, standardized under IEEE 1588, and shows technicians how to assess clock distribution across Ethernet without changing live systems. The lesson follows <a href="https://bitcoinversus.tech/2026/11/06/osntc-038-macsec-ethernet-encryption-mka-troubleshooting/">OSNTC.038 on MACsec Ethernet security</a>: where MACsec protects supported links, PTP supplies timing to compatible devices. Learners will distinguish grandmasters and switch timing roles, examine packet exchanges and hardware timestamps, calculate clock offset, and document a safe diagnostic plan.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Define a PTP grandmaster, ordinary clock, boundary clock, transparent clock, and timing domain.</li><li>Explain the function of Announce, Sync, Follow_Up, Delay_Req and Delay_Resp messages in the appropriate profile.</li><li>Identify hardware timestamp support and distinguish a NIC physical hardware clock (PHC) from the host system clock.</li><li>Calculate approximate client clock offset and mean path delay with four timestamp values and state the assumptions.</li><li>Compare IEEE 1588 default and IEEE 802.1AS gPTP concepts, including domain, transport, and delay-mechanism compatibility.</li><li>Use read-only commands and management GET queries to gather PTP evidence without adjusting a clock.</li><li>Identify safe escalation steps when a timing source, switch port, or management dataset differs from its intended design.</li><li>Complete a written fault-isolation exercise and answer the end-of-lesson assessment.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Prerequisites: Ethernet switching, <a href="https://bitcoinversus.tech/2026/10/27/osntc-036-lldp-neighbor-discovery-switch-port-mapping/">LLDP neighbor discovery</a>, <a href="https://bitcoinversus.tech/2026/10/29/osntc-037-8021x-network-access-control-eapol-radius-port-authentication/">802.1X port authentication</a>, and basic Linux command inspection. The optional arithmetic example requires only Python 3. The networking exercise is observation-only: do not start timing daemons, change security controls, or modify production device clocks.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A clock reading on one computer can differ from another even when both appear to show the same time. Applications that coordinate industrial equipment, broadcast frames, distributed measurements, or network events sometimes require more precise agreement than ordinary office timekeeping. PTP uses timestamped messages to let a receiving clock estimate its difference from a selected time source. Its actual accuracy depends on network design, hardware, delay symmetry and clock quality.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Imagine musicians following one conductor. In a PTP domain, the <strong>grandmaster</strong> is the selected reference. Some network devices simply transport PTP traffic; specialized devices also correct for internal forwarding delays or synchronize to one source while distributing time to other ports. Ethernet link LEDs do not prove the musicians—or network clocks—are synchronized.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=DWulalw5v0U","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=DWulalw5v0U
+</div><figcaption class="wp-element-caption"><em>Cisco Industrial IoT, March 25, 2024: official presentation explaining ordinary, boundary, transparent and grandmaster PTP clock roles, plus Best Master Clock Algorithm (BMCA) selection. Video identity sourced; live embedded playback is not independently confirmed.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">History and Current Standards</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>IEEE 1588 was first issued in 2002 and revised in 2008. <a href="https://standards.ieee.org/ieee/1588/6825/">IEEE 1588-2019</a> remains an active major edition with later amendments including <a href="https://standards.ieee.org/ieee/1588a/10395/">IEEE 1588a-2023</a>, which clarified BMCA behavior. The standard supports configurable <strong>profiles</strong>; compatible profiles and data sets, not just generic PTP capability, determine interoperability. The separate <a href="https://standards.ieee.org/ieee/802.1AS/11968/">IEEE 802.1AS-2025</a> standard specifies generalized PTP (gPTP) for time-sensitive networks and supersedes IEEE 802.1AS-2020.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>PTP differs from NTP chiefly in its timing models, network roles, and common use of hardware timestamping and timing-aware network equipment. A well-engineered hardware PTP deployment can achieve sub-microsecond synchronization, but <strong>no protocol alone guarantees a particular accuracy</strong>. For general computer timekeeping, <a href="https://bitcoinversus.tech/2026/10/08/networking-what-is-ntp-network-time-protocol-clock-synchronization/">NTP</a> remains useful. Compare the two approaches in the <a href="https://www.ntp.org/reflib/ptp/">Network Time Foundation’s technical study</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Clock Roles and the Grandmaster Selection Process</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Grandmaster:</strong> the preferred source of timing within a PTP domain, potentially referenced to GNSS or an approved oscillator.</li><li><strong>Ordinary clock:</strong> one PTP port acting as a timing source or receiver under its selected role.</li><li><strong>Boundary clock:</strong> a multiport timing-aware device whose local clock follows an upstream source and serves other PTP ports.</li><li><strong>Transparent clock:</strong> measures time a timing packet spends crossing a device and contributes residence-time correction rather than acting as an ordinary downstream source.</li><li><strong>Domain:</strong> a logical group of clocks sharing a timing context; a mismatched domain can prevent expected synchronization.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>In the default <strong>BMCA</strong>, clocks compare data from Announce messages and local datasets. Depending on profile, selection criteria include configured priority, clock class, clock accuracy, offsetScaledLogVariance and clock identities. A source is not elected merely because it has the smallest IP address. Changing election settings on production equipment may influence many downstream devices and requires the designated approval.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Four Messages and Four Timestamps</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>In a common <strong>two-step end-to-end (E2E)</strong> arrangement, the grandmaster sends <code>Sync</code> and a following <code>Follow_Up</code> carrying the precise transmit timestamp. The client sends <code>Delay_Req</code>; the grandmaster responds with <code>Delay_Resp</code>. Other profiles use one-step timing or peer-delay (<code>Pdelay</code>) messages, so the shown sequence is illustrative rather than universal.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":31836,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osntc-039-ptp-two-step-e2e-diagram-1200x720-1.png?w=1024" alt="Grandmaster-to-client Sync and Follow Up; client-to-grandmaster Delay Request; grandmaster-to-client Delay Response; four timestamps and offset equation" class="wp-image-31836" style="width:100%;height:auto" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech instructional diagram: simplified IEEE 1588 two-step end-to-end timing. The equation assumes symmetric delays and omits device-specific corrections; no production trace is depicted.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><code>t1</code> marks the grandmaster sending Sync, <code>t2</code> the client receiving it, <code>t3</code> the client sending Delay_Req, and <code>t4</code> the grandmaster receiving Delay_Req. The client combines the timestamp pairs to estimate offset and path delay. With symmetric forward/reverse path delays and no unmodeled corrections, the simplified formulas are:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Two-step E2E timing equations under symmetry" tabindex="0" style="background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>forward = t2 - t1
+reverse = t4 - t3
+offset_client_minus_source = (forward - reverse) / 2
+mean_path_delay = (forward + reverse) / 2</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Consider fictional values measured in nanoseconds by the clocks at the appropriate endpoints:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Illustrative nanosecond timing calculation" tabindex="0" style="background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>t1 = 1,000,000,000 ns (source clock)
+t2 = 1,000,001,600 ns (client clock)
+t3 = 1,000,020,000 ns (client clock)
+t4 = 1,000,021,400 ns (source clock)
+
+forward = 1,600 ns
+reverse = 1,400 ns
+offset = (1600 - 1400) / 2 = +100 ns
+mean path delay = (1600 + 1400) / 2 = 1,500 ns</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The positive <strong>+100 ns</strong> result means the client clock is ahead of the reference under the stated sign convention. One example measurement does not prove sustained precision, and physical path asymmetry can bias the result even if the formulas are applied perfectly. Hardware timestamp uncertainty, network residence-time corrections, oscillator drift, queueing and synchronization-servo behavior must also be considered.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Hardware Timestamps and Two Different Clocks</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A software timestamp is taken by the host networking stack, where scheduling and packet handling can add variable delay. A hardware timestamp can be captured nearer the actual transmit or receive event at a network interface controller (NIC). Linux exposes certain PTP-capable NIC clocks as <strong>physical hardware clocks (PHCs)</strong>, commonly represented by devices such as <code>/dev/ptp0</code>. Capability depends on NIC, driver, firmware and kernel support.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>In a common deployment, <code>ptp4l</code> disciplines a PHC from PTP network messages; <code>phc2sys</code> may then synchronize the Linux <code>CLOCK_REALTIME</code> system clock from the PHC. Those are separate synchronization relationships. A stable PTP port and low reported offset do not prove that applications reading the system clock have accurate UTC time. The <a href="https://www.linuxptp.org/documentation/phc2sys/">linuxptp phc2sys manual</a> documents time-scale issues, including the potential offset between continuous PTP time and UTC. Starting or reconfiguring either timing daemon can change clock state and must be authorized.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Transport, Domains, and Compatibility</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Depending on the profile, IEEE 1588 packets can use native Layer 2 Ethernet or UDP over IPv4/IPv6. With UDP, destination port <strong>319</strong> carries event messages and <strong>320</strong> carries general messages. Direct Layer 2 PTP uses EtherType <strong>0x88F7</strong>. Vendor implementations differ; <a href="https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/103x/configuration/system-management/cisco-nexus-9000-series-nx-os-system-management-configuration-guide-103x/m-configuring-ptp-10x.html">Cisco Nexus PTP documentation</a> provides transport and feature restrictions for a particular NX-OS family rather than every switch model.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A timing network must also agree on its <strong>profile, PTP domain, delay mechanism</strong> (end-to-end versus peer-to-peer), message intervals, source roles and configured addressing. A switch may forward ordinary Ethernet while rejecting or not receiving the needed timing messages. VLAN membership, multicast filtering, ACL policy, asymmetric paths and unsupported one-step/two-step modes can contribute. Review <a href="https://bitcoinversus.tech/2026/10/09/osntc-022-vlan-trunking-802-1q-tagged-frames-native-vlans-allowed-vlans-verification/">OSNTC.022 on VLAN tagging</a> when mapping timing traffic.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A Read-Only LinuxPTP Inspection Procedure</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The following commands inspect an <strong>already managed and authorized</strong> Linux machine. Substitute its actual interface for <code>eno1</code>. The <code>pmc GET</code> queries require access to the existing local ptp4l management socket; without a running daemon or permissions, they may return an error or no response. None of the examples starts a daemon, changes a network interface, resets a clock or issues a management <code>SET</code> command.</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Observational timing interface and PTP dataset commands" tabindex="0" style="background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>ip -br link show
+ethtool -T eno1
+ps -eo pid,args | grep '[p]tp4l'
+ps -eo pid,args | grep '[p]hc2sys'
+pmc -u -b 0 'GET DEFAULT_DATA_SET' 'GET PARENT_DATA_SET'
+pmc -u -b 0 'GET CURRENT_DATA_SET' 'GET PORT_DATA_SET'</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>An operator can inspect the grandmaster identity, domain, current data set, port state, meanPathDelay, reported offset and timestamping support. Management field names vary with standards edition and software. For an existing local ptp4l process, <code>pmc -u</code> selects the Unix-domain socket transport; <code>-b 0</code> controls boundary hops. Only <code>GET</code> requests are used. Refer to the primary <a href="https://www.linuxptp.org/documentation/pmc/">pmc(8)</a> and <a href="https://www.linuxptp.org/documentation/ptp4l/">ptp4l(8)</a> documentation before using a real interface.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><code>ethtool -T</code> reports capability, not whether the NIC is currently timestamping PTP packets correctly. <code>ps</code> process presence is not proof of successful clock convergence. The port may be in a timing-receiver state and still fail a required accuracy objective. A healthy system needs an agreed reference source, sufficient observation period, and a valid independent measurement method.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Paper Lab: Diagnose a Profile Mismatch</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Examine three entirely fictional endpoints with physical links up. Do not alter any device during the exercise:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Synthetic profile and domain inventory" tabindex="0" style="background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>Node A: domain 24 | UDPv4 | E2E delay | hardware timestamps
+Node B: domain 24 | UDPv4 | E2E delay | hardware timestamps
+Node C: domain 0  | L2 Ethernet | P2P delay | software timestamps
+
+All three ports show an Ethernet link.
+No evidence is available about signed-off timing architecture.</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Node C differs from A and B in domain number, transport, delay mechanism and timestamp source. The proper first task is to confirm the approved network timing profile and intended topology, not to assume a damaged cable or force the same settings across every switch. The technician should document differences, identify the design owner, collect relevant read-only counters and request authorized changes only after compatibility is established.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Paper Lab: Interpret Offset Samples</h2><!-- /wp:heading -->
+
+<!-- wp:html --><pre aria-label="Synthetic PTP state and offset snapshot" tabindex="0" style="background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>FICTIONAL DATA — not actual pmc or device output
+portState: CLIENT
+grandmasterIdentity: 00:1b:19:ff:fe:23:45:67
+meanPathDelay: 1500 ns
+offsetFromMaster samples (ns): +210, +140, +80, +50, +30
+PHC device: /dev/ptp0
+System-clock UTC verification: not supplied</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Offset magnitudes decline across the five invented samples. That is consistent with improvement in the selected trace, but five values cannot demonstrate stability, accuracy, holdover performance or compliance with a professional profile. The snapshot does not report sampling interval, reference uncertainty, environmental drift, jitter distribution, independent time comparison, or asymmetry. Nor does it prove that the operating-system time is synchronized. Treat <strong>observed state</strong> and <strong>guaranteed performance</strong> as separate claims.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Optional Local Arithmetic Self-Test</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The four-timestamp calculation is reproducible with a short Python 3 program that needs no network access or hardware. Two assertions check the expected values; this is a test of illustrative arithmetic, not a test of the physical PTP protocol:</p><!-- /wp:paragraph -->
+
+<!-- wp:html --><pre aria-label="Local Python verification of example clock offset and delay" tabindex="0" style="background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>t1 = 1_000_000_000
+t2 = 1_000_001_600
+t3 = 1_000_020_000
+t4 = 1_000_021_400
+forward = t2 - t1
+reverse = t4 - t3
+offset_ns = (forward - reverse) / 2
+delay_ns = (forward + reverse) / 2
+assert offset_ns == 100
+assert delay_ns == 1500
+print(f&quot;offset={offset_ns:.0f} ns delay={delay_ns:.0f} ns&quot;)</code></pre><!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The authoring environment executed those arithmetic assertions successfully; the result was <code>offset=100 ns delay=1500 ns</code>. No PTP grandmaster, NIC PHC, or linuxptp daemon was exercised as part of that Python check.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=3ljTrWAJ72Y","type":"video","providerNameSlug":"youtube","responsive":true} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=3ljTrWAJ72Y
+</div><figcaption class="wp-element-caption"><em>David Gessner, <a href="https://www.youtube.com/watch?v=3ljTrWAJ72Y">“IEEE 1588 terminology: ordinary, boundary and transparent clocks”</a> (February 4, 2015). Historical educational explanation of standard clock roles; use current IEEE and vendor references for updated profiles and terminology.</em></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Troubleshooting and Escalation Checklist</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><strong>Wrong grandmaster:</strong> inspect received Announce datasets, priority, clockClass, clockAccuracy, configured source preferences and approved failover architecture.</li><li><strong>No synchronization despite link up:</strong> check domain, profile, addressing, UDP 319/320 or EtherType 0x88F7 as applicable, VLANs, multicast and authorization policy.</li><li><strong>High or changing offset:</strong> investigate hardware timestamp availability, packet queueing, correction fields, switch residence time, link asymmetry, oscillators and servo status.</li><li><strong>PHC synchronized but system time wrong:</strong> distinguish the PHC from CLOCK_REALTIME, then inspect the authorized phc2sys and UTC offset design without starting a second conflicting clock synchronizer.</li><li><strong>Clock failure during failover:</strong> inspect alternate grandmaster quality, selected priority, GNSS/source alarms, holdover performance and profile compatibility.</li><li><strong>Security policy blocks timing:</strong> verify Layer 2 controls, <a href="https://bitcoinversus.tech/2026/10/14/osntc-030-layer-2-switch-security/">OSNTC.030 switch security</a>, approved ACLs and the prior MACsec deployment; do not disable controls to force packets through.</li><li><strong>Hardware unsupported:</strong> compare NIC and switch model, PHY, driver, firmware, optics and software against current vendor support documentation.</li><li><strong>Outdated terminology:</strong> identify actual source/receiver roles even if a tool uses historical “master/slave” instead of “server/client” language.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Operational Security and Safety</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Accurate time can matter for authentication, event ordering, databases, industrial controls, network automation and forensic evidence. A rogue or failing grandmaster can propagate bad time to many devices, while an improperly disciplined system clock may step unexpectedly. IEEE 1588 provides security-related provisions but does not automatically authenticate every permitted timing endpoint. Follow the local source-trust design, network admission controls, management access restrictions and approved monitoring.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Do not start <code>ptp4l</code> or <code>phc2sys</code>, reset clocks, change VLANs, disable MACsec, adjust BMCA priorities, or reconfigure a production time server merely to reproduce a lesson. Escalate to the designated network/timing owner and use a change plan with rollback and independently measured acceptance criteria. Suspicious time-source behavior may also require cybersecurity escalation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Why can ordinary Ethernet traffic pass while the receiving node fails to synchronize over PTP?</li><li>How does a boundary clock differ from a transparent clock?</li><li>Identify t1, t2, t3, and t4 and calculate offset and mean delay from the example.</li><li>Which ports carry UDP PTP event and general messages? What EtherType identifies direct Layer 2 PTP?</li><li>Why does a PTP-capable NIC not prove that Linux CLOCK_REALTIME is synchronized?</li><li>List each difference between synthetic node C and nodes A/B, and choose a read-only first diagnostic.</li><li>What evidence would you need before claiming sub-microsecond accuracy from reported samples?</li><li>Which timing and security operations require explicit approval?</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><strong>Answer key:</strong> Profile, domain, network transport, filtering, timing mode, or unsupported hardware can prevent synchronization even when Ethernet link is healthy. A boundary clock follows a source and serves downstream ports; a transparent clock corrects residence time. The example gives +100 ns client offset and 1,500 ns mean path delay under symmetry. UDP ports 319 and 320 carry event and general messages, while direct Ethernet PTP uses 0x88F7. PHC synchronization and CLOCK_REALTIME are distinct. Node C differs in domain, transport, E2E/P2P delay and timestamping method. A measured accuracy claim requires sufficient observations, an independently valid reference, jitter and asymmetry analysis, and accepted performance criteria. Clock service changes, source priorities, interface/security settings and service restarts are controlled actions.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Primary Sources and Further Reading</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://standards.ieee.org/ieee/1588/6825/">IEEE 1588-2019 — Precision Clock Synchronization</a>.</li><li><a href="https://standards.ieee.org/ieee/1588a/10395/">IEEE 1588a-2023 — BMCA Clarifications</a>.</li><li><a href="https://standards.ieee.org/ieee/802.1AS/11968/">IEEE 802.1AS-2025 — Timing for Time-Sensitive Applications</a>.</li><li><a href="https://www.linuxptp.org/documentation/ptp4l/">linuxptp — ptp4l(8)</a>.</li><li><a href="https://www.linuxptp.org/documentation/pmc/">linuxptp — pmc(8) PTP Management Client</a>.</li><li><a href="https://www.linuxptp.org/documentation/phc2sys/">linuxptp — phc2sys(8) and Timescale Usage</a>.</li><li><a href="https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/103x/configuration/system-management/cisco-nexus-9000-series-nx-os-system-management-configuration-guide-103x/m-configuring-ptp-10x.html">Cisco — PTP Configuration and Transport</a>.</li><li><a href="https://www.ntp.org/reflib/ptp/">Network Time Foundation — PTP and NTP Comparison</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>IEEE 1588 PTP is a structured way to distribute accurate timing among compatible networked clocks. A technician needs to recognize the grandmaster and clock roles, follow the timestamp-message exchange, verify the required profile and domain, and inspect both hardware clock and system clock state. Safe diagnostics separate read-only evidence collection from potentially disruptive clock adjustments. Real accuracy is demonstrated by measurement and design validation, not by a protocol label or a green link LED.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor’s Note:</strong> OSNTC.039 follows published OSNTC.038 and cites IEEE, linuxptp and Cisco primary documentation checked November 8, 2026; IEEE 802.1AS-2025 supersedes IEEE 802.1AS-2020. All network inventories, identities, offset samples and hardware scenarios are fictional educational data. Python arithmetic assertions were executed locally; live PTP, NIC and managed-switch measurements were not performed. The original 1200 × 630 cover and separate 1200 × 720 diagram include the required bottom-left Bitcoinversus.tech signature. Both YouTube identities were found in public listings; successful playback and responsive visual appearance remain independent QA checks.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original optional BitcoinVersus.Tech 5,000-satoshi donation QR code" class="wp-image-24043" /></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code. Confirm the address and amount with your wallet before sending funds.</em></p><!-- /wp:paragraph -->

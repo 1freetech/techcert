@@ -1,0 +1,61 @@
+{
+  "course_id": "OSPython.046",
+  "title": "Structured JSON Logging in Python — Formatters, UTC Time, and Safe Fields",
+  "post_id": 32072,
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/11/ospython-046-structured-json-logging-formatters-utc-safe-fields/",
+  "verified_on": "2026-11-11",
+  "featured_media_id": 32057,
+  "featured_image_size": [
+    1200,
+    630
+  ],
+  "body_image_id": 32060,
+  "body_image_size": [
+    1200,
+    720
+  ],
+  "videos": [
+    {
+      "youtube_id": "9L77QExPmI0",
+      "channel": "mCoding",
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "youtube_id": "jX4Ai-ZWkj4",
+      "channel": "Otávio Miranda",
+      "rendered_iframe": true,
+      "playback_verified": false
+    }
+  ],
+  "internal_link_occurrences": 8,
+  "prose_word_count_estimate": 1385,
+  "tests": {
+    "python_script": "ospython046_example.py",
+    "cases": 4,
+    "passed": 4,
+    "command": "python ospython046_example.py",
+    "uses_synthetic_data": true
+  },
+  "code_layout": "three unboxed wp:html pre/code examples, no wp:code blocks",
+  "footer": {
+    "qr_media_id": 24043,
+    "editor_note": true,
+    "mobile_instructions": true,
+    "volunteer_disclaimer": true
+  },
+  "checks": {
+    "exact_wp_source_saved": true,
+    "wp_rendered_iframes": true,
+    "live_browser_playback": false,
+    "mobile_viewport_visual": false,
+    "external_public_fetch": false
+  },
+  "primary_sources": [
+    "https://docs.python.org/3/library/logging.html",
+    "https://docs.python.org/3/howto/logging-cookbook.html",
+    "https://docs.python.org/3/library/json.html",
+    "https://docs.python.org/3/library/datetime.html"
+  ]
+}

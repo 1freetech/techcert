@@ -1,0 +1,33 @@
+{
+  "audited_at": "2026-11-12",
+  "track_id": "Linux Command 68",
+  "wordpress_post_id": 32153,
+  "wordpress_url": "https://bitcoinversus.tech/2026/11/12/linux-systemd-run-transient-services-scopes-cpu-memory-resource-limits/",
+  "status": "publish",
+  "category": "Linux+",
+  "word_count_approx": 1508,
+  "internal_link_occurrences": 7,
+  "in_story_media_count": 3,
+  "media_details": {
+    "verified_server_render_iframe_ids": [
+      "VLt2b3iNUgg",
+      "KpDLoYnT5t0"
+    ],
+    "authentic_in_story_photo_id": 32147,
+    "cover_media_id": 32146,
+    "cover_dimensions": [
+      1200,
+      630
+    ],
+    "donation_qr_media_id": 24043
+  },
+  "footer_approved_and_mobile_scan_instructions": true,
+  "no_code_boxes": true,
+  "technical_check": "local systemd-run version 257.9 options verified; live scope failed due absent user bus",
+  "limitations": [
+    "actual YouTube playback not verified",
+    "public browser viewport/mobile rendering not inspected",
+    "cgroup CPU/memory enforcement not executed",
+    "third archive repository lacks lesson-rotation.json"
+  ]
+}

@@ -1,0 +1,203 @@
+<!-- wp:paragraph -->
+<p>Python applications often send diagnostic events to files, terminals and log collectors. Human-readable lines help operators, but structured logs let software select events by severity, timestamp, logger name and request identifier without trying to parse arbitrary sentences. A custom <code>logging.Formatter</code> can turn each <code>LogRecord</code> into a compact JSON object, yielding a practical introduction to newline-delimited JSON logging.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine a notebook where every entry always has the same labels: time, importance, place and what happened. A computer can search such a notebook more reliably than a pile of differently worded sentences. In Python, a logger creates an event record; a formatter decides how the event looks when it is written. A JSON formatter gives every event predictable names and values.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The skill extends <a href="https://bitcoinversus.tech/2026/11/06/ospython-045-logrecordfactory-application-wide-logging-context/">record factories</a>, <a href="https://bitcoinversus.tech/2026/10/11/ospython-036-logging-configuration-dictconfig-handlers-formatters-loggers-json/">logging configuration</a> and <a href="https://bitcoinversus.tech/2026/10/18/ospython-041-logging-secrets-safely-redaction-filters-and-credential-protection/">credential-safe logging</a>. No external package, cloud account or production server is required.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Identify the logger, <code>LogRecord</code>, formatter, handler and downstream collector.</li><li>Write one valid JSON object per log event using an explicit schema.</li><li>Generate UTC timestamps with timezone information and millisecond precision.</li><li>Preserve message interpolation and optional request identifiers without automatically exporting every record attribute.</li><li>Test newline escaping, missing fields, exception metadata and output parseability.</li><li>Recognize privacy, backpressure, schema-version and distributed-system limitations.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: Python functions and classes; <a href="https://bitcoinversus.tech/2026/10/07/ospython-028-python-logging-basics/">logging fundamentals</a>; <a href="https://bitcoinversus.tech/2026/10/06/ospython-026-json-serialization-deserialization-strings-files-apis-validation/">JSON serialization</a> (or an equivalent introduction); and a local Python 3 interpreter.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=9L77QExPmI0&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>mCoding, “Modern Python logging” (January 22, 2024). The source explains the logging pipeline and discusses JSON output near 12:37. Video identity and topic were verified; actual playback inside the published article remains a separate QA requirement.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Where Structured Formatting Fits</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A logger first checks whether a record is enabled. The logging system creates a <code>LogRecord</code> with fields including <code>created</code>, <code>levelname</code>, <code>name</code>, <code>msg</code> and <code>args</code>. Handlers choose destinations, while formatters construct their final text. Calling <code>record.getMessage()</code> performs the ordinary message interpolation; serializing <code>record.msg</code> alone would omit substituted arguments. The official <a href="https://docs.python.org/3/library/logging.html">Python logging reference</a> documents the record lifecycle and formatter interface.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>JSON is a data representation, not a transport or storage system. A newline-delimited JSON stream places one independently parseable JSON object on each physical line. Each event can be read with <code>json.loads()</code>, indexed by a collector or stored in a line-oriented file. A JSON object embedded inside prose is harder for downstream software to process consistently.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A Safe, Explicit Event Schema</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The formatter below exports five fields: UTC timestamp, severity, logger name, formatted message and optional request identifier. The exception type is added only when exception information exists. An allowlist prevents arbitrary <code>extra</code> attributes from being copied into collected events, although sensitive information written into the message itself still leaks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The central formatter implementation uses only Python standard-library functions:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="margin:0.35rem 0 1rem;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;max-width:100%;color:inherit;font-size:0.91em;line-height:1.5"><code>import json
+import logging
+from datetime import datetime, timezone
+
+class JsonFormatter(logging.Formatter):
+    def format(self, record):
+        event = {
+            "timestamp": datetime.fromtimestamp(
+                record.created, timezone.utc
+            ).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+            "level": record.levelname,
+            "logger": record.name,
+            "message": record.getMessage(),
+            "request_id": getattr(record, "request_id", None),
+        }
+        if record.exc_info:
+            event["exception_type"] = record.exc_info[0].__name__
+        return json.dumps(
+            event, ensure_ascii=False, allow_nan=False,
+            separators=(",", ":")
+        )</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The <code>datetime.fromtimestamp(..., timezone.utc)</code> call gives the timestamp an explicit UTC offset. Replacing <code>+00:00</code> with <code>Z</code> preserves its UTC meaning. The <code>json.dumps()</code> encoder escapes literal newlines inside messages, allowing each event to occupy one log line. <code>allow_nan=False</code> rejects nonstandard NaN and infinity values if they enter the exported schema. Python’s <a href="https://docs.python.org/3/library/json.html">JSON module documentation</a> specifies the encoding behavior.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":32060,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ospython046-logging-pipeline-1200x720-2.png" alt="Python structured logging schematic: LogRecord to custom JSON formatter to one JSON object per line to a collector." class="wp-image-32060" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech schematic. Field names and the sample event are synthetic examples, not production log data.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Attach the Formatter and Emit an Event</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A formatter has no output destination by itself. Add it to a stream handler, attach the handler to a named logger and disable propagation so the parent logger does not duplicate a record. The following code runs after the class definition above:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="margin:0.35rem 0 1rem;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;max-width:100%;color:inherit;font-size:0.91em;line-height:1.5"><code>import sys
+
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(JsonFormatter())
+logger = logging.getLogger("course.json.046")
+logger.setLevel(logging.INFO)
+logger.propagate = False
+logger.addHandler(handler)
+logger.info(
+    "rack=%s state=%s", "R7", "ok",
+    extra={"request_id": "req-007"}
+)</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>An illustrative JSON event contains <code>"level":"INFO"</code>, <code>"logger":"course.json.046"</code>, <code>"message":"rack=R7 state=ok"</code> and <code>"request_id":"req-007"</code>. The actual timestamp depends on execution time. A production initialization routine should avoid adding a duplicate handler when configuration is repeated; it should also close or restore handlers during controlled shutdown.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=jX4Ai-ZWkj4&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Otávio Miranda, “How to Create a JSON Formatter from Scratch for Python Logging” (July 13, 2025). The Portuguese-language tutorial covers JSON Lines, timestamps, exceptions and extra fields. An external instructional resource, not a BitcoinVersus.Tech production test.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Validate JSON Lines Instead of Assuming Correctness</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The format is useful only if each emitted event parses correctly. A test can capture the stream in an <code>io.StringIO</code> buffer, parse one line and assert expected keys. Avoid equality checks against a wall-clock timestamp; validate its shape and UTC marker instead. Check that messages containing newline characters remain a single physical JSON line.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The abbreviated assertion pattern operates on a captured JSON line:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="margin:0.35rem 0 1rem;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:pre-wrap;max-width:100%;color:inherit;font-size:0.91em;line-height:1.5"><code>import json
+
+event = json.loads(captured_line)
+assert event["level"] == "INFO"
+assert event["message"] == "rack=R7 state=ok"
+assert event["request_id"] == "req-007"
+assert event["timestamp"].endswith("Z")
+assert "api_token" not in event</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>Four automated tests were executed for the accompanying expanded Python example: formatted fields and UTC timestamps; exclusion of an unapproved token in <code>extra</code>; newline escaping; and exception-type output without an exception-message traceback. All four passed. The tests exercised synthetic data only, not a live server, shipping pipeline or log collector.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting and Operational Limits</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Missing request ID:</strong> <code>getattr(record, "request_id", None)</code> yields JSON <code>null</code> when no identifier was supplied. Add a stable identifier at the request boundary, as described in <a href="https://bitcoinversus.tech/2026/10/27/ospython-043-correlation-ids-contextvars-request-logging/">the correlation-ID lesson</a>.</li><li><strong>Unserializable objects:</strong> avoid serializing every record attribute. Restrict output to known JSON-compatible values; define an explicit normalization rule before adding custom objects.</li><li><strong>Leaking credentials:</strong> the allowlist excludes unintended <code>extra</code> fields but does not automatically scrub message strings or exception text. Apply the <a href="https://bitcoinversus.tech/2026/10/18/ospython-041-logging-secrets-safely-redaction-filters-and-credential-protection/">logging redaction principles</a> before collecting events.</li><li><strong>Slow output:</strong> JSON serialization still consumes CPU and ordinary stream writes can block. Queue-based handlers may separate application work from slower sinks; review <a href="https://bitcoinversus.tech/2026/10/11/ospython-037-queuehandler-queuelistener-non-blocking-logging-background-queues/">QueueHandler and QueueListener</a> before deployment.</li><li><strong>Multi-process services:</strong> a structured record does not provide centralized delivery or synchronized process clocks. Use an explicit transport and collector; record schema changes require coordination with querying and retention rules.</li><li><strong>Unexpected duplicates:</strong> inspect logger propagation and repeated setup. A named logger can inherit parent handlers when propagation remains enabled.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check With Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Why call <code>record.getMessage()</code>?</strong> It returns the final formatted message after the logger applies positional arguments.</li><li><strong>Does JSON automatically protect secrets?</strong> No. Structured output only changes representation; deliberate field selection and message sanitation remain necessary.</li><li><strong>What makes the output newline-delimited JSON?</strong> Each log event becomes one parseable object, followed by a record-separating newline from the stream handler.</li><li><strong>Why emit a UTC timezone marker?</strong> A stable time reference helps correlate events across machines with different local clocks.</li><li><strong>Does the formatter guarantee delivery to a monitoring service?</strong> No. Writing and transporting records are separate responsibilities.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References and Further Learning</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consult the <a href="https://docs.python.org/3/library/logging.html">Python logging API</a>, <a href="https://docs.python.org/3/howto/logging-cookbook.html">Logging Cookbook</a>, <a href="https://docs.python.org/3/library/json.html">JSON serialization reference</a>, and <a href="https://docs.python.org/3/library/datetime.html">timezone-aware datetime reference</a>. The two videos are instructional supplements; the Python documentation governs the API behavior.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A JSON formatter works like a careful organizer: it takes the facts from a logging event and puts them under familiar labels. A computer can then identify important errors, connect related requests and read a long stream of events one line at a time. The format works best when developers choose safe fields, use clear UTC timestamps, test the output and plan how the records travel to their destination.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor’s Note:</strong> Open Source TechCert Python curriculum record OSPython.046 follows OSPython.045. Python standard-library behavior was checked against official documentation. Four executable tests passed for the companion reference implementation. The cover and in-story diagram are original conceptual illustrations; they do not represent a deployed production environment. Public YouTube pages and identities were verified separately from live playback. The prose and example use synthetic data.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original 5,000-satoshi donation QR code" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>To scan on a phone, display the donation QR on another screen and use a compatible Bitcoin wallet camera. Confirm the destination before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

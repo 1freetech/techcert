@@ -1,0 +1,241 @@
+<!-- wp:paragraph -->
+<p><strong>systemd-run</strong> launches a program under Linux's systemd service manager without requiring a permanent unit file. Administrators can start transient services or scopes, identify their resource usage, inspect logs, and stop the associated workloads. The command is especially useful for controlled maintenance jobs, repeatable diagnostic tasks, and learning how processes are organized into control groups.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A terminal starts a program, but a command started without additional supervision can be difficult to track after the operator disconnects. <code>systemd-run</code> gives a temporary program a name and places it under systemd management. System tools can then display the job, monitor it, or stop it. Imagine labeling an otherwise loose task and assigning a supervisor to watch it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The concept builds on the <a href="https://bitcoinversus.tech/2026/10/08/what-is-systemd-how-linux-starts-stops-and-watches-background-services/">systemd service-manager introduction</a> and <a href="https://bitcoinversus.tech/2026/11/06/linux-command-67-systemd-cgtop-cgroup-cpu-memory-io/">systemd-cgtop resource monitoring</a>. A transient unit is temporary, not automatically isolated, safe, or secure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=VLt2b3iNUgg&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Red Hat Enterprise Linux, “Anatomy of a Linux Service,” August 2026. Official service lifecycle demonstration; the cgroups segment explains resource grouping.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain the distinction between a transient <code>.service</code> and <code>.scope</code>.</li><li>Start a named test service and inspect its state and journal.</li><li>Understand CPU and memory limits without confusing configured values with measured performance.</li><li>Recognize user-bus, version, permission, and controller limitations, then clean up the test safely.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Use a Linux laboratory host booted with systemd, a working user manager, and a shell with permission to create a user service. Verify installed options before using examples on production equipment. No command below needs a privileged system-wide service manager if the user manager supports the requested operation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How Transient Services and Scopes Differ</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Under the default service mode, systemd starts the program as a managed service, generally detached from the invoking terminal. A start request can return before the program finishes. With <code>--scope</code>, the invoking program starts the process while systemd manages its control group; execution generally remains synchronous and inherits more of the caller's environment. Both unit kinds appear in systemd's unit hierarchy while active.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A scope is not a container and does not automatically restrict network traffic, filesystem access, or credentials. The <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-run.html">official systemd-run(1) manual</a> documents the distinctions and the separate timer, path, and socket activation modes. Resource boundaries depend on working kernel and manager facilities.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Check the Installed systemd Version</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Confirm the local implementation and available command switches before attempting transient execution:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>systemd-run --version</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>systemd-run --help</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The client program can exist inside a container even when no user systemd service bus is running. A message such as “Failed to connect to bus” can indicate an unavailable manager, not an invalid option. For full behavior checks, run a separate disposable Linux virtual machine or a properly delegated host session.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Start and Inspect a Test Service</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Launch a harmless 90-second command through the user manager. An explicit unit name makes monitoring straightforward; <code>Type=exec</code> asks systemd to confirm the executable was launched rather than only that the process was forked:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>systemd-run --user --unit=lesson-demo --property=Type=exec /usr/bin/sleep 90</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The expected name is <code>lesson-demo.service</code>. While the test remains active, inspect its state and read entries associated with the unit:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>systemctl --user status lesson-demo.service</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>journalctl --user -u lesson-demo.service --no-pager</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The status and journal describe different dimensions: unit lifecycle versus recorded event messages. Successful short-lived transient units can be unloaded quickly, so inspect while the test is active. For journal concepts, refer to the <a href="https://bitcoinversus.tech/2026/09/26/linux-command-28-troubleshoot-system-logs-with-journalctl/">journalctl troubleshooting lesson</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Start a Temporary Scope</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A scope can place an ordinary foreground command under systemd resource tracking without turning it into a detached service:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>systemd-run --user --scope /usr/bin/sleep 20</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The upstream manual states that <code>--scope</code> and <code>--wait</code> cannot be combined. A scope normally ends when its processes exit. A failed user-bus request leaves the requested unit uncreated; a printed example alone does not establish operational support on a host.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Limit CPU and Memory</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Attach resource-control settings to a user service to request a half-core-equivalent CPU quota and a 256 MiB absolute memory limit:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>systemd-run --user --unit=lesson-limited --property=Type=exec --property=CPUQuota=50% --property=MemoryMax=256M /usr/bin/sleep 90</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>CPUQuota=50%</code> means a maximum of about half the CPU time available from one processor, not 50% of a server's total compute capacity. Values above 100% can represent multiple CPU equivalents. A quota is a ceiling, not a promise of throughput, and scheduling or parent hierarchy settings can further restrict work.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>MemoryMax=256M</code> requests a hard memory ceiling. Exceeding the effective ceiling can invoke an out-of-memory killer inside the unit. The <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html">official systemd.resource-control manual</a> recommends using <code>MemoryHigh=</code> for reclaim pressure and <code>MemoryMax=</code> as a last line of defense. Actual enforcement requires working cgroup controllers and inspection under a representative load.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":32147,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/nersc-server-racks-wikimedia-cc0.jpg" alt="Actual server racks at the National Energy Research Scientific Computing Center" class="wp-image-32147" /><figcaption class="wp-element-caption"><em>Authentic data-center server-rack photograph at NERSC, via Wikimedia Commons (CC0). Hardware context, not a test-result screenshot.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>The example uses <code>sleep</code>, a low-consumption process. CPU throttling and OOM response cannot be validated by observing an idle test alone. Performance investigations must also consider NUMA locality and memory placement on multi-socket machines, covered in the <a href="https://bitcoinversus.tech/2026/11/01/what-is-numa-linux-server-memory-locality-cpu-node-numactl-explained/">NUMA reference guide</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=KpDLoYnT5t0&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>TechTooniya, “systemd cgroup v2 Tutorial: CPUQuota, MemoryMax, IOWeight Hands-On,” September 2026. Independent practical demonstration; check commands against the installed systemd version.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inspect Configuration Against Behavior</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Read the active service's resource properties and current result using <code>systemctl show</code>:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>systemctl --user show lesson-limited.service -p CPUQuotaPerSecUSec -p MemoryMax -p ActiveState -p Result</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The returned properties describe the manager's view. Cross-check observed CPU and memory usage with <a href="https://bitcoinversus.tech/2026/11/06/linux-command-67-systemd-cgtop-cgroup-cpu-memory-io/">systemd-cgtop</a> and, where permitted, the underlying cgroup v2 files. A value alone does not prove the limit was exercised. Delegation, accounting configuration, and parent slice limits affect what operators can see and enforce.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Wait for Completion and Clean Up</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A one-time service can be awaited until it exits. The <code>--collect</code> flag requests cleanup even for a failed transient unit:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>systemd-run --user --wait --collect /usr/bin/true</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <code>--wait</code> option is for direct transient service execution rather than scopes or timer-triggered units. For an active named laboratory service, stop the unit cleanly:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code>systemctl --user stop lesson-limited.service</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A finished transient unit may already have been unloaded. Stopping an active service is a normal process-management action and can interrupt its work, so avoid applying the demonstration against unknown or business-critical units.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common Troubleshooting Cases</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Missing bus:</strong> check whether a functioning systemd user manager is reachable; containers often do not expose one.</li><li><strong>Unit not found:</strong> the program may have exited and its transient unit been garbage-collected.</li><li><strong>Executable not launched:</strong> check binary location, permissions, and journal output; <code>Type=exec</code> can improve startup failure detection.</li><li><strong>Unexpected OOM termination:</strong> investigate actual memory usage, hierarchy limits, and OOM events before increasing the cap.</li><li><strong>Quota not visibly throttling:</strong> verify controller availability, manager settings, and whether the workload is CPU-bound.</li><li><strong>Privileged operation rejected:</strong> use an authorized user manager or properly approved system-level privileges; never bypass controls just to make a lab command succeed.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Related diagnostics include <a href="https://bitcoinversus.tech/2026/10/28/linux-command-65-systemd-analyze-linux-os/">systemd-analyze for startup behavior</a> and <a href="https://bitcoinversus.tech/2026/10/30/linux-command-66-coredumpctl-linux-os/">coredumpctl for application crash artifacts</a>. Neither replaces runtime inspection of resource enforcement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>What makes a transient unit temporary?</strong> It is created through the manager interface without installing an ordinary permanent unit file.</li><li><strong>What distinguishes scope mode?</strong> The caller starts the program and systemd manages the resulting group.</li><li><strong>Does 50% CPUQuota mean half of an eight-core machine?</strong> No; it is half of one CPU equivalent.</li><li><strong>Can MemoryMax terminate a process?</strong> Yes, if usage cannot remain below the effective ceiling.</li><li><strong>Does a valid command prove an active service ran?</strong> No; the unit manager and runtime result must be checked.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-run.html">systemd-run(1)</a>, <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html">systemd.resource-control(5)</a>, <a href="https://www.freedesktop.org/software/systemd/man/latest/systemctl.html">systemctl(1)</a>, and the <a href="https://docs.kernel.org/admin-guide/cgroup-v2.html">Linux kernel cgroup v2 administrator guide</a> as the authoritative references. Video demonstrations supplement, rather than replace, the version-matched documentation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>systemd-run</code> gives temporary jobs names and an operating-system supervisor. Administrators can start a job, inspect it, set resource boundaries, and stop it when needed. The essential practice is to verify the service manager is available, inspect what actually ran, and confirm a limit under real workload conditions before claiming it worked.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Internal Open Source TechCert slot Linux Command 68 follows Linux Command 67 and OSPython.046 in the established rotation. Official systemd and Linux kernel manuals were checked for the command and controller behavior. A local systemd 257.9 client recognized the described options; a user scope could not be launched in the isolated test container because no user systemd bus was available. No quota-enforcement or public mobile-render test is claimed. The cover is original AI-generated conceptual imagery, not an authentic terminal capture. The NERSC in-body photograph is credited CC0. Video identities were checked from public pages, not through successful live playback.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original 5,000-satoshi donation QR code" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>To scan on a phone, display the donation QR on a second screen and use a compatible Bitcoin wallet camera. A wallet may also allow scanning an image saved from the same phone. Verify the destination before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

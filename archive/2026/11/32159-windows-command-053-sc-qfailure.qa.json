@@ -1,0 +1,41 @@
+{
+  "audited_at": "2026-11-12",
+  "course_id": "Windows Command 53",
+  "title": "sc.exe qfailure — Inspecting Windows Service Recovery Policies",
+  "wordpress_post_id": 32159,
+  "url": "https://bitcoinversus.tech/2026/11/12/windows-sc-qfailure-service-recovery-actions-reset-period/",
+  "publication_status": "publish",
+  "categories": [
+    "Information Technology",
+    "Tech Docs",
+    "technology"
+  ],
+  "word_count_approx": 1612,
+  "internal_link_occurrences": 6,
+  "in_story_media_count": 3,
+  "featured_media_id": 32156,
+  "featured_dimensions": [
+    1200,
+    630
+  ],
+  "media": {
+    "video_ids_in_server_render": [
+      "IXiXjjcXGmA"
+    ],
+    "official_microsoft_screenshot_ids": [
+      32157,
+      32158
+    ],
+    "donation_qr_media_id": 24043
+  },
+  "editorial_footer_present": true,
+  "seo_description_saved": true,
+  "no_code_boxes": true,
+  "technical_verification": "Microsoft Learn API documentation, qfailure and .NET Windows Service example independently checked; no native Windows execution performed",
+  "limitations": [
+    "Actual public player playback unverified",
+    "Public mobile viewport rendering unverified",
+    "Live Windows Service Control Manager and recovery behavior not exercised",
+    "Web reader could not directly fetch public WordPress page"
+  ]
+}

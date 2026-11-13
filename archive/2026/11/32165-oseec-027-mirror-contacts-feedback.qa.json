@@ -1,0 +1,45 @@
+{
+  "audited_at": "2026-11-12",
+  "track_id": "OSEEC.027",
+  "title": "Mirror Contacts and Mechanically Linked Relays — Weld Detection and Safety Feedback",
+  "wordpress_post_id": 32165,
+  "wordpress_url": "https://bitcoinversus.tech/2026/11/12/mirror-contacts-mechanically-linked-relays-weld-detection-safety-feedback/",
+  "status": "publish",
+  "categories": [
+    "electrical engineering",
+    "Tech Docs",
+    "technology"
+  ],
+  "word_count": 1816,
+  "internal_link_occurrences": 6,
+  "in_story_media_count": 3,
+  "verified_server_render_iframe_ids": [
+    "pGDKVLVNwtw",
+    "mY9epBkmj6Q"
+  ],
+  "in_story_authentic_safety_relay_photo_id": 32164,
+  "featured_media_id": 32162,
+  "featured_dimensions": [
+    1200,
+    630
+  ],
+  "cover_watermark": "Bitcoinversus.tech, neon green #39FF14, 10pt lower-left",
+  "original_5000_sat_qr_id": 24043,
+  "footer_ok": true,
+  "original_editor_note": true,
+  "seo_saved": true,
+  "no_code_boxes": true,
+  "source_refs": [
+    "https://www.se.com/my/en/download/document/DOCA0422EN/",
+    "https://webstore.iec.ch/en/publication/74487",
+    "https://www.rockwellautomation.com/en-us/products/hardware/motor-control/iec-safety-contactors.html",
+    "https://www.ia.omron.com/support/faq/answer/16/faq02301/"
+  ],
+  "limitations": [
+    "YouTube player playback on real client not tested",
+    "Mobile breakpoint screenshot and pixel-level layout not tested",
+    "Real energized or controlled lab safety circuit not tested",
+    "Direct public web reader returned inaccessible; server-rendered WordPress API verified instead"
+  ],
+  "source_wording": "Hypothetical feedback response times identified as teaching example, not actual measurements"
+}

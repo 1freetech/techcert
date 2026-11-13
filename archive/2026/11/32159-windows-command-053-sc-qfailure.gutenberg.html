@@ -1,0 +1,215 @@
+<!-- wp:paragraph -->
+<p><strong><code>sc.exe qfailure</code></strong> reads the recovery actions configured for a Windows service. The Service Control Manager may be instructed to restart a failed service, launch a program, reboot a computer, or take no action. Reading a recovery policy is useful during incident diagnosis because it establishes planned responses without modifying the service or forcing an interruption.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Many Windows programs run quietly in the background. When one stops after an error, Windows may have a plan for what to do next. The <code>qfailure</code> command lets someone read that plan, including whether Windows should try again and how long it should wait. A service can have a plan without ever needing it, and a plan does not guarantee successful recovery.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Begin with the <a href="https://bitcoinversus.tech/2026/10/10/ositc-005-windows-services-fundamentals-service-control-manager-startup-types-dependencies-services-msc-and-verification/">Windows Services fundamentals guide</a>. The previous <a href="https://bitcoinversus.tech/2026/11/06/windows-command-52-sc-qtriggerinfo-service-trigger-events/">qtriggerinfo lesson</a> examined service starts initiated by device, network, and other registered events. Recovery policy serves a different purpose: actions after qualifying failures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Identify a Windows service by its internal SCM name rather than its display label.</li><li>Query recovery actions in Command Prompt or PowerShell using the explicit <code>sc.exe</code> executable.</li><li>Read reset periods in seconds, action delays in milliseconds, and any reboot message or recovery command.</li><li>Separate a service's configured policy from actual runtime state and observed historical failures.</li><li>Compare <code>qfailure</code> with <code>qfailureflag</code> while avoiding unauthorized configuration changes.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Use Windows 10, Windows 11, or a supported Windows Server edition with an account allowed to query the service. No crash injection, registry modification, service stoppage, or administrator elevation should be required merely to practice permitted queries. Service access rights and local enterprise policy can still restrict some results.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=IXiXjjcXGmA&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+
+<!-- wp:paragraph -->
+<p><em>TheWindowsClub, “How to open and use Windows Services Manager (Services.msc)” (September 20, 2020). Independent instructional demonstration of the graphical service manager and its properties tabs. The video supplies interface context rather than a direct <code>qfailure</code> walkthrough.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Service Control Manager and Recovery Policy</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Windows Service Control Manager (SCM) maintains the service database, executes start and stop operations, and tracks service status. Recovery actions are configured separately from the startup type. A service may start automatically but have no recovery actions, or it may start manually and still have a configured response for an unexpected failure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Microsoft's <a href="https://learn.microsoft.com/en-us/windows/win32/api/winsvc/ns-winsvc-service_failure_actionsa">SERVICE_FAILURE_ACTIONS reference</a> defines an action array, a failure-count reset period, and optional recovery command or reboot message. If a service process terminates without reporting the stopped state, the SCM can treat the termination as a failure eligible for configured actions. An additional flag governs other error-stop cases.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Run the Read-Only Query</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Query the Windows Print Spooler service by internal name on a machine where the service exists:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="white-space:normal">sc.exe qfailure Spooler</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The same command accepts the Windows Time service name on systems where it is installed:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="white-space:normal">sc.exe qfailure W32Time</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Those examples inspect the local SCM configuration; their returned settings are not universal Windows defaults. Use <code>sc.exe</code> explicitly in PowerShell because the shorter token <code>sc</code> may be interpreted as an alias for <code>Set-Content</code> in Windows PowerShell. The <a href="https://learn.microsoft.com/en-us/windows/win32/services/configuring-a-service-using-sc">Microsoft SC reference</a> confirms the operation and general syntax.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A service display label may differ from its command-line identifier. Use the previous <a href="https://bitcoinversus.tech/2026/10/30/windows-command-51-sc-getkeyname-windows-os/">sc getkeyname guide</a> to resolve the internal name before querying. A not-found response should prompt name validation rather than repeated guesses against production systems.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Interpret the Output Fields</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>SERVICE_NAME:</strong> the internal name of the service in the SCM database.</li><li><strong>RESET_PERIOD (in seconds):</strong> the failure-free interval that resets the accumulated failure count.</li><li><strong>REBOOT_MESSAGE:</strong> optional message associated with a recovery action that reboots the host.</li><li><strong>COMMAND_LINE:</strong> optional executable or command used for a run-process recovery action.</li><li><strong>FAILURE_ACTIONS:</strong> the ordered actions and their delays, reported in milliseconds.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>A service with no configured actions may show the general fields without a populated action sequence. That finding is a configuration observation, not evidence of a stable application. Microsoft's <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/windows-service">.NET Windows Service tutorial</a> includes real example output both before and after actions were configured.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":32158,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/windows-service-recovery-default-microsoft-learn.png" alt="Microsoft Learn example Windows Service Recovery tab before recovery actions were configured" class="wp-image-32158" style="width:auto;max-width:100%;height:auto" /><figcaption class="wp-element-caption"><em>Official Microsoft Learn screenshot of the example .NET service's Recovery tab before configuring actions; no local test is represented.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Failure Sequence and Delay Units</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The first qualifying failure selects the first recovery action; the next qualifying failure selects the second. If failures exceed the configured array length, the SCM repeats the last action. The reset interval can return the count to zero after the specified failure-free period. An action list can therefore restart a service twice and then stop trying, or continue applying the final restart policy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Microsoft's published .NET example shows restart delays of 60,000 milliseconds after each of two failures, followed by a run-program action delayed by 1,000 milliseconds. Those correspond to 60 seconds, 60 seconds, and one second. If the reset period is 3,600 seconds, the specified failure-free duration is one hour. Such numbers illustrate units, not measured service availability or an independently reproduced event sequence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":32157,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/windows-service-recovery-configured-microsoft-learn.png" alt="Microsoft Learn .NET service Recovery tab showing restart restart and run program selections" class="wp-image-32157" style="width:auto;max-width:100%;height:auto" /><figcaption class="wp-element-caption"><em>Official Microsoft Learn screenshot of configured recovery actions for a sample .NET service, including two restart selections and a run-program selection.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">When Do Failure Actions Apply?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A recovery action is not necessarily triggered whenever an application disappears from the Running list. Normal administrative stops differ from unexpected termination. An additional SCM flag can allow certain services that report a stopped state with a nonzero error code to become eligible for recovery.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Inspect the separate read-only flag:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="white-space:normal">sc.exe qfailureflag Spooler</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://bitcoinversus.tech/2026/10/11/windows-command-45-sc-qfailureflag-windows-os/">qfailureflag lesson</a> covers the query; Microsoft's <a href="https://learn.microsoft.com/en-us/windows/win32/api/winsvc/ns-winsvc-service_failure_actions_flag">SERVICE_FAILURE_ACTIONS_FLAG reference</a> explains how an enabled flag permits some non-crash error stops to trigger configured actions. A flag without any actions has nothing to execute. Actual policy modifications belong under change control, as explained in the <a href="https://bitcoinversus.tech/2026/10/10/windows-command-43-sc-failure-windows-os/">sc failure configuration</a> and <a href="https://bitcoinversus.tech/2026/10/10/windows-command-44-sc-failureflag-windows-os/">sc failureflag</a> lessons.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Compare Configuration With Runtime Evidence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Check the current state of the same service without modifying it:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="white-space:normal">sc.exe query Spooler</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <code>STATE</code> field is a snapshot. A running service might have restarted many times; a stopped service may be intentionally idle. Compare service state with its recovery action list, configured trigger conditions, and relevant logs. Event Viewer’s System log often contains records from the <code>Service Control Manager</code>; correlate timestamps, service names, and application log entries before asserting the cause of an outage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Microsoft's .NET BackgroundService example also explains a subtle failure mode: some application exceptions can terminate a host gracefully, which may not satisfy the SCM's failure criteria. A correctly populated recovery tab is therefore insufficient proof of automatic restoration after every fault. Application error handling and event evidence matter.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Buffer Size and Remote Administration</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Microsoft's legacy command reference documents an optional buffer size in bytes. A larger buffer may be useful when a service has extensive recovery configuration:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><code style="white-space:normal">sc.exe qfailure Spooler 2048</code></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The general <code>sc.exe</code> format also permits a remote computer name before the operation when the account, network, and remote SCM policy permit access. Remote queries can reveal administrative command lines, so access should be limited to authorized operators. Check the installed command help for platform-specific behavior.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting and Operational Safety</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Service not found:</strong> verify the internal identifier instead of relying on a display name.</li><li><strong>Access denied:</strong> request appropriate approved read access; do not change permissions solely to run an exercise.</li><li><strong>Recovery actions absent:</strong> distinguish an empty policy from missing monitoring evidence and from a failed query.</li><li><strong>Unexpected restarts:</strong> examine SCM events and the failure flag before blaming the configured restart policy.</li><li><strong>Restart loops:</strong> repeated restarts may hide application bugs, missing dependencies, or corrupt data; investigate the root cause.</li><li><strong>Run-program action:</strong> a stored executable path may pose a security or operational risk; a policy listing does not prove execution.</li><li><strong>Reboot action:</strong> any recovery-induced host restart may disrupt other services and require formal change-management review.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check With Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Does <code>qfailure</code> change a recovery policy?</strong> No, the query is read-only.</li><li><strong>Are restart delays measured in seconds?</strong> No, individual action delays are presented in milliseconds.</li><li><strong>What resets the failure count?</strong> A configured failure-free interval expressed in seconds.</li><li><strong>Does Running prove recovery actions worked?</strong> No; verify incident logs and application health.</li><li><strong>Which command reads the non-crash eligibility flag?</strong> <code>sc.exe qfailureflag</code>.</li><li><strong>What occurs after the last configured action?</strong> The final action is repeated for additional qualifying failures.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Official References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary sources: <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/windows-service">Microsoft Learn Windows Service recovery example</a>, <a href="https://learn.microsoft.com/en-us/windows/win32/services/configuring-a-service-using-sc">SC command reference</a>, <a href="https://learn.microsoft.com/en-us/windows/win32/api/winsvc/ns-winsvc-service_failure_actionsa">SERVICE_FAILURE_ACTIONS</a>, <a href="https://learn.microsoft.com/en-us/windows/win32/api/winsvc/ns-winsvc-service_failure_actions_flag">SERVICE_FAILURE_ACTIONS_FLAG</a>, and <a href="https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc742047(v=ws.11)">Microsoft's earlier qfailure syntax documentation</a>. The authoritative descriptions and example figures come from Microsoft; the local service configuration varies by machine.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>qfailure</code> lets someone read Windows' backup plan for a background service. The plan may instruct Windows to wait, restart a failed service, launch a recovery program, or stop trying. Good administrators read the plan and check the actual events separately. A printed recovery policy is not proof of a successful repair.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor’s Note:</strong> Internal Open Source TechCert curriculum slot Windows Command 53 follows the published Windows Command 52 service-trigger lesson. Official Microsoft documentation supplies the command syntax, action semantics, and numeric example. A native Windows SCM session was unavailable for live command execution, failure injection, and recovery verification. The branded featured cover is an AI-created conceptual illustration rather than a real Windows screenshot. Both genuine in-story screenshots come from Microsoft's .NET service tutorial. The video demonstrates the Services interface, not qfailure directly; rendered player and actual playback require separate checks.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech donation QR for 5,000 satoshis" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, display the QR on another screen and scan it with a compatible Bitcoin wallet. Certain wallets can read an image saved to the same phone. Verify the destination before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

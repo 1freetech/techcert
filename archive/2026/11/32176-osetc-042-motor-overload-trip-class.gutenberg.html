@@ -1,0 +1,185 @@
+<!-- wp:paragraph -->
+<p><strong>Motor overload relays</strong> protect electric motors against sustained overcurrent that can overheat their windings. The relay's <strong>trip class</strong> describes a standardized time-current response, not the running current of a motor and not an unconditional delay before shutdown. For technicians diagnosing a tripped starter, the essential evidence includes motor nameplate full-load amperes, overload settings, starting duration, phase currents, reset state, and the manufacturer's curve.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A motor needs more electrical current when it first starts turning than when it runs normally. A protective overload relay allows an appropriate starting surge but reacts when excessive current continues long enough to threaten overheating. The trip class helps describe how quickly the device responds to large overloads. A larger class number usually allows a longer start under a defined test, but it does not mean a motor is safe to overheat.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://bitcoinversus.tech/2026/10/01/osetc-016-motor-starters-overload-relays-basics/">motor-starter fundamentals lesson</a> introduces the contactor and overload relay as separate devices. A contactor switches motor power. An overload relay monitors a thermal or electronic model of current and often opens a control contact that drops the contactor out. The more advanced <a href="https://bitcoinversus.tech/2026/10/12/oseec-019-motor-protection-engineering-overloads-short-circuits-relays-breakers-coordination/">motor-protection reference</a> distinguishes overload protection from short-circuit and ground-fault protective functions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=Pu1pZuhYFxk&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Schneider Electric, “Installing Thermal Units &amp; Resetting NEMA Class 2510 Manual Starters” (November 18, 2016). Official instruction for the named manual-starter product family; demonstration is not a universal procedure for other starters.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Read the relay's current setting and trip-class marking without confusing them with motor nameplate values.</li><li>Distinguish the 600% reference in NEMA guidance from the 7.2-times-setting reference in IEC trip-class tables.</li><li>Compare a motor's documented acceleration time with the applicable manufacturer time-current curve.</li><li>Recognize single-phasing, phase imbalance, mechanical overload, and unsuitable settings as separate troubleshooting hypotheses.</li><li>Explain manual versus automatic reset hazards and assemble an evidence record before authorized restart.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites include <a href="https://bitcoinversus.tech/2026/10/02/oseec-008-three-phase-power-fundamentals/">three-phase AC fundamentals</a>, motor nameplate terminology, and safe electrical isolation practices. Classroom examples use fictional currents; no live panel testing, intentional fault, current adjustment, or motor restart is authorized by the lesson.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why the Two Trip-Class Conventions Matter</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Schneider Electric's North American <a href="https://www.se.com/us/en/faqs/FA87530/">NEMA overload trip-class FAQ</a> defines Class 10, 20 and 30 using a test current equal to <strong>600% of the relevant thermal current rating or adjustable dial setting</strong>. In the stated convention, the maximum trip times at the reference current are 10, 20 and 30 seconds, respectively. The description applies to the relevant product and test context, not every relay in a control room.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Schneider Electric's <a href="https://download.se.com/files?filename=Catalog&amp;p_Doc_Ref=LVPED221001EN">2026 ComPacT NSX motor-feeder catalog</a> presents the IEC 60947-4-1 thermal trip classes against <strong>7.2 × Iᵣ</strong>, where Iᵣ is the relay's thermal setting. The catalog identifies Class 5, 10, 20 and 30 cold-state upper bounds of 5, 10, 20 and 30 seconds at the stated reference. For the same numerical class label, 600% and 720% are different test currents; combining their descriptions into one unsupported rule would distort protection analysis.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The relevant specification also depends on <strong>cold versus hot</strong> initial thermal state. A relay that has already heated during repeated attempts can operate sooner than a cold-state chart suggests. Verify the exact product family and manufacturer curve before translating a trip class into diagnostic expectations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":32174,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osetc042-iec-overload-trip-class-vertical-chart-1200x720-1.png" alt="Vertical columns depicting IEC cold-state maximum trip times at 7.2 times overload setting: Class 5 up to 5 seconds, 10 up to 10 seconds, 20 up to 20 seconds and 30 up to 30 seconds" class="wp-image-32174" style="width:100%;height:auto" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech vertical chart from Schneider Electric's 2026 <a href='https://download.se.com/files?filename=Catalog&amp;p_Doc_Ref=LVPED221001EN'>ComPacT NSX motor-feeder trip-class table</a>. The bars represent IEC cold-state upper limits at 7.2 × Iᵣ, not measured start durations; black-and-neon watermark identifies the original chart.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read the Motor Nameplate Before Reading the Dial</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A motor nameplate typically states rated voltage, full-load current, frequency, speed and other identifying information. The overload relay has its own adjustable current range and may offer a class selector. For a straightforward direct-on-line starter, Schneider's <a href="https://www.se.com/au/en/faqs/FA241094/">overload-selection guidance</a> uses the motor nameplate full-load current as the setting reference, but final selection must follow the exact motor, starter manufacturer's instructions, application standard and local code.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A range marking such as 9–13 A means the dial is intended for that adjustable interval; it does not certify that a connected motor should always be set to 13 A. An operator must not raise the adjustment to avoid an unexplained trip. Motors with special service factors, ambient conditions, starters or drive electronics require product-specific evaluation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked Example With Two Reference Currents</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a fictional motor with nameplate full-load amperes of 14.0 A and a hypothetical relay setting of 14.0 A. In the Schneider NEMA 600% reference, the test-current arithmetic is <strong>6 × 14.0 A = 84.0 A</strong>. In the IEC 7.2 × Iᵣ reference, it is <strong>7.2 × 14.0 A = 100.8 A</strong>. The difference is 16.8 A, or 20% of the 84.0 A reference current.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Neither multiplication predicts the motor's actual starting current, and the two figures are not interchangeable measures of device quality. A verified trip curve also considers the relay's thermal state, phase-loss sensitivity, settings and system conditions. Real motor acceleration can draw variable current, so the full start profile matters more than a single calculated multiple.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Suppose an illustrative motor reaches normal speed in seven seconds while a specified Class 10 overload has been selected. A seven-second start does not establish compliance by itself: actual current versus time must be compared with the approved relay curve and the motor's permissible starting thermal duty. The <a href="https://bitcoinversus.tech/2026/10/09/oseec-017-motor-starting-engineering-inrush-voltage-dip-dol-soft-starters-vfds-starter-selection/">motor-starting engineering lesson</a> covers direct-on-line inrush, soft starters, variable-frequency drives, and load inertia.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What a Real Overload Relay Looks Like</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Thermal overload relays may use bimetallic elements or heater mechanisms to approximate motor heating; electronic relays can estimate thermal capacity through current-sensing and firmware. The unit commonly has a dial, trip indicator, reset selector and auxiliary contacts for the contactor control circuit. The exact location of features varies widely by device generation and model.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":32175,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/maxge-sgr2-d1321-thermal-overload-relay-cc-by-sa-3.jpg" alt="Authentic photo of MAXGE SGR2-D1321 thermal overload relay showing housing, terminals and manufacturer markings including Class 10A" class="wp-image-32175" style="width:100%;height:auto" /><figcaption class="wp-element-caption"><em>Authentic MAXGE SGR2-D1321 thermal overload relay photo, Dmitry G / <a href='https://commons.wikimedia.org/wiki/File:MAXGE_SGR2-D1321.JPG'>Wikimedia Commons</a>, <a href='https://creativecommons.org/licenses/by-sa/3.0/'>CC BY-SA 3.0</a>, unchanged. A product marking is not a certification of any other model.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Investigating a Trip Without Assuming the Cause</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An overload trip can indicate sustained mechanical load, repeated prolonged starts, loss of a motor phase, low voltage, unbalanced supply, winding damage, a restricted fan, or a setting error. An <strong>overload</strong> event should not be confused with a branch breaker or fuse operating against a short circuit. Protection coordination and physical motor conditions must both be examined.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Start with recorded trip state, the motor nameplate, relay model, load conditions and recent changes. The <a href="https://bitcoinversus.tech/2026/10/29/osetc-039-three-phase-motor-current-imbalance-clamp-meter-single-phasing/">three-phase current imbalance guide</a> shows why single-phasing can overheat a remaining phase. The <a href="https://bitcoinversus.tech/2026/10/30/osetc-040-three-phase-motor-voltage-imbalance-line-to-line-troubleshooting/">voltage imbalance guide</a> explains how small voltage asymmetry can produce a larger current response. Prior <a href="https://bitcoinversus.tech/2026/11/06/osetc-041-three-phase-sequence-motor-rotation-verification/">phase-sequence verification</a> matters after approved wiring changes, but reversed rotation and overload tripping describe different faults.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The actual investigation may require measurements by a qualified technician using correctly rated instruments and established boundaries. A repetitive trip is a condition to document and isolate, not a reason to repeatedly press reset. Other hypotheses, including winding continuity or insulation issues, can be reviewed under the <a href="https://bitcoinversus.tech/2026/10/27/osetc-038-motor-winding-resistance-phase-balance-low-ohm-testing/">winding resistance</a> and insulation-test lessons when permitted by the maintenance plan.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=TB7IVcZK5kA&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Schneider Electric, “How to manually trip a solid state Motor Logic Overload Relay” (August 5, 2016). Official demonstration confined to a specified Square D Motor Logic product family; the act shown is not a recommended live test for untrained personnel.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Manual Reset, Automatic Reset and Unexpected Restart</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A relay's reset mechanism may be manual, automatic, or configurable. A thermal element typically needs time to cool before a reset becomes possible. An electronic relay may instead apply stored thermal capacity or a configured reset threshold. A cleared trip indicator does not establish that a jammed shaft, phase loss, damaged winding, or faulty contactor has been repaired.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Automatic reset can be hazardous when a separate maintained start command remains present, potentially allowing the motor to restart unexpectedly. Device and starter logic must be evaluated as a system. Verify the isolation plan and safe restart controls before returning machinery to service. OSHA's <a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147">29 CFR 1910.147</a> addresses hazardous-energy control during covered servicing and maintenance, including stored energy and verification of isolation. An ordinary STOP pushbutton or overload trip contact is not an energy-isolating device.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://bitcoinversus.tech/2026/10/08/electrical-safety-what-is-lockout-tagout-loto-hazardous-energy/">BitcoinVersus.Tech lockout/tagout reference</a> explains why an OFF indication is not equivalent to a verified de-energized condition. Always use the applicable site procedure, equipment instructions and trained authorized personnel rather than treating a video demonstration as authority to open an energized panel.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Field Documentation Checklist</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Record equipment ID, motor manufacturer, nameplate FLA, rated voltage, duty and service factor where applicable.</li><li>Record overload manufacturer, exact model, trip class, dial setting, reset mode and latest fault indication.</li><li>Record observed start duration and relevant operating conditions from approved instruments or logs, keeping times and units explicit.</li><li>Separate overload-relay trip evidence from branch breaker operations, thermal alarms and drive-specific diagnostics.</li><li>Document phase-current balance, phase-voltage balance, ventilation, load condition and recent maintenance when safely established.</li><li>Obtain authorization and demonstrate resolution of the root cause before returning to service; do not bypass or increase protective settings merely to stop trips.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check With Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Does Class 20 mean every overload takes exactly 20 seconds to trip?</strong> No. The class represents a time-current requirement at a defined reference condition.</li><li><strong>Are the NEMA 600% and IEC 7.2 × Iᵣ tests identical?</strong> No. Their reference currents differ and their standards and product contexts must be kept separate.</li><li><strong>What does the relay's current dial normally reference?</strong> The motor nameplate full-load current, subject to applicable device instructions and system rules.</li><li><strong>Can an overload relay replace short-circuit protection?</strong> No. The complete starter requires coordinated overcurrent protection.</li><li><strong>Does pressing reset confirm a mechanical jam was corrected?</strong> No. Reset only changes the device's trip state, when permitted.</li><li><strong>What is the primary risk of automatic reset?</strong> Unexpected restart if the starter and external command logic allow it.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References and Technical Limits</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Authoritative sources: <a href="https://www.se.com/us/en/faqs/FA87530/">Schneider Electric USA — NEMA Trip Classes 10, 20 and 30</a>; <a href="https://download.se.com/files?filename=Catalog&amp;p_Doc_Ref=LVPED221001EN">Schneider Electric 2026 ComPacT NSX Catalog — IEC Trip-Class Time-Curve Table</a>; <a href="https://www.se.com/au/en/faqs/FA241094/">Schneider Electric — Class Selection and Motor FLA</a>; <a href="https://productinfo.se.com/compactnsxuserguide/viewer?docidentity=D-SE-0068777&amp;extension=xml&amp;lang=en&amp;manualidentity=UserGuidePacTSeriesComPacTNSXCircui-67530380">Schneider ComPacT NSX motor-feeder user guide</a>; <a href="https://www.fluke.com/en/learn/blog/motors-drives-pumps-compressors/how-to-troubleshoot-motors-and-drives-starting-at-the-inputs">Fluke motor input troubleshooting</a>; and <a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147">OSHA hazardous energy control standard</a>. Class curves vary by model and by test state; consult the actual manufacturer's documentation before equipment decisions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An overload relay helps stop a motor from staying overloaded for too long. A trip class tells technicians something about response speed when current is much higher than the chosen setting. The class number alone cannot say why a motor stopped, and a reset button cannot fix a damaged machine. Proper maintenance connects nameplate information, manufacturer curves, fault records and safe inspection before restart.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Internal Open Source TechCert Electrical Technician curriculum slot OSETC.042 follows published OSETC.041. Trip-class definitions and numerical examples were checked against Schneider Electric's NEMA FAQ and 2026 IEC-related catalog. The 14.0-A motor calculations and seven-second starting example are fictional, not physical measurements. The 1200 × 630 featured cover is a branded AI-generated conceptual illustration, not a photograph of the tested plant. The authored chart is derived from published class limits, and the in-story MAXGE photo is genuine CC BY-SA 3.0 material with source attribution. YouTube references are official manufacturer demonstrations for specific products, not a substitute for equipment-specific instructions. No electrical test, setting change, or motor restart was performed.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000-satoshi donation QR code" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, display the original donation QR on a second screen, then scan with a compatible Bitcoin wallet. Some wallets can scan a saved image on the same phone. Verify the destination before sending 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the original QR code above to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

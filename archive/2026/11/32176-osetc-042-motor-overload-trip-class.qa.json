@@ -1,0 +1,53 @@
+{
+  "audited_at": "2026-11-13",
+  "track_id": "OSETC.042",
+  "title": "Motor Overload Relay Trip Classes — Settings, Starting Currents, and Safe Reset",
+  "wordpress_post_id": 32176,
+  "wordpress_url": "https://bitcoinversus.tech/2026/11/13/motor-overload-relay-trip-classes-settings-current-safe-reset/",
+  "wordpress_status": "publish",
+  "categories": [
+    "Tech Docs",
+    "technology",
+    "electrical engineering"
+  ],
+  "word_count": 1960,
+  "internal_link_occurrences": 9,
+  "in_story_media_count": 4,
+  "verified_server_render_iframe_ids": [
+    "Pu1pZuhYFxk",
+    "TB7IVcZK5kA"
+  ],
+  "actual_video_playback_verified": false,
+  "media": {
+    "cover_media_id": 32173,
+    "cover_original_dimensions": [
+      1200,
+      630
+    ],
+    "vertical_chart_media_id": 32174,
+    "chart_dimensions": [
+      1200,
+      720
+    ],
+    "authentic_relay_photo_id": 32175,
+    "authentic_photo_license": "CC BY-SA 3.0; Dmitry G / Wikimedia Commons",
+    "qr_media_id": 24043
+  },
+  "footer_verified": true,
+  "editor_note_present": true,
+  "seo_description_saved": true,
+  "no_boxed_code": true,
+  "no_cover_duplication_in_body": true,
+  "technical_sources": [
+    "Schneider Electric USA FA87530 NEMA 600% convention",
+    "Schneider Electric 2026 ComPacT NSX catalog IEC 7.2 × Ir trip table",
+    "Schneider Electric Australia FA241094 overload selection",
+    "OSHA 29 CFR 1910.147 lockout-tagout"
+  ],
+  "verification_limits": [
+    "No real energized equipment or motor tripping test",
+    "No actual video playback test",
+    "No mobile viewport/pixel-level browser inspection",
+    "Public web reader could not fetch article; WordPress edit/view API rendered HTML verified"
+  ]
+}

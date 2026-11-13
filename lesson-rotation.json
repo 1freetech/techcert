@@ -48,40 +48,38 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "windows",
-    "lesson_number": 53,
-    "track_id": "Windows Command 53",
-    "title": "sc.exe qfailure — Inspecting Windows Service Recovery Policies",
-    "public_title": "sc.exe qfailure — Inspecting Windows Service Recovery Policies",
-    "wordpress_post_id": 32159,
-    "live_url": "https://bitcoinversus.tech/2026/11/12/windows-sc-qfailure-service-recovery-actions-reset-period/",
-    "archive_path": "archive/2026/11/32159-windows-command-053-sc-qfailure.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/32159-windows-command-053-sc-qfailure.qa.json",
+    "subject": "electrical_engineering",
+    "lesson_number": 27,
+    "track_id": "OSEEC.027",
+    "title": "Mirror Contacts and Mechanically Linked Relays — Weld Detection and Safety Feedback",
+    "public_title": "Mirror Contacts and Mechanically Linked Relays — Weld Detection and Safety Feedback",
+    "wordpress_post_id": 32165,
+    "live_url": "https://bitcoinversus.tech/2026/11/12/mirror-contacts-mechanically-linked-relays-weld-detection-safety-feedback/",
+    "archive_path": "archive/2026/11/32165-oseec-027-mirror-contacts-feedback.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/32165-oseec-027-mirror-contacts-feedback.qa.json",
     "verified_repositories": [
       "1freetech/opencert.tech",
       "1freetech/techcert",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 32156,
-    "in_story_image_media_ids": [
-      32157,
-      32158
-    ],
+    "featured_media_id": 32162,
+    "in_story_photo_media_id": 32164,
     "body_video_ids": [
-      "IXiXjjcXGmA"
+      "pGDKVLVNwtw",
+      "mY9epBkmj6Q"
     ],
-    "verification_status": "WordPress published and saved raw markup; server-rendered YouTube iframe present; 1200x630 cover and source screenshots verified; exact Gutenberg source and QA archived to three repositories.",
-    "qa_status": "1,612-word lesson; six contextual internal links, three in-story media items, original 5,000-sats QR, Editor's Note and footer, SEO saved; no code boxes. Live Windows execution, player playback and viewport visual tests unverified."
+    "verification_status": "Published WordPress; 2 server-rendered YouTube iframes and branded 1200x630 cover verified; exact Gutenberg and QA source archived to 3 repos. Public browser, actual playback and live safety hardware testing unverified.",
+    "qa_status": "1,816 words, 6 contextual internal links, 3 in-story media, original 5k sats QR with scanning instructions, approved Editor's Note and footer, SEO description and no boxed code."
   },
   "next": {
-    "subject": "electrical_engineering",
-    "lesson_number": 27,
-    "title_format": "OSEEC.027: {topic}",
+    "subject": "electrical_technician",
+    "lesson_number": 42,
+    "title_format": "OSETC.042: {topic}",
     "public_title_format": "{topic}",
-    "resolution_note": "Windows Command 53 published as WordPress #32159 and archived to three repositories on November 12, 2026. Electrical Engineering OSEEC.026 was verified published #30434. Continue with unique OSEEC.027."
+    "resolution_note": "OSEEC.027 published WP #32165 November 12, 2026 and archived in three repositories; preceding OSETC.041 WP #30461 is published. Continue with unique OSETC.042."
   },
-  "next_after_current": "electrical_technician",
+  "next_after_current": "pcb_engineering",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -235,9 +233,9 @@
     },
     "electrical_engineering": {
       "acronym": "OSEEC",
-      "next_lesson_number": 27,
-      "last_published_lesson_number": 26,
-      "last_wordpress_post_id": 30434
+      "next_lesson_number": 28,
+      "last_published_lesson_number": 27,
+      "last_wordpress_post_id": 32165
     },
     "electrical_technician": {
       "acronym": "OSETC",

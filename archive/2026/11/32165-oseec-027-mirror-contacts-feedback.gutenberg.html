@@ -1,0 +1,169 @@
+<!-- wp:paragraph -->
+<p><strong>Mirror contacts</strong> and <strong>mechanically linked contacts</strong> are specialized contact arrangements used to make switching faults observable. In industrial motor-control and machinery-safety systems, a normally closed (NC) feedback contact can reveal that a contactor has failed to release after its control coil was de-energized. The resulting information can block a subsequent start, but only when the surrounding safety logic, circuit architecture, and device ratings support the intended safety function.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A contactor is a powerful electrical switch. When a controller tells it to turn off, the switch should open and remove electricity from the connected load. After many operations or a severe fault, a contact can become stuck together, a condition called <strong>contact welding</strong>. A separate small contact can help report that the main switch did not open as expected.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The important difference is that an indicator does not physically remove a welded connection. It informs a monitoring device, which must respond appropriately. For background, review <a href="https://bitcoinversus.tech/2026/10/01/osetc-015-relays-contactors-basics/">relay and contactor fundamentals</a> and <a href="https://bitcoinversus.tech/2026/11/06/oseec-026-relay-contact-ratings-ac15-dc13-electrical-endurance/">contact current ratings and electrical endurance</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=pGDKVLVNwtw&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>RSP Supply, “Safety Relays – Part 2” (February 25, 2020). An independently published teaching video focused on force-guided contacts and contact-weld detection. The video introduces principles; the manufacturer’s device documentation governs safety design.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Distinguish a contactor <strong>mirror contact</strong> from a relay's <strong>mechanically linked</strong> or forcibly guided contacts.</li><li>Identify how normally open (NO) power contacts and NC monitoring contacts behave during a welded-contact fault.</li><li>Describe external device monitoring (EDM) and the function of redundant output contactors.</li><li>Explain why an NC auxiliary contact, an indicator lamp, or a single monitoring channel cannot automatically establish a safety-rated machine stop.</li><li>Read model-specific technical claims and prepare a safe, non-energized verification checklist.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites include normally open and normally closed contact conventions, control-coil operation, and basic <a href="https://bitcoinversus.tech/2026/10/14/oseec-021-electrical-drawings-ladder-diagrams/">electrical and ladder diagrams</a>. The discussion is conceptual and contains no authorized wiring design, live demonstration, or instructions for bypassing safety controls. Machinery-safety design and testing belong to qualified personnel working under applicable standards and site procedures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The Distinction Between Mirror and Mechanically Linked Contacts</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>mirror contact</strong> is an NC auxiliary contact designed so that it cannot be closed simultaneously with an associated normally open main power contact under the specified conditions. The relevant contactor requirements appear in <a href="https://webstore.iec.ch/en/publication/74487">IEC 60947-4-1</a>, Annex F. The engineering relationship is principally from the main power poles to the auxiliary indication: when a main pole remains welded closed, its qualified mirror NC contact must not report the expected released condition.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Mechanically linked contacts</strong> apply to specified sets of NO and NC contacts on control relays or related devices. They are arranged so that the opposing contact sets cannot both report closed under their defined fault conditions. The concept appears in IEC 60947-5-1, Annex L, and in the separate forcibly guided relay standard IEC 61810-3. A mechanically linked NO/NC pair and a contactor mirror contact serve related purposes, but their terminology and underlying test scope are not interchangeable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Schneider Electric’s <a href="https://www.se.com/my/en/download/document/DOCA0422EN/">October 27, 2026 application note, DOCA0422EN</a>, revisits both contact arrangements and their use in safety monitoring. A Schneider <a href="https://www.se.com/uk/en/faqs/FA136111/">technical FAQ</a> cautions that a generic claim of “safety contactor” is less meaningful than the actual rated and documented mirror-contact feature. Any specified contact block must be checked against the exact model, mounting configuration, and applicable standard edition.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Normal Operation and the Welded Main-Pole Fault</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a normally open contactor controlling a motor. With the coil de-energized, the main poles should be open and its qualified mirror NC contact should be closed. Energizing the coil closes the main poles and opens the NC feedback contact. In a healthy stop, the main poles open and the mirror contact returns to its NC state after the mechanism releases.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If a main pole welds closed, the contactor may remain electrically conductive after the coil loses power. A certified mirror NC contact should then remain open rather than falsely indicating that the main contactor fully released. The monitoring controller may use that mismatch as evidence of a failed final switching element. The contact does not itself break the welded power path, and an individual NC contact is not a direct measurement of load voltage, motor motion, or stored energy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":32164,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/schleicher-safety-relays-cc-by-sa-3-de.jpg" alt="Four yellow Schleicher Electronic industrial safety relays with printed terminals and status indicators" class="wp-image-32164" style="max-width:100%;height:auto" /><figcaption class="wp-element-caption"><em>Actual Schleicher Electronic safety relay equipment, photographed by Schleicher Electronic and released under <a href="https://creativecommons.org/licenses/by-sa/3.0/de/deed.en">CC BY-SA 3.0 Germany</a> via <a href="https://commons.wikimedia.org/wiki/File:Schleicher_Electronic_Sicherheitsrelais.jpg">Wikimedia Commons</a>. Photo illustrates hardware; device-specific contact specifications must be checked separately.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">External Device Monitoring and Feedback Loops</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>External device monitoring</strong> (EDM) is a diagnostic function in which the safety controller checks the state of final switching devices, often using suitable NC feedback contacts on contactors K1 and K2. One common architecture uses two contactors in the motor power path and checks their feedback before re-enabling the safety outputs. In the released state, both designated feedback contacts should return to the condition expected by the safety controller.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The controller must evaluate the feedback sequence and timing, not merely display a green indicator. During a stop demand, if one contactor remains welded, its mirror feedback should fail to return. A correctly implemented diagnostic can refuse the next restart and report the fault. A second independently operating contactor may still interrupt the hazardous circuit, depending on the complete design and failure conditions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://www.pilz.com/en-US/support/lexicon/articles/072106">Pilz's safety-relay technical guide</a> describes feedback loops and self-monitoring in machinery applications. <a href="https://www.ia.omron.com/support/faq/answer/16/faq02301/">Omron's safety-relay FAQ</a> emphasizes that redundancy and diagnostics are required to make welding detectable and actionable. Monitoring one contactor alone is not equivalent to a redundant safety architecture.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=mY9epBkmj6Q&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>AboutElectricity, “How To Wire Pilz Safety Relay. Step by Step Guide For Beginners” (August 8, 2023). The original instructional video identifies its feedback-circuit segment around 06:08. Reference material only: do not use an online demonstration as an approved machinery-safety wiring design.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Engineering Example: Feedback Timing</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Assume a fictional safety controller requires the NC feedback signals to return within 250 milliseconds after a stop command. Suppose the two contactors report healthy release at 70 milliseconds and 95 milliseconds. Both observations occur before the hypothetical deadline. If a third test returns a feedback signal after 320 milliseconds, the observed delay exceeds the stated limit by 70 milliseconds; a controller configured for the example should regard the result as a timing fault.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The 250, 70, 95, and 320 millisecond values are teaching assumptions, not manufacturer timing specifications, a safety performance calculation, or test results. Real controller response windows must account for contactor dropout, <a href="https://bitcoinversus.tech/2026/10/30/oseec-025-contactor-coil-suppression-flyback-diodes-tvs-rc-snubbers/">coil suppression</a>, input filtering, controller scan timing, temperature, manufacturing tolerances, and the validated safety design. A delayed contactor is not automatically a welded contactor, and the diagnostic record should distinguish both conditions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Device Selection and Verification</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Rockwell Automation's <a href="https://www.rockwellautomation.com/en-us/products/hardware/motor-control/iec-safety-contactors.html">Bulletin 100S/104S safety-contactor portfolio</a> documents mirror and mechanically linked contact features on identified product families. Some models use red NC feedback contacts designed for low-current monitoring. An operator must confirm the exact ordering code and the manufacturer's contact arrangement rather than assuming every auxiliary contact is a qualified mirror contact.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Check the exact manufacturer and component number, the designated NC contact terminals, and the applicable standard marking.</li><li>Confirm the load duty, coil voltage, isolation method, and mechanical configuration against the approved safety design.</li><li>Verify that the controller uses appropriate feedback supervision, restart interlocks, and fault indication.</li><li>Record fault-response times from a controlled, approved test procedure; compare against the actual safety requirements.</li><li>Confirm the design addresses common-cause failures, supply faults, unexpected reset, and maintenance replacement.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The checklist concerns design review. It is not permission to energize exposed contacts, manipulate a live contactor, or create an intentional short or welded fault. Follow the site's <a href="https://bitcoinversus.tech/2026/10/08/electrical-safety-what-is-lockout-tagout-loto-hazardous-energy/">lockout/tagout and verification procedures</a> and the applicable machinery-safety plan before inspection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Limitations and Common Misinterpretations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>NC signal equals power removed:</strong> false. Mirror feedback indicates a defined mechanical relationship, not absence of voltage or hazardous motion.</li><li><strong>Every auxiliary NC is a mirror contact:</strong> false. Only the identified manufacturer-qualified arrangement should be credited with the feature.</li><li><strong>Mirror and mechanically linked are synonyms:</strong> false. The specified relationships and standard definitions differ.</li><li><strong>A single contactor provides fault tolerance:</strong> not established. Redundancy and monitored restart behavior depend on the whole safety subsystem.</li><li><strong>Any delay proves welding:</strong> false. Coil suppression, mechanical wear, sluggish dropout, and input problems can cause other abnormal timings.</li><li><strong>A safety relay replaces motor protection:</strong> false. <a href="https://bitcoinversus.tech/2026/10/12/oseec-019-motor-protection-engineering-overloads-short-circuits-relays-breakers-coordination/">Overcurrent and motor protection</a> remain distinct functions.</li><li><strong>Passing a continuity check validates safety performance:</strong> false. System-level safety validation requires the approved test plan.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check With Answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>What does a mirror NC contact establish?</strong> Under defined conditions, the NC auxiliary cannot report closed while its associated NO main pole remains closed.</li><li><strong>What is the central advantage of mechanically linked NO/NC contacts?</strong> Their designated opposing contacts cannot both occupy the closed state under the specified fault conditions.</li><li><strong>Can feedback open a welded main pole?</strong> No. Feedback enables fault detection; another protective action or path must handle hazardous energy.</li><li><strong>What should happen before a restart after failed feedback?</strong> The approved safety logic should refuse restart and require correction and the prescribed reset procedure.</li><li><strong>Why verify model numbers?</strong> Contact grouping, declared safety features, and accessories differ by device and configuration.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Engineering references: <a href="https://www.se.com/my/en/download/document/DOCA0422EN/">Schneider Electric, Mirror Contacts and Mechanically Linked Contacts, DOCA0422EN (October 27, 2026)</a>; <a href="https://www.se.com/uk/en/faqs/FA136111/">Schneider technical terminology FAQ</a>; <a href="https://www.rockwellautomation.com/en-us/products/hardware/motor-control/iec-safety-contactors.html">Rockwell IEC safety-contactor portfolio</a>; <a href="https://www.ia.omron.com/support/faq/answer/16/faq02301/">Omron guidance on forcibly guided safety relays</a>; <a href="https://www.pilz.com/en-US/support/lexicon/articles/072106">Pilz safety-relay principles</a>; and <a href="https://webstore.iec.ch/en/publication/74487">IEC 60947-4-1:2023, corrected March 2026</a>. Only the published standards and device-specific manufacturer documentation establish claimed compliance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A mirror contact helps a machine know when a powerful switch did not release. A mechanically linked relay provides a similar kind of dependable disagreement between identified contact sets after a fault. The signal only becomes useful when the machine's controller knows how to interpret it, stop the hazard, and prevent an unsafe restart. Safe equipment needs the complete system, not just a special relay.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> The lesson follows the published relay-contact-rating curriculum and draws on authoritative IEC, Schneider Electric, Rockwell Automation, Omron and Pilz references. Numerical feedback timing is a clearly labeled fictional calculation, not a commissioned safety-system measurement. The featured cover is an original AI-generated illustrative industrial scene, not a certified wiring example. The in-story photograph is genuine licensed manufacturer imagery. Both YouTube presentations are educational supplements; server iframe verification, actual playback, and public mobile viewport review are separate quality-assurance steps. No live electrical circuit or safety function was tested.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech donation QR for 5,000 satoshis" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, display the donation QR on another screen and use a compatible Bitcoin wallet camera. When supported, a wallet may read a QR saved as an image on the same phone. Verify the destination before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

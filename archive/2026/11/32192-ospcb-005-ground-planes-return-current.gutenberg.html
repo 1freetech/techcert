@@ -1,0 +1,205 @@
+<!-- wp:paragraph -->
+<p><strong>PCB ground planes and return-current paths</strong> determine how electrical signals complete their circuits after leaving a source. Routing a copper trace correctly is only half of the task: current must also return through a sufficiently continuous, low-impedance conductor. A copper zone can provide that return route, but gaps, slots, narrow necks and unexpected layer changes may increase loop area, coupling and electromagnetic interference even when a PCB design-rule check reports no geometric errors.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Electric current needs a complete loop, like water needing a path back to the pump. A printed circuit board carries current outward through one copper connection and back through another. Designers often spread a large sheet of copper across part of a board to give many circuits a shared return path, commonly called a ground plane.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For fast-changing signals, a return current generally stays near the outgoing trace when a continuous reference plane lies alongside it. A break in the reference copper can force a longer path. Earlier articles explain <a href="https://bitcoinversus.tech/2026/10/24/ospcb-000-what-is-a-printed-circuit-board/">printed circuit board fundamentals</a>, <a href="https://bitcoinversus.tech/2026/10/24/ospcb-001-pcb-layers-copper-stackups/">copper layers and stackups</a>, and <a href="https://bitcoinversus.tech/2026/11/06/ospcb-004-pcb-trace-routing-copper-width-clearance-drc/">trace routing and clearances</a>. The next skill is checking where current actually returns, not simply where the visible signal trace goes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=XwEGDvSZA3s&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Altium Academy, “Return Path Basics for Mixed Signal PCB Design” (March 27, 2026), presented by Zach Peterson. Official EDA-vendor education on displacement current and why reference-plane continuity matters; not a measurement of the sample board discussed below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning Objectives and Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Differentiate a copper zone outline, filled copper, net assignment and a genuine continuous return path.</li><li>Explain why fast return currents tend to cluster near the signal route while steady DC return follows the resistance distribution.</li><li>Inspect KiCad 10 zone properties, thermal reliefs, priorities and isolated copper islands.</li><li>Recognize plane slots, gaps and layer transitions that require further signal-integrity review.</li><li>Distinguish DRC connectivity checks from electrical simulation, laboratory validation and manufacturing approval.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Prerequisites: basic circuit current, resistance, a PCB schematic with a GND net, and familiarity with <a href="https://bitcoinversus.tech/2026/10/24/ospcb-002-pads-vias-through-holes/">vias and plated holes</a>. Examples are educational, not finished manufacturing or safety-critical PCB designs. A particular board stackup, copper weight, material and intended signal spectrum must be confirmed before hardware release.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Return Current Is Part of the Signal Loop</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Every complete current path includes an outbound portion and a return portion. At low frequencies or steady DC, copper resistance has a strong influence on current distribution. At higher frequencies, impedance includes the effects of inductance and capacitance, so return current tends to follow nearby reference copper that minimizes loop inductance. The return is distributed through conductive material rather than flowing as a single perfect line.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Analog Devices explains that a solid plane directly beneath a signal trace reduces loop area and magnetic-field coupling, while a split plane forces some current around the interruption. The underlying principle appears in <a href="https://www.analog.com/en/resources/technical-articles/avoid-pclayout-gotchas-in-ismrf-products.html">ADI's PCB layout and return-current discussion</a> and its <a href="https://www.analog.com/en/resources/technical-articles/successful-pcb-grounding-with-mixedsignal-chips--follow-the-path-of-least-impedance.html">mixed-signal grounding analysis</a>. The word ground does not imply zero voltage everywhere: physical copper has resistance, inductance and finite current-carrying ability.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A copper fill placed on the same layer as signal routing may be fragmented by tracks and pads. A dedicated neighboring copper plane can offer more reliable reference continuity, but merely adding green-colored fill in an editor does not prove that any high-frequency trace has a good return path.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Continuous Ground Plane Versus a Split Plane</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine a signal crossing a narrow void in the reference plane. The signal conductor can remain perfectly connected and pass spacing rules. The nearby return current, however, cannot cross the missing reference copper and may detour around the end of the slot or seek another permitted path. Depending on the current's frequency content, the longer loop can increase radiated emissions, crosstalk or waveform disturbance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":32187,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ospcb005-return-current-continuity-diagram-1200x720-1.png" alt="Original two-panel PCB diagram comparing nearby signal and return current above a continuous ground plane against a detoured return around a copper slot" class="wp-image-32187" style="max-width:100%;height:auto" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech engineering diagram based on <a href='https://www.analog.com/en/resources/technical-articles/avoid-pclayout-gotchas-in-ismrf-products.html'>Analog Devices' return-path explanation</a>. Red shows outgoing signal direction; blue shows a schematic return-current path. The arrows illustrate topology, not a field solver or measured current density.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Analog Devices recommends keeping sensitive traces above uninterrupted reference copper wherever practicable. Routing a high-speed trace across an isolation gap can be a design problem even if KiCad reports the net electrically connected. The appropriate correction may be moving the trace, relocating the split or reconsidering the stackup; adding an arbitrary bridge is not a universal repair.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why KiCad Copper Zones Need Both Net Assignment and Refill</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>KiCad 10's <a href="https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html">PCB Editor manual</a> describes <strong>zones</strong> as filled or hatched copper regions assigned to a net. Their polygon outlines establish where copper may be generated; the outline itself is not fabricated metal. A GND zone normally keeps configured clearance from objects on other nets, clips to the board boundary and may use solid or thermal-relief connections to pads.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the PCB Editor, use the <strong>Add Filled Zone</strong> tool or the documented default shortcut <code>Ctrl+Shift+Z</code>. Choose the relevant copper layer and the GND net, then define the zone outline. After placing or modifying routed objects, refill zones with the documented default <code>B</code> shortcut. KiCad's zone fill is not automatically recalculated after every edit by default, although automatic refill can be enabled in preferences. Always refill before final DRC and manufacturing exports.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A GND-labeled polygon should never be presumed electrically useful merely because its outline covers the board. The resulting filled copper can be broken into sections by keepouts, cutouts and clearances. Designers should inspect the finished filled geometry on every relevant layer and confirm the expected copper is attached to the correct nets.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Thermal Reliefs, Islands and Copper Neckdowns</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A thermal relief connects a pad to a surrounding copper zone using narrow spokes instead of covering the entire pad perimeter with solid copper. The spokes reduce heat sinking during soldering, but they also add a localized current path whose width and count must suit the actual application. High-current pads may require different, manufacturer-reviewed connections; a solder-friendly relief is not necessarily suitable for every power connection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>KiCad 10 can remove isolated filled-copper islands and includes parameters for minimum filled width, clearances, thermal relief gaps and spoke widths. Its zone manager controls priorities where zone areas compete for space. An isolated copper patch may behave like floating metal rather than an intentional ground connection; a very narrow neck may create unwanted impedance even when basic connectivity exists. <a href="https://bitcoinversus.tech/2026/10/24/ospcb-003-component-footprints-land-patterns/">Footprints and pad geometry</a> also influence whether a zone can connect as intended.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>No single clearance, spoke or stitching-via dimension is appropriate for every fabrication process or signal speed. Obtain fabrication capability limits from the board house and electrical performance requirements from the circuit design, not a generic screen capture.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reference Changes and Ground Stitching Vias</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>When a signal changes from one copper layer to another using a via, its nearby reference environment can change as well. Connecting same-net ground regions with appropriately located GND stitching vias may help provide a return-current transition when the relevant planes are physically connected. A decorative via disconnected from the necessary copper does not solve the problem. A return transition between different reference nets can involve a more complicated power-distribution and decoupling design.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The correct via count, spacing, isolation and capacitor placement depend on layer geometry, frequency spectrum and component guidance. Blindly placing many ground vias cannot guarantee impedance control or electromagnetic compatibility. Review the <a href="https://bitcoinversus.tech/2026/10/24/ospcb-002-pads-vias-through-holes/">pads and vias lesson</a> before making such changes, and confirm manufacturability with the chosen fabricator.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Authentic PCB Hardware and Physical Copper</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A finished board's traces, plated holes, solder mask and components are physical objects. The image below illustrates patterned copper on manufactured hardware, not the current distribution inside a reference plane. Internal planes may not be visible in an ordinary photograph.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":32188,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/white-printed-circuit-board-cc0-gunthercox.jpg" alt="Authentic close-up of a white printed circuit board with surface-mount components, visible tracks and holes" class="wp-image-32188" style="max-width:100%;height:auto" /><figcaption class="wp-element-caption"><em>Actual printed circuit board photographed by gunthercox, <a href='https://commons.wikimedia.org/wiki/File:White_Printed_Circuit_Board.JPG'>Wikimedia Commons</a>, <a href='https://creativecommons.org/publicdomain/zero/1.0/'>CC0 1.0</a>. Original source photograph, used as physical hardware context; no return-current measurement is implied.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=xldFgyK6shM&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph -->
+<p><em>Ampnics, “How to use cupper filled zone in KiCAD | Part 14 | KiCAD 9.0” (March 28, 2025). Independent step-by-step demonstration of zone net assignments, copper pours and thermal reliefs; precise KiCad 10 settings are governed by the current version's official manual.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Illustrative Loop-Area Calculation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a simplified rectangular loop model with 40 mm of signal length and a 0.2 mm separation between the signal trace and its adjacent reference. The nominal geometric area is <strong>40 mm × 0.2 mm = 8 mm²</strong>. If a hypothetical reference-plane interruption forced the average return path to sit 5 mm away for the same 40 mm span, the simplified area would be <strong>40 mm × 5 mm = 200 mm²</strong>, a factor of <strong>25</strong> larger.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The calculation demonstrates how separation changes a toy loop-area estimate; the full field is distributed and real PCB electromagnetic behavior is not represented by a single rectangular path. An area ratio alone cannot predict emissions, timing error or impedance. A production design may need field simulation, validated layout rules and laboratory EMC testing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">KiCad Verification Workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li>Start from a netlist with confirmed schematic ground connections and an approved <a href="https://bitcoinversus.tech/2026/10/24/ospcb-001-pcb-layers-copper-stackups/">copper stackup</a>.</li><li>Assign each intended copper zone to the correct net and verify the chosen layers, minimum widths, keepouts, thermal connections and priorities.</li><li>Refill all copper zones, then inspect the actual fill rather than relying on the polygon outlines.</li><li>Use KiCad DRC to check documented clearance, connectivity and relevant geometric errors; investigate warnings rather than suppressing them blindly.</li><li>Visually trace the nearby return path for fast signals across layer changes and near plane cutouts, noting any discontinuities DRC cannot interpret as a signal-integrity risk.</li><li>Review final fabrication outputs and validate the design against device datasheets, board-fabrication limits and the required electrical testing plan.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>KiCad's <a href="https://docs.kicad.org/10.0/en/getting_started_in_kicad/getting_started_in_kicad.html">Getting Started documentation</a> describes filling copper zones, observing thermal spokes and checking rules. Passing DRC is necessary in many workflows but not sufficient evidence of signal integrity, appropriate current capacity, controlled impedance or manufacturing readiness.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting Common Zone Problems</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Ground pad appears disconnected:</strong> inspect net assignment, pad stack, thermal gap, spoke width and zone refill state.</li><li><strong>Zone breaks into islands:</strong> check tracks, keepouts, board cutouts, minimum width, island removal settings and actual net continuity.</li><li><strong>Fast signal crosses a plane slot:</strong> reroute it over continuous reference copper where feasible; document an engineered alternate return scheme if unavoidable.</li><li><strong>Mixed-signal noise persists:</strong> review component placement and return-current partitioning before splitting ground indiscriminately. <a href="https://www.analog.com/en/resources/analog-dialogue/articles/what-are-the-basic-guidelines-for-layout-design-of-mixed-signal-pcbs.html">Analog Devices' mixed-signal layout guide</a> explains why one continuous plane is often preferable for simpler mixed-signal designs.</li><li><strong>DRC passes but EMI testing fails:</strong> examine the real loop geometry, switching transitions, cables, shielding, and reference changes. DRC does not substitute for electromagnetic analysis or test.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge Check With Explanations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><li><strong>Is a zone outline manufactured copper?</strong> No; the filled geometry is the intended copper output.</li><li><strong>Does GND net assignment guarantee a continuous high-frequency return path?</strong> No; a zone may have slots, islands or neckdowns.</li><li><strong>Why may a high-speed return current run close to the outbound trace?</strong> The nearby path commonly reduces loop inductance and overall impedance.</li><li><strong>What purpose do thermal spokes serve?</strong> They help solderability by limiting heat transfer to a large copper plane, subject to current requirements.</li><li><strong>What does the KiCad default B shortcut do?</strong> Refill all zones in the PCB Editor.</li><li><strong>Does a clean DRC prove EMC compliance?</strong> No; geometric rules and electromagnetic behavior are different checks.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary References</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Primary references: <a href="https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html">KiCad 10 PCB Editor Manual — Working with Zones</a>; <a href="https://docs.kicad.org/10.0/en/getting_started_in_kicad/getting_started_in_kicad.html">KiCad 10 Getting Started — Copper Zones and DRC</a>; <a href="https://www.analog.com/en/resources/technical-articles/avoid-pclayout-gotchas-in-ismrf-products.html">Analog Devices — Avoid PC-Layout Gotchas in ISM-RF Products</a>; <a href="https://www.analog.com/en/resources/technical-articles/successful-pcb-grounding-with-mixedsignal-chips--follow-the-path-of-least-impedance.html">Analog Devices — Successful PCB Grounding with Mixed-Signal Chips</a>; and <a href="https://www.analog.com/en/resources/analog-dialogue/articles/what-are-the-basic-guidelines-for-layout-design-of-mixed-signal-pcbs.html">Analog Devices — Basic Layout Guidelines for Mixed-Signal PCBs</a>. The video links supply additional instruction, and manufacturer-specific layout guidance takes precedence over simplified illustrations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A printed circuit board needs a way for electricity to return after travelling along a trace. A wide copper ground plane can give that returning current a nearby route, especially for quickly changing signals. If a gap blocks the route, current may take a longer path and interfere with other parts of the board. Correct PCB design checks the copper fill, the entire current loop and the physical board requirements instead of trusting the signal trace alone.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Internal Open Source TechCert PCB curriculum slot OSPCB.005 follows published OSPCB.004. Technical statements were checked against KiCad 10 and Analog Devices source documentation. The loop-area numbers are transparent hypothetical calculations, not an impedance simulation, measured current distribution or certified board geometry. The 1200 × 630 branded cover is original colored-pencil conceptual artwork; the instructional return-path diagram is original and not a field solver. The physical PCB photograph is genuine CC0 media with attribution. The YouTube sources were identified by video title, channel and public listing; actual playback and public mobile-view verification are separate checks. No EDA project was opened, no Gerber was exported and no PCB was fabricated or measured.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000-satoshi donation QR code" class="wp-image-24043" style="width:100%;height:auto" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>For mobile scanning, display the donation QR on a separate screen and scan it with a compatible Bitcoin wallet. On the same phone, some wallets support reading an image saved from the page. Verify the recipient before donating 5,000 sats: <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the original QR code above to donate 5,000 sats.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

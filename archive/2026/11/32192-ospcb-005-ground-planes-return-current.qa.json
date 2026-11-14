@@ -1,0 +1,53 @@
+{
+  "audited_at": "2026-11-13",
+  "course_id": "OSPCB.005",
+  "title": "PCB Ground Planes and Return-Current Paths — Copper Zones, Slots, and KiCad Checks",
+  "wordpress_post_id": 32192,
+  "wordpress_url": "https://bitcoinversus.tech/2026/11/13/pcb-ground-planes-return-current-paths-copper-zones-kicad/",
+  "status": "publish",
+  "categories": [
+    "OSPCB — Open-Source Printed Circuit Board",
+    "semiconductors",
+    "Tech Docs"
+  ],
+  "word_count": 2215,
+  "internal_link_occurrences": 7,
+  "in_story_media_count": 4,
+  "server_rendered_youtube_iframe_ids": [
+    "XwEGDvSZA3s",
+    "xldFgyK6shM"
+  ],
+  "media": {
+    "featured_id": 32186,
+    "featured_dimensions": [
+      1200,
+      630
+    ],
+    "conceptual_return_path_diagram_id": 32187,
+    "diagram_dimensions": [
+      1200,
+      720
+    ],
+    "real_board_photograph_id": 32188,
+    "real_board_license": "CC0 1.0; gunthercox / Wikimedia Commons",
+    "original_donation_qr_id": 24043
+  },
+  "footer_verified": true,
+  "editor_note_present": true,
+  "seo_description_saved": true,
+  "no_boxed_code": true,
+  "no_cover_duplication_in_body": true,
+  "primary_references": [
+    "https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html",
+    "https://docs.kicad.org/10.0/en/getting_started_in_kicad/getting_started_in_kicad.html",
+    "https://www.analog.com/en/resources/technical-articles/avoid-pclayout-gotchas-in-ismrf-products.html",
+    "https://www.analog.com/en/resources/analog-dialogue/articles/what-are-the-basic-guidelines-for-layout-design-of-mixed-signal-pcbs.html"
+  ],
+  "limitations": [
+    "Actual public YouTube video playback not tested",
+    "Live mobile breakpoint screenshot and pixel-level layout not tested",
+    "No KiCad project/DRC or signal integrity simulation executed",
+    "No PCB fabricated or measured",
+    "WordPress editor/view API rendering audited, not a full third-party web browser session"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "post_id": 32965,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/16/osrec-015-occupancy-grid-mapping-log-odds-lidar-navigation-costmaps/",
+  "title": "OSREC.015 — Occupancy Grid Mapping, LiDAR Rays, and Navigation Costmaps",
+  "cover_id": 32963,
+  "cover_dimensions": [
+    1200,
+    630
+  ],
+  "source_word_count": 1200,
+  "internal_links": 4,
+  "in_story_media": 3,
+  "media_type": "verified external YouTube URLs in native Gutenberg embed blocks",
+  "gutenberg_video_blocks": 3,
+  "wordpress_rendered_youtube_iframes": 3,
+  "donation_qr_id": 24043,
+  "editor_note": true,
+  "volunteer_footer": true,
+  "verification": "WordPress edit and rendered view returned published status and three YouTube iframe tags",
+  "unverified": [
+    "live public-page rendering from external network (fetch failed)",
+    "actual video playback",
+    "mobile viewport screenshots",
+    "physical robot or software runtime"
+  ],
+  "sources": [
+    "https://docs.mrpt.org/reference/stable/class_mrpt_maps_COccupancyGridMap2D.html",
+    "https://docs.nav2.org/jazzy/configuration_and_development/configuration_guide/core_servers/costmap_2d/costmap_plugins/obstacle/",
+    "https://docs.ros.org/en/ros2_packages/humble/api/nav_msgs/index.html"
+  ],
+  "created_utc": "2026-11-16"
+}

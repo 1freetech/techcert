@@ -288,13 +288,20 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 17,
-        "title": "OSDCEC.017 — UPS Ride-Through, Generator Load Steps, and Integrated Power Testing",
-        "wordpress_post_id": 32865,
-        "live_url": "https://bitcoinversus.tech/2026/11/15/osdcec-017-ups-ride-through-generator-load-steps-integrated-power-testing/",
-        "verification_status": "published on WordPress, independently verified November 16 2026; archives not reaudited during activation"
+        "lesson_number": 18,
+        "title": "OSDCEC.018 — 800 VDC Power Architecture for AI Data Centers: Conversion, Protection, and Capacity Math",
+        "wordpress_post_id": 33008,
+        "live_url": "https://bitcoinversus.tech/2026/11/16/osdcec-018-800-vdc-ai-data-center-power-architecture-conversion-protection-capacity-math/",
+        "archive_path": "archive/2026/11/33008-osdcec-018-800-vdc-power-architecture.gutenberg.html",
+        "qa_archive_path": "archive/2026/11/33008-osdcec-018-800-vdc-power-architecture.qa.json",
+        "source_match_verified_repositories": [
+          "1freetech/techcert",
+          "1freetech/opencert.tech",
+          "1freetech/Bitcoinversus.tech"
+        ],
+        "verification_status": "published; Gutenberg saved/source read back and identical across three repos; three server-rendered YouTube embeds; independent playback and mobile screenshots unverified"
       },
-      "next_lesson_number": 18
+      "next_lesson_number": 19
     },
     {
       "subject": "fiber_optics_technician",

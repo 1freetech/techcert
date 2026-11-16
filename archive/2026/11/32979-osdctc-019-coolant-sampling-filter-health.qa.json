@@ -1,0 +1,64 @@
+{
+  "audited_at": "2026-11-16",
+  "lesson_id": "OSDCTC.019",
+  "title": "OSDCTC.019 — Coolant Sampling and Filter Health: Conductivity, Contamination, and Pressure-Drop Checks",
+  "wordpress_post_id": 32979,
+  "wordpress_url": "https://bitcoinversus.tech/2026/11/16/osdctc-019-coolant-sampling-filter-health-conductivity-contamination-pressure-drop/",
+  "status": "publish",
+  "word_count": 1675,
+  "internal_link_occurrences": 5,
+  "media_in_body_count": 4,
+  "video_ids": [
+    "8uKjYnq3mvU",
+    "ePZY1I5YoLc",
+    "jmQJ5EzfKAc"
+  ],
+  "server_rendered_youtube_iframe_ids": [
+    "8uKjYnq3mvU",
+    "ePZY1I5YoLc",
+    "jmQJ5EzfKAc"
+  ],
+  "media": {
+    "featured_id": 32977,
+    "featured_dimensions": [
+      1200,
+      630
+    ],
+    "featured_style": "original oil painting; AI illustrated; graffiti neon-green watermark on black; 10pt approximately; bottom-left",
+    "real_photo_id": 32978,
+    "real_photo_credit": "Accessen 2025 exhibition photograph",
+    "donation_qr_id": 24043
+  },
+  "editor_note_present": true,
+  "seo_description_saved": true,
+  "qa_checks": {
+    "wp_published": true,
+    "featured_media_set": true,
+    "three_unique_official_videos": true,
+    "server_iframe_ids_match": true,
+    "real_photo_present": true,
+    "qr_original_present": true,
+    "donation_wallet_present": true,
+    "five_internal_links": true,
+    "no_decorative_boxes": true,
+    "has_elementary_sections": true,
+    "editor_note_present": true,
+    "has_content_photo_attribution": true,
+    "no_prohibited_words": true
+  },
+  "primary_sources": [
+    "https://www.opencompute.org/documents/ocp-acs-liquid-cooling-cold-plate-requirements-pdf",
+    "https://www.opencompute.org/documents/ocp-document-submission-guidelines-for-pre-commission-preparation-of-technology-cooling-system-tcs-row-manifolds-revq-pdf-1",
+    "https://support.hpe.com/hpesc/public/docDisplay?docId=a00127186en_us&docLocale=en_US&page=GUID-D830F461-A292-4CF0-AF54-2CF498277D55.html",
+    "https://www.coolitsystems.com/products-services/global-professional-services/",
+    "https://www.nvent.com/en-se/data-solutions/cooling"
+  ],
+  "limitations": [
+    "YouTube iframe embed source verified in WordPress server-rendered HTML; actual end-user playback not tested",
+    "No live mobile viewport screenshot or browser interaction test",
+    "No physical coolant lab testing, filter change, leak isolation or measured ΔP test",
+    "Credit and vendor availability as verified by the retrieved sources; no external license permission beyond attribution asserted"
+  ],
+  "archive_path": "archive/2026/11/32979-osdctc-019-coolant-sampling-filter-health.gutenberg.html",
+  "qa_archive_path": "archive/2026/11/32979-osdctc-019-coolant-sampling-filter-health.qa.json"
+}

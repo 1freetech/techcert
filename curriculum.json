@@ -265,19 +265,20 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 16,
-        "title": "OSDCTC.016: Liquid-Cooling Monitoring — CDU Telemetry, Leak Detection and Supply/Return Temperatures",
-        "wordpress_post_id": 27601,
-        "live_url": "https://bitcoinversus.tech/2026/10/31/osdctc-016-liquid-cooling-monitoring-cdu-telemetry-leak-detection/",
-        "archive_path": "archive/2026/10/osdctc-016-liquid-cooling-monitoring-cdu-telemetry-leak-detection.md",
+        "lesson_number": 19,
+        "title": "OSDCTC.019 — Coolant Sampling and Filter Health: Conductivity, Contamination, and Pressure-Drop Checks",
+        "wordpress_post_id": 32979,
+        "live_url": "https://bitcoinversus.tech/2026/11/16/osdctc-019-coolant-sampling-filter-health-conductivity-contamination-pressure-drop/",
+        "archive_path": "archive/2026/11/32979-osdctc-019-coolant-sampling-filter-health.gutenberg.html",
+        "qa_archive_path": "archive/2026/11/32979-osdctc-019-coolant-sampling-filter-health.qa.json",
         "source_match_verified_repositories": [
-          "1freetech/Bitcoinversus.tech",
           "1freetech/techcert",
-          "1freetech/opencert.tech"
+          "1freetech/opencert.tech",
+          "1freetech/Bitcoinversus.tech"
         ],
-        "verification_status": "published; original featured cover 1200x630 verified; two Gutenberg YouTube embeds and two iframe renders confirmed; exact source archived across three repositories; actual playback and desktop/mobile visual QA not verified"
+        "verification_status": "published; WordPress server rendered 3 official YouTube iframes; exact final source and QA read back 3 repositories; independent video playback/mobile viewport unverified"
       },
-      "next_lesson_number": 17
+      "next_lesson_number": 20
     },
     {
       "subject": "data_center_engineer",
@@ -287,19 +288,13 @@
       "starting_lesson_number": 1,
       "status": "active",
       "latest_lesson": {
-        "lesson_number": 15,
-        "title": "OSDCEC.015: Data Center Protective Device Coordination — Fault Current, Trip Curves and Selectivity",
-        "wordpress_post_id": 27635,
-        "live_url": "https://bitcoinversus.tech/2026/10/31/osdcec-015-data-center-protective-device-coordination-trip-curves-selectivity/",
-        "archive_path": "archive/2026/10/osdcec-015-data-center-protective-device-coordination-trip-curves-selectivity.md",
-        "source_match_verified_repositories": [
-          "1freetech/Bitcoinversus.tech",
-          "1freetech/techcert",
-          "1freetech/opencert.tech"
-        ],
-        "verification_status": "published and source read back; new 1200x630 featured cover with rotated older Asian male engineer; 2 native YouTube blocks and 2 rendered iframes; exact three-repository archives; browser playback and visual desktop/mobile QA not independently confirmed"
+        "lesson_number": 17,
+        "title": "OSDCEC.017 — UPS Ride-Through, Generator Load Steps, and Integrated Power Testing",
+        "wordpress_post_id": 32865,
+        "live_url": "https://bitcoinversus.tech/2026/11/15/osdcec-017-ups-ride-through-generator-load-steps-integrated-power-testing/",
+        "verification_status": "published on WordPress, independently verified November 16 2026; archives not reaudited during activation"
       },
-      "next_lesson_number": 16
+      "next_lesson_number": 18
     },
     {
       "subject": "fiber_optics_technician",

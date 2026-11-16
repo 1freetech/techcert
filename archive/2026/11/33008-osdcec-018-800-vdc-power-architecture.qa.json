@@ -1,0 +1,67 @@
+{
+  "audited_at": "2026-11-16",
+  "lesson_id": "OSDCEC.018",
+  "title": "OSDCEC.018 — 800 VDC Power Architecture for AI Data Centers: Conversion, Protection, and Capacity Math",
+  "wordpress_post_id": 33008,
+  "wordpress_url": "https://bitcoinversus.tech/2026/11/16/osdcec-018-800-vdc-ai-data-center-power-architecture-conversion-protection-capacity-math/",
+  "status": "publish",
+  "word_count": 1974,
+  "internal_link_occurrences": 7,
+  "in_story_media_count": 4,
+  "media": {
+    "featured_id": 33001,
+    "featured_dimensions": [
+      1200,
+      630
+    ],
+    "featured_style": "photorealistic original AI-generated equipment illustration; neon-green Bitcoinversus.tech tag on black bottom-left",
+    "authentic_photo_id": 33003,
+    "photo_credit": "Delta Electronics official GTC 2026 demonstration photograph",
+    "youtube_video_ids": [
+      "7ePyya2q8Zo",
+      "y-hUscuGB0U",
+      "DUgNmh9-CSE"
+    ],
+    "server_rendered_youtube_ids": [
+      "7ePyya2q8Zo",
+      "y-hUscuGB0U",
+      "DUgNmh9-CSE"
+    ],
+    "original_donation_qr_id": 24043
+  },
+  "qa_checks": {
+    "wp_published": true,
+    "cover_exact_1200_630": true,
+    "cover_assigned": true,
+    "three_original_source_video_embeds": true,
+    "three_rendered_youtube_iframes": true,
+    "credited_authentic_photo": true,
+    "seven_contextual_internal_links": true,
+    "elementary_overview_and_conclusion": true,
+    "editor_note_italicized": true,
+    "original_donation_qr": true,
+    "mobile_wallet_instructions": true,
+    "volunteer_disclaimer": true,
+    "seo_description": true,
+    "no_boxed_code": true,
+    "no_generated_diagrams": true,
+    "no_prohibited_words": true
+  },
+  "seo_description_saved": "OSDCEC.018 teaches 800 VDC AI data-center power architecture, conversion losses, busway sizing, DC protection, redundancy, and capacity math.",
+  "primary_references": [
+    "https://blogs.nvidia.com/blog/800-vdc-power-architecture-ai-factory/",
+    "https://www.nvidia.com/en-us/data-center/technologies/800-vdc-architecture/",
+    "https://www.opencompute.org/projects/data-center-facility/power-distribution/",
+    "https://blog.se.com/datacenter/2026/08/20/why-arc-flash-safety-analysis-is-critical-to-the-industrys-shift-to-800-vdc-in-ai-data-centers/",
+    "https://www.delta-americas.com/en-us/news/walk-through-deltas-nvidia-gtc-2026-grid-to-chip-showcase"
+  ],
+  "limitations": [
+    "WordPress server returned 3 YouTube iframes; independent browser playback not performed",
+    "Mobile screenshot and live browser layout unverified",
+    "No electrical prototype, fault test, commissioning or thermal measurement performed",
+    "Third-party product certification not independently checked; vendor roadmap and performance claims labeled accordingly",
+    "Image rights remain with credited Delta source; attribution is not a license determination"
+  ],
+  "archive_path": "archive/2026/11/33008-osdcec-018-800-vdc-power-architecture.gutenberg.html",
+  "qa_archive_path": "archive/2026/11/33008-osdcec-018-800-vdc-power-architecture.qa.json"
+}

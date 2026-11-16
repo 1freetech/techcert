@@ -48,53 +48,55 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "pcb_engineering",
-    "lesson_number": 5,
-    "track_id": "OSPCB.005",
-    "title": "PCB Ground Planes and Return-Current Paths — Copper Zones, Slots, and KiCad Checks",
-    "public_title": "PCB Ground Planes and Return-Current Paths — Copper Zones, Slots, and KiCad Checks",
-    "wordpress_post_id": 32192,
-    "live_url": "https://bitcoinversus.tech/2026/11/13/pcb-ground-planes-return-current-paths-copper-zones-kicad/",
-    "archive_path": "archive/2026/11/32192-ospcb-005-ground-planes-return-current.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/32192-ospcb-005-ground-planes-return-current.qa.json",
+    "subject": "data_center_technician",
+    "lesson_number": 19,
+    "track_id": "OSDCTC.019",
+    "title": "OSDCTC.019 — Coolant Sampling and Filter Health: Conductivity, Contamination, and Pressure-Drop Checks",
+    "public_title": "OSDCTC.019 — Coolant Sampling and Filter Health: Conductivity, Contamination, and Pressure-Drop Checks",
+    "wordpress_post_id": 32979,
+    "live_url": "https://bitcoinversus.tech/2026/11/16/osdctc-019-coolant-sampling-filter-health-conductivity-contamination-pressure-drop/",
+    "archive_path": "archive/2026/11/32979-osdctc-019-coolant-sampling-filter-health.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/32979-osdctc-019-coolant-sampling-filter-health.qa.json",
     "verified_repositories": [
-      "1freetech/opencert.tech",
       "1freetech/techcert",
+      "1freetech/opencert.tech",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 32186,
-    "conceptual_diagram_id": 32187,
-    "authentic_photo_media_id": 32188,
+    "featured_media_id": 32977,
+    "authentic_photo_media_id": 32978,
     "body_video_ids": [
-      "XwEGDvSZA3s",
-      "xldFgyK6shM"
+      "8uKjYnq3mvU",
+      "ePZY1I5YoLc",
+      "jmQJ5EzfKAc"
     ],
-    "verification_status": "WordPress published and server returned two YouTube iframes; exact Gutenberg source and QA report archived in three repos. Actual playback and mobile screenshot unverified.",
-    "qa_status": "2,215 words; 7 internal links; 4 media (2 video players, original return-path diagram, CC0 real PCB photo), unique 1200×630 branded colored-pencil cover, original 5000-sat QR, Editor's Note, SEO, no boxed code. No KiCad project or EMC validation."
+    "verification_status": "WordPress publish and 3 server-rendered YouTube iframes verified; identical Gutenberg source and QA archives read back in all three repos; browser playback/mobile visual QA unverified",
+    "qa_status": "1,675 words; 5 internal links; 4 in-story media (3 official video iframes, 1 credited authentic CDU photograph); unique oil-painting 1200x630 cover; original 5000-sat QR; editor note and SEO; no decorative boxes or custom diagrams."
   },
   "next": {
-    "subject": "data_center_technician",
-    "lesson_number": 19,
-    "title_format": "OSDCTC.019 — {topic}",
-    "public_title_format": "OSDCTC.019 — {topic}",
-    "resolution_note": "OSRTC.018 (#32895) and OSREC.015 (#32965) are published. OSDCTC.018 (#32852) is published; targeted WordPress check returned no OSDCTC.019 published/draft/pending as of 2026-11-16. Recheck before creating."
+    "subject": "data_center_engineer",
+    "lesson_number": 18,
+    "title_format": "OSDCEC.018 — {topic}",
+    "public_title_format": "OSDCEC.018 — {topic}",
+    "resolution_note": "WordPress OSDCEC.017 UPS Ride-Through (#32865) is published; targeted WordPress OSDCEC.018 search returned no published/draft/pending/future/private post as of 2026-11-16."
   },
-  "next_after_current": "data_center_engineer",
+  "next_after_current": "fiber_optics_technician",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
-      "next_lesson_number": 19,
-      "last_published_lesson_number": 18,
-      "last_wordpress_post_id": 32852,
-      "last_published_title": "OSDCTC.018 — Quick-Disconnect Inspection for Liquid-Cooled Racks",
-      "verification_status": "live WordPress published post verified Nov 16 2026"
+      "next_lesson_number": 20,
+      "last_published_lesson_number": 19,
+      "last_wordpress_post_id": 32979,
+      "last_published_title": "OSDCTC.019 — Coolant Sampling and Filter Health: Conductivity, Contamination, and Pressure-Drop Checks",
+      "verification_status": "published_archived_identical_3_repos_server_render_checked"
     },
     "data_center_engineer": {
       "acronym": "OSDCEC",
-      "next_lesson_number": 17,
-      "last_published_lesson_number": 16,
-      "last_wordpress_post_id": 30600
+      "next_lesson_number": 18,
+      "last_published_lesson_number": 17,
+      "last_wordpress_post_id": 32865,
+      "last_published_title": "OSDCEC.017 — UPS Ride-Through, Generator Load Steps, and Integrated Power Testing",
+      "verification_status": "published WordPress post #32865 independently verified 2026-11-16; archive not reaudited during OSDCTC.019 activation"
     },
     "fiber_optics_technician": {
       "acronym": "OSFOTC",

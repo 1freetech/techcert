@@ -1,0 +1,174 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>OSDCTC.019</strong> teaches data-center technicians how coolant quality and filtration protect liquid-cooled servers. A cold plate can lose cooling performance when particles obstruct narrow channels, while incorrect fluid chemistry can accelerate corrosion or damage seals. Reliable maintenance starts with the approved coolant specification, a documented baseline and trained personnel—not the appearance of a clear sample. The preceding <a href="https://bitcoinversus.tech/2026/11/15/osdctc-018-quick-disconnect-inspection-liquid-cooled-racks/">OSDCTC.018 quick-disconnect inspection</a> addresses connector integrity; the present lesson covers fluid condition, laboratory records and filter-health evidence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Learning objectives: distinguish the facility-water system (FWS) from the technology cooling system (TCS); interpret pH, conductivity, particles and differential pressure; document a safe sampling request; identify conditions requiring engineering escalation; and explain why acceptance limits are <strong>installation-specific</strong>. Authorized fluid sampling, valve operation and filter replacement remain separate procedures requiring the manufacturer's instructions and the site's permits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=8uKjYnq3mvU","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=8uKjYnq3mvU
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>Open Compute Project, October 21, 2024: Filtration Challenges and Solutions in Liquid Cooling, presented by an Industrial Filtration technical director. The lecture examines contamination threats to cold-plate channels and filtration media. Credit: Open Compute Project / YouTube.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Two loops with different fluid requirements</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A cooling distribution unit (CDU) commonly separates the <strong>FWS</strong>, receiving water from building infrastructure, from the <strong>TCS</strong>, circulating coolant through manifolds and IT equipment. A heat exchanger transfers energy between circuits without normally mixing their fluids. The <a href="https://www.opencompute.org/documents/ocp-acs-liquid-cooling-cold-plate-requirements-pdf">Open Compute Project cold-plate requirements</a> describe the TCS path from CDU to manifold, server cold plate and back. A sample from one loop cannot establish compliance in the other.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Coolants may contain treated water, corrosion inhibitors, biocides or propylene glycol. <a href="https://www.coolitsystems.com/products-services/global-professional-services/">CoolIT Systems' maintenance guidance</a> gives one product-family example using 25% propylene glycol with additives; that concentration is <strong>not</strong> a universal recommendation. Fluid selection is tied to wetted-material compatibility, operating temperature, pump performance, service requirements and vendor qualification. Mixing unapproved formulations can invalidate established compatibility.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reading a coolant sample without overclaiming</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Identification comes first.</strong> Record the site, CDU asset ID, supply or return loop, manufacturer, fluid brand and formulation, fill or top-up history, approved sample port, collection time and technician. Separate a commissioning flush sample from a normal operating-loop sample. A transparent container and a visually clear fluid do not rule out dissolved ions, microbial activity, inhibitor loss or particles below naked-eye resolution.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>pH</strong> describes acidity or alkalinity. A downward trend can signal coolant aging or buffering changes, but pH alone cannot identify a contaminant. <strong>Specific conductivity</strong>, commonly reported in microsiemens per centimeter (µS/cm) at a reference temperature, indicates how readily dissolved ions carry electric current. Conductivity does not directly measure all particulate contamination and does not prove dielectric safety. <strong>Turbidity</strong> and laboratory particle counts characterize suspended material; tests for metals, inhibitors or microbiological growth answer different questions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Numerical guidance must retain its original scope. For example, <a href="https://support.hpe.com/hpesc/public/docDisplay?docId=a00127186en_us&amp;docLocale=en_US&amp;page=GUID-D830F461-A292-4CF0-AF54-2CF498277D55.html">HPE's MCS 300 facility-water specification</a> lists pH 7–9 for that particular equipment and loop. Separately, an <a href="https://www.opencompute.org/documents/ocp-document-submission-guidelines-for-pre-commission-preparation-of-technology-cooling-system-tcs-row-manifolds-revq-pdf-1">OCP pre-commissioning flushing guide</a> discusses an outlet conductivity target referenced to the procedure water. Neither example supplies a universal running-CDU alarm setting. Compare a measured result only with the same loop's approved fluid specification and documented test method.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Measurements should be assessed as <strong>trends</strong>, with probe calibration, sample temperature and instrument limitations attached. A conductivity increase following a top-up may have multiple causes; an apparent pH change might also reflect a measurement or handling error. An unexpected reading calls for confirmation and escalation, not improvised chemical dosing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Filters, strainers and differential pressure</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Fine cold-plate passages are sensitive to circulating debris. The OCP guidance explains that filter selection depends on particle size, cold-plate geometry, heat-exchanger passages and flow restrictions. Filters protect components but also impose hydraulic resistance. The approved equipment manual establishes element grade, bypass configuration, service intervals and replacement criteria; choosing a finer filter without engineering review may reduce flow.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Filter differential pressure, written ΔP, means the measured pressure <strong>upstream minus downstream</strong> of a filter while fluid is moving. For an educational calculation, suppose a filter inlet gauge reads 140 kPa and its outlet reads 110 kPa at a recorded steady flow. Then ΔP = 140 − 110 = <strong>30 kPa = 0.30 bar</strong>. The calculation alone does not indicate a blocked filter: compare with the same unit's clean-filter baseline at similar flow, temperature, viscosity and sensor conditions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A sustained differential-pressure rise under comparable conditions can indicate loading or blockage. A reading near zero does <em>not</em> automatically mean a clean filter: low flow, a bypass path, failed element, faulty sensor or incorrect measurement points can also explain it. OCP pre-commissioning guidance explicitly warns that a zero reading may indicate a breached filter in its defined flushing context. Treat abnormal readings as diagnostic evidence requiring review, not permission to open a pressurized housing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=ePZY1I5YoLc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=ePZY1I5YoLc
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>nVent SCHROFF, April 21, 2021: nVent RackChiller CDU800 Overview. Original equipment walkthrough shows an integrated CDU and filter-service arrangement. Model-specific demonstrations do not authorize a procedure on another vendor's equipment. Credit: nVent SCHROFF / YouTube.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Identifying the hardware on a real CDU</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The manufacturer photograph below shows a CDU cabinet with metal pipes and labeled elements. Real systems can locate strainers, sensors, sampling points and service valves differently. Use the installed unit's piping-and-instrumentation diagram, component labels and revision-controlled manual; an unlabeled fitting should never be treated as a sample port.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":32978,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/osdctc-019-accessen-cdu-authentic-event-photo.jpg" alt="Authentic CDU demonstration photograph showing stainless-steel piping and labeled filtration components in an open liquid cooling cabinet" class="wp-image-32978" /><figcaption class="wp-element-caption"><em>Authentic coolant distribution unit photograph at Data Centre World Asia 2025. Credit: <a href="https://www.accessen.com/index/detail/205">Accessen</a>, manufacturer exhibition report. The picture shows equipment layout, not a completed maintenance inspection.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.nvent.com/en-se/data-solutions/cooling">nVent cooling product documentation</a> distinguishes CDU architectures and hardware variants. The <a href="https://www.opencompute.org/documents/ocp-acs-liquid-cooling-cold-plate-requirements-pdf">OCP filtration requirements</a> likewise treat placement, pressure drop and serviceability as design decisions. Technicians verify the exact model and circuit before opening a maintenance ticket or interpreting an alarm.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical example: a filter alarm and a questionable sample</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a training scenario: a CDU dashboard reports increased filter ΔP at roughly unchanged flow, while a scheduled laboratory report shows conductivity rising from an established baseline. Assume both measurements are correctly labeled for the TCS, with no leak alarm or loss of cooling. No universal numeric rejection threshold is supplied, because the example intentionally lacks the manufacturer's acceptance range.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>First:</strong> review the maintenance ticket, sensor timestamps, calibration status, flow rate, coolant temperatures, pump state and any recent top-ups. <strong>Second:</strong> compare trends with historical readings taken at equivalent conditions; verify the filter and upstream/downstream taps against the as-built drawing. <strong>Third:</strong> flag the sample's exact location, chain of custody and laboratory method. A sample collected after a flush, chemical treatment or accidental cross-contamination may not represent normal operation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Next:</strong> send the evidence to the authorized mechanical or facilities engineer with the approved limits and applicable safety procedures. Record the engineer's disposition and any work order. Do not defeat alarms, open coolant connections, bypass filtration, add chemicals or replace a filter on the basis of one dashboard reading. A pressured or energized system can create chemical, slip, electrical and availability hazards.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The preceding <a href="https://bitcoinversus.tech/2026/10/31/osdctc-016-liquid-cooling-monitoring-cdu-telemetry-leak-detection/">OSDCTC.016 telemetry lesson</a> explains baseline monitoring; <a href="https://bitcoinversus.tech/2026/11/07/osdctc-017-condensation-dew-point-monitoring-liquid-cooled-racks/">OSDCTC.017</a> covers dew-point safeguards. Earlier <a href="https://bitcoinversus.tech/2026/10/27/osdctc-014-rack-inlet-temperature-mapping-sensor-hot-spot-triage/">OSDCTC.014</a> explains rack-temperature mapping, while <a href="https://bitcoinversus.tech/2026/10/29/rack-pdu-load-balancing-ab-feed-verification-metering-capacity-limits/">OSDCTC.015</a> covers A/B electrical-feed verification near serviced hardware. Taken together, those lessons help specialists distinguish a fluid-quality concern from a thermal, electrical or instrumentation fault.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jmQJ5EzfKAc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=jmQJ5EzfKAc
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>nVent HOFFMAN, January 26, 2022: RackChiller CDU800. Manufacturer introduction explains FWS/TCS separation, integrated pumps and heat-exchanger operation. Credit: nVent HOFFMAN / YouTube.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Maintenance intervals, limitations and recordkeeping</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Routine sampling intervals are determined by the plant maintenance plan, warranty, coolant formulation and vendor agreement. CoolIT describes preventative visits typically every six months, including coolant sampling and analysis; the interval is an example of its service program rather than a standard for all facilities. Water chemistry can change through evaporation, top-ups, contamination, material interaction or inhibitor aging, so the record should retain trends and corrective-action outcomes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A useful maintenance record contains the approved fluid and test limits, asset and circuit identity, sampling authorization, lab certificate, results with units and temperature reference, date, sensor calibration, matched flow and pressure readings, alarms, recent maintenance, corrective action, reviewer and follow-up date. Follow the facility's safety plan for pressure isolation, personal protective equipment, spill response, fluid disposal and electrical proximity. No physical sampling is requested by the educational example.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Review questions and answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Question 1:</strong> Can a facility-water pH value be used as the acceptance limit for the server-side TCS? <strong>Answer:</strong> No. Each loop and coolant formulation requires its own approved specification.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Question 2:</strong> A filter's inlet reads 175 kPa and its outlet reads 145 kPa. What is ΔP? <strong>Answer:</strong> 30 kPa, or 0.30 bar, at the measured operating state; adequacy depends on the equipment's approved baseline and limits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Question 3:</strong> Does clear-looking coolant prove a clean microchannel loop? <strong>Answer:</strong> No. Dissolved contaminants, chemistry drift and fine particles may escape visual inspection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Coolant care is a disciplined comparison of <strong>fluid identity, laboratory results, filtration trends and approved equipment limits</strong>. A technician contributes by collecting trustworthy records, recognizing inconsistent conditions and escalating safely. Final acceptance depends on documented manufacturer criteria and qualified personnel—not generic pH numbers or visual appearance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Technical explanations were cross-checked against OCP requirements, HPE's named-equipment water specification, CoolIT's maintenance guidance and official nVent training videos. The unique 1200 × 630 oil-painting cover is AI-generated editorial illustration, not a photograph. The in-body CDU photograph is authentic and credited to Accessen. No physical coolant test, filter swap, independent live YouTube playback audit or mobile screenshot inspection was performed.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR code for an optional 5,000-satoshi donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-satoshi donation QR; independently verify the recipient and amount.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. An optional <strong>5,000-satoshi</strong> donation supports research. Scan the original QR using a compatible Bitcoin wallet from a second screen; on the same phone, use a wallet that can import a saved QR image. Independently confirm recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount. Bitcoin transfers are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on BitcoinVersus.Tech is Verifiably True. Educational material does not authorize work on pressurized coolant lines or energized racks and is not certified engineering, financial or investment advice.</em></p>
+<!-- /wp:paragraph -->

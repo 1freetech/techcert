@@ -48,41 +48,41 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "history_of_engineering",
-    "lesson_number": 6,
-    "track_id": "OSHE.006",
-    "title": "OSHE.006: Sneferu's Red Pyramid at Dahshur, Geometry, Masonry, and the First Completed True Pyramid",
-    "public_title": "OSHE.006: Sneferu's Red Pyramid at Dahshur, Geometry, Masonry, and the First Completed True Pyramid",
-    "wordpress_post_id": 33148,
-    "live_url": "https://bitcoinversus.tech/2026/11/18/oshe-006-sneferu-red-pyramid-dahshur-geometry-masonry-true-pyramid/",
-    "archive_path": "archive/2026/11/33148-oshe-006-red-pyramid-dahshur.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/33148-oshe-006-red-pyramid-dahshur.qa.json",
+    "subject": "history_materials_science",
+    "lesson_number": 4,
+    "track_id": "OSHMS.004",
+    "title": "OSHMS.004: Tubal-Cain, Bronze and Iron — Scripture, Archaeology, and Early Alloy Engineering",
+    "public_title": "OSHMS.004: Tubal-Cain, Bronze and Iron — Scripture, Archaeology, and Early Alloy Engineering",
+    "wordpress_post_id": 33260,
+    "live_url": "https://bitcoinversus.tech/2026/11/18/oshms-004-tubal-cain-bronze-iron-scripture-archaeology-alloy-engineering/",
+    "archive_path": "archive/2026/11/33260-oshms-004-tubal-cain-bronze-iron.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/33260-oshms-004-tubal-cain-bronze-iron.qa.json",
     "verified_repositories": [
       "1freetech/techcert",
       "1freetech/opencert.tech",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 33144,
-    "authentic_photograph_media_ids": [
-      33145,
-      33146
+    "featured_media_id": 33246,
+    "authentic_artifact_media_ids": [
+      33247,
+      33248
     ],
     "body_video_ids": [
-      "mjiJrZD6_qY",
-      "Jwac6vk5WA8"
+      "Ohij1e2oZio",
+      "28ZUM8OrIko"
     ],
-    "verification_status": "Published WordPress HTTP 200; saved 2 native YouTube embeds rendered as 2 iframes; 2 Creative-Commons credited original Dahshur photographs uploaded and rendered; original 1200x630 cover, canonical/SEO/OG and alt verified. Exact Gutenberg and QA archived and read back identically from three repos. Real playback, mobile screenshots and exact brand-reference pixel match unverified.",
-    "qa_status": "1762 original manuscript words, five distinct contextual internal links, four in-story media, illustrative pyramid geometry, original 5000-satoshi QR, editorial note, no diagrams or boxed text/code."
+    "verification_status": "WordPress public HTTP 200; 1200x630 original oil painting cover, SEO/canonical/OG/alt confirmed; two institutional YouTube embed links repaired and retested to two server-rendered iframe players; authentic credited Met/PAS artifact photos in Gutenberg. Final saved source and QA archived identically in three repos. Playback on real device, exact watermark pixel reference and mobile visual inspection unverified.",
+    "qa_status": "666 manuscript words, 4 contextual internal links, two official educational videos, two authentic historical artifact images, original donation QR and editorial note. Source distinction between Genesis and excavated evidence; hypothetical 2 kg 90/10 Cu-Sn mass calculation."
   },
   "next": {
-    "subject": "history_materials_science",
-    "lesson_number": 4,
-    "title_format": "OSHMS.{number} — {topic}",
-    "public_title_format": "OSHMS.{number} — {topic}",
-    "resolution_note": "Latest known published OSHMS.003 (#30935) on copper to smelting; verify published/drafts/archive and choose historically subsequent nonduplicate topic."
+    "subject": "information_technology",
+    "lesson_number": 14,
+    "title_format": "OSITC.{number} — {topic}",
+    "public_title_format": "OSITC.{number} — {topic}",
+    "resolution_note": "Verify latest OSITC numbered posts and drafts in WordPress, as well as all three GitHub archives, before choosing the next Information Technology topic."
   },
-  "next_after_current": "information_technology",
+  "next_after_current": "c",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -340,9 +340,11 @@
     },
     "history_materials_science": {
       "acronym": "OSHMS",
-      "next_lesson_number": 4,
-      "last_published_lesson_number": 3,
-      "last_wordpress_post_id": 30935
+      "next_lesson_number": 5,
+      "last_published_lesson_number": 4,
+      "last_wordpress_post_id": 33260,
+      "last_published_title": "OSHMS.004: Tubal-Cain, Bronze and Iron — Scripture, Archaeology, and Early Alloy Engineering",
+      "verification_status": "published_archived_exact_3_repos_two_embeds_repaired_and_server_render_checked"
     },
     "csharp": {
       "acronym": "OSC#",
@@ -423,32 +425,32 @@
     }
   },
   "last_published": {
-    "subject": "history_of_engineering",
-    "lesson_number": 6,
-    "track_id": "OSHE.006",
-    "title": "OSHE.006: Sneferu's Red Pyramid at Dahshur, Geometry, Masonry, and the First Completed True Pyramid",
-    "public_title": "OSHE.006: Sneferu's Red Pyramid at Dahshur, Geometry, Masonry, and the First Completed True Pyramid",
-    "wordpress_post_id": 33148,
-    "live_url": "https://bitcoinversus.tech/2026/11/18/oshe-006-sneferu-red-pyramid-dahshur-geometry-masonry-true-pyramid/",
-    "archive_path": "archive/2026/11/33148-oshe-006-red-pyramid-dahshur.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/33148-oshe-006-red-pyramid-dahshur.qa.json",
+    "subject": "history_materials_science",
+    "lesson_number": 4,
+    "track_id": "OSHMS.004",
+    "title": "OSHMS.004: Tubal-Cain, Bronze and Iron — Scripture, Archaeology, and Early Alloy Engineering",
+    "public_title": "OSHMS.004: Tubal-Cain, Bronze and Iron — Scripture, Archaeology, and Early Alloy Engineering",
+    "wordpress_post_id": 33260,
+    "live_url": "https://bitcoinversus.tech/2026/11/18/oshms-004-tubal-cain-bronze-iron-scripture-archaeology-alloy-engineering/",
+    "archive_path": "archive/2026/11/33260-oshms-004-tubal-cain-bronze-iron.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/33260-oshms-004-tubal-cain-bronze-iron.qa.json",
     "verified_repositories": [
       "1freetech/techcert",
       "1freetech/opencert.tech",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 33144,
-    "authentic_photograph_media_ids": [
-      33145,
-      33146
+    "featured_media_id": 33246,
+    "authentic_artifact_media_ids": [
+      33247,
+      33248
     ],
     "body_video_ids": [
-      "mjiJrZD6_qY",
-      "Jwac6vk5WA8"
+      "Ohij1e2oZio",
+      "28ZUM8OrIko"
     ],
-    "verification_status": "Published WordPress HTTP 200; saved 2 native YouTube embeds rendered as 2 iframes; 2 Creative-Commons credited original Dahshur photographs uploaded and rendered; original 1200x630 cover, canonical/SEO/OG and alt verified. Exact Gutenberg and QA archived and read back identically from three repos. Real playback, mobile screenshots and exact brand-reference pixel match unverified.",
-    "qa_status": "1762 original manuscript words, five distinct contextual internal links, four in-story media, illustrative pyramid geometry, original 5000-satoshi QR, editorial note, no diagrams or boxed text/code."
+    "verification_status": "WordPress public HTTP 200; 1200x630 original oil painting cover, SEO/canonical/OG/alt confirmed; two institutional YouTube embed links repaired and retested to two server-rendered iframe players; authentic credited Met/PAS artifact photos in Gutenberg. Final saved source and QA archived identically in three repos. Playback on real device, exact watermark pixel reference and mobile visual inspection unverified.",
+    "qa_status": "666 manuscript words, 4 contextual internal links, two official educational videos, two authentic historical artifact images, original donation QR and editorial note. Source distinction between Genesis and excavated evidence; hypothetical 2 kg 90/10 Cu-Sn mass calculation."
   },
   "pending_publication_qa": [
     {
@@ -853,12 +855,23 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "WordPress public HTTP 200, 2 iframe videos, 2 authentic CC photographs, cover 1200x630, SEO and alt. Exact saved Gutenberg and QA archived identically across 3 repos."
+    },
+    {
+      "wordpress_post_id": 33260,
+      "live_url": "https://bitcoinversus.tech/2026/11/18/oshms-004-tubal-cain-bronze-iron-scripture-archaeology-alloy-engineering/",
+      "unresolved": [
+        "Actual YouTube video playback in a browser/device not independently tested.",
+        "Mobile viewport appearance and exact logo sample pixel comparison not inspected."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "Initial in-body videos rendered as links; wrappers repaired using newline-delimited YouTube Gutenberg embed blocks, retested and confirmed two WordPress-rendered iframes. Exact saved source and QA archived in three repositories."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 33148,
-    "last_style": "modern drawing / colored-pencil illustration",
-    "next_style": "fine-art oil painting",
+    "last_post_id": 33260,
+    "last_style": "fine-art oil painting",
+    "next_style": "photorealistic editorial photography",
     "approved_styles": [
       "photorealistic editorial photography",
       "cinematic anime illustration",
@@ -870,9 +883,9 @@
     "human_subject_policy": "Choose equipment, code, scene or topic first; rotate demographics when people are genuinely relevant, never insert people solely to meet rotation.",
     "subject_first_requirement": "Depict the actual work, material, hardware, software behavior, mechanism, data or event; no generic desktop/portrait.",
     "former_demographic_rotation": "retired by explicit user directive November 1, 2026",
-    "last_cover_media_id": 33144,
-    "last_cover_note": "Story-specific 1200x630 colored-pencil reconstruction of Sneferu's Red Pyramid and ancient workers, with neon-green BitcoinVersus.tech wordmark on tightly highlighted black strip at bottom left.",
-    "last_cover_status": "WordPress original cover media dimensions 1200x630, OG image and descriptive alt confirmed; exact watermark reference pixels and mobile screenshots unverified.",
+    "last_cover_media_id": 33246,
+    "last_cover_note": "Original 1200x630 oil-painting anonymous early metalsmith and forge, neon-green BitcoinVersus.tech lettering on tight black highlight at bottom left.",
+    "last_cover_status": "Original WordPress cover dimensions 1200x630, SEO OG and alt verified; exact sample pixel match and mobile screenshots not independently checked.",
     "next_person_note": "People prohibited on new covers. Use relevant technical split-screen diptych without humans for OSSolidity.002.",
     "latest_exception_note": {
       "post_id": 28650,

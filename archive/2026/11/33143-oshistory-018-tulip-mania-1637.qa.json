@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "qa_date": "2026-11-18",
+  "wordpress_post_id": 33143,
+  "track_id": "OSHistory.018",
+  "title": "OSHistory.018 — Dutch Tulip Mania, 1636–1637: Contracts, Prices, Collapse, and Historical Myths",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/18/oshistory-018-dutch-tulip-mania-1636-1637-contracts-prices-collapse-historical-myths/",
+  "original_content_source": "Exactly saved Gutenberg from WordPress context=edit after publication, archived without rewriting",
+  "gutenberg_characters": 18834,
+  "cover": {
+    "media_id": 33130,
+    "source_dimensions": [
+      1200,
+      630
+    ],
+    "style": "cinematic anime historical editorial illustration",
+    "wordmark": "neon green BitcoinVersus.tech highlighted in tight black background at bottom left",
+    "original_logo_reference_pixel_comparison_verified": false
+  },
+  "authentic_media": {
+    "met_public_domain_watercolor": {
+      "media_id": 33133,
+      "artist": "Jacob Marrel",
+      "art_title": "Four Tulips",
+      "date": "ca. 1635–1645",
+      "museum": "The Metropolitan Museum of Art",
+      "object": "68.66"
+    },
+    "public_domain_satire": {
+      "media_id": 33134,
+      "artist": "Jan Brueghel the Younger",
+      "art_title": "Satire on Tulip Mania",
+      "date": "ca. 1640",
+      "museum": "Frans Hals Museum"
+    },
+    "video": {
+      "id": "kbr971h2piE",
+      "official_source": "Getty lecture by historian Anne Goldgar",
+      "Gutenberg_embed_count": 1,
+      "WordPress_rendered_iframes": 1
+    },
+    "donation_qr_id": 24043
+  },
+  "quality": {
+    "live_http_status": 200,
+    "canonical_verified": true,
+    "SEO_title_and_description_verified": true,
+    "Open_Graph_image_present": true,
+    "images_missing_alt": 0,
+    "original_manuscript_words": 1674,
+    "unique_internal_links": 5,
+    "prohibited_prose_words": [],
+    "no_boxed_code": true,
+    "duplicate_post_id_count": 1
+  },
+  "factual_quality": {
+    "date_scope": "1636–1637, following OSHistory.017 1619–1623",
+    "sources": [
+      "University of Oxford",
+      "University of Chicago Press and Anne Goldgar",
+      "Rijksmuseum",
+      "The Metropolitan Museum of Art",
+      "Cambridge Financial History Review",
+      "Getty Museum",
+      "Frans Hals Museum"
+    ],
+    "settlement_math": "3.5% of illustrative 1000 guilders = 35; 10% = 100",
+    "qualifications": [
+      "4,200 guilder Viceroy quote is a probably unpaid bid",
+      "No supported nationwide bankruptcy claim",
+      "Contract cancellation percentages are not a single national rule",
+      "Feb 1637 crash drivers disputed; underground supply hypothesis labeled one proposal"
+    ]
+  },
+  "limitations": [
+    "Independent video playback on a real browser or mobile device not verified.",
+    "Mobile viewport and pixel-identical comparison with uploaded reference logo not performed.",
+    "No historical artifact was generated in the body; original cover is visibly modern illustrative art."
+  ],
+  "curriculum": {
+    "active_rotation_subjects": 43,
+    "coding_tracks": 20,
+    "historical_snapshot_2026_10_07": {
+      "entries": 626,
+      "folders": 38
+    },
+    "next_subject": "history_of_engineering"
+  }
+}

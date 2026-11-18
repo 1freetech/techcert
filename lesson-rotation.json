@@ -48,39 +48,39 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "fiber_optics_technician",
-    "lesson_number": 17,
-    "track_id": "OSFOTC.017",
-    "title": "OSFOTC.017 — MPO/MTP Fiber Polarity: Type A, B, C and Field Verification",
-    "public_title": "OSFOTC.017 — MPO/MTP Fiber Polarity: Type A, B, C and Field Verification",
-    "wordpress_post_id": 33100,
-    "live_url": "https://bitcoinversus.tech/2026/11/17/osfotc-017-mpo-mtp-fiber-polarity-type-a-b-c-field-verification/",
-    "archive_path": "archive/2026/11/33100-osfotc-017-mpo-mtp-fiber-polarity.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/33100-osfotc-017-mpo-mtp-fiber-polarity.qa.json",
+    "subject": "fiber_optics_engineer",
+    "lesson_number": 15,
+    "track_id": "OSFOEC.015",
+    "title": "OSFOEC.015 — Brillouin Distributed Strain Sensing: BOTDA, BOTDR and Temperature Compensation",
+    "public_title": "OSFOEC.015 — Brillouin Distributed Strain Sensing: BOTDA, BOTDR and Temperature Compensation",
+    "wordpress_post_id": 33107,
+    "live_url": "https://bitcoinversus.tech/2026/11/17/osfoec-015-brillouin-distributed-strain-sensing-botda-botdr-temperature-compensation/",
+    "archive_path": "archive/2026/11/33107-osfoec-015-brillouin-distributed-strain-sensing.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/33107-osfoec-015-brillouin-distributed-strain-sensing.qa.json",
     "verified_repositories": [
       "1freetech/techcert",
       "1freetech/opencert.tech",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 33098,
-    "authentic_photo_url": "https://www.flukenetworks.com/sites/default/files/other/mfpro.jpg",
+    "featured_media_id": 33106,
+    "authentic_photo_url": "https://neubrex-infra.com/hs-fs/hubfs/Neubrescope-3.jpg?height=800&name=Neubrescope-3.jpg&width=1200",
     "body_video_ids": [
-      "f0VyWuP4guQ",
-      "GqNIamt1b78",
-      "-yt8dnb4PyA"
+      "AhbMCcRMPiQ",
+      "xRyknLf9gCc",
+      "WKnabBoResQ"
     ],
-    "verification_status": "WordPress published, 3 server-rendered YouTube iframes confirmed, original cover 1200x630, SEO canonical/social title confirmed, exact Gutenberg and QA archives read back from all 3 repos. Actual playback, external photo loading, and mobile viewport visual QA unverified.",
-    "qa_status": "1,943 manuscript words; 7 verified internal article links; 4 in-story media (3 official YouTube videos, 1 linked authentic Fluke Networks photo); original 5000-sat QR; no custom diagrams or code boxes; editor's note and footer present."
+    "verification_status": "WordPress post public HTTP 200, canonical and SEO verified, three native YouTube embeds rendered into iframes, original 1200x630 cover assigned. Exact Gutenberg and QA copied and read back in all three archives; playback, browser image loading and mobile screenshots unverified.",
+    "qa_status": "2081 manuscript words, 6 internal links, 4 story media (3 manufacturer video embeds, 1 original-source equipment image), original donation QR, editorial note and footer, no boxed code or prohibited editorial terms."
   },
   "next": {
-    "subject": "fiber_optics_engineer",
-    "lesson_number": 15,
-    "title_format": "OSFOEC.015 — {topic}",
-    "public_title_format": "OSFOEC.015 — {topic}",
-    "resolution_note": "OSFOEC.014 published WordPress #30679; check published, draft, archive sources for OSFOEC.015 before creating."
+    "subject": "firmware_technician",
+    "lesson_number": 17,
+    "title_format": "OSFTC.017 — {topic}",
+    "public_title_format": "OSFTC.017 — {topic}",
+    "resolution_note": "OSFTC.016 is previously published; independently check live WordPress, drafts, and three repos for OSFTC.017 before creating."
   },
-  "next_after_current": "firmware_technician",
+  "next_after_current": "firmware_engineer",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -108,9 +108,11 @@
     },
     "fiber_optics_engineer": {
       "acronym": "OSFOEC",
-      "next_lesson_number": 15,
-      "last_published_lesson_number": 14,
-      "last_wordpress_post_id": 30679
+      "next_lesson_number": 16,
+      "last_published_lesson_number": 15,
+      "last_wordpress_post_id": 33107,
+      "last_published_title": "OSFOEC.015 — Brillouin Distributed Strain Sensing: BOTDA, BOTDR and Temperature Compensation",
+      "verification_status": "published_archived_3_repositories_server_render_verified"
     },
     "firmware_technician": {
       "acronym": "OSFTC",
@@ -411,30 +413,30 @@
     }
   },
   "last_published": {
-    "subject": "fiber_optics_technician",
-    "lesson_number": 17,
-    "track_id": "OSFOTC.017",
-    "title": "OSFOTC.017 — MPO/MTP Fiber Polarity: Type A, B, C and Field Verification",
-    "public_title": "OSFOTC.017 — MPO/MTP Fiber Polarity: Type A, B, C and Field Verification",
-    "wordpress_post_id": 33100,
-    "live_url": "https://bitcoinversus.tech/2026/11/17/osfotc-017-mpo-mtp-fiber-polarity-type-a-b-c-field-verification/",
-    "archive_path": "archive/2026/11/33100-osfotc-017-mpo-mtp-fiber-polarity.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/33100-osfotc-017-mpo-mtp-fiber-polarity.qa.json",
+    "subject": "fiber_optics_engineer",
+    "lesson_number": 15,
+    "track_id": "OSFOEC.015",
+    "title": "OSFOEC.015 — Brillouin Distributed Strain Sensing: BOTDA, BOTDR and Temperature Compensation",
+    "public_title": "OSFOEC.015 — Brillouin Distributed Strain Sensing: BOTDA, BOTDR and Temperature Compensation",
+    "wordpress_post_id": 33107,
+    "live_url": "https://bitcoinversus.tech/2026/11/17/osfoec-015-brillouin-distributed-strain-sensing-botda-botdr-temperature-compensation/",
+    "archive_path": "archive/2026/11/33107-osfoec-015-brillouin-distributed-strain-sensing.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/33107-osfoec-015-brillouin-distributed-strain-sensing.qa.json",
     "verified_repositories": [
       "1freetech/techcert",
       "1freetech/opencert.tech",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 33098,
-    "authentic_photo_url": "https://www.flukenetworks.com/sites/default/files/other/mfpro.jpg",
+    "featured_media_id": 33106,
+    "authentic_photo_url": "https://neubrex-infra.com/hs-fs/hubfs/Neubrescope-3.jpg?height=800&name=Neubrescope-3.jpg&width=1200",
     "body_video_ids": [
-      "f0VyWuP4guQ",
-      "GqNIamt1b78",
-      "-yt8dnb4PyA"
+      "AhbMCcRMPiQ",
+      "xRyknLf9gCc",
+      "WKnabBoResQ"
     ],
-    "verification_status": "WordPress published, 3 server-rendered YouTube iframes confirmed, original cover 1200x630, SEO canonical/social title confirmed, exact Gutenberg and QA archives read back from all 3 repos. Actual playback, external photo loading, and mobile viewport visual QA unverified.",
-    "qa_status": "1,943 manuscript words; 7 verified internal article links; 4 in-story media (3 official YouTube videos, 1 linked authentic Fluke Networks photo); original 5000-sat QR; no custom diagrams or code boxes; editor's note and footer present."
+    "verification_status": "WordPress post public HTTP 200, canonical and SEO verified, three native YouTube embeds rendered into iframes, original 1200x630 cover assigned. Exact Gutenberg and QA copied and read back in all three archives; playback, browser image loading and mobile screenshots unverified.",
+    "qa_status": "2081 manuscript words, 6 internal links, 4 story media (3 manufacturer video embeds, 1 original-source equipment image), original donation QR, editorial note and footer, no boxed code or prohibited editorial terms."
   },
   "pending_publication_qa": [
     {
@@ -782,12 +784,24 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "Published WordPress server-rendered view contains all three official YouTube iframe players and linked authentic manufacturer equipment photo, QR and footer. Media source 1200x630; exact saved Gutenberg source and QA files archived identically in all 3 repos."
+    },
+    {
+      "wordpress_post_id": 33107,
+      "live_url": "https://bitcoinversus.tech/2026/11/17/osfoec-015-brillouin-distributed-strain-sensing-botda-botdr-temperature-compensation/",
+      "unresolved": [
+        "Actual YouTube playback untested despite rendered iframe tags.",
+        "In-body external manufacturer image is source-grounded, but loading on reader device unverified.",
+        "Desktop/mobile screenshots and exact secondary-logo reference comparison not independently inspected."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "WordPress server-rendered view has 3 YouTube iframes, authentic manufacturer image, donation QR, SEO metadata; original cover WordPress 1200x630. Exact saved Gutenberg and QA archives identical across three repos."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 33100,
-    "last_style": "cinematic anime illustration",
-    "next_style": "modern drawing / colored-pencil illustration",
+    "last_post_id": 33107,
+    "last_style": "modern drawing / colored-pencil illustration",
+    "next_style": "fine-art oil painting",
     "approved_styles": [
       "photorealistic editorial photography",
       "cinematic anime illustration",
@@ -799,9 +813,9 @@
     "human_subject_policy": "Choose equipment, code, scene or topic first; rotate demographics when people are genuinely relevant, never insert people solely to meet rotation.",
     "subject_first_requirement": "Depict the actual work, material, hardware, software behavior, mechanism, data or event; no generic desktop/portrait.",
     "former_demographic_rotation": "retired by explicit user directive November 1, 2026",
-    "last_cover_media_id": 33098,
-    "last_cover_note": "Original 1200x630 illustrated technical MPO connector bench scene; bottom-left neon-green brand wordmark on black label; logo-reference pixel identity not independently compared.",
-    "last_cover_status": "WordPress media source dimensions 1200x630, live og:image and alt text verified; browser/pixel mobile inspection unverified.",
+    "last_cover_media_id": 33106,
+    "last_cover_note": "Original detailed technical colored-pencil cover, Brillouin interrogator with fiber spools bridge/tunnel, neon-green BitcoinVersus.tech on tight black label at bottom-left.",
+    "last_cover_status": "WordPress original media verified 1200x630; link/social image present; independent pixel identity and browser mobile visual QA not performed.",
     "next_person_note": "People prohibited on new covers. Use relevant technical split-screen diptych without humans for OSSolidity.002.",
     "latest_exception_note": {
       "post_id": 28650,

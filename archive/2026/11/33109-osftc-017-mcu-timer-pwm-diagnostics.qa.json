@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-11-17",
+  "wordpress_post_id": 33109,
+  "track_id": "OSFTC.017",
+  "title": "OSFTC.017 — MCU Timer and PWM Diagnostics: Prescalers, Duty Cycle and Oscilloscope Checks",
+  "publication_status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/17/osftc-017-mcu-timer-pwm-diagnostics-prescalers-duty-cycle-oscilloscope-checks/",
+  "content_source": "Exact WordPress post context edit Gutenberg readback, unchanged and archived to all three repositories",
+  "gutenberg_characters": 19277,
+  "featured_image": {
+    "media_id": 33108,
+    "original_dimensions": [
+      1200,
+      630
+    ],
+    "style": "fine-art oil painting",
+    "brand_tag": "neon green BitcoinVersus.tech tight black background bottom left",
+    "original_pixel_reference_comparison_verified": false
+  },
+  "media": {
+    "official_youtube_video_ids": [
+      "4omSQHY0rDw",
+      "uv4VXhzi7Ys",
+      "QMAgD9SS5_E"
+    ],
+    "saved_embed_blocks": 3,
+    "rendered_iframe_count": 3,
+    "donation_qr_media_id": 24043
+  },
+  "quality": {
+    "live_http_status": 200,
+    "seo_metadata_verified": true,
+    "canonical_verified": true,
+    "open_graph_image_verified": true,
+    "images_missing_alt": 0,
+    "original_manuscript_wordcount": 1850,
+    "unique_internal_links": 5,
+    "forbidden_words": [],
+    "boxed_code": false,
+    "duplicate_post_id_count": 1,
+    "computed_example": "80MHz/(79+1)/(999+1)=1000Hz; 250/(999+1)=25%"
+  },
+  "limitations": [
+    "Actual YouTube playback not independently tested in browser or device.",
+    "Desktop/mobile screenshots and full pixel-level cover/logo reference check not completed.",
+    "No physical oscilloscope, MCU board or electrical test performed."
+  ],
+  "rotation": {
+    "registered_tracks": 43,
+    "coding_tracks": 20,
+    "next_subject_after_publication": "firmware_engineer",
+    "next_lesson_candidate": "OSFEC.016"
+  }
+}

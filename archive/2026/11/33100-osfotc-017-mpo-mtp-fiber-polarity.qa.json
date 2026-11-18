@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-11-17",
+  "post_id": 33100,
+  "track_id": "OSFOTC.017",
+  "title": "OSFOTC.017 — MPO/MTP Fiber Polarity: Type A, B, C and Field Verification",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/17/osfotc-017-mpo-mtp-fiber-polarity-type-a-b-c-field-verification/",
+  "content_source": "Exact post content returned by WordPress context=edit after publish, no local rewrites",
+  "content_length_characters": 21063,
+  "source_fingerprint": "To be compared by full readback",
+  "featured_media_id": 33098,
+  "featured_media_dimensions_original": [
+    1200,
+    630
+  ],
+  "featured_image_alt": "Original cinematic technical illustration of aqua MPO multi-fiber connectors, optical test meter and a fiber inspection microscope on a data center bench; BitcoinVersus.tech neon-green mark on black at lower left",
+  "category_ids": [
+    346871,
+    5812,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    25866,
+    154288891,
+    793251519,
+    793251520
+  ],
+  "media": {
+    "official_youtube_video_ids": [
+      "f0VyWuP4guQ",
+      "GqNIamt1b78",
+      "-yt8dnb4PyA"
+    ],
+    "video_embed_count_in_saved_gutenberg": 3,
+    "server_rendered_video_iframes": 3,
+    "official_photo_url": "https://www.flukenetworks.com/sites/default/files/other/mfpro.jpg",
+    "original_satoshi_qr_media_id": 24043
+  },
+  "quality": {
+    "live_http_status": 200,
+    "seo_title_present": true,
+    "seo_description_present": true,
+    "canonical_matches_live_url": true,
+    "open_graph_image_present": true,
+    "images_without_alt": 0,
+    "unboxed_code": true,
+    "internal_links_unique": 7,
+    "prohibited_editorial_words": [],
+    "dup_post_search_count": 1
+  },
+  "limitations": [
+    "No independent browser playback verification for external YouTube videos",
+    "No mobile viewport or pixel-level inspection",
+    "Official photo is linked from manufacturer host; external image response not independently checked",
+    "No physical MPO testing performed",
+    "Exact pixel match to previously uploaded secondary-logo sample not independently measured"
+  ],
+  "curriculum_reconciliation": {
+    "active_rotation_subjects": 43,
+    "coding_tracks": 20,
+    "historical_folders": 38,
+    "archived_entries_snapshot_2026_10_07": 626,
+    "out_of_rotation_verified_series": [
+      "Chef esoteric-language",
+      "NEC Review"
+    ]
+  },
+  "next_candidate": "OSFOEC.015 (Fiber Optics Engineer) after OSFOTC.017 publication and archive verification"
+}

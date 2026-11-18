@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-11-18",
+  "wordpress_post_id": 33148,
+  "track_id": "OSHE.006",
+  "title": "OSHE.006: Sneferu's Red Pyramid at Dahshur, Geometry, Masonry, and the First Completed True Pyramid",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/18/oshe-006-sneferu-red-pyramid-dahshur-geometry-masonry-true-pyramid/",
+  "source_basis": "Exact saved Gutenberg from WordPress context edit, no reformatting or local edits.",
+  "gutenberg_chars": 18939,
+  "featured_image": {
+    "media_id": 33144,
+    "original_dimensions": [
+      1200,
+      630
+    ],
+    "style": "modern colored-pencil editorial illustration",
+    "watermark": "neon green BitcoinVersus.tech lettering on a tight black highlight at bottom left",
+    "same_sample_pixel_match_unverified": true
+  },
+  "media": {
+    "manufacturer_or_author_videos": [
+      "mjiJrZD6_qY",
+      "Jwac6vk5WA8"
+    ],
+    "youtube_embed_count": 2,
+    "WordPress_rendered_iframes": 2,
+    "source_media": [
+      {
+        "media_id": 33145,
+        "photographer": "Darer101",
+        "date": "2023-03-13",
+        "license": "CC BY 4.0",
+        "url": "https://commons.wikimedia.org/wiki/File:Red_Pyramid_at_Dahshur.jpg"
+      },
+      {
+        "media_id": 33146,
+        "photographer": "Roland Unger",
+        "date": "2000-02-20",
+        "license": "CC BY-SA 3.0",
+        "url": "https://commons.wikimedia.org/wiki/File:DahshurRedPyrGallery.jpg"
+      }
+    ],
+    "original_donation_qr_media_id": 24043
+  },
+  "quality": {
+    "live_http_status": 200,
+    "seo_title_and_description_verified": true,
+    "canonical_verified": true,
+    "open_graph_image_verified": true,
+    "images_missing_alt": 0,
+    "original_manuscript_words": 1762,
+    "distinct_internal_links": 5,
+    "prohibited_prose_words": [],
+    "boxed_code": false,
+    "duplicate_wordpress_oshe006_count": 1
+  },
+  "engineering_checks": {
+    "rounded_angle": "arctan(105/110)≈43.67 degrees, illustrative geometry",
+    "rounded_volume": "220*220*105/3=1,694,000 cubic metres, theoretical solid envelope",
+    "scholarly_uncertainty": "Bent Pyramid versus Red Pyramid project relationship and possible ancient dams explicitly called interpretations/hypotheses, not settled facts."
+  },
+  "limitations": [
+    "Actual video playback not independently tested, only server-rendered iframes.",
+    "Mobile viewport screenshot and exact reference watermark pixel comparison not independently conducted.",
+    "No construction method witnessed or modern load-bearing field testing performed."
+  ],
+  "curriculum_snapshot": {
+    "active_tracks": 43,
+    "coding_tracks": 20,
+    "legacy_history_index": "626 entries in 38 folders as of 2026-10-07",
+    "next_subject": "history_materials_science"
+  }
+}

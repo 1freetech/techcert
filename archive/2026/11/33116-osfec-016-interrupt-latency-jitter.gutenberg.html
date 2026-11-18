@@ -1,0 +1,201 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>OSFEC.016</strong> teaches why a fast microcontroller can still react late to a sensor, a network packet, or a hardware fault. An interrupt is a request for the processor to handle an important event. Interrupt latency is the time between an event becoming actionable and the first instruction of its interrupt service routine (ISR). A processor can be busy or temporarily unable to take a particular interrupt, so a short handler does not guarantee a short response.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Engineers also care about <strong>jitter</strong>, the variation in response timing across repeated events. A 3 microsecond response on one occasion and a 20 microsecond response on another can matter more than a favorable average. The previous <a href="https://bitcoinversus.tech/2026/11/07/osfec-015-crash-consistent-flash-storage-zephyr-nvs-littlefs-power-loss-recovery/">OSFEC.015 flash-consistency lesson</a> addressed sudden interruption during persistent writes. The related <a href="https://bitcoinversus.tech/2026/11/17/osftc-017-mcu-timer-pwm-diagnostics-prescalers-duty-cycle-oscilloscope-checks/">OSFTC.017 timer lesson</a> explains time bases and PWM generation. Here, the engineering task is to establish when an event arrived, when its handler ran, and how reliably a waiting thread resumed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Learning outcomes:</strong> distinguish interrupt latency from ISR execution and thread wake-up time; interpret Arm Cortex-M NVIC priorities; calculate response and jitter from timestamps; understand RTOS interrupt-call limits; and design a reproducible, low-impact timing validation plan. All numerical measurements in the examples are hypothetical teaching values.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=-HHW82z8AJw","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=-HHW82z8AJw
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>SEGGER, official SystemView introduction. SEGGER's original training demonstrates observing interrupt and scheduler behavior in a real embedded trace rather than relying on firmware assumptions. <a href="https://www.youtube.com/watch?v=-HHW82z8AJw">Original video</a>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Timing boundaries engineers must separate</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <strong>physical event</strong> may start as a rising input edge, timer compare, peripheral receive flag, or fault condition. The <strong>interrupt request</strong> may then become pending in the controller. Entry into the handler may be delayed by masking, higher-priority execution, disabled peripheral routing, processor state, bus contention, or implementation-specific exception overhead. A correct test must define its start event and first measurement point.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>ISR execution time</strong> starts when its instrumented entry point is reached and ends at the corresponding exit point. <strong>Event-to-thread latency</strong> continues until a task waiting for the ISR's signal becomes runnable and actually starts running. The latter includes kernel dispatch and interference from higher-priority tasks. An ISR can complete quickly while the application still reacts too late. The earlier <a href="https://bitcoinversus.tech/2026/10/05/osfec-002-real-time-firmware-scheduling-superloops-rtos-tasks-priorities-preemption-timing/">real-time scheduling lesson</a> describes the distinction between a hardware response and RTOS execution.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An interrupt's observed frequency is not its latency. A handler executing every millisecond can have poor worst-case response timing. Likewise, an oscilloscope trace of a toggled pin may include software instructions before the toggle and measurement probe delay. Engineers document those contributions rather than treating GPIO instrumentation as an ideal timestamp.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">NVIC priority numbers and nesting</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On many Arm Cortex-M devices, the Nested Vectored Interrupt Controller (NVIC) determines which enabled, pending interrupt may execute. <strong>A lower numeric priority value denotes a higher logical urgency.</strong> Priority zero is commonly the highest configurable external-interrupt urgency, not the lowest. The implementation supports a device-specific number of priority bits, given by <code>__NVIC_PRIO_BITS</code>. <a href="https://arm-software.github.io/CMSIS_6/latest/Core/group__NVIC__gr.html">Arm's official CMSIS NVIC reference</a> defines functions such as <code>NVIC_SetPriority</code>, <code>NVIC_GetPriority</code> and priority-grouping helpers.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a hypothetical Cortex-M design with four implemented priority bits, configurable priority values run from 0 through 15. The CMSIS call <code>NVIC_SetPriority(IRQn, 5)</code> accepts the unshifted logical priority value for a configurable interrupt, while the hardware priority register encodes implemented bits in the most significant portion of its byte. Manually shifting a CMSIS argument again can silently set a wrong level. <a href="https://developer.arm.com/community/arm-community-blogs/b/embedded-and-microcontrollers-blog/posts/cutting-through-the-confusion-with-arm-cortex-m-interrupt-priorities">Arm's interrupt-priority explanation</a> details the distinction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>On Cortex-M variants supporting configurable priority grouping, some bits can define preemption priority and others subpriority. A higher preemption priority can interrupt a lower one; subpriority alone only resolves ordering of pending requests within a shared preemption level. The allocation varies by core and configuration. Cortex-M0 and M0+ have different capabilities, so priority-grouping examples from larger cores must not be copied automatically.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A worked interrupt response timeline</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Suppose an authorized instrument records a hypothetical external event at <strong>100.0 µs</strong>, the first marked ISR instruction at <strong>103.6 µs</strong>, ISR completion at <strong>109.2 µs</strong>, and the awakened application thread beginning at <strong>114.4 µs</strong>. The observed event-to-ISR latency is <strong>103.6 − 100.0 = 3.6 µs</strong>. The marked ISR body runs for <strong>109.2 − 103.6 = 5.6 µs</strong>. Event-to-thread response is <strong>114.4 − 100.0 = 14.4 µs</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>At a hypothetical constant 160 MHz core clock, 3.6 µs corresponds to <strong>3.6 × 160 = 576 clock cycles</strong>. That conversion is only a representation at the assumed frequency, not the processor's architectural exception-entry cycle count. A low-power transition, clock change, tracing overhead, or external measurement offset can make the interpretation more complicated. The 5.2 µs interval from ISR completion to thread start is also not automatically pure scheduler overhead; other work may have executed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For five hypothetical response samples of 3.2, 3.8, 4.1, 3.3 and 7.0 µs, the arithmetic mean equals <strong>4.28 µs</strong>; the worst observed response is <strong>7.0 µs</strong>, and the simple max-minus-min span is <strong>3.8 µs</strong>. The span is one descriptive measure of variation, not a standard deviation or a proven worst-case execution bound. Five samples cannot establish a certified worst-case latency.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Priority masking and FreeRTOS restrictions</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An RTOS port may temporarily mask some interrupt priorities while manipulating kernel data. For supported Cortex-M FreeRTOS ports, <code>configMAX_SYSCALL_INTERRUPT_PRIORITY</code> and the corresponding library-oriented constant define the priority region from which interrupt-safe kernel APIs may be called. A logically higher-priority ISR, numerically below the configured ceiling, must not call a prohibited <code>FromISR</code> API merely because it runs quickly.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Priority values supplied in some FreeRTOS configuration macros are already shifted into hardware-register position, while CMSIS <code>NVIC_SetPriority</code> expects an unshifted logical value. The <a href="https://github.com/FreeRTOS/FreeRTOS-Kernel-Book/blob/main/ch07.md">official FreeRTOS Kernel Book's interrupt chapter</a> explains the difference and notes that default priority zero must not be used for ISR-safe API calls on applicable ports. Configuration must be checked against the exact FreeRTOS version, processor port and project header.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Raising every interrupt to the highest priority does not solve latency. Doing so may defeat intended nesting, interfere with kernel critical sections, or make fault recovery less deterministic. Engineers should distinguish critical asynchronous fault handling, periodic control work, DMA completion, communications and routine logging. <a href="https://bitcoinversus.tech/2026/10/14/osfec-011-rtos-synchronization-concurrency/">OSFEC.011 on synchronization and concurrency</a> provides context for races and shared data.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"large","linkDestination":"custom"} -->
+<figure class="wp-block-image size-large" style="max-width:900px;margin:1.35rem auto"><a href="https://www.segger.com/support/training-classes/webinar-runtime-behavior-analysis/"><img src="https://www.segger.com/fileadmin/images/Events/Webinar/SystemView_Webinar/SystemView_Webinar_Screenshot.png" alt="Official SEGGER SystemView application screenshot showing recorded RTOS interrupt events, task timelines and execution timing statistics" loading="lazy" style="max-width:100%;height:auto" /></a><figcaption class="wp-element-caption">Authentic manufacturer screenshot of the SEGGER SystemView trace and timeline interface. Source and image credit: <a href="https://www.segger.com/support/training-classes/webinar-runtime-behavior-analysis/">SEGGER SystemView runtime analysis webinar</a>. The displayed trace is a vendor demonstration, not a test performed for BitcoinVersus.Tech.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Trace tools, timestamps and observer effects</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>SEGGER <a href="https://kb.segger.com/Recording_Interrupts">SystemView's interrupt recording documentation</a> describes entering and leaving interrupt trace hooks. Modern SystemView can correlate ISR activity, task switching and other events using target-generated timestamps; available features depend on the integration and license. Trace hooks add work, trace buffers can overflow, and the transport can lose records. A missing event can mean lost telemetry rather than an idle core.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Direct physical measurement and software tracing serve different purposes. An authorized test using an external signal generator and oscilloscope can capture the delay between a known input edge and a firmware-controlled output marker. An on-chip cycle counter or tracing framework can provide additional timing points, provided counter availability, rollover, frequency, synchronization and instrumentation overhead have been checked. No single technique is automatically ground truth across all targets.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=tZBZKnjbbX4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=tZBZKnjbbX4
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Golioth, official developer tutorial covering Zephyr analysis with SEGGER J-Link, Ozone and SystemView. The walkthrough demonstrates a trace-based RTOS investigation on an embedded board. <a href="https://www.youtube.com/watch?v=tZBZKnjbbX4">Original video</a>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://docs.zephyrproject.org/latest/services/debugging/zyclictest.html">Zephyr zyclictest documentation</a> offers a method to measure hardware interrupt response and thread wake-up delay, then record distributions. Its guidance also distinguishes test interval, clock resolution and histogram overflow. A large sample count can improve confidence about an observed maximum, but still does not mathematically prove an absolute worst case for all operating conditions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A documented verification plan</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Define the timing requirement:</strong> state event source, allowed ISR-start latency, allowed thread-start latency, workload, clock configuration, operating mode, and environmental limits.</li><li><strong>Capture the exact firmware:</strong> record build hash, linker map, vector table, selected interrupt priorities, <code>__NVIC_PRIO_BITS</code>, priority grouping and kernel interrupt-mask configuration.</li><li><strong>Establish a measurement reference:</strong> identify input-edge detection, test pin or trace timestamp, instrument clock accuracy, trigger thresholds and probe-loading precautions.</li><li><strong>Exercise interference:</strong> run representative DMA, peripherals, control loops, communication bursts, interrupts, flash activity and low-power transitions without violating the product's permitted service state.</li><li><strong>Quantify uncertainty:</strong> record mean, minimum, observed maximum, distribution tail, sample count, timer frequency, capture resolution, possible missed records and trace overhead.</li><li><strong>Diagnose anomalies:</strong> correlate latency spikes with critical sections, interrupt masks, nesting, bus access, flash stalls or scheduling delays instead of guessing from a single screen capture.</li><li><strong>Repeat and preserve evidence:</strong> save traces, measurement conditions, source versions and acceptance decisions. Escalate any limit violation and rerun under the same controlled conditions after approved changes.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Bench tests must use a suitable low-voltage development board and authorized probe connections. Never connect earth-referenced oscilloscope grounds to unknown or energized power nodes. Time-sensitive safety-critical changes require design review, applicable functional-safety requirements, and device-specific validation. The prior <a href="https://bitcoinversus.tech/2026/10/29/osfec-013-hardware-in-the-loop-firmware-testing-test-rigs-fault-injection-ci/">hardware-in-the-loop testing lesson</a> explains controlled test rigs and fault injection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=6t4dVAkoso8","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=6t4dVAkoso8
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Silicon Labs, official demonstration of SEGGER SystemView with Micrium µC/OS-III. The training shows how task and interrupt accounting support runtime analysis on another RTOS platform. <a href="https://www.youtube.com/watch?v=6t4dVAkoso8">Original video</a>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Failure patterns and limitations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A high average CPU utilization may correlate with long thread latency yet leave a truly high-priority, unmasked hardware interrupt responsive. Conversely, brief interrupt masking may cause a rare response spike on an otherwise lightly loaded system. A logging statement inside an ISR can distort timing or block on an unsafe facility. An ISR that performs lengthy application work can also delay lower-priority requests even when the hardware responded promptly to its own trigger.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a field failure report, distinguish <strong>unobserved</strong>, <strong>observed but late</strong>, and <strong>observed on time yet functionally incorrect</strong>. The <a href="https://bitcoinversus.tech/2026/10/27/osfec-012-firmware-observability-structured-diagnostics/">firmware observability lesson</a> covers retention of timestamped evidence, while <a href="https://bitcoinversus.tech/2026/10/13/osfec-010-fault-handling-post-mortem-architecture/">OSFEC.010 fault handling</a> examines post-mortem state preservation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> On a common Cortex-M NVIC, is priority number 0 the weakest configurable interrupt priority? <strong>Answer:</strong> No. It is ordinarily the highest logical priority.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> Does a 3.6 µs ISR-start latency prove the application task runs after 3.6 µs? <strong>Answer:</strong> No. RTOS thread scheduling adds a separate response interval.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> If five measured samples have a 7.0 µs maximum, is 7.0 µs a guaranteed system-wide maximum? <strong>Answer:</strong> No. It is only the worst response observed in the small hypothetical sample.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">References and technical documentation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://arm-software.github.io/CMSIS_6/latest/Core/group__NVIC__gr.html">Arm CMSIS-Core NVIC reference</a>, official interrupt priorities, exceptions and CMSIS APIs.</li><li><a href="https://developer.arm.com/community/arm-community-blogs/b/embedded-and-microcontrollers-blog/posts/cutting-through-the-confusion-with-arm-cortex-m-interrupt-priorities">Arm, Cutting Through the Confusion with Cortex-M Interrupt Priorities</a>, priority numbering and shifted register encodings.</li><li><a href="https://github.com/FreeRTOS/FreeRTOS-Kernel-Book/blob/main/ch07.md">FreeRTOS Kernel Book, Interrupt Management</a>, official interrupt-safe RTOS APIs and priority rules.</li><li><a href="https://docs.zephyrproject.org/latest/services/debugging/zyclictest.html">Zephyr Project, zyclictest</a>, interrupt and thread latency estimation.</li><li><a href="https://kb.segger.com/Recording_Interrupts">SEGGER, Recording Interrupts</a>, trace hooks, runtime observations and limitations.</li><li><a href="https://doc.segger.com/UM08027_SystemView.html">SEGGER SystemView User Guide</a>, verified application features and recording analysis.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An interrupt is like a request for the chip to respond to something important. The time before the chip starts responding, the time spent handling the request, and the time until the application acts are separate measurements. A reliable engineer checks all three, assigns priorities carefully, and tests timing during realistic workloads instead of trusting a single quick reading.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Primary Arm CMSIS, FreeRTOS, Zephyr and SEGGER documentation informed the descriptions and constraints. Every timestamp and cycle calculation is a clearly labeled teaching example, not a physical experiment. The 1200×630 photorealistic featured cover is original AI-generated editorial illustration with the BitcoinVersus.tech bottom-left watermark; the internal SystemView image is a credited genuine SEGGER screenshot. The three videos originate from SEGGER, Golioth and Silicon Labs respectively. Rendered embeds are not proof of playback, and neither hardware timing tests nor independent desktop/mobile browser screenshots were performed.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR code for an optional 5,000-satoshi donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech optional 5,000-satoshi donation QR. Verify address and amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. Optional 5,000-satoshi contributions support research. Scan the QR from a second screen or import it into a compatible wallet. Independently confirm receiving address <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount. Bitcoin transactions are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on BitcoinVersus.Tech is Verifiably True. Educational content does not authorize unsafe electrical work or replace equipment-specific verification by qualified personnel.</em></p>
+<!-- /wp:paragraph -->

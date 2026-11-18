@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-11-17",
+  "wordpress_post_id": 33107,
+  "track_id": "OSFOEC.015",
+  "title": "OSFOEC.015 — Brillouin Distributed Strain Sensing: BOTDA, BOTDR and Temperature Compensation",
+  "publication_status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/17/osfoec-015-brillouin-distributed-strain-sensing-botda-botdr-temperature-compensation/",
+  "original_content_source": "Exact Gutenberg from WordPress context edit after successful publish. No rewrite.",
+  "gutenberg_characters": 22909,
+  "featured_image": {
+    "media_id": 33106,
+    "source_file": "osfoec-015-brillouin-strain-sensing-color-pencil-1200x630-1.jpg",
+    "dimensions_original": [
+      1200,
+      630
+    ],
+    "visual_style": "modern drawing/colored pencil",
+    "brand_tag": "neon green lettering on black bottom-left",
+    "exact_reference_pixel_match_unverified": true
+  },
+  "media": {
+    "youtube_video_ids": [
+      "AhbMCcRMPiQ",
+      "xRyknLf9gCc",
+      "WKnabBoResQ"
+    ],
+    "gutenberg_native_embed_count": 3,
+    "WordPress_rendered_iframe_count": 3,
+    "manufacturer_photo": "https://neubrex-infra.com/hs-fs/hubfs/Neubrescope-3.jpg?height=800&name=Neubrescope-3.jpg&width=1200",
+    "manufacturer_photo_credit_url": "https://neubrex-infra.com/products/neubrescope-nbx-7000-series",
+    "donation_qr_media_id": 24043
+  },
+  "quality": {
+    "live_http_status": 200,
+    "canonical_verified": true,
+    "title_and_meta_description_verified": true,
+    "open_graph_image_verified": true,
+    "seo_json_ld": [
+      "Person",
+      "Article",
+      "BreadcrumbList"
+    ],
+    "in_body_images_missing_alt": 0,
+    "unique_internal_links": 6,
+    "original_editorial_prohibited_words": [],
+    "boxed_code_found": false,
+    "documented_calculation": "(4.60-1.07*2.00)/0.0497=49.5 microstrain"
+  },
+  "limitations": [
+    "Independent YouTube playback untested despite rendered iframes.",
+    "Manufacturer image sourced by original provider URL; its loading inside the reader browser not independently checked.",
+    "Mobile viewport and original reference-logo pixel-match not independently assessed.",
+    "Physical fiber test, installation and field acceptance were not performed."
+  ],
+  "curriculum": {
+    "rotation_tracks": 43,
+    "next_subject_after_publication": "firmware_technician",
+    "next_number_expected": 17,
+    "older_duplicate_foec_007_posts_preserved": true
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-11-18",
+  "wordpress_post_id": 33116,
+  "track_id": "OSFEC.016",
+  "title": "OSFEC.016: Interrupt Latency and Jitter, NVIC Priority, ISR Timing, and Trace Validation",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/18/osfec-016-interrupt-latency-jitter-nvic-priority-isr-timing-trace-validation/",
+  "exact_source": "WordPress context=edit saved Gutenberg source; archived byte-for-byte, no local formatting changes",
+  "gutenberg_chars": 22530,
+  "featured_cover": {
+    "media_id": 33112,
+    "width": 1200,
+    "height": 630,
+    "style": "photorealistic editorial AI illustration",
+    "watermark": "neon green BitcoinVersus.tech on tight black background bottom left",
+    "exact_reference_logo_pixel_match_unverified": true
+  },
+  "media": {
+    "youtube_ids": [
+      "-HHW82z8AJw",
+      "tZBZKnjbbX4",
+      "6t4dVAkoso8"
+    ],
+    "saved_native_gutenberg_embed_blocks": 3,
+    "WordPress_rendered_iframes": 3,
+    "real_screenshot_src": "https://www.segger.com/fileadmin/images/Events/Webinar/SystemView_Webinar/SystemView_Webinar_Screenshot.png",
+    "screenshot_credit": "https://www.segger.com/support/training-classes/webinar-runtime-behavior-analysis/",
+    "qr_media_id": 24043
+  },
+  "quality": {
+    "live_http_status": 200,
+    "seo_title_meta_canonical_verified": true,
+    "open_graph_image_verified": true,
+    "images_missing_alt": 0,
+    "manuscript_word_count": 2006,
+    "unique_internal_links": 7,
+    "prohibited_prose_words": [],
+    "code_boxes_present": false,
+    "duplicate_post_id_search_count": 1,
+    "example_calculations": "103.6-100.0=3.6us; 109.2-103.6=5.6us; 114.4-100.0=14.4us; 160MHz*3.6us=576 cycles; average 4.28us"
+  },
+  "limitations": [
+    "Actual YouTube playback not independently tested despite server-rendered iframes.",
+    "Desktop/mobile visual and exact watermark-reference comparison not performed.",
+    "External SEGGER screenshot is linked to original host, reader-browser image loading not directly checked.",
+    "Hardware test and oscilloscope measurements not performed."
+  ],
+  "curriculum": {
+    "active_rotation_subjects": 43,
+    "coding_language_tracks": 20,
+    "historical_index_folder_count": 38,
+    "legacy_index_entries_as_of_2026_10_07": 626,
+    "next_subject": "history_money_technology_bitcoin",
+    "pending_legacy_subjects": [
+      "OSChef esoteric",
+      "NEC Review"
+    ]
+  }
+}

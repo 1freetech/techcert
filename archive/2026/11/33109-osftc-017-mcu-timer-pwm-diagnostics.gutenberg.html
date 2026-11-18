@@ -1,0 +1,185 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>OSFTC.017</strong> explains how a microcontroller creates carefully timed electrical pulses and how a firmware technician can verify the pulses without guessing. A timer inside the chip counts regular clock ticks. It can turn a digital output on for part of each cycle and off for the remaining part, producing a pulse-width-modulated signal, commonly called <strong>PWM</strong>. PWM can control an LED's apparent brightness, regulate a suitable fan-controller input or provide a command to a motor driver. The waveform is a timed digital signal, not an adjustable analog voltage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A signal that looks steady to the eye can still have the wrong frequency, duty cycle, voltage level or output route. A technician checks the approved expected values, reads the timer configuration and confirms the result with a properly connected oscilloscope or logic analyzer. The preceding <a href="https://bitcoinversus.tech/2026/11/07/osftc-016-mcu-clock-source-diagnostics-oscillators-pll-clock-failure/">OSFTC.016 clock-source diagnostics</a> covered oscillator and phase-locked-loop problems; a timer's behavior depends on the clock path examined there.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Learning goals:</strong> distinguish PWM period, frequency and duty cycle; explain prescaler (PSC), auto-reload (ARR) and capture/compare (CCR) settings; calculate expected waveforms; identify clock-tree and pin-routing mistakes; perform a low-voltage instrument check; and document evidence before changing firmware or hardware.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=4omSQHY0rDw","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=4omSQHY0rDw
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Official STMicroelectronics training: <strong>Hands-On with STM32 Timers: Custom Signal Generation using PWM and DMA, Part 1</strong>. Demonstrates a real STM32 Nucleo board, STM32CubeIDE and timer PWM output on a selected channel. <a href="https://www.youtube.com/watch?v=4omSQHY0rDw">Watch the original manufacturer video</a>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What timer hardware measures</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Many STM32 microcontrollers provide timers with a clock input, counting register, prescaler, period register, channel comparison registers and output-control logic. The prescaler reduces the counter tick rate. An auto-reload value defines the counter rollover in ordinary edge-aligned up-counting. A compare value determines when the channel changes its logical output state. The official <a href="https://wiki.st.com/stm32mcu/wiki/Getting_started_with_TIM">STMicroelectronics Getting started with TIM reference</a> introduces these settings and STM32CubeMX configuration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For common edge-aligned up-counting PWM mode 1, with active-high output and a timer clock called f<sub>TIM</sub>, the counter clock is approximately <strong>f<sub>counter</sub> = f<sub>TIM</sub> / (PSC + 1)</strong>. If the counter runs from zero through ARR, the ordinary PWM repetition frequency is <strong>f<sub>PWM</sub> = f<sub>counter</sub> / (ARR + 1)</strong>. For a compare value between zero and one complete period, the ideal active-high duty fraction is <strong>D ≈ CCR / (ARR + 1)</strong>. These relationships describe one specific counting and output mode, not every timer family.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A timer input clock is not always identical to the CPU frequency or the peripheral bus frequency. Some STM32 clock trees multiply a timer clock relative to a divided APB bus clock, while other families use different rules or selected kernel clocks. A technician must consult the particular chip's clock-tree documentation, peripheral registers and debug readback. Treating SystemCoreClock as every timer clock can yield a factor-of-two error.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked timer calculation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Teaching example:</strong> suppose a general-purpose timer receives an 80 MHz clock. The configured prescaler register is <strong>PSC = 79</strong>, giving 80,000,000 / 80 = <strong>1,000,000 counter ticks/s</strong>. The auto-reload register is <strong>ARR = 999</strong>, so the counter completes 1,000 ticks per PWM period. Frequency becomes 1,000,000 / 1,000 = <strong>1,000 Hz</strong>, or 1 kHz.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For active-high, edge-aligned PWM mode 1, choose <strong>CCR = 250</strong>. The ideal duty fraction is 250 / 1,000 = <strong>25%</strong>. Period is 1 / 1,000 Hz = <strong>1.00 ms</strong>; an oscilloscope should therefore show approximately <strong>0.25 ms high</strong> and <strong>0.75 ms low</strong>, assuming the output is enabled and no load distorts the waveform. These are calculations for a hypothetical timer, not measurements from physical hardware.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Do not interchange the software's <em>desired pulse width</em>, a driver API argument called <em>pulse</em>, and the raw register value without reviewing its documentation. Likewise, center-aligned counting traverses the count range in both directions and changes the relation between counter clock and waveform frequency. Output inversion, PWM mode 2, dead-time, complementary channels and special 0% or 100% behavior may alter observed pins. Advanced timers can also require a main-output-enable setting and a nonasserted break input.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inspecting the signal safely</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use an authorized, isolated low-voltage development setup and the instrument manufacturer's lead and grounding instructions. Many bench oscilloscopes have protective-earth-referenced probe grounds. Connecting that ground clip to a live or floating high-voltage node can create a short and an electric-shock hazard. Never use a standard grounded oscilloscope clip to investigate mains, inverter phases, power stages or other unknown-voltage nodes. A qualified technician must select an appropriately rated differential or isolated measurement arrangement when required.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><strong>Establish the safe baseline:</strong> identify board model, power source, expected logic level, signal frequency, duty cycle, output pin and connector reference ground.</li><li><strong>Review firmware settings:</strong> record timer clock source, PSC, ARR, CCR, PWM mode, edge/center alignment, output polarity, preload, timer enable and peripheral ownership.</li><li><strong>Trace pin routing:</strong> check the MCU alternate-function selection, board schematic, pin mapping, pull configuration and any external transistor, buffer or isolator between the timer and the accessible test point.</li><li><strong>Measure carefully:</strong> connect a suitably rated probe to an authorized low-voltage test point, choose an appropriate voltage range and time base, then record period, positive pulse width, duty percentage and logic levels.</li><li><strong>Compare evidence:</strong> distinguish absent switching, incorrect frequency, incorrect duty cycle, inverted polarity, jitter and load-induced distortion. Capture settings, screenshots and firmware version.</li><li><strong>Recover deliberately:</strong> change only approved parameters, rerun the same measurement, and retain previous configuration and results for rollback.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>For an unrelated microcontroller reset during testing, check supply integrity and the diagnostic context before blaming PWM. The existing <a href="https://bitcoinversus.tech/2026/11/01/osftc-015-brownout-reset-diagnostics-embedded-firmware/">brownout reset diagnosis</a> and <a href="https://bitcoinversus.tech/2026/10/07/osftc-005-watchdog-timers-reset-loops-timeouts-feeding-reset-causes-firmware-troubleshooting/">watchdog timer lesson</a> cover two distinct causes of unexpectedly interrupted output.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=uv4VXhzi7Ys","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=uv4VXhzi7Ys
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Official STMicroelectronics training: <strong>Hands-On with STM32 Timers: Complementary Variable Frequency PWM</strong>. Shows a manufacturer demonstration of center-aligned operation and complementary outputs; those advanced cases require their own timing and safety analysis. <a href="https://www.youtube.com/watch?v=uv4VXhzi7Ys">Watch the original manufacturer video</a>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Troubleshooting common mismatches</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>No waveform:</strong> the timer may be stopped, a channel disabled, a GPIO set to ordinary output rather than the correct alternate function, the wrong physical test point selected, or an advanced timer's output gate disabled. A PWM configuration inside software does not guarantee an active pin. Begin with pin routing and the read-only state of output-enable settings, not arbitrary register writes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Frequency differs by a factor of two:</strong> first compare timer clock and bus clock, then verify counting alignment. <strong>Frequency off by a smaller fixed ratio:</strong> examine prescaler and ARR off-by-one assumptions. <strong>Duty wrong but frequency right:</strong> inspect CCR, output polarity, preload behavior, PWM1/PWM2 selection and whether the measurement refers to positive pulse width or active time.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Jitter or unstable pulse width:</strong> distinguish a hardware-timer output from software bit-banging under interrupt load. Real hardware PWM can run without toggling its pin on every CPU interrupt. CPU scheduling may still affect when firmware updates CCR or ARR; DMA transfers, preload settings, bus contention and clock behavior may matter. The <a href="https://bitcoinversus.tech/2026/10/13/osftc-010-firmware-crash-logs-fault-recovery/">firmware crash-log lesson</a> provides broader diagnostic evidence collection practices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A logic analyzer may show edges and duty cycle, but it generally does not reveal analog rise time, overshoot, ringing or insufficient logic-high amplitude. An oscilloscope can show those voltage-domain defects if its bandwidth, sampling, probes and grounding arrangement are suitable. The instrument's displayed measurement remains subject to calibration and uncertainty.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Input capture is a different test</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Some timers can also measure an incoming waveform using input-capture channels. Captured counter values at successive edges reveal period or pulse width when interpreted with the timer's actual clock and rollover handling. That mode is different from output-compare PWM generation. The <a href="https://onlinedocs.microchip.com/oxy/GUID-76576783-C495-405D-B106-CD04836134D0-en-US-2/GUID-1591DA36-BD1A-425C-9E0A-08B74BDA0395.html">Microchip PWM technical brief</a> offers a separate implementation of capture/compare/PWM principles; register names and timer structures vary across MCU vendors.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a test in which an expected 1 kHz PWM is measured as 1.02 kHz, the absolute deviation is 20 Hz and relative deviation is <strong>(1,020 − 1,000) / 1,000 × 100 = +2%</strong>. Before calling the result a timer fault, establish instrument accuracy, clock tolerance, actual configuration, measurement gate duration and acceptable system requirements. No universal ±2% pass/fail rule is implied.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=QMAgD9SS5_E","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=QMAgD9SS5_E
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Official STMicroelectronics training: <strong>Hands-On with STM32 Timers: Internal Triggering System</strong>. Demonstrates linked hardware timers and phase-shifted PWM, illustrating why timer synchronization must be identified before comparing channels. <a href="https://www.youtube.com/watch?v=QMAgD9SS5_E">Watch the original manufacturer video</a>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practical documentation exercise</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Using only the hypothetical 80 MHz example, write an acceptance record containing source clock 80 MHz, PSC 79, ARR 999, CCR 250, edge-aligned PWM1, active-high output, target 1 kHz and 25% duty, calculated period 1.00 ms, and expected high interval 0.25 ms. A blank observation field must remain blank until a qualified operator performs an actual measurement. Record measured and expected quantities separately.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A valid engineering record also includes the exact MCU and board revisions, firmware build, pin location, instrument calibration identifier, probe configuration, screenshot filename, ambient conditions if relevant, technician, timestamp and test authorization. When updating firmware, preserve the <a href="https://bitcoinversus.tech/2026/10/05/osftc-003-firmware-backup-recovery-checksums-golden-images-rollback-validation/">backup and recovery workflow</a> before changing timer initialization.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> With an 80 MHz timer clock and PSC of 79, what is the counter tick rate? <strong>Answer:</strong> 1 MHz, because the divider is PSC + 1 = 80.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> For ARR of 999 and CCR of 500 in the stated PWM mode, what ideal active-high duty fraction is expected? <strong>Answer:</strong> 50%, because 500 / 1,000 = 0.5.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> Does seeing 1 kHz on a logic analyzer prove electrical amplitude and edge quality? <strong>Answer:</strong> No. Those properties require suitable analog measurement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Primary technical references</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li><a href="https://wiki.st.com/stm32mcu/wiki/Getting_started_with_TIM">STMicroelectronics, Getting started with TIM</a>, official guidance for STM32 timer configuration, prescalers and PWM.</li><li><a href="https://www.st.com/en/embedded-software/stm32cube-mcu-mpu-packages.html">STMicroelectronics STM32Cube software documentation</a>, device-specific example packages; consult the matching family reference manual.</li><li><a href="https://onlinedocs.microchip.com/oxy/GUID-76576783-C495-405D-B106-CD04836134D0-en-US-2/GUID-1591DA36-BD1A-425C-9E0A-08B74BDA0395.html">Microchip Technology, Getting Started with PWM</a>, official CCP/PWM principles and example configurations.</li><li><a href="https://www.microchip.com/en-us/about/media-center/blog/2024/how-to-select-a-timer-on-pic-mcus">Microchip Technology, How to Select a Timer on PIC MCUs</a>, timer mode comparison and application context.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A timer is a small clock-based counter built into the microcontroller. PWM uses the counter to repeat an on/off signal at a chosen rate and with a chosen share of time on. By checking the timer clock, prescaler, period, compare setting and actual output pin, a technician can find out why the real signal differs from the intended one. The safest diagnosis combines exact calculations with carefully authorized low-voltage measurements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> The examples are instructional calculations checked against official STMicroelectronics and Microchip materials. The featured oil painting is original AI-generated editorial art, not a photograph of an operational lab. All three in-body videos are genuine STMicroelectronics training entries. WordPress may render YouTube iframes without independent confirmation that a particular device can play them. No electrical bench testing, firmware upload, oscilloscope hookup or live-hardware verification was performed. Safety limitations, model-specific differences and measurement uncertainty remain essential.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR code for an optional 5,000-satoshi donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi donation QR. Independently verify the address and amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. An optional <strong>5,000-satoshi</strong> contribution supports research. Scan the QR using a second screen or import a saved QR image into a compatible wallet. Independently confirm the destination <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount; Bitcoin payments are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on BitcoinVersus.Tech is Verifiably True. Educational content is not permission to perform hazardous electrical testing, and does not replace equipment-specific service manuals or qualified supervision.</em></p>
+<!-- /wp:paragraph -->

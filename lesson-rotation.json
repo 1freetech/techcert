@@ -48,39 +48,40 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "firmware_engineer",
-    "lesson_number": 16,
-    "track_id": "OSFEC.016",
-    "title": "OSFEC.016: Interrupt Latency and Jitter, NVIC Priority, ISR Timing, and Trace Validation",
-    "public_title": "OSFEC.016: Interrupt Latency and Jitter, NVIC Priority, ISR Timing, and Trace Validation",
-    "wordpress_post_id": 33116,
-    "live_url": "https://bitcoinversus.tech/2026/11/18/osfec-016-interrupt-latency-jitter-nvic-priority-isr-timing-trace-validation/",
-    "archive_path": "archive/2026/11/33116-osfec-016-interrupt-latency-jitter.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/33116-osfec-016-interrupt-latency-jitter.qa.json",
+    "subject": "history_money_technology_bitcoin",
+    "lesson_number": 18,
+    "track_id": "OSHistory.018",
+    "title": "OSHistory.018 — Dutch Tulip Mania, 1636–1637: Contracts, Prices, Collapse, and Historical Myths",
+    "public_title": "OSHistory.018 — Dutch Tulip Mania, 1636–1637: Contracts, Prices, Collapse, and Historical Myths",
+    "wordpress_post_id": 33143,
+    "live_url": "https://bitcoinversus.tech/2026/11/18/oshistory-018-dutch-tulip-mania-1636-1637-contracts-prices-collapse-historical-myths/",
+    "archive_path": "archive/2026/11/33143-oshistory-018-tulip-mania-1637.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/33143-oshistory-018-tulip-mania-1637.qa.json",
     "verified_repositories": [
       "1freetech/techcert",
       "1freetech/opencert.tech",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 33112,
-    "authentic_photo_url": "https://www.segger.com/fileadmin/images/Events/Webinar/SystemView_Webinar/SystemView_Webinar_Screenshot.png",
-    "body_video_ids": [
-      "-HHW82z8AJw",
-      "tZBZKnjbbX4",
-      "6t4dVAkoso8"
+    "featured_media_id": 33130,
+    "authentic_museum_media_ids": [
+      33133,
+      33134
     ],
-    "verification_status": "WordPress published and live HTTP 200, 3 native YouTube embeds converted to iframes, original cover 1200x630 and SEO canonical/alt verified. Exact Gutenberg and QA read back byte-for-byte from 3 repositories. Playback, external screenshot load, pixel-identical reference logo and mobile visual QA not independently verified.",
-    "qa_status": "2,006 manuscript words, 7 contextual internal links, 4 in-story media (3 genuine videos and 1 official SEGGER screenshot), original QR, no code boxes, editor note and disclaimer, illustrative calculations marked."
+    "body_video_ids": [
+      "kbr971h2piE"
+    ],
+    "verification_status": "Published WordPress HTTP 200; Getty YouTube embed renders one iframe; both public-domain museum art images uploaded and rendered; original cover 1200x630, SEO canonical/OG and alt verified; exact Gutenberg and QA archives read back identical in three repositories. Independent playback, mobile visual and exact brand-reference pixel match unverified.",
+    "qa_status": "1674 original manuscript words, 5 contextual internal article links, 3 in-story source-backed media, original 5000 sat QR, editor note, no code/text boxes, historical price/contract distinction checked."
   },
   "next": {
-    "subject": "history_money_technology_bitcoin",
-    "lesson_number": 18,
-    "title_format": "OSHistory.018 — {topic}",
-    "public_title_format": "OSHistory.018 — {topic}",
-    "resolution_note": "Check existing published/drafts across WordPress and 3 GitHub archives, plus latest chronology, before choosing lesson topic."
+    "subject": "history_of_engineering",
+    "lesson_number": 6,
+    "title_format": "OSHE.{number} — {topic}",
+    "public_title_format": "OSHE.{number} — {topic}",
+    "resolution_note": "Check latest published OSHE and draft posts, plus all three GitHub archives and historical coverage, before selecting next engineering-history lesson."
   },
-  "next_after_current": "history_of_engineering",
+  "next_after_current": "history_materials_science",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -132,10 +133,12 @@
     },
     "history_money_technology_bitcoin": {
       "acronym": "OSHistory",
-      "next_lesson_number": 18,
-      "last_published_lesson_number": 17,
-      "last_wordpress_post_id": 30808,
-      "last_crash_year": 1623
+      "next_lesson_number": 19,
+      "last_published_lesson_number": 18,
+      "last_wordpress_post_id": 33143,
+      "last_crash_year": 1637,
+      "last_published_title": "OSHistory.018 — Dutch Tulip Mania, 1636–1637: Contracts, Prices, Collapse, and Historical Myths",
+      "verification_status": "published_archived_exact_3_repos_page_render_verified"
     },
     "information_technology": {
       "acronym": "OSITC",
@@ -417,30 +420,31 @@
     }
   },
   "last_published": {
-    "subject": "firmware_engineer",
-    "lesson_number": 16,
-    "track_id": "OSFEC.016",
-    "title": "OSFEC.016: Interrupt Latency and Jitter, NVIC Priority, ISR Timing, and Trace Validation",
-    "public_title": "OSFEC.016: Interrupt Latency and Jitter, NVIC Priority, ISR Timing, and Trace Validation",
-    "wordpress_post_id": 33116,
-    "live_url": "https://bitcoinversus.tech/2026/11/18/osfec-016-interrupt-latency-jitter-nvic-priority-isr-timing-trace-validation/",
-    "archive_path": "archive/2026/11/33116-osfec-016-interrupt-latency-jitter.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/33116-osfec-016-interrupt-latency-jitter.qa.json",
+    "subject": "history_money_technology_bitcoin",
+    "lesson_number": 18,
+    "track_id": "OSHistory.018",
+    "title": "OSHistory.018 — Dutch Tulip Mania, 1636–1637: Contracts, Prices, Collapse, and Historical Myths",
+    "public_title": "OSHistory.018 — Dutch Tulip Mania, 1636–1637: Contracts, Prices, Collapse, and Historical Myths",
+    "wordpress_post_id": 33143,
+    "live_url": "https://bitcoinversus.tech/2026/11/18/oshistory-018-dutch-tulip-mania-1636-1637-contracts-prices-collapse-historical-myths/",
+    "archive_path": "archive/2026/11/33143-oshistory-018-tulip-mania-1637.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/33143-oshistory-018-tulip-mania-1637.qa.json",
     "verified_repositories": [
       "1freetech/techcert",
       "1freetech/opencert.tech",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 33112,
-    "authentic_photo_url": "https://www.segger.com/fileadmin/images/Events/Webinar/SystemView_Webinar/SystemView_Webinar_Screenshot.png",
-    "body_video_ids": [
-      "-HHW82z8AJw",
-      "tZBZKnjbbX4",
-      "6t4dVAkoso8"
+    "featured_media_id": 33130,
+    "authentic_museum_media_ids": [
+      33133,
+      33134
     ],
-    "verification_status": "WordPress published and live HTTP 200, 3 native YouTube embeds converted to iframes, original cover 1200x630 and SEO canonical/alt verified. Exact Gutenberg and QA read back byte-for-byte from 3 repositories. Playback, external screenshot load, pixel-identical reference logo and mobile visual QA not independently verified.",
-    "qa_status": "2,006 manuscript words, 7 contextual internal links, 4 in-story media (3 genuine videos and 1 official SEGGER screenshot), original QR, no code boxes, editor note and disclaimer, illustrative calculations marked."
+    "body_video_ids": [
+      "kbr971h2piE"
+    ],
+    "verification_status": "Published WordPress HTTP 200; Getty YouTube embed renders one iframe; both public-domain museum art images uploaded and rendered; original cover 1200x630, SEO canonical/OG and alt verified; exact Gutenberg and QA archives read back identical in three repositories. Independent playback, mobile visual and exact brand-reference pixel match unverified.",
+    "qa_status": "1674 original manuscript words, 5 contextual internal article links, 3 in-story source-backed media, original 5000 sat QR, editor note, no code/text boxes, historical price/contract distinction checked."
   },
   "pending_publication_qa": [
     {
@@ -823,12 +827,23 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "WordPress HTTP 200, 3 rendered YouTube iframes, 1200x630 original cover, valid SEO and no missing alt. Exact saved source and QA read back identical across all three repositories."
+    },
+    {
+      "wordpress_post_id": 33143,
+      "live_url": "https://bitcoinversus.tech/2026/11/18/oshistory-018-dutch-tulip-mania-1636-1637-contracts-prices-collapse-historical-myths/",
+      "unresolved": [
+        "Independent YouTube video playback on a mobile/browser not tested.",
+        "Exact reference-logo pixel comparison and mobile screenshot visual QA unverified."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "WordPress server returned public HTTP 200, Getty lecture iframe rendered, two museum art images uploaded, source 1200x630 cover, SEO and alt validated; exact saved Gutenberg and QA files identical across all three repos."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 33116,
-    "last_style": "photorealistic editorial photography",
-    "next_style": "cinematic anime illustration",
+    "last_post_id": 33143,
+    "last_style": "cinematic anime illustration",
+    "next_style": "modern drawing / colored-pencil illustration",
     "approved_styles": [
       "photorealistic editorial photography",
       "cinematic anime illustration",
@@ -840,9 +855,9 @@
     "human_subject_policy": "Choose equipment, code, scene or topic first; rotate demographics when people are genuinely relevant, never insert people solely to meet rotation.",
     "subject_first_requirement": "Depict the actual work, material, hardware, software behavior, mechanism, data or event; no generic desktop/portrait.",
     "former_demographic_rotation": "retired by explicit user directive November 1, 2026",
-    "last_cover_media_id": 33112,
-    "last_cover_note": "Photorealistic editorial image of Cortex-M hardware, logic-analyzer tracing and oscilloscope; neon-green BitcoinVersus.tech tag against tight black highlight bottom-left.",
-    "last_cover_status": "WordPress original media dimensions 1200x630 confirmed, OG image and alt text verified. Mobile/pixel watermark match unverified.",
+    "last_cover_media_id": 33130,
+    "last_cover_note": "Original cinematic anime 17th-century Dutch tulip-trading room cover, candlelit merchants and botanical documents with bottom-left neon-green BitcoinVersus.tech on black highlight.",
+    "last_cover_status": "Media original dimensions 1200x630, OG image verified, same-brand label appearance observed from generated illustration, exact reference-pixel match and mobile browser screenshots unverified.",
     "next_person_note": "People prohibited on new covers. Use relevant technical split-screen diptych without humans for OSSolidity.002.",
     "latest_exception_note": {
       "post_id": 28650,

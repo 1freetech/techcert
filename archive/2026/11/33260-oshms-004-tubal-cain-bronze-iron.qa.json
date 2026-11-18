@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "publication_date": "2026-11-18",
+  "lesson_id": "OSHMS.004",
+  "wordpress_post_id": 33260,
+  "title": "OSHMS.004: Tubal-Cain, Bronze and Iron — Scripture, Archaeology, and Early Alloy Engineering",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/18/oshms-004-tubal-cain-bronze-iron-scripture-archaeology-alloy-engineering/",
+  "content_source": "Exact WordPress saved Gutenberg content retrieved in edit context after two iframe embed repairs; no local changes for archive",
+  "gutenberg_characters": 9648,
+  "curriculum": {
+    "canonical_active_tracks": 43,
+    "coding_tracks": 20,
+    "historical_index_snapshot": "626 entries in 38 folders (2026-10-07 historical snapshot; not live current lesson count)",
+    "explicit_curriculum_plan": "OSHMS.000 reserved Tubal-Cain in OSHMS.004",
+    "previous_lesson": "OSHMS.003 (WordPress 30935)",
+    "next_track": "information_technology"
+  },
+  "media": {
+    "featured_cover_id": 33246,
+    "original_cover_dimensions": [
+      1200,
+      630
+    ],
+    "cover_style": "fine-art oil painting",
+    "logo_note": "Neon-green BitcoinVersus.tech lettering with tight black highlight bottom-left, exact sample pixel comparison not performed",
+    "source_images": [
+      {
+        "id": 33248,
+        "provider": "The Metropolitan Museum of Art",
+        "object": "1992.149.7",
+        "rights": "public domain",
+        "source": "https://www.metmuseum.org/art/collection/search/327471"
+      },
+      {
+        "id": 33247,
+        "provider": "Portable Antiquities Scheme / Trustees of the British Museum",
+        "photographer": "Birmingham Museums Trust / Caroline Johnson",
+        "rights": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Early_Bronze_Age_flat_axe_(front_and_back_views)_(FindID_135333).jpg"
+      }
+    ],
+    "official_videos": [
+      {
+        "id": "Ohij1e2oZio",
+        "publisher": "London Museum"
+      },
+      {
+        "id": "28ZUM8OrIko",
+        "publisher": "Asian Art Museum"
+      }
+    ],
+    "native_youtube_blocks": 2,
+    "rendered_iframes_after_fix": 2,
+    "qr_media_id": 24043
+  },
+  "quality": {
+    "public_http_status": 200,
+    "canonical_verified": true,
+    "seo_title_and_description_verified": true,
+    "og_featured_image_verified": true,
+    "cover_original_dimensions_verified": true,
+    "images_missing_alt": 0,
+    "original_manuscript_words": 666,
+    "internal_links_unique": 4,
+    "previous_lessons_linked": [
+      "OSHMS.000",
+      "OSHMS.001",
+      "OSHMS.002",
+      "OSHMS.003"
+    ],
+    "code_boxes_present": false,
+    "prohibited_words": [],
+    "exact_slug_post_count": 1
+  },
+  "fact_check": {
+    "genesis": "Genesis 4:22 textually names Tubal-Cain; independent historical confirmation/date not claimed",
+    "chemistry": "Hypothetical 2.00 kg batch 90% Cu and 10% Sn yields 1.80 kg Cu and 0.20 kg Sn by mass",
+    "ancient_metal": "Copper, tin bronze, copper-arsenic alloys and iron distinguished; regional chronology not collapsed",
+    "cited_sources": [
+      "Sefaria Genesis 4:22",
+      "Encyclopedia of the Bible",
+      "Metropolitan Museum of Art 2025 metallurgy findings",
+      "The Met copper-alloy axe object 1992.149.7",
+      "Portable Antiquities Scheme record 135333",
+      "London Museum",
+      "Asian Art Museum"
+    ]
+  },
+  "limits": [
+    "YouTube video players are server-rendered as iframes, but independent device playback was not verified.",
+    "Desktop/mobile viewport screenshots and exact brand sample pixel comparison were not performed.",
+    "No physical metal casting or experimental archaeology was performed."
+  ],
+  "issue_and_fix": "Initial Gutenberg video wrappers lacked required line breaks and rendered as links. WordPress content was updated to newline-delimited canonical embed wrappers, retested, and showed two iframe players."
+}

@@ -1,0 +1,216 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>OSFOTC.017</strong> explains how technicians confirm that every fiber in a multi-fiber cable reaches the correct position at the opposite end. Imagine a group of tiny light pipes running between two rooms. A cable can carry light well yet still connect the wrong transmitter to the wrong receiver. <strong>Fiber polarity</strong> identifies the path that each signal follows. A careful check prevents a working cable from being mistaken for a working network link.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <strong>multi-fiber push-on (MPO)</strong> connector holds several fibers in one ferrule. <strong>MTP®</strong> is a trademarked MPO-family connector design, not a separate universal polarity standard. Modern data centers use array connectors to simplify dense cabling. The preceding <a href="https://bitcoinversus.tech/2026/11/07/osfotc-016-fiber-macrobend-microbend-dual-wavelength-otdr-diagnosis/">OSFOTC.016 bend-diagnosis lesson</a> focused on optical loss; the new topic separates <em>correct destination</em> from <em>acceptable attenuation</em>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Learning goals:</strong> distinguish connector orientation from fiber routing; identify Type A, B and C cable mappings; explain why Tx must reach Rx; measure individual-fiber continuity and insertion loss; and document a safe acceptance test. All examples are educational and do not substitute for the approved site method of procedure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=f0VyWuP4guQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=f0VyWuP4guQ
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Fluke Networks, <strong>Basic Testing with the MultiFiber Pro</strong> (2018): an official demonstration of reference setup, MPO trunk testing, result interpretation and field-test precautions.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What polarity means at the link</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A typical optical transmitter (Tx) sends light toward an optical receiver (Rx). On a duplex connection, the Tx at one device must reach the Rx at the other, and the reverse path must also arrive at its intended receiver. In an array connector, that relationship may involve many separate positions. <a href="https://bitcoinversus.tech/2026/10/06/osfotc-004-fiber-connector-types-polarity-lc-sc-upc-apc-mpo-mtp-tx-rx-vfl-verification/">OSFOTC.004 introduced connector types and Tx/Rx polarity</a>; the focus here is traceable position-by-position verification.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Polarity is not the same quantity as insertion loss. A low-loss cable can map transmit positions to the wrong fibers. Conversely, a correctly mapped cable can fail an insertion-loss budget because of contaminated ends, stressed cable or a faulty connector. A technician records <strong>both</strong> the connectivity map and optical loss rather than treating one result as proof of the other. For equipment background, review the site's <a href="https://bitcoinversus.tech/2026/11/01/optical-transceivers-complete-guide-sfp-qsfp-fiber-links-800g/">optical transceiver guide</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Understanding Type A, Type B and Type C cables</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The Fiber Optic Association and Fluke Networks describe three common MPO cable-assembly mappings. Under a consistent connector-position reference, the essential patterns for a twelve-position assembly are:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list">
+<li><strong>Type A — straight through:</strong> position 1 reaches position 1; position 2 reaches position 2; the pattern continues through 12 → 12.</li>
+<li><strong>Type B — full reversal:</strong> position 1 reaches 12; 2 reaches 11; 3 reaches 10; the pattern continues through 12 → 1.</li>
+<li><strong>Type C — adjacent-pair swap:</strong> position 1 reaches 2 and 2 reaches 1; 3 reaches 4 and 4 reaches 3; later pairs follow the same exchange.</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><strong>Important distinction:</strong> Type A/B/C describes a cable mapping, while polarity <em>Methods</em> A/B/C describe channel-level combinations of trunks, adapters and patch cords. A channel using a Type A trunk need not produce an end-to-end straight-through result. Adapter key orientation, cassette construction and patch-cord selection can change the final path. The <a href="https://www.tiafotc.org/tia-standards-update/tia-568-3-e/">TIA Fiber Optics Tech Consortium's ANSI/TIA-568.3-E summary</a> explains the different supported arrangements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The connector key is a physical orientation feature, and guide pins align mating ferrules. Neither the key nor the presence of pins independently proves the optical mapping. Record the defined viewing direction and position-number convention; looking at opposite connector faces without adjusting the reference can make a correct assembly appear reversed. Confirm pinned-versus-unpinned mating compatibility before connecting test leads. The <a href="https://www.thefoa.org/tech/ref/testing/test/test-MPO.html">Fiber Optic Association's MPO testing reference</a> covers these practical complications.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why the correct mapping depends on optics</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In a common eight-fiber parallel-optics arrangement using a twelve-position MPO interface, four outer positions carry transmission in one direction and four positions at the opposite side carry reception. A reversal may be required somewhere in the complete channel. Other transceiver designs use different position counts, lane assignments or bidirectional schemes, so do not infer a universal lane map solely from a connector's twelve visible openings. Read the actual transceiver and cabling documentation. For higher-speed equipment context, compare <a href="https://bitcoinversus.tech/2026/11/14/osntc-042-osfp-vs-qsfp-dd-800g-host-cages-lanes-compatibility/">OSFP and QSFP-DD host compatibility</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For example, a specified Type B twelve-position trunk should send a test signal launched at position 2 to position 11 at the opposite connector. If the instrument sees position 2 instead, the assembly or channel mapping differs from the expected plan. That finding is a <strong>polarity mismatch</strong>; it is not evidence that position 2 has high attenuation. Testing must also identify whether the fault belongs to a patch cord, cassette, adapter selection or trunk.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=GqNIamt1b78","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=GqNIamt1b78
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Fluke Networks, <strong>MultiFiber Pro Optical Power Meter and Light Source</strong> (2012): manufacturer training material showing automated fiber-by-fiber continuity and polarity checking on MPO connections.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inspect, clean and protect the connectors</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Begin with the site-approved safety procedure and confirm whether the circuit is energized. <strong>Never look into a fiber or connector</strong> to determine whether an optical source is operating; some wavelengths are invisible. Use a suitable meter or authorized live-fiber detection procedure. Treat every optical connection as potentially active until verified otherwise. Follow applicable eye-safety requirements and avoid disturbing production links without authorization.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Inspect each exposed end face with an appropriate fiber inspection instrument, clean with a validated method, and reinspect as required. MPO ferrules contain multiple fibers; one dirty position can fail an otherwise good array. The inspection outcome should not be fabricated from an insertion-loss test. Compare the earlier <a href="https://bitcoinversus.tech/2026/10/25/osfotc-012-fiber-connector-endface-inspection-iec-pass-fail/">OSFOTC.012 end-face inspection lesson</a> and the <a href="https://www.flukenetworks.com/expertise/learn-about/multi-fiber-push-mpo-connectors">Fluke Networks MPO technical reference</a>, which discusses inspection under IEC 61300-3-35.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full","linkDestination":"custom"} -->
+<figure class="wp-block-image size-full"><a href="https://www.flukenetworks.com/datacom-cabling/fiber-testing/multifiber-pro-optical-power-meter-and-fiber-testing-kits"><img src="https://www.flukenetworks.com/sites/default/files/other/mfpro.jpg" alt="Official manufacturer photograph of Fluke Networks MultiFiber Pro optical meter and light source connected to MPO test leads" loading="lazy" /></a><figcaption class="wp-element-caption">Authentic manufacturer photo: Fluke Networks MultiFiber Pro testing equipment. Image: Fluke Networks; <a href="https://www.flukenetworks.com/datacom-cabling/fiber-testing/multifiber-pro-optical-power-meter-and-fiber-testing-kits">official product and technical source</a>. The photo shows real equipment, not the generated cover illustration.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A documented field-verification procedure</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A repeatable acceptance workflow records the physical cable, the instrument configuration and the expected map before any corrective action:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list">
+<li><strong>Identify the channel:</strong> record rack endpoints, fiber count, connector variant, manufacturer part numbers, trunk ID, planned Tx/Rx assignments, adapter orientations and approved test limits.</li>
+<li><strong>Establish a safe test state:</strong> obtain authorization, check for active optical signals with suitable equipment and apply the relevant isolation or live-system rules.</li>
+<li><strong>Inspect and clean:</strong> document end-face condition, correct contamination using approved tools, and reinspect before mating test connectors.</li>
+<li><strong>Set a measurement reference:</strong> use the specified optical light source, MPO-compatible power meter or optical-loss test set (OLTS), matching wavelengths and approved test-reference cords; capture the reference method.</li>
+<li><strong>Verify each position:</strong> confirm the observed destination of the launched fiber against the expected end-to-end map, including unpopulated positions and any lane-group conversions.</li>
+<li><strong>Measure loss:</strong> record wavelength-specific insertion loss for every required active fiber, compare against the approved link budget and log instrument uncertainty and test-cord condition.</li>
+<li><strong>Resolve any mismatch:</strong> check the channel design, cassettes, patch cords, polarity configuration and allowed interchangeable components. Do not randomly flip or reterminate production links.</li>
+<li><strong>Retest and hand off:</strong> repeat the complete approved verification, save traceable results and identify the final accepted configuration.</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.flukenetworks.com/datacom-cabling/fiber-testing/multifiber-pro-optical-power-meter-and-fiber-testing-kits">Fluke Networks MultiFiber Pro documentation</a> describes a tester designed to examine individual MPO positions for both power/loss and polarity. A basic continuity light or visual fault locator may help with limited checks, but it does not replace a documented multi-position optical loss test or guarantee correct performance across every operating wavelength.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked example: mapping and loss are separate</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Classroom mapping:</strong> the approved build sheet calls for a Type B twelve-position assembly. A source applied to input positions 1, 2 and 3 should appear at output positions 12, 11 and 10, respectively. Suppose a mapper reports 1 → 12, 2 → 11 and 3 → 3. Two positions match, while the third does not. Mark the assembly as <em>failed polarity verification</em> for the specified design and investigate the full path. A low optical-loss reading at position 3 would not overturn the mismatch.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Classroom attenuation:</strong> if the referenced optical power is 1.00 mW and measured output power is 0.50 mW, insertion loss is <strong>10 log<sub>10</sub>(1.00 / 0.50) = 3.01 dB</strong>. An approximately 3.01 dB reduction corresponds to half the referenced optical power. No pass or fail decision is possible without the actual wavelength, reference configuration, required connector/splice budget and measurement uncertainty. A calculated example is not a measured site result.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If a tester reports in dBm, a difference in two readings using the same reference convention produces a loss in dB: <strong>0.00 dBm − (−3.01 dBm) = 3.01 dB</strong>. The meaning of the reading still depends on how the test reference was established. For additional optical-loss context, consult <a href="https://bitcoinversus.tech/2026/11/08/dbm-decibel-milliwatt-fiber-optics/">dBm in fiber optics</a> and <a href="https://bitcoinversus.tech/2026/10/12/osfotc-009-fiber-optic-link-testing-certification/">OSFOTC.009 on certification</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=-yt8dnb4PyA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=-yt8dnb4PyA
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Fluke Networks, <strong>How to Test Fiber Polarity with the FiberLert Live Fiber Detector</strong>: official supplementary training for a simpler fiber-polarity check. A single-fiber demonstration must not be mistaken for twelve-position MPO certification.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Failure modes and limitations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A failed link may result from a wrong cassette type, an unexpected Type B patch cord, an incompatible pinned connector pair, an inverted position reference, a contaminated fiber, a damaged test reference cord or an incorrect instrument configuration. Swapping patch cords until link LEDs illuminate can conceal an undocumented channel design and make later maintenance hazardous. Record the actual mapping, not only the observed link-up state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Older polarity discussions often use twelve-position examples, while modern facilities may have 8-, 16-, 24- or other fiber configurations. The definitions and intermateability requirements depend on the physical interface and applicable standards. The IEC TR 61282-15 guidance and ANSI/TIA-568.3-E framework do not replace a particular transceiver vendor's lane map or an approved site acceptance specification.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> Does a 0.5 dB insertion-loss result prove that Tx reaches the intended Rx? <strong>Answer:</strong> No. Loss and destination mapping are independently verified.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> In a defined twelve-position Type B assembly, which far-end position corresponds to position 4? <strong>Answer:</strong> position 9, assuming the specified numbering reference.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Question:</strong> May a technician inspect an unverified fiber by looking into its connector? <strong>Answer:</strong> No. Use approved optical safety and test equipment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">References and standards</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list">
+<li><a href="https://www.thefoa.org/tech/ref/testing/test/test-MPO.html">Fiber Optic Association — Testing Cables with Multifiber/Array Connectors</a> (educational reference).</li>
+<li><a href="https://www.flukenetworks.com/blog/cabling-chronicles/b-c-s-fiber-polarity">Fluke Networks — Fiber Polarity Basics</a> (manufacturer technical explanation).</li>
+<li><a href="https://www.tiafotc.org/tia-standards-update/tia-568-3-e/">TIA Fiber Optics Tech Consortium — ANSI/TIA-568.3-E summary</a> (standards overview, not the full paid standard).</li>
+<li><a href="https://www.flukenetworks.com/expertise/learn-about/multi-fiber-push-mpo-connectors">Fluke Networks — MPO and MTP connector overview</a> (inspection, connector interfaces and testing).</li>
+<li><a href="https://www.flukenetworks.com/datacom-cabling/fiber-testing/multifiber-pro-optical-power-meter-and-fiber-testing-kits">Fluke Networks — MultiFiber Pro product documentation</a> (vendor-specific equipment capabilities).</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A multi-fiber cable must do two jobs: carry enough light and send each light signal to the correct destination. A well-made connector and a good power reading do not prove that the paths are wired correctly. A technician identifies the planned map, checks every required fiber, measures loss, and saves the results. Clear records make dense data-center cabling easier to maintain without guesswork.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Technical guidance was checked against the Fiber Optic Association, Fluke Networks and TIA Fiber Optics Tech Consortium. Type A/B/C examples assume the explicitly stated twelve-position reference and are not a universal lane assignment for every transceiver. The original 1200 × 630 featured illustration is AI-generated editorial art; the in-story test-instrument photograph belongs to Fluke Networks and is credited and linked to the source. Video IDs correspond to original Fluke Networks YouTube materials. Actual device testing, independent video playback, external image hotlink availability and mobile viewport screenshots were not performed.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium" style="max-width:260px;margin:1.25rem auto"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR code for an optional 5,000-satoshi donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-satoshi donation QR. Independently verify the receiving address and amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. An optional <strong>5,000-satoshi</strong> donation supports research. Scan the original QR from a second screen with a compatible Bitcoin wallet; on the same phone, use a wallet supporting image import. Independently verify recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before sending. Bitcoin transactions are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on BitcoinVersus.Tech is Verifiably True. Educational material does not authorize changes to live optical networks or replace site-specific training, safety rules and acceptance criteria.</em></p>
+<!-- /wp:paragraph -->

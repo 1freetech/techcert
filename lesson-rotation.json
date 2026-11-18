@@ -1,6 +1,6 @@
 {
   "schema_version": 8,
-  "updated_at": "2026-11-17",
+  "updated_at": "2026-11-18",
   "rotation": [
     "data_center_technician",
     "data_center_engineer",
@@ -48,38 +48,39 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "firmware_technician",
-    "lesson_number": 17,
-    "track_id": "OSFTC.017",
-    "title": "OSFTC.017 — MCU Timer and PWM Diagnostics: Prescalers, Duty Cycle and Oscilloscope Checks",
-    "public_title": "OSFTC.017 — MCU Timer and PWM Diagnostics: Prescalers, Duty Cycle and Oscilloscope Checks",
-    "wordpress_post_id": 33109,
-    "live_url": "https://bitcoinversus.tech/2026/11/17/osftc-017-mcu-timer-pwm-diagnostics-prescalers-duty-cycle-oscilloscope-checks/",
-    "archive_path": "archive/2026/11/33109-osftc-017-mcu-timer-pwm-diagnostics.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/33109-osftc-017-mcu-timer-pwm-diagnostics.qa.json",
+    "subject": "firmware_engineer",
+    "lesson_number": 16,
+    "track_id": "OSFEC.016",
+    "title": "OSFEC.016: Interrupt Latency and Jitter, NVIC Priority, ISR Timing, and Trace Validation",
+    "public_title": "OSFEC.016: Interrupt Latency and Jitter, NVIC Priority, ISR Timing, and Trace Validation",
+    "wordpress_post_id": 33116,
+    "live_url": "https://bitcoinversus.tech/2026/11/18/osfec-016-interrupt-latency-jitter-nvic-priority-isr-timing-trace-validation/",
+    "archive_path": "archive/2026/11/33116-osfec-016-interrupt-latency-jitter.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/33116-osfec-016-interrupt-latency-jitter.qa.json",
     "verified_repositories": [
       "1freetech/techcert",
       "1freetech/opencert.tech",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 33108,
+    "featured_media_id": 33112,
+    "authentic_photo_url": "https://www.segger.com/fileadmin/images/Events/Webinar/SystemView_Webinar/SystemView_Webinar_Screenshot.png",
     "body_video_ids": [
-      "4omSQHY0rDw",
-      "uv4VXhzi7Ys",
-      "QMAgD9SS5_E"
+      "-HHW82z8AJw",
+      "tZBZKnjbbX4",
+      "6t4dVAkoso8"
     ],
-    "verification_status": "WordPress status publish and HTTP 200; 3 official STMicroelectronics iframe embeds rendered, cover media source 1200×630, SEO metadata canonical and alt text verified. Identical exact WordPress Gutenberg source and QA archive verified in all three repos; independent playback and mobile/pixel inspection untested.",
-    "qa_status": "1850 manuscript words; 5 unique contextual internal links; 3 official YouTube media; 1200x630 oil painting with neon-green black-label wordmark; original QR 24043; Editor's Note and footer; no boxed code."
+    "verification_status": "WordPress published and live HTTP 200, 3 native YouTube embeds converted to iframes, original cover 1200x630 and SEO canonical/alt verified. Exact Gutenberg and QA read back byte-for-byte from 3 repositories. Playback, external screenshot load, pixel-identical reference logo and mobile visual QA not independently verified.",
+    "qa_status": "2,006 manuscript words, 7 contextual internal links, 4 in-story media (3 genuine videos and 1 official SEGGER screenshot), original QR, no code boxes, editor note and disclaimer, illustrative calculations marked."
   },
   "next": {
-    "subject": "firmware_engineer",
-    "lesson_number": 16,
-    "title_format": "OSFEC.016 — {topic}",
-    "public_title_format": "OSFEC.016 — {topic}",
-    "resolution_note": "OSFEC.015 is published; recheck draft, published, and all GitHub archives before OSFEC.016 creation."
+    "subject": "history_money_technology_bitcoin",
+    "lesson_number": 18,
+    "title_format": "OSHistory.018 — {topic}",
+    "public_title_format": "OSHistory.018 — {topic}",
+    "resolution_note": "Check existing published/drafts across WordPress and 3 GitHub archives, plus latest chronology, before choosing lesson topic."
   },
-  "next_after_current": "history_money_technology_bitcoin",
+  "next_after_current": "history_of_engineering",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -123,9 +124,11 @@
     },
     "firmware_engineer": {
       "acronym": "OSFEC",
-      "next_lesson_number": 16,
-      "last_published_lesson_number": 15,
-      "last_wordpress_post_id": 30773
+      "next_lesson_number": 17,
+      "last_published_lesson_number": 16,
+      "last_wordpress_post_id": 33116,
+      "last_published_title": "OSFEC.016: Interrupt Latency and Jitter, NVIC Priority, ISR Timing, and Trace Validation",
+      "verification_status": "published_archived_identical_3_repos_server_render_checked"
     },
     "history_money_technology_bitcoin": {
       "acronym": "OSHistory",
@@ -414,29 +417,30 @@
     }
   },
   "last_published": {
-    "subject": "firmware_technician",
-    "lesson_number": 17,
-    "track_id": "OSFTC.017",
-    "title": "OSFTC.017 — MCU Timer and PWM Diagnostics: Prescalers, Duty Cycle and Oscilloscope Checks",
-    "public_title": "OSFTC.017 — MCU Timer and PWM Diagnostics: Prescalers, Duty Cycle and Oscilloscope Checks",
-    "wordpress_post_id": 33109,
-    "live_url": "https://bitcoinversus.tech/2026/11/17/osftc-017-mcu-timer-pwm-diagnostics-prescalers-duty-cycle-oscilloscope-checks/",
-    "archive_path": "archive/2026/11/33109-osftc-017-mcu-timer-pwm-diagnostics.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/33109-osftc-017-mcu-timer-pwm-diagnostics.qa.json",
+    "subject": "firmware_engineer",
+    "lesson_number": 16,
+    "track_id": "OSFEC.016",
+    "title": "OSFEC.016: Interrupt Latency and Jitter, NVIC Priority, ISR Timing, and Trace Validation",
+    "public_title": "OSFEC.016: Interrupt Latency and Jitter, NVIC Priority, ISR Timing, and Trace Validation",
+    "wordpress_post_id": 33116,
+    "live_url": "https://bitcoinversus.tech/2026/11/18/osfec-016-interrupt-latency-jitter-nvic-priority-isr-timing-trace-validation/",
+    "archive_path": "archive/2026/11/33116-osfec-016-interrupt-latency-jitter.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/33116-osfec-016-interrupt-latency-jitter.qa.json",
     "verified_repositories": [
       "1freetech/techcert",
       "1freetech/opencert.tech",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 33108,
+    "featured_media_id": 33112,
+    "authentic_photo_url": "https://www.segger.com/fileadmin/images/Events/Webinar/SystemView_Webinar/SystemView_Webinar_Screenshot.png",
     "body_video_ids": [
-      "4omSQHY0rDw",
-      "uv4VXhzi7Ys",
-      "QMAgD9SS5_E"
+      "-HHW82z8AJw",
+      "tZBZKnjbbX4",
+      "6t4dVAkoso8"
     ],
-    "verification_status": "WordPress status publish and HTTP 200; 3 official STMicroelectronics iframe embeds rendered, cover media source 1200×630, SEO metadata canonical and alt text verified. Identical exact WordPress Gutenberg source and QA archive verified in all three repos; independent playback and mobile/pixel inspection untested.",
-    "qa_status": "1850 manuscript words; 5 unique contextual internal links; 3 official YouTube media; 1200x630 oil painting with neon-green black-label wordmark; original QR 24043; Editor's Note and footer; no boxed code."
+    "verification_status": "WordPress published and live HTTP 200, 3 native YouTube embeds converted to iframes, original cover 1200x630 and SEO canonical/alt verified. Exact Gutenberg and QA read back byte-for-byte from 3 repositories. Playback, external screenshot load, pixel-identical reference logo and mobile visual QA not independently verified.",
+    "qa_status": "2,006 manuscript words, 7 contextual internal links, 4 in-story media (3 genuine videos and 1 official SEGGER screenshot), original QR, no code boxes, editor note and disclaimer, illustrative calculations marked."
   },
   "pending_publication_qa": [
     {
@@ -807,12 +811,24 @@
       "featured_cover_verified": true,
       "archive_source_verified": true,
       "note": "WordPress served HTTP 200; saved Gutenberg 3 video embeds, rendered 3 iframes, cover dimensions 1200x630, SEO and alt all confirmed. Exact source and QA archived identically in three repos."
+    },
+    {
+      "wordpress_post_id": 33116,
+      "live_url": "https://bitcoinversus.tech/2026/11/18/osfec-016-interrupt-latency-jitter-nvic-priority-isr-timing-trace-validation/",
+      "unresolved": [
+        "Actual video playback not independently tested.",
+        "Third-party SEGGER screenshot external loading not independently tested.",
+        "Desktop/mobile screenshots and exact reference logo pixel match not inspected."
+      ],
+      "featured_cover_verified": true,
+      "archive_source_verified": true,
+      "note": "WordPress HTTP 200, 3 rendered YouTube iframes, 1200x630 original cover, valid SEO and no missing alt. Exact saved source and QA read back identical across all three repositories."
     }
   ],
   "featured_image_rotation": {
-    "last_post_id": 33109,
-    "last_style": "fine-art oil painting",
-    "next_style": "photorealistic editorial photography",
+    "last_post_id": 33116,
+    "last_style": "photorealistic editorial photography",
+    "next_style": "cinematic anime illustration",
     "approved_styles": [
       "photorealistic editorial photography",
       "cinematic anime illustration",
@@ -824,9 +840,9 @@
     "human_subject_policy": "Choose equipment, code, scene or topic first; rotate demographics when people are genuinely relevant, never insert people solely to meet rotation.",
     "subject_first_requirement": "Depict the actual work, material, hardware, software behavior, mechanism, data or event; no generic desktop/portrait.",
     "former_demographic_rotation": "retired by explicit user directive November 1, 2026",
-    "last_cover_media_id": 33108,
-    "last_cover_note": "1200x630 oil-painting MCU and oscilloscope technical cover with neon-green BitcoinVersus.tech on tight black label at bottom left",
-    "last_cover_status": "Media 1200x630 and social image verified, full mobile and exact logo pixel comparison unverified.",
+    "last_cover_media_id": 33112,
+    "last_cover_note": "Photorealistic editorial image of Cortex-M hardware, logic-analyzer tracing and oscilloscope; neon-green BitcoinVersus.tech tag against tight black highlight bottom-left.",
+    "last_cover_status": "WordPress original media dimensions 1200x630 confirmed, OG image and alt text verified. Mobile/pixel watermark match unverified.",
     "next_person_note": "People prohibited on new covers. Use relevant technical split-screen diptych without humans for OSSolidity.002.",
     "latest_exception_note": {
       "post_id": 28650,

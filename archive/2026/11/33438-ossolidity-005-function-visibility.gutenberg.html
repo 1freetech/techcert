@@ -1,0 +1,122 @@
+<!-- wp:paragraph --><p>Solidity functions define how an Ethereum-compatible smart contract exposes operations and handles information. A function can be made callable from outside the contract, available only to related code, or restricted to the contract declaring it. Solidity uses four function visibility levels: <code>public</code>, <code>external</code>, <code>internal</code> and <code>private</code>. The separate <code>view</code>, <code>pure</code> and <code>payable</code> keywords describe permitted state access and value receipt, not who is authorized to call an operation. <a href="https://docs.soliditylang.org/en/v0.8.38/contracts.html#function-visibility">The Solidity 0.8.38 contract specification</a> defines those rules.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The earlier <a href="https://bitcoinversus.tech/2026/10/08/ossolidity-001-evm-smart-contracts/">EVM and smart-contract introduction</a>, <a href="https://bitcoinversus.tech/2026/11/02/ossolidity-002-contract-structure-spdx-pragma-state-variables-functions-remix/">contract structure reference</a>, and <a href="https://bitcoinversus.tech/2026/11/08/ossolidity-003-value-types-function-parameters-data-locations/">value-types and parameters lesson</a> supply the prerequisites. The prior <a href="https://bitcoinversus.tech/2026/11/08/ossolidity-004-base-denim-200ms-blocks-time-locks-solidity/">block-deadline exercise</a> addressed chain timing; the present subject focuses on function interfaces and access boundaries rather than another timing scenario.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Think of a smart contract as a workshop with rooms and doors. A <code>public</code> function can be reached from outside the workshop and from other rooms inside. An <code>external</code> function is designed as a door for outside callers. An <code>internal</code> function stays within the workshop and its inherited extensions, while a <code>private</code> function is available only inside the original contract. A closed programming door does not make the activity secret: public blockchains preserve transaction records and contract storage that observers can inspect.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Explain the four function visibility keywords and distinguish contract ABI entry points from internal calls.</li><li>Explain why <code>private</code> is not encryption and why visibility is not caller authorization.</li><li>Distinguish <code>view</code>, <code>pure</code> and <code>payable</code>.</li><li>Read a small parent-and-child contract example and identify exposed functions.</li><li>Use a local Remix VM to evaluate expected results without spending real cryptocurrency.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=h3rgSRN-Y1M&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Terry White, “Solidity Tutorial: Function visibility (external, public, internal &amp; private).” An identifiable educational video dedicated to the four visibility levels. <a href="https://www.youtube.com/watch?v=h3rgSRN-Y1M">Original video</a>. The material predates Solidity 0.8.38; current language semantics are checked against the official compiler documentation.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Public and External Function Calls</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>public</code> function belongs to the externally callable contract interface and can also be called by name from inside the contract. In the sample, <code>getNumber()</code> and <code>triple()</code> are public. An <code>external</code> function also appears in the external contract interface, but it cannot be invoked by an ordinary unqualified internal call. Solidity treats a qualified external self-call as an actual message call with different gas and execution-context consequences. The official <a href="https://docs.soliditylang.org/en/v0.8.38/contracts.html#function-visibility">function visibility reference</a> distinguishes those paths.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Neither keyword checks who the caller is. Unless additional conditions exist, any account or contract can call a public or external function. The educational <code>setNumber</code> method intentionally allows everyone to update a bounded number, so it must never be mistaken for a production access-control design. Restricting administrative operations requires explicit authorization rules such as a correctly implemented owner or role check, along with appropriate security review.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Internal and Private Functions</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>internal</code> functions are callable from the declaring contract and compatible derived contracts. They do not appear as separately invocable methods in the external application binary interface, or ABI. The example's <code>_save()</code> method is marked internal so its derived child can use it. <code>private</code> functions, including the example's <code>_double()</code>, are callable only by code in the declaring contract, not by derived contracts. Leading underscores are naming conventions rather than access controls.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Function visibility regulates which Solidity code can directly call a function. It does not hide its implementation or stored data from blockchain observers. Solidity's own documentation warns that <code>private</code> and <code>internal</code> restrict access from other contracts, not public visibility of data on chain. Never keep passwords, secret recovery phrases or private keys in state variables, regardless of declared visibility.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">View, Pure, and Payable Are Separate Rules</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>view</code> indicates that a function does not modify contract state. <code>getNumber()</code> reads a stored number, so <code>view</code> fits. <code>pure</code> disallows state reads as well as writes, which makes it suitable for <code>triple(number)</code> and the internal calculation <code>_double(number)</code>. By contrast, <code>payable</code> permits a function to receive Ether with a call. A state-changing function without <code>payable</code> generally rejects attached Ether. Refer to the <a href="https://docs.soliditylang.org/en/v0.8.38/cheatsheet.html#modifiers">official 0.8.38 cheatsheet</a> for each modifier's meaning.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Calling a view function with an off-chain read ordinarily avoids a paid blockchain transaction, but submitting a transaction that executes a view function can still consume gas. The word <code>view</code> does not imply free network usage in every context. The sample deliberately omits payable operations, live-wallet connections and fund transfers to keep the exercise self-contained.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=2PO2Y-4dDv8&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>“Solidity Functions Tutorial | Visibility, Parameters &amp; Return Values,” a separately identified educational overview of function declarations, return values, visibility, and <code>view</code>/<code>pure</code>/<code>payable</code>. <a href="https://www.youtube.com/watch?v=2PO2Y-4dDv8">Original YouTube page</a>. Video identity is distinct from the earlier visibility-specific tutorial.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Executable Example for a Local Remix VM</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The following code illustrates each visibility level, two state-read rules and inheritance. Save it as <code>VisibilityLab.sol</code> in <a href="https://remix.ethereum.org/">Remix IDE</a>. Select compiler <strong>0.8.38</strong>, announced by the Solidity team on <a href="https://www.soliditylang.org/blog/2026/10/22/solidity-0.8.38-release-announcement/">October 22, 2026</a>. The pragma accepts any compatible 0.8 release from 0.8.20 upward. Use a <strong>Remix VM</strong> rather than Mainnet, a funded wallet or a live deployment:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Solidity source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,Consolas,monospace!important"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract VisibilityLab {
+    uint256 private storedNumber;
+
+    function setNumber(uint256 number) external {
+        require(number &lt;= 1000, &quot;Number too large&quot;);
+        _save(number);
+    }
+
+    function getNumber() public view returns (uint256) {
+        return storedNumber;
+    }
+
+    function doubleStored() external view returns (uint256) {
+        return _double(storedNumber);
+    }
+
+    function _save(uint256 number) internal {
+        storedNumber = number;
+    }
+
+    function _double(uint256 number) private pure returns (uint256) {
+        return number * 2;
+    }
+
+    function triple(uint256 number) public pure returns (uint256) {
+        return number * 3;
+    }
+
+    function isZero() external view returns (bool) {
+        return getNumber() == 0;
+    }
+}
+
+contract VisibilityChild is VisibilityLab {
+    function saveFromChild(uint256 number) external {
+        require(number &lt;= 1000, &quot;Number too large&quot;);
+        _save(number);
+    }
+}</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Local Test Procedure and Expected Results</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Compile the file, deploy <code>VisibilityLab</code> in the Remix VM and click <code>getNumber()</code>. The expected initial value is <code>0</code>. Calling <code>isZero()</code> should return <code>true</code>, while <code>triple(4)</code> should return <code>12</code>. Next, submit <code>setNumber(7)</code>. After the simulated transaction, <code>getNumber()</code> should return <code>7</code>, <code>doubleStored()</code> should return <code>14</code>, and <code>isZero()</code> should return <code>false</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Submitting <code>setNumber(1001)</code> is designed to revert with <code>Number too large</code>, leaving the previous stored value unchanged. Deploy the separate <code>VisibilityChild</code> contract and call <code>saveFromChild(6)</code>; its inherited <code>getNumber()</code> should then report <code>6</code>. Remix should offer buttons for public and external operations but not standalone buttons for <code>_save()</code> or <code>_double()</code>. The latter are not external ABI functions.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The expected outputs above are specifications for a reader-run lab, <strong>not results claimed from an executed EVM test</strong>. The publication environment has no Solidity compiler or Remix VM available, so contract compilation, EVM deployment and transaction assertions remain unverified. Arithmetic and declared access relationships were reviewed against the Solidity reference material; readers should reproduce the complete test sequence before relying on the example.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Security Boundaries and Common Errors</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Do not confuse <code>external</code> with permission to call; it defines a call interface, not an allowlist.</li><li>Do not treat a <code>private</code> state variable or function as confidential. Public chains expose storage and execution artifacts to observers.</li><li>Do not assume a derived contract can access private functions; only internal or public functions can be directly inherited for access in the demonstrated pattern.</li><li>Do not describe <code>view</code> as inherently free of all gas costs; distinguish an off-chain call from a transaction.</li><li>Do not deploy an unrestricted setter protecting money or administrative state; the example is an educational laboratory.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Which function kind can both outsiders and internal code normally call directly? <code>public</code>.</li><li>Which kind is callable by a derived contract but absent from the external ABI? <code>internal</code>.</li><li>Which keyword prevents reading contract state as well as modifying it? <code>pure</code>.</li><li>Does a private variable hide a password on Ethereum? No; blockchain contents are publicly inspectable.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://docs.soliditylang.org/en/v0.8.38/contracts.html#function-visibility">Solidity 0.8.38: Function Visibility</a>, official language behavior.</li><li><a href="https://docs.soliditylang.org/en/v0.8.38/contracts.html#state-variable-visibility">Solidity 0.8.38: State Variable Visibility</a>, getter and privacy limitations.</li><li><a href="https://docs.soliditylang.org/en/v0.8.38/cheatsheet.html#modifiers">Solidity 0.8.38: Modifiers</a>, view, pure and payable definitions.</li><li><a href="https://www.soliditylang.org/blog/2026/10/22/solidity-0.8.38-release-announcement/">Solidity Team: v0.8.38 Release Announcement</a>, October 22, 2026.</li><li><a href="https://remix.ethereum.org/">Official Remix IDE</a>, browser-based Solidity experimentation.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Solidity uses visibility keywords to control which functions a contract exposes to other code. Public and external functions can be reached from outside, while internal and private functions are intended for specific parts of the program. State mutability keywords describe whether the function reads or writes persistent information. A working smart contract also needs real authorization checks when a sensitive operation should be limited to particular users. The most important distinction is that program visibility does not keep blockchain information secret.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> Internal curriculum record OSSolidity.005 follows published OSSolidity.004 in the 43-subject rotation. The 1200 × 630 cover is original AI-generated oil-painting editorial artwork featuring a fictional software developer; the displayed interface is conceptual and does not prove a deployed contract, even where a simulated interface suggests deployment. The two YouTube references are identifiable third-party educational videos, not publisher recordings. Official Solidity 0.8.38 documentation grounds the technical rules. Solidity compilation, local EVM transactions, real-world security testing, player playback and mobile viewport screenshots were not independently completed. No real funds were transferred.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000 satoshi voluntary donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original optional BitcoinVersus.Tech donation QR. Verify the recipient and requested amount in the wallet before confirming payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>To donate on mobile, display the original QR on another device or use a compatible wallet's saved-image scanner. Confirm the intended recipient 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and 5,000 satoshis before authorizing payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech publishes programming education for informational purposes, not audited smart-contract code, investment guidance, permission to deploy to public networks, or a substitute for independent security review.</em></p><!-- /wp:paragraph -->

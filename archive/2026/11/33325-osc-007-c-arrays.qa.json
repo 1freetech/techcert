@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-11-18",
+  "wordpress_post_id": 33325,
+  "track_id": "OSC.007",
+  "title": "OSC.007: C Arrays — Indexing, Initialization, Bounds Safety, and sizeof",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/18/osc-007-c-arrays-indexing-initialization-bounds-safety-sizeof/",
+  "content_source": "Exact saved Gutenberg body retrieved from WordPress post in edit context after publication",
+  "saved_gutenberg_characters": 8596,
+  "rotation": {
+    "active_tracks": 43,
+    "coding_tracks": 20,
+    "topic_alignment": "C arrays following OSC.006 functions, per coding-curriculum.json",
+    "next_track": "rust"
+  },
+  "media": {
+    "featured_cover_media_id": 33322,
+    "original_cover_dimensions": [
+      1200,
+      630
+    ],
+    "style": "cinematic anime illustration",
+    "original_logo_text": "BitcoinVersus.tech neon green #39FF14 on tight black highlight at bottom left",
+    "logo_reference_pixel_match_verified": false,
+    "official_tutorial_videos": [
+      {
+        "id": "MOeGnamlUP4",
+        "publisher": "Programiz",
+        "source": "https://github.com/programiz/c-youtube/blob/master/19.%20C%20Array.md"
+      },
+      {
+        "id": "hsmSDBBsifo",
+        "publisher": "Neso Academy",
+        "source": "https://www.youtube.com/watch?v=hsmSDBBsifo"
+      }
+    ],
+    "native_gutenberg_video_embed_count": 2,
+    "WordPress_rendered_video_iframe_count": 2,
+    "optional_donation_QR_id": 24043
+  },
+  "quality": {
+    "live_http_status": 200,
+    "canonical_correct": true,
+    "SEO_title_and_description_present": true,
+    "OG_featured_image_present": true,
+    "missing_image_alt_count": 0,
+    "manuscript_words": 631,
+    "distinct_contextual_internal_links": 5,
+    "duplicate_wordpress_lesson_count": 1,
+    "code_in_preformatted_block": true,
+    "forbidden_prose_words": []
+  },
+  "code_test": {
+    "language_standard": "C11",
+    "compiler": "GCC",
+    "compiler_flags": "-std=c11 -Wall -Wextra -Wpedantic -Werror -fsanitize=address,undefined -fno-omit-frame-pointer",
+    "status": "success on local container Linux",
+    "observed_stdout": "count=5 total=100 average=20.0",
+    "assertions": "Array length 5, sum 100, arithmetic mean 20.0; no sanitizer errors on tested path",
+    "source_file_name": "osc007_array_example.c"
+  },
+  "technical_sources": [
+    "https://en.cppreference.com/w/c/language/array",
+    "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/arrays-arr/arr30-c/",
+    "https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html",
+    "https://www.programiz.com/c-programming/c-arrays"
+  ],
+  "limitations": [
+    "Independent playback on YouTube not tested, server-side WordPress video iframes verified.",
+    "Desktop/mobile viewport screenshots not inspected.",
+    "Exact user-supplied prior logo-reference pixels not independently matched.",
+    "No target microcontroller execution; the code was tested in local GCC Linux environment."
+  ]
+}

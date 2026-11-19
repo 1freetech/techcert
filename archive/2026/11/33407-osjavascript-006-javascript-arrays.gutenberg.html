@@ -1,0 +1,149 @@
+<!-- wp:paragraph --><p>A JavaScript <strong>array</strong> stores an ordered sequence of values under one variable. Arrays make it practical to organize sensor readings, website products, messages, or test results. Values are accessed through numeric indexes beginning at zero. The built-in <code>length</code> property reports the array's span. Some operations, such as <code>push()</code> and <code>splice()</code>, change the original array; others, including <code>slice()</code>, create a separate array.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The topic follows <a href="https://bitcoinversus.tech/2026/11/08/osjavascript-005-javascript-control-flow-conditions-loops-break-continue/">JavaScript control flow</a>, which introduced loops over values. Earlier references explain <a href="https://bitcoinversus.tech/2026/11/01/osjavascript-004-operators-expressions-type-coercion-strict-equality-nullish-optional-chaining/">operators and comparisons</a>, <a href="https://bitcoinversus.tech/2026/10/15/osjavascript-003-variables-constants-let-const-var-reassignment-scope-temporal-dead-zone/">variables and constants</a>, and <a href="https://bitcoinversus.tech/2026/10/10/osjavascript-002-values-primitive-types-string-number-boolean-null-undefined-bigint-symbol-typeof/">primitive types</a>. Technical definitions follow the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN Array reference</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Imagine a shelf with numbered spaces for objects. An array is a shelf that can gain or lose spaces. Position zero contains the first value, and position one contains the second. Different names can point to the same shelf, so changes through either name appear in the shared collection. A copied array behaves like a second shelf, although the same nested objects can remain shared.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Create arrays and locate values with zero-based indexes.</li><li>Explain <code>length</code>, including arrays with empty positions.</li><li>Compare <code>push</code>, <code>pop</code>, <code>slice</code>, and <code>splice</code>.</li><li>Recognize aliases and shallow copies.</li><li>Run 21 functional checks using Node.js without external dependencies.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=yQ1fz8LY354&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Bro Code, “Learn JavaScript ARRAYS in 8 minutes!”, an identified educational video covering array syntax and common operations. <a href="https://www.youtube.com/watch?v=yQ1fz8LY354">Original video page</a>. Server-generated player markup is distinguishable from verified playback.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Array Literals and Zero-Based Indexes</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An expression such as <code>const readings = [12, 18, 21]</code> creates a three-element array. Its first element is <code>readings[0]</code>, which evaluates to 12. <code>readings[2]</code> evaluates to 21. An absent index ordinarily reads as <code>undefined</code>, and <code>readings.at(-1)</code> accesses the last element. JavaScript permits mixed element types, although predictable data types make many applications easier to validate.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The value of <code>readings.length</code> is 3. Array length is not a count of occupied positions in every case. For example, assigning index 5 in a three-element array extends the length to 6 and leaves gaps. An <em>array hole</em> is an absent property, not a stored <code>undefined</code> value. The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length">MDN array-length reference</a> describes the relationship between indexes, empty slots, and truncation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Adding and Removing Values</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>push(25)</code> appends a value to an array and returns its new length, not the resulting array. For <code>[12, 18, 21]</code>, the returned value is 4. Calling <code>pop()</code> then removes and returns 25. Both methods mutate the existing array object. Because another variable can hold a reference to the same array, callers should document whether shared values may be changed.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A variable declared with <code>const</code> cannot be rebound to a different array, but the array's elements may still change. For a stable original, use a copying method or make an independent copy before editing. The introductory <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Arrays">MDN arrays guide</a> explains the practical difference between adding and removing elements.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Copying with slice</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>slice(1, 3)</code> selects indexes 1 and 2; index 3 is excluded. The returned array is new, and the original remains unchanged. Calling <code>slice()</code> without arguments makes a shallow copy of the complete array. Independent primitive values are copied, but object elements remain references to the same underlying objects. Mutating a nested object can therefore affect both collections. The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">MDN slice documentation</a> explains half-open ranges and shallow copying.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":23198,"sizeSlug":"medium","linkDestination":"none"} --><figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/javascript-code-wikimedia-cc0.png" alt="Authentic JavaScript code example showing declarations and arrays" class="wp-image-23198" /><figcaption class="wp-element-caption"><em>Authentic source-code image from Wikimedia Commons, retained in the BitcoinVersus.Tech media library under a CC0 attribution. Educational source material, not a real array performance test.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Editing in Place with splice</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The method <code>splice(start, deleteCount, ...items)</code> inserts, replaces, or removes values inside the original array. Starting with <code>[12, 18, 21]</code>, calling <code>splice(1, 1, 19)</code> returns the removed element as <code>[18]</code> while changing the original array to <code>[12, 19, 21]</code>. Confusing <code>slice</code> with <code>splice</code> can produce hard-to-find mutation errors. Modern JavaScript also provides <code>toSpliced()</code> for a copying alternative, subject to runtime support.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">MDN splice reference</a> specifies the number of deleted values and the optional inserted values. When a program depends on a collection remaining unchanged, copying operations make its intent clearer than modifying shared storage.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=gl0cpq4RJhU&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>freeCodeCamp.org, “Everything You Need to Know About JavaScript Arrays,” published April 23, 2025. The original course covers creation, indexing, mutating and non-mutating methods, plus advanced array operations. <a href="https://www.youtube.com/watch?v=gl0cpq4RJhU">Original course page</a>.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Aliases, Shallow Copies, and Sparse Arrays</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The assignment <code>const alias = readings</code> copies an object reference rather than duplicating the array. Both variables identify the same array, so modifying <code>alias[0]</code> also changes <code>readings[0]</code>. By contrast, <code>readings.slice()</code> creates a separate array of element references. For arrays containing only numbers, an indexed replacement in the copy does not change the source. Nested objects still require separate copying when independent mutable contents are necessary.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The literal <code>[1, , 3]</code> creates a sparse array with one missing position. Its length is 3, but the expression <code>1 in sparse</code> is false. Reading that position yields <code>undefined</code> even though no indexed property exists there. Also distinguish <code>Array(3)</code>, which creates an array with three empty positions, from <code>Array.of(3)</code>, which creates one element containing the value 3. The difference matters when validating collection sizes.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Reproducible Node.js Lab</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Save the following complete file as <code>arrays.js</code>. The source uses Node.js built-in strict assertions, synthetic numeric readings, and no external packages. Each <code>check</code> raises an assertion failure if actual behavior differs from the stated expected result:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,Consolas,monospace!important"><code>&quot;use strict&quot;;
+const assert = require(&quot;node:assert/strict&quot;);
+let checks = 0;
+function check(actual, expected, label) {
+  assert.deepEqual(actual, expected, label);
+  checks += 1;
+}
+
+const readings = [12, 18, 21];
+check(Array.isArray(readings), true, &quot;array type&quot;);
+check(readings.length, 3, &quot;length&quot;);
+check(readings[0], 12, &quot;zero index&quot;);
+check(readings.at(-1), 21, &quot;last element&quot;);
+check(readings[9], undefined, &quot;missing index&quot;);
+
+const newLength = readings.push(25);
+check(newLength, 4, &quot;push returns new length&quot;);
+check(readings, [12, 18, 21, 25], &quot;push changes original&quot;);
+check(readings.pop(), 25, &quot;pop returns final element&quot;);
+check(readings.length, 3, &quot;pop changes length&quot;);
+
+const middle = readings.slice(1, 3);
+check(middle, [18, 21], &quot;slice returns half-open range&quot;);
+check(readings, [12, 18, 21], &quot;slice preserves source&quot;);
+const removed = readings.splice(1, 1, 19);
+check(removed, [18], &quot;splice returns removed values&quot;);
+check(readings, [12, 19, 21], &quot;splice mutates source&quot;);
+
+const alias = readings;
+alias[0] = 15;
+check(readings[0], 15, &quot;assignment creates alias&quot;);
+const snapshot = readings.slice();
+snapshot[0] = 0;
+check(readings[0], 15, &quot;slice copies primitive elements&quot;);
+check(snapshot, [0, 19, 21], &quot;copy can be changed separately&quot;);
+
+const objects = [{ count: 1 }];
+const shallow = objects.slice();
+shallow[0].count = 2;
+check(objects[0].count, 2, &quot;shallow copy shares nested object&quot;);
+
+const sparse = [1, , 3];
+check(sparse.length, 3, &quot;sparse length includes hole&quot;);
+check(1 in sparse, false, &quot;hole is not an indexed property&quot;);
+check(sparse[1], undefined, &quot;reading hole produces undefined&quot;);
+check(Array.of(3), [3], &quot;Array.of creates one element&quot;);
+
+console.log(checks + &quot; array checks passed&quot;);
+console.log(&quot;readings: &quot; + readings.join(&quot;, &quot;));</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Open a terminal in the file's directory, check syntax, then run the program:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,Consolas,monospace!important"><code>node --check arrays.js
+node arrays.js</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The independently executed example produced the following output under <strong>Node.js v22.16.0</strong>:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.5 ui-monospace,Consolas,monospace!important"><code>21 array checks passed
+readings: 15, 19, 21</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The 21 checks verify element access, mutation return values, copying, aliases, shared object references, and sparse arrays. Passing tests establish the behavior of the demonstrated cases, not universal application correctness or a production performance benchmark.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common Errors</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Treating the value returned by <code>push()</code> as an array instead of its new length.</li><li>Assuming <code>slice()</code> modifies the source, or assuming <code>splice()</code> leaves the source unchanged.</li><li>Assuming <code>const</code> makes referenced arrays immutable.</li><li>Assuming shallow copies clone their nested objects.</li><li>Assuming every position below an array's length contains an element.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Where is the first element stored? At index zero.</li><li>What does <code>pop()</code> return? The removed final element, or <code>undefined</code> for an empty array.</li><li>Why can an alias modify its source? Both names reference the same array object.</li><li>Does <code>slice(1, 3)</code> include index three? No; the end boundary is excluded.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN Array Reference</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length">MDN Array.length</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">MDN Array.slice()</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">MDN Array.splice()</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of">MDN Array.of()</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An array keeps a sequence of values in one collection. You can read an item by its numbered position, add a new item, remove one, or make a copy. The important question is whether an operation changes the original collection or creates a new one. Knowing the difference makes programs safer to edit and easier to test.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> Curriculum identifier OSJavaScript.006 follows OSJavaScript.005 after Java OSJava.007 in the master rotation. The featured photograph-style cover is original AI-generated editorial art of a fictional developer with a consistent bottom-left BitcoinVersus.tech secondary logo; it is not documentary photography. The in-story code image is the existing Wikimedia Commons CC0 media item. Both YouTube sources have identifiable public video pages. The example passed 21 checks and Node.js syntax validation under Node.js v22.16.0. Actual third-party video playback, browser interaction and mobile viewport screenshots were not independently tested.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5000-satoshi voluntary donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech voluntary 5,000-satoshi donation QR. Verify the recipient and payment amount before sending.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the original QR on a second screen or use a wallet's saved-image scanner. Confirm the intended recipient 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and 5,000 satoshis before sending funds.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech provides programming education for informational purposes. Review official documentation and validate code in its intended runtime before production use.</em></p><!-- /wp:paragraph -->

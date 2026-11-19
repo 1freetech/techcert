@@ -1,0 +1,134 @@
+{
+  "schema": "bitcoinversus-tech-lesson-publication-audit-v2",
+  "verified_date": "2026-11-19",
+  "track_id": "OSBash.007",
+  "title": "Bash Command-Line Options: getopts, OPTARG, OPTIND, and Safe Arguments",
+  "wordpress_post_id": 33501,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/19/osbash-007-getopts-command-line-options-optarg-optind-safe-arguments/",
+  "duplicate_prevention": {
+    "published_and_unpublished_wordpress_matches_before_create": 0,
+    "open_cert_source_search_matches": 0,
+    "prior_bash_lesson": "OSBash.006 WordPress 31403",
+    "master_rotation_predecessor": "OSSQL.007 WordPress 33472"
+  },
+  "sources": [
+    "https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html",
+    "https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Variables.html",
+    "https://www.gnu.org/software/bash/manual/html_node/Positional-Parameters.html",
+    "https://www.gnu.org/software/bash/manual/html_node/Special-Parameters.html",
+    "https://flokoe.github.io/bash-hackers-wiki/howto/getopts_tutorial/"
+  ],
+  "media": {
+    "cover_id": 33492,
+    "original_dimensions": [
+      1200,
+      630
+    ],
+    "style": "cinematic anime",
+    "subject": "young South Asian female Linux developer, differentiated from older male SQL developer",
+    "watermark": "previously approved neon-green BitcoinVersus.tech wordmark cropped unchanged, tightly black-highlighted, placed once at bottom left",
+    "original_cover_reused_in_body": false,
+    "in_body": [
+      {
+        "type": "youtube",
+        "id": "wTvqFQydZQs",
+        "title": "Crash-Course in using getopts to parse Command Line Arguments in Bash!",
+        "source_identified": true,
+        "iframe_rendered": true
+      },
+      {
+        "type": "youtube",
+        "id": "VOPh2fgsdd4",
+        "title": "Bash Script: Parsing command-line options with getopts",
+        "source_identified": true,
+        "iframe_rendered": true
+      },
+      {
+        "type": "image",
+        "wordpress_id": 23290,
+        "subject": "GNOME Terminal screenshot, Wikimedia-linked prior media archive"
+      }
+    ],
+    "iframe_count": 2,
+    "unrendered_shortcode_count": 0,
+    "independent_playback_test": "not performed",
+    "social_media": "omitted: no verified original-source social post relevant enough to add value",
+    "donation_qr_id": 24043
+  },
+  "code": {
+    "archived_shell": "archive/2026/11/33501-osbash-007-getopts-options.sh",
+    "archived_test_harness": "archive/2026/11/33501-osbash-007-getopts-options.py",
+    "archived_gutenberg": "archive/2026/11/33501-osbash-007-getopts-options.gutenberg.html",
+    "shell_version": "GNU Bash 5.2.37(1)-release, Linux",
+    "test_harness": "Python 3 subprocess, dependency-free",
+    "checks_passed": 31,
+    "checks_failed": 0,
+    "coverage": [
+      "bash -n syntax",
+      "default and explicit limits",
+      "OPTARG and OPTIND behavior",
+      "combined options",
+      "prefix handling",
+      "verbose stderr",
+      "missing argument/unknown flag/invalid numeric value",
+      "double-dash terminator",
+      "quoted spaces and literal metacharacters",
+      "empty and multiline operands"
+    ],
+    "verified_source_identity": "saved WordPress shell example FNV-1a32 a97c824e, matching tested local Bash source without final newline; Github source readback exact",
+    "code_test_stdout": "31 Bash CLI parsing checks passed",
+    "testing_limits": "safe illustrative Bash parser, not independently audited operational automation"
+  },
+  "qa": {
+    "word_count_public_page_including_site_text": 1649,
+    "http_status": 200,
+    "site_public": true,
+    "canonical_matches": true,
+    "seo_title_present": true,
+    "meta_description_present": true,
+    "og_image_matches_cover": true,
+    "featured_media_id": 33492,
+    "internal_links": 5,
+    "authentic_in_story_image": 1,
+    "images_missing_alt": 0,
+    "empty_links": 0,
+    "code_blocks_unboxed": 2,
+    "code_boxes": 0,
+    "donation_footer_present": true,
+    "editors_note_present": true,
+    "mobile_visual_screenshot": "not performed",
+    "third_party_video_playback": "not performed",
+    "live_desktop_browser_interaction": "not performed"
+  },
+  "smartchart": {
+    "candidates": [
+      {
+        "type": "vertical columns",
+        "assessment": "no comparable external numeric dataset"
+      },
+      {
+        "type": "time-series line",
+        "assessment": "no dated measurements"
+      },
+      {
+        "type": "scatter",
+        "assessment": "no independent numeric axes"
+      }
+    ],
+    "selected": "none",
+    "rationale": "Bash option parsing is a language-semantics lesson; adding invented measurements or a simplistic diagram would mislead"
+  },
+  "archive": {
+    "repositories": [
+      "1freetech/opencert.tech",
+      "1freetech/techcert",
+      "1freetech/Bitcoinversus.tech"
+    ],
+    "source_and_shell_readback_verified": true,
+    "test_harness_archived_and_count_verified": true
+  },
+  "next_subject": "powershell",
+  "next_track_id": "OSPowerShell.006",
+  "next_duplicate_check": "no published/draft/pending/scheduled/private match during final check"
+}

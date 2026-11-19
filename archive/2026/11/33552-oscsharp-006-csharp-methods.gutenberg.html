@@ -1,0 +1,165 @@
+<!-- wp:paragraph --><p>A <strong>C# method</strong> is a named block of behavior that can accept parameters, calculate a result, and return control to the caller. Methods make larger .NET programs easier to organize because a validated operation can be reused without duplicating its statements. <strong>OSC#.006</strong> covers return types, method overloading, named and optional arguments, and the important distinction between ordinary argument copies and the <code>ref</code> or <code>out</code> modifiers.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The lesson follows <a href="https://bitcoinversus.tech/2026/11/08/oscsharp-005-csharp-control-flow-conditions-switch-loops/">OSC#.005: C# Control Flow</a>. Earlier units cover <a href="https://bitcoinversus.tech/2026/11/05/oscsharp-004-csharp-strings-literals-interpolation-equality-immutability/">strings</a>, <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-003-csharp-operators-expressions-precedence/">operators</a>, <a href="https://bitcoinversus.tech/2026/10/14/oscsharp-002-csharp-variables-built-in-types-var-const/">variables and types</a>, and <a href="https://bitcoinversus.tech/2026/10/09/oscsharp-001-dotnet-sdk-compiler-install-verify-create-build-run-csharp-toolchain/">the .NET SDK</a>. The <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods">Microsoft C# programming guide</a> defines method syntax and return semantics.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Declare a method with an access modifier, return type, name, and parameter list.</li><li>Distinguish method parameters from arguments supplied at a call site.</li><li>Return values, use <code>void</code>, and choose overloads based on parameter lists rather than return types.</li><li>Use named arguments, optional defaults, and <code>params</code>.</li><li>Explain why <code>ref</code> and <code>out</code> require deliberate caller syntax.</li><li>Review 18 assertions in a self-contained C# console program without accessing real equipment.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=GhQdlIFylQ8&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>freeCodeCamp.org, “C# Tutorial: Full Course for Beginners,” published September 6, 2018. Methods begin near <strong>1:29:49</strong>; return values near <strong>1:40:29</strong>. <a href="https://www.youtube.com/watch?v=GhQdlIFylQ8&amp;t=5389s">View the methods chapter on YouTube</a>. The older course is useful for fundamentals; current language rules are sourced from Microsoft Learn.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Method Declarations and Return Values</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A declaration such as <code>private static int Add(int left, int right)</code> says the method is private to its containing type, belongs to the type rather than an instance, receives two integers, and returns an integer. Parameter names identify the values locally. The <code>return</code> statement transfers a result to the caller, while a <code>void</code> method does not return a value. A method that returns a non-void type must supply a compatible value along its normal completion paths.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A method's overload signature identifies its name and relevant parameter types and passing modes. Changing only the result type does not create a separate overload. The two <code>Add</code> methods in the exercise accept either integers or doubles. The compiler selects an applicable overload according to argument types and language conversion rules, not simply the way the result will be printed.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Optional, Named, and Variable-Length Arguments</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The method <code>Label(string kind, int count = 1)</code> provides a default value when a caller omits <code>count</code>. Named arguments allow <code>Label(count: 3, kind: "switch")</code> to identify parameters explicitly. The <code>params int[]</code> form accepts a normal integer array or several separate integer arguments, which the method receives as an array. For easy-to-maintain APIs, defaults should be predictable and overload lists should avoid ambiguous conversions.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The Microsoft references for <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments">named and optional arguments</a> and <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters">parameter modifiers</a> document the exact syntax and restrictions.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Pass-by-Value, ref, and out</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>C# passes arguments by value unless a supported modifier requests reference passing. For an ordinary integer parameter, reassignment changes only the local copy. A reference-type argument also passes its reference value by value, so the callee may modify the referenced object's contents without being able to reassign the caller's variable. The <code>ref</code> modifier instead allows the method to work with the caller's variable itself. The example's <code>Increment(ref number)</code> changes the caller's number from 7 to 8.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><code>out</code> provides an output parameter, commonly used by <code>Try</code>-style parsing methods. The caller need not initialize an <code>out</code> variable beforehand, but the method must assign it before a normal return. The demonstration validates a fictional wattage text field using <code>int.TryParse</code>, followed by a deliberately narrow range check. The resulting 0 to 10,000 teaching range is not an electrical safety threshold or manufacturer specification.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=wxznTygnRfQ&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Bro Code, “C# Full Course for Free,” published July 5, 2021. Its method chapter begins around <strong>1:54:42</strong>, return values at <strong>2:00:37</strong>, and overloading at <strong>2:04:12</strong>. <a href="https://www.youtube.com/watch?v=wxznTygnRfQ&amp;t=6882s">Open the methods chapter</a>.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete Self-Contained C# Exercise</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Create a console project with an available supported .NET SDK, replace its <code>Program.cs</code> contents with the code below, then run it locally. The sample has no network requests, external packages, privileged commands, or genuine telemetry inputs. It uses <code>checked</code> integer arithmetic to make overflow throw an exception rather than silently wrap.</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Complete Program.cs C# method lab" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>using System;
+
+internal static class MethodLab
+{
+    private static int checks;
+
+    private static int Add(int left, int right) =&gt; checked(left + right);
+    private static double Add(double left, double right) =&gt; left + right;
+
+    private static string Label(string kind, int count = 1)
+        =&gt; $&quot;{kind}: {count}&quot;;
+
+    private static void Increment(ref int value)
+    {
+        value++;
+    }
+
+    private static bool TryReadWattage(string text, out int watts)
+    {
+        if (!int.TryParse(text, out watts))
+            return false;
+        return watts is &gt;= 0 and &lt;= 10000;
+    }
+
+    private static int Sum(params int[] values)
+    {
+        ArgumentNullException.ThrowIfNull(values);
+        int total = 0;
+        foreach (int value in values)
+            total = checked(total + value);
+        return total;
+    }
+
+    private static void Check(bool condition, string label)
+    {
+        if (!condition)
+            throw new InvalidOperationException(label);
+        checks++;
+    }
+
+    public static void Main()
+    {
+        Check(Add(3, 5) == 8, &quot;integer overload&quot;);
+        Check(Add(2.5, 1.5) == 4.0, &quot;double overload&quot;);
+        Check(Label(&quot;rack&quot;) == &quot;rack: 1&quot;, &quot;default argument&quot;);
+        Check(Label(&quot;rack&quot;, 2) == &quot;rack: 2&quot;, &quot;explicit argument&quot;);
+        Check(Label(count: 3, kind: &quot;switch&quot;) == &quot;switch: 3&quot;, &quot;named arguments&quot;);
+
+        int number = 7;
+        Increment(ref number);
+        Check(number == 8, &quot;ref updates caller variable&quot;);
+
+        Check(TryReadWattage(&quot;650&quot;, out int watts) &amp;&amp; watts == 650, &quot;valid out&quot;);
+        Check(!TryReadWattage(&quot;bad&quot;, out int invalid) &amp;&amp; invalid == 0, &quot;invalid text&quot;);
+        Check(!TryReadWattage(&quot;-1&quot;, out int negative) &amp;&amp; negative == -1, &quot;negative&quot;);
+        Check(!TryReadWattage(&quot;10001&quot;, out int above) &amp;&amp; above == 10001, &quot;over range&quot;);
+
+        Check(Sum() == 0, &quot;empty params&quot;);
+        Check(Sum(1, 2, 3) == 6, &quot;several params&quot;);
+        Check(Sum(new[] { 4, 5 }) == 9, &quot;array params&quot;);
+        Check(Add(0, 0) == 0, &quot;zero addition&quot;);
+
+        bool nullRejected = false;
+        try { Sum(null!); }
+        catch (ArgumentNullException) { nullRejected = true; }
+        Check(nullRejected, &quot;null array rejected&quot;);
+
+        bool overflowCaught = false;
+        try { Add(int.MaxValue, 1); }
+        catch (OverflowException) { overflowCaught = true; }
+        Check(overflowCaught, &quot;checked overflow&quot;);
+
+        Check(Label(&quot;rack&quot;, 0) == &quot;rack: 0&quot;, &quot;zero count&quot;);
+        Check(Label(kind: &quot;router&quot;, count: 2) == &quot;router: 2&quot;, &quot;named order&quot;);
+
+        Console.WriteLine($&quot;{checks} method checks passed&quot;);
+        Console.WriteLine(Label(&quot;devices&quot;, 3));
+    }
+}</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>From a terminal, use the following commands in an empty practice directory:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Commands to create and run the C# console lab" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>dotnet new console -n MethodLab -f net10.0
+cd MethodLab
+# Replace Program.cs with the complete listing above.
+dotnet run</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>If compilation and the reader-run assertions succeed, the program's expected output is:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Expected output, not independently executed" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1.1em 0!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>18 method checks passed
+devices: 3</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The checks cover integer and floating-point overloads, optional and named arguments, <code>ref</code> and <code>out</code>, variable-length arguments, null rejection, and checked overflow. A failed check raises an <code>InvalidOperationException</code> and prevents a success message. The publication preparation environment lacked the <code>dotnet</code> compiler, so the expected output is <strong>not represented as a locally executed result</strong>. Readers should verify the example under their installed .NET SDK.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Frequent Errors and Limitations</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Assuming different return types alone define overloads. C# overload resolution depends on parameter signatures.</li><li>Treating <code>ref</code> and <code>out</code> as interchangeable. They have distinct initialization and assignment rules.</li><li>Assuming <code>params</code> automatically rejects a null array. Input validation remains necessary.</li><li>Using an unchecked integer sum when overflow must be reported.</li><li>Mistaking an educational range check for a production equipment operating limit.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>What is returned by <code>Add(3, 5)</code>? The integer 8.</li><li>Can two methods differ only by return type? No.</li><li>Which modifier permits updating a caller's initialized local variable? <code>ref</code>.</li><li>Which modifier commonly supplies a parsed result? <code>out</code>.</li><li>What does <code>params</code> enable? An array parameter that callers can supply as separate arguments.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods">Microsoft Learn: Methods</a>.</li><li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/methods">Microsoft Learn: Overview of Methods</a>.</li><li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters">Microsoft Learn: Method Parameters and Modifiers</a>.</li><li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments">Microsoft Learn: Named and Optional Arguments</a>.</li><li><a href="https://dotnet.microsoft.com/en-us/download/dotnet/10.0">Microsoft .NET 10 SDK Download</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A C# method gives a reusable operation a clear name and contract. Parameters carry inputs, return statements produce results, and overloads allow one method name to support different parameter types. Named and optional arguments make call sites easier to read, while <code>ref</code> and <code>out</code> provide controlled access to caller variables. Validating inputs and checking arithmetic help keep reusable methods predictable.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> Curriculum identifier <strong>OSC#.006</strong> follows OSC#.005 in the 43-subject rotation. The original featured cover is AI-generated fine-art oil-painting artwork depicting a fictional developer and illustrative programming interface. Both educational YouTube videos have identifiable public sources; rendering and playback must be evaluated separately. The example contains 18 assertions, but C# compilation and runtime execution were not independently completed because the .NET SDK was unavailable. No SmartChart was generated because the tutorial contains no measured dataset suitable for a quantitative chart.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5,000-satoshi donation QR image" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional original BitcoinVersus.Tech donation QR for 5,000 satoshis. Verify recipient and amount before sending any payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the QR on a second screen or use a compatible wallet's saved-image scanner. Confirm the requested amount and destination before authorizing payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on BitcoinVersus.Tech is Verifiably True. If you would like to support independent technical research, scan the QR code above.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech provides programming education for informational purposes. Examples do not replace certified engineering controls, audited production software, or safety procedures.</em></p><!-- /wp:paragraph -->

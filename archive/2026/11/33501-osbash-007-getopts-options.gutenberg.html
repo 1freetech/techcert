@@ -1,0 +1,129 @@
+<!-- wp:paragraph --><p><strong>OSBash.007</strong> teaches Linux administrators how to turn a shell script into a small command-line program with predictable options and error messages. Bash's built-in <code>getopts</code> processes single-letter flags, identifies flags that require values, and tracks the argument position before ordinary operands begin. The technique makes scheduled scripts and diagnostic tools easier to operate without inventing an unsafe parsing loop.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The preceding <a href="https://bitcoinversus.tech/2026/11/08/osbash-006-bash-functions-arguments-scope-exit-codes/">Bash functions lesson</a> introduced positional parameters inside functions. Review <a href="https://bitcoinversus.tech/2026/11/02/bash-loops-for-while-until-break-continue-safe-file-iteration/">loops and safe iteration</a>, <a href="https://bitcoinversus.tech/2026/10/15/osbash-003-variables-expansion-assignment-parameter-expansion-quoting-environment-command-substitution/">variables and quoting</a>, <a href="https://bitcoinversus.tech/2026/10/18/osbash-004-conditional-tests-if-then-else-fi-and/">conditional tests</a>, and <a href="https://bitcoinversus.tech/2026/10/09/osbash-001-shell-script-basics-bash-shebang-chmod-first-script/">the first Bash script</a> for prerequisites. The <a href="https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html">GNU Bash manual</a> provides the authoritative <code>getopts</code> behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Consider a terminal program that prints a few equipment names. The option <code>-n 2</code> asks for at most two names, <code>-p 'Lab: '</code> adds a prefix, and <code>-v</code> requests a status message. The names remain ordinary arguments. A parser must distinguish an option from its value and keep names containing spaces intact. A separate <code>--</code> marker ends option parsing, allowing a name beginning with a dash.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Parse short options with the Bash <code>getopts</code> builtin and its option string.</li><li>Understand <code>OPTARG</code>, <code>OPTIND</code>, the leading colon, and <code>shift</code>.</li><li>Preserve quoted operands through <code>"$@"</code> and <code>--</code>.</li><li>Reject unsupported flags, missing values, and invalid numeric limits with a nonzero status.</li><li>Run a read-only sample script and reproduce 31 local checks.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=wTvqFQydZQs&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>“Crash-Course in using getopts to parse Command Line Arguments in Bash!” A source-identified YouTube lesson focusing on option parsing. <a href="https://www.youtube.com/watch?v=wTvqFQydZQs">Original YouTube page</a>. An iframe can render even when player playback is unavailable.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">How getopts Interprets Flags</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The syntax <code>while getopts ':n:p:vh' option</code> loops over eligible short options. The <code>n:</code> and <code>p:</code> entries require associated values; <code>v</code> and <code>h</code> are standalone flags. Bash stores the currently recognized option letter in the variable named <code>option</code>. When an option takes a value, Bash places it in <code>OPTARG</code>. A sequence such as <code>-vn 2</code> combines the verbose flag with a numeric limit.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The first colon enables controlled diagnostic handling. A missing required value selects the <code>:</code> case and identifies the option through <code>OPTARG</code>; an unrecognized option selects <code>?</code>. The script prints its own error and exits with status 2. Without the leading colon, Bash can emit its default option error text. <a href="https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Variables.html">GNU's variable reference</a> documents <code>OPTARG</code> and <code>OPTIND</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Removing Parsed Flags Without Losing Names</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>OPTIND</code> tracks the index of the next argument to inspect. After the parsing loop, <code>shift "$((OPTIND - 1))"</code> removes the already-processed options and their values from the positional parameters. The remaining <code>"$@"</code> expands each device name as a distinct quoted argument, preserving spaces and metacharacters. Using bare <code>$@</code> would risk word splitting and pathname expansion.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Place short options before ordinary operands when using the standard <code>getopts</code> pattern. The explicit <code>--</code> delimiter marks the end of options, enabling a literal device name such as <code>-rack</code>. Native Bash <code>getopts</code> does not directly parse GNU-style long flags such as <code>--verbose</code>. For long-option interfaces, design a separate parser or investigate the distinct external <code>getopt</code> utility and its portability limits.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">A Read-Only Bash Inventory Labeler</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The following example prints fictional device names and never opens network connections, writes files, invokes elevated commands, or executes supplied input. A deliberately narrow numeric range from 1 through 9 avoids invalid values and confusing arithmetic corner cases. Save the source as <code>osbash-007-options-lab.sh</code>:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Complete Bash getopts example" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0 0 1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>#!/usr/bin/env bash
+# OSBash.007: safe CLI option parsing. No file changes or network access.
+set -u
+
+usage() {
+  printf 'Usage: %s [-n 1-9] [-p prefix] [-v] [-h] -- device [device ...]\n' &quot;${0##*/}&quot;
+}
+
+limit=3
+prefix=''
+verbose=0
+OPTIND=1
+while getopts ':n:p:vh' option; do
+  case $option in
+    n)
+      if [[ ! $OPTARG =~ ^[1-9]$ ]]; then
+        printf 'Error: -n requires a digit from 1 to 9\n' &gt;&amp;2
+        exit 2
+      fi
+      limit=$OPTARG
+      ;;
+    p) prefix=$OPTARG ;;
+    v) verbose=1 ;;
+    h) usage; exit 0 ;;
+    :) printf 'Error: -%s needs a value\n' &quot;$OPTARG&quot; &gt;&amp;2; exit 2 ;;
+    \?) printf 'Error: unknown option -%s\n' &quot;$OPTARG&quot; &gt;&amp;2; exit 2 ;;
+  esac
+done
+shift &quot;$((OPTIND - 1))&quot;
+
+if (( $# == 0 )); then
+  printf 'Error: supply at least one device name\n' &gt;&amp;2
+  usage &gt;&amp;2
+  exit 2
+fi
+
+if (( verbose )); then
+  printf 'Selection limit: %s; supplied: %s\n' &quot;$limit&quot; &quot;$#&quot; &gt;&amp;2
+fi
+
+printed=0
+for device in &quot;$@&quot;; do
+  (( printed &lt; limit )) || break
+  printf '%s%s\n' &quot;$prefix&quot; &quot;$device&quot;
+  ((printed += 1))
+done</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Run the syntax checker, then invoke the script with quoted names:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Bash syntax and sample invocation" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:0 0 1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>bash -n osbash-007-options-lab.sh
+bash osbash-007-options-lab.sh -n 2 -p 'Lab: ' -v -- 'rack A' 'rack B' 'rack C'</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The verified example prints <code>Lab: rack A</code> and <code>Lab: rack B</code> to standard output, and writes <code>Selection limit: 2; supplied: 3</code> to standard error. With <code>-n 0</code>, an unsupported <code>-z</code>, or a missing value following <code>-n</code>, execution exits with status 2. The help option <code>-h</code> displays usage and exits successfully.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=VOPh2fgsdd4&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>“Bash Script: Parsing command-line options with getopts.” A separate public YouTube tutorial demonstrating the built-in parser. <a href="https://www.youtube.com/watch?v=VOPh2fgsdd4">Original video</a>. The video source is identifiable, but full embedded playback requires a browser test.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Testing Unsafe-Looking Input Without Running It</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The test suite supplies input strings containing spaces, hyphens, semicolons, and the literal text <code>$(touch /tmp/NONEXISTENT)</code>. The program uses the supplied names only as data for <code>printf '%s%s\n'</code>. No <code>eval</code>, shell re-parsing, or command execution is applied to their contents. Quoting is necessary for reliable argument boundaries, but code handling actual filenames, remote commands or secrets needs additional input-specific controls.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":23290,"sizeSlug":"medium","linkDestination":"none"} --><figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bash-gnome-terminal-wikimedia.png" alt="GNOME Terminal screenshot showing authentic Bash commands on a Linux desktop" class="wp-image-23290" /><figcaption class="wp-element-caption"><em>Authentic GNOME Terminal screenshot from the existing BitcoinVersus.Tech media archive, originally sourced from Wikimedia Commons. The screen illustrates the shell environment, not results of the new exercise.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><strong>31 checks passed</strong> in the local GNU Bash 5.2.37 environment. The suite validates syntax, default limits, combined flags, prefixes, verbose diagnostics, missing option values, unknown flags, zero and oversized limits, empty operands, names beginning with a dash, and literal shell syntax. Bash parsing remains environment-specific: a shell other than Bash may interpret extensions differently. Scripts should specify the expected shell and receive independent testing before operational use.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common Mistakes</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Treating a flag value like an ordinary positional name because <code>OPTIND</code> was not applied after parsing.</li><li>Reading <code>$@</code> without quotation, which can split a single device name into several words.</li><li>Assuming <code>getopts</code> accepts long options or every arrangement of flags and operands.</li><li>Using <code>eval</code> to execute text supplied as an argument.</li><li>Displaying a successful status for an invalid option instead of returning a nonzero exit code.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Which option string entry requires a value? A letter followed by <code>:</code>, such as <code>n:</code>.</li><li>Where does Bash place a value following a recognized option? In <code>OPTARG</code>.</li><li>How are processed flags removed before examining names? Use <code>shift "$((OPTIND - 1))"</code>.</li><li>Why write <code>"$@"</code> rather than bare <code>$@</code>? To preserve individual argument boundaries.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Official References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html">GNU Bash: Bourne Shell Builtins</a>, authoritative <code>getopts</code> semantics.</li><li><a href="https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Variables.html">GNU Bash: Bourne Shell Variables</a>, <code>OPTARG</code> and <code>OPTIND</code>.</li><li><a href="https://www.gnu.org/software/bash/manual/html_node/Positional-Parameters.html">GNU Bash: Positional Parameters</a>, argument indexing.</li><li><a href="https://www.gnu.org/software/bash/manual/html_node/Special-Parameters.html">GNU Bash: Special Parameters</a>, quoted <code>"$@"</code>.</li><li><a href="https://flokoe.github.io/bash-hackers-wiki/howto/getopts_tutorial/">Bash Hackers Wiki: getopts tutorial</a>, supplemental examples.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A reliable command-line script needs to understand what the user requested before carrying out work. <code>getopts</code> handles recognized short flags, while <code>shift</code> exposes the remaining arguments. Quoted expansion preserves each name, and clear errors prevent invalid requests from looking successful. Those habits support safer scripts for administration, reporting and automation.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> Internal identifier OSBash.007 follows the verified functions lesson OSBash.006 and the SQL entry OSSQL.007 in the established rotation. The featured cover is AI-generated cinematic anime art depicting a fictional engineer and illustrative shell interface, not a screenshot of the executed exercise. The in-story GNOME Terminal screenshot is sourced from the prior Wikimedia-linked media archive. Both YouTube sources have identifiable public video entries. The accompanying script and 31-check test harness ran under GNU Bash 5.2.37 on Linux; end-to-end YouTube playback and pixel-level mobile inspection have not been independently tested. No SmartChart was produced because the lesson contains no measured numerical time series or comparable operational dataset.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original voluntary 5000-satoshi donation QR image" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional original BitcoinVersus.Tech 5,000-satoshi donation QR. Verify recipient and amount before sending.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the QR on a separate screen or use a compatible wallet's saved-image scanning feature. Confirm the destination and the requested 5,000 satoshis inside the wallet before authorizing payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on this platform is Verifiably True. If you would like to support the research, please scan the QR code.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech educational lessons do not replace reviewed production automation, documented security practices, or validated data-center operational procedures.</em></p><!-- /wp:paragraph -->

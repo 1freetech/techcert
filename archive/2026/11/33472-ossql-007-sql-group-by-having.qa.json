@@ -1,0 +1,130 @@
+{
+  "schema": "bitcoinversus-tech-lesson-publication-audit-v2",
+  "date_checked": "2026-11-19",
+  "track_id": "OSSQL.007",
+  "title": "SQL Aggregate Functions: GROUP BY, HAVING, COUNT, SUM, and AVG",
+  "wordpress_post_id": 33472,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/19/ossql-007-aggregate-functions-group-by-having-count-sum-avg/",
+  "rotation": {
+    "predecessor": "OSSolidity.005 WordPress 33438",
+    "last_SQL": "OSSQL.006 WordPress 31378",
+    "duplicates_found_before_create": 0,
+    "next_subject": "bash",
+    "next_anticipated_track_id": "OSBash.007",
+    "next_subject_duplicate_results": 0
+  },
+  "sources": [
+    "https://www.sqlite.org/lang_aggfunc.html",
+    "https://www.sqlite.org/lang_select.html",
+    "https://www.sqlite.org/cli.html",
+    "https://www.freecodecamp.org/news/sql-group-by-clauses-explained/"
+  ],
+  "media": {
+    "featured_media_id": 33464,
+    "featured_original_width": 1200,
+    "featured_original_height": 630,
+    "cover_style": "Photorealistic editorial illustration",
+    "cover_subject": "Older male database engineer, distinct from prior Solidity cover's younger female engineer",
+    "watermark_source": "approved existing BitcoinVersus.tech logo crop with neon green lettering and tight black highlight, one wordmark lower-left",
+    "in_body": [
+      {
+        "type": "youtube",
+        "id": "Rl6jUZPR-Oo",
+        "provider": "RuchiCodes",
+        "topic": "SQL GROUP BY and HAVING Clause Explained",
+        "published": "2026-03-15",
+        "rendered_iframe": true
+      },
+      {
+        "type": "image",
+        "media_id": 33465,
+        "source": "https://www.sqlite.org/images/sqlite370_banner.gif",
+        "rights": "SQLite project official site logo",
+        "rendered": true
+      },
+      {
+        "type": "youtube",
+        "id": "mXW7JHJM34k",
+        "provider": "freeCodeCamp.org",
+        "topic": "Intuitive SQL For Data Analytics",
+        "topic_time": "05:15:39 GROUP BY and aggregations",
+        "rendered_iframe": true
+      }
+    ],
+    "in_story_media_count": 3,
+    "donation_qr_id": 24043,
+    "youtube_iframe_count": 2,
+    "unrendered_shortcodes": 0,
+    "youtube_playback": "NOT INDEPENDENTLY TESTED",
+    "social_media": "Omitted because no verified relevant original social post was needed"
+  },
+  "chart": {
+    "choice": "none",
+    "candidate_comparison": [
+      {
+        "type": "vertical column",
+        "evaluation": "Could depict synthetic facility totals, but no real measurements; not editorially warranted"
+      },
+      {
+        "type": "line",
+        "evaluation": "No time series or repeated observations exist"
+      },
+      {
+        "type": "heatmap",
+        "evaluation": "Artificial facility-by-category sample has too few grounded dimensions to justify quantitative publication"
+      }
+    ],
+    "reason": "Lesson teaches aggregate functions using explicitly fictional records. Original chart would repeat invented examples rather than a newsworthy measured trend.",
+    "smartchart_created": false
+  },
+  "code": {
+    "sql_source_archive": "archive/2026/11/33472-ossql-007-sql-group-by-having.sql",
+    "test_harness_archive": "archive/2026/11/33472-ossql-007-sql-group-by-having.py",
+    "gutenberg_archive": "archive/2026/11/33472-ossql-007-sql-group-by-having.gutenberg.html",
+    "sql_environment": "Python 3 sqlite3 on Linux, SQLite version 3.46.1",
+    "checks_passed": 28,
+    "checks_failed": 0,
+    "test_stdout": [
+      "28 SQLite aggregate checks passed on SQLite 3.46.1",
+      "North: rows=5, known=4, watts=1600, avg=400.00",
+      "South: rows=3, known=3, watts=1000, avg=333.33",
+      "West: rows=3, known=2, watts=600, avg=300.00",
+      "Unassigned: rows=1, known=1, watts=100, avg=100.00"
+    ],
+    "data_provenance": "12 deliberately fictional equipment rows; no real operating capacity, power measurements or facilities",
+    "test_scope": "Illustrative SQLite functional assertions; not benchmark or production database assurance"
+  },
+  "wordpress_quality": {
+    "public_http_status": 200,
+    "site_visibility": "public",
+    "canonical_matches": true,
+    "seo_title": true,
+    "seo_description": true,
+    "og_image": true,
+    "body_internal_links": 5,
+    "image_alt_missing": 0,
+    "empty_links": 0,
+    "unboxed_code_blocks": 1,
+    "boxed_code_blocks": 0,
+    "theme_mobile_screenshot": "NOT TESTED",
+    "youtube_embedded_iframes": 2,
+    "third_party_playback_test": "NOT TESTED",
+    "seo_metadata_test": "public rendered head confirmed"
+  },
+  "archives": {
+    "repositories": [
+      "1freetech/opencert.tech",
+      "1freetech/techcert",
+      "1freetech/Bitcoinversus.tech"
+    ],
+    "readback_check": "pending separate verification"
+  },
+  "learned": [
+    "Keep synthetic educational aggregates labeled as invented rather than measured data.",
+    "A chart requires a defensible dataset, not a decorative representation of fabricated totals.",
+    "Check WordPress shortcode to iframe rendering, then separately note playback as untested.",
+    "Avoid repeating the featured artwork inside article content.",
+    "Rotate person and visual style while preserving the approved secondary logo."
+  ]
+}

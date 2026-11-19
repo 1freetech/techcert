@@ -1,0 +1,7 @@
+name 'opencert_lab'
+maintainer 'BitcoinVersus.Tech educational lab'
+maintainer_email 'noreply@example.invalid'
+license 'MIT'
+description 'Disposable Chef Infra cookbook learning example'
+version '0.1.0'
+chef_version '>= 18.0'

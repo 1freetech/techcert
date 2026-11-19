@@ -1,0 +1,96 @@
+<!-- wp:paragraph --><p><strong>OSCSS.003</strong> teaches CSS measurement units through an actual responsive-browser experiment. <code>px</code>, <code>em</code>, <code>rem</code>, percentages, and viewport units calculate sizes from different reference points. Choosing the right reference helps pages adapt to small screens and reader font preferences. The lab demonstrates those differences without making production performance claims.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Prerequisites include <a href="https://bitcoinversus.tech/2026/11/05/oscss-001-css-selectors-types-classes-ids-attributes-relationships/">OSCSS.001: Selectors</a> and <a href="https://bitcoinversus.tech/2026/11/08/oscss-002-css-cascade-specificity-layers-importance-inheritance/">OSCSS.002: Cascade and Specificity</a>. The elements in <a href="https://bitcoinversus.tech/2026/11/18/oshtml-006-semantic-html-headers-navigation-main-articles-landmarks/">OSHTML.006: Semantic HTML</a> and controls in <a href="https://bitcoinversus.tech/2026/11/01/oshtml-004-html-forms-labels-inputs-fieldsets-submission-validation/">OSHTML.004: Accessible Forms</a> also need usable sizing. The <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units">MDN units guide</a> supplies the definitions.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Explain CSS pixels versus physical display pixels.</li><li>Calculate <code>em</code> and <code>rem</code> from font-size references.</li><li>Use percentages, <code>vw</code>, and <code>vh</code> with appropriate constraints.</li><li>Combine <code>min()</code> and <code>clamp()</code> for adaptive sizes.</li><li>Check responsive behavior at desktop and mobile widths.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=-GR52czEd-0&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Web Dev Simplified, <a href="https://www.youtube.com/watch?v=-GR52czEd-0">“Learn CSS Units in 8 Minutes”</a> (2019). Explains pixels, percentages, viewport units, em, and rem. Player playback requires separate verification.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Pixels and percentages</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A CSS pixel is a reference unit, not necessarily one device pixel. High-density screens may use multiple hardware pixels for one CSS pixel. A fixed <code>width: 600px</code> could exceed a narrow screen, so constraints such as <code>max-width: 100%</code> matter. For a usual block box, <code>width: 60%</code> uses the containing block's width; a percentage font size instead refers to the parent font size. The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/percentage">percentage reference</a> explains the property-dependent behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Root-relative and element-relative font sizes</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>rem</code> uses the root element's computed font size. With a 16px root, <code>1.25rem</code> equals 20 CSS pixels. When <code>em</code> is used for <code>font-size</code>, its reference is the inherited font size; for padding, it uses the element's own font size. Thus <code>padding: 1em</code> on a 20px element yields 20px of padding. Nested em-based font sizing can compound, while rem sizing avoids repeated multiplication.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":33560,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oscss-003-chromium-desktop-tested-1280.png" alt="Chromium desktop screenshot at 1280px showing CSS pixels, percentage widths, em/rem and viewport units in separate test cards" class="wp-image-33560" /><figcaption class="wp-element-caption"><em>Actual Chromium screenshot of the CSS lab at 1,280 CSS pixels. All dimensions are instructional CSS values rather than measurements from a production site.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Viewport units and responsive typography</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>1vw</code> is one percent of viewport width, and <code>1vh</code> one percent of viewport height. Dynamic browser toolbars make viewport height especially complex on phones, where <code>svh</code>, <code>lvh</code>, and <code>dvh</code> provide additional choices. The <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length">MDN length reference</a> documents those distinctions.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=_-aDOAMmDHI&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Kevin Powell, <a href="https://www.youtube.com/watch?v=_-aDOAMmDHI">“CSS em and rem explained”</a> (2017). Demonstrates how em calculations change between font size and other properties.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><code>clamp(min, preferred, max)</code> bounds a flexible value. The lab's <code>clamp(1.75rem, 1rem + 3vw, 3rem)</code> computes to 28px at 390px viewport width and 48px at 1,280px when the root font is 16px. Those outcomes change when the root font changes. Relative minimum and maximum limits also support readable zoom behavior, which still needs manual accessibility review. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp">MDN clamp()</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">The reproducible browser lab</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Save the full HTML example and open it in a current browser. The following excerpt shows the CSS rules under test. A responsive grid uses a minimum card size, while <code>min(100%, 16rem)</code> prevents its tracks from exceeding a narrow container:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="CSS core from verified browser lab" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>/* OSCSS.003: core styles from tested Chromium lab */
+* { box-sizing: border-box; }
+:root { font-family: system-ui, sans-serif; }
+main { width: min(92%, 72rem); margin: 2rem auto; }
+h1 {
+  font-size: clamp(1.75rem, 1rem + 3vw, 3rem);
+  line-height: 1.2;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+}
+.card { padding: 1.25rem; min-width: 0; }
+.sample-px { width: 200px; max-width: 100%; }
+.sample-percent { width: 60%; }
+.sample-rem { font-size: 1.25rem; padding: 1em; }
+.sample-vw { width: min(50vw, 100%); }</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<pre aria-label="Semantic HTML fragment from the CSS lab" tabindex="0" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important;margin:1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>&lt;main&gt;
+  &lt;h1&gt;Responsive CSS units&lt;/h1&gt;
+  &lt;section class=&quot;cards&quot; aria-label=&quot;CSS unit demonstrations&quot;&gt;
+    &lt;article class=&quot;card&quot;&gt;
+      &lt;h2&gt;Root em and em&lt;/h2&gt;
+      &lt;div class=&quot;sample-rem&quot;&gt;1.25rem / 1em&lt;/div&gt;
+    &lt;/article&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Chromium tests at 390px and 1,280px passed <strong>20 checks</strong>, covering computed percentage widths, rem text, em padding, viewport-constrained widths, clamp boundaries, and lack of document overflow. Increasing the root font from 16px to 20px raised <code>1.25rem</code> from 20px to 25px. These tests validate one browser environment, not every browser or assistive technology.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":33561,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oscss-003-chromium-mobile-tested-390.png" alt="Chromium screenshot at 390px showing four CSS unit cards stacked vertically without horizontal overflow" class="wp-image-33561" /><figcaption class="wp-element-caption"><em>The same authentic Chromium lab at a 390 CSS-pixel viewport; the cards stack vertically without horizontal scrolling.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common errors and knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Do not equate a CSS pixel with one physical screen pixel.</li><li>Do not assume every percentage refers to viewport width.</li><li>Avoid unconstrained fixed widths and <code>100vw</code> values that may overflow.</li><li>Do not force all text to fixed sizes without testing zoom.</li><li>Check changing mobile browser controls before choosing <code>100vh</code>.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>With a 16px root, <code>2rem</code> computes to 32px. If a containing block is 400px wide, <code>width: 60%</code> normally yields 240px. Use <code>clamp()</code> when a preferred size must stay between two boundaries.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Sources and conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units">MDN: CSS Values and Units</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length">MDN: CSS Length Units</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp">MDN: clamp()</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Values_and_units/Using_math_functions">MDN: CSS Math Functions</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>CSS sizing becomes predictable when every value has a known reference. Choose rem for root-based sizing, em for spacing linked to element text, percentages for container proportions, and viewport units when screen dimensions matter. Constrain fluid values and test in browsers at more than one screen width.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSCSS.003 follows verified OSCSS.002 in the OpenCert curriculum. The featured 1200 × 630 image is original AI-generated photorealistic editorial artwork, with the approved BitcoinVersus.tech wordmark applied once. Two in-story screenshots were captured from a real Chromium test at 390px and 1,280px; 20 automated checks passed. Both educational video sources are identifiable, but third-party playback remains unverified. No quantitative SmartChart was created because the example contains instructional CSS values rather than comparable external measurements.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Voluntary BitcoinVersus.Tech 5,000-satoshi donation QR. Confirm the recipient and amount before payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>To scan on mobile, display the QR on another screen or use a trusted wallet's saved-image scanning feature. Confirm the recipient and amount in your wallet before authorizing payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on BitcoinVersus.Tech is Verifiably True. Optional contributions help support continuing technical research.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Examples are educational and do not replace cross-browser, mobile-device, zoom, screen-reader, or production accessibility tests.</em></p><!-- /wp:paragraph -->

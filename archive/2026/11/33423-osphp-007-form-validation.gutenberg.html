@@ -1,0 +1,208 @@
+<!-- wp:paragraph --><p>A PHP contact form joins <strong>HTML input controls</strong> with server-side code that checks whether a visitor submitted usable data. Names, email addresses, and messages arrive as external input, not trusted program state. A reliable introductory form validates their shape and length before using them, then escapes text before placing it inside HTML. Validation and output escaping solve different problems and neither should be omitted.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Earlier <a href="https://bitcoinversus.tech/2026/11/08/osphp-006-php-exceptions-try-catch-finally-safe-error-handling/">PHP exception handling</a>, <a href="https://bitcoinversus.tech/2026/11/01/osphp-005-functions-parameters-return-values-scope-type-declarations/">functions</a>, and <a href="https://bitcoinversus.tech/2026/10/15/osphp-004-arrays-indexed-associative-nested-access-update-iteration/">associative arrays</a> supply the foundation. The related <a href="https://bitcoinversus.tech/2026/11/01/oshtml-004-html-forms-labels-inputs-fieldsets-submission-validation/">HTML forms lesson</a> explains labels and input controls. The official <a href="https://www.php.net/manual/en/tutorial.forms.php">PHP forms tutorial</a> connects browser submissions to PHP variables.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A form is like a small questionnaire. Someone enters a name, email address, and message, then presses a button. PHP receives the answers and checks whether they make sense. For example, an email should have a recognizable format, and a name should not be empty. When showing an answer back on a webpage, PHP must display it as text rather than accidentally treating it as webpage instructions.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Distinguish an HTML form's <code>name</code> attributes from PHP's <code>$_POST</code> keys.</li><li>Validate expected strings, required fields, byte lengths, and email formats.</li><li>Use <code>htmlspecialchars()</code> when placing external text into HTML.</li><li>Run the complete contact-form demonstration and its 15 self-tests.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=bOqTCDfc7Tk&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Dani Krossing, “The Basics of PHP Form Handling Tutorial,” March 17, 2023. An authentic educational lesson introducing form submission and processing. <a href="https://www.youtube.com/watch?v=bOqTCDfc7Tk">Original YouTube page</a>.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">How a Form Reaches PHP</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>An HTML <code>&lt;form method="post"&gt;</code> sends ordinary named controls to the server. PHP exposes traditional URL-encoded and multipart form submissions through the <code>$_POST</code> superglobal, whose keys correspond to input <code>name</code> attributes. <code>$_GET</code> instead exposes query-string parameters. Both are external input, and POST alone does not make sensitive information secure. Read the <a href="https://www.php.net/manual/en/language.variables.external.php">official external-variables reference</a> before assuming a particular submitted type.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Form controls can be omitted or replaced by arrays, including unexpected values such as <code>name[]=bad</code>. An application should check that its expected fields are strings before trimming or validating them. Client-side attributes such as <code>required</code> improve usability, but cannot replace server-side checks because visitors can construct HTTP requests without using the browser form.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Validation Is Not HTML Escaping</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Validation decides whether an input is acceptable for its intended purpose. The sample rejects empty names, malformed email addresses, and messages exceeding defined byte limits. It calls <code>filter_var($email, FILTER_VALIDATE_EMAIL)</code> to check email syntax, not to prove that an inbox exists. Its length limits use <code>strlen()</code>, which counts bytes; multilingual text may use multiple UTF-8 bytes per character. The <a href="https://www.php.net/manual/en/function.filter-var.php">PHP filter_var reference</a> defines validation behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Escaping happens when text is displayed in an HTML context. <code>htmlspecialchars()</code> converts special characters, including angle brackets and quotation marks, into HTML entities. It does not validate email addresses, protect SQL queries, or make input suitable for every other output context. See the <a href="https://www.php.net/manual/en/function.htmlspecialchars.php">PHP htmlspecialchars manual</a> for supported flags and encoding options.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":23243,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/php-code-wikimedia-cc0.jpg" alt="Actual PHP source code visible inside a source-code editor" class="wp-image-23243" /><figcaption class="wp-element-caption"><em>Authentic PHP source-code photograph from Wikimedia Commons, retained in the BitcoinVersus.Tech media library as CC0; the photograph is not an execution screenshot of the tutorial code.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete Executable Contact Form</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Save the following self-contained file as <code>contact.php</code>. It checks three fields, reports errors beside their corresponding labels, safely restores submitted values after validation failures, and displays a success message only when input passes. It deliberately <strong>does not email, persist, or forward any submission</strong>. No third-party packages, database accounts, or production equipment are required:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="PHP source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.54 ui-monospace,Consolas,monospace!important"><code>&lt;?php
+declare(strict_types=1);
+
+// Educational only: validates and displays a result. No email or storage.
+function validateContact(array $input): array
+{
+    $errors = [];
+    $values = [];
+    foreach (['name', 'email', 'message'] as $key) {
+        if (!isset($input[$key]) || !is_string($input[$key])) {
+            $errors[$key] = 'Enter a text value.';
+            $values[$key] = '';
+            continue;
+        }
+        $values[$key] = trim($input[$key]);
+    }
+    if (!isset($errors['name']) &amp;&amp; ($values['name'] === '' || strlen($values['name']) &gt; 80)) {
+        $errors['name'] = 'Name must contain 1 to 80 bytes.';
+    }
+    if (!isset($errors['email']) &amp;&amp;
+        (strlen($values['email']) &gt; 254 || filter_var($values['email'], FILTER_VALIDATE_EMAIL) === false)) {
+        $errors['email'] = 'Enter a valid email address of at most 254 bytes.';
+    }
+    if (!isset($errors['message']) &amp;&amp; ($values['message'] === '' || strlen($values['message']) &gt; 500)) {
+        $errors['message'] = 'Message must contain 1 to 500 bytes.';
+    }
+    return [$values, $errors];
+}
+
+function htmlText(string $value): string
+{
+    return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
+function inputValue(array $values, string $key): string
+{
+    return isset($values[$key]) &amp;&amp; is_string($values[$key]) ? $values[$key] : '';
+}
+
+if (PHP_SAPI === 'cli' &amp;&amp; in_array('--self-test', $argv ?? [], true)) {
+    $checks = 0;
+    $check = function (bool $condition, string $message) use (&amp;$checks): void {
+        if (!$condition) {
+            throw new RuntimeException('FAIL: ' . $message);
+        }
+        $checks++;
+    };
+    $sample = ['name' =&gt; ' Ada ', 'email' =&gt; 'ada@example.org', 'message' =&gt; ' Hello '];
+    [$valid, $errors] = validateContact($sample);
+    $check($errors === [], 'valid fields');
+    $check($valid['name'] === 'Ada', 'trim name');
+    $check($valid['message'] === 'Hello', 'trim message');
+    [, $errors] = validateContact(['email' =&gt; 'a@b.org', 'message' =&gt; 'ok']);
+    $check(isset($errors['name']), 'missing name');
+    [, $errors] = validateContact(['name' =&gt; '', 'email' =&gt; 'a@b.org', 'message' =&gt; 'ok']);
+    $check(isset($errors['name']), 'empty name');
+    [, $errors] = validateContact(['name' =&gt; str_repeat('a', 81), 'email' =&gt; 'a@b.org', 'message' =&gt; 'ok']);
+    $check(isset($errors['name']), 'long name');
+    [, $errors] = validateContact(['name' =&gt; 'Ada', 'email' =&gt; 'not-an-email', 'message' =&gt; 'ok']);
+    $check(isset($errors['email']), 'malformed email');
+    [, $errors] = validateContact(['name' =&gt; 'Ada', 'message' =&gt; 'ok']);
+    $check(isset($errors['email']), 'missing email');
+    [, $errors] = validateContact(['name' =&gt; 'Ada', 'email' =&gt; str_repeat('a', 251) . '@x.org', 'message' =&gt; 'ok']);
+    $check(isset($errors['email']), 'oversized email');
+    [, $errors] = validateContact(['name' =&gt; 'Ada', 'email' =&gt; 'a@b.org', 'message' =&gt; '']);
+    $check(isset($errors['message']), 'empty message');
+    [, $errors] = validateContact(['name' =&gt; 'Ada', 'email' =&gt; 'a@b.org', 'message' =&gt; str_repeat('x', 501)]);
+    $check(isset($errors['message']), 'long message');
+    [, $errors] = validateContact(['name' =&gt; ['bad'], 'email' =&gt; 'a@b.org', 'message' =&gt; 'ok']);
+    $check(isset($errors['name']), 'array injection');
+    $escaped = htmlText('&lt;script&gt;alert(&quot;x&quot;)&lt;/script&gt;');
+    $check(str_contains($escaped, '&amp;lt;script&amp;gt;'), 'HTML escaping');
+    $check(!str_contains($escaped, '&lt;script&gt;'), 'no raw script markup');
+    $check(inputValue(['name' =&gt; ['not text']], 'name') === '', 'array redisplay guard');
+    echo $checks . &quot; PHP form checks passed\n&quot;;
+    exit;
+}
+
+$submitted = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
+[$values, $errors] = $submitted ? validateContact($_POST) : [[], []];
+$success = $submitted &amp;&amp; $errors === [];
+?&gt;
+&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Contact form validation lab&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main&gt;
+    &lt;h1&gt;Contact form validation lab&lt;/h1&gt;
+    &lt;?php if ($success): ?&gt;
+      &lt;p role=&quot;status&quot;&gt;Input accepted for demonstration only; nothing was saved or sent.&lt;/p&gt;
+    &lt;?php endif; ?&gt;
+    &lt;form method=&quot;post&quot;&gt;
+      &lt;p&gt;
+        &lt;label for=&quot;name&quot;&gt;Name&lt;/label&gt;
+        &lt;input id=&quot;name&quot; name=&quot;name&quot; required maxlength=&quot;80&quot;
+          value=&quot;&lt;?= htmlText(inputValue($values, 'name')) ?&gt;&quot;&gt;
+        &lt;?php if (isset($errors['name'])): ?&gt;
+          &lt;span role=&quot;alert&quot;&gt;&lt;?= htmlText($errors['name']) ?&gt;&lt;/span&gt;
+        &lt;?php endif; ?&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;label for=&quot;email&quot;&gt;Email&lt;/label&gt;
+        &lt;input id=&quot;email&quot; name=&quot;email&quot; type=&quot;email&quot; required maxlength=&quot;254&quot;
+          value=&quot;&lt;?= htmlText(inputValue($values, 'email')) ?&gt;&quot;&gt;
+        &lt;?php if (isset($errors['email'])): ?&gt;
+          &lt;span role=&quot;alert&quot;&gt;&lt;?= htmlText($errors['email']) ?&gt;&lt;/span&gt;
+        &lt;?php endif; ?&gt;
+      &lt;/p&gt;
+      &lt;p&gt;
+        &lt;label for=&quot;message&quot;&gt;Message&lt;/label&gt;
+        &lt;textarea id=&quot;message&quot; name=&quot;message&quot; required maxlength=&quot;500&quot;&gt;&lt;?= htmlText(inputValue($values, 'message')) ?&gt;&lt;/textarea&gt;
+        &lt;?php if (isset($errors['message'])): ?&gt;
+          &lt;span role=&quot;alert&quot;&gt;&lt;?= htmlText($errors['message']) ?&gt;&lt;/span&gt;
+        &lt;?php endif; ?&gt;
+      &lt;/p&gt;
+      &lt;button type=&quot;submit&quot;&gt;Check input&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Use a terminal to verify syntax and execute the built-in tests. The built-in PHP development server can serve the local demonstration in a disposable testing environment, but it must never be exposed as a production server:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="PHP source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.54 ui-monospace,Consolas,monospace!important"><code>php -l contact.php
+php contact.php --self-test
+php -S 127.0.0.1:8000</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The checks were executed with <strong>PHP 8.4.24 CLI</strong>; expected console output after the syntax check is:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="PHP source code example" style="background:transparent!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.54 ui-monospace,Consolas,monospace!important"><code>15 PHP form checks passed</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The self-tests cover valid input, trimming, absent fields, length boundaries, malformed email, array-shaped submissions, and HTML escaping. Testing individual functions does not establish that every browser interaction, web-server configuration, or accessibility tool behaves correctly.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What Production Applications Need</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Because the sample only redisplays a demonstration result, it contains no data-changing action or database insert. A real contact system needs appropriate protections such as HTTPS, cross-site request forgery controls for relevant authenticated actions, spam and rate limiting, careful data retention, secure email or storage handling, and review of privacy requirements. The <a href="https://www.php.net/manual/en/security.variables.php">PHP user-submitted data guidance</a> explains why incoming values must never be implicitly trusted.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=0VJgiVnon88&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Dani Krossing, “3 Beginner Mistakes in PHP When it Comes to Form Data,” July 5, 2023. A separate original-source tutorial explaining common data-handling and validation mistakes. <a href="https://www.youtube.com/watch?v=0VJgiVnon88">Original video page</a>.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Why check <code>is_string()</code> before calling <code>trim()</code>? Browser submissions can supply an array for a field name.</li><li>Does valid email syntax prove that a mailbox exists? No.</li><li>Why escape an invalid name before redisplaying it? Its characters must appear as text rather than HTML markup.</li><li>Does a passing CLI test demonstrate an entire secure production form? No.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://www.php.net/manual/en/tutorial.forms.php">PHP Manual: Dealing with Forms</a>.</li><li><a href="https://www.php.net/manual/en/language.variables.external.php">PHP Manual: Variables From External Sources</a>.</li><li><a href="https://www.php.net/manual/en/function.filter-var.php">PHP Manual: filter_var</a>.</li><li><a href="https://www.php.net/manual/en/function.htmlspecialchars.php">PHP Manual: htmlspecialchars</a>.</li><li><a href="https://www.php.net/manual/en/security.variables.php">PHP Manual: User Submitted Data</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A PHP form accepts answers, checks whether they meet its rules, and shows a clear result. Checking the answers and safely displaying them are separate jobs. A useful exercise can teach both without sending or storing anyone's information. More protection is required before turning a classroom demonstration into a real service.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> Internal curriculum identifier OSPHP.007 follows the published PHP exceptions lesson and the latest HTML lesson in the broader course rotation. The featured cover is an original colored-pencil AI illustration of a fictional older developer, deliberately different from the person featured in the preceding lesson; the consistent secondary BitcoinVersus.tech logo is composited from an existing branded reference. The in-story PHP photograph is sourced to a Wikimedia Commons CC0 media record. Both video URLs were verified against the original educator's public video listings. PHP 8.4.24 completed its syntax check and 15 sample assertions. Independent video playback, mobile viewport inspection, web-server penetration testing, and screen-reader validation were not performed.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech voluntary donation QR for 5000 satoshis" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original voluntary BitcoinVersus.Tech donation QR. Verify the destination and 5,000-satoshi amount in your wallet before authorizing payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the QR on another device or use a supported saved-image scanner. Confirm the receiving address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and the requested 5,000-satoshi amount before sending.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech provides programming education for informational purposes, not a substitute for independent security review, application testing, or production validation.</em></p><!-- /wp:paragraph -->

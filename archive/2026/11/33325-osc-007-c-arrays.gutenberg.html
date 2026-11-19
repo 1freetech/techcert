@@ -1,0 +1,127 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>OSC.007</strong> introduces C arrays: a fixed number of elements of the same type stored consecutively. Arrays help a program process measurements, sensor samples or scores without declaring a new variable for every value. C indexes begin at <strong>zero</strong>; an array containing five elements has valid positions <code>0</code> through <code>4</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The sequence follows <a href="https://bitcoinversus.tech/2026/11/07/osc-006-c-functions-prototypes-parameters-return-values-scope/">OSC.006 functions</a>, <a href="https://bitcoinversus.tech/2026/11/01/osc-005-c-loops-for-while-do-while-break-continue/">OSC.005 loops</a> and <a href="https://bitcoinversus.tech/2026/10/10/osc-002-c-variables-and-fundamental-types-declarations-initialization-integers-floating-point-char-const-and-sizeof/">OSC.002 fundamental types</a>. Students will declare arrays, compute their element count and prevent invalid indexing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=MOeGnamlUP4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=MOeGnamlUP4
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Programiz, <strong>C Arrays</strong>, an original instructional video covering declarations, initialization, indexing and loop traversal <a href="https://www.youtube.com/watch?v=MOeGnamlUP4">Original publisher video</a>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Declaration and initialization</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The declaration <code>int readings[5];</code> reserves space for five <code>int</code> objects. An uninitialized automatic array contains indeterminate values, so do not read its elements before assigning them. In contrast, <code>int readings[5] = {12, 18, 25, 30, 15};</code> initializes every position. A partial initializer such as <code>int values[4] = {2, 4};</code> initializes the two remaining elements to zero.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Compile and test a complete C11 program</h2>
+<!-- /wp:heading -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted" style="white-space:pre-wrap">#include &lt;stdio.h&gt;
+#include &lt;stddef.h&gt;
+
+int main(void)
+{
+    int readings[] = {12, 18, 25, 30, 15};
+    size_t count = sizeof readings / sizeof readings[0];
+    int total = 0;
+
+    for (size_t i = 0; i &lt; count; ++i) {
+        total += readings[i];
+    }
+
+    printf("count=%zu total=%d average=%.1f\n",
+           count, total, (double)total / count);
+    return 0;
+}</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>The program prints <code>count=5 total=100 average=20.0</code>. The example was compiled and run using GCC with <code>-std=c11 -Wall -Wextra -Wpedantic -Werror</code> and address/undefined-behavior sanitizers. The result describes the tested example, not proof that every C program is safe.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why sizeof needs context</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>sizeof readings</code> gives the entire array size in <strong>bytes</strong>; <code>sizeof readings[0]</code> gives one element's size. Their quotient produces five here, independent of how many bytes the implementation assigns to <code>int</code>. Perform the calculation where the actual array object is visible.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A function declared <code>void inspect(int data[], size_t length)</code> receives a pointer parameter rather than a complete array object. Its <code>sizeof data</code> therefore cannot recover the caller's element count. Pass <code>length</code> separately, as explained by <a href="https://en.cppreference.com/w/c/language/array">cppreference's C array reference</a>. Pointer behavior receives fuller treatment in a later lesson.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Bounds are a safety requirement</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>readings[5]</code> does <strong>not</strong> designate the sixth valid element. Accessing beyond the array bounds causes undefined behavior; a program might appear to work, crash or corrupt data. Use conditions such as <code>i &lt; count</code>, not <code>i &lt;= count</code>. The <a href="https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/arrays-arr/arr30-c/">SEI CERT ARR30-C rule</a> specifically addresses invalid array subscripts.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=hsmSDBBsifo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=hsmSDBBsifo
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Neso Academy, <strong>Arrays in C: Solved Problem 1</strong>, an original worked tutorial showing array processing <a href="https://www.youtube.com/watch?v=hsmSDBBsifo">Original publisher video</a>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice and knowledge check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list">
+<li>Change the array to <code>{3, 6, 9}</code>, recompile and predict the count, total and average before running.</li>
+<li>Explain why the final valid index is <code>count - 1</code> when count is positive.</li>
+<li>Explain why <code>sizeof data</code> inside an ordinary array-parameter function cannot determine the caller's length.</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>For an earlier review of comparison operators and loop conditions, revisit <a href="https://bitcoinversus.tech/2026/10/14/osc-004-c-control-flow-if-else-switch-ternary/">OSC.004 control flow</a>. The <a href="https://bitcoinversus.tech/2026/10/09/osc-001-c-compiler-toolchain-gcc-preprocessing-compilation-assembly-linking-first-build/">OSC.001 compiler lesson</a> provides build prerequisites. Reference: <a href="https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html">GCC warning options</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>C arrays organize multiple same-type values, but programmers remain responsible for initialization, element counts and valid indices. Combine arrays with loops and functions, preserve lengths at interfaces, and test boundary conditions before trusting output.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> The original cinematic-anime cover illustrates a fictional C workstation. It is not an actual debugger screenshot. Both videos come from the identified educational publishers. The program was locally compiled and run; YouTube playback and mobile visual appearance have not been independently verified.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5,000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi donation; verify wallet address and amount.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run. An optional 5,000-satoshi contribution supports independent lessons. Confirm receiving address <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and payment amount before sending an irreversible transaction.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on BitcoinVersus.Tech is Verifiably True. Learning materials are educational, not a substitute for production software review.</em></p>
+<!-- /wp:paragraph -->

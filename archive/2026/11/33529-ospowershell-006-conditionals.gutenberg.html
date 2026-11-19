@@ -1,0 +1,122 @@
+<!-- wp:paragraph --><p><strong>PowerShell conditional statements</strong> let a script evaluate a value and choose an appropriate action. The <code>if</code>, <code>elseif</code>, and <code>else</code> keywords check conditions in order, while <code>switch</code> offers a readable way to match several possible values. Combined with comparison operators such as <code>-eq</code> and <code>-ge</code>, conditional logic can classify inventory records and produce reports without changing actual infrastructure.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The lesson follows <a href="https://bitcoinversus.tech/2026/11/08/ospowershell-005-arrays-hashtables-collections-indexing-key-value/">PowerShell arrays and hashtables</a>. Earlier units on <a href="https://bitcoinversus.tech/2026/11/05/ospowershell-004-variables-assignment-objects-strings-types-scope/">variables</a>, <a href="https://bitcoinversus.tech/2026/10/19/ospowershell-003-the-pipeline-object-flow-filtering-sorting-parameter-binding/">the object pipeline</a>, <a href="https://bitcoinversus.tech/2026/10/10/ospowershell-002-objects-properties-methods-types-get-member/">object properties</a>, and <a href="https://bitcoinversus.tech/2026/10/09/ospowershell-001-cmdlets-verb-noun-get-command-get-help-first-workflow/">cmdlets</a> provide background. Microsoft documents the exact rules in <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_if?view=powershell-7.5">about_If</a> and <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_switch?view=powershell-7.5">about_Switch</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Think of a technician deciding which label to attach to a fictional equipment reading. A reported value of 650 watts receives a Review label, 350 receives Monitor, and 200 receives Normal. Another decision evaluates the reported status: Online means Continue, Offline means Investigate, and Maintenance means Wait. Such labels are instructional categories only, not electrical safety thresholds or manufacturer specifications.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Write conditional branches using <code>if</code>, <code>elseif</code>, and <code>else</code>.</li><li>Use <code>-eq</code>, <code>-ge</code>, and <code>-or</code> accurately.</li><li>Compare a <code>switch</code> statement with a chain of conditions.</li><li>Understand case-insensitive matching and the purpose of <code>break</code>.</li><li>Read a PowerShell 7 script and reproduce its stated example results in a local runtime.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=I4POqjlkswY&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>CodeLucky, “PowerShell If-ElseIf-Else Tutorial: Master Multiple Conditions for Beginners,” published October 24, 2025. An identifiable explanation of branch order and multiple conditions. <a href="https://www.youtube.com/watch?v=I4POqjlkswY">Original video</a>. Actual playback inside the published page requires browser testing.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">If, ElseIf, and Else</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>PowerShell evaluates an <code>if</code> condition first. If the expression is true, its script block runs and subsequent <code>elseif</code> conditions are skipped. Otherwise, PowerShell examines each <code>elseif</code> in sequence. The final <code>else</code> runs only when no prior condition succeeds. Threshold order matters: a 650-watt example must be tested against 600 before the broader 300 threshold or it would receive the lower category.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The comparison operators <code>-eq</code> and <code>-ne</code> mean equal and not equal; <code>-gt</code>, <code>-ge</code>, <code>-lt</code>, and <code>-le</code> compare magnitude. The logical <code>-or</code> combines conditions. PowerShell string comparisons are case-insensitive by default, although variants such as <code>-ceq</code> enforce case-sensitive equality. Collection comparisons require particular care, because comparing a collection can return matching elements rather than a single Boolean. See <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.5">Microsoft's comparison-operator reference</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Switch Handles Named States</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>switch</code> statement can match named status values without repeating lengthy conditions. By default, PowerShell compares text without case sensitivity, so <code>offline</code> matches an <code>Offline</code> case. Unlike a conventional first-match-only assumption, PowerShell can run multiple matching switch clauses. The sample includes <code>break</code> to stop after the selected case; its <code>default</code> branch handles unrecognized names. The <a href="https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-switch?view=powershell-7.5">official switch deep dive</a> explains multiple matches, wildcards, and regular expressions.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=C9yVvCnCbfo&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>HardReset_Pro, “Windows PowerShell: How to use switch statements,” published April 15, 2026. Covers the switch cases, default matching, and break behavior. <a href="https://www.youtube.com/watch?v=C9yVvCnCbfo">Original video</a>.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete Read-Only PowerShell Example</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Save the following program as <code>ospowershell-006-conditions.ps1</code>. The parameters use validation attributes and the output is a structured PowerShell object, with an optional JSON presentation. The code does not connect to services, modify settings, collect passwords, or touch hardware. All readings are fictional:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="PowerShell if elseif else and switch sample" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,Consolas,monospace!important"><code>#requires -Version 7.0
+# OSPowerShell.006: read-only educational decision lab.
+[CmdletBinding()]
+param(
+    [ValidateNotNullOrEmpty()]
+    [string]$Status = 'Online',
+
+    [ValidateRange(0, 1000)]
+    [int]$Watts = 250,
+
+    [switch]$AsJson
+)
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+$band = if ($Watts -ge 600) {
+    'Review'
+} elseif ($Watts -ge 300) {
+    'Monitor'
+} else {
+    'Normal'
+}
+
+$action = switch ($Status) {
+    'Online'      { 'Continue'; break }
+    'Offline'     { 'Investigate'; break }
+    'Maintenance' { 'Wait'; break }
+    default       { 'Verify'; break }
+}
+
+$report = [pscustomobject][ordered]@{
+    Status = $Status
+    Watts = $Watts
+    Band = $band
+    Action = $action
+    NeedsAttention = ($band -eq 'Review' -or $action -eq 'Investigate')
+}
+
+if ($AsJson) {
+    $report | ConvertTo-Json -Depth 3
+} else {
+    $report
+}</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Use PowerShell 7 locally to run a sample with an Offline state and 650 fictional watts:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="PowerShell example command" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1.1em 0!important;max-width:100%!important;white-space:pre-wrap!important;color:inherit!important;font:0.92em/1.55 ui-monospace,Consolas,monospace!important"><code>pwsh -NoProfile -File ./ospowershell-006-conditions.ps1 -Status Offline -Watts 650 -AsJson</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The <strong>expected</strong> JSON properties are <code>Status: Offline</code>, <code>Watts: 650</code>, <code>Band: Review</code>, <code>Action: Investigate</code>, and <code>NeedsAttention: true</code>. Supplying <code>-Status maintenance -Watts 300</code> should produce Monitor and Wait. An unsupported state enters Verify; values outside zero through 1,000 should be rejected during parameter binding.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":23294,"sizeSlug":"medium","linkDestination":"none"} --><figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/powershell-7-5-windows-terminal-wikimedia.png" alt="Authentic PowerShell 7.5 Core in Windows Terminal on a Windows 11 desktop" class="wp-image-23294" /><figcaption class="wp-element-caption"><em>PowerShell 7.5 inside Windows Terminal, authentic Wikimedia-sourced screenshot preserved in the BitcoinVersus.Tech media library. The image does not show the result of the tutorial script.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Validation and Testing Boundaries</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The saved source passed <strong>23 static structural checks</strong>, including the expected keywords, both thresholds, four switch branches, input-range attributes, balanced braces, JSON output, and absence of commands that change systems. However, <strong>PowerShell was not installed in the preparation environment</strong>. Compilation through the PowerShell parser, execution, and the expected output scenarios have not been verified, so readers should perform the example commands in their own PowerShell 7 environment before trusting the results.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common Errors</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Using <code>=</code> for equality instead of the PowerShell operator <code>-eq</code>.</li><li>Checking the broad lower threshold before the narrower high threshold.</li><li>Assuming a <code>switch</code> always stops automatically after one matched clause.</li><li>Confusing default case-insensitive string comparisons with strict text identity.</li><li>Treating fictional classification values as equipment operating limits or live readings.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>What happens after a successful <code>if</code> condition? Later branches in the chain are skipped.</li><li>What does <code>-ge</code> mean? Greater than or equal to.</li><li>How can a matched switch branch stop further processing? Use <code>break</code>.</li><li>Does <code>offline</code> match <code>Offline</code> by default? Yes, ordinary switch matching is case-insensitive.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Sources and Further Reading</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_if?view=powershell-7.5">Microsoft Learn: about_If</a>.</li><li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_switch?view=powershell-7.5">Microsoft Learn: about_Switch</a>.</li><li><a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.5">Microsoft Learn: about_Comparison_Operators</a>.</li><li><a href="https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.5">Microsoft Learn: Everything About If</a>.</li><li><a href="https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-switch?view=powershell-7.5">Microsoft Learn: Everything About Switch</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>PowerShell conditions make automation more predictable by showing how a script chooses among known outcomes. Use ordered <code>if</code> branches for thresholds, <code>switch</code> for named states, validation for expected input ranges, and structured objects for reusable results. Classification examples should be tested against real requirements before a script is used in operational systems.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> Curriculum identifier OSPowerShell.006 follows the published collections lesson OSPowerShell.005 and the Bash entry OSBash.007 in the established subject rotation. The cover is original AI-generated colored-pencil editorial art of a fictional systems administrator, not a real operations photograph or code-execution screenshot. The in-body PowerShell image is authentic Wikimedia-sourced media. Two educational YouTube video identities were verified by public source pages, but their embedded playback and mobile visual presentation have not been independently tested. The 23 checks concern static program structure; no PowerShell parser or runtime was available to validate behavior. No SmartChart was created because the topic presents no verifiable quantitative dataset.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional original BitcoinVersus.Tech 5000-satoshi Bitcoin donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional BitcoinVersus.Tech 5,000-satoshi donation QR. Verify the recipient and requested amount before sending funds.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>On mobile, show the original QR on another screen or use a compatible wallet's saved-image scanner. Confirm the recipient and the requested 5,000 satoshis before authorizing payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the information on BitcoinVersus.Tech is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech publishes programming education for informational purposes. Examples are not operating procedures, audited security controls, or substitutes for real-world equipment verification.</em></p><!-- /wp:paragraph -->

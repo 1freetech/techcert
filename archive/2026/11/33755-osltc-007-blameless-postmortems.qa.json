@@ -1,0 +1,132 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "lesson_id": "OSLTC.007",
+  "title": "OSLTC.007: How to Run a Blameless Postmortem",
+  "wordpress_post_id": 33755,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/19/osltc-007-blameless-postmortems-corrective-actions/",
+  "date": "2026-11-19",
+  "category_ids": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    548394964,
+    290375477,
+    1333317
+  ],
+  "topic": "Technical leadership: blameless postmortems, incident analysis, tracked corrective actions",
+  "featured_media": {
+    "id": 33741,
+    "filename": "osltc007-blameless-postmortem-cover.jpg",
+    "original_dimensions": [
+      1200,
+      630
+    ],
+    "style": "detailed modern colored-pencil illustration",
+    "watermark": "BitcoinVersus.tech, neon green #39FF14, bottom-left, tight black text highlight",
+    "alt_text": "Detailed colored-pencil illustration of four technical professionals reviewing incident milestones and corrective actions in a data center conference room",
+    "not_embedded_in_body": true
+  },
+  "source_references": [
+    {
+      "url": "https://sre.google/workbook/postmortem-culture/",
+      "type": "Google SRE Workbook"
+    },
+    {
+      "url": "https://sre.google/sre-book/postmortem-culture/",
+      "type": "Google SRE Book"
+    },
+    {
+      "url": "https://sre.google/sre-book/example-postmortem/",
+      "type": "Google SRE worked example"
+    },
+    {
+      "url": "https://docs.pagerduty.com/ops-guides/incident-response-guide/effective-postmortems",
+      "type": "PagerDuty incident review guidance"
+    },
+    {
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "type": "NIST SP 800-61 Revision 3 final, April 2025"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=qgHWzQ2zcqQ",
+      "title": "Postmortem Culture at Google",
+      "source": "Conf42",
+      "published": "2022-07-12",
+      "source_listing_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=UBe7U2b3tsA",
+      "title": "Postmortems and Retrospectives (class SRE implements DevOps)",
+      "source": "Google Cloud Tech",
+      "published": "2018-10-09",
+      "source_listing_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=zsBt1cY2TAs",
+      "title": "Postmortem Action Items: Plan the Work and Work the Plan",
+      "source": "SREcon 2017",
+      "source_listing_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    }
+  ],
+  "prepublication_qa": {
+    "published_series_range_confirmed": "OSLTC.001 through OSLTC.006",
+    "osltc007_draft_and_published_duplicates_before_creation": 0,
+    "forbidden_editorial_words": [],
+    "source_gutenberg_embeds": 3,
+    "source_internal_links": 5,
+    "editor_note": true,
+    "donation_qr": true,
+    "seo_title": "OSLTC.007: Blameless Postmortems and Corrective Actions | BitcoinVersus.Tech",
+    "meta_description": "OSLTC.007 explains blameless postmortems, incident timelines, contributing factors, accountable action items and follow-through.",
+    "timeline_calculation": "09:40 minus 09:02 = 38 minutes; fictional alert-to-confirmed-recovery interval",
+    "code_test_execution": "not applicable",
+    "chart": {
+      "included": false,
+      "reason": "All sample event times are invented for a classroom scenario; a quantitative chart would risk suggesting real incident telemetry."
+    }
+  },
+  "live_audit": {
+    "rendered_page_http_status": 200,
+    "visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/19/osltc-007-blameless-postmortems-corrective-actions/",
+    "seo_title": "OSLTC.007: Blameless Postmortems and Corrective Actions | BitcoinVersus.Tech",
+    "og_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/osltc007-blameless-postmortem-cover.jpg",
+    "uploaded_original_cover_dimensions": [
+      1200,
+      630
+    ],
+    "wordpress_generated_og_dimensions": [
+      1024,
+      538
+    ],
+    "youtube_iframes": 3,
+    "iframe_urls": [
+      "https://www.youtube.com/embed/qgHWzQ2zcqQ",
+      "https://www.youtube.com/embed/UBe7U2b3tsA",
+      "https://www.youtube.com/embed/zsBt1cY2TAs"
+    ],
+    "images_missing_alt": 0,
+    "empty_links": 0,
+    "site_ui_links_to_nowhere": 8,
+    "site_ui_note": "The eight reported links are standard sharing, photo control and subscription UI links; article-body defects not established."
+  },
+  "unverified": [
+    "Successful YouTube player playback and interaction not tested in a browser",
+    "Mobile visual layout and viewport appearance not independently tested",
+    "No actual incident, staff drill or infrastructure intervention occurred; case is fictional."
+  ],
+  "next_rotation_candidate": "OSNTC.044, subject to fresh live WordPress and GitHub duplicate/numbering check",
+  "recorded_date": "2026-11-19"
+}

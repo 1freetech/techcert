@@ -25,14 +25,16 @@
     "saved_gutenberg": "archive/2026/11/33438-ossolidity-005-function-visibility.gutenberg.html",
     "source_solidity": "archive/2026/11/33438-ossolidity-005-function-visibility.sol",
     "original_cover": {
-      "id": 33433,
+      "id": 33455,
       "dimensions": [
         1200,
         630
       ],
       "style": "fine-art oil painting",
       "demographic_note": "young Black woman coder, different age/gender presentation from preceding older East Asian male PHP cover",
-      "branding": "approved original user wordmark crop, neon green with tight black highlight in lower left"
+      "branding": "approved original user wordmark crop, neon green with tight black highlight in lower left",
+      "file_name": "ossolidity-005-function-visibility-corrected-oil-cover-1200x630-1.jpg",
+      "logo_overlay_verified": true
     },
     "youtube": [
       {
@@ -109,7 +111,20 @@
     "Do not claim static source checks equal Solidity compilation.",
     "Original oil painting portrays fictional on-screen interface; cannot be treated as a real mainnet deployment.",
     "Existing theme-level Share/Subscribe links may be empty; no empty lesson-body links were found.",
-    "No actual public-chain wallet, funds or transactions were involved."
+    "No actual public-chain wallet, funds or transactions were involved.",
+    "Cover defect fixed after publication: replaced #33433 with #33455, avoiding duplicate wordmark."
   ],
-  "next_subject_candidate": "SQL / OSSQL.007; recheck live and drafts before next publication"
+  "next_subject_candidate": "SQL / OSSQL.007; recheck live and drafts before next publication",
+  "cover_correction": {
+    "observed_defect": "First featured media #33433 contained duplicate text: an AI-rendered wordmark remained visible beneath the approved secondary logo.",
+    "corrective_action": "Recropped source artwork to exclude AI-rendered wordmark and placed the exact approved secondary wordmark crop once at bottom left.",
+    "replacement_media_id": 33455,
+    "new_dimensions": [
+      1200,
+      630
+    ],
+    "local_visual_check": "Single wordmark verified visually in cropped lower-left image",
+    "wordpress_post_featured_media_updated": true,
+    "public_image_readback": "pending separate WordPress verification"
+  }
 }

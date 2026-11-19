@@ -1,0 +1,113 @@
+<!-- wp:paragraph -->
+<p><strong>OSLTC.007</strong> teaches technical leaders how to turn a completed incident into durable improvements. Recovery ends an outage; a blameless postmortem investigates what happened, what responders knew at each moment, why existing safeguards did not prevent the impact, and how the organization will reduce future risk. The lesson follows <a href="https://bitcoinversus.tech/2026/11/08/osltc-006-leading-technical-incidents-roles-escalation-communication-recovery/">OSLTC.006 on incident command and recovery</a>. Its emphasis moves from live response to evidence, contributing factors, action ownership and verification. The approach draws on the <a href="https://sre.google/workbook/postmortem-culture/">Google SRE Workbook</a> and <a href="https://docs.pagerduty.com/ops-guides/incident-response-guide/effective-postmortems">PagerDuty's effective postmortem guidance</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=qgHWzQ2zcqQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=qgHWzQ2zcqQ
+</div><figcaption class="wp-element-caption"><em>Conf42 SRE 2022: “Postmortem Culture at Google,” presented by Google SRE Ramon Medrano Llamas and published July 12, 2022. The public listing and speaker attribution were checked; actual playback remains unverified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Start with an evidence-based timeline</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A useful review documents user impact, detection, escalation, mitigation and recovery using recorded times rather than reconstructed guesses. Differentiate observed events from explanations still under investigation. Logs, alert history, deployment records and shift notes provide evidence; recollections add context but may need confirmation. Avoid exposing customer information, credentials, personally identifying data or restricted infrastructure details in broadly shared reports.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Fictional tabletop:</strong> At 09:02, an API health alarm fires after a software deployment. At 09:08, the team acknowledges the alert. At 09:17, an approved rollback begins. At 09:31, health checks first pass. At 09:40, the incident commander confirms sustained recovery. The alert-to-confirmed-recovery window is <strong>38 minutes</strong> (09:40 minus 09:02). Actual user-impact onset may have preceded the first alert, so 38 minutes cannot automatically be called total outage duration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The deployment and recovery happened near the alert and rollback, respectively, but proximity alone does not prove a single root cause. Investigators should examine latency traces, change records, client errors and configuration differences. An unknown should remain labeled <em>unknown</em> until supporting evidence arrives. A review may identify several interacting conditions instead of a tidy single culprit.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Blameless does not mean unaccountable</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Blameless analysis studies the context in which reasonable people made decisions with limited visibility. It avoids statements such as “the technician caused the outage” when the evidence points to missing safeguards, unclear approval paths or fragile automation. Leaders can still review policy violations, deliberate misconduct and personnel obligations through appropriate separate processes. <a href="https://bitcoinversus.tech/2026/10/10/osltc-004-how-to-give-corrective-feedback-without-making-it-personal/">OSLTC.004 on corrective feedback</a> explains how to separate behavior from personal attacks; <a href="https://bitcoinversus.tech/2026/10/09/what-is-psychological-safety-technical-teams/">the psychological-safety guide</a> explains why staff need confidence to report mistakes and near misses.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=UBe7U2b3tsA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=UBe7U2b3tsA
+</div><figcaption class="wp-element-caption"><em>Google Cloud Tech, “Postmortems and Retrospectives (class SRE implements DevOps),” published October 9, 2018. Google engineers discuss blameless review practices and learning across incidents. Rendered-player presence is checked separately from video playback.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Find contributing factors, not a convenient scapegoat</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Ask what increased the likelihood or severity of the event. Possible hypotheses for the fictional API incident include incomplete canary coverage, an alert threshold adjusted during deployment, a rollback process requiring manual approval, or a dependency whose failure mode was not tested. Each hypothesis needs evidence and a confidence level. An automated regression test addressing a specific failure mode is usually more measurable than an instruction to “be more careful.”</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For security incidents, the final <a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final">NIST SP 800-61 Revision 3</a>, published April 2025, integrates lessons learned with ongoing cybersecurity risk management. Its cybersecurity scope does not automatically certify a general facilities or service postmortem. For all incident types, leaders should still distinguish operational safety investigations, compliance reporting, organizational learning and disciplinary procedures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Convert findings into testable corrective actions</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An action should describe a specific change, name one accountable owner, set a priority and deadline, and define evidence required for closure. A collection of vague recommendations is not a completed improvement plan. Google's <a href="https://sre.google/sre-book/example-postmortem/">example postmortem</a> lists actions with types and owners, while its <a href="https://sre.google/sre-book/postmortem-culture/">postmortem culture guidance</a> emphasizes systematic follow-through.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Example action A, detection:</strong> Monitoring owner, due December 3, 2026. Restore the API's independent request-error alert and replay a synthetic failure. Close only when the test demonstrates an actionable page within the team's approved threshold.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Example action B, mitigation:</strong> Deployment owner, due December 10, 2026. Practice a rollback on a staging release and capture an auditable record of approval, start, finish and service verification. Close only after the runbook and evidence are reviewed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Example action C, prevention:</strong> Test owner, due December 17, 2026. Add a regression case for the confirmed failure mechanism after causal analysis. Close only when the test fails against the defective scenario and passes against the authorized fix. All action names, dates and roles above are hypothetical teaching data, not assignments at a real organization.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Track progress after the meeting</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Assign a reviewer to revisit actions at an agreed cadence, verify acceptance evidence and escalate overdue high-priority work. An open action can remain open even after a postmortem document is published. <a href="https://bitcoinversus.tech/2026/11/06/osltc-005-delegation-accountability-technical-teams/">OSLTC.005 on delegation and accountability</a> provides a useful framework for responsibility and verification; <a href="https://bitcoinversus.tech/2026/10/08/osltc-002-how-to-set-clear-expectations/">OSLTC.002 on clear expectations</a> explains why owners need specific deliverables.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=zsBt1cY2TAs","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=zsBt1cY2TAs
+</div><figcaption class="wp-element-caption"><em>SREcon 2017, “Postmortem Action Items: Plan the Work and Work the Plan.” A verified conference presentation on selecting and executing corrective actions under competing priorities. Video playback and mobile responsiveness are not independently established.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Facilitate a short tabletop exercise</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Give a four-person group the fictional 09:02 to 09:40 timeline. Ask one person to reconstruct the evidence, another to challenge unsupported causal claims, another to write corrective actions, and a facilitator to check fairness and ownership. For each proposed action, ask whether a future reviewer can objectively determine whether it worked. When uncertainty remains, document a follow-up investigation rather than claiming closure. Store the final report in the team's authorized repository and protect sensitive artifacts.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> A good postmortem is not a verdict about who made a mistake. It is a record of evidence, human and system context, practical mitigations and measurable commitments that leaders keep until the organization has demonstrated an improvement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> The lesson draws from Google SRE, PagerDuty and final NIST SP 800-61 Revision 3. NIST's publication addresses cybersecurity risk management; generalization to data center service incidents is an educational application, not a claim of NIST certification. Every timeline event, duration, owner and action deadline in the tabletop is fictional. The three video identities were checked against public listings, while embedded playback and mobile layout require separate verification. The original featured cover is a 1200 × 630 colored-pencil illustration, not a photograph of an actual incident.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5,000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech contribution QR for an optional donation of 5,000 satoshis. Verify the recipient and amount independently.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. An optional <strong>5,000-satoshi</strong> donation supports research. Scan the original QR with a compatible Bitcoin wallet, or import a saved QR image where supported. Independently verify recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before sending. Bitcoin transactions are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to help ensure information on BitcoinVersus.Tech is Verifiably True. Educational material does not authorize changes to production infrastructure or substitute for organizational incident policy, occupational safety requirements, legal advice or financial advice.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,124 @@
+{
+  "schema": "bitcoinversus-tech-lesson-publication-audit-v3",
+  "checked_on": "2026-11-19",
+  "track_id": "OSChefInfra.003",
+  "wordpress_post_id": 33575,
+  "title": "OSChefInfra.003: Chef Infra Cookbooks, Node Attributes, and ERB Templates",
+  "url": "https://bitcoinversus.tech/2026/11/19/oschefinfra-003-cookbooks-node-attributes-erb-templates/",
+  "publication_status": "publish",
+  "disambiguation": "Chef Infra automation, distinct from OSChef.001–003 Chef esoteric programming-language lessons",
+  "duplicate_prevention": {
+    "existing_published_or_unpublished_OSChefInfra_003_before_publication": 0,
+    "verified_prior_lesson": "OSChefInfra.002 WordPress #31576",
+    "preceding_rotation": "OSCSS.003 WordPress #33562"
+  },
+  "research": {
+    "official_sources": [
+      "https://docs.chef.io/client/19/cookbooks/",
+      "https://docs.chef.io/client/19/cookbooks/attributes/attribute_precedence/",
+      "https://docs.chef.io/client/19/resources/bundled/template/",
+      "https://docs.chef.io/client/19/cookbooks/templates/",
+      "https://docs.chef.io/workstation/26.1/get_started/"
+    ],
+    "publisher": "Progress Chef",
+    "topic": "cookbook structure, attributes, ERB templates"
+  },
+  "media": {
+    "cover_id": 33573,
+    "cover_dimensions": [
+      1200,
+      630
+    ],
+    "cover_style": "cinematic anime",
+    "cover_depiction": "fictional older Black male infrastructure engineer, different person from prior Latina woman CSS cover",
+    "logo": "approved source-derived BitcoinVersus.tech neon-green wordmark, one black-highlighted instance bottom-left",
+    "cover_not_duplicated_in_story": true,
+    "in_story": [
+      {
+        "type": "youtube",
+        "id": "TjBdaYlT-Uw",
+        "source": "Progress Chef",
+        "subject": "Using Attributes in Cookbook",
+        "published": "2023-06-20"
+      },
+      {
+        "type": "official_artwork",
+        "media_id": 33574,
+        "source": "https://www.chef.io/blog/introducing-progress-chef-infra-client-19"
+      },
+      {
+        "type": "youtube",
+        "id": "lqMijB1JIuU",
+        "source": "Progress Chef",
+        "subject": "How to Set Up Chef Workstation, Create a Cookbook and Get Started with Compliance"
+      }
+    ],
+    "youtube_iframes_in_server_rendered_post": 2,
+    "unrendered_video_shortcodes": 0,
+    "real_player_playback": "NOT TESTED",
+    "donation_qr_id": 24043
+  },
+  "testing": {
+    "environment": "Ruby 3.3.8 on Linux",
+    "metadata_syntax": "PASS ruby -c",
+    "attribute_syntax": "PASS ruby -c",
+    "recipe_syntax": "PASS ruby -c",
+    "test_syntax": "PASS ruby -c",
+    "ERB_and_cookbook_structural_checks": 20,
+    "passed": 20,
+    "failed": 0,
+    "test_script": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.cookbook/tests/test_template.rb",
+    "expected_output_summary": "20 ERB/cookbook structural checks passed (Ruby 3.3.8)",
+    "chef_infra_client_installed": false,
+    "chef_convergence": "NOT TESTED",
+    "repeat_run_idempotence": "NOT TESTED",
+    "server_compatibility": "NOT TESTED",
+    "test_scope": "Ruby syntax and standalone ERB rendering, not Chef Infra DSL compilation or actual resource convergence"
+  },
+  "live_wordpress": {
+    "http_status": 200,
+    "site_visibility": "public",
+    "canonical_matches": true,
+    "featured_media_id": 33573,
+    "seo_title_starts_OSChefInfra_003": true,
+    "seo_description_starts_OSChefInfra_003": true,
+    "og_featured_image": true,
+    "body_youtube_iframes": 2,
+    "body_images": [
+      "33574",
+      "24043"
+    ],
+    "images_missing_alt": 0,
+    "empty_links": 0,
+    "internal_contextual_links": 4,
+    "unboxed_pre_blocks": 4,
+    "boxed_code_blocks": 0,
+    "editor_note": true,
+    "donation_footer": true,
+    "WordPress_mobile_screenshot": "NOT TESTED",
+    "third_party_youtube_playback": "NOT TESTED"
+  },
+  "smartchart": {
+    "selected": "none",
+    "candidate_chart_types": [
+      "vertical bar",
+      "line",
+      "scatter"
+    ],
+    "reason": "Chef cookbook attributes and templates are conceptual infrastructure-as-code constructs; no sourced comparative measurements exist, so charting would invent or decorate data."
+  },
+  "archives": {
+    "repos": [
+      "1freetech/opencert.tech",
+      "1freetech/techcert",
+      "1freetech/Bitcoinversus.tech"
+    ],
+    "WordPress_gutenberg_file": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.gutenberg.html",
+    "chef_metadata": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.cookbook/metadata.rb",
+    "chef_attributes": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.cookbook/attributes/default.rb",
+    "chef_recipe": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.cookbook/recipes/default.rb",
+    "chef_template": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.cookbook/templates/default/settings.conf.erb",
+    "ruby_test": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.cookbook/tests/test_template.rb"
+  },
+  "next_rotation_candidate": "OSShakespeare.004, confirm prior OSShakespeare.003 and recheck duplicates before next publication"
+}

@@ -1,0 +1,104 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "lesson_id": "OSDotNet.005",
+  "title": "OSDotNet.005: NuGet Packages, Lock Files, and Dependency Security",
+  "wp_post_id": 33631,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/19/osdotnet-005-nuget-packages-lock-files-dependency-security/",
+  "published_date": "2026-11-19",
+  "category_ids": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    16141948,
+    21555412,
+    21635100
+  ],
+  "featured_media": {
+    "id": 33625,
+    "file": "osdotnet005-nuget-dependencies-cover.jpg",
+    "width": 1200,
+    "height": 630,
+    "style": "fine-art oil painting",
+    "watermark": "BitcoinVersus.tech neon green on tight black label",
+    "alt": "Fine-art oil painting of a Black developer examining glowing software dependency packages, a brass lock, and a security magnifying glass beside a laptop"
+  },
+  "sources": [
+    "https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management",
+    "https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files",
+    "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-package-list",
+    "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-why",
+    "https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages",
+    "https://www.nuget.org/packages/Newtonsoft.Json/13.0.4"
+  ],
+  "media": [
+    {
+      "type": "core/embed",
+      "url": "https://www.youtube.com/watch?v=N_SBf3BRp5A",
+      "owner": "dotnet / Microsoft",
+      "identity_verified_by_search": true,
+      "playback_verified": false
+    },
+    {
+      "type": "core/embed",
+      "url": "https://www.youtube.com/watch?v=J4hMAETgK_8",
+      "owner": "Ardalis",
+      "identity_verified_by_search": true,
+      "playback_verified": false
+    },
+    {
+      "type": "core/embed",
+      "url": "https://www.youtube.com/watch?v=nddfk2bTQUo",
+      "owner": "dotnet / Microsoft",
+      "identity_verified_by_search": true,
+      "playback_verified": false
+    }
+  ],
+  "prepublication_qa": {
+    "duplicate_checked": true,
+    "numbering_checked": true,
+    "wordpress_published_lessons": "OSDotNet.001 through OSDotNet.004 confirmed; OSDotNet.005 absent before creation",
+    "saved_gutenberg_blocks": 33,
+    "saved_core_embeds": 3,
+    "internal_links": 4,
+    "code_blocks": 6,
+    "editor_note": true,
+    "donation_qr": true,
+    "seo_title": "OSDotNet.005: NuGet Dependencies and Lock Files | BitcoinVersus.Tech",
+    "seo_description": "OSDotNet.005 explains NuGet dependencies, central package versions, packages.lock.json, locked restore, and vulnerability auditing with a practical .NET lab.",
+    "prohibited_words_found": [],
+    "xml_examples_statically_parsed": true,
+    "dotnet_runtime_executed": false
+  },
+  "live_audit": {
+    "public_http_status": 200,
+    "canonical_url": "https://bitcoinversus.tech/2026/11/19/osdotnet-005-nuget-packages-lock-files-dependency-security/",
+    "featured_og_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/osdotnet005-nuget-dependencies-cover.jpg",
+    "og_alt_present": true,
+    "images_missing_alt": 0,
+    "empty_links": 0,
+    "structured_data_types": [
+      "Person",
+      "Article",
+      "BreadcrumbList"
+    ],
+    "rendered_heading_sections": 7,
+    "wordpress_provider": "jetpack",
+    "cms_links_to_nowhere": 8,
+    "cms_links_to_nowhere_note": "Primarily site-level sharing/navigation controls; not verified to be article-body defects"
+  },
+  "chart": {
+    "used": false,
+    "reason": "No factual numerical comparison is required. Direct source code and dependency management commands explain the lesson more accurately than a decorative chart."
+  },
+  "unresolved": [
+    "Browser-level YouTube iframe playback and mobile responsive layout not independently tested",
+    "Separate web fetch of published page unavailable; WordPress rendered-page source confirmed HTTP 200",
+    ".NET SDK unavailable in authoring environment; project restore, compilation, output and lock-file execution not independently tested"
+  ],
+  "next_rotation_candidate": "OSEmojicode.004, subject to fresh live and draft duplicate check",
+  "recorded_date": "2026-11-19"
+}

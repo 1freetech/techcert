@@ -1,0 +1,128 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "lesson_id": "OSZig.004",
+  "wordpress_post_id": 33737,
+  "title": "OSZig.004: Zig Loops, Ranges, Break, and Continue",
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/19/oszig-004-while-for-loops-ranges-break-continue/",
+  "published_date": "2026-11-19",
+  "category_ids": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    1688101,
+    806317,
+    793297233
+  ],
+  "featured_media": {
+    "id": 33730,
+    "file": "oszig004-loops-cover.jpg",
+    "dimensions_px": [
+      1200,
+      630
+    ],
+    "style": "cinematic anime",
+    "wordmark": "BitcoinVersus.tech, neon-green #39FF14 on black bottom-left tag",
+    "alt": "Cinematic anime-style young woman programmer at a neon-lit server room workstation, viewing abstract nested loop arrows on a monitor"
+  },
+  "technical_sources": [
+    {
+      "url": "https://ziglang.org/documentation/0.17.1/",
+      "kind": "official Zig language reference",
+      "version": "0.17.1",
+      "release_date": "2026-11-03"
+    },
+    {
+      "url": "https://ziglang.org/download/",
+      "kind": "official Zig download page"
+    }
+  ],
+  "embedded_media": [
+    {
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=li-BIgZoi3Q",
+      "publisher": "Pokelego Dev",
+      "title": "Loops in Zig",
+      "published": "2026-05-30",
+      "listing_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=3ctet8j7QxA",
+      "publisher": "LEASY",
+      "title": "Discovering Zig Programming Language: Loops",
+      "published": "2025-04-05",
+      "listing_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=iqddnwKF8HQ",
+      "publisher": "JetBrains",
+      "title": "Zig 2026: Andrew Kelley Explains",
+      "published": "2026-05-27",
+      "listing_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    }
+  ],
+  "prepublish_qa": {
+    "numbering_avoids_duplicate": true,
+    "latest_previous_lesson": "OSZig.003",
+    "draft_or_published_OSZig004_absent_before_create": true,
+    "source_word_count_estimate": 1305,
+    "embedded_gutenberg_video_blocks": 3,
+    "code_blocks": 5,
+    "internal_links": 5,
+    "prohibited_editorial_words": [],
+    "editor_note_present": true,
+    "donation_qr_present": true,
+    "cover_not_duplicated_in_article": true,
+    "seo_title": "OSZig.004: Zig Loops, Break and Continue | BitcoinVersus.Tech",
+    "seo_description": "OSZig.004 explains Zig while and for loops, ranges, break, continue, labeled loops and loop expressions through documented tests.",
+    "zig_compiler_test_executed": false,
+    "manually_checked_expected_values": true
+  },
+  "live_qa": {
+    "http_status": 200,
+    "site_visibility": "public",
+    "page_url": "https://bitcoinversus.tech/2026/11/19/oszig-004-while-for-loops-ranges-break-continue/",
+    "canonical_verified": "https://bitcoinversus.tech/2026/11/19/oszig-004-while-for-loops-ranges-break-continue/",
+    "og_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/oszig004-loops-cover.jpg",
+    "og_image_alt_present": true,
+    "image_alt_missing_count": 0,
+    "empty_links_count": 0,
+    "rendered_iframe_count": 3,
+    "rendered_iframe_sources": [
+      "https://www.youtube.com/embed/li-BIgZoi3Q",
+      "https://www.youtube.com/embed/3ctet8j7QxA",
+      "https://www.youtube.com/embed/iqddnwKF8HQ"
+    ],
+    "site_ui_links_to_nowhere": 8,
+    "ui_note": "Eight links are site-level share/photo/subscription controls, not confirmed article-body failures.",
+    "json_ld_types": [
+      "Person",
+      "Article",
+      "BreadcrumbList"
+    ],
+    "jetpack_meta_verified": true
+  },
+  "chart": {
+    "used": false,
+    "reason": "No authentic numerical dataset is necessary; Zig reference code and five self-contained tests directly convey control flow."
+  },
+  "unresolved": [
+    "Live player playback and video interaction not independently tested",
+    "Mobile responsive appearance not independently verified with screenshots",
+    "Zig 0.17.1 compiler unavailable for direct execution; five test blocks were not run",
+    "External web page fetch failed, but WordPress visitor-rendered page reported HTTP 200"
+  ],
+  "next_candidate": "OSLTC.007, subject to live WordPress published and draft duplicate search",
+  "archived_date": "2026-11-19"
+}

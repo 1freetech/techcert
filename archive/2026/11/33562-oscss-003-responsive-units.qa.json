@@ -1,0 +1,123 @@
+{
+  "schema": "bitcoinversus-tech-lesson-publication-audit-v3",
+  "checked_date": "2026-11-19",
+  "track_id": "OSCSS.003",
+  "wordpress_post_id": 33562,
+  "public_title": "OSCSS.003: CSS Units, Responsive Sizing, em, rem, Percentages, and clamp()",
+  "public_url": "https://bitcoinversus.tech/2026/11/19/oscss-003-css-units-responsive-sizing-em-rem-percentages-clamp/",
+  "publication_status": "publish",
+  "duplicate_check": {
+    "wp_published_draft_pending_scheduled_private_matches_before_create": 0,
+    "last_track_lesson": "OSCSS.002 WordPress 31553",
+    "preceding_rotation": "OSC#.006 WordPress 33552"
+  },
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Values_and_units",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/percentage",
+    "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp"
+  ],
+  "videos": [
+    {
+      "id": "-GR52czEd-0",
+      "source": "Web Dev Simplified",
+      "title": "Learn CSS Units In 8 Minutes",
+      "published": "2019-10-08",
+      "server_rendered_iframe": true
+    },
+    {
+      "id": "_-aDOAMmDHI",
+      "source": "Kevin Powell",
+      "title": "CSS em and rem explained",
+      "published": "2017-04-19",
+      "server_rendered_iframe": true
+    }
+  ],
+  "media": {
+    "featured_media_id": 33559,
+    "cover_original_dimensions": [
+      1200,
+      630
+    ],
+    "style": "photorealistic editorial artwork",
+    "subject": "Latina web developer, distinct from preceding C# young East Asian developer",
+    "single_approved_neon_green_wordmark_lower_left": true,
+    "body_desktop_screenshot_id": 33560,
+    "body_mobile_screenshot_id": 33561,
+    "in_story_media_count": 4,
+    "donation_qr_id": 24043,
+    "cover_not_duplicated_in_body": true
+  },
+  "tests": {
+    "environment": "Chromium (headless) using Python Playwright on Linux",
+    "cases": 20,
+    "passed": 20,
+    "failed": 0,
+    "desktop_viewport_width": 1280,
+    "mobile_viewport_width": 390,
+    "root_font_baseline_px": 16,
+    "root_font_test_px": 20,
+    "passed_topics": [
+      "root baseline",
+      "clamp bounds",
+      "no horizontal scroll",
+      "pixel max-width",
+      "percentage width",
+      "rem text",
+      "em padding",
+      "viewport width bounds",
+      "viewport box fit",
+      "root-font scaling"
+    ],
+    "test_script": "archive/2026/11/33562-oscss-003-responsive-units.test.py",
+    "lab_html": "archive/2026/11/33562-oscss-003-responsive-units.lab.html",
+    "mobile_screenshot": "WordPress media 33561",
+    "desktop_screenshot": "WordPress media 33560",
+    "page_tests_scope": "Local standalone HTML/CSS example; not identical to WordPress theme or actual YouTube player viewport"
+  },
+  "live_site": {
+    "http_status": 200,
+    "public": true,
+    "canonical_matches": true,
+    "seo_title_with_OSCSS_003": true,
+    "meta_description_with_OSCSS_003": true,
+    "og_image_present": true,
+    "video_iframes": 2,
+    "unresolved_video_shortcodes": 0,
+    "body_image_count": 3,
+    "missing_image_alt": 0,
+    "empty_links": 0,
+    "unboxed_pre_blocks": 2,
+    "boxed_code_blocks": 0,
+    "internal_links": 4
+  },
+  "limitations": {
+    "third_party_youtube_actual_playback": "not independently verified",
+    "production_mobile_website_visual_test": "not performed",
+    "production_desktop_website_visual_test": "not performed",
+    "production_accessibility_audit": "not performed"
+  },
+  "smartchart": {
+    "chosen": "none",
+    "candidate_review": [
+      {
+        "type": "vertical bar",
+        "reason": "Would depict educational CSS values rather than independently measured data"
+      },
+      {
+        "type": "line",
+        "reason": "No time series"
+      },
+      {
+        "type": "scatter",
+        "reason": "No independently observed two-axis dataset"
+      }
+    ]
+  },
+  "archives": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ],
+  "next_rotation_candidate": "OSChefInfra.003, verify against actual WordPress and GitHub history before advancing or publishing; distinguish legacy OSChef esolang"
+}

@@ -30,15 +30,17 @@ foreach ($case in $cases) {
     $json = (& $pwsh -NoProfile -File $target -Status $case.Status -Watts $case.Watts -AsJson | Out-String)
     if ($LASTEXITCODE -ne 0) { throw "Command failed for $($case.Status) / $($case.Watts)" }
     $actual = $json | ConvertFrom-Json
-    foreach ($pair in @(
-        @('Status', $case.Status),
-        @('Watts', $case.Watts),
-        @('Band', $case.Band),
-        @('Action', $case.Action),
-        @('NeedsAttention', $case.Attention)
-    )) {
-        if ($actual.($pair[0]) -cne $pair[1]) {
-            throw "Assertion failed: $($case.Status) / $($case.Watts), $($pair[0]): got $($actual.($pair[0]))"
+    $expected = [ordered]@{
+        Status = $case.Status
+        Watts = $case.Watts
+        Band = $case.Band
+        Action = $case.Action
+        NeedsAttention = $case.Attention
+    }
+    foreach ($property in $expected.Keys) {
+        $got = $actual.PSObject.Properties[$property].Value
+        if ($got -cne $expected[$property]) {
+            throw "Assertion failed: $($case.Status) / $($case.Watts), $($property): got $got"
         }
         $checks++
     }

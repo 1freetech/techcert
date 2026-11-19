@@ -1,0 +1,114 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "lesson_id": "OSEmojicode.004",
+  "wordpress_post_id": 33698,
+  "title": "OSEmojicode.004: Loops, Ranges, and Repeat-While",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/19/osemojicode-004-loops-for-in-ranges-repeat-while/",
+  "published_on": "2026-11-19",
+  "category_ids": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    254055022,
+    1688101,
+    806317
+  ],
+  "featured_media": {
+    "id": 33689,
+    "filename": "osemojicode004-loops-cover.jpg",
+    "actual_dimensions_px": [
+      1200,
+      630
+    ],
+    "style": "photorealistic editorial photography",
+    "alt_text": "Photorealistic desktop with a small circular conveyor of numbered pieces and emoji-themed code on a monitor, illustrating repeated programming steps",
+    "watermark": "BitcoinVersus.tech, neon green #39FF14, tight black highlight at bottom left",
+    "used_inside_article": false
+  },
+  "subject": "Emojicode 1.0 beta 2 for-in loops, numeric ranges, list iteration and repeat-while",
+  "primary_sources": [
+    "https://www.emojicode.org/docs/reference/controlflow",
+    "https://www.emojicode.org/docs/reference/variables",
+    "https://www.emojicode.org/docs/guides/compile-and-run",
+    "https://www.emojicode.org/docs/guides/install"
+  ],
+  "media": [
+    {
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=dIe9SlnzJ8s",
+      "publisher": "Khalili Oriented Programming",
+      "publication_date": "2021-12-25",
+      "identity_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=tJcZx8mz7lo",
+      "publisher": "Alfredo Sequeida",
+      "publication_date": "2020-12-08",
+      "identity_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "type": "youtube",
+      "url": "https://www.youtube.com/watch?v=w7yQwTU3cOs",
+      "publisher": "EPICODE Institute of Technology",
+      "publication_date": "2025-11-24",
+      "language": "Italian",
+      "identity_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    }
+  ],
+  "prepublication_qa": {
+    "numbering_checked": true,
+    "duplicate_checked": true,
+    "prior_published_lesson": "OSEmojicode.003",
+    "this_number_before_publish": "unoccupied",
+    "source_banned_words": [],
+    "gutenberg_embed_blocks": 3,
+    "gutenberg_code_blocks": 4,
+    "contextual_internal_links": 5,
+    "editor_note_present": true,
+    "donation_qr_present": true,
+    "seo_title": "OSEmojicode.004: Loops and Ranges Explained | BitcoinVersus.Tech",
+    "seo_description": "OSEmojicode.004 explains for-in loops, ranges, list iteration and repeat-while control flow through practical Emojicode examples.",
+    "code_checked_against_official_docs": true,
+    "compiler_execution_verified": false
+  },
+  "live_qa": {
+    "wordpress_rendered_page_http_status": 200,
+    "public_page_visible": true,
+    "canonical_verified": "https://bitcoinversus.tech/2026/11/19/osemojicode-004-loops-for-in-ranges-repeat-while/",
+    "open_graph_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/osemojicode004-loops-cover.jpg",
+    "open_graph_image_alt_present": true,
+    "missing_image_alt_count": 0,
+    "empty_link_count": 0,
+    "rendered_youtube_iframes": 3,
+    "rendered_iframe_sources": [
+      "https://www.youtube.com/embed/dIe9SlnzJ8s",
+      "https://www.youtube.com/embed/tJcZx8mz7lo",
+      "https://www.youtube.com/embed/w7yQwTU3cOs"
+    ],
+    "site_level_links_to_nowhere_count": 8,
+    "site_level_links_note": "Page controls including sharing and toggles; not confirmed as post-body link failures"
+  },
+  "chart": {
+    "used": false,
+    "reason": "Numeric ranges and code traces convey loop semantics directly; no external numerical dataset warrants a chart."
+  },
+  "unresolved_qa": [
+    "Public video playback and interactions not independently verified",
+    "Mobile-browser viewport and responsive visual appearance not independently verified",
+    "Emojicode compiler unavailable in editorial execution environment, so compilation and predicted outputs are not runtime-tested",
+    "Independent web fetch of the public page failed; WordPress own server-rendered API returned HTTP 200"
+  ],
+  "next_curriculum_candidate": "OSZig.004, pending future WordPress and GitHub duplicate audit",
+  "archived_date": "2026-11-19"
+}

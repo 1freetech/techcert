@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OSCSS.003: CSS Units and Fluid Sizing Lab</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root { font-family: system-ui, sans-serif; color: #172236; }
+    body { margin: 0; background: #f2f6fc; }
+    main { width: min(92%, 72rem); margin: 2rem auto; }
+    h1 { font-size: clamp(1.75rem, 1rem + 3vw, 3rem); line-height: 1.2; margin: 0 0 0.5em; }
+    p { max-width: 65ch; line-height: 1.5; }
+    .intro { margin: 0 0 1.75rem; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1rem; }
+    .card { background: white; border: 1px solid #cfdaeb; border-radius: 0.75rem; padding: 1.25rem; min-width: 0; }
+    .card h2 { font-size: 1.2rem; margin: 0 0 0.5rem; }
+    .card p { font-size: 0.95rem; }
+    .sample { min-height: 3rem; border-radius: 0.4rem; display: flex; align-items: center; padding: 0.5rem; }
+    .sample-px { width: 200px; max-width: 100%; background: #dbeafe; }
+    .sample-percent { width: 60%; background: #dcfce7; }
+    .sample-rem { font-size: 1.25rem; padding: 1em; background: #fef3c7; }
+    .sample-vw { width: min(50vw, 100%); background: #f3e8ff; }
+    .note { font-size: 0.85rem; color: #3c4a60; }
+    footer { margin-top: 1rem; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Responsive CSS units</h1>
+    <p class="intro">Resize the viewport or change your browser's root font size. Each card demonstrates a different reference point without requiring JavaScript.</p>
+    <section class="cards" aria-label="CSS unit demonstrations">
+      <article class="card" data-unit="px"><h2>CSS pixels</h2><p>200px, constrained by the card width.</p><div class="sample sample-px">200px</div></article>
+      <article class="card" data-unit="percent"><h2>Percent</h2><p>60% of the card's content width.</p><div class="sample sample-percent">60%</div></article>
+      <article class="card" data-unit="rem"><h2>Root em and em</h2><p>Text is 1.25rem; inner padding is 1em.</p><div class="sample sample-rem">1.25rem / 1em</div></article>
+      <article class="card" data-unit="vw"><h2>Viewport width</h2><p>50vw, limited to the card width.</p><div class="sample sample-vw">50vw</div></article>
+    </section>
+    <footer>Educational CSS exercise, not a measured site-performance benchmark.</footer>
+  </main>
+</body>
+</html>

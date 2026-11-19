@@ -1,0 +1,80 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "lesson_id": "OSShakespeare.004",
+  "title": "OSShakespeare.004: Questions, Conditions, and Scene Jumps",
+  "wp_post_id": 33611,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/19/osshakespeare-004-questions-conditions-scene-jumps/",
+  "publication_date": "2026-11-19",
+  "category_ids": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    5512978,
+    350111083,
+    133087778
+  ],
+  "featured_media_id": 33607,
+  "cover": {
+    "file": "osshakespeare004-cover.jpg",
+    "width": 1200,
+    "height": 630,
+    "style": "detailed colored-pencil illustration",
+    "wordmark": "BitcoinVersus.tech"
+  },
+  "sources": [
+    "https://krayon.github.io/shakespearelang/docs/shakespeare.html",
+    "https://shakespearelang.com/1.0/"
+  ],
+  "embeds": [
+    {
+      "type": "core/embed",
+      "provider": "youtube",
+      "url": "https://www.youtube.com/watch?v=6avJHaC3C2U",
+      "source": "NDC Conferences, Dylan Beattie",
+      "identity_checked": true,
+      "playback_verified": false
+    },
+    {
+      "type": "core/embed",
+      "provider": "youtube",
+      "url": "https://www.youtube.com/watch?v=nO6rvqxj5kY",
+      "source": "Ted Neward, Voxxed Days Crete 2025",
+      "identity_checked_from_earlier_lesson": true,
+      "playback_verified": false
+    }
+  ],
+  "wp_saved_qa": {
+    "numbering_checked": true,
+    "duplicate_search_done": true,
+    "internal_links": 5,
+    "gutenberg_embeds": 2,
+    "donation_qr": true,
+    "editor_note": true,
+    "seo_title": "OSShakespeare.004: Conditional Logic and Scene Jumps | BitcoinVersus.Tech",
+    "seo_description": "OSShakespeare.004 explains SPL comparisons, If so and If not conditionals, scene jumps, and a manually traced branching example."
+  },
+  "public_rendered_qa": {
+    "http_status": 200,
+    "canonical": "https://bitcoinversus.tech/2026/11/19/osshakespeare-004-questions-conditions-scene-jumps/",
+    "images_missing_alt": 0,
+    "empty_links": 0,
+    "og_image_present": true,
+    "public_site_visibility": true,
+    "word_count_estimate": 1183
+  },
+  "limitations": [
+    "No independent video iframe playback or mobile/browser viewport tests",
+    "SPL example manually traced against original specification; not executed in an SPL interpreter",
+    "WordPress reported 8 'links to nowhere' from site-level sharing/navigation controls, not verified as article-level defects"
+  ],
+  "chart": {
+    "used": false,
+    "reason": "Source code and a branch trace are more informative than a quantitative chart for this lesson."
+  },
+  "next_rotation_candidate": "OSDotNet.005, subject to live WordPress duplicate search",
+  "archived_at": "2026-11-19"
+}

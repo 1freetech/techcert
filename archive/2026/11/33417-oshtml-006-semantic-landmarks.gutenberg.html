@@ -1,0 +1,121 @@
+<!-- wp:paragraph --><p><strong>Semantic HTML</strong> uses elements whose names describe the role of their content. A <code>&lt;nav&gt;</code> identifies navigation, <code>&lt;main&gt;</code> identifies primary page content, and <code>&lt;article&gt;</code> identifies a self-contained composition. The meaningful structure helps browsers, assistive technology, and other software interpret a document beyond its visual layout. Accurate markup does not guarantee accessibility by itself, but it establishes a dependable foundation for headings, landmarks, and keyboard navigation.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The earlier <a href="https://bitcoinversus.tech/2026/11/08/oshtml-005-html-tables-structure-headers-accessibility/">HTML tables tutorial</a> explained how meaningful headers connect tabular data. Related references cover <a href="https://bitcoinversus.tech/2026/11/01/oshtml-004-html-forms-labels-inputs-fieldsets-submission-validation/">accessible forms</a>, <a href="https://bitcoinversus.tech/2026/10/15/oshtml-003-attributes-names-values-global-boolean-element-specific-configuration/">HTML attributes</a>, <a href="https://bitcoinversus.tech/2026/10/10/oshtml-002-elements-start-tags-end-tags-void-elements-nesting-semantic-structure/">element nesting</a>, and <a href="https://bitcoinversus.tech/2026/10/09/oshtml-001-document-structure-doctype-html-head-body-metadata-first-page/">document structure</a>. The current unit focuses specifically on page regions and landmarks, using the <a href="https://www.w3.org/WAI/tutorials/page-structure/regions/">W3C WAI page regions tutorial</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Imagine walking into a school. Signs show where the entrance, classrooms, library, and office are located. Semantic HTML gives similar signs to a webpage. It tells software which area holds the site menu, which area contains the main story, and which material is only additional reading. People can still see the page without those signs, but meaningful labels make moving around a complex page easier for many visitors.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Select appropriate semantic elements for major page regions and repeated content.</li><li>Explain what <code>main</code>, <code>nav</code>, and named <code>section</code> landmarks mean to assistive technology.</li><li>Distinguish site-wide headers and footers from those nested inside an article.</li><li>Use headings, IDs, and accessible names without adding redundant ARIA roles.</li><li>Run a complete example and inspect 20 focused structural checks.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=kX3TfdUqpuU&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>“Semantic HTML Tags | HTML5 Semantic Elements Tutorial,” a public educational video that discusses <code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>, <code>article</code>, <code>section</code>, and <code>aside</code>. <a href="https://www.youtube.com/watch?v=kX3TfdUqpuU">Original YouTube page</a>. The embedded player is separately subject to provider availability.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Site Header, Navigation, and Main Content</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A top-level <code>&lt;header&gt;</code> generally contains a site's identity and introductory links. When not nested inside a sectioning element, the header usually supplies the <strong>banner</strong> landmark. A <code>&lt;nav&gt;</code> represents a major collection of navigation links and supplies a <strong>navigation</strong> landmark. Multiple navigation menus are permitted, but meaningful names such as <code>aria-label="Primary navigation"</code> help distinguish them. Routine links inside article paragraphs do not each need a separate <code>nav</code> element.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A visible <code>&lt;main&gt;</code> contains content unique to the current page. An ordinary document should have one active main region, rather than multiple competing primary regions. The <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main">MDN main element reference</a> and <a href="https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/">W3C landmark guidance</a> explain the associated accessibility behavior. A skip link at the start of the body can point to the main region, allowing keyboard visitors to bypass repeated navigation.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":33414,"sizeSlug":"medium","linkDestination":"none"} --><figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/w3c-html5-badge-official-cc-by-3.png" alt="Orange HTML5 shield logo with white number five, distributed by the W3C" class="wp-image-33414" /><figcaption class="wp-element-caption"><em>W3C HTML5 badge, licensed <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Source: <a href="https://www.w3.org/html/logo/">W3C HTML5 Logo</a>. Historical standards artwork, not an endorsement of the lesson or evidence of a webpage's accessibility.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Article, Section, and Aside</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>&lt;article&gt;</code> represents content that can stand alone, such as a report or blog post. A <code>&lt;section&gt;</code> groups related material around a theme, normally with a descriptive heading. A section becomes a named <strong>region</strong> landmark when it has an accessible name, for example through <code>aria-labelledby</code> referencing an existing heading ID. Adding section elements merely for spacing does not make a document more semantic; use CSS and neutral containers where no meaningful section exists.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><code>&lt;aside&gt;</code> contains complementary information, such as a glossary or related explanation. Its contextual relationship to the main content matters more than whether CSS places it visually to the left or right. The <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements">MDN HTML elements reference</a> defines these elements, while the <a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H101">W3C H101 technique</a> explains how native semantic elements identify page regions.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=7ZZK9Iprw5c&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>“HTML Semantic Tags: header, main, footer, section, aside, nav, and others,” an independently indexed educational HTML lesson. <a href="https://www.youtube.com/watch?v=7ZZK9Iprw5c">Original YouTube page</a>. The saved video URL and the WordPress iframe must still be distinguished from tested playback.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Headers and Footers Change Meaning When Nested</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A page can have more than one <code>&lt;header&gt;</code> or <code>&lt;footer&gt;</code>. At the site level, a header usually maps to <strong>banner</strong> and a footer to <strong>contentinfo</strong>. Headers or footers placed inside an article or section normally become ordinary introductory or closing content rather than extra banner or contentinfo landmarks. A nested article footer may contain author notes, while the site footer may contain contact or legal information. The <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header">MDN header documentation</a> describes those context-sensitive semantics.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete Semantic HTML Example</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Save the following standalone file as <code>semantic-page.html</code>. The example presents a fictional equipment report with site navigation, a unique main landmark, two titled sections, a complementary glossary, and separate site and article footers. No external CSS or JavaScript dependencies are needed:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Complete semantic HTML source example" style="background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1em 0!important;white-space:pre-wrap!important;max-width:100%!important;color:inherit!important;font:0.92em/1.55 ui-monospace,Consolas,monospace!important"><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Lab Notes | Example Equipment Report&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;a href=&quot;#content&quot;&gt;Skip to main content&lt;/a&gt;
+  &lt;header&gt;
+    &lt;p&gt;Lab Notes&lt;/p&gt;
+    &lt;nav aria-label=&quot;Primary navigation&quot;&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;#report&quot;&gt;Report&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#glossary&quot;&gt;Glossary&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;main id=&quot;content&quot;&gt;
+    &lt;article id=&quot;report&quot; aria-labelledby=&quot;report-title&quot;&gt;
+      &lt;header&gt;
+        &lt;h1 id=&quot;report-title&quot;&gt;Example Equipment Report&lt;/h1&gt;
+      &lt;/header&gt;
+      &lt;section aria-labelledby=&quot;method-title&quot;&gt;
+        &lt;h2 id=&quot;method-title&quot;&gt;Method&lt;/h2&gt;
+        &lt;p&gt;Three invented devices are reviewed as a training exercise.&lt;/p&gt;
+      &lt;/section&gt;
+      &lt;section aria-labelledby=&quot;findings-title&quot;&gt;
+        &lt;h2 id=&quot;findings-title&quot;&gt;Findings&lt;/h2&gt;
+        &lt;p&gt;No live equipment was measured.&lt;/p&gt;
+      &lt;/section&gt;
+      &lt;footer&gt;&lt;p&gt;Example prepared for learning only.&lt;/p&gt;&lt;/footer&gt;
+    &lt;/article&gt;
+  &lt;/main&gt;
+  &lt;aside id=&quot;glossary&quot; aria-labelledby=&quot;glossary-title&quot;&gt;
+    &lt;h2 id=&quot;glossary-title&quot;&gt;Glossary&lt;/h2&gt;
+    &lt;p&gt;A landmark identifies a major region of a page.&lt;/p&gt;
+  &lt;/aside&gt;
+  &lt;footer&gt;&lt;p&gt;Lab Notes educational example.&lt;/p&gt;&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Open the HTML file directly in a browser to inspect its source order and link targets. The <code>Skip to main content</code> link leads to the region with ID <code>content</code>; the navigation links lead to the report and glossary. The visible headings identify those areas. An <code>aria-labelledby</code> value must match an existing ID, or its intended name may not be exposed correctly.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Structural Tests and Accessibility Limits</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A focused Python parser check of the exact sample passed <strong>20 structural assertions</strong>. The checks covered the HTML doctype, English document language, UTF-8 metadata, viewport declaration, one main element, a named navigation region, article and aside presence, heading count, distinct IDs, valid fragment links, named sections, and the skip-link target. No browser-specific visual measurements or real hardware data are involved.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Parser checks are not equivalent to full HTML conformance validation, keyboard testing, or screen-reader evaluation. A reliable review should also use the <a href="https://validator.w3.org/nu/">Nu HTML Checker</a> for standards conformance, a keyboard-only walkthrough, accessibility-tree inspection, and representative assistive technology where available. Semantic landmarks help identify regions, but they do not automatically fix unreadable text, inaccessible interaction controls, incorrect headings, or poor visual contrast.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Common Mistakes</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Replacing every <code>div</code> with <code>section</code>, even when no meaningful section exists.</li><li>Putting multiple active <code>main</code> regions on one ordinary page.</li><li>Adding redundant <code>role="navigation"</code> to native <code>nav</code> without a specific need.</li><li>Using <code>aria-labelledby</code> values with no matching heading ID.</li><li>Assuming a landmark automatically guarantees keyboard or screen-reader usability.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Which element should contain the page's unique primary material? <code>main</code>.</li><li>Why label multiple navigation regions? Accessible names distinguish their purposes.</li><li>Does a header inside an article create another banner landmark? Normally no.</li><li>Why is an untitled section not necessarily a landmark? A <code>section</code> needs an accessible name to expose a region landmark.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://www.w3.org/WAI/tutorials/page-structure/regions/">W3C WAI, Page Regions</a>, updated March 24, 2026.</li><li><a href="https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/">W3C ARIA Authoring Practices, Landmark Regions</a>.</li><li><a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H101">W3C H101, Semantic HTML Regions</a>.</li><li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents">MDN, Structuring Documents</a>.</li><li><a href="https://www.w3.org/html/logo/">W3C HTML5 Logo Licensing and Assets</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Semantic HTML gives each major webpage area a useful name. Navigation links help people move through the site, the main region holds the central information, and sections and side notes organize related material. Good names and headings make the structure easier to understand. Testing remains important because meaningful tags alone cannot make every page accessible.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> Internal curriculum identifier OSHTML.006 follows the published HTML tables lesson after OSJavaScript.006 in the verified master rotation. The cover is original AI-generated cinematic anime editorial art depicting a fictional web developer, not a real screenshot or a claim of production deployment. The body image is authentic W3C HTML5 badge artwork used under CC BY 3.0 with attribution. Two publicly indexed HTML tutorial videos are provided through their original URLs. The standalone HTML sample passed 20 focused BeautifulSoup-based structural checks; full conformance, live screen-reader behavior, video playback, and mobile viewport appearance were not independently verified.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech original voluntary 5000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-satoshi voluntary donation QR. Confirm the destination and amount before sending funds.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>To donate using a mobile wallet, display the original QR on another device or use a wallet's supported saved-image scanner. Check the intended recipient and the 5,000-satoshi amount before approving a transfer.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech provides independent technical education. Perform additional standards and accessibility validation before using the examples in a production website.</em></p><!-- /wp:paragraph -->

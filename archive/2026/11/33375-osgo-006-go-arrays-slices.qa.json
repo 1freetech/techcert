@@ -1,0 +1,52 @@
+{
+  "post_id": 33375,
+  "track_id": "OSGo.006",
+  "subject": "go",
+  "title": "Go Arrays and Slices: Length, Capacity, Append, and Copy",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/18/osgo-006-go-arrays-slices-length-capacity-append-copy/",
+  "featured_media_id": 33365,
+  "featured_size": [
+    1200,
+    630
+  ],
+  "in_body_media": [
+    {
+      "type": "youtube",
+      "id": "T1T8-MG-mPg",
+      "source": "The Go Programming Language",
+      "render_pending": true
+    },
+    {
+      "type": "image",
+      "id": 31023,
+      "source": "Renée French, Go project CC BY 4.0"
+    },
+    {
+      "type": "youtube",
+      "id": "YS4e4q9oBaU",
+      "source": "freeCodeCamp.org",
+      "render_pending": true
+    }
+  ],
+  "body_video_count": 2,
+  "source_links": [
+    "https://go.dev/blog/slices-intro",
+    "https://go.dev/ref/spec",
+    "https://go.dev/blog/slices",
+    "https://go.dev/tour/moretypes/6",
+    "https://go.dev/tour/moretypes/7"
+  ],
+  "code": {
+    "go_version": "go1.23.2 linux/amd64",
+    "run": "PASS",
+    "tests_passed": 3,
+    "go_vet": "PASS"
+  },
+  "limitations": [
+    "Browser playback not tested",
+    "Phone viewport screenshot not tested",
+    "Source watermark matched visually to the requested treatment, but original reference image was not attached to the active conversation"
+  ],
+  "editorial": "Concept-first public title, private OSGo.006 ID, no invented social post"
+}

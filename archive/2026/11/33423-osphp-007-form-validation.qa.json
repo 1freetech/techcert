@@ -1,0 +1,99 @@
+{
+  "schema": "bitcoinversus-tech-lesson-publication-qa-v1",
+  "publication_date": "2026-11-18",
+  "track_id": "OSPHP.007",
+  "title": "PHP Form Handling: Input Validation, Safe Output, and Error Messages",
+  "wordpress_post_id": 33423,
+  "url": "https://bitcoinversus.tech/2026/11/18/osphp-007-form-handling-input-validation-safe-output-error-messages/",
+  "status": "publish",
+  "rotation_predecessor": "OSHTML.006 WordPress 33417",
+  "duplicate_prevention": {
+    "wordpress_published_drafts_pending_scheduled_private_osphp007": 0,
+    "github_opencert_search_osphp007_before_publication": 0,
+    "prior_php": "OSPHP.006 WordPress 31335"
+  },
+  "primary_sources": [
+    "https://www.php.net/manual/en/tutorial.forms.php",
+    "https://www.php.net/manual/en/language.variables.external.php",
+    "https://www.php.net/manual/en/function.filter-var.php",
+    "https://www.php.net/manual/en/function.htmlspecialchars.php",
+    "https://www.php.net/manual/en/security.variables.php"
+  ],
+  "live": {
+    "http_status": 200,
+    "visibility": "public",
+    "canonical_matches": true,
+    "seo_title": "PHP Form Handling: Input Validation and Safe Output",
+    "seo_description": "Learn PHP form handling, POST inputs, validation, safe HTML output, and form error messages with 15 verified PHP 8.4 examples.",
+    "og_image": true
+  },
+  "technical": {
+    "runtime": "PHP 8.4.24 CLI",
+    "syntax_command": "php -l contact.php",
+    "syntax_result": "No syntax errors",
+    "test_command": "php contact.php --self-test",
+    "tests_passed": 15,
+    "tests_failed": 0,
+    "stdout": "15 PHP form checks passed",
+    "behavior": "No messages are stored or sent. Production use requires separate security and privacy controls.",
+    "browser_form_submission_test": "not performed"
+  },
+  "media": {
+    "featured_id": 33422,
+    "featured_original_dimensions": [
+      1200,
+      630
+    ],
+    "style": "colored-pencil",
+    "cover_subject": "older East Asian man with silver hair; different person from prior HTML lesson",
+    "logo": "previously standardized black highlight neon-green text composited at bottom-left",
+    "body": [
+      {
+        "type": "youtube",
+        "id": "bOqTCDfc7Tk",
+        "source": "Dani Krossing, PHP forms tutorial, March 17 2023"
+      },
+      {
+        "type": "photograph",
+        "media_id": 23243,
+        "source": "Wikimedia Commons CC0 PHP code image"
+      },
+      {
+        "type": "youtube",
+        "id": "0VJgiVnon88",
+        "source": "Dani Krossing, PHP form mistakes tutorial, July 5 2023"
+      }
+    ],
+    "rendered_youtube_iframes": 2,
+    "unrendered_youtube_shortcodes": 0,
+    "third_party_video_playback": "not tested",
+    "social_embed": "not included; no independently verified relevant original post selected"
+  },
+  "format": {
+    "gutenberg_code_blocks": 0,
+    "unboxed_pre_blocks": 3,
+    "contextual_internal_links": 4,
+    "qr_media_id": 24043,
+    "missing_image_alt": 0,
+    "empty_links": 0,
+    "mobile_visual_screenshot": "not tested",
+    "screen_reader_test": "not tested"
+  },
+  "archives": {
+    "gutenberg_path": "archive/2026/11/33423-osphp-007-form-validation.gutenberg.html",
+    "php_source_path": "archive/2026/11/33423-osphp-007-form-validation.php",
+    "qa_path": "archive/2026/11/33423-osphp-007-form-validation.qa.json",
+    "repositories": [
+      "1freetech/opencert.tech",
+      "1freetech/techcert",
+      "1freetech/Bitcoinversus.tech"
+    ],
+    "source_readback_to_be_verified": true
+  },
+  "next_rotation_candidate": "Solidity OSSolidity.005; no matching published/draft/pending/scheduled/private WordPress result during final check",
+  "limits": [
+    "Actual YouTube playback and mobile screenshot not established by server-rendered markup.",
+    "CLI tests demonstrate a bounded teaching example, not production application security.",
+    "PHP's length constraints in the example count bytes rather than Unicode characters."
+  ]
+}

@@ -1,0 +1,130 @@
+<!-- wp:paragraph -->
+<p><strong>OSShakespeare.004</strong> introduces decisions in the Shakespeare Programming Language (SPL). A question tests two values, and a later sentence can send execution to a different scene. The mechanism resembles a conditional branch in assembly language, even though the source reads like a play. Readers should first study <a href="https://bitcoinversus.tech/2026/10/08/osshakespeare-001-how-a-shakespeare-program-is-structured/">OSShakespeare.001 on play structure</a>, <a href="https://bitcoinversus.tech/2026/11/05/osshakespeare-002-characters-variables-values-dialogue-stage-addressing/">OSShakespeare.002 on characters and variables</a>, and <a href="https://bitcoinversus.tech/2026/11/08/osshakespeare-003-arithmetic-expressions-sums-products-numeric-output/">OSShakespeare.003 on arithmetic</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=6avJHaC3C2U","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=6avJHaC3C2U
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Dylan Beattie, “The Art of Code,” NDC Conferences, published February 26, 2020. The conference talk provides wider context on artistic and esoteric programming languages. It is not an SPL syntax tutorial. Video identity is verified; embedded playback remains untested.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The question is a comparison</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>SPL characters are integer variables. With exactly two characters on stage, the current speaker can ask about the value of the listener. <code>Am I better than you?</code> tests whether the speaker's value exceeds the listener's. <code>Am I as good as you?</code> asks whether the values are equal. The opposite comparative <code>worse than</code> tests whether the first value is smaller. The <a href="https://krayon.github.io/shakespearelang/docs/shakespeare.html">original language specification</a>, last rebuilt August 21, 2001, defines comparison grammar and the conditional mechanism.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A question records a yes-or-no result. A later sentence beginning <code>If so,</code> runs only when the most recent question was true; <code>If not,</code> runs only when it was false. The condition is not attached to a brace-delimited block. Another question can replace the stored result, so keep tests and dependent branches close together while learning.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Scenes are program labels</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>Let us proceed to scene III.</code> jumps to Scene III of the current act. <code>We shall return to scene II.</code> is another supported form. Stage directions still matter: characters must be on stage before addressing each other, and a jump does not automatically enter or exit a character. The specification permits a jump to an act, but a scene name alone refers to the current act.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=nO6rvqxj5kY","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=nO6rvqxj5kY
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Ted Neward, “Busy Developer’s Guide to Esoteric Languages,” Voxxed Days Crete 2025. The conference presentation discusses Shakespeare programming around 23:36. The original specification remains authoritative for exact syntax; embedded playback remains untested.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A complete branching exercise</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The original exercise below prints the number <strong>1</strong> when Juliet holds a larger value than Romeo, or <strong>0</strong> otherwise. <code>nothing</code> supplies zero, <code>a big flower</code> supplies two, and <code>a flower</code> supplies one. Character declarations, an act, named scenes, and an entrance supply the surrounding play structure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>A Debate at the Crossroads.
+
+Romeo, a patient examiner.
+Juliet, a keeper of numbers.
+
+Act I: A Trial of Values.
+Scene I: Two Figures Speak.
+[Enter Romeo and Juliet]
+
+Juliet:
+ You are nothing!
+
+Romeo:
+ You are a big flower.
+
+Juliet:
+ Am I better than you?
+
+Romeo:
+ If so, let us proceed to scene III.
+
+Scene II: The Negative Verdict.
+Romeo:
+ You are nothing. Open your heart.
+ Let us proceed to scene IV.
+
+Scene III: The Positive Verdict.
+Romeo:
+ You are a flower. Open your heart.
+
+Scene IV: The Curtain Falls.
+[Exeunt]</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p><strong>Manual trace:</strong> Juliet speaks first, assigning Romeo zero. Romeo then assigns Juliet two. Juliet asks whether her value exceeds Romeo's: 2 &gt; 0 is true. Romeo's <code>If so</code> jumps past Scene II to Scene III. Romeo assigns Juliet one and prints her value with <code>Open your heart</code>. Execution reaches Scene IV and the actors leave. Expected numeric output: <code>1</code>. The sequence was reviewed against the grammar, but execution in an SPL interpreter was not available for independent confirmation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Change the answer and inspect the branch</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a false branch, change Juliet's opening line from <code>You are nothing!</code> to <code>You are a big big flower!</code>, assigning Romeo four. Juliet remains two, so 2 &gt; 4 is false. The conditional jump is skipped, Scene II assigns Juliet zero, prints <code>0</code>, and jumps to Scene IV to avoid running Scene III afterward. The second jump prevents two results from being printed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a third experiment, replace the comparison with <code>Am I as good as you?</code>. Ask which initial values make equality true. Record the predicted output before running the program, then compare against an interpreter's actual output and error messages.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Verify the result in an interpreter</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The independent <a href="https://shakespearelang.com/1.0/">shakespearelang interpreter documentation</a> provides <code>python -m pip install shakespearelang</code>, a <code>shakespeare run</code> command, and a debugger that can show character values and a global boolean. Save the play as <code>crossroads.spl</code> and run <code>shakespeare run crossroads.spl</code> in a local environment. Do not mistake the manual trace above for a verified runtime test. Implementations can differ in supported vocabulary, parser diagnostics, and character encodings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The underlying concepts transfer to conventional programming. Compare explicit conditionals in <a href="https://bitcoinversus.tech/2026/11/08/osemojicode-003-conditionals-if-else-comparisons-boolean-logic/">OSEmojicode.003</a> and <a href="https://bitcoinversus.tech/2026/11/08/oszig-003-zig-control-flow-if-switch-optional-values/">OSZig.003</a>. SPL is valuable for understanding state, comparison flags, branches, and labels, not for writing maintainable production services.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Technical claims were checked against the SPL authors' original language specification and the modern shakespearelang documentation. YouTube video identities were checked against their public listings. The original code has been manually traced but not executed with an SPL interpreter. Browser playback, mobile layout and live iframe behavior remain unverified. The cover is an original 1200 × 630 colored-pencil editorial illustration.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR for an optional 5,000-satoshi Bitcoin donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-satoshi contribution QR. Confirm the wallet recipient and amount independently.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. An optional <strong>5,000-satoshi</strong> donation supports research. Scan the original QR from a second screen with a compatible Bitcoin wallet; on the same phone, use a wallet supporting a saved QR image. Independently verify recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and the amount before sending. Bitcoin transactions are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. The lesson is educational, not a substitute for production code review, qualified engineering guidance, financial advice, or investment advice.</em></p>
+<!-- /wp:paragraph -->

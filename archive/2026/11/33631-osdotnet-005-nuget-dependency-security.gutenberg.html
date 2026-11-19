@@ -1,0 +1,160 @@
+<!-- wp:paragraph -->
+<p><strong>OSDotNet.005</strong> teaches .NET developers to control external software dependencies rather than simply downloading packages and hoping a build remains stable. A NuGet package can depend on more packages, creating a dependency graph that affects reliability, licensing, and security. Building on <a href="https://bitcoinversus.tech/2026/11/08/osdotnet-004-sdk-style-projects-target-frameworks-restore-msbuild/">OSDotNet.004 on SDK-style projects and MSBuild</a>, the lesson covers <strong>PackageReference</strong>, central package versions, lock files, and vulnerability auditing with a small reproducible console application.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=N_SBf3BRp5A","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=N_SBf3BRp5A
+</div><figcaption class="wp-element-caption"><em>Microsoft's official .NET channel, “Introduction to .NET Package Management using NuGet,” presented by Alexandra Barry, November 10, 2023. A verified source video; playback in the published player requires a separate browser test.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What direct and transitive dependencies mean</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <em>direct dependency</em> appears explicitly in a project's <code>PackageReference</code> list. A <em>transitive dependency</em> arrives because one of the selected packages requires another. A single direct reference can introduce many transitive packages. NuGet evaluates compatible package versions and records the resolved graph in <code>obj/project.assets.json</code>, as described by Microsoft's <a href="https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files">PackageReference documentation</a>. Downloaded packages are normally cached outside the project in the user's global NuGet package directory.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A project file defines what software it needs, while a restore resolves the complete set. Readers unfamiliar with the command-line toolchain can review <a href="https://bitcoinversus.tech/2026/10/09/oscsharp-001-dotnet-sdk-compiler-install-verify-create-build-run-csharp-toolchain/">OSC#.001 on installing and using the .NET SDK</a>, then return to the dependency exercise.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Create a small practice project</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use a supported .NET SDK and a disposable folder. The example targets <code>net10.0</code> and deliberately uses the genuine <a href="https://www.nuget.org/packages/Newtonsoft.Json/13.0.4">Newtonsoft.Json 13.0.4 package</a> from NuGet.org. The chosen version is a documented example, not a recommendation to freeze every application on the same release. Evaluate current supported versions and advisories before production deployment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>dotnet new console --framework net10.0 -n PackageLab
+cd PackageLab</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Create a file named <code>Directory.Packages.props</code> alongside the generated project file. Central Package Management places versions in one repository-level location, letting multiple projects reference a common package without repeating the version in every <code>.csproj</code>. NuGet uses the closest applicable <code>Directory.Packages.props</code> file in the directory hierarchy by default.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>&lt;Project&gt;
+  &lt;PropertyGroup&gt;
+    &lt;ManagePackageVersionsCentrally&gt;true&lt;/ManagePackageVersionsCentrally&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;ItemGroup&gt;
+    &lt;PackageVersion Include="Newtonsoft.Json" Version="13.0.4" /&gt;
+  &lt;/ItemGroup&gt;
+&lt;/Project&gt;</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Replace the generated <code>PackageLab.csproj</code> contents with the following lab configuration. The package reference has <strong>no Version attribute</strong>; the central file supplies the declared version. The lock-file setting asks restore to record the resulting dependency closure. Microsoft's <a href="https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management">Central Package Management reference</a> explains the arrangement. A package version directly on the reference can trigger NuGet error NU1008 when central management is enabled.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+  &lt;PropertyGroup&gt;
+    &lt;OutputType&gt;Exe&lt;/OutputType&gt;
+    &lt;TargetFramework&gt;net10.0&lt;/TargetFramework&gt;
+    &lt;RestorePackagesWithLockFile&gt;true&lt;/RestorePackagesWithLockFile&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;ItemGroup&gt;
+    &lt;PackageReference Include="Newtonsoft.Json" /&gt;
+  &lt;/ItemGroup&gt;
+&lt;/Project&gt;</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=J4hMAETgK_8","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=J4hMAETgK_8
+</div><figcaption class="wp-element-caption"><em>Steve Smith (Ardalis), “Automatically Convert to Central Package Management,” November 4, 2024. The verified tutorial shows a manual and tool-assisted migration; use Microsoft's current documentation as the authoritative configuration reference.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Lock the resolved dependency graph</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Run <code>dotnet restore</code>. A successful restore creates <code>packages.lock.json</code>, which records the full resolved package graph, including dependency versions and content hashes. Commit the lock file for an executable application when reproducibility matters. In CI, <code>dotnet restore --locked-mode</code> rejects dependency changes that would require changing the committed lock file. Central Package Management aligns declared package versions across projects; a lock file constrains what a particular restore may resolve. The two features solve different problems.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>dotnet restore
+dotnet restore --locked-mode
+dotnet package list --include-transitive
+dotnet package list --include-transitive --vulnerable</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#locking-dependencies">official lock-file documentation</a> advises committing application lock files but cautions that a library's lock file does not govern the final dependency closure of an application consuming that library. If a package version changes intentionally, regenerate and review the lock-file diff before returning to locked mode.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Check package health and trace dependencies</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>With a recent .NET SDK, <code>dotnet package list --include-transitive --vulnerable</code> reports known vulnerable packages from configured advisory sources. The command does not establish that a package is harmless, since new advisories may emerge after an audit. When an unexpected package appears, <code>dotnet nuget why Newtonsoft.Json</code> can reveal the dependency path. Microsoft documents the commands in its <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-package-list">package list reference</a> and <a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-why">dependency explanation reference</a>. Avoid blindly upgrading production dependencies without compatibility tests.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=nddfk2bTQUo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=nddfk2bTQUo
+</div><figcaption class="wp-element-caption"><em>Microsoft's official .NET channel, “Package Security in NuGet,” presented by Alexandra Barry, November 10, 2023. Covers open-source package threats and protections; current audit behavior is documented separately by Microsoft.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A minimal runtime check</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Replace <code>Program.cs</code> with a short JSON serialization test. The program imports its dependency and formats a small object, allowing an engineer to confirm that restore, compilation, and runtime assembly loading all succeed together.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>using Newtonsoft.Json;
+
+var record = new { lesson = "OSDotNet.005", packages = 1 };
+Console.WriteLine(JsonConvert.SerializeObject(record));</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>dotnet run</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Expected output, <em>not a locally verified execution</em>: <code>{"lesson":"OSDotNet.005","packages":1}</code>. Repeat the practice with a deliberately changed central version in a separate development branch and observe how locked restore behaves. Do not test changes against production build infrastructure without an approved maintenance window.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Where dependency security can fail</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Checking packages involves more than a version string. Validate author reputation, repository activity, licensing, package source and advisories before adoption. NuGet's <a href="https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages">auditing guidance</a> explains vulnerability signals, while package source mapping can restrict which feeds supply package identifiers. An audit warning deserves investigation, but indiscriminately suppressing warnings defeats the purpose. Changes to dependencies also deserve regression tests and a rollback path.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Dependencies ultimately affect compiled applications and the runtime environment. <a href="https://bitcoinversus.tech/2026/11/05/osdotnet-003-cil-assemblies-intermediate-language-metadata-manifests/">OSDotNet.003 on assemblies and CIL</a> explains their compiled representation, while <a href="https://bitcoinversus.tech/2026/10/08/osdotnet-002-what-common-language-runtime-does/">OSDotNet.002 on the CLR</a> explains managed execution. A secure process requires all three layers: controlled source dependencies, verified build outputs, and supported runtime environments.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> Central package versions simplify maintenance, dependency lock files make application restores more predictable, and vulnerability audits reveal known package risks. Keep the package graph reviewable, update deliberately, and test the finished application rather than treating any single command as proof of security.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor’s Note:</strong> The lesson follows the verified OSDotNet.004 curriculum and uses Microsoft Learn, NuGet.org and official .NET educational videos as technical references. The central package example was statically reviewed and both XML samples parsed successfully, but the local authoring environment lacks the .NET SDK, so restore, compilation and execution were not performed. Expected output is a prediction. Video identities were confirmed from public listings; iframe playback and mobile rendering remain unverified. The original featured cover is a 1200 × 630 fine-art oil painting with the BitcoinVersus.tech wordmark.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR for an optional 5,000-satoshi Bitcoin donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-satoshi contribution QR. Independently verify the recipient and amount.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. An optional <strong>5,000-satoshi</strong> donation supports research. Scan the original QR with a compatible Bitcoin wallet, or use a wallet capable of importing a saved QR image. Independently verify recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and the amount before sending. Bitcoin transfers are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. The lesson is educational and informational, not authorization to modify production systems, a security certification, financial advice or investment advice.</em></p>
+<!-- /wp:paragraph -->

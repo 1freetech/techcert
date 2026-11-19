@@ -1,0 +1,150 @@
+<!-- wp:paragraph -->
+<p><strong>OSEmojicode.004</strong> explains how programs repeat instructions. In <strong>Emojicode 1.0 beta 2</strong>, <code>🔂</code> iterates over a range or collection, while <code>🔁</code> repeats instructions as long as a condition remains true. The approach saves programmers from manually repeating identical statements. Readers should first review <a href="https://bitcoinversus.tech/2026/11/08/osemojicode-003-conditionals-if-else-comparisons-boolean-logic/">OSEmojicode.003 on conditionals</a>, <a href="https://bitcoinversus.tech/2026/11/05/osemojicode-002-variables-types-constants-mutation-scope/">OSEmojicode.002 on variables</a>, and <a href="https://bitcoinversus.tech/2026/10/08/osemojicode-001-what-is-emojicode-how-emoji-become-programming-syntax/">OSEmojicode.001 on program structure</a>. Each example below uses the syntax documented for the 1.0 beta 2 release.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=dIe9SlnzJ8s","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=dIe9SlnzJ8s
+</div><figcaption class="wp-element-caption"><em>Khalili Oriented Programming, “The emoji programming language,” December 25, 2021. Independent Emojicode overview; not evidence of the lab output. Video source verified, player playback not tested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A loop repeats a block</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Emojicode encloses executable blocks between <code>🍇</code> and <code>🍉</code>. A loop repeats a block rather than duplicating its individual lines in source code. The <a href="https://www.emojicode.org/docs/reference/controlflow">official Control Flow reference</a> defines <code>🔂</code> as <em>for-in</em>, fetching values from an iterable one by one. The <code>🔁</code> construct is <em>repeat-while</em>, evaluating a Boolean condition before each pass. If the condition starts false, the body is skipped.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The choice depends on the task. Prefer a collection or range when a bounded group of items is already available. Use a condition-driven loop when progress depends on changing state. Either approach requires a clear stopping rule and, in real applications, appropriate resource limits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Count with 🔂 and a numeric range</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An Emojicode <code>⏩</code> range holds an immutable sequence of integers. The start value is included, while the stopping value is excluded when the step is positive. Save the following complete practice program as <code>laps.emojic</code>. The <code>🏁</code> symbol declares the entry point, and the inner block prints each value provided by the range.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>🏁 🍇
+  🔂 lap 🆕⏩ 1 6❗️ 🍇
+    😀 🔡 lap❗️❗️
+  🍉
+🍉</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The sequence is 1, 2, 3, 4 and 5. Each integer is converted into text using <code>🔡 lap❗️</code> before printing. <strong>Expected output:</strong> five lines containing 1 through 5. The expectation was derived from the language specification, not from a completed compiler run.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A third numeric argument controls the step. For example, <code>🆕⏩ 0 10 2❗️</code> produces 0, 2, 4, 6 and 8. A negative step supports descending sequences, with the reference defining a corresponding strict stopping boundary. Learners who understand half-open intervals avoid an important source of off-by-one errors.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Visit each item in a list</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <code>🔂</code> loop can traverse a list without an explicit numeric index. Emojicode's collection literal begins with <code>🍿</code> and ends with <code>🍆</code>. The following program stores three device names, then prints the items in the sequence supplied by the collection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>🏁 🍇
+  🍿🔤router🔤 🔤switch🔤 🔤server🔤🍆 ➡️ devices
+
+  🔂 device devices 🍇
+    😀 device❗️
+  🍉
+🍉</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The loop variable <code>device</code> receives each string, giving three predicted lines: <code>router</code>, <code>switch</code> and <code>server</code>. The underlying idea is familiar across programming languages. <a href="https://bitcoinversus.tech/2026/11/18/osgo-006-go-arrays-slices-length-capacity-append-copy/">OSGo.006 on arrays and slices</a> offers a related comparison for learners working with indexed collections.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=tJcZx8mz7lo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=tJcZx8mz7lo
+</div><figcaption class="wp-element-caption"><em>Alfredo Sequeida, “Coding using EMOJIS!,” December 8, 2020. Publicly identifiable demonstration of the Emojicode language; exact loop syntax is verified from the official documentation, not inferred from the video.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Repeat only while a condition is true</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <code>🔁</code> instruction accepts a Boolean condition rather than a collection. For a predictable demonstration, declare a mutable counter, print its current value and increment it each time. The <a href="https://www.emojicode.org/docs/reference/variables">official Variables and Assignment guide</a> establishes <code>🖍🆕</code> for mutable declaration and <code>⬅️➕</code> for addition followed by assignment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>🏁 🍇
+  0 ➡️ 🖍🆕counter
+  🔁 counter ◀️ 3 🍇
+    😀 🔡 counter❗️❗️
+    counter ⬅️➕ 1
+  🍉
+🍉</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The initial value is zero. The comparison <code>counter ◀️ 3</code> stays true for 0, 1 and 2. Once the counter becomes 3, the next test is false, ending the loop. <strong>Expected output:</strong> 0, 1 and 2, on separate lines. Removing the increment would leave the condition true and produce an unbounded stream of zeroes until the program is interrupted. Zero-iteration cases are also important: changing the comparison limit to zero would skip the loop entirely.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Compile and check actual output</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Install the 1.0 beta 2 compiler and a supported C++ compiler and linker according to the <a href="https://www.emojicode.org/docs/guides/install">Emojicode installation guide</a>. Use a UTF-8 text editor and save one complete sample per file. The <a href="https://www.emojicode.org/docs/guides/compile-and-run">official compile-and-run tutorial</a> documents the basic shell workflow. For the first program, a Unix-like terminal uses:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>emojicodec laps.emojic
+./laps</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Check the executable name reported by your toolchain, especially on Windows. Record compiler version, output and errors, then compare them against the manual traces. A source example that looks valid is not equivalent to a passed runtime test. The editorial environment did not have an Emojicode compiler installed, so no compilation or execution is being claimed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice exercises and engineering limits</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Try three changes. Set the range to <code>🆕⏩ 2 12 3❗️</code> and predict 2, 5, 8 and 11. Add <code>🔤firewall🔤</code> to the device list and expect four printed names. Change the repeat-while limit from 3 to 0 and predict no output. Learners can verify the resulting behavior, then explain any difference between expected and observed values.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The same concepts apply to equipment inventories, batch jobs, metrics collection and network automation, but classroom code is not a production monitoring system. Use authorized data sources, finite bounds, error handling and resource limits before running operational scripts. For another compiled language comparison, consult <a href="https://bitcoinversus.tech/2026/11/08/oszig-003-zig-control-flow-if-switch-optional-values/">OSZig.003 on control flow</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=w7yQwTU3cOs","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=w7yQwTU3cOs
+</div><figcaption class="wp-element-caption"><em>EPICODE Institute of Technology, “Un linguaggio di PROGRAMMAZIONE con EMOJI: Emojicode,” November 24, 2025. Italian-language educational overview, included for broader context; video playback remains unverified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><strong>Conclusion:</strong> Prefer <code>🔂</code> for iteration over known ranges and collections. Use <code>🔁</code> when a changing condition controls repetition. Predict each pass, identify a terminating condition and verify results through a real compiler whenever available.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor’s Note:</strong> The lesson advances the verified OSEmojicode.003 curriculum and uses official Emojicode 1.0 beta 2 reference material. Program outputs are manually traced expectations, not evidence of compiler execution. Three public video identities were checked, but actual YouTube playback and mobile-layout rendering were not independently tested. The original 1200 × 630 photorealistic cover is conceptual editorial artwork, not a screenshot of running Emojicode.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR for an optional 5,000-satoshi Bitcoin donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech 5,000-satoshi contribution QR. Verify the wallet recipient and amount independently.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. An optional <strong>5,000-satoshi</strong> donation supports research. Scan the original QR from a second screen with a compatible Bitcoin wallet, or import a saved QR image where supported. Independently verify recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before sending. Bitcoin transfers are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. The lesson is educational and informational, not authorization to modify production networks, licensed engineering advice, financial advice or investment advice.</em></p>
+<!-- /wp:paragraph -->

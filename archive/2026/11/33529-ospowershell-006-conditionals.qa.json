@@ -1,0 +1,134 @@
+{
+  "schema": "bitcoinversus-tech-lesson-publication-audit-v2",
+  "recorded_at_utc": "2026-11-19",
+  "track_id": "OSPowerShell.006",
+  "title": "PowerShell Conditionals: If, ElseIf, Else, Switch, and Comparison Operators",
+  "wordpress_post_id": 33529,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/19/ospowershell-006-conditionals-if-elseif-else-switch-comparison-operators/",
+  "rotation": {
+    "predecessor": "OSBash.007 WordPress #33501",
+    "last_same_track": "OSPowerShell.005 WordPress #31438",
+    "duplicate_check": {
+      "wordpress_published_draft_pending_scheduled_private": 0,
+      "opencert_code_search": 0
+    },
+    "next_subject": "csharp",
+    "next_candidate_id": "OSC#.006",
+    "next_duplicate_check": "No OSC#.006 published or draft match in prepublish query; recheck on next activation"
+  },
+  "primary_sources": [
+    "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_if?view=powershell-7.5",
+    "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_switch?view=powershell-7.5",
+    "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comparison_operators?view=powershell-7.5",
+    "https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-if?view=powershell-7.5",
+    "https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-switch?view=powershell-7.5"
+  ],
+  "media": {
+    "featured_id": 33516,
+    "dimensions": [
+      1200,
+      630
+    ],
+    "style": "detailed colored pencil",
+    "subject": "older Black male systems administrator, different from preceding young South Asian female developer",
+    "logo": "exact approved neon-green BitcoinVersus.tech pixel crop with tight black highlight applied once at bottom-left",
+    "in_article": [
+      {
+        "type": "youtube",
+        "id": "I4POqjlkswY",
+        "source": "CodeLucky",
+        "topic": "PowerShell If-ElseIf-Else Tutorial",
+        "source_pub_date": "2025-10-24",
+        "rendered_as_iframe": true
+      },
+      {
+        "type": "youtube",
+        "id": "C9yVvCnCbfo",
+        "source": "HardReset_Pro",
+        "topic": "Windows PowerShell switch statements",
+        "source_pub_date": "2026-04-15",
+        "rendered_as_iframe": true
+      },
+      {
+        "type": "image",
+        "media_id": 23294,
+        "source": "PowerShell 7.5 Windows Terminal screenshot from Wikimedia-linked WordPress archive"
+      }
+    ],
+    "in_article_media_items": 3,
+    "youtube_iframes": 2,
+    "unrendered_youtube_shortcodes": 0,
+    "actual_video_playback": "NOT independently tested",
+    "social_post": "omitted because none independently verified as directly relevant",
+    "donation_qr_id": 24043
+  },
+  "code": {
+    "gutenberg_source": "archive/2026/11/33529-ospowershell-006-conditionals.gutenberg.html",
+    "powershell_source": "archive/2026/11/33529-ospowershell-006-conditionals.ps1",
+    "reader_run_test_suite": "archive/2026/11/33529-ospowershell-006-conditionals.Tests.ps1",
+    "powershell_runtime_available_in_preparation_environment": false,
+    "powershell_parser_execution": "NOT TESTED",
+    "powershell_runtime_execution": "NOT TESTED",
+    "static_structural_checks_passed": 23,
+    "static_structural_checks_failed": 0,
+    "static_qa_scope": "source string checks for PowerShell version gate, parameters, validation, if/elseif/else, switch branches, structured object, JSON, balanced braces, no destructive cmdlets; not a parser or behavior test",
+    "reader_test_harness_scenarios": 10,
+    "reader_test_harness_field_checks_if_executed": 50,
+    "reader_test_harness_execution": "NOT TESTED; test suite supplied for reader execution",
+    "example_expected_values": "-Status Offline -Watts 650 -AsJson should yield Review / Investigate / NeedsAttention true, pending runtime confirmation"
+  },
+  "live_page": {
+    "http_status": 200,
+    "visibility": "public",
+    "canonical_verified": true,
+    "seo_title": "PowerShell If, ElseIf, Else & Switch: Conditionals Explained",
+    "meta_description": "Learn PowerShell if, elseif, else, switch, comparison operators and input validation using a structured read-only scripting example.",
+    "og_cover_present": true,
+    "featured_image_id": 33516,
+    "internal_links": 5,
+    "missing_img_alt": 0,
+    "empty_links": 0,
+    "in_story_iframes": 2,
+    "code_boxes": 0,
+    "transparent_pre_blocks": 2,
+    "editor_note": true,
+    "donation_footer": true,
+    "actual_youtube_playback": "NOT TESTED",
+    "mobile_screenshot": "NOT TESTED",
+    "desktop_browser_interaction": "NOT TESTED"
+  },
+  "smartchart": {
+    "selected": "none",
+    "candidate_comparison": [
+      {
+        "type": "vertical bar",
+        "assessment": "no measured cross-sectional quantities"
+      },
+      {
+        "type": "line",
+        "assessment": "no dated measurements or trend"
+      },
+      {
+        "type": "scatter",
+        "assessment": "no independently measured numeric pairs"
+      }
+    ],
+    "rationale": "Program branching semantics and fictional watts do not justify a quantitative graphic."
+  },
+  "archival": {
+    "repositories": [
+      "1freetech/opencert.tech",
+      "1freetech/techcert",
+      "1freetech/Bitcoinversus.tech"
+    ],
+    "exact_saved_markup_and_code_readback": "pending separate call",
+    "reader_harness_test_copy_corrected": "ordered expected-property map avoids array flattening concerns"
+  },
+  "quality_lessons": [
+    "Separate static content checks from actual PowerShell parser and runtime execution.",
+    "A rendered YouTube iframe is not proof of playback.",
+    "Keep the finished secondary logo as an exact single pixel crop.",
+    "Never imply fictional watt values are actual device safety thresholds."
+  ]
+}

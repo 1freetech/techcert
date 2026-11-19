@@ -1,0 +1,109 @@
+{
+  "schema": "bitcoinversus-tech-lesson-publication-audit-v3",
+  "date": "2026-11-19",
+  "track_id": "OSC#.006",
+  "title": "OSC#.006: C# Methods, Parameters, Return Values, and Overloading",
+  "wordpress_post_id": 33552,
+  "post_status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/19/oscsharp-006-csharp-methods-parameters-return-values-overloading/",
+  "duplicate_prevention": {
+    "prior": "OSC#.005 WordPress 31450",
+    "matches_before_publication": 0,
+    "registry_predecessor": "OSPowerShell.006 WordPress 33529"
+  },
+  "naming_audit": {
+    "law": "Public WordPress titles and H1 must start {canonical OS acronym}.{3-digit lesson number}:, preserving exact OSC#, OSC++ and specialized track names; SEO title should include identical identifier.",
+    "scanned_categories": [
+      {
+        "id": 44329,
+        "name": "computer programming",
+        "posts": 457
+      },
+      {
+        "id": 2509703,
+        "name": "Tech Docs",
+        "posts": 1607
+      }
+    ],
+    "observed_status": "Current published programming lesson titles show required prefix. Tech Docs audit identified only four historical URL/title naming conflicts, not missing title identifiers.",
+    "legacy_conflicting_post_ids": [
+      25078,
+      24223,
+      24017,
+      23605
+    ],
+    "legacy_rule": "OSNTC titles are correct per active network_technician registry; historical osetc URLs are retained to preserve existing links.",
+    "new_post_correct_prefix": true,
+    "slug": "oscsharp-006-csharp-methods-parameters-return-values-overloading",
+    "seo_title_has_identifier": true,
+    "note": "Category cohorts overlap, and audit scans numbered OS slugs rather than unnumbered general editorial content."
+  },
+  "official_sources": [
+    "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/methods",
+    "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters",
+    "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments",
+    "https://learn.microsoft.com/en-us/dotnet/csharp/methods"
+  ],
+  "media": {
+    "featured_media_id": 33545,
+    "original_dimensions": [
+      1200,
+      630
+    ],
+    "style": "oil painting",
+    "person": "fictional young East Asian female developer",
+    "wordmark": "approved single neon-green BitcoinVersus.tech on tightly highlighted black background, lower left",
+    "video_ids": [
+      "GhQdlIFylQ8",
+      "wxznTygnRfQ"
+    ],
+    "in_story_youtube_iframes": 2,
+    "unresolved_shortcodes": 0,
+    "player_playback": "not independently tested",
+    "donation_qr_id": 24043,
+    "featured_not_repeated": true
+  },
+  "live_qa": {
+    "http_status": 200,
+    "visibility": "public",
+    "canonical_matches": true,
+    "title_identifier": "OSC#.006",
+    "seo_title_identifier": "OSC#.006",
+    "seo_description_identifier": "OSC#.006",
+    "contextual_internal_links": 5,
+    "missing_image_alt": 0,
+    "empty_links": 0,
+    "unboxed_pre_blocks": 3,
+    "boxed_code_blocks": 0,
+    "mobile_screenshots": "not tested"
+  },
+  "code": {
+    "source": "archive/2026/11/33552-oscsharp-006-csharp-methods.cs",
+    "test_runner": "archive/2026/11/33552-oscsharp-006-csharp-methods.test.sh",
+    "gutenberg": "archive/2026/11/33552-oscsharp-006-csharp-methods.gutenberg.html",
+    "static_source_checks_passed": 25,
+    "reader_run_assertions": 18,
+    "compiler_and_runtime": "not tested; .NET SDK unavailable",
+    "expected_stdout": [
+      "18 method checks passed",
+      "devices: 3"
+    ],
+    "runner": "archived for an environment with .NET 10"
+  },
+  "chart": {
+    "selected": "none",
+    "candidate_types": [
+      "vertical column",
+      "line",
+      "scatter"
+    ],
+    "reason": "No externally measured dataset; chart would be decorative"
+  },
+  "repositories": [
+    "1freetech/opencert.tech",
+    "1freetech/techcert",
+    "1freetech/Bitcoinversus.tech"
+  ],
+  "next_track_id": "OSCSS.003",
+  "next_duplicate_matches": 0
+}

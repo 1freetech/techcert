@@ -1,0 +1,115 @@
+{
+  "schema": "bitcoinversus-lesson-publishing-audit-v1",
+  "recorded_date": "2026-11-19",
+  "wordpress_id": 33438,
+  "track_id": "OSSolidity.005",
+  "title": "Solidity Function Visibility: Public, External, Internal, Private, View, and Pure",
+  "url": "https://bitcoinversus.tech/2026/11/19/ossolidity-005-function-visibility-public-external-internal-private-view-pure/",
+  "status": "publish",
+  "predecessor": "OSPHP.007 WordPress #33423",
+  "duplicate_checks": {
+    "wordpress_published_draft_pending_scheduled_private_matches_for_OSSolidity_005": 0,
+    "open_cert_github_code_search_matches_before_creation": 0,
+    "prior_solidity_lesson": "OSSolidity.004 WordPress #31359"
+  },
+  "research": {
+    "primary_sources": [
+      "https://docs.soliditylang.org/en/v0.8.38/contracts.html",
+      "https://docs.soliditylang.org/en/v0.8.38/cheatsheet.html",
+      "https://www.soliditylang.org/blog/2026/10/22/solidity-0.8.38-release-announcement/"
+    ],
+    "verified_release": "Solidity 0.8.38 released October 22 2026",
+    "article_claim_type": "Educational explanation; no deployment claims"
+  },
+  "content": {
+    "saved_gutenberg": "archive/2026/11/33438-ossolidity-005-function-visibility.gutenberg.html",
+    "source_solidity": "archive/2026/11/33438-ossolidity-005-function-visibility.sol",
+    "original_cover": {
+      "id": 33433,
+      "dimensions": [
+        1200,
+        630
+      ],
+      "style": "fine-art oil painting",
+      "demographic_note": "young Black woman coder, different age/gender presentation from preceding older East Asian male PHP cover",
+      "branding": "approved original user wordmark crop, neon green with tight black highlight in lower left"
+    },
+    "youtube": [
+      {
+        "id": "h3rgSRN-Y1M",
+        "type": "verified video identity",
+        "caption": "Terry White function visibility tutorial"
+      },
+      {
+        "id": "2PO2Y-4dDv8",
+        "type": "verified video identity",
+        "caption": "Solidity functions parameters return values overview"
+      }
+    ],
+    "in_story_media_count": 2,
+    "youtube_iframe_count": 2,
+    "unrendered_youtube_shortcodes": 0,
+    "youtube_playback": "NOT TESTED end-to-end",
+    "social_embed": "not included; no independently verified relevant original-source post",
+    "internal_contextual_links": 4,
+    "official_references": 3,
+    "donation_qr_media_id": 24043,
+    "code_format": "plain unboxed transparent pre / wp:html",
+    "boxed_code_count": 0,
+    "chart": {
+      "selection": "none",
+      "candidate_types_considered": [
+        "flow/relationship chart",
+        "line chart",
+        "vertical bar chart"
+      ],
+      "reason": "Function-visibility definitions have no numerical comparable dataset; a quantitative chart would be decorative or unsupported. The educational code and official reference explain the mechanism more accurately."
+    }
+  },
+  "test_evidence": {
+    "static_solidity_source_checks_passed": 10,
+    "static_solidity_source_checks_failed": 0,
+    "static_checks": [
+      "SPDX",
+      "pragma compatible with 0.8.38",
+      "two contract declarations",
+      "four visibility keywords",
+      "view/pure",
+      "no payable transfer",
+      "input range check",
+      "derived contract inherits internal method",
+      "balanced braces",
+      "public getter"
+    ],
+    "solidity_compiler_available": false,
+    "solidity_compilation": "NOT TESTED; no compiler installed",
+    "remix_vm_execution": "NOT TESTED; manual steps with expected outcomes provided",
+    "manual_expected_results": [
+      "getNumber initially 0",
+      "isZero initially true",
+      "triple(4) = 12",
+      "after setNumber(7), getNumber 7 and doubleStored 14",
+      "setNumber(1001) should revert",
+      "derived child saveFromChild(6) should result in getNumber 6"
+    ],
+    "public_http_status": 200,
+    "public_visibility": "public",
+    "seo_canonical_present": true,
+    "seo_meta_description_present": true,
+    "open_graph_cover_present": true,
+    "images_missing_alt_total": 0,
+    "rendered_image_count_in_post_body": 1,
+    "third_party_iframes_rendered": 2,
+    "mobile_visual_test": "NOT TESTED",
+    "browser_video_playback": "NOT TESTED",
+    "security_audit": "NOT PERFORMED"
+  },
+  "quality_notes": [
+    "Do not confuse a verified iframe with video playback.",
+    "Do not claim static source checks equal Solidity compilation.",
+    "Original oil painting portrays fictional on-screen interface; cannot be treated as a real mainnet deployment.",
+    "Existing theme-level Share/Subscribe links may be empty; no empty lesson-body links were found.",
+    "No actual public-chain wallet, funds or transactions were involved."
+  ],
+  "next_subject_candidate": "SQL / OSSQL.007; recheck live and drafts before next publication"
+}

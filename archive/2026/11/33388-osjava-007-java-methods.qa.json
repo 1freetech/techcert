@@ -1,0 +1,101 @@
+{
+  "schema": "bitcoinversus-tech-lesson-publication-qa-v1",
+  "publication_date": "2026-11-18",
+  "wordpress_post_id": 33388,
+  "lesson_track_id": "OSJava.007",
+  "public_title": "Java Methods: Parameters, Return Values, Overloading, and Pass-by-Value",
+  "url": "https://bitcoinversus.tech/2026/11/18/osjava-007-java-methods-parameters-return-values-overloading-pass-by-value/",
+  "status": "publish",
+  "preceding_main_rotation": "OSGo.006, WordPress 33375",
+  "duplicate_prevention": {
+    "wordpress_osjava_007_published_draft_pending_scheduled_private_matches": 0,
+    "github_open_cert_search_osjava_007_matches_before_publication": 0,
+    "prior_java_unit": "OSJava.006 WordPress 31058"
+  },
+  "source_urls": [
+    "https://dev.java/learn/classes-objects/defining-methods/",
+    "https://dev.java/learn/language/oop/classes-objects/calling-methods-constructors/",
+    "https://dev.java/learn/language/oop/classes-objects/more-on-classes/",
+    "https://docs.oracle.com/javase/tutorial/java/javaOO/arguments.html",
+    "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Math.html#addExact(int,int)"
+  ],
+  "code": {
+    "language": "Java",
+    "file": "archive/2026/11/33388-osjava-007-java-methods.java",
+    "run_environment": "OpenJDK 21.0.12.1 Linux",
+    "compile_command": "javac -Xlint:all MethodLab.java",
+    "run_command": "java MethodLab",
+    "checks_passed": 10,
+    "checks_failed": 0,
+    "stdout": [
+      "10 method checks passed",
+      "readings: 3"
+    ],
+    "test_limit": "illustrative runtime assertions, not a complete automated test suite or production security review"
+  },
+  "media": {
+    "featured_media_id": 33379,
+    "featured_media_source_dimensions": [
+      1200,
+      630
+    ],
+    "featured_style": "oil painting",
+    "logo_placement": "bottom-left, wordmark region copied exactly from previous 1200x630 Go lesson cover and composited",
+    "logo_reference_limit": "user's separate uploaded master reference was not available for direct pixel comparison",
+    "in_story": [
+      {
+        "type": "youtube",
+        "id": "JKecvKiNX2I",
+        "source": "Bro Code, methods tutorial, 2024-12-05"
+      },
+      {
+        "type": "image",
+        "wordpress_media_id": 23181,
+        "subject": "historical Java Duke Star7 mascot"
+      },
+      {
+        "type": "youtube",
+        "id": "nhnAx79gxCM",
+        "source": "Bro Code, method overloading tutorial, 2024-12-05"
+      }
+    ],
+    "youtube_iframe_count_in_wordpress_rendered_post": 2,
+    "unrendered_youtube_shortcodes": 0,
+    "third_party_playback_test": "not performed",
+    "social_embed": "omitted because no independently verified relevant original-source social post was established"
+  },
+  "layout": {
+    "gutenberg_source_archived": "archive/2026/11/33388-osjava-007-java-methods.gutenberg.html",
+    "default_boxed_code_blocks": 0,
+    "plain_transparent_pre_code_blocks": 3,
+    "mobile_screenshot_test": "not available",
+    "rendered_images_missing_alt": 0
+  },
+  "links": {
+    "contextual_internal_links_in_saved_article": 6,
+    "donation_qr_media_id": 24043
+  },
+  "seo": {
+    "custom_title": "Java Methods: Parameters, Returns, Overloading & Pass-by-Value",
+    "description": "Learn Java methods, typed parameters, return values, overloading and pass-by-value with tested OpenJDK code, examples, and video tutorials.",
+    "public_url_status": 200,
+    "canonical_verified": true,
+    "open_graph_featured_image": true
+  },
+  "archive": {
+    "repositories": [
+      "1freetech/opencert.tech",
+      "1freetech/techcert",
+      "1freetech/Bitcoinversus.tech"
+    ],
+    "exact_gutenberg_and_java_readback_verified": true
+  },
+  "notes": [
+    "WordPress public visitor view returned HTTP 200 and is not private.",
+    "OG image is dynamically downscaled to 1024x538 while the WordPress original media is 1200x630.",
+    "Playback of third-party videos and visual mobile viewport inspection are not proven by iframe presence.",
+    "Site-theme sharing controls may contain empty links unrelated to lesson body.",
+    "Java methods material sourced to official dev.java and Oracle documentation."
+  ],
+  "next_rotation_candidate": "OSJavaScript.006 after verified OSJavaScript.005; no OSJavaScript.006 published or draft match during final check"
+}

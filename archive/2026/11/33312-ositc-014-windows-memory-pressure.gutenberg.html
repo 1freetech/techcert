@@ -1,0 +1,97 @@
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Overview</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>OSITC.014</strong> explains how to distinguish insufficient physical RAM from an exhausted memory commitment limit or ordinary cache activity. Slow Windows applications do not automatically mean defective memory modules. A technician should correlate symptoms with measurements before changing system settings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The lesson follows <a href="https://bitcoinversus.tech/2026/11/07/ositc-013-windows-disk-performance-latency-iops-queue-depth/">OSITC.013 on disk latency</a>, <a href="https://bitcoinversus.tech/2026/11/01/ositc-012-windows-performance-monitor-perfmon-counters-baselines-data-collector-sets/">OSITC.012 on Performance Monitor</a> and <a href="https://bitcoinversus.tech/2026/10/28/ositc-011-windows-resource-monitor-cpu-memory-disk-network-troubleshooting/">OSITC.011 on Resource Monitor</a>. Learning goals include identifying committed memory, working sets, hard faults, standby cache and safe pagefile triage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=WQfRlSmRRzo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=WQfRlSmRRzo
+</div></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p><em>Independent <strong>Windows Performance and Monitoring: Resource Monitor Tutorial</strong>. The walkthrough illustrates the interface; Microsoft's documentation remains authoritative for counter definitions <a href="https://www.youtube.com/watch?v=WQfRlSmRRzo">Watch the original video</a>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read the memory numbers separately</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>In use</strong> describes RAM currently occupied. <strong>Available</strong> includes memory Windows can provide for new work, including reclaimable standby pages. <strong>Committed</strong> tracks memory backed by RAM or paging files under Windows' commitment accounting; it does not mean that the entire displayed amount was written to disk. The <strong>commit limit</strong> is influenced by installed RAM and paging-file capacity, with system overhead.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":33306,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ositc014-authentic-microsoft-task-manager-memory-screenshot.png" alt="Official Microsoft Task Manager Memory screenshot showing used RAM, available memory, committed amount and kernel memory pools" class="wp-image-33306" loading="lazy" /><figcaption class="wp-element-caption"><em>Authentic <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/troubleshoot-performance-problems-in-windows">Microsoft Learn Task Manager screenshot</a>. Example readings belong to Microsoft's documentation, not a measured BitcoinVersus.Tech computer.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Hard faults do not mean faulty RAM</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>hard page fault</strong> means Windows had to obtain a requested page from storage rather than an already resident physical page. Some hard faults retrieve file-backed content, not necessarily pagefile data. The count is <strong>not</strong> an error tally for DRAM hardware. Sustained hard faults alongside poor available RAM, elevated disk response time and a slow application are more informative than an isolated spike.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A process <strong>working set</strong> is its resident physical-memory allocation, whereas <strong>private committed bytes</strong> describe a different accounting quantity. Kernel paged and nonpaged pools need separate attention. A rising nonpaged pool may warrant driver investigation, not simply closing the largest visible application.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A safe, repeatable diagnostic workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Open Task Manager, Performance, Memory. Note installed RAM, available memory, committed amount and the observation time.</li><li>Open Resource Monitor, Memory. Correlate processes, working sets and hard faults with the reported slowdown.</li><li>Record <code>\Memory\Available MBytes</code>, <code>\Memory\% Committed Bytes In Use</code> and relevant disk counters using Performance Monitor, with a matching baseline.</li><li>Inspect the <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/rammap">Microsoft Sysinternals RAMMap</a> Use Counts and Priority Summary tabs without clearing memory lists.</li><li>Check application and system error history using <a href="https://bitcoinversus.tech/2026/10/27/ositc-010-windows-reliability-monitor-crash-history-perfmon-rel/">OSITC.010 Reliability Monitor</a>; document findings before escalation.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:image {"id":33307,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/ositc014-authentic-microsoft-sysinternals-rammap-screenshot.png" alt="Official Microsoft RAMMap Use Counts view showing Active, Standby, Modified and Free physical page allocations" class="wp-image-33307" loading="lazy" /><figcaption class="wp-element-caption"><em>Authentic <a href="https://learn.microsoft.com/en-us/sysinternals/downloads/rammap">Microsoft Sysinternals RAMMap screenshot</a>. Older program interface shown for educational context; do not mistake standby cache for wasted RAM.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked calculation and pagefile caution</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Assume a hypothetical workstation reports <strong>20 GiB committed</strong> against a <strong>28 GiB commit limit</strong>. Utilization equals <strong>20 ÷ 28 × 100 ≈ 71.4%</strong>; remaining commitment headroom is <strong>8 GiB</strong>. The arithmetic says nothing by itself about disk paging or a required RAM upgrade.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Microsoft explains that pagefile sizing depends on workload commitment, crash-dump needs and system configuration. There is no universal requirement to set the pagefile to 1.5 times installed RAM. Preserve the system-managed configuration unless authorized diagnosis supports a change. Disabling the pagefile can reduce commit headroom and interfere with crash-dump collection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Elementary Conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Diagnose memory pressure by comparing available RAM, commit headroom, hard faults, process behavior and storage latency at the same time. Use the <a href="https://bitcoinversus.tech/2026/10/06/ositc-002-storage-file-systems-hdds-ssds-partitions-volumes-ntfs-ext4-mounting-basic-diagnostics/">storage fundamentals lesson</a> when a paging-related slowdown points toward the storage path. Avoid clearing caches or altering virtual-memory settings solely to make one graph look better.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>References:</strong> <a href="https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/how-to-determine-the-appropriate-page-file-size-for-64-bit-versions-of-windows">Microsoft pagefile sizing</a>; <a href="https://learn.microsoft.com/en-us/windows/win32/memory/memory-performance-information">memory performance terminology</a>; <a href="https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/hard-faults">hard-fault definitions</a>; <a href="https://learn.microsoft.com/en-us/shows/defrag-tools/6-rammap">Microsoft's original RAMMap training video</a>.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Microsoft documentation supplies technical definitions. The featured cover is original AI-generated editorial illustration, including fictional screen data. Both in-body screenshots are genuine Microsoft educational images. The numerical example is hypothetical. No Windows workstation was physically tested; server-side player rendering is not independent playback or mobile-viewport verification.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original optional BitcoinVersus.Tech 5,000-satoshi donation QR" class="wp-image-24043" loading="lazy" /><figcaption class="wp-element-caption"><em>Original optional BitcoinVersus.Tech donation QR; verify the address and amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run. An optional 5,000-satoshi contribution supports educational research. Confirm receiving address <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and the amount in your wallet; Bitcoin payments are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the information on BitcoinVersus.Tech is Verifiably True. Educational material does not replace site-specific change-control procedures.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-11-18",
+  "wordpress_post_id": 33312,
+  "track_id": "OSITC.014",
+  "title": "OSITC.014: Windows Memory Pressure Diagnostics, Commit Charge, Hard Faults, and the Pagefile",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/18/ositc-014-windows-memory-pressure-commit-hard-faults-pagefile-diagnostics/",
+  "saved_source": "Exact Gutenberg string from WordPress edit-context post after publication, unchanged in all archives",
+  "gutenberg_chars": 9917,
+  "cover": {
+    "media_id": 33305,
+    "original_dimensions": [
+      1200,
+      630
+    ],
+    "style": "photorealistic editorial illustration",
+    "watermark": "Neon-green BitcoinVersus.tech text in tight black highlight at lower left",
+    "brand_logo_reference_pixel_identical_unverified": true
+  },
+  "media": {
+    "youtube_ids": [
+      "WQfRlSmRRzo"
+    ],
+    "youtube_publisher": "Independent third-party Resource Monitor tutorial; not Microsoft-produced",
+    "native_embed_count": 1,
+    "WordPress_rendered_iframe_count": 1,
+    "real_microsoft_screenshots": [
+      {
+        "id": 33306,
+        "source": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/troubleshoot-performance-problems-in-windows",
+        "description": "Task Manager Performance memory screenshot"
+      },
+      {
+        "id": 33307,
+        "source": "https://learn.microsoft.com/en-us/sysinternals/downloads/rammap",
+        "description": "RAMMap usage and paging lists screenshot"
+      }
+    ],
+    "official_training_link": "https://learn.microsoft.com/en-us/shows/defrag-tools/6-rammap",
+    "donation_qr_id": 24043
+  },
+  "quality": {
+    "public_http_status": 200,
+    "seo_title_description_and_canonical_verified": true,
+    "open_graph_image_present": true,
+    "missing_image_alt": 0,
+    "original_manuscript_words": 676,
+    "distinct_contextual_internal_links": 5,
+    "code_boxes_found": false,
+    "prohibited_editorial_words": [],
+    "duplicate_wordpress_lesson_id_count": 1
+  },
+  "factual_check": {
+    "references": [
+      "Microsoft Learn How to determine pagefile size",
+      "Microsoft Learn memory-performance information",
+      "Microsoft Windows Performance Counter documentation",
+      "Microsoft Learn hard fault definition",
+      "Microsoft Sysinternals RAMMap"
+    ],
+    "example": "20 GiB committed / 28 GiB commit limit = 71.4%; 8 GiB remaining hypothetical headroom",
+    "qualifications": [
+      "Commit charge not proof pages have been written to disk",
+      "Hard faults do not mean defective RAM",
+      "Standby list is reclaimable cache, not necessarily waste",
+      "No universal 1.5x RAM pagefile recommendation"
+    ]
+  },
+  "limitations": [
+    "Actual YouTube playback not independently tested even though server rendered iframe.",
+    "Mobile viewport screenshot and exact comparison against user reference logo not independently conducted.",
+    "All screenshot readings and arithmetic are educational; no real Windows workstation testing was performed."
+  ],
+  "curriculum": {
+    "active_registered_subjects": 43,
+    "coding_subjects": 20,
+    "historical_index_snapshot_2026_10_07": {
+      "entries": 626,
+      "folders": 38
+    },
+    "next_subject": "c",
+    "known_unregistered_series": [
+      "OSChef esoteric programming (not OSChefInfra)",
+      "NEC Review"
+    ]
+  }
+}

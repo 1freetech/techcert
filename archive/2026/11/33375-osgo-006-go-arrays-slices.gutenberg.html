@@ -1,0 +1,156 @@
+<!-- wp:paragraph --><p>Go uses two closely related ways to store sequences of values. An <strong>array</strong> has a fixed length that forms part of its type. A <strong>slice</strong> is a variable-length view over an underlying array. The distinction determines how programs allocate memory, pass data into functions, and react when new elements are appended. A slice may share storage with an array or another slice, so a change that looks local can also affect other variables. The official <a href="https://go.dev/blog/slices-intro">Go slice internals guide</a> explains the storage model.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The Go curriculum previously introduced <a href="https://bitcoinversus.tech/2026/11/07/osgo-005-functions-parameters-multiple-results-error-returns/">typed functions and error results</a>, <a href="https://bitcoinversus.tech/2026/11/01/osgo-004-control-flow-if-switch-for-range-break-continue/">control flow</a>, and <a href="https://bitcoinversus.tech/2026/10/10/osgo-002-variables-constants-zero-values-and-basic-types-var-int-float64-bool-string-byte-and-rune/">types and zero values</a>. Arrays and slices supply collections to those functions and loops. The curriculum registry identifies the progression as OSGo.006, while the published reference title remains concept-first.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Imagine a shelf with four numbered spaces. An array is the shelf with its fixed number of spaces. A slice is a window showing some of those spaces. Two windows can show the same shelf, so changing an item through one window can change what the other window sees. A slice also remembers its current length and how much of the shelf it can reach before more storage is required. Go uses slices often because their length can grow as a program collects data.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Declare arrays and slices and identify their different type syntax.</li><li>Explain slice length, capacity, indexing, and shared backing storage.</li><li>Use append and copy correctly while controlling accidental data sharing.</li><li>Read a runnable example and verify behavior with unit tests.</li><li>Recognize why capacity growth is not an API guarantee about underlying memory.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=T1T8-MG-mPg&w=640&h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>The Go Programming Language, “Arrays and Slices,” January 23, 2024. Official project video introducing the two sequence types and their behavior.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Fixed Arrays and Flexible Slices</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The declaration <code>[4]int</code> specifies exactly four integers. In contrast, <code>[]int</code> specifies a slice of integers without a fixed length in the type. Arrays are values: assigning an array to another variable copies its elements. A slice value contains information about its backing storage, length, and capacity. Assigning a slice copies the slice value, but not necessarily its elements. The official <a href="https://go.dev/ref/spec">language specification</a> describes array and slice types separately.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>An array can be declared using <code>values := [4]int{10, 20, 30, 40}</code>. Selecting <code>values[1:3]</code> creates a slice containing elements at positions 1 and 2, excluding position 3. Go indexes sequences from zero, a convention shared by the earlier <a href="https://bitcoinversus.tech/2026/11/18/osc-007-c-arrays-indexing-initialization-bounds-safety-sizeof/">C arrays lesson</a>. However, Go's slices carry a length and capacity automatically, instead of requiring the caller to maintain a separate buffer length for ordinary slice operations.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The built-in <code>len</code> function reports how many slice elements are currently accessible. The built-in <code>cap</code> reports the maximum number of elements reachable from the slice's starting position within its backing array, without reallocating. For a four-element array and a view <code>values[1:3]</code>, the slice length is 2 and capacity is 3. Indexing at or beyond the current length panics even when the capacity is larger. That distinction prevents treating spare capacity as already initialized, addressable slice elements.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":31023,"sizeSlug":"medium","linkDestination":"none"} --><figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/go-gopher-official-mascot-renee-french-cc-by.png" alt="Official Go programming language gopher mascot by Renée French" class="wp-image-31023"/><figcaption class="wp-element-caption"><em>Official Go Gopher artwork by Renée French, credited under <a href="https://go.dev/brand">Go project brand guidance</a>, CC BY 4.0. Authentic project art, not a diagram of Go memory.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Shared Memory, Append, and Copy</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The Go team's <a href="https://go.dev/blog/slices">explanation of append mechanics</a> demonstrates why a growing slice must be assigned the return value of <code>append</code>. When capacity is sufficient, an append can reuse the existing backing array. When capacity is insufficient, Go allocates enough new storage and copies existing data. An application must never rely on an exact future capacity growth factor, because implementation choices may change. It should rely on slice contents and documented <code>len</code>/<code>cap</code> behavior instead.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Shared backing arrays are useful when a function intentionally edits an existing buffer. They can also create surprising side effects. A function receiving a slice can modify visible elements, but appending may redirect its local result to a different array. For independent data, use <code>copy(destination, source)</code> with a properly sized destination or clone the elements using <code>append([]int(nil), source...)</code>. The built-in <code>copy</code> returns the number of elements actually copied, which is the smaller of the source and destination lengths.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=YS4e4q9oBaU&w=640&h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>freeCodeCamp.org, “Learn Go Programming,” June 20, 2019. Community course with arrays and slices beginning at approximately 1:47:53. The video is educational archive footage, not an official Go project demonstration.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Executable Example: Observe a Shared Backing Array</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The following complete program uses a four-element array, takes a two-element view, modifies the view, extends it within available capacity, and finally makes an independent copy. Save the source as <code>main.go</code>. No third-party dependencies, external accounts, or network connections are required:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1em 0;white-space:pre-wrap;overflow-wrap:anywhere"><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    slots := [4]int{10, 20, 30, 40}
+    window := slots[1:3]
+    fmt.Printf(&quot;array: %v\n&quot;, slots)
+    fmt.Printf(&quot;slice: %v len=%d cap=%d\n&quot;, window, len(window), cap(window))
+
+    window[0] = 99
+    extended := append(window, 50)
+    fmt.Printf(&quot;after shared edits: %v\n&quot;, slots)
+    fmt.Printf(&quot;extended: %v\n&quot;, extended)
+
+    independent := append([]int(nil), extended...)
+    independent[0] = 7
+    fmt.Printf(&quot;copy: %v original: %v\n&quot;, independent, slots)
+
+    dst := make([]int, len(window))
+    n := copy(dst, window)
+    fmt.Printf(&quot;copied %d values: %v\n&quot;, n, dst)
+}</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>From the containing directory, initialize a small local module and run the example:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1em 0;white-space:pre-wrap;overflow-wrap:anywhere"><code>go mod init example.com/osgo006
+go run .</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The program was compiled and executed with Go 1.23.2 on Linux. Its observed standard output was:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1em 0;white-space:pre-wrap;overflow-wrap:anywhere"><code>array: [10 20 30 40]
+slice: [20 30] len=2 cap=3
+after shared edits: [10 99 30 50]
+extended: [99 30 50]
+copy: [7 30 50] original: [10 99 30 50]
+copied 2 values: [99 30]</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The first slice points at positions 1 and 2 of the original four-element array. Assigning 99 through the slice changes the array at position 1. Appending 50 extends the view into the last available slot, so the original array's final element becomes 50. Creating a separate copy and assigning 7 changes only the copy. The original array retains 99. No runtime memory address is printed, and the example does not assume a particular allocation algorithm.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Unit Tests and Boundary Behavior</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Automated tests are useful because slice bugs may only appear when a buffer has spare capacity or two variables unexpectedly share storage. Save the following source as <code>main_test.go</code> beside the program. It checks the slice length and capacity, shared writes, independently copied elements, and the number of copied values:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1em 0;white-space:pre-wrap;overflow-wrap:anywhere"><code>package main
+
+import &quot;testing&quot;
+
+func TestSliceAliasingAndCapacity(t *testing.T) {
+    a := [4]int{10, 20, 30, 40}
+    s := a[1:3]
+    if len(s) != 2 || cap(s) != 3 {
+        t.Fatalf(&quot;len=%d cap=%d&quot;, len(s), cap(s))
+    }
+    s[0] = 99
+    s = append(s, 50)
+    if a[1] != 99 || a[3] != 50 {
+        t.Fatalf(&quot;backing array not shared: %v&quot;, a)
+    }
+}
+
+func TestIndependentCopy(t *testing.T) {
+    original := []int{4, 5, 6}
+    copied := append([]int(nil), original...)
+    copied[0] = 100
+    if original[0] != 4 {
+        t.Fatalf(&quot;unexpected alias: %v&quot;, original)
+    }
+}
+
+func TestCopyCountsElements(t *testing.T) {
+    src := []int{3, 4, 5}
+    dst := make([]int, 2)
+    if n := copy(dst, src); n != 2 {
+        t.Fatalf(&quot;copied %d, expected 2&quot;, n)
+    }
+    if dst[0] != 3 || dst[1] != 4 {
+        t.Fatalf(&quot;copy mismatch: %v&quot;, dst)
+    }
+}</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Run <code>go test -v .</code> and <code>go vet .</code> in the module directory. In the local environment, all three named unit tests passed and <code>go vet</code> completed without diagnostics. The tests validate the illustrated cases only; they are not a proof that every future slice operation in an application is safe.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>An out-of-range slice access causes a panic rather than exposing arbitrary memory. A nil slice has length and capacity zero and may still be appended to. A slice created using <code>make([]int, 2, 5)</code> has two accessible zero-valued elements and room for up to five before growing beyond that declared capacity. For functions handling untrusted input, check indices and sizes before operations, just as the <a href="https://bitcoinversus.tech/2026/11/18/osrust-008-result-option-safe-network-challenge-parsing/">Rust network parsing lesson</a> does with safe slices and explicit errors.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Why can changing a slice modify an array? Both views can use the same backing storage.</li><li>Does capacity 5 permit indexing element 4 when length is 2? No; current index bounds are determined by length.</li><li>Why save the result of append? A larger backing allocation may produce a new slice value.</li><li>How can a function keep a private copy of integer elements? Allocate an appropriately sized slice and copy its contents.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Arrays are fixed-size storage, while slices are flexible views of storage. Length tells a program how much of a slice it can use immediately. Capacity tells it how much nearby storage can be reached before a larger allocation may be needed. When multiple slices share an array, they may see each other's changes. Copying elements makes a separate collection when independence matters. Understanding the difference helps Go programs handle buffers without hidden data changes.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Official References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://go.dev/tour/moretypes/6">A Tour of Go: Arrays</a> and <a href="https://go.dev/tour/moretypes/7">Slices</a>.</li><li><a href="https://go.dev/blog/slices-intro">Go Slices: Usage and Internals</a>, Go team.</li><li><a href="https://go.dev/blog/slices">Arrays, Slices, and Strings: The Mechanics of Append</a>, Go team.</li><li><a href="https://go.dev/ref/spec">Go Language Specification</a>, arrays, slices, length, capacity, append, and copy.</li><li><a href="https://go.dev/brand">Official Go Brand Guide</a>, gopher illustration attribution.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> The lesson advances the verified Go curriculum after OSGo.005. Three unit tests, the displayed sample output, and go vet were checked under go1.23.2 linux/amd64. The cover is original AI-generated colored-pencil editorial art of a fictional programmer, not documentary photography or an exact visualization of runtime memory. The Go Gopher image is authentic project artwork credited to Renée French. The official and community educational YouTube videos have verified source URLs; actual third-party player playback and mobile viewport screenshots were not independently tested.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech voluntary donation QR code for 5000 satoshis" class="wp-image-24043"/><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech donation QR for a voluntary 5,000-satoshi contribution. Verify the address and amount in your wallet.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the QR on another device or use a supported saved-image scanner. Confirm the recipient 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and the 5,000-satoshi amount before sending.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech offers technical education for informational purposes. Readers should review official documentation and test code in their own environment before using it in production.</em></p><!-- /wp:paragraph -->

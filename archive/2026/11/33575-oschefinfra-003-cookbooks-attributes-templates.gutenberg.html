@@ -1,0 +1,109 @@
+<!-- wp:paragraph --><p><strong>OSChefInfra.003</strong> explores how Chef Infra organizes reusable infrastructure configuration. A cookbook can contain recipes, node attribute defaults, and Embedded Ruby (ERB) templates. Together, those files describe desired settings and produce a configuration suited to a managed machine. The lesson uses fictional service settings and an isolated practice directory, without requiring production access or an operational Chef Infra Server.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The Chef Infra curriculum begins with <a href="https://bitcoinversus.tech/2026/11/05/oschefinfra-001-chef-infra-architecture-workstation-cookbooks-nodes-convergence/">OSChefInfra.001: Architecture</a> and <a href="https://bitcoinversus.tech/2026/11/08/oschefinfra-002-chef-infra-recipes-resources-convergence-notifications/">OSChefInfra.002: Resources and Recipes</a>. Familiarity with <a href="https://bitcoinversus.tech/2026/10/09/osbash-001-shell-script-basics-bash-shebang-chmod-first-script/">OSBash.001: Shell Basics</a> and <a href="https://bitcoinversus.tech/2026/11/19/osbash-007-getopts-command-line-options-optarg-optind-safe-arguments/">OSBash.007: Safe Command-Line Arguments</a> helps when working in a Linux sandbox. The current track is <strong>OSChefInfra</strong>, not the separate Chef esoteric programming language.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Locate <code>metadata.rb</code>, <code>attributes/</code>, <code>recipes/</code>, and <code>templates/</code> inside a cookbook.</li><li>Define node defaults and read values through the Chef <code>node</code> object.</li><li>Pass recipe values into an ERB template using the <code>variables</code> property.</li><li>Explain how template resources manage the desired contents of a file.</li><li>Distinguish ordinary Ruby/ERB checks from a real Chef Infra Client convergence run.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=TjBdaYlT-Uw&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Progress Chef, <a href="https://www.youtube.com/watch?v=TjBdaYlT-Uw">“Using Attributes in Cookbook”</a>, June 20, 2023. Official demonstration of cookbook attributes. Video source confirmed; player playback is assessed separately.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What belongs in a cookbook?</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A cookbook packages a related set of configuration instructions. A recipe declares resources, <code>metadata.rb</code> identifies the cookbook and version, <code>attributes/default.rb</code> holds default settings, and <code>templates/default/</code> contains ERB input files. The <a href="https://docs.chef.io/client/19/cookbooks/">Chef Infra 19 cookbook guide</a> documents the directory roles. A recipe must be selected by a run list or equivalent local-mode configuration before Chef Infra Client applies its resources.</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Chef Infra cookbook directory tree" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1rem 0!important;color:inherit!important;font:0.9em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>opencert_lab/
+├── metadata.rb
+├── attributes/
+│   └── default.rb
+├── recipes/
+│   └── default.rb
+└── templates/
+    └── default/
+        └── settings.conf.erb</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Node attributes and precedence</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The practice cookbook defines three fictional values: a service label, port 8080, and an enabled flag set to false. Attributes are stored in the Chef node object and may come from cookbooks, policies, or automatic node discovery. Default attributes provide baseline values; higher-precedence settings can replace them according to Chef's documented order. A default is not an immutable constant, and an attribute is not a secure place for plaintext credentials.</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Chef Infra attributes/default.rb" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1rem 0!important;color:inherit!important;font:0.9em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code># attributes/default.rb
+default['opencert_lab']['service'] = 'training-dashboard'
+default['opencert_lab']['port'] = 8080
+default['opencert_lab']['enabled'] = false</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Chef documents the precedence rules in its <a href="https://docs.chef.io/client/19/cookbooks/attributes/attribute_precedence/">attribute precedence reference</a>. For a beginner exercise, keep one clearly named default rather than layering normal, override, force-default, and automatic values without understanding their consequences.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":33574,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/progress-chef-infra-client-19-official-brand-image.png" alt="Official Progress Chef Infra Client 19 branding artwork from chef.io" class="wp-image-33574" /><figcaption class="wp-element-caption"><em>Official Progress Chef Infra Client 19 product illustration from the <a href="https://www.chef.io/blog/introducing-progress-chef-infra-client-19">Progress Chef announcement</a>. Product art identifies the genuine infrastructure automation platform; it is not evidence that the local cookbook ran.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Use a template resource to render settings</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The recipe declares a directory and a <code>template</code> resource. <code>source 'settings.conf.erb'</code> identifies the ERB file in the cookbook template folder; <code>variables(...)</code> passes service, port, and enabled values. The destination lives only in a temporary exercise directory. Running Chef would create or update files, so the lab belongs in a disposable VM or container, never an unreviewed production host.</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Chef Infra recipes/default.rb" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1rem 0!important;color:inherit!important;font:0.9em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code># recipes/default.rb
+lab_dir = '/tmp/opencert-chef-infra-003'
+
+directory lab_dir do
+  mode '0755'
+  action :create
+end
+
+template &quot;#{lab_dir}/settings.conf&quot; do
+  source 'settings.conf.erb'
+  mode '0644'
+  variables(
+    service: node['opencert_lab']['service'],
+    port: node['opencert_lab']['port'],
+    enabled: node['opencert_lab']['enabled']
+  )
+  action :create
+end</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The template reads the values as <code>@service</code>, <code>@port</code>, and <code>@enabled</code>. ERB substitutes each expression into plain text. The expected example output is a fictional service label, port 8080, and <code>enabled=false</code>. The <a href="https://docs.chef.io/client/19/resources/bundled/template/">official template resource reference</a> describes source, variables, permissions, and create/update behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Chef Infra templates/default/settings.conf.erb" tabindex="0" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:1rem 0!important;color:inherit!important;font:0.9em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code># templates/default/settings.conf.erb
+# Educational Chef Infra settings. Do not use as a production configuration.
+service=&lt;%= @service %&gt;
+port=&lt;%= @port %&gt;
+enabled=&lt;%= @enabled %&gt;</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=lqMijB1JIuU&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Progress Chef, <a href="https://www.youtube.com/watch?v=lqMijB1JIuU">“How to Set Up Chef Workstation, Create a Cookbook and Get Started with Compliance”</a>. Official historical walkthrough covering cookbook creation and attributes. Check current product releases and licensing independently.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">What was actually tested?</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Ruby 3.3.8 compiled the metadata, attribute, recipe, and test files successfully with <code>ruby -c</code>. A standard Ruby ERB renderer produced the expected configuration, and <strong>20 structural and rendering assertions passed</strong>. Those checks verify Ruby syntax, the presence of Chef resource declarations, variable references, and the generated text. Chef Infra Client was unavailable in the publication environment, so <strong>actual convergence, repeated idempotence, server compatibility, and privilege behavior have not been tested</strong>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>In a disposable Linux lab with Chef Workstation properly installed and licensed, administrators can create the cookbook under a configured cookbook path and run a controlled local-mode test. Before a real Chef run, review path ownership, permissions, resources, and any policy restrictions. Chef's <a href="https://docs.chef.io/workstation/26.1/get_started/">Workstation setup guide</a> is the appropriate starting point.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Operational boundaries and knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Where do default attribute declarations go? Commonly <code>attributes/default.rb</code>.</li><li>Where is the ERB source stored? Under the cookbook's <code>templates/</code> hierarchy.</li><li>What passes recipe values to the template? The <code>variables</code> property.</li><li>Does a successful Ruby syntax test prove Chef converged? No; the Chef client must be exercised separately.</li><li>Are node attributes suitable for private keys? No; use a dedicated secrets-management mechanism.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References and conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://docs.chef.io/client/19/cookbooks/">Progress Chef: About Cookbooks</a>.</li><li><a href="https://docs.chef.io/client/19/cookbooks/attributes/attribute_precedence/">Progress Chef: Attribute Precedence</a>.</li><li><a href="https://docs.chef.io/client/19/resources/bundled/template/">Progress Chef: Template Resource</a>.</li><li><a href="https://docs.chef.io/client/19/cookbooks/templates/">Progress Chef: About Templates</a>.</li><li><a href="https://docs.chef.io/workstation/26.1/get_started/">Progress Chef: Workstation Getting Started</a>.</li></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Cookbooks keep infrastructure definitions organized. Attributes hold customizable settings, recipes declare desired resources, and ERB templates turn data into configuration files. The boundaries between those layers help teams review changes, repeat deployments, and reduce manual errors. Test carefully before applying changes to real machines.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> OSChefInfra.003 follows OSChefInfra.002 in the verified OpenCert rotation and is distinct from OSChef esoteric-language lessons. The 1200 × 630 cover is original anime-style editorial artwork depicting a fictional engineer. The genuine in-body Progress Chef graphic comes from the vendor's product announcement. Both video sources were identified on the official Progress Chef channel; actual embedded playback is unverified. Twenty Ruby/ERB checks passed, but Chef Infra Client was not installed, so no convergence or idempotence claims are made. SmartChart was omitted because no relevant external numeric dataset exists for a comparison.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional donation QR for 5,000 satoshis" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional BitcoinVersus.Tech 5,000-satoshi donation QR. Confirm the recipient and amount before sending funds.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the QR on another screen or use a compatible wallet's saved-image scanner. Verify the payment destination and amount before authorizing payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure information on BitcoinVersus.Tech is Verifiably True. Optional contributions support independent research and technical education.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Educational examples are not production deployment instructions, security audit results, or proof of compliance. Run infrastructure automation only in authorized environments.</em></p><!-- /wp:paragraph -->

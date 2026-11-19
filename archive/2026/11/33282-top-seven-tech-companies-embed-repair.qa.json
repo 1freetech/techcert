@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "run_date": "2026-11-18",
+  "wordpress_post_id": 33282,
+  "title": "Top 7 Most Promising Tech Companies Under $100 Billion in 2026, Ranked",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/18/top-7-most-promising-tech-companies-under-100-billion-market-cap-2026/",
+  "repair": "Replaced exactly seven legacy [youtube https://www.youtube.com/watch?v=VIDEO_ID] shortcodes with canonical Gutenberg wp:embed blocks while preserving all seven headings, company order, original video URLs, captions, statistics, photos and other content.",
+  "content_basis": "Exact saved Gutenberg WordPress edit readback after repair; final saved version archived without changes",
+  "gutenberg_chars": 13827,
+  "video_mapping": {
+    "IonQ": "f80y85GGyfE",
+    "Symbotic": "MgNEyEwrjaw",
+    "Rubrik": "G6U7N3OUGCI",
+    "Credo": "oLB9Fy1r3j4",
+    "Nebius": "lrxU7Z4p3Vs",
+    "Astera Labs": "ecKq_4kZjws",
+    "Rocket Lab": "kyR8kZ2XlhQ"
+  },
+  "expected_native_embed_count": 7,
+  "WordPress_view_rendered_iframe_count": 7,
+  "remaining_legacy_youtube_shortcode_count": 0,
+  "quality": {
+    "public_http_status": 200,
+    "canonical_verified": true,
+    "cover_OG_image_present": true,
+    "images_missing_alt": 0,
+    "seven_company_headings_preserved": true,
+    "seven_video_ids_preserved": true,
+    "original_featured_media_id": 33274
+  },
+  "limitations": [
+    "Interactive YouTube playback not independently tested on desktop/mobile.",
+    "Provider-specific video embedding restrictions may vary by reader/device. Server-rendered iframe presence is not playback proof."
+  ],
+  "previous_issue": "All seven legacy shortcodes were present; native Gutenberg embed format was absent, despite old server view showing iframe output. User requested explicit functional Gutenberg embeds for each ranked company."
+}

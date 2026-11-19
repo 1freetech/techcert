@@ -48,37 +48,37 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "javascript",
+    "subject": "html",
     "lesson_number": 6,
-    "track_id": "OSJavaScript.006",
-    "title": "JavaScript Arrays: Indexing, Length, Mutation, and Copying",
-    "public_title": "JavaScript Arrays: Indexing, Length, Mutation, and Copying",
-    "wordpress_post_id": 33407,
-    "live_url": "https://bitcoinversus.tech/2026/11/18/osjavascript-006-javascript-arrays-indexing-length-mutation-copying/",
-    "archive_path": "archive/2026/11/33407-osjavascript-006-javascript-arrays.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/33407-osjavascript-006-javascript-arrays.qa.json",
+    "track_id": "OSHTML.006",
+    "title": "Semantic HTML: Headers, Navigation, Main Content, Articles, and Accessible Landmarks",
+    "public_title": "Semantic HTML: Headers, Navigation, Main Content, Articles, and Accessible Landmarks",
+    "wordpress_post_id": 33417,
+    "live_url": "https://bitcoinversus.tech/2026/11/18/oshtml-006-semantic-html-headers-navigation-main-articles-landmarks/",
+    "archive_path": "archive/2026/11/33417-oshtml-006-semantic-landmarks.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/33417-oshtml-006-semantic-landmarks.qa.json",
     "verified_repositories": [
       "1freetech/techcert",
       "1freetech/opencert.tech",
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 33403,
+    "featured_media_id": 33413,
     "body_video_ids": [
-      "yQ1fz8LY354",
-      "gl0cpq4RJhU"
+      "kX3TfdUqpuU",
+      "7ZZK9Iprw5c"
     ],
-    "verification_status": "WordPress public HTTP 200; two verified YouTube iframes in server-rendered post; Node.js v22.16.0 syntax check and 21 assertions passed; published Gutenberg source, JavaScript and QA archived in three repositories; mobile viewport and third-party player playback unverified.",
-    "qa_status": "3 relevant in-story media: two educational YouTube videos and one Wikimedia Commons CC0 image; original 1200x630 photorealistic cover with persistent logo; four contextual internal links; QR 24043; SEO tags and no boxed code."
+    "verification_status": "WordPress public HTTP200, two YouTube iframes in rendered source; 20 BeautifulSoup structural checks passed; exact Gutenberg and HTML sample archived and read back in three repositories; video playback, HTML validator, mobile visual and screen-reader checks not performed.",
+    "qa_status": "3 in-story media, original 1200x630 cinematic anime cover, five contextual internal links, W3C artwork CC BY 3.0, QR 24043, SEO and no boxed code."
   },
   "next": {
-    "subject": "html",
-    "lesson_number": 6,
-    "title_format": "OSHTML.006 — {topic}",
+    "subject": "php",
+    "lesson_number": 7,
+    "title_format": "OSPHP.007 — {topic}",
     "public_title_format": "{topic}",
-    "resolution_note": "OSJavaScript.006 WordPress 33407 published 2026-11-18 after Java. OSHTML.005 previously published WordPress 31296; no OSHTML.006 published/draft/pending/future/private match on 2026-11-18, recheck before creating."
+    "resolution_note": "HTML OSHTML.006 published as WordPress 33417 after JavaScript. PHP OSPHP.006 previously published WordPress 31335; OSPHP.007 published/draft/pending/future/private search yielded zero matches on 2026-11-18. Recheck before creation."
   },
-  "next_after_current": "php",
+  "next_after_current": "solidity",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -191,11 +191,11 @@
     },
     "html": {
       "acronym": "OSHTML",
-      "next_lesson_number": 6,
-      "last_published_lesson_number": 5,
-      "last_wordpress_post_id": 31296,
-      "last_published_title": "OSHTML.005: HTML Tables — Structure, Headers, and Accessibility",
-      "verification_status": "published_archived_server_render_checked"
+      "next_lesson_number": 7,
+      "last_published_lesson_number": 6,
+      "last_wordpress_post_id": 33417,
+      "last_published_title": "Semantic HTML: Headers, Navigation, Main Content, Articles, and Accessible Landmarks",
+      "verification_status": "published_3_repos_two_youtube_iframes_20_html_structural_checks_mobile_playback_unverified"
     },
     "php": {
       "acronym": "OSPHP",

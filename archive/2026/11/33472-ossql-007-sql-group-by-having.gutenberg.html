@@ -1,0 +1,129 @@
+<!-- wp:paragraph --><p>SQL aggregate functions turn collections of database rows into counts, totals, averages and other summaries. The <code>GROUP BY</code> clause collects rows sharing one or more values, while <code>HAVING</code> can select groups according to aggregate results. Together, those features help answer questions such as how many devices are assigned to each facility or which fictional locations exceed a selected sum. The official <a href="https://www.sqlite.org/lang_select.html">SQLite SELECT reference</a> defines the grouping and filtering rules.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The subject builds on <a href="https://bitcoinversus.tech/2026/11/08/ossql-006-inner-left-joins-missing-matches/">SQL joins and unmatched records</a>. Earlier lessons explain <a href="https://bitcoinversus.tech/2026/10/09/ossql-001-relational-databases-and-tables/">relational tables</a>, <a href="https://bitcoinversus.tech/2026/10/09/ossql-002-select-choosing-columns-reading-rows-select-star-from/">SELECT queries</a>, <a href="https://bitcoinversus.tech/2026/10/10/ossql-003-where-filtering-rows-conditions-and-or-not/">row filtering with WHERE</a>, and <a href="https://bitcoinversus.tech/2026/10/15/ossql-004-order-by-sorting-rows-asc-desc-multiple-columns-null-placement/">sorting with ORDER BY</a>. Our examples use an invented inventory rather than live equipment telemetry or a manufacturer dataset.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Imagine a box of receipts from several workshops. Counting the entire box tells you how many receipts exist. Sorting receipts into one pile per workshop lets you count or total each pile separately. SQL <code>GROUP BY</code> performs the electronic equivalent of sorting into piles. <code>HAVING</code> can then return only piles meeting a condition, while <code>WHERE</code> first decides which individual receipts are eligible for inclusion.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Identify the different meanings of <code>COUNT(*)</code> and <code>COUNT(column)</code>.</li><li>Calculate group totals using <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, and <code>MAX</code>.</li><li>Explain how <code>NULL</code> values affect aggregates and grouping.</li><li>Compare <code>WHERE</code> filtering before aggregation with <code>HAVING</code> filtering after grouping.</li><li>Run a self-contained SQLite exercise and reproduce 28 local automated checks.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=Rl6jUZPR-Oo&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>RuchiCodes, “SQL GROUP BY and HAVING Clause Explained,” published March 15, 2026. A publicly identified walkthrough of grouping, COUNT, SUM, AVG, and filtering groups. <a href="https://www.youtube.com/watch?v=Rl6jUZPR-Oo">Original educational video</a>. Embed presence is distinct from verified player playback.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">COUNT, SUM, AVG, MIN, and MAX</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><code>COUNT(*)</code> counts rows, even when a counted row contains missing information. <code>COUNT(watts)</code> counts only rows whose <code>watts</code> value is not <code>NULL</code>. In the training dataset, 12 equipment rows exist but only 10 have known watt values, so those two counts differ. <code>COUNT(DISTINCT device_type)</code> counts unique non-NULL device types rather than all rows.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><code>SUM(watts)</code> adds known watt values while excluding <code>NULL</code>. <code>AVG(watts)</code> divides the non-NULL sum by the number of known values, not by the entire row count. <code>MIN</code> and <code>MAX</code> identify smallest and largest non-NULL entries. The <a href="https://www.sqlite.org/lang_aggfunc.html">SQLite aggregate-function reference</a> documents each operation, including an important empty-input distinction: <code>SUM</code> returns <code>NULL</code> when no non-NULL values exist, while SQLite's nonstandard <code>total()</code> function returns <code>0.0</code>. Other database engines may differ in extensions and numeric behavior.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">GROUP BY Creates One Result Per Group</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A query grouping by <code>facility</code> returns one row for each distinct facility value. North has five device records, South has three, West has three, and one unassigned record has a <code>NULL</code> facility. SQLite groups the missing facility value as a separate group, rather than silently discarding the row. For North, four of five watt values are known, their sum is 1,600 W, and their average is 400 W. Those figures are <strong>synthetic teaching values</strong>, not operational electrical measurements.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Adding a second grouping column, as in <code>GROUP BY facility, device_type</code>, makes a separate group for each distinct combination. Only grouped columns and aggregate expressions should be selected in portable grouped queries. SQLite permits certain ungrouped bare columns, but their values may come from arbitrarily selected input rows. Avoid relying on such behavior for cross-database correctness. Use <code>ORDER BY</code> when a deterministic display order matters.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":33465,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/sqlite-official-website-logo.gif" alt="Official SQLite database logo showing a blue quill and the SQLite lettering" class="wp-image-33465" /><figcaption class="wp-element-caption"><em>Official SQLite project logo, obtained directly from <a href="https://www.sqlite.org/">sqlite.org</a>. The sample below runs against SQLite rather than a production database.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">WHERE Filters Rows, HAVING Filters Groups</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <code>WHERE watts &gt;= 250</code> condition removes low or unknown watt values before the aggregation. North retains three qualifying records totaling 1,450 W, South retains two totaling 880 W, and West retains one totaling 400 W. A different condition, <code>HAVING SUM(watts) &gt;= 1000</code>, examines each already-formed group and returns North and South based on the full group's total. A filtering condition on individual rows does not generally answer the same question as one on aggregated groups.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>SQL's logical processing model places row filtering before grouping and group filtering afterward; an engine may use different physical execution strategies that preserve those semantics. <code>HAVING</code> may also be valid without an explicit <code>GROUP BY</code> in aggregate queries, depending on the SQL dialect. The central rule remains: a condition depending on <code>SUM</code> or <code>COUNT</code> belongs in a grouped result filter rather than an ordinary row-level <code>WHERE</code> expression.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=mXW7JHJM34k&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>freeCodeCamp.org, “Intuitive SQL for Data Analytics,” a verified long-form course. The section on <strong>GROUP BY and aggregations begins near 5:15:39</strong>, offering an extended introduction to grouped queries. <a href="https://www.youtube.com/watch?v=mXW7JHJM34k">Original course video</a>. Its database environment and examples may differ from the SQLite exercise.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete SQLite Practice Dataset</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Save the following source as <code>ossql-007-aggregate-demo.sql</code>. The file builds an in-memory-friendly exercise database with fictional North, South, West and unassigned equipment records; unknown watt values are deliberately represented as <code>NULL</code>. It then runs four query demonstrations. Execute the SQL in the SQLite command-line shell or use the separate Python verification harness preserved with the lesson archive:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre aria-label="Complete SQLite equipment aggregation source" style="max-width:100%!important;white-space:pre-wrap!important;background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 1.1em 0!important;color:inherit!important;font:0.92em/1.55 ui-monospace,SFMono-Regular,Consolas,monospace!important"><code>-- All equipment entries and wattage values are fictional.
+DROP TABLE IF EXISTS equipment;
+CREATE TABLE equipment (
+    device_id INTEGER PRIMARY KEY,
+    facility TEXT,
+    device_type TEXT NOT NULL,
+    watts INTEGER CHECK (watts &gt;= 0)
+);
+INSERT INTO equipment (device_id, facility, device_type, watts) VALUES
+ (1, 'North', 'Router', 150),
+ (2, 'North', 'Switch', 300),
+ (3, 'North', 'Server', 500),
+ (4, 'North', 'Server', NULL),
+ (5, 'South', 'Router', 120),
+ (6, 'South', 'Switch', 280),
+ (7, 'South', 'Server', 600),
+ (8, 'West', 'Switch', 200),
+ (9, 'West', 'Server', 400),
+ (10, 'West', 'Server', NULL),
+ (11, NULL, 'Spare', 100),
+ (12, 'North', 'Server', 650);
+
+SELECT facility,
+       COUNT(*) AS device_rows,
+       COUNT(watts) AS known_watt_values,
+       SUM(watts) AS sum_watts,
+       ROUND(AVG(watts), 2) AS avg_watts
+FROM equipment
+GROUP BY facility
+ORDER BY facility IS NULL, facility;
+
+SELECT facility, COUNT(*) AS qualifying_rows, SUM(watts) AS sum_watts
+FROM equipment
+WHERE watts &gt;= 250
+GROUP BY facility
+ORDER BY facility;
+
+SELECT facility, COUNT(*) AS device_rows, SUM(watts) AS sum_watts
+FROM equipment
+WHERE facility IS NOT NULL
+GROUP BY facility
+HAVING SUM(watts) &gt;= 1000
+ORDER BY facility;
+
+SELECT facility, device_type, COUNT(*) AS device_rows
+FROM equipment
+WHERE facility IS NOT NULL
+GROUP BY facility, device_type
+ORDER BY facility, device_type;</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>After executing the sample, the first grouped query should return four groups. North has 5 rows and 1,600 W, South has 3 rows and 1,000 W, West has 3 rows and 600 W, and the unassigned group has 1 row and 100 W. The respective known-value averages are 400.00 W, 333.33 W, 300.00 W and 100.00 W. Notice that the displayed sums do not imply real equipment draw, energy consumption, or capacity.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The query with <code>HAVING SUM(watts) &gt;= 1000</code> returns the two named facilities North and South. For multi-column grouping, North contains three records with <code>Server</code> as their device type, while West contains two. Results were checked in SQLite 3.46.1 through Python's built-in <code>sqlite3</code> module.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Verification, Edge Cases, and Query Safety</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The companion Python harness includes <strong>28 passing checks</strong>, covering row totals, known and missing values, overall wattage, grouped averages, distinct categories, two-column groups, <code>WHERE</code>, <code>HAVING</code>, and empty-result behavior. A group with three rows may contain fewer than three known watt values. Accordingly, <code>HAVING COUNT(*) &gt;= 3</code> need not match <code>HAVING COUNT(watts) &gt;= 3</code>. The sample demonstrates that difference.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Database queries involving user-supplied values should use bound parameters instead of concatenating raw input strings. Aggregate values are also affected by missing records, duplicate rows introduced by joins, data quality and integer overflow. When aggregating after a join, verify that row multiplicity has not inflated counts or sums. No performance benchmark, live infrastructure deployment, or production query-plan optimization was conducted for the example.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Why can <code>COUNT(*)</code> exceed <code>COUNT(watts)</code>? The second expression ignores rows with NULL watt values.</li><li>Where does <code>SUM(watts) &gt;= 1000</code> belong when filtering whole facility groups? In <code>HAVING</code>.</li><li>Why does North's average divide by four rather than five? Only four North rows have a known watt value.</li><li>How should multiple dimensions be grouped? List the dimensions together, for example <code>GROUP BY facility, device_type</code>.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://www.sqlite.org/lang_select.html">SQLite SELECT Statement</a>, aggregation, GROUP BY and HAVING semantics.</li><li><a href="https://www.sqlite.org/lang_aggfunc.html">SQLite Built-In Aggregate Functions</a>, NULL behavior and aggregate definitions.</li><li><a href="https://www.sqlite.org/cli.html">SQLite Command-Line Shell</a>, how to execute SQL files.</li><li><a href="https://www.freecodecamp.org/news/sql-group-by-clauses-explained/">freeCodeCamp: SQL GROUP BY Tutorial</a>, supplemental teaching examples.</li><li><a href="https://www.sqlite.org/">SQLite Project</a>, database and logo source.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>SQL aggregation turns many records into useful summaries. <code>COUNT</code> measures rows or known values, <code>SUM</code> adds values, and <code>AVG</code> calculates a mean from non-NULL inputs. <code>GROUP BY</code> organizes those calculations by category, and <code>HAVING</code> can retain only the groups that satisfy a stated rule. Correct handling of missing values and duplicated records helps keep reports reliable.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> The internal lesson identifier OSSQL.007 follows the published SQL joins lesson in the 43-subject rotation. The cover is original AI-generated photorealistic editorial artwork of a fictional database engineer, not a documentary record of a working data center. The in-body SQLite logo comes directly from the official project website. The inventory, nominal watt values and computed results are entirely synthetic. Twenty-eight local checks passed against SQLite 3.46.1. Two public educational videos were identified and embedded; third-party player playback and mobile viewport screenshots require separate testing. No numerical SmartChart was generated because the only available numeric dataset is fictional teaching material, not a real measured comparison.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5,000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional BitcoinVersus.Tech 5,000-satoshi donation QR. Verify the recipient and amount in your wallet before sending funds.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>On mobile, show the original QR on another screen or use a compatible wallet's saved-image scanner. Confirm the recipient and requested 5,000 satoshis before authorizing any payment.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech provides programming education and does not certify real-world electrical measurements, secure production database systems, or operational procedures. Validate code and data against the intended environment before relying on the output.</em></p><!-- /wp:paragraph -->

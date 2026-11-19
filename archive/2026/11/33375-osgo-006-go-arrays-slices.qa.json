@@ -15,7 +15,9 @@
       "type": "youtube",
       "id": "T1T8-MG-mPg",
       "source": "The Go Programming Language",
-      "render_pending": true
+      "render_pending": false,
+      "server_iframe_present": true,
+      "playback_tested": false
     },
     {
       "type": "image",
@@ -26,7 +28,9 @@
       "type": "youtube",
       "id": "YS4e4q9oBaU",
       "source": "freeCodeCamp.org",
-      "render_pending": true
+      "render_pending": false,
+      "server_iframe_present": true,
+      "playback_tested": false
     }
   ],
   "body_video_count": 2,
@@ -44,9 +48,31 @@
     "go_vet": "PASS"
   },
   "limitations": [
-    "Browser playback not tested",
-    "Phone viewport screenshot not tested",
-    "Source watermark matched visually to the requested treatment, but original reference image was not attached to the active conversation"
+    "Video iframe markup verified in WordPress rendered content, but playback not tested in a browser",
+    "Mobile viewport and actual frontend CSS not visually inspected",
+    "No verified topic-specific original-source X/social post available, so no social embed was invented",
+    "Original referenced secondary logo is not mounted in the current chat; generated cover matches the requested visible green-on-black treatment"
   ],
-  "editorial": "Concept-first public title, private OSGo.006 ID, no invented social post"
+  "editorial": "Concept-first public title, private OSGo.006 ID, no invented social post",
+  "qa_checked_at": "2026-11-18",
+  "server_render": {
+    "http_status": 200,
+    "visibility": "public",
+    "youtube_iframes": 2,
+    "youtube_video_ids": [
+      "T1T8-MG-mPg",
+      "YS4e4q9oBaU"
+    ],
+    "body_image_id": 31023,
+    "qr_image_id": 24043,
+    "missing_image_alt": 0,
+    "verified_contextual_internal_links": 5,
+    "seo_head_title": "Go Arrays vs Slices: Memory, Append and Copy | BitcoinVersus.Tech",
+    "seo_meta_description_present": true,
+    "og_cover_present": true,
+    "code_examples_render_unboxed": true,
+    "code_pre_elements": 4,
+    "banned_prose_words_found": false
+  },
+  "qa_status": "live_html_and_source_verified_with_disclosed_playback_mobile_limitations"
 }

@@ -1,0 +1,178 @@
+<!-- wp:paragraph --><p>A <strong>method</strong> is a named group of Java statements that performs a defined task. Methods let programs reuse operations, accept inputs through parameters, and return calculated results. Java also permits several methods to share one name when their parameter lists differ. Correct method design depends on an accurate understanding of Java's <strong>pass-by-value</strong> argument rules, especially when arrays or objects are passed into functions.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The topic follows our <a href="https://bitcoinversus.tech/2026/11/07/osjava-006-java-arrays-indexing-bounds-copying/">Java arrays reference</a>. Earlier lessons cover <a href="https://bitcoinversus.tech/2026/11/01/osjava-005-java-strings-literals-immutability-equals-length-substring/">String values and immutability</a>, <a href="https://bitcoinversus.tech/2026/11/01/osjava-004-control-flow-if-switch-for-while-do-while-break-continue/">control flow</a>, <a href="https://bitcoinversus.tech/2026/10/10/osjava-002-primitive-types-variables-byte-short-int-long-float-double-boolean-char-literals-local-variables/">primitive types</a>, and <a href="https://bitcoinversus.tech/2026/10/08/osjava-001-what-is-java-source-code-bytecode-jvm-jdk-first-program/">compiling Java with the JDK</a>. The <a href="https://dev.java/learn/classes-objects/defining-methods/">official Java methods reference</a> supplies the language definitions.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Overview</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Think of a method as a kitchen recipe. A recipe has a name, may receive ingredients, and can produce a result. A method called <code>add</code> can accept two numbers and return their sum. A second method named <code>add</code> can accept decimal numbers. The computer chooses between them using the input types. When the caller gives a method an array, both can see the same collection of elements, even though Java passes a copy of the array reference rather than handing over the caller's variable.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning Objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Read a method declaration, including its modifier, result type, name, and typed parameters.</li><li>Distinguish a parameter in a declaration from an argument at a call site.</li><li>Use <code>return</code>, <code>void</code>, overloaded signatures, and variable-length arguments.</li><li>Explain why Java passes primitive values and object references by value.</li><li>Compile a standalone example and inspect ten executable checks.</li></ul><!-- /wp:list -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=JKecvKiNX2I&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Bro Code, “METHODS in Java are easy,” December 5, 2024. Identifiable educational video explaining declarations, parameters, arguments, and returns. <a href="https://www.youtube.com/watch?v=JKecvKiNX2I">Original YouTube page</a>. In-page playback is subject to the video provider.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Method Declarations and Signatures</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A normal declaration identifies the method's return type, name, parameter list, and code body. Optional modifiers, including <code>public</code>, <code>private</code>, and <code>static</code>, specify access and whether the operation belongs to a class rather than an instance. The example <code>static int add(int a, int b)</code> returns an integer and accepts two integer parameters. The parentheses remain present even when a method accepts no parameters.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>In Java terminology, a method's <strong>signature</strong> consists of its name and parameter types, not its return type. Parameter names improve readability but do not make distinct overloads. Two declarations differing only in their result type are not legal overloads. The return type <code>void</code> means that no value is returned, although a <code>return;</code> statement may end a <code>void</code> method early. For a non-void method, every normally completing route must return a compatible value or the compiler reports an error.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Parameters, Arguments, and Returned Results</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A <strong>parameter</strong> is a local variable declared inside a method's parentheses; an <strong>argument</strong> is the value supplied by its caller. For <code>add(3, 4)</code>, the values 3 and 4 are arguments copied into parameters <code>a</code> and <code>b</code>. A returned result may be stored, printed, or used in another expression. Returning a value is different from printing one, because printing only writes to an output stream and does not give the caller a computed result.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Method contracts should also say what happens with invalid input. The demonstration's <code>sum</code> method rejects <code>null</code> arrays using <code>IllegalArgumentException</code>. Its integer arithmetic uses <code>Math.addExact</code> to make overflow explicit through <code>ArithmeticException</code>, rather than silently accepting wraparound. Such choices illustrate one policy, not a universal requirement for every mathematical function. The <a href="https://dev.java/learn/language/oop/classes-objects/calling-methods-constructors/">official parameters guide</a> covers argument matching and variable-length argument lists.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Overloading and Variable-Length Arguments</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The two <code>add</code> declarations accept either two <code>int</code> values or two <code>double</code> values. The compiler examines the call's applicable argument types to choose the appropriate overload. As a rule, prefer a small number of clear overloads; conversion and overloaded names can become ambiguous in larger APIs. Changing only the return type cannot resolve a call, because the return type is not enough to distinguish signatures.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The syntax <code>int... values</code> declares a <strong>varargs</strong> parameter. Callers may pass zero, one, or several integers, and the method receives an array. Only the final parameter may use the varargs form. The method <code>countPositive(-2, 0, 3, 7)</code> counts two positive numbers. Varargs are convenient for small APIs, but callers should still understand how empty input is handled.</p><!-- /wp:paragraph -->
+
+<!-- wp:shortcode -->
+[youtube https://www.youtube.com/watch?v=nhnAx79gxCM&amp;w=640&amp;h=360]
+<!-- /wp:shortcode -->
+<!-- wp:paragraph --><p><em>Bro Code, “Learn Java overloaded methods in 6 minutes!”, December 5, 2024. A separate tutorial on methods with the same name and distinct parameter lists. <a href="https://www.youtube.com/watch?v=nhnAx79gxCM">Original YouTube page</a>.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Pass-by-Value: Primitives and Shared Objects</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>Java always passes arguments by value.</strong> Passing an <code>int</code> copies its numerical value, so assigning a new number to the parameter does not change the caller's variable. Passing an array copies the <em>reference value</em>. Both reference copies point to the same array object, so modifying an element is visible to the caller. Reassigning the method's local parameter to a newly allocated array, however, does not redirect the caller's variable. Oracle documents the distinction in its <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/arguments.html">parameter-passing tutorial</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Consider the earlier <a href="https://bitcoinversus.tech/2026/11/07/osjava-006-java-arrays-indexing-bounds-copying/">array aliasing example</a>. Two Java variables can hold references to the same array, but neither variable is identical to the array itself. Calling <code>changeFirst(readings)</code> writes into shared storage; calling <code>replaceArray(readings)</code> changes only the local parameter's reference. As a result, the original caller still sees the array with its modified first element.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":23181,"sizeSlug":"medium","linkDestination":"none"} --><figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/duke-star7-dev-java.png" alt="Duke, the Java mascot, holding the Star7 handheld device" class="wp-image-23181" /><figcaption class="wp-element-caption"><em>Authentic Java mascot Duke pictured with the Star7 handheld concept, from the Java project educational archive. Reused from the BitcoinVersus.Tech media library; Java history illustration, not evidence of modern application performance.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Complete Executable Java Example</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Save the following source as <code>MethodLab.java</code>. The example includes overloads, typed returns, a <code>void</code> method, variable-length arguments, ordinary input validation, and assertions implemented without external libraries. Every tested operation runs locally with a JDK:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1em 0;white-space:pre-wrap;max-width:100%"><code>public final class MethodLab {
+    private MethodLab() { }
+
+    static int add(int a, int b) {
+        return Math.addExact(a, b);
+    }
+
+    static double add(double a, double b) {
+        return a + b;
+    }
+
+    static String describe(String name, int count) {
+        return name + &quot;: &quot; + count;
+    }
+
+    static int sum(int[] values) {
+        if (values == null) {
+            throw new IllegalArgumentException(&quot;values must not be null&quot;);
+        }
+        int total = 0;
+        for (int value : values) {
+            total = Math.addExact(total, value);
+        }
+        return total;
+    }
+
+    static void changeNumber(int value) {
+        value = 99;
+    }
+
+    static void changeFirst(int[] values) {
+        values[0] = 99;
+    }
+
+    static void replaceArray(int[] values) {
+        values = new int[] {500};
+    }
+
+    static int countPositive(int... values) {
+        int count = 0;
+        for (int value : values) {
+            if (value &gt; 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    static void verify(boolean ok, String label) {
+        if (!ok) {
+            throw new AssertionError(label);
+        }
+    }
+
+    public static void main(String[] args) {
+        verify(add(3, 4) == 7, &quot;integer overload&quot;);
+        verify(add(1.5, 2.25) == 3.75, &quot;double overload&quot;);
+        verify(describe(&quot;devices&quot;, 3).equals(&quot;devices: 3&quot;), &quot;return value&quot;);
+        verify(sum(new int[] {2, 4, 6}) == 12, &quot;array parameter&quot;);
+        verify(countPositive(-2, 0, 3, 7) == 2, &quot;variable arguments&quot;);
+
+        int number = 7;
+        changeNumber(number);
+        verify(number == 7, &quot;primitive passed by value&quot;);
+
+        int[] readings = {1, 2, 3};
+        changeFirst(readings);
+        verify(readings[0] == 99, &quot;shared array mutated&quot;);
+        replaceArray(readings);
+        verify(readings[0] == 99, &quot;caller reference unchanged&quot;);
+        verify(sum(readings) == 104, &quot;array still accessible&quot;);
+
+        try {
+            sum(null);
+            throw new AssertionError(&quot;null input was accepted&quot;);
+        } catch (IllegalArgumentException expected) {
+            verify(expected.getMessage().contains(&quot;null&quot;), &quot;null error&quot;);
+        }
+        System.out.println(&quot;10 method checks passed&quot;);
+        System.out.println(describe(&quot;readings&quot;, readings.length));
+    }
+}</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>From a terminal in the containing directory, compile with warnings enabled and execute the class:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1em 0;white-space:pre-wrap;max-width:100%"><code>javac -Xlint:all MethodLab.java
+java MethodLab</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>The checked output on <strong>OpenJDK 21.0.12.1</strong> was:</p><!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre style="background:transparent;border:0;box-shadow:none;padding:0;margin:0 0 1em 0;white-space:pre-wrap;max-width:100%"><code>10 method checks passed
+readings: 3</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph --><p>Ten checks cover integer and floating-point overloads, a returned string, a sum, varargs, primitive argument copying, shared array mutation, reference reassignment, continued array access, and null-input rejection. A failed verification throws <code>AssertionError</code>; the count is a test tally, not a software-quality benchmark. Java's <code>assert</code> keyword is different from the deliberate <code>verify</code> helper, because language assertions are normally disabled unless enabled by a runtime flag.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Mistakes to Avoid</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Do not describe an object parameter as pass-by-reference. Java copies the reference value.</li><li>Do not overload methods solely by changing their return types. The parameter list must distinguish them.</li><li>Do not assume <code>static</code> and instance methods are interchangeable; instance behavior requires an object.</li><li>Do not assume normal integer addition reports overflow. Use explicit checks when overflow matters.</li><li>Do not treat a passing example as proof of correctness for all inputs, threads, or production workloads.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge Check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li>Why does changing a primitive parameter not update the caller's integer? The callee receives a value copy.</li><li>Why can a method mutate the caller's array? Two copied references can identify the same array object.</li><li>What identifies Java overloads? Their method names together with parameter types; return type alone is insufficient.</li><li>How do callers handle a result? Store, pass, or evaluate the returned value rather than relying only on printed output.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">References</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><li><a href="https://dev.java/learn/classes-objects/defining-methods/">Dev.java: Defining Methods</a>, declarations, signatures, overloads.</li><li><a href="https://dev.java/learn/language/oop/classes-objects/calling-methods-constructors/">Dev.java: Calling Methods and Constructors</a>, arguments, parameters, varargs.</li><li><a href="https://dev.java/learn/language/oop/classes-objects/more-on-classes/">Dev.java: More on Classes</a>, returns, static and instance methods.</li><li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/arguments.html">Oracle Java Tutorial: Passing Information to a Method</a>, pass-by-value behavior.</li><li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Math.html#addExact(int,int)">Java SE 21 API: Math.addExact</a>, checked addition semantics.</li></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary Conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A Java method is a reusable instruction with a name and clear inputs. The method can calculate a result and give it back through <code>return</code>. Several methods can use the same name as long as their parameter lists meaningfully differ. When a method receives a number, changing its local copy leaves the original alone. When it receives an array, it can change the shared array's elements. Those rules make larger programs easier to understand, reuse, and test.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em><strong>Editor's Note:</strong> Internal curriculum identifier OSJava.007 follows the verified Java arrays unit and the most recently published Go arrays and slices lesson. The cover is original AI-generated oil-painting editorial artwork portraying a fictional developer, not documentary photography or an authentic compiler screenshot. The Duke image is authentic historical Java project artwork reused from the media archive. Two separate educational videos have identifiable original URLs. The complete Java example compiled with javac -Xlint:all and passed ten runtime checks under OpenJDK 21.0.12.1 on Linux. Video playback and mobile viewport rendering remain unverified without a browser-level test.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5000-satoshi donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech voluntary donation QR. Verify the recipient and amount in your wallet before authorizing payment.</em></figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p><em>For mobile scanning, display the original QR on another device or use a compatible wallet's saved-image scanner. Verify the recipient 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and the 5,000-satoshi amount before sending.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. If you would like to support our work and help further secure the integrity of our research initiatives, please scan the QR code above.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>BitcoinVersus.Tech provides programming education for informational purposes, not production software certification. Test source code against the intended JDK and application requirements before deployment.</em></p><!-- /wp:paragraph -->

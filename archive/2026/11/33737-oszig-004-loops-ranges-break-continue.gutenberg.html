@@ -1,0 +1,185 @@
+<!-- wp:paragraph -->
+<p><strong>OSZig.004</strong> teaches repetition in the <strong>Zig programming language</strong>. A <code>while</code> loop repeats work until its condition becomes false, while <code>for</code> iterates through arrays, slices and bounded integer ranges. Zig also supports <code>break</code>, <code>continue</code>, labels and loops that return values. These capabilities matter when analyzing records, processing device inventories or stopping a search once a match is found. The lesson follows <a href="https://bitcoinversus.tech/2026/11/08/oszig-003-zig-control-flow-if-switch-optional-values/">OSZig.003 on if, switch and optionals</a> and uses the official <a href="https://ziglang.org/documentation/0.17.1/">Zig 0.17.1 language reference</a>, released November 3, 2026.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=li-BIgZoi3Q","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=li-BIgZoi3Q
+</div><figcaption class="wp-element-caption"><em>Pokelego Dev, “Loops in Zig,” published May 30, 2026. The presentation covers while, for, continue, break and loops as expressions. Video identity verified from its public listing; actual playback still needs browser testing.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">While repeats until a condition changes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <code>while</code> loop checks its condition before every pass. Its syntax can include a <em>continue expression</em> after a colon, such as <code>: (i += 1)</code>, which updates a counter after each completed iteration or after <code>continue</code>. The official reference demonstrates the same construct in the 0.17.1 test examples. Start with a bounded sum, using numbers zero through four:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>const std = @import("std");
+
+test "while counts five passes" {
+    var i: usize = 0;
+    var sum: usize = 0;
+    while (i &lt; 5) : (i += 1) {
+        sum += i;
+    }
+    try std.testing.expectEqual(@as(usize, 10), sum);
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The expected sum is <code>0 + 1 + 2 + 3 + 4 = 10</code>. The variable <code>i</code> reaches five, the condition becomes false, and the loop ends. Without an increment or another terminating action, a condition can remain true indefinitely. A service must bound iterations and account for cancellation, timeouts and failed inputs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">For traverses arrays and half-open ranges</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <code>for</code> construct captures a value from an array or slice on each pass. The range <code>0..5</code> visits zero through four, excluding five. Adding <code>0..</code> as a second iterable provides a zero-based index when another bounded collection determines the number of iterations. A bare <code>for (0..)</code> has no bound and is invalid. The official <a href="https://ziglang.org/documentation/0.17.1/#for">for reference</a> includes indexing, slicing and multiple iterable examples.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>test "for ranges and indexed arrays" {
+    var count: usize = 0;
+    for (0..5) |index| {
+        count += index;
+    }
+    try std.testing.expectEqual(@as(usize, 10), count);
+
+    const readings = [_]u8{ 10, 20, 30 };
+    var index_sum: usize = 0;
+    for (readings, 0..) |reading, index| {
+        _ = reading;
+        index_sum += index;
+    }
+    try std.testing.expectEqual(@as(usize, 3), index_sum);
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Each captured array element can be used directly; an index is only required when its position matters. The final assertion checks <code>0 + 1 + 2 = 3</code>. Bounded loops eliminate manually maintained counters for many collection operations. For comparison, <a href="https://bitcoinversus.tech/2026/11/18/osgo-006-go-arrays-slices-length-capacity-append-copy/">OSGo.006 on arrays and slices</a> covers similar iteration concepts in another compiled language.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=3ctet8j7QxA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=3ctet8j7QxA
+</div><figcaption class="wp-element-caption"><em>LEASY, “Discovering Zig Programming Language: Loops,” April 5, 2025. Sections cover while, continue, break, for and infinite loops. The authoritative 0.17.1 documentation controls any version-specific differences; playback remains unverified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Continue skips; break stops</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>continue</code> ends the current loop pass and advances to the next one. <code>break</code> ends the loop altogether. Filtering fictional device readings demonstrates both operations. A negative value is skipped, while a sentinel value of 99 stops further processing. Values after the sentinel are never added.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>test "continue and break in a for loop" {
+    const samples = [_]i32{ 4, -1, 5, 99, 20 };
+    var sum: i32 = 0;
+    for (samples) |value| {
+        if (value &lt; 0) continue;
+        if (value == 99) break;
+        sum += value;
+    }
+    try std.testing.expectEqual(@as(i32, 9), sum);
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The expected result is nine, from four plus five. The examples are educational placeholders; a real monitoring system must not treat an arbitrary integer as a safe shutdown threshold. Inspect <a href="https://bitcoinversus.tech/2026/11/08/ossql-006-inner-left-joins-missing-matches/">OSSQL.006 on missing matches</a> for another illustration of why ignoring or terminating on an input changes downstream results.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A loop can return a value</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Zig loops are expressions. A <code>for</code> loop's <code>else</code> arm runs when the loop finishes normally, without <code>break</code>. A <code>break</code> with an operand can supply a different result. The following function searches a fixed list and returns the first value greater than ten; otherwise it returns zero. Both outcomes are explicitly defined.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>fn firstLarge(values: []const i32) i32 {
+    return for (values) |value| {
+        if (value &gt; 10) break value;
+    } else 0;
+}
+
+test "for else returns a search result" {
+    const small = [_]i32{ 3, 5, 8 };
+    const mixed = [_]i32{ 4, 12, 20 };
+    try std.testing.expectEqual(@as(i32, 0), firstLarge(&amp;small));
+    try std.testing.expectEqual(@as(i32, 12), firstLarge(&amp;mixed));
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The <code>else</code> expression is not evaluated after a <code>break</code>. Do not confuse the result with an implicit Boolean. In production, zero might be a legitimate match, so an optional return type such as <code>?i32</code> could represent absence more accurately, a distinction introduced in <a href="https://bitcoinversus.tech/2026/11/08/oszig-003-zig-control-flow-if-switch-optional-values/">OSZig.003</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Labels control nested loops</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In nested loops, a plain <code>break</code> leaves only the innermost loop. A labeled form such as <code>break :outer</code> can exit a named outer loop. <code>continue :outer</code> advances a specified outer loop instead. Both forms are shown in the Zig 0.17.1 reference and can simplify a two-dimensional search without extra state variables.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>test "labeled break exits the outer loop" {
+    var visits: usize = 0;
+    outer: for (0..5) |_| {
+        for (0..5) |_| {
+            visits += 1;
+            break :outer;
+        }
+    }
+    try std.testing.expectEqual(@as(usize, 1), visits);
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>With five possible outer and five inner passes, a full traversal could visit 25 pairs. The labeled exit stops after the first pair, leaving <code>visits</code> equal to one. Labels are especially useful when a successful search can terminate several nested loops immediately. They should remain descriptive, and excessive nesting is still a readability warning.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=iqddnwKF8HQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=iqddnwKF8HQ
+</div><figcaption class="wp-element-caption"><em>JetBrains interview with Zig creator Andrew Kelley, published May 27, 2026. The discussion adds current context on the language, ecosystem and engineering goals; it is not a substitute for official loop semantics. Video playback has not been independently tested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Run the tests and review the limitations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Copy all five <code>test</code> blocks and the <code>firstLarge</code> function into one UTF-8 file named <code>loops.zig</code>. Keep the initial <code>const std = @import("std");</code> declaration once at the top. With Zig 0.17.1 installed from the <a href="https://ziglang.org/download/">official download page</a>, run <code>zig test loops.zig</code> and compare the actual test report against the stated expected values. A missing compiler, an incompatible version or a compile error must be reported as a failed or unperformed run, never as a pass.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Exercises: change the first loop bound from five to six and recalculate the expected sum; change the break sentinel from 99 to another test-only value; replace the labeled break with an ordinary break and predict the visit count. Repeated operations are also relevant to <a href="https://bitcoinversus.tech/2026/11/19/osemojicode-004-loops-for-in-ranges-repeat-while/">OSEmojicode.004 on loops and ranges</a>, despite very different syntax.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> Use <code>while</code> for condition-controlled repetition, <code>for</code> for bounded iteration, <code>continue</code> to skip a pass, and <code>break</code> to stop. Loop expressions and labels enable precise control without fabricated output or hidden state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor’s Note:</strong> Official Zig 0.17.1 documentation was consulted for loop syntax and expected results. Five Zig test blocks were manually checked against examples in the language reference; they were not executed in a compiler in the editorial environment. Three public YouTube presentations were identified through their listings, but actual playback and mobile rendering require separate checks. The featured 1200 × 630 cinematic-anime cover is original conceptual editorial art, not a runtime screenshot.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR for an optional 5,000-satoshi Bitcoin donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech donation QR for an optional 5,000 sats. Verify the recipient and amount independently.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. An optional <strong>5,000-satoshi</strong> donation supports research. Scan the original QR with a compatible Bitcoin wallet or use a wallet able to import a saved QR image. Independently verify recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before sending. Bitcoin transfers are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of information on BitcoinVersus.Tech is Verifiably True. The lesson is educational and informational, not authorization to control production equipment, professional engineering advice, financial advice or investment advice.</em></p>
+<!-- /wp:paragraph -->

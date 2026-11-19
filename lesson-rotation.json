@@ -63,13 +63,13 @@
       "1freetech/Bitcoinversus.tech"
     ],
     "publication_status": "publish",
-    "featured_media_id": 33433,
+    "featured_media_id": 33455,
     "body_video_ids": [
       "h3rgSRN-Y1M",
       "2PO2Y-4dDv8"
     ],
-    "verification_status": "WordPress public HTTP 200; two YouTube iframes rendered and no unresolved shortcodes; ten local static checks on Solidity source passed but Solidity compiler and EVM runtime unavailable; GitHub Gutenberg/Solidity/QA archived in three repositories; browser playback and mobile screenshots unverified.",
-    "qa_status": "2 relevant educational videos, original 1200x630 fine-art oil-painting cover with approved secondary logo, four internal links, QR 24043, SEO, zero boxed code; no numerical chart warranted by data."
+    "verification_status": "Public WordPress HTTP 200, two YouTube iframes rendered; featured cover corrected to a single approved logo #33455 at 1200x630; 10 Solidity static checks passed. Compiler, EVM execution, playback and mobile screenshots unverified. Gutenberg, Solidity source and QA archived in three repositories.",
+    "qa_status": "2 YouTube embeds, corrected single-logo oil-painting cover #33455, 4 internal links, QR 24043, SEO, no boxed code, chart omitted because no comparable dataset."
   },
   "next": {
     "subject": "sql",

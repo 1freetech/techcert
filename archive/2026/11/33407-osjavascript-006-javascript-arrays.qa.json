@@ -1,0 +1,74 @@
+{
+  "schema": "bitcoinversus-tech-lesson-publication-qa-v1",
+  "date": "2026-11-18",
+  "track": "OSJavaScript.006",
+  "title": "JavaScript Arrays: Indexing, Length, Mutation, and Copying",
+  "wordpress_id": 33407,
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/18/osjavascript-006-javascript-arrays-indexing-length-mutation-copying/",
+  "rotation_predecessor": "OSJava.007 WordPress 33388",
+  "sources": [
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice",
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of"
+  ],
+  "verification": {
+    "wordpress_post_public": true,
+    "public_http_status": 200,
+    "public_canonical_url_matches": true,
+    "seo_title_description_present": true,
+    "open_graph_image_attached": true,
+    "featured_media_id": 33403,
+    "featured_original_width": 1200,
+    "featured_original_height": 630,
+    "featured_style": "photorealistic editorial illustration",
+    "featured_logo": "same historical black-highlight neon-green wordmark crop from previous Go cover, composited at lower left",
+    "in_body_media": [
+      {
+        "type": "youtube",
+        "id": "yQ1fz8LY354",
+        "source": "Bro Code — Learn JavaScript Arrays in 8 minutes"
+      },
+      {
+        "type": "image",
+        "wordpress_id": 23198,
+        "source": "Wikimedia Commons CC0 JavaScript code image"
+      },
+      {
+        "type": "youtube",
+        "id": "gl0cpq4RJhU",
+        "source": "freeCodeCamp.org JavaScript arrays full course"
+      }
+    ],
+    "youtube_iframes_in_rendered_post": 2,
+    "unrendered_youtube_shortcode_count": 0,
+    "actual_youtube_playback": "not tested independently",
+    "social_embed": "omitted because no independently verified, directly relevant original social-media post was found",
+    "code_boxes": 0,
+    "unboxed_pre_count": 3,
+    "contextual_internal_links": 4,
+    "donation_qr_media_id": 24043,
+    "media_missing_alt_attributes": 0,
+    "syntax_check": "Node.js v22.16.0: pass",
+    "javascript_checks_passed": 21,
+    "javascript_checks_failed": 0,
+    "javascript_stdout": [
+      "21 array checks passed",
+      "readings: 15, 19, 21"
+    ],
+    "runtime_limitations": "functional lab only, not production validation or browser testing",
+    "mobile_screenshot": "not available",
+    "article_word_count_including_website_elements": 1836,
+    "source_gutenberg_path": "archive/2026/11/33407-osjavascript-006-javascript-arrays.gutenberg.html",
+    "executable_source_path": "archive/2026/11/33407-osjavascript-006-javascript-arrays.js",
+    "archives_exact_readback": "to be verified separately"
+  },
+  "next_rotation": "HTML, OSHTML.006; HTML.005 published WordPress 31296, confirm no duplicate at next activation",
+  "lessons_learned": [
+    "Separate fixed-length Java arrays from dynamic JavaScript arrays in internal comparisons.",
+    "Use exact verified YouTube IDs and Gutenberg shortcodes rather than unverified X posts.",
+    "Retain only one featured cover and avoid code boxes; check actual post-rendered iframe count."
+  ]
+}

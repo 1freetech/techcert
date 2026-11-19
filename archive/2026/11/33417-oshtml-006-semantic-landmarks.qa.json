@@ -1,0 +1,79 @@
+{
+  "schema": "bitcoinversus-tech-lesson-publication-qa-v1",
+  "date": "2026-11-18",
+  "track": "OSHTML.006",
+  "title": "Semantic HTML: Headers, Navigation, Main Content, Articles, and Accessible Landmarks",
+  "wordpress_id": 33417,
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/18/oshtml-006-semantic-html-headers-navigation-main-articles-landmarks/",
+  "rotation_predecessor": "OSJavaScript.006 WordPress 33407",
+  "deduplication": {
+    "wordpress_published_draft_pending_future_private_exact_match_before_creation": 0,
+    "github_search_open_cert_exact_id": 0,
+    "previous_html_post": "OSHTML.005 WordPress 31296"
+  },
+  "source_urls": [
+    "https://www.w3.org/WAI/tutorials/page-structure/regions/",
+    "https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/",
+    "https://www.w3.org/WAI/WCAG21/Techniques/html/H101",
+    "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Structuring_documents",
+    "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main"
+  ],
+  "verification": {
+    "public_http_status": 200,
+    "public_visibility": "public",
+    "seo_title_description_and_canonical_verified": true,
+    "original_featured_media_id": 33413,
+    "original_featured_dimensions": [
+      1200,
+      630
+    ],
+    "cover_style": "cinematic anime",
+    "secondary_logo": "same exact lettering crop from prior approved Go lesson wordmark, placed bottom-left on black highlight",
+    "in_story_media": [
+      {
+        "type": "youtube",
+        "id": "kX3TfdUqpuU",
+        "source": "Semantic HTML Tags | HTML5 Semantic Elements Tutorial"
+      },
+      {
+        "type": "image",
+        "wordpress_media_id": 33414,
+        "source": "W3C HTML5 badge; original W3C art, CC BY 3.0"
+      },
+      {
+        "type": "youtube",
+        "id": "7ZZK9Iprw5c",
+        "source": "HTML Semantic Tags: header, main, footer, section, aside, nav"
+      }
+    ],
+    "youtube_iframe_count": 2,
+    "unresolved_youtube_shortcodes": 0,
+    "actual_youtube_playback": "not independently tested",
+    "social_embed": "omitted because no verified original-source relevant social post was established",
+    "code_block_count": 0,
+    "transparent_unboxed_pre_count": 1,
+    "contextual_internal_links": 5,
+    "donation_qr_media_id": 24043,
+    "images_missing_alt": 0,
+    "structural_example_checks": 20,
+    "structural_testing": "Python BeautifulSoup HTML parser: doctype, lang, meta, ID uniqueness, named nav and sections, links, main count, headings, skip link, and other checks passed",
+    "html_validator_test": "not performed",
+    "screen_reader_and_browser_keyboard_tests": "not performed",
+    "mobile_viewport_visual_test": "not performed",
+    "saved_gutenberg_path": "archive/2026/11/33417-oshtml-006-semantic-landmarks.gutenberg.html",
+    "saved_html_path": "archive/2026/11/33417-oshtml-006-semantic-landmarks.html",
+    "exact_source_readback_verified_all_three_repos": true
+  },
+  "next_rotation_candidate": "PHP OSPHP.007, after WordPress OSPHP.006; no exact existing published or pending/draft/scheduled result at final check",
+  "prior_defects_avoided": [
+    "No numbered public headline",
+    "No stock diagrams or code boxes",
+    "No unverified autoplay or social embeds"
+  ],
+  "improvements": [
+    "Use independent accessible browser playback testing when a browser is available",
+    "Run Nu HTML Checker and assistive technology review before asserting production readiness",
+    "Keep exact official media attribution and mobile overflow checks"
+  ]
+}

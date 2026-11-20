@@ -1,0 +1,126 @@
+<!-- wp:paragraph -->
+<p><strong>Linux Command #69</strong> introduces <code>systemd-cat</code>, a small utility that sends a program's text output to the <strong>systemd journal</strong>. On a Linux server, application messages can arrive through stdout, stderr or logging APIs, while the journal provides a common place to inspect them. Earlier, <a href="https://bitcoinversus.tech/2026/09/26/linux-command-28-troubleshoot-system-logs-with-journalctl/">Linux Command #28</a> explained how to read journal entries. The new lesson works in the opposite direction, sending a deliberately harmless test entry and retrieving it by a unique identifier.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jXO7q_7a6-s","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=jXO7q_7a6-s
+</div><figcaption class="wp-element-caption"><em>Jadi, “LPIC 1: System Logging, systemd-journald, journalctl and systemd-cat,” published July 5, 2023. The tutorial demonstrates manual logging with systemd-cat around 13:35. Source verified; actual playback requires separate testing.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What systemd-cat does</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The upstream <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-cat.html">systemd-cat manual</a> documents two modes. With no command argument, the utility reads text from standard input, useful at the end of a shell pipeline. With a command argument, it runs the program and connects both its standard output and standard error to the journal. A pipeline only sends the upstream command's standard output unless the shell explicitly redirects stderr. Choosing the command form can therefore preserve errors otherwise missed by a pipe.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <code>--identifier</code> option assigns a short tag, while <code>--priority</code> sets the default message severity. Supported values include <code>debug</code>, <code>info</code>, <code>notice</code>, <code>warning</code> and <code>err</code>. A systemd-enabled Linux environment with an accessible journal is needed; a minimal container without a running journal service may not support the exercise.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Send one identifiable test message</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On an authorized development machine, run the following command. The message contains no credentials, user data or actual equipment status. The identifier <code>bv-lesson69</code> makes the new entry easy to locate later.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>printf '%s\n' 'lesson69 synthetic test message' | systemd-cat --identifier=bv-lesson69 --priority=notice</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The pipeline passes one line of text to <code>systemd-cat</code>. The journal receives the entry with a <em>notice</em> default priority, which corresponds to syslog priority 5. The command does write a record into the local journal; do not run it on production systems without authorization. A successful shell exit code alone does not prove an entry was retained, exported or delivered to a remote monitoring service.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read back the message</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use <code>journalctl</code> to filter by the assigned identifier and a short time window. The <a href="https://www.freedesktop.org/software/systemd/man/latest/journalctl.html">official journalctl reference</a> documents <code>-t</code> for matching <code>SYSLOG_IDENTIFIER</code> and <code>--since</code> for time filtering.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>journalctl -t bv-lesson69 --since "10 minutes ago" --no-pager</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Look for the text <code>lesson69 synthetic test message</code>. The output also includes local timestamps and source information chosen by the system. A missing match is not automatically evidence that <code>systemd-cat</code> is broken; first confirm the journal service is active, the host clocks are reasonable, and the user has permission to read the entry. An unprivileged account may only see a subset of journal records.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=oqelHBvR_JE","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=oqelHBvR_JE
+</div><figcaption class="wp-element-caption"><em>HardReset_Pro, “journalctl: How to Read System Logs on Linux,” published March 31, 2026. Demonstrates filtering by service, time and priority. Video listing verified; iframe playback remains untested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Severity and command mode</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The priority can also be supplied by a syslog-style line prefix when <code>--level-prefix</code> is enabled, as it is by default. Prefix <code>&lt;4&gt;</code> means warning. Keep the test identifier distinct from actual production alerts, and compare the stored priority after running:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>printf '&lt;4&gt;lesson69 synthetic warning\n' | systemd-cat -t bv-lesson69
+journalctl -t bv-lesson69 -p warning --since '10 minutes ago' --no-pager</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>For a standalone program rather than a pipeline, <code>systemd-cat --identifier=bv-lesson69 /usr/bin/printf '%s\n' 'command-mode check'</code> attaches the invoked program's output to the journal. Unlike the pipeline example, command mode also captures stderr. A custom <code>--stderr-priority</code> can assign different default severities to stdout and stderr, although using separate channels may affect their relative ordering. Refer to the same upstream manual before relying on order-dependent diagnostics.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What systemd-cat cannot promise</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Writing a message is not the same as ensuring durable storage. The journal may be configured for volatile storage, and retention limits can remove older entries. The <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-journald.service.html">systemd-journald documentation</a> explains journal storage and lifecycle. Never place API tokens, private keys, passwords or sensitive customer records into demonstration log entries.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Linux technicians can combine journal filtering with read-only system inspection. <a href="https://bitcoinversus.tech/2026/11/15/linux-command-68-systemd-cgls-service-process-tree-inspection/">Linux Command #68</a> maps service process trees, <a href="https://bitcoinversus.tech/2026/11/06/linux-command-67-systemd-cgtop-cgroup-cpu-memory-io/">#67</a> samples cgroup resource usage, and <a href="https://bitcoinversus.tech/2026/10/28/linux-command-65-systemd-analyze-linux-os/">#65</a> examines boot timing. None of those observations alone establishes why a service failed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jIhNUGKPjQM","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=jIhNUGKPjQM
+</div><figcaption class="wp-element-caption"><em>Tomás GD, “Systemd for Humans in 10 Minutes: Services, Logs and Timers,” published January 12, 2026. Broader systemd and journalctl context; not a demonstration of the exact commands above. Video identified, playback not independently verified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice and verification</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In an approved Linux test environment, create two messages with different priorities, then query only warnings. Note the journal identifier, actual priority and observed timestamp. Compare the results against the manual before writing a short diagnostic report. No service restarts, configuration changes or removal of journal files are needed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> <code>systemd-cat</code> connects command output or pipeline text to journald, while <code>journalctl</code> retrieves it. A useful troubleshooting exercise verifies both sides without mistaking a log entry for proof of hardware condition or guaranteed delivery.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Syntax and technical behavior were checked against the upstream systemd-cat, journalctl and systemd-journald manuals. The exercises are limited to invented text and have not been executed against a live journald service in the editorial environment. Three YouTube identities were verified through public listings. Saved iframes, player playback and mobile visual appearance require separate checks. The original 1200 × 630 oil-painting cover shows data-center equipment and is not reused inside the article.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please scan the QR code below</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR for an optional contribution of 5,000 satoshis" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech contribution QR. Independently confirm the destination and amount.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. An optional <strong>5,000-satoshi</strong> donation supports verification work. Confirm recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount in a compatible wallet before sending. Bitcoin transfers are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Disclaimer:</strong> The lesson is educational, not permission to alter production logging, disclose sensitive records, certify engineering decisions, or make financial or investment decisions.</em></p>
+<!-- /wp:paragraph -->

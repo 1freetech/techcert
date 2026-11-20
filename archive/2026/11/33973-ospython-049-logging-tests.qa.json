@@ -1,0 +1,128 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "post_id": 33973,
+  "lesson_number": "OSPython.049",
+  "title": "OSPython.049: Test Python Logs with assertLogs and caplog",
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/20/ospython-049-test-python-logs-assertlogs-assertnologs-pytest-caplog/",
+  "publication_date": "2026-11-20",
+  "category": "Computer Programming / Python",
+  "categories": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tags": [
+    832,
+    793305068,
+    857003
+  ],
+  "curriculum": {
+    "subject_count": 43,
+    "source": "curriculum/MODULE_COVERAGE_AUDIT_2026-11-16.md",
+    "previous_track": "OSNEC.010, Networking Engineer",
+    "current": "OSPython.049, Python",
+    "previous_python": "OSPython.048",
+    "next_track": "Linux Commands",
+    "next_number_candidate": "Linux Command #69",
+    "linux68_confirmed_published": true,
+    "linux69_search_before_publish": "not found",
+    "limitations": "Full live inventory of all 43 tracks not exhaustively re-counted. Rotation audit lists legacy Chef esolang and NEC Review outside canonical slots; duplicate OSPython.020 and OSPCB numbers remain historical cleanup tasks."
+  },
+  "technical_references": [
+    "https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertLogs",
+    "https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertNoLogs",
+    "https://docs.pytest.org/en/stable/how-to/logging.html",
+    "https://docs.python.org/3/howto/logging.html"
+  ],
+  "testing": {
+    "status": "passed",
+    "platform": "editorial container",
+    "python": "3.13.5",
+    "pytest": "9.0.2",
+    "command_unittest": "python -m unittest -v test_logging.py",
+    "unittest_cases": 3,
+    "unittest_passed": 3,
+    "command_pytest": "python -m pytest -q test_caplog.py",
+    "pytest_cases": 1,
+    "pytest_passed": 1,
+    "scope": "Fictional logging records only; no live devices, no production logging, and no compatibility test across other Python releases."
+  },
+  "embedded_media": [
+    {
+      "url": "https://www.youtube.com/watch?v=bMk5a10KeVc",
+      "publisher": "JCharisTech",
+      "title": "How To Unit Test Logging In Python (Asserting Logs)",
+      "identity_verified": true,
+      "saved_gutenberg": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=jxmzY9soFXg",
+      "publisher": "Corey Schafer",
+      "title": "Python Tutorial: Logging Advanced - Loggers, Handlers, and Formatters",
+      "identity_verified": true,
+      "saved_gutenberg": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=EgpLj86ZHFQ",
+      "publisher": "Tech With Tim",
+      "title": "Please Learn How To Write Tests in Python… • Pytest Tutorial",
+      "identity_verified": true,
+      "saved_gutenberg": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    }
+  ],
+  "featured_cover": {
+    "media_id": 33982,
+    "filename": "ospython049-cover-exact-neon-green-1200x630-1.png",
+    "width": 1200,
+    "height": 630,
+    "mime": "image/png",
+    "style": "detailed colored-pencil illustration",
+    "person": "Asian woman, visual-rotation depiction",
+    "watermark": "BitcoinVersus.tech exact #39FF14 pixels on tight black highlight, verified locally",
+    "not_repeated_in_body": true,
+    "alt_text": "Original detailed colored-pencil illustration of an Asian woman programmer validating Python log warnings and unit-test results in a data center; bottom-left exact neon-green BitcoinVersus.tech watermark"
+  },
+  "chart": {
+    "used": false,
+    "reason": "No authentic quantitative comparison; tested Python code provides the most informative demonstration. Grouped bars, line charts, and scatter charts would add unsupported numeric content."
+  },
+  "editorial_qa": {
+    "duplicates_checked_wordpress_and_github": true,
+    "forbidden_terms_in_original_editorial_prose": [],
+    "fixed_required_footer_exception": "this",
+    "internal_links": 5,
+    "gutenberg_video_blocks": 3,
+    "gutenberg_code_blocks": 3,
+    "editor_note_present": true,
+    "qr_id": 24043,
+    "original_qr_present": true,
+    "seo_title": "OSPython.049: Test Python Logging with unittest and pytest | BitcoinVersus.Tech",
+    "seo_description": "OSPython.049 teaches assertLogs, assertNoLogs and pytest caplog through four independently executed Python logging tests.",
+    "exact_donation_statement_present": true
+  },
+  "live_qa": {
+    "wordpress_rendered_http_status": 200,
+    "visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/20/ospython-049-test-python-logs-assertlogs-assertnologs-pytest-caplog/",
+    "og_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/ospython049-cover-exact-neon-green-1200x630-1.png",
+    "rendered_youtube_iframes": 3,
+    "images_missing_alt": 0,
+    "empty_links": 0,
+    "site_level_ui_links_to_nowhere": 8
+  },
+  "limitations": [
+    "Player iframe markup verified, actual YouTube playback not tested in a browser",
+    "Responsive mobile visual rendering not independently tested",
+    "Python testing only on one interpreter and pytest version",
+    "WordPress OG preview is a downscaled 1024 x 538 representation of the original 1200 x 630 PNG"
+  ],
+  "recorded_at": "2026-11-20"
+}

@@ -1,0 +1,110 @@
+<!-- wp:paragraph -->
+<p><strong>OSNEC.010</strong> explains why two healthy OSPF adjacencies can carry different sets of link-state advertisements. A stub area reduces external routing detail, while a <em>not-so-stubby area</em> (NSSA) makes a controlled exception for redistributed routes. The difference matters when a branch can reach internal subnets but not an advertised external service. Start with <a href="https://bitcoinversus.tech/2026/10/11/osnec-004-ospf-areas-abrs-area-0-inter-area-routing-verification/">OSNEC.004 on areas and area border routers</a> and <a href="https://bitcoinversus.tech/2026/11/06/osnec-005-ospf-link-state-advertisements-lsdb-spf-path-calculation/">OSNEC.005 on LSAs and the LSDB</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=NovgOj0oK_U","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=NovgOj0oK_U
+</div><figcaption class="wp-element-caption"><em>Cisco OSPF Lab 3, published 2024: Stub, Totally Stubby, NSSA and route redistribution. Publicly identified independent lab; actual player playback remains untested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Stub areas reduce external advertisements</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A normal OSPF area can receive Type 3 inter-area summary LSAs, Type 4 ASBR summaries, and Type 5 external LSAs when appropriate. A <strong>standard stub area</strong> blocks the external Type 4 and Type 5 information while retaining ordinary Type 3 summaries. An area border router (ABR) supplies a default route for other destinations. The result is a smaller routing database, not a disconnected branch.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <strong>totally stubby area</strong> also suppresses non-default Type 3 summaries from other areas and relies on a default summary originated by the ABR. The totally stubby option is a common vendor extension, so operators must confirm platform syntax and behavior. Cisco's <a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13703-8.html">OSPF area documentation</a> describes the variation. A stub option mismatch between OSPF neighbors can prevent adjacency formation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">NSSA uses Type 7 LSAs</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An ordinary stub area does not permit a local autonomous system boundary router (ASBR) to inject newly redistributed external routes. An NSSA permits local redistribution through <strong>Type 7 external LSAs</strong>. A selected NSSA ABR can translate eligible Type 7 information into Type 5 LSAs for other OSPF areas. Translation depends on the propagation bit and translator behavior; not every observed Type 7 must become Type 5. Consult <a href="https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/6208-nssa.html">Cisco's NSSA guide</a> and <a href="https://www.rfc-editor.org/rfc/rfc3101">RFC 3101</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Standard NSSAs generally accept Type 3 inter-area summaries. A totally NSSA additionally suppresses non-default Type 3 summaries while retaining the local Type 7 mechanism. A crucial operational distinction concerns the default: <strong>do not assume a regular NSSA automatically receives a default route</strong>. The ABR's default generation depends on configured options and vendor behavior. Juniper's <a href="https://www.juniper.net/documentation/us/en/software/junos/ospf/topics/topic-map/configuring-ospf-areas.html">OSPF area guide</a> details the relevant choices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=sBI5cX8TiZo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=sBI5cX8TiZo
+</div><figcaption class="wp-element-caption"><em>Tech With Ravish, “NSSA and Totally NSSA in OSPF Explained with Configuration Steps,” published 2025. Source video verified; reference documentation controls exact platform differences.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What each area should carry</h2>
+<!-- /wp:heading -->
+
+<!-- wp:table {"hasFixedLayout":true} -->
+<figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><th>Area</th><th>Inter-area Type 3</th><th>External Type 5</th><th>Local Type 7</th></tr></thead><tbody><tr><td>Normal</td><td>Allowed</td><td>Allowed</td><td>No</td></tr><tr><td>Stub</td><td>Allowed; ABR default</td><td>Blocked</td><td>No</td></tr><tr><td>Totally stubby</td><td>Default only</td><td>Blocked</td><td>No</td></tr><tr><td>NSSA</td><td>Generally allowed</td><td>Blocked</td><td>Allowed</td></tr><tr><td>Totally NSSA</td><td>Default only</td><td>Blocked</td><td>Allowed</td></tr></tbody></table><figcaption class="wp-element-caption">OSPFv2 overview. “Totally” variants and default origination are platform-dependent. A regular NSSA does not universally inject a default automatically. Sources: Cisco and RFC 3101.</figcaption></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>A default is useful only when its next hop can actually reach the destination. The presence of a 0.0.0.0/0 route is not proof of end-to-end service health. See <a href="https://bitcoinversus.tech/2026/10/09/osnec-003-ospf-default-routes-origination-verification-failure-risks/">OSNEC.003 on default routes</a>. If the OSPF adjacency never reaches Full, resolve neighbor conditions before interpreting LSAs; <a href="https://bitcoinversus.tech/2026/11/09/osnec-006-ospf-neighbor-adjacency-hello-timers-states-mtu-troubleshooting/">OSNEC.006</a> addresses adjacency states and MTU mismatches.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read-only lab: the missing external route</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a <em>fictional</em> Area 20 branch with a local ASBR and an ABR connecting to Area 0. The branch reaches an internal prefix but an external route does not appear in another area. Record the current area mode and compare LSAs on the ASBR, ABR and receiving router. On supported Cisco IOS devices, read-only inspection may use:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>show ip ospf neighbor
+show ip ospf
+show ip ospf database summary
+show ip ospf database nssa-external
+show ip ospf database external
+show ip route ospf</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>First, establish whether Area 20 is a stub or NSSA. A stub should not carry locally originated Type 7 information. In an NSSA, verify that an ASBR originated the required Type 7, then inspect eligible translation and filtering at the ABR. If the failure instead concerns missing internet reachability, investigate default-route origination and forwarding rather than guessing that all NSSAs contain a default. Juniper provides different commands such as <a href="https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/command/show-ospf-ospf3-route.html">show ospf route</a>. Actual output depends on platform and software version.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Avoid changing a production area to NSSA during diagnosis. Area-option changes, redistribution policies and ABR settings can reset adjacencies or alter reachability. Run configuration experiments only in a lab or an approved maintenance window.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=RnOuZJwtV7Y","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=RnOuZJwtV7Y
+</div><figcaption class="wp-element-caption"><em>Pedro Lino Cáceres, “OSPF Stub Areas &amp; Totally Stubby Areas,” May 2024. Verified public instructional video. Playback within the published iframe requires separate testing.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises and conclusion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a normal, stub, NSSA and totally NSSA area, predict whether Type 3, Type 5 and Type 7 LSAs should appear. Explain one reason a Type 7 may remain untranslated, and identify the specific ABR and policy evidence you would collect. Finally, explain why an OSPF Full adjacency and an installed default route are insufficient to prove external application reachability.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> Stub areas reduce external routing detail, whereas NSSAs enable a limited local external-route exception. Effective troubleshooting checks the actual area type, permitted LSAs, ABR translation, default-route policy and forwarding state instead of trusting a green adjacency indicator.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Cisco documentation, RFC 3101 and Juniper guidance were used to verify the technical distinctions. Area 20 is an illustrative case, not a production incident. Three source-identified YouTube videos are included, but independent player playback and mobile viewport testing were not available. The original 1200 × 630 cinematic-anime featured image does not depict actual operational equipment, and no router commands were executed.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR for an optional 5,000-satoshi donation" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>The voluntary suggested donation is 5,000 satoshis. Verify recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before sending. Bitcoin transfers generally cannot be reversed. The lesson is educational and is not permission to modify production networks, professional engineering advice, or financial or investment advice.</em></p>
+<!-- /wp:paragraph -->

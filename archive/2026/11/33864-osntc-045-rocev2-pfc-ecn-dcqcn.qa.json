@@ -1,0 +1,110 @@
+{
+  "site": "BitcoinVersus.Tech",
+  "publication_type": "Numbered technical networking lesson",
+  "lesson_id": "OSNTC.045",
+  "post_id": 33864,
+  "title": "OSNTC.045: RoCEv2 Congestion, PFC, ECN, and DCQCN",
+  "status": "publish",
+  "published_url": "https://bitcoinversus.tech/2026/11/20/osntc-045-rocev2-congestion-pfc-ecn-dcqcn-troubleshooting/",
+  "published_date": "2026-11-20",
+  "category_ids": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    598000931,
+    689404190,
+    345708969
+  ],
+  "topic": "RoCEv2 congestion troubleshooting; PFC, ECN, DCQCN and read-only GPU Ethernet fabric diagnostics",
+  "primary_sources": [
+    "https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/cisco-data-center-networking-blueprint-for-ai-ml-applications.html",
+    "https://enterprise-support.nvidia.com/s/article/understanding-rocev2-congestion-management",
+    "https://networking-docs.nvidia.com/onyxum/3102002/roce-commands",
+    "https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-58/Layer-1-and-Switch-Ports/Quality-of-Service/RDMA-over-Converged-Ethernet-RoCE/",
+    "https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/7-x/command_references/show_commands/b_N9K_Show_Commands_703i5x/b_N9K_Show_Commands_703i5x_chapter_01001.html"
+  ],
+  "video_media": [
+    {
+      "publisher": "LevelUP I.T.",
+      "title": "RDMA & RoCEv2 EXPLAINED",
+      "url": "https://www.youtube.com/watch?v=nKz92Yr09q8",
+      "source_listing_verified": true,
+      "wordpress_iframe_rendered": true,
+      "actual_playback_verified": false
+    },
+    {
+      "publisher": "Networking @Scale 2023 / Adi Gangidi",
+      "title": "Scaling RoCE Networks for AI Training",
+      "url": "https://www.youtube.com/watch?v=H564lUSK804",
+      "source_listing_verified": true,
+      "wordpress_iframe_rendered": true,
+      "actual_playback_verified": false
+    },
+    {
+      "publisher": "KubeCon + CloudNativeCon North America 2019",
+      "title": "Networking Optimizations for Multi-Node Deep Learning on Kubernetes",
+      "url": "https://www.youtube.com/watch?v=UIyLFDHNgFc",
+      "source_listing_verified": true,
+      "wordpress_iframe_rendered": true,
+      "actual_playback_verified": false
+    }
+  ],
+  "featured_media": {
+    "id": 33858,
+    "filename": "osntc045-rocev2-pfc-ecn-dcqcn-1200x630-1.jpg",
+    "original_dimensions_px": [
+      1200,
+      630
+    ],
+    "style": "cinematic anime",
+    "wordmark": "BitcoinVersus.tech, neon green on tight black lower-left background",
+    "alt": "Cinematic anime illustration of a network engineer investigating congestion telemetry among blue-lit server racks and fiber-connected Ethernet switches",
+    "not_duplicated_inside_article": true
+  },
+  "saved_gutenberg_qa": {
+    "bytes": 11279,
+    "embed_blocks": 3,
+    "code_blocks": 1,
+    "internal_links": 5,
+    "editor_note": true,
+    "donation_qr": true,
+    "forbidden_editorial_words": [],
+    "seo_title": "OSNTC.045: RoCEv2 PFC, ECN and DCQCN | BitcoinVersus.Tech",
+    "seo_description": "OSNTC.045 explains RoCEv2 congestion, PFC pauses, ECN, DCQCN feedback and read-only troubleshooting on AI Ethernet fabrics."
+  },
+  "public_page_qa": {
+    "http_status": 200,
+    "site_visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/20/osntc-045-rocev2-congestion-pfc-ecn-dcqcn-troubleshooting/",
+    "og_image_verified": true,
+    "missing_image_alt_count": 0,
+    "empty_link_count": 0,
+    "rendered_youtube_iframes": 3,
+    "unresolved_site_level_control_links": 8
+  },
+  "chart": {
+    "included": false,
+    "candidates_considered": [
+      "line chart of counters",
+      "vertical bar chart of error types",
+      "source-code and diagnostic sequence"
+    ],
+    "selected": "source-code and diagnostic sequence",
+    "reason": "The counter readings are fictional classroom examples; plotting them as measurements would be misleading. Verified vendor output and read-only commands better explain troubleshooting."
+  },
+  "source_dates": {
+    "cisco": "Existing Cisco AI networking reference",
+    "nvidia": "Current retrieved official network documentation; exact publication date of several pages not independently established"
+  },
+  "unresolved": [
+    "Video player playback and interaction not tested in browser",
+    "Mobile layout appearance not independently tested using device viewport",
+    "No real network hardware, counter snapshots or commands executed; fictitious five-minute sample is explicitly labeled",
+    "Exact hex color of generated watermark not independently sampled"
+  ],
+  "next_curriculum_candidate": "OSNTC.046, subject to current duplicate audit",
+  "recorded_date": "2026-11-20"
+}

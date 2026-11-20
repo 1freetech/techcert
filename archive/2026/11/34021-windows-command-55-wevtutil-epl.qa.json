@@ -1,0 +1,107 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "recorded_date": "2026-11-20",
+  "lesson": "Windows Command #55",
+  "title": "Windows Command #55: Export Event Logs with wevtutil epl",
+  "wordpress_id": 34021,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/20/windows-command-55-wevtutil-epl-export-event-logs-evtx/",
+  "slug": "windows-command-55-wevtutil-epl-export-event-logs-evtx",
+  "categories": [
+    5812,
+    2509703,
+    6
+  ],
+  "tags": [
+    24918814,
+    59355672,
+    572368
+  ],
+  "rotation": {
+    "previous": "Linux Command #69",
+    "current": "Windows Commands",
+    "next": "Electrical Engineering",
+    "source": "Canonical 43-subject curriculum audit"
+  },
+  "topic": "Exporting Windows event logs to EVTX, XPath filtering, verifying exported logs and evidence-handling boundaries",
+  "official_sources": [
+    "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil",
+    "https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log-tools",
+    "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent"
+  ],
+  "cover": {
+    "media_id": 34011,
+    "filename": "windows-command-55-wevtutil-epl-1200x630-1.jpg",
+    "pixels": [
+      1200,
+      630
+    ],
+    "style": "photorealistic conceptual editorial artwork",
+    "people": false,
+    "wordmark": "BitcoinVersus.tech; #39FF14 applied at lower-left on black",
+    "not_repeated_inside_article": true,
+    "alt": "Photorealistic conceptual Windows data-center workstation with event log viewer, evidence storage drive and secure collection envelope"
+  },
+  "embedded_media": [
+    {
+      "url": "https://www.youtube.com/watch?v=nOhQpVCHssc",
+      "publisher": "NKTechForAll",
+      "title": "How to Export Event viewer logs and share it on Windows",
+      "identity_verified": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1ldbMlxKZVQ",
+      "title": "Peep the Technique Episode 1.2: Windows Event Logs",
+      "identity_verified": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=08WZXnicLBo",
+      "publisher": "Tech In Moments",
+      "title": "Windows Event Viewer Tutorial: A Step by Step Guide",
+      "identity_verified": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    }
+  ],
+  "prepublication_qa": {
+    "numbering_checked": true,
+    "next_number_open_before_create": true,
+    "duplicate_topic_search_done": true,
+    "content_bytes": 12639,
+    "save_gutenberg_embed_blocks": 3,
+    "code_blocks": 5,
+    "contextual_internal_links": 4,
+    "mandatory_footer_exact": true,
+    "original_qr_present": true,
+    "editor_note_present": true,
+    "seo_title": "Windows Command #55: wevtutil epl Export Logs | BitcoinVersus.Tech",
+    "seo_description": "Windows Command #55 covers wevtutil epl, EVTX exports, XPath event filters, offline verification and secure incident evidence handling.",
+    "banned_words_in_original_prose": []
+  },
+  "live_page": {
+    "http_status": 200,
+    "visibility": "public",
+    "canonical_url": "https://bitcoinversus.tech/2026/11/20/windows-command-55-wevtutil-epl-export-event-logs-evtx/",
+    "three_youtube_iframes_rendered": true,
+    "og_featured_image_present": true,
+    "og_image_alt_present": true,
+    "missing_alt_images": 0,
+    "empty_links": 0,
+    "site_level_links_to_nowhere": 8,
+    "site_level_link_note": "WordPress sharing, image and subscription controls, not established article-body defects"
+  },
+  "chart": {
+    "used": false,
+    "reason": "Command sequence and evidence checklist communicate the workflow without inventing quantitative operational data; no measurement dataset available."
+  },
+  "unresolved": [
+    "Actual YouTube video playback and controls not browser-tested",
+    "Mobile visual appearance and responsive layout not independently tested",
+    "Commands not run on a Windows host; no real event log files were collected",
+    "No independent forensic validation, chain-of-custody audit or hardware intervention occurred."
+  ]
+}

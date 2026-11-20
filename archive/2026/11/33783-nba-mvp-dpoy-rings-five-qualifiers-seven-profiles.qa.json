@@ -1,0 +1,224 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "date": "2026-11-19",
+  "section": "Sports / NBA history",
+  "title": "Only Five NBA Players Have Won MVP, DPOY and a Ring: Top 7 Countdown",
+  "wp_post_id": 33783,
+  "published_status": "publish",
+  "published_url": "https://bitcoinversus.tech/2026/11/19/nba-mvp-dpoy-championship-five-players-top-seven-near-misses-2026/",
+  "slug": "nba-mvp-dpoy-championship-five-players-top-seven-near-misses-2026",
+  "category_ids": [
+    67,
+    6
+  ],
+  "tag_ids": [
+    6090136,
+    1276687,
+    798510,
+    2041629
+  ],
+  "scope": {
+    "criteria": "Won at least one NBA regular-season MVP, at least one NBA Defensive Player of the Year, and at least one NBA championship at any time during career",
+    "historical_cutoff": "2025-26 completed NBA season; checked 2026-11-19",
+    "qualifying_count": 5,
+    "qualifying_ranking": [
+      {
+        "rank": 5,
+        "name": "Kevin Garnett",
+        "mvp": 1,
+        "dpoy": 1,
+        "rings": 1
+      },
+      {
+        "rank": 4,
+        "name": "David Robinson",
+        "mvp": 1,
+        "dpoy": 1,
+        "rings": 2
+      },
+      {
+        "rank": 3,
+        "name": "Giannis Antetokounmpo",
+        "mvp": 2,
+        "dpoy": 1,
+        "rings": 1
+      },
+      {
+        "rank": 2,
+        "name": "Hakeem Olajuwon",
+        "mvp": 1,
+        "dpoy": 2,
+        "rings": 2
+      },
+      {
+        "rank": 1,
+        "name": "Michael Jordan",
+        "mvp": 5,
+        "dpoy": 1,
+        "rings": 6
+      }
+    ],
+    "explicit_nonqualifiers": [
+      {
+        "rank": 7,
+        "name": "Kawhi Leonard",
+        "mvp": 0,
+        "dpoy": 2,
+        "rings": 2,
+        "reason": "No regular-season NBA MVP award"
+      },
+      {
+        "rank": 6,
+        "name": "Tim Duncan",
+        "mvp": 2,
+        "dpoy": 0,
+        "rings": 5,
+        "reason": "Never won NBA Defensive Player of the Year"
+      }
+    ],
+    "editorial_sort": "Editorial assessment of career honors, two-way peak and championship contributions; ranking not an NBA award or official statistic."
+  },
+  "sources": [
+    "https://www.nba.com/news/history-mvp-award-winners",
+    "https://www.nba.com/news/history-defensive-player-of-the-year-winners",
+    "https://www.nba.com/news/history-nba-legend-michael-jordan",
+    "https://www.nba.com/news/history-nba-legend-hakeem-olajuwon",
+    "https://www.usab.com/players/david-robinson",
+    "https://www.nba.com/news/season-review-2007-08",
+    "https://pr.nba.com/19-20-mvp-antetokounmpo/",
+    "https://www.nba.com/news/players-who-have-won-both-kia-mvp-and-nba-championship-in-the-same-season"
+  ],
+  "media": [
+    {
+      "rank": 7,
+      "player": "Kawhi Leonard",
+      "url": "https://www.youtube.com/watch?v=rB4qtxWW8sw",
+      "source": "ESPN",
+      "source_page_identified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "rank": 6,
+      "player": "Tim Duncan",
+      "url": "https://www.youtube.com/watch?v=OL1sORY3Kh4",
+      "source": "NBA",
+      "source_page_identified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "rank": 5,
+      "player": "Kevin Garnett",
+      "url": "https://www.youtube.com/watch?v=StejdQWmb50",
+      "source": "NBA",
+      "source_page_identified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "rank": 4,
+      "player": "David Robinson",
+      "url": "https://www.youtube.com/watch?v=jR5IMM0mzUk",
+      "source": "NBA",
+      "source_page_identified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "rank": 3,
+      "player": "Giannis Antetokounmpo",
+      "url": "https://www.youtube.com/watch?v=xxRQ5nne7fs",
+      "source": "NBA",
+      "source_page_identified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "rank": 2,
+      "player": "Hakeem Olajuwon",
+      "url": "https://www.youtube.com/watch?v=_m8OeZWbcOE",
+      "source": "NBA",
+      "source_page_identified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "rank": 1,
+      "player": "Michael Jordan",
+      "url": "https://www.youtube.com/watch?v=jbW4f60dCNA",
+      "source": "NBA",
+      "source_page_identified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    }
+  ],
+  "featured_image": {
+    "id": 33781,
+    "filename": "nba-mvp-dpoy-champions-top-five-oil-painting-cover.jpg",
+    "original_size_px": [
+      1200,
+      630
+    ],
+    "style": "fine-art oil painting",
+    "watermark_visual": "BitcoinVersus.tech green on tight black lower-left label; exact pixel-color value not independently sampled",
+    "alt": "Original oil painting of five legendary basketball players in red, green and black uniforms under golden trophies, representing the only five NBA players with MVP, DPOY and championship credentials",
+    "duplicated_in_body": false
+  },
+  "chart": {
+    "id": 33782,
+    "file": "nba-mvp-dpoy-ring-counts-five-players-vertical-grouped-bars.png",
+    "type": "grouped vertical bar",
+    "original_size_px": [
+      1785,
+      976
+    ],
+    "source": "NBA MVP and DPOY histories; league and USA Basketball championship profiles",
+    "data": "five eligible players only; MVP, DPOY and title counts",
+    "candidates_considered": [
+      "grouped vertical bars",
+      "stacked vertical bars",
+      "donut chart"
+    ],
+    "reason_for_choice": "Grouped vertical bars keep the award types separate and preserve absolute comparisons. Stacking would conflate distinct types; a donut would imply a misleading shared total.",
+    "zero_baseline": true,
+    "labeled_series": true,
+    "values_labeled": true,
+    "mobile_css_responsive": true,
+    "mobile_screenshot_verified": false,
+    "forecast_used": false
+  },
+  "saved_gutenberg_qa": {
+    "verified_content_bytes": 15449,
+    "numbered_headings": 7,
+    "video_embed_blocks": 7,
+    "internal_contextual_links": 4,
+    "source_og_chart_present": true,
+    "donation_qr_present": true,
+    "editor_note_present": true,
+    "prohibited_editorial_words": [],
+    "seo_title": "Only 5 NBA Players Have Won MVP, DPOY and a Ring | Ranked",
+    "seo_description": "Five NBA players have won MVP, Defensive Player of the Year and a championship. Compare Jordan, Hakeem, Giannis, Robinson, Garnett and two near-misses.",
+    "novel_topic_checked_wordpress_published_drafts_and_github": true
+  },
+  "live_page_qa": {
+    "public_http_status": 200,
+    "canonical": "https://bitcoinversus.tech/2026/11/19/nba-mvp-dpoy-championship-five-players-top-seven-near-misses-2026/",
+    "seo_title": "Only 5 NBA Players Have Won MVP, DPOY and a Ring | Ranked",
+    "social_og_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/nba-mvp-dpoy-champions-top-five-oil-painting-cover.jpg",
+    "og_image_alt_present": true,
+    "rendered_youtube_iframes": 7,
+    "rendered_chart_present": true,
+    "missing_image_alt_count": 0,
+    "empty_link_count": 0,
+    "site_ui_links_to_nowhere_count": 8,
+    "site_ui_note": "Site-level share, photo and subscription UI controls; not verified as article-body defects"
+  },
+  "unresolved": [
+    "YouTube playback and controls not verified in real browser",
+    "Mobile video and chart visual layout not independently verified with viewport screenshots",
+    "Individual embedded video availability could change after publication",
+    "Exact featured-wordmark green color #39FF14 not pixel-sampled"
+  ],
+  "archive_date": "2026-11-19"
+}

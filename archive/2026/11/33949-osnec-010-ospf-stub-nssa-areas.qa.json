@@ -1,0 +1,115 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "date": "2026-11-20",
+  "lesson": "OSNEC.010",
+  "subject": "Networking Engineering",
+  "numbering": "OSNEC.009 preceded OSNEC.010; no earlier OSNEC.010 draft/published entry found before publication",
+  "rotation": "Canonical 43-subject order, Networking Engineer follows Networking Technician OSNTC.048",
+  "wp_post_id": 33949,
+  "title": "OSNEC.010: OSPF Stub and NSSA Areas Explained",
+  "status": "publish",
+  "live_url": "https://bitcoinversus.tech/2026/11/20/osnec-010-ospf-stub-totally-stubby-nssa-type7-lsa-translation/",
+  "categories": [
+    346871,
+    5177360,
+    5812,
+    2509703,
+    6
+  ],
+  "tags": [
+    37647
+  ],
+  "technical_basis": [
+    "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13703-8.html",
+    "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/6208-nssa.html",
+    "https://www.juniper.net/documentation/us/en/software/junos/ospf/topics/topic-map/configuring-ospf-areas.html",
+    "https://www.rfc-editor.org/rfc/rfc3101"
+  ],
+  "verified_embeds": [
+    {
+      "url": "https://www.youtube.com/watch?v=NovgOj0oK_U",
+      "type": "youtube",
+      "topic": "OSPF Stub / Totally Stubby / NSSA",
+      "source_page_identified": true,
+      "saved_block_verified": true,
+      "rendered_iframe_verified": true,
+      "actual_playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sBI5cX8TiZo",
+      "type": "youtube",
+      "topic": "NSSA and Totally NSSA configuration",
+      "source_page_identified": true,
+      "saved_block_verified": true,
+      "rendered_iframe_verified": true,
+      "actual_playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=RnOuZJwtV7Y",
+      "type": "youtube",
+      "topic": "Stub and Totally Stubby areas",
+      "source_page_identified": true,
+      "saved_block_verified": true,
+      "rendered_iframe_verified": true,
+      "actual_playback_verified": false
+    }
+  ],
+  "cover": {
+    "media_id": 33940,
+    "file": "osnec010-ospf-stub-nssa-1200x630-1.jpg",
+    "dimensions": [
+      1200,
+      630
+    ],
+    "style": "cinematic anime",
+    "depicted_subject": "Latina network engineer working beside switching racks",
+    "wordmark": "BitcoinVersus.tech neon-green bottom-left tight black label",
+    "exact_hex_pixel_test": false,
+    "alt_text": "Original cinematic anime illustration of a Latina network engineer examining routing diagnostics at a laptop beside high-speed network switches",
+    "duplicated_in_body": false
+  },
+  "chart": {
+    "included": false,
+    "alternatives_compared": [
+      "Grouped vertical bars",
+      "line chart",
+      "categorical protocol comparison table"
+    ],
+    "selected": "categorical protocol comparison table",
+    "reason": "Area LSA permissions are categorical, not measurements; charting numeric heights would mislead. Accessible Gutenberg table is a clearer teaching aid."
+  },
+  "saved_gutenberg": {
+    "bytes": 11175,
+    "three_embed_blocks": 3,
+    "internal_links": 4,
+    "html_table": true,
+    "code_block": true,
+    "editor_note": true,
+    "required_donation_qr": true,
+    "exact_footer": true,
+    "prohibited_words_in_editorial": [],
+    "meta_description": "OSNEC.010 explains OSPF stub and NSSA areas, Type 7 to Type 5 translation, ABR default routes and safe troubleshooting.",
+    "seo_title": "OSNEC.010: OSPF Stub vs NSSA Areas | BitcoinVersus.Tech"
+  },
+  "live_audit": {
+    "http_status": 200,
+    "site_visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/20/osnec-010-ospf-stub-totally-stubby-nssa-type7-lsa-translation/",
+    "featured_image_open_graph": true,
+    "og_image_alt": true,
+    "rendered_youtube_iframes": 3,
+    "missing_image_alt_count": 0,
+    "empty_link_count": 0,
+    "site_ui_placeholder_links": 8,
+    "site_ui_note": "Site navigation/sharing and subscription controls, not confirmed post-body failures",
+    "mobile_layout_tested": false
+  },
+  "limitations": [
+    "Real player playback and interaction were not tested in a browser",
+    "Mobile viewport appearance and responsive playback not independently tested",
+    "No physical router command execution or topology test was performed",
+    "Exact watermark #39FF14 pixel value and 10pt visual size not independently measured"
+  ],
+  "next_main_rotation_candidate": "OSPython.049, subject to fresh live and draft duplicate check",
+  "archived_date": "2026-11-20"
+}

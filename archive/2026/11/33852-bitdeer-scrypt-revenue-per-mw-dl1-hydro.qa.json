@@ -1,0 +1,93 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "topic": "Bitdeer November 10 2026 Scrypt mining revenue per megawatt and DL1 Hydro",
+  "post_id": 33852,
+  "title": "Bitdeer Says Scrypt Mining Earns More Revenue per MW Than Bitcoin",
+  "slug": "bitdeer-scrypt-mining-revenue-per-mw-bitcoin-dl1-hydro-2026",
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/19/bitdeer-scrypt-mining-revenue-per-mw-bitcoin-dl1-hydro-2026/",
+  "published_date": "2026-11-19",
+  "categories": [
+    792826578,
+    36507086,
+    57414501,
+    5812,
+    6,
+    27318186
+  ],
+  "tags": [
+    168624715,
+    706547707,
+    203895137
+  ],
+  "cover_media_id": 33845,
+  "original_cover_size_px": [
+    1200,
+    630
+  ],
+  "cover_style": "Photorealistic ASIC-mining editorial illustration",
+  "cover_not_repeated_in_article": true,
+  "source_evidence": [
+    "https://www.fool.com/earnings/call-transcripts/2026/11/10/bitdeer-btdr-q3-2026-earnings-call-transcript/",
+    "https://ir.bitdeer.com/news-releases/news-release-details/bitdeer-launches-sealminer-dl1-hydro-achieving-525-ghs-and-149",
+    "https://www.bitdeer.com/shop/sealminer/dl1/hyd",
+    "https://bitdeer.gcs-web.com/news-releases/news-release-details/bitdeer-reports-unaudited-third-quarter-2026-results-record"
+  ],
+  "original_sources_verified": true,
+  "youtube_embeds": [
+    {
+      "url": "https://www.youtube.com/watch?v=x_oS0oL_2hU",
+      "publisher": "Bitdeer Official",
+      "source_listing_verified": true,
+      "wordpress_saved_embed": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1cUX-5S0vW0",
+      "publisher": "Bitdeer Official",
+      "source_listing_verified": true,
+      "wordpress_saved_embed": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ImUJcMGAz60",
+      "publisher": "Red Fox Crypto",
+      "source_listing_verified": true,
+      "wordpress_saved_embed": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    }
+  ],
+  "saved_gutenberg": {
+    "content_bytes": 9173,
+    "core_embed_blocks": 3,
+    "internal_links": 4,
+    "donation_qr": true,
+    "editors_note": true,
+    "forbidden_editorial_terms": [],
+    "seo_title": "Bitdeer: Scrypt Revenue per MW Beats Bitcoin | BitcoinVersus.Tech",
+    "seo_description": "Bitdeer says Scrypt mining earns more revenue per MW than Bitcoin. DL1 Hydro power, Scrypt ASIC economics and profitability limits explained."
+  },
+  "chart": {
+    "description": "Vertical bar, three operating modes, 0 kW baseline; calculated power [5.610,7.8225,8.635] kW from manufacturer-rated GH/s and J/GH, not measured; media 33849"
+  },
+  "live_page": {
+    "http_status": 200,
+    "site_visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/19/bitdeer-scrypt-mining-revenue-per-mw-bitcoin-dl1-hydro-2026/",
+    "open_graph_featured_image_present": true,
+    "missing_alt_count": 0,
+    "empty_link_count": 0,
+    "youtube_iframe_count": 3,
+    "site_level_placeholder_control_links": 8
+  },
+  "outstanding": [
+    "Actual player playback not verified with browser interaction",
+    "Mobile screenshot / responsive visual verification not performed",
+    "No physical production system or independent ASIC benchmark tested"
+  ],
+  "next_rotation_candidate": null,
+  "archived_on": "2026-11-19"
+}

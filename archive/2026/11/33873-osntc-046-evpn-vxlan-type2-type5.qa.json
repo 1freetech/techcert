@@ -1,0 +1,114 @@
+{
+  "site": "BitcoinVersus.Tech",
+  "lesson_number": "OSNTC.046",
+  "title": "OSNTC.046: EVPN-VXLAN Route Types 2 and 5",
+  "wordpress_id": 33873,
+  "status": "publish",
+  "public_url": "https://bitcoinversus.tech/2026/11/20/osntc-046-evpn-vxlan-route-type-2-5-troubleshooting/",
+  "publication_date": "2026-11-20",
+  "subject": "EVPN VXLAN Type 2 MAC/IP and Type 5 IP prefix route troubleshooting",
+  "category_ids": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    57619195,
+    2143232,
+    488133995
+  ],
+  "preceding_lesson": "OSNTC.045",
+  "duplicate_audit": "WordPress published/draft search for OSNTC.046 and subject; GitHub lesson archive checked before creation",
+  "original_cover": {
+    "wordpress_media_id": 33870,
+    "width": 1200,
+    "height": 630,
+    "visual_style": "Detailed modern colored-pencil illustration",
+    "wordmark": "BitcoinVersus.tech, neon green on tight black bottom-left highlight",
+    "alternative_text": "Detailed colored-pencil illustration of a network engineer reviewing a data-center EVPN fabric beside switches and yellow and turquoise fiber cables",
+    "not_embedded_in_body": true
+  },
+  "source_urls": [
+    "https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/106x/configuration/vxlan/cisco-nexus-9000-series-nx-os-vxlan-configuration-guide-release-106x/m_configuring_vxlan_bgp_evpn.html",
+    "https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/concept/evpn-vxlan-encapsulation.html",
+    "https://www.cisco.com/c/en/us/td/docs/switches/lan/cisco_ie9300/software/Configuration_Guide/BGP-EVPN-VXLAN/b-bgp-evpn-vxlan-cg/troubleshooting_bgp_evpn_vxlan.html",
+    "https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/example/example-using-policy-filters-to-filter-evpn-routes.html",
+    "https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/concept/evpn-t2-t5-coexist-evpn-vxlan.html"
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=XC62Dqn8S-g",
+      "publisher": "HPE Juniper Networking",
+      "title": "Simplified: Why EVPN/VXLAN?",
+      "published": "2019-11-05",
+      "listing_verified": true,
+      "rendered_iframe_verified": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=vyIhIluK_9M",
+      "publisher": "Nick Carlton",
+      "title": "Cisco VXLAN EVPN - Reading Type 2 Route Output",
+      "published": "2025-03-30",
+      "listing_verified": true,
+      "rendered_iframe_verified": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=YwLSRhh8OP0",
+      "publisher": "HPE Juniper Networking",
+      "title": "Configuring Data Center EVPN-VXLAN",
+      "published": "2022-06-10",
+      "listing_verified": true,
+      "rendered_iframe_verified": true,
+      "playback_verified": false
+    }
+  ],
+  "saved_source_qa": {
+    "content_length_bytes": 12309,
+    "gutenberg_embed_blocks": 3,
+    "gutenberg_code_blocks": 1,
+    "contextual_internal_links": 5,
+    "prohibited_editorial_terms": [],
+    "editor_note": true,
+    "donation_qr": true,
+    "seo_title": "OSNTC.046: EVPN-VXLAN Type 2 and Type 5 Routes | BitcoinVersus.Tech",
+    "meta_description": "OSNTC.046 explains EVPN VXLAN route Type 2 and Type 5, missing MAC/IP hosts, VTEP checks, and safe Cisco and Juniper troubleshooting."
+  },
+  "live_qa": {
+    "response_http": 200,
+    "public_visibility": true,
+    "canonical": "https://bitcoinversus.tech/2026/11/20/osntc-046-evpn-vxlan-route-type-2-5-troubleshooting/",
+    "seo_title": "OSNTC.046: EVPN-VXLAN Type 2 and Type 5 Routes | BitcoinVersus.Tech",
+    "open_graph_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/osntc046-evpn-vxlan-routes-cover-1200x630-1.jpg",
+    "open_graph_scaled_preview": "1024x538 (WordPress generated derivative, original media 1200x630)",
+    "image_alt_missing_count": 0,
+    "empty_link_count": 0,
+    "youtube_iframe_count": 3,
+    "iframe_ids": [
+      "XC62Dqn8S-g",
+      "vyIhIluK_9M",
+      "YwLSRhh8OP0"
+    ],
+    "reported_site_level_placeholder_links": 8
+  },
+  "chart": {
+    "included": false,
+    "reason": "Route type classification and read-only network commands are more instructive than a numeric chart without a verified dataset. No invented time series used.",
+    "considered": [
+      "Vertical bar of authentic route counts",
+      "Line chart of real incident latency",
+      "Source-code/route-table exercise"
+    ],
+    "chosen": "Source-code/route-table exercise"
+  },
+  "limitations": [
+    "YouTube playback and actual controls not tested interactively",
+    "Mobile responsive visual checks not independently performed",
+    "Lab addresses and incident observations are fictional; no hardware or network CLI execution",
+    "Published page's generic sharing and subscription controls include eight placeholder-style links outside the lesson body"
+  ],
+  "next_candidate": "OSNTC.047, after a new duplicate and subject-rotation audit",
+  "archive_date": "2026-11-20"
+}

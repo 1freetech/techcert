@@ -1,0 +1,122 @@
+<!-- wp:paragraph -->
+<p><strong>OSNTC.046</strong> explains why an endpoint can disappear from an Ethernet VPN (EVPN) fabric even while its physical link remains up. <strong>VXLAN</strong> carries tenant Ethernet traffic across a routed IP underlay. <strong>BGP EVPN</strong> distributes information about reachable MAC addresses, host IPs and routed prefixes. An operator therefore needs to check control-plane advertisements, overlay next hops and actual forwarding, not just port LEDs. The lesson extends <a href="https://bitcoinversus.tech/2026/11/20/osntc-045-rocev2-congestion-pfc-ecn-dcqcn-troubleshooting/">OSNTC.045 on RoCEv2 congestion</a> and <a href="https://bitcoinversus.tech/2026/10/11/osdcec-009-data-center-network-fabrics/">OSDCEC.009 on data-center fabrics</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=XC62Dqn8S-g","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=XC62Dqn8S-g
+</div><figcaption class="wp-element-caption"><em>HPE Juniper Networking, “Simplified: Why EVPN/VXLAN?”, November 5, 2019. Official introductory overview; player playback has not been independently tested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Type 2 carries MAC and optional host-IP reachability</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>EVPN <strong>Route Type 2</strong>, the MAC/IP Advertisement Route, announces a learned MAC address and can include an associated IP address. Leaf switches use it to discover remote endpoints without relying solely on traditional flood-and-learn behavior. An imported route still needs the correct tenant context, route target and reachable VXLAN tunnel endpoint (VTEP) to become useful for forwarding. Cisco's <a href="https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/106x/configuration/vxlan/cisco-nexus-9000-series-nx-os-vxlan-configuration-guide-release-106x/m_configuring_vxlan_bgp_evpn.html">Nexus 9000 VXLAN configuration reference</a> documents the EVPN route and MAC verification commands.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An endpoint may be locally learned but not exported, visible in BGP yet rejected by the remote import policy, or imported without a working underlay path. Those failure modes call for different evidence. Avoid declaring a server faulty merely because its MAC is absent from one switch's forwarding table.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Type 5 advertises IP prefixes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Route Type 5</strong> advertises an IP prefix, commonly supporting routed connectivity between tenant subnets or toward an external network through an L3 VXLAN service. Unlike a host MAC/IP Type 2 advertisement, a Type 5 route describes prefix reachability without requiring a separate advertisement for every host MAC. <a href="https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/concept/evpn-vxlan-encapsulation.html">Juniper's EVPN Type 5 explanation</a> describes the separation. Type 2 and Type 5 can coexist, and vendor-specific route preferences may influence which path is installed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A healthy Type 5 route does <strong>not</strong> prove a particular host's Type 2 information exists. An operator troubleshooting traffic must establish whether the failing destination is a local or remote MAC, a routed host, or an IP prefix reached through a border leaf. See <a href="https://bitcoinversus.tech/2026/10/10/osntc-024-static-routing-and-routing-tables-next-hops-default-routes-longest-prefix-match-and-verification/">OSNTC.024 on next hops and routing tables</a> for the underlying forwarding concepts.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=vyIhIluK_9M","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=vyIhIluK_9M
+</div><figcaption class="wp-element-caption"><em>Nick Carlton, “Cisco VXLAN EVPN: Reading Type 2 Route Output,” March 30, 2025. A focused independent walkthrough; command semantics are checked against Cisco documentation.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A safe, read-only verification sequence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a supported Cisco Nexus NX-OS fabric, start by recording the platform, release, tenant VRF, VLAN-to-VNI mapping, intended source and destination, and incident timestamps. The following examples are observation commands; exact syntax and available output differ by switch family and software version. Confirm them against the local command reference before use.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>show bgp l2vpn evpn summary
+show bgp l2vpn evpn
+show nve peers
+show nve vni
+show l2route evpn mac all
+show l2route evpn mac-ip all</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Check in order: BGP EVPN session state, expected Type 2 and Type 5 advertisements, VTEP peer status, membership in the correct VXLAN Network Identifier (VNI), then the learned local and remote MAC/IP entries. Cisco's <a href="https://www.cisco.com/c/en/us/td/docs/switches/lan/cisco_ie9300/software/Configuration_Guide/BGP-EVPN-VXLAN/b-bgp-evpn-vxlan-cg/troubleshooting_bgp_evpn_vxlan.html">EVPN troubleshooting guidance</a> explicitly distinguishes host reachability from Type 5 external-prefix reachability. A BGP session alone is insufficient evidence of a usable data path.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice: one missing host, one healthy prefix</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Fictional incident:</strong> Tenant BLUE has a remote server at 10.10.10.25, MAC 00:11:22:33:44:55, reached through VTEP 192.0.2.12. A routed Type 5 advertisement for 10.20.0.0/24 is visible, and the remote VTEP is reachable in the underlay. However, the expected server MAC/IP Type 2 advertisement is missing from the receiving leaf's EVPN table. All addresses and observations are teaching examples; no real network was queried.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Before selecting a repair, confirm whether the server MAC is learned on its attachment leaf. If yes, compare the originating and receiving BGP EVPN tables, tenant route targets, import/export policy and matching L2 VNI. If the Type 2 route is present in BGP but absent from the installed EVPN MAC table, investigate next-hop resolution and supported installation diagnostics. If no remote route exists at all, inspect the source of advertisement rather than changing receive-side forwarding indiscriminately.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a Junos environment, comparable <em>read-only</em> observations include <code>show route table bgp.evpn.0</code> and <code>show evpn database</code>. Juniper's <a href="https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/example/example-using-policy-filters-to-filter-evpn-routes.html">official policy-filter example</a> demonstrates both commands. Do not copy a Cisco command directly into Junos or assume identical tables and route preferences.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=YwLSRhh8OP0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=YwLSRhh8OP0
+</div><figcaption class="wp-element-caption"><em>HPE Juniper Networking, “Configuring Data Center EVPN-VXLAN,” June 10, 2022. Official training for supported Junos platforms; configuration shown in the video is not authorization to alter a production fabric.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Where the underlay and overlay meet</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>VXLAN commonly uses UDP destination port <strong>4789</strong>. The IP underlay must route packets to the remote VTEP; the EVPN control plane must distribute appropriate reachability; and tenant-specific VNI and routing contexts must agree. A working optical interface or 800G port does not guarantee either overlay requirement. Review <a href="https://bitcoinversus.tech/2026/11/19/osntc-044-800g-optical-dom-rx-power-fec-troubleshooting/">OSNTC.044 on optics and FEC</a> and <a href="https://bitcoinversus.tech/2026/11/15/osntc-043-800g-breakout-port-channelization-2x400g-8x100g-verification/">OSNTC.043 on breakout mapping</a> to separate physical failures from EVPN reachability faults.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Avoid changing route targets, VLAN mappings, BGP sessions, NVE interfaces or tunnel settings during an exploratory check. Such changes may disconnect many tenants. Record time-stamped output, affected endpoints and a narrow hypothesis. If configuration remediation is necessary, follow an approved change plan with peer review and rollback steps.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Lab questions and acceptance evidence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Explain why a received Type 5 route cannot substitute automatically for a missing Type 2 MAC/IP route. Identify which leaf should originate the missing announcement. List the read-only evidence that would distinguish a route export failure, import-policy mismatch and VTEP reachability issue. An acceptable lab report names the exact route, peer and tenant context for each conclusion, while labeling unverified claims explicitly.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> Troubleshoot EVPN-VXLAN from endpoint to control plane to tunnel to forwarding table. Type 2 identifies MAC/IP reachability; Type 5 identifies IP prefixes. Correct classification prevents unnecessary changes to healthy ports or unrelated tenants.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSNTC.046 follows published OSNTC.045. Sources include Cisco Nexus VXLAN documentation and Juniper's EVPN Type 5 and policy-filter references. The exercise is fictional and no network hardware or production router was accessed. The three videos were identified from their public publisher listings, but playback, smartphone layout and real-device command execution remain unverified. The one original 1200 × 630 colored-pencil featured cover is not repeated in the article.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5,000-satoshi contribution QR code" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech publishes independent technical education. An optional <strong>5,000-satoshi</strong> contribution supports research. Independently verify wallet recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before sending. Bitcoin transactions are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We work to make information Verifiably True. The lab is educational, not authorization to change production networks, bypass organizational approvals, or substitute for qualified engineering advice. No financial or investment advice is provided.</em></p>
+<!-- /wp:paragraph -->

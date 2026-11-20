@@ -1,0 +1,137 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "lesson_id": "OSPCB.009",
+  "category": "PCB Engineering",
+  "post_id": 34076,
+  "title": "OSPCB.009: From PCB Design to Assembly",
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/20/ospcb-009-pcb-assembly-bom-pick-place-solder-paste-stencil/",
+  "slug": "ospcb-009-pcb-assembly-bom-pick-place-solder-paste-stencil",
+  "published_date": "2026-11-20",
+  "categories": [
+    233999,
+    792709720,
+    284207,
+    2509703,
+    6
+  ],
+  "tags": [
+    3056964,
+    6940473,
+    104156545
+  ],
+  "rotation": {
+    "registry": "43-subject curriculum",
+    "previous": "OSETC.044",
+    "current": "PCB Engineering, OSPCB.009",
+    "next_subject": "C++",
+    "next_number": "requires live duplicate check",
+    "visual_style": "fine-art oil painting",
+    "person": "Latino man, only when applicable"
+  },
+  "duplicates": {
+    "wordpress_published_and_drafts_checked": true,
+    "ospcb009_existing_before_creation": 0,
+    "series_has_prior_duplicate_numbers": [
+      "OSPCB.007",
+      "OSPCB.008"
+    ],
+    "no_duplicate_created": true
+  },
+  "cover": {
+    "featured_media_id": 34074,
+    "file": "ospcb009-assembly-bom-pick-place-stencil-cover.jpg",
+    "original_dimensions_px": [
+      1200,
+      630
+    ],
+    "type": "original oil-painting editorial artwork",
+    "alt": "Original fine-art oil painting of a Latino electronics technician reviewing a PCB assembly board, placement machine, stencil and component reels at an electronics lab bench.",
+    "bottom_left_wordmark": "BitcoinVersus.tech neon green over tight black rectangle",
+    "exact_font_or_pixel_color_not_independently_measured": true,
+    "duplicated_in_body": false
+  },
+  "primary_sources": [
+    "https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html",
+    "https://docs.kicad.org/10.0/en/eeschema/eeschema.html",
+    "https://jlcpcb.com/help/article/smt-stencil-data-prepared-for-smt-orders",
+    "https://jlcpcb.com/blog/printed-circuit-board-assembly/",
+    "https://www.pcbway.com/helpcenter/generate_gerber/How_to_Export_Gerber__BOM__and_Pick_and_Place_Files_in_KiCad_9_0.html"
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=V2rnSN_lwjM",
+      "publisher": "Simon Gelo",
+      "published": "2026-04-17",
+      "source_verified": true,
+      "wordpress_embed_saved": true,
+      "rendered_iframe": true,
+      "playback_tested": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=82ujJ1URRxk",
+      "publisher": "Build a CubeSat",
+      "published": "2026-05-23",
+      "source_verified": true,
+      "sponsor_disclosed": true,
+      "wordpress_embed_saved": true,
+      "rendered_iframe": true,
+      "playback_tested": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=PfGJDiz7-TQ",
+      "publisher": "Phil's Lab",
+      "source_verified": true,
+      "sponsor_disclosed": true,
+      "wordpress_embed_saved": true,
+      "rendered_iframe": true,
+      "playback_tested": false
+    }
+  ],
+  "saved_source_qa": {
+    "content_bytes": 10618,
+    "core_video_blocks": 3,
+    "internal_links": 4,
+    "original_donation_qr": true,
+    "exact_approved_footer": true,
+    "editor_note": true,
+    "seo_title": "OSPCB.009: PCB Assembly, BOM and Pick-and-Place | BitcoinVersus.Tech",
+    "seo_description": "OSPCB.009 explains PCB assembly handoff: bills of materials, placement files, solder-paste layers, stencil checks and KiCad 10 export requirements.",
+    "prohibited_editorial_words": []
+  },
+  "visitor_audit": {
+    "http_status": 200,
+    "visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/20/ospcb-009-pcb-assembly-bom-pick-place-solder-paste-stencil/",
+    "seo_title_verified": true,
+    "og_image_present": true,
+    "og_image_alt_present": true,
+    "youtube_iframe_count": 3,
+    "iframe_ids": [
+      "V2rnSN_lwjM",
+      "82ujJ1URRxk",
+      "PfGJDiz7-TQ"
+    ],
+    "missing_image_alt_count": 0,
+    "empty_link_count": 0,
+    "site_ui_placeholder_links_count": 8,
+    "site_ui_note": "WordPress sharing/navigation controls; no confirmed body-link issue"
+  },
+  "chart": {
+    "used": false,
+    "considered": [
+      "grouped vertical bar",
+      "line chart",
+      "scatter chart"
+    ],
+    "reason": "The lesson contains no real numerical dataset that merits a chart. An assembly file checklist is a more accurate teaching aid."
+  },
+  "limitations": [
+    "Actual YouTube playback and control interaction not independently tested",
+    "Mobile viewport appearance not independently tested with browser screenshots",
+    "KiCad GUI export not run in the editorial environment",
+    "No assembly factory or physical PCB inspected",
+    "Exact neon-green pixel color and watermark font size not measured"
+  ],
+  "archived_date": "2026-11-20"
+}

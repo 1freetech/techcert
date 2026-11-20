@@ -1,0 +1,105 @@
+<!-- wp:paragraph -->
+<p><strong>OSEEC.029</strong> introduces a dangerous misunderstanding in industrial motor control: <strong>Safe Torque Off (STO) inhibits torque-producing energy in a compatible drive, but does not electrically isolate its power terminals.</strong> A stopped shaft, cleared alarm or dark display is not proof that a machine is safe for electrical work. The lesson follows <a href="https://bitcoinversus.tech/2026/11/15/oseec-028-dual-channel-safety-relays-emergency-stops-monitored-reset/">OSEEC.028 on dual-channel safety relays</a>, extending the safety chain to the variable-frequency drive (VFD). Siemens' <a href="https://docs.tia.siemens.cloud/r/fail_safe_modules_manual_collection_enus_20/device-specific-information/et-200sp-fail-safe-modules/fail-safe-technology-module-f-tm/f-tm-stepdrive-st-1x24..48v-5a/safety-functions-integrated-in-the-drive/basic-safety-information/safety-integrated-functions/safe-torque-off-sto">official STO reference</a> distinguishes torque inhibition from electrical isolation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=eHsTjQy4HJc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=eHsTjQy4HJc
+</div><figcaption class="wp-element-caption"><em>IMO Precision Controls, “The Engineers Essentials: Safe Torque Off.” Verified source listing, not independently tested playback.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How Safe Torque Off works</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A VFD creates a controlled motor output by switching semiconductor devices. Its certified STO function prevents the output stage from applying the switching sequence needed to produce commanded motor torque. On drives using a stop-category-0 strategy, STO results in coasting rather than a commanded ramp to zero speed. Mechanical inertia may keep a fan, pump or conveyor moving after the safety demand. For VFD conversion and its DC bus, see <a href="https://bitcoinversus.tech/2026/10/11/oseec-018-variable-frequency-drive-engineering-rectifier-dc-bus-pwm-vector-harmonics/">OSEEC.018 on drive engineering</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>STO is standardized as a drive functional-safety function under IEC 61800-5-2. Actual safety integrity depends on the certified drive, wiring or network architecture, diagnostic coverage, application risk assessment and validation. A drive with an STO label does not automatically make an entire machine compliant. Rockwell's <a href="https://literature.rockwellautomation.com/idc/groups/literature/documents/um/750-um002_-en-p.pdf">January 2026 PowerFlex 750 safety manual</a> specifically warns that STO is not electrical safety and that power-device failures can create residual movement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">STO is not an electrical disconnect</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A safety demand may originate at an emergency-stop button or another protective device. STO can serve as the final torque-inhibiting action, but it does not necessarily remove supply voltage, discharge the DC link, or eliminate other stored energy. Qualified workers must follow the equipment-specific electrical isolation, lockout/tagout and absence-of-voltage verification procedure before electrical service. See <a href="https://bitcoinversus.tech/2026/09/30/osetc-011-lockout-tagout-energy-isolation/">OSETC.011 on lockout/tagout</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:table {"hasFixedLayout":true} -->
+<figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><th>Protection</th><th>What it does</th><th>What it does not prove</th></tr></thead><tbody><tr><td>STO</td><td>Inhibits torque-producing drive output</td><td>Electrical isolation or instant shaft stop</td></tr><tr><td>Controlled safety stop</td><td>Provides a specified deceleration and safe state</td><td>Universal availability on every drive</td></tr><tr><td>Isolation and LOTO</td><td>Controls hazardous energy for authorized work</td><td>Completion without approved verification</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>A controlled safety stop, when supported and engineered, can decelerate a machine before reaching a defined safe state. STO alone generally allows coasting. A suspended or externally driven load may still move under gravity or mechanical force, which can require a rated brake or other safeguards. Neither a safety-status indication nor a quiet motor demonstrates that access hazards have been eliminated.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=N2eavSwdwcs","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=N2eavSwdwcs
+</div><figcaption class="wp-element-caption"><em>“What STO Is and Is Not,” a motion-engineering presentation by Trevor Sisco. Source identity checked; actual playback remains unverified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Two channels and safe restart are system questions</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Many STO implementations use redundant safety channels or certified safety communications, but wiring count alone does not establish Performance Level or Safety Integrity Level. Engineers must assess sensor diagnostics, faults, reaction time, feedback and the complete safety-related control system. <a href="https://bitcoinversus.tech/2026/11/12/mirror-contacts-mechanically-linked-relays-weld-detection-safety-feedback/">OSEEC.027 on mirror contacts</a> explains why observing the final switching element can be important in related safety functions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Releasing an emergency-stop or clearing an STO demand should not be treated as permission to restart machinery. Depending on the risk assessment, the design must require an appropriate reset and distinct deliberate start action. The engineer also needs to know how input-channel faults, drive inhibit status and unexpected restart conditions are detected and logged.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read-only practice: investigate a conveyor</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Imagine a hypothetical conveyor that receives an emergency-stop demand. Its safety system activates STO. The drive reports that torque is inhibited, and the belt coasts to a standstill. A technician proposes opening the live VFD enclosure because the motor no longer turns. Identify the missing safety evidence before any access.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The correct engineering review asks for a defined stopping-time assessment, residual motion analysis, verified guarding and access times, restart behavior, documented fault response and authorized electrical-isolation process. The technician must not substitute an STO indication for absence-of-voltage verification. No jumper, wiring changes, drive tests or energized measurements are part of the exercise.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=kAPuTyKT9Oc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=kAPuTyKT9Oc
+</div><figcaption class="wp-element-caption"><em>Rockwell Automation, “New Module Provides Safe Torque Off Functionality via EtherNet/IP,” November 10, 2016. Original manufacturer presentation; playback remains unverified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How to review an STO design</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Start with the machine risk assessment and required level of risk reduction. Verify the exact drive model and approved safety function, the complete signal path, reaction and stopping time, diagnostic treatment of failures, and the validated restart sequence. Compare all claims with the applicable manufacturer documentation rather than copying a circuit from another product family. The Rockwell manual also cautions that STO must not replace ordinary operational starting and stopping controls.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> STO prevents commanded motor torque. It does not equal a holding brake, emergency power disconnect or lockout/tagout. A safe machine depends on the validated system, not a single indicator.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Technical explanations were checked against Siemens, Rockwell's January 2026 PowerFlex safety manual and published ABB STO materials. The three video source pages were identified, but player playback and mobile layout were not independently verified. The conveyor example is fictional; no electrical measurements or live hardware tests were performed. The original 1200 × 630 cinematic-anime featured cover is not repeated inside the article.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please scan the QR code below</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR code for a voluntary 5,000-satoshi donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi contribution. Verify the recipient and amount independently.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-supported. Verify recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before any Bitcoin transfer. Payments are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Disclaimer:</strong> Educational material only. No permission is granted to open energized enclosures, bypass safety devices or substitute for qualified engineering review, approved safety procedures, applicable standards or financial advice.</em></p>
+<!-- /wp:paragraph -->

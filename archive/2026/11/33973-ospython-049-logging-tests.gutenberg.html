@@ -1,0 +1,160 @@
+<!-- wp:paragraph -->
+<p><strong>OSPython.049</strong> answers a practical operations question: does an application log the correct event at the right severity, and stay quiet when there is no warning? Monitoring and incident response depend on reliable evidence. Automated tests can catch missing warnings before deployment. The lesson follows <a href="https://bitcoinversus.tech/2026/11/15/ospython-048-logging-shutdown-handler-flush-file-cleanup/">OSPython.048 on logging shutdown</a> and <a href="https://bitcoinversus.tech/2026/11/14/ospython-047-logger-propagation-nullhandler-duplicate-messages/">OSPython.047 on logger propagation</a>. It tests a fictional equipment record, not a live sensor.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=bMk5a10KeVc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=bMk5a10KeVc
+</div><figcaption class="wp-element-caption"><em>JCharisTech, “How To Unit Test Logging In Python (Asserting Logs),” published November 6, 2022. Direct tutorial on testing logging records and output; iframe playback remains independently unverified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Capture log records instead of console text</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A Python logging call creates a <code>LogRecord</code>, while handlers and formatters determine the final destination and presentation. Python's <a href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertLogs">official assertLogs documentation</a> specifies that <code>assertLogs</code> succeeds when at least one matching record reaches the selected logger at or above a requested level. Its <code>records</code> list contains actual record objects; <code>output</code> contains formatted text. Named loggers make tests less sensitive to unrelated software.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Create the three unittest cases</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Save the complete Python program below as <code>test_logging.py</code>. The temperature function records a WARNING at 80°C or higher, or an INFO message below the threshold. One test checks the warning's level and formatted message, another ensures no warning occurred during ordinary operation, and a third tests the informational message. No hardware is controlled or queried.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>import logging
+import unittest
+
+logger = logging.getLogger("lab.telemetry")
+
+def record_temperature(celsius):
+    if celsius &gt;= 80:
+        logger.warning("device temperature high: %s C", celsius)
+        return "hot"
+    logger.info("device temperature nominal: %s C", celsius)
+    return "ok"
+
+class LoggingTests(unittest.TestCase):
+    def test_warning_record_and_level(self):
+        with self.assertLogs("lab.telemetry", level="WARNING") as captured:
+            state = record_temperature(84)
+        self.assertEqual(state, "hot")
+        self.assertEqual(len(captured.records), 1)
+        record = captured.records[0]
+        self.assertEqual(record.levelname, "WARNING")
+        self.assertEqual(record.getMessage(), "device temperature high: 84 C")
+
+    def test_normal_path_is_quiet_at_warning(self):
+        with self.assertNoLogs("lab.telemetry", level="WARNING"):
+            self.assertEqual(record_temperature(42), "ok")
+
+    def test_normal_info_message(self):
+        with self.assertLogs("lab.telemetry", level="INFO") as captured:
+            record_temperature(42)
+        self.assertEqual(captured.output, [
+            "INFO:lab.telemetry:device temperature nominal: 42 C"
+        ])
+
+if __name__ == "__main__":
+    unittest.main()</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p><code>record.getMessage()</code> resolves delayed <code>%s</code> formatting, allowing a reliable comparison with the final event text. Checking record count also detects duplicate warnings. The topic connects to <a href="https://bitcoinversus.tech/2026/11/14/ospython-047-logger-propagation-nullhandler-duplicate-messages/">OSPython.047</a>, where propagation can unexpectedly produce repeated output. Avoid asserting arbitrary timestamps or machine-specific paths unless those values are under test.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=jxmzY9soFXg","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=jxmzY9soFXg
+</div><figcaption class="wp-element-caption"><em>Corey Schafer, “Python Tutorial: Logging Advanced — Loggers, Handlers, and Formatters.” Background on record routing and formatting; Python documentation governs exact test assertions.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Understand what assertNoLogs guarantees</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>assertNoLogs("lab.telemetry", level="WARNING")</code> fails if the specified logger or a captured child emits a WARNING, ERROR, or CRITICAL entry. It does not prohibit lower-severity INFO or DEBUG messages. Python introduced the method in version 3.10, as recorded in the <a href="https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertNoLogs">official unittest reference</a>. A successful quiet-path test cannot establish an absence of errors outside its capture scope.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Use pytest's caplog fixture</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For teams using pytest, the <code>caplog</code> fixture can inspect logging levels, names and messages without configuring file destinations. Save the following code as <code>test_caplog.py</code> beside the first file. The official <a href="https://docs.pytest.org/en/stable/how-to/logging.html">pytest logging guide</a> documents <code>caplog.at_level()</code>, <code>records</code>, and <code>record_tuples</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>import logging
+from test_logging import record_temperature
+
+def test_warning_with_caplog(caplog):
+    with caplog.at_level(logging.WARNING, logger="lab.telemetry"):
+        result = record_temperature(85)
+    assert result == "hot"
+    assert ("lab.telemetry", logging.WARNING,
+            "device temperature high: 85 C") in caplog.record_tuples</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The assertion checks a precise tuple of logger name, numeric WARNING level and message. A broad search for the substring “high” would be less robust. When application code reconfigures root handlers or disables propagation, pytest's capture can miss records, so keep fixture setup isolated. <a href="https://bitcoinversus.tech/2026/11/11/ospython-046-structured-json-logging-formatters-utc-safe-fields/">OSPython.046 on structured formatting</a> explains the role of stable fields.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=EgpLj86ZHFQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=EgpLj86ZHFQ
+</div><figcaption class="wp-element-caption"><em>Tech With Tim, “Please Learn How To Write Tests in Python… • Pytest Tutorial,” February 25, 2025. Introductory pytest fixtures and assertions, not independent execution of the lab.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Run both frameworks and inspect the results</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>With Python 3.10 or newer, execute <code>python -m unittest -v test_logging.py</code>. To use the optional second framework, install pytest into a disposable virtual environment and run <code>python -m pytest -q test_caplog.py</code>. The actual editorial test environment used <strong>Python 3.13.5</strong> and <strong>pytest 9.0.2</strong>. All three unittest cases and the single pytest case passed. Other interpreter versions, platforms and logging integrations were not tested.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>python -m unittest -v test_logging.py
+python -m pytest -q test_caplog.py
+
+# Actual local result:
+# unittest: Ran 3 tests — OK
+# pytest: 1 passed</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Improve the checks safely</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Change the temperature input from 84 to 79 in a throwaway branch and predict which test should fail. Restore the code after observing the failure. In production, never include passwords, tokens or unnecessary identifiers in logs. Pair logging validation with the redaction techniques in <a href="https://bitcoinversus.tech/2026/10/18/ospython-041-logging-secrets-safely-redaction-filters-and-credential-protection/">OSPython.041</a>. Passing tests prove the program emitted expected events under controlled inputs; they do not prove a device is healthy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> <code>assertLogs</code> checks required events, <code>assertNoLogs</code> guards quiet paths, and <code>caplog</code> offers pytest-based inspection. Compare actual records rather than assumed console output, and keep examples independent of live operations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Example code was executed locally with Python 3.13.5 and pytest 9.0.2, yielding four passing tests. Official Python and pytest references govern API and version behavior. Three YouTube video identities were checked against public listings, but browser playback and mobile display were not independently tested. The 1200 × 630 original colored-pencil cover is editorial artwork, not a screenshot of an operational system.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please scan the QR code below</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional donation QR code for 5,000 satoshis" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech QR for an optional 5,000-satoshi contribution. Verify the recipient and amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>Optional Bitcoin contributions support research. Independently confirm recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and 5,000 satoshis in a compatible wallet. Transfers are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>Educational material only. No production device was connected or modified. Passing logging tests are not an engineering safety certification or a substitute for security review, financial advice, or investment advice.</em></p>
+<!-- /wp:paragraph -->

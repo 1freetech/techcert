@@ -1,0 +1,116 @@
+<!-- wp:paragraph -->
+<p><strong>OSNTC.048</strong> asks why a server can disappear from an EVPN-VXLAN network after moving between racks, even when the new switch port is up. The answer often involves <strong>MAC mobility</strong>, an out-of-date MAC/IP advertisement, a duplicate-MAC protection state, or an ARP/ND proxy entry that has not converged. The lesson builds on <a href="https://bitcoinversus.tech/2026/11/20/osntc-046-evpn-vxlan-route-type-2-5-troubleshooting/">OSNTC.046 on EVPN Route Types 2 and 5</a> and <a href="https://bitcoinversus.tech/2026/11/20/osntc-047-evpn-multihoming-esi-df-election-type-1-type-4/">OSNTC.047 on multihoming and Ethernet Segment Identifiers</a>. Its goal is evidence-based, read-only diagnosis, not changes to a production fabric.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=QeRmgetsDx0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=QeRmgetsDx0
+</div><figcaption class="wp-element-caption"><em>EANTC AG, April 15, 2020: “EVPN MAC Mobility Demo,” a multi-vendor interoperability demonstration involving Arista, Arrcus, Cisco, Juniper, Metaswitch, Nokia and Spirent. Video listing verified; embedded playback has not been independently tested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why a MAC address needs a new location</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In an EVPN fabric, a leaf switch advertises endpoint MAC information using <strong>Route Type 2</strong>, potentially including an IP address. Other leaf switches learn which remote endpoint or VTEP can reach the host. When a VM moves, the newly attached leaf must advertise the updated location and the previous owner should withdraw its stale route. <a href="https://www.rfc-editor.org/rfc/rfc7432.html">RFC 7432, Section 15</a>, defines a MAC Mobility extended community with a sequence number that helps switches distinguish newer advertisements from older ones.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A first advertisement can omit the mobility community, effectively starting at sequence zero. For a genuine move to a different Ethernet segment, the new advertisement uses an incremented sequence number. The same MAC learned on two leaf switches sharing an identical nonzero Ethernet Segment Identifier is a separate multihoming case; it should not automatically be interpreted as a host moving repeatedly. The ESI distinction prevents misleading diagnoses.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Five rapid moves can trigger protection</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Rapid apparent MAC moves may indicate a loop, duplicate addresses or unstable endpoint attachment. RFC 7432 describes a configurable duplicate-MAC mechanism with illustrative defaults of <strong>five moves in 180 seconds</strong>. A device reaching its configured threshold can suppress further MAC/IP advertisement processing for the offending address. Vendor defaults and recovery behavior vary, so never infer a configured threshold from the standards document alone. <a href="https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/task/configuring-mac-mobility-settings.html">Juniper's mobility configuration guide</a> documents the detection window, event threshold and recorded mobility history.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A duplicate alarm is a symptom, not proof that two malicious endpoints exist. Repeated live migrations, a misplaced Ethernet loop, inconsistent ESI configuration or genuinely duplicated MAC settings can produce similar observations. <a href="https://bitcoinversus.tech/2026/10/13/what-is-a-network-loop/">The network-loop explainer</a> helps separate a layer-two loop from a legitimate VM migration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=x8Tm0kjlxrI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=x8Tm0kjlxrI
+</div><figcaption class="wp-element-caption"><em>The Netcademy, March 18, 2026: an educational walkthrough of Junos MAC learning, local switching tables, EVPN Route Type 2 creation and BGP advertisement. Source listing verified; actual player playback remains untested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">ARP suppression can preserve the wrong answer</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>EVPN proxy ARP and IPv6 Neighbor Discovery reduce broadcast and multicast address-resolution traffic by answering requests from learned IP-to-MAC bindings. <a href="https://www.rfc-editor.org/rfc/rfc9161.html">RFC 9161</a> explains how proxy tables learn, refresh, age and respond to neighbor requests. A stale or conflicting binding can make a host appear unreachable even after the BGP route reflects its new location. Diagnose the MAC reachability advertisement and the IP-to-MAC cache separately; successful BGP exchange alone does not prove that every forwarding or proxy table is correct.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Cisco's <a href="https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/103x/configuration/vxlan/cisco-nexus-9000-series-nx-os-vxlan-configuration-guide-release-103x/m_configuring_vxlan_bgp_evpn.html">Nexus VXLAN configuration guide</a> documents ARP suppression and MAC/IP route inspection. IPv6 Neighbor Discovery requires its own checks and policy considerations. Compare <a href="https://bitcoinversus.tech/2026/11/08/osntc-040-ethernet-storm-control-broadcast-multicast-unknown-unicast/">OSNTC.040 on broadcast and multicast storm control</a>: suppression of address-resolution traffic and limiting broadcast storms solve different problems.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read-only commands for Junos and Cisco</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On supported Junos systems, the following operational commands expose MAC location, mobility sequence, history and duplicate state. Record the routing instance, VNI, source leaf and peer platform before interpreting their output.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>show evpn database extensive
+show evpn instance extensive</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>On supported Cisco Nexus NX-OS versions, inspect BGP EVPN, the MAC/IP route table and the suppression cache. The available options depend on software release and platform. These examples are read-only <code>show</code> commands, not configuration changes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>show bgp l2vpn evpn
+show l2route evpn mac-ip all detail
+show ip arp suppression-cache detail</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Juniper's <a href="https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/command/show-evpn-database.html">show evpn database reference</a> describes sequence, history and duplicate-detection fields. Check the same MAC and IP on both old and new leaves, then compare advertised next hops, route sequence, local forwarding installation and proxy-cache status. Do not clear routes, reset neighbors or disable protection during evidence collection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=D9k9_hRdrGc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=D9k9_hRdrGc
+</div><figcaption class="wp-element-caption"><em>Network Direction, March 8, 2018: “VXLAN Part 6: BGP EVPN Configuration” on Cisco Nexus, including VTEPs, MAC/IP learning and ARP suppression. Historical demonstration; use current vendor guides for exact supported commands.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A simulated migration ticket</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A fictional VM with IP <code>192.0.2.25</code> and MAC <code>02:11:22:33:44:55</code> moves from Leaf A to Leaf B at 10:02. Leaf B advertises sequence 8, while one remote leaf still shows sequence 7 with Leaf A as its next hop at 10:03. At 10:04, an ARP proxy entry still points to the former association. The evidence suggests a convergence or state-installation problem, but does not establish why convergence stalled. All addresses, times and sequences are classroom data, not field telemetry.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Build an incident record listing the observed VNI, ESI, old and new MAC/IP Type 2 routes, current sequence numbers, MAC table entries, neighbor-cache records and timestamps. Identify which switch originated each value and whether information came from control-plane BGP, hardware forwarding or a proxy cache. Check <a href="https://bitcoinversus.tech/2026/11/20/osntc-045-rocev2-congestion-pfc-ecn-dcqcn-troubleshooting/">OSNTC.045 on RoCEv2 congestion</a> before blaming an overlay route for unrelated packet loss or network congestion.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> A moved endpoint may have a correct new physical port but an obsolete route or address-resolution entry elsewhere. Follow the identity, route sequence, next hop and proxy binding across the fabric; document discrepancies before anyone authorizes remediation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Core technical claims were verified against RFC 7432 and RFC 9161, together with Cisco and Juniper command references. The classroom timeline is fictional. Three independently identifiable educational YouTube videos are embedded in Gutenberg, but actual browser playback and mobile viewport rendering have not been independently confirmed. No device commands were executed on live infrastructure. The original featured image is a 1200 × 630 photorealistic editorial illustration and is not repeated inside the lesson.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR for an optional 5,000-satoshi donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech optional 5,000-satoshi contribution QR. Verify wallet recipient and payment amount independently.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. Optional contributions of <strong>5,000 satoshis</strong> support research. Scan the original QR in a compatible wallet and independently verify recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before sending. Bitcoin transfers are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to improve the credibility of information on BitcoinVersus.Tech and make it Verifiably True. The lesson is educational, not permission to modify a production network, a substitute for qualified engineering review or financial or investment advice.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,122 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "article_type": "Technical networking lesson",
+  "lesson": "OSNTC.047",
+  "published_on": "2026-11-20",
+  "wordpress_post_id": 33908,
+  "status": "publish",
+  "title": "OSNTC.047: EVPN Multihoming, ESI, and DF Election",
+  "canonical_url": "https://bitcoinversus.tech/2026/11/20/osntc-047-evpn-multihoming-esi-df-election-type-1-type-4/",
+  "category_ids": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    57619195,
+    508412855,
+    2143232
+  ],
+  "topic": "EVPN multihoming, Ethernet Segment Identifier, EVPN Route Types 1 and 4, designated-forwarder election, split horizon and read-only operational diagnostics",
+  "deduplication": {
+    "number_unoccupied_before_create": true,
+    "wordpress_topic_and_title_search_done": true,
+    "github_search_done": true,
+    "previous_number": "OSNTC.046",
+    "prior_article": "https://bitcoinversus.tech/2026/11/20/osntc-046-evpn-vxlan-route-type-2-5-troubleshooting/"
+  },
+  "primary_sources": [
+    "https://www.rfc-editor.org/rfc/rfc7432.html",
+    "https://www.rfc-editor.org/rfc/rfc8584.html",
+    "https://www.rfc-editor.org/rfc/rfc9785.html",
+    "https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/concept/evpn-bgp-multihoming-overview.html",
+    "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/mpls/b-mpls/m-ce-evpn-multihoming.html",
+    "https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/105x/configuration/vxlan/cisco-nexus-9000-series-nx-os-vxlan-configuration-guide-release-105x/m-interoperability-with-mvpn-multi-homing-using-esi.html",
+    "https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/example/example-evpn-active-active-multihoming-configuring.html"
+  ],
+  "media": [
+    {
+      "kind": "youtube",
+      "url": "https://www.youtube.com/watch?v=EMA8-csnilA",
+      "publisher": "Sneaky Subnet",
+      "video_subject": "EVPN multihoming, DF and split horizon",
+      "source_identity_verified": true,
+      "wordpress_embedded": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "kind": "youtube",
+      "url": "https://www.youtube.com/watch?v=pDwchcAXgdI",
+      "publisher": "BGP L2VPN EVPN Multihome Lab",
+      "video_subject": "EVPN multihoming route types",
+      "source_identity_verified": true,
+      "wordpress_embedded": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "kind": "youtube",
+      "url": "https://www.youtube.com/watch?v=Q-oBiCV_EO0",
+      "publisher": "Sneaky Subnet",
+      "video_subject": "Auto Discovery, fast convergence, aliasing",
+      "source_identity_verified": true,
+      "wordpress_embedded": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    }
+  ],
+  "cover": {
+    "wordpress_media_id": 33900,
+    "filename": "osntc047-evpn-multihoming-1200x630-1.jpg",
+    "original_dimensions_px": [
+      1200,
+      630
+    ],
+    "style": "fine-art oil painting",
+    "person_rotation": "white man",
+    "alt_text": "Original oil painting of a white male network engineer inspecting switch ports, racks and yellow and blue fiber cables in a data center",
+    "watermark": "BitcoinVersus.tech, neon-green on black bottom-left text highlight",
+    "featured_image_not_duplicated_in_body": true
+  },
+  "chart": {
+    "included": false,
+    "candidates_considered": [
+      "line",
+      "grouped vertical bar",
+      "scatter"
+    ],
+    "reason": "A fictional control-plane diagnostic exercise has no comparable measured dataset; a numeric chart would misrepresent evidence."
+  },
+  "saved_gutenberg_checks": {
+    "content_bytes": 12451,
+    "video_embed_blocks": 3,
+    "internal_links": 5,
+    "footer_qr": true,
+    "editor_note": true,
+    "banned_terms": [],
+    "seo_title": "OSNTC.047: EVPN Multihoming and DF Election | BitcoinVersus.Tech",
+    "seo_description": "OSNTC.047 explains EVPN multihoming, ESI, BGP Route Types 1 and 4, designated-forwarder election and read-only troubleshooting."
+  },
+  "live_rendered_checks": {
+    "http_status": 200,
+    "visibility": "public",
+    "canonical_url": "https://bitcoinversus.tech/2026/11/20/osntc-047-evpn-multihoming-esi-df-election-type-1-type-4/",
+    "seo_metadata_present": true,
+    "featured_og_image_present": true,
+    "image_alt_missing": 0,
+    "empty_links": 0,
+    "rendered_video_iframes": 3,
+    "site_level_ui_action_links": 8,
+    "site_level_ui_link_note": "WordPress site sharing, photo, subscription and display controls; not confirmed article body defects"
+  },
+  "unverified": [
+    "YouTube player playback and controls in a real browser",
+    "Mobile viewport layout and responsiveness via independent screenshot",
+    "Real switch command execution or physical verification; simulated classroom case only",
+    "Exact watermark hex value not independently sampled"
+  ],
+  "archived_on": "2026-11-20",
+  "next_number_candidate": "OSNTC.048; verify the series rotation before any future publication"
+}

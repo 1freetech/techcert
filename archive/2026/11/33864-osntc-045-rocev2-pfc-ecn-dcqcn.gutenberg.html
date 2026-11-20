@@ -1,0 +1,103 @@
+<!-- wp:paragraph -->
+<p><strong>OSNTC.045</strong> explains a networking challenge in GPU training clusters: an Ethernet link can remain up at 400G or 800G while RDMA traffic slows or stalls under congestion. RoCEv2, short for RDMA over Converged Ethernet version 2, can move data efficiently between compute nodes without traditional CPU-driven copies for every operation. Reliable performance requires attention to flow control and buffering, not merely physical link status. Begin with <a href="https://bitcoinversus.tech/2026/11/19/osntc-044-800g-optical-dom-rx-power-fec-troubleshooting/">OSNTC.044 on optics and FEC</a> and <a href="https://bitcoinversus.tech/2026/08/19/rdma-programming-how-direct-memory-access-powers-ai-and-high-speed-computing/">the RDMA introduction</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=nKz92Yr09q8","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=nKz92Yr09q8
+</div><figcaption class="wp-element-caption"><em>LevelUP I.T., “RDMA &amp; RoCEv2 Explained,” October 25, 2025. Independent technical overview; video identity confirmed, playback not independently tested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">PFC, ECN, and DCQCN do different jobs</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Priority Flow Control (PFC)</strong> is hop-by-hop. A congested receiver can send a pause request for an identified traffic priority to its upstream neighbor. Protecting a full queue can reduce packet drops, yet excessive pauses can spread congestion, delay unrelated flows sharing that priority, or cause head-of-line blocking. PFC is not an end-to-end application rate controller. <strong>Explicit Congestion Notification (ECN)</strong> marks eligible packets in their IP headers to signal congestion before switches would otherwise discard them. An ECN mark alone does not automatically reduce traffic.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Data Center Quantized Congestion Notification (DCQCN)</strong> provides rate feedback. When a RoCEv2 receiver detects ECN-marked traffic, it can generate a Congestion Notification Packet (CNP). The compatible sender uses that signal to adjust its sending rate. In many validated lossless Ethernet designs, ECN/DCQCN manages congestion proactively while PFC protects queues during bursts. NVIDIA's <a href="https://enterprise-support.nvidia.com/s/article/understanding-rocev2-congestion-management">congestion-control explanation</a> and Cisco's <a href="https://www.cisco.com/c/en/us/td/docs/dcn/whitepapers/cisco-data-center-networking-blueprint-for-ai-ml-applications.html">AI networking blueprint</a> discuss the interaction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Check the traffic class and both endpoints</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Inspect the RDMA traffic priority, DSCP or PCP mapping, host adapter settings, queue classification and buffer policy across the intended network path. A priority mismatch can place a flow in the wrong queue or pause a class that should remain best-effort. A vendor example may use UDP destination port <code>4791</code> for RoCEv2, but its traffic-priority assignment is platform-specific. NVIDIA's <a href="https://networking-docs.nvidia.com/onyxum/3102002/roce-commands">Onyx RoCE command reference</a> shows configuration examples, not settings suitable for indiscriminate copying.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Physical checks remain necessary. Low optical receive power, FEC uncorrectables or incorrect breakout lanes can create loss without queue congestion. Use <a href="https://bitcoinversus.tech/2026/11/14/osntc-041-ethernet-fec-rs-fec-100g-400g-error-counters-troubleshooting/">OSNTC.041 on FEC errors</a> and <a href="https://bitcoinversus.tech/2026/11/15/osntc-043-800g-breakout-port-channelization-2x400g-8x100g-verification/">OSNTC.043 on breakout mapping</a> to separate an optical fault from a traffic-management problem.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=H564lUSK804","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=H564lUSK804
+</div><figcaption class="wp-element-caption"><em>Adi Gangidi, “Scaling RoCE Networks for AI Training,” Networking @Scale 2023. Conference presentation on production PFC/ECN/DCQCN tuning, slow receivers and load balancing; listed by the conference, playback not verified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Gather read-only evidence before changing anything</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On supported NVIDIA Cumulus Linux versions, <a href="https://docs.nvidia.com/networking-ethernet-software/cumulus-linux-58/Layer-1-and-Switch-Ports/Quality-of-Service/RDMA-over-Converged-Ethernet-RoCE/">the official RoCE guide</a> documents commands for viewing RoCE QoS and interface counters. The examples below are not Cisco NX-OS commands and can vary with the release or hardware. They inspect state rather than altering it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>nv show qos roce
+nv show interface swp16 qos roce status
+nv show interface swp16 qos roce counters</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Record the interface, traffic priority, snapshot time, PFC pause packets and pause duration where available. Add ECN-marked packets, CNP packets, queue occupancy, buffer drops, NIC health and application throughput. Compare increments over the same observation interval rather than treating lifetime counters as current rates. Do not reset counters before collecting evidence. Cisco also documents the read-only <a href="https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/7-x/command_references/show_commands/b_N9K_Show_Commands_703i5x/b_N9K_Show_Commands_703i5x_chapter_01001.html">show interface priority-flow-control</a> family for supported Nexus releases.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Diagnose a hypothetical pause storm</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Assume a <strong>fictional</strong> cluster leaf sees received PFC pause frames increase from 120 to 420 over five minutes, while a GPU workload slows. The difference is 300 frames, averaging <strong>60 additional pause frames per minute</strong>. The example cannot establish total pause duration or prove which component caused the congestion. Examine actual pause time, buffer pressure, ECN/CNP feedback and slow-receiver counters. An interface reset or a wrapped counter would also invalidate simple subtraction.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If ECN marks increase without a sender rate response, confirm the receiver, CNP feedback path and adapter congestion-control support. If pauses spread across adjacent ports, inspect the blocked receiver and queue isolation. If FEC errors rise at the same time, investigate the optical path. Also compare active paths against <a href="https://bitcoinversus.tech/2026/10/08/osntc-020-link-aggregation-lacp-etherchannel-port-channels-member-links-load-balancing-failure-recovery/">OSNTC.020 on load balancing and LACP</a>. A congested path can coexist with spare capacity elsewhere.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=UIyLFDHNgFc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=UIyLFDHNgFc
+</div><figcaption class="wp-element-caption"><em>KubeCon + CloudNativeCon North America 2019, “Networking Optimizations for Multi-Node Deep Learning on Kubernetes.” The published conference listing covers RoCE, RDMA, PFC and ECN; playback remains unverified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Verify repairs using a matched workload</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An approved fix might involve classification, queue scheduling, ECN thresholds, host configuration, load balancing or defective hardware. Never change production PFC settings merely to see whether a link stays up. Obtain a change window, review the vendor's validated design, and preserve a rollback option. Compare latency, throughput, ECN marks, pauses, drops and application progress under the same workload before and after any authorized modification. Some supported architectures use resilient or ECN-centered RoCE policies instead of identical PFC behavior, so no single configuration applies everywhere.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Practice:</strong> Write an incident ticket for the fictional five-minute sample. Label observations, possible causes, next read-only tests and measurable conditions for closure. Avoid calling the link healthy solely because the carrier remains up.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Claims were checked against Cisco and NVIDIA technical documentation. The sample pause-count readings and workload effects are fictional classroom data, not production telemetry. Three authentic educational video listings were verified, but embedded video playback and mobile-browser appearance were not independently tested. No live switch configuration was changed or tested. The original cinematic-anime featured cover is a conceptual 1200 × 630 illustration.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR for an optional 5,000-satoshi Bitcoin contribution" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is independently published and volunteer-run. An optional <strong>5,000-satoshi</strong> donation supports technical lessons. Verify wallet recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before sending; Bitcoin transfers generally cannot be reversed.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We work toward Verifiably True technical education. The material does not authorize changes to production systems and is not an engineering certification, financial advice or investment advice.</em></p>
+<!-- /wp:paragraph -->

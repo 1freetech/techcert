@@ -1,0 +1,110 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "post_id": 34048,
+  "lesson": "OSEEC.029",
+  "category": "Electrical Engineering",
+  "title": "OSEEC.029: Safe Torque Off Does Not Mean Power Is Off",
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/20/oseec-029-safe-torque-off-sto-vfd-motor-safety-isolation/",
+  "published_date": "2026-11-20",
+  "categories": [
+    233999,
+    2509703,
+    6
+  ],
+  "tags": [],
+  "topic": "Safe Torque Off on VFDs, coast-to-stop, restart safeguards, functional safety vs electrical isolation",
+  "primary_sources": [
+    {
+      "url": "https://docs.tia.siemens.cloud/r/fail_safe_modules_manual_collection_enus_20/device-specific-information/et-200sp-fail-safe-modules/fail-safe-technology-module-f-tm/f-tm-stepdrive-st-1x24..48v-5a/safety-functions-integrated-in-the-drive/basic-safety-information/safety-integrated-functions/safe-torque-off-sto",
+      "publisher": "Siemens"
+    },
+    {
+      "url": "https://literature.rockwellautomation.com/idc/groups/literature/documents/um/750-um002_-en-p.pdf",
+      "publisher": "Rockwell Automation",
+      "publication": "January 2026"
+    },
+    {
+      "url": "https://library.e.abb.com/public/1c80293806a4465292f5d2486e5f63f8/EN_ACS880-07LC_HW_E.pdf",
+      "publisher": "ABB"
+    }
+  ],
+  "image": {
+    "id": 34046,
+    "original_dimensions_px": [
+      1200,
+      630
+    ],
+    "filename": "oseec029-safe-torque-off-1200x630-1.jpg",
+    "style": "cinematic anime",
+    "person_rotation": "Black man",
+    "watermark": "BitcoinVersus.tech, #39FF14 source color on black bottom-left highlight",
+    "exact_post_compression_pixel_color_sampled": false,
+    "alt": "Cinematic anime illustration of a Black industrial technician reviewing a motor drive and safety relay cabinet, with a warning symbol and the BitcoinVersus.tech wordmark",
+    "cover_repeated_in_body": false
+  },
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=eHsTjQy4HJc",
+      "publisher": "IMO Precision Controls",
+      "topic": "Safe Torque Off fundamentals",
+      "identity_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=N2eavSwdwcs",
+      "publisher": "Motion engineering presentation",
+      "topic": "What STO Is and Is Not",
+      "identity_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=kAPuTyKT9Oc",
+      "publisher": "Rockwell Automation",
+      "publication_date": "2016-11-10",
+      "topic": "Networked Safe Torque Off for selected PowerFlex drives",
+      "identity_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    }
+  ],
+  "prepublication": {
+    "word_count_estimate": 943,
+    "source_length": 11172,
+    "duplicate_oseec029_before_creation": false,
+    "previous_lesson": "OSEEC.028",
+    "unique_video_blocks": 3,
+    "contextual_internal_links": 4,
+    "approved_exact_footer": true,
+    "donation_qr_present": true,
+    "editor_note_present": true,
+    "prohibited_terms_in_original_prose": [],
+    "seo_title": "OSEEC.029: Safe Torque Off vs Electrical Isolation | BitcoinVersus.Tech",
+    "seo_description": "OSEEC.029 explains VFD Safe Torque Off, coasting loads, redundant safety controls, restart behavior, and why STO never replaces electrical isolation."
+  },
+  "live_audit": {
+    "http_status": 200,
+    "visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/20/oseec-029-safe-torque-off-sto-vfd-motor-safety-isolation/",
+    "og_featured_image_present": true,
+    "missing_image_alt_count": 0,
+    "empty_links_count": 0,
+    "rendered_youtube_iframes": 3,
+    "site_level_ui_placeholder_links": 8,
+    "site_level_note": "WordPress UI share, subscription and image controls; not established as article-body link failures"
+  },
+  "chart": {
+    "used": false,
+    "reason": "STO is a safety-function logic lesson; numerical comparison would be decorative and risk conflating device-specific stop times. A functional comparison table is used instead."
+  },
+  "open_checks": [
+    "Actual YouTube playback not independently tested",
+    "Mobile viewport and rendered player responsiveness not screenshot-tested",
+    "No live drive or safety system exercised; tabletop review only",
+    "Exact cover watermark pixels not sampled after lossy JPEG conversion"
+  ],
+  "next_rotation": "Electrical Technician, OSETC.044, subject to duplicate verification",
+  "recorded_on": "2026-11-20"
+}

@@ -1,0 +1,102 @@
+<!-- wp:paragraph -->
+<p><strong>OSNTC.044</strong> teaches how to investigate a high-speed optical Ethernet link without guessing from a single green LED. At 400G and 800G, an interface may show link up while accumulating corrected errors, reduced optical margin or intermittent lane alarms. The technician's task is to distinguish module diagnostics from actual packet integrity. Building on <a href="https://bitcoinversus.tech/2026/11/15/osntc-043-800g-breakout-port-channelization-2x400g-8x100g-verification/">OSNTC.043 on 800G breakout port mapping</a>, the lesson combines digital optical monitoring (DOM), transmit and receive power, FEC counters, and read-only troubleshooting.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=SXTARKZJjzc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=SXTARKZJjzc
+</div><figcaption class="wp-element-caption"><em>Teledyne LeCroy Xena, ECOC 2024: “Testing Signal Integrity View (SIV) &amp; Forward Error Correction (FEC) on hi-speed Ethernet.” Industry demonstration for 400G/800G Ethernet; the video listing is confirmed, playback not independently verified.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read optical diagnostics before touching the link</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>DOM reports transceiver telemetry, often including module temperature, supply voltage, transmit optical power, receive optical power and warning or alarm states. On supported Junos platforms, <a href="https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/command/show-interfaces-diagnostics-optics-ex-series.html">Juniper's optics diagnostic command reference</a> documents receiver values in milliwatts and <strong>dBm</strong>, plus module-dependent alarm fields. DOM availability and channel detail differ by optic, switch hardware and software revision. Never substitute a remembered threshold from another module for the installed part's datasheet.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>show interfaces diagnostics optics &lt;interface-name&gt;
+show interfaces extensive &lt;interface-name&gt;</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The commands above are <em>Junos-style examples</em>, not universal syntax. Record the precise physical port, module part number, host software version, speed, breakout configuration and peer. A parent 800G port broken into 2×400G or 8×100G logical interfaces may map to different physical or electrical lanes. Review <a href="https://bitcoinversus.tech/2026/11/14/osntc-042-osfp-vs-qsfp-dd-800g-host-cages-lanes-compatibility/">OSNTC.042 on cages and lane compatibility</a> before diagnosing an apparent lane failure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What Rx and Tx optical power reveal</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Transmit power is what the local optic reports sending. Receive power is what it measures arriving from the remote endpoint. A low received level can indicate dirty connectors, excessive loss, a damaged jumper, patching error, or the wrong link specification. Yet a healthy average Rx number cannot prove every individual lane or bit is healthy. See <a href="https://bitcoinversus.tech/2026/11/08/dbm-decibel-milliwatt-fiber-optics/">the dBm lesson</a> for optical power math: a 3 dB difference represents approximately a factor of two in optical power.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For an <em>illustrative, invented</em> report, suppose an optic reads −2 dBm at its transmitter and the far end reads −5 dBm. The apparent 3 dB end-to-end difference is a preliminary observation, not a certified insertion-loss test. Vendor calibration uncertainty, lane aggregation and intermediate optics may affect interpretation. Record which two measurements were compared and check the actual optical budget before deciding whether the link is acceptable.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=ZIsdgw6YyD4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=ZIsdgw6YyD4
+</div><figcaption class="wp-element-caption"><em>FS.com, “How to Connect OSFP and QSFP-DD Ports,” September 2025. Explains 800G-to-breakout physical choices; use the original vendor matrix for actual link qualification. The player iframe requires live playback verification.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">FEC counters answer a different question</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Forward error correction adds redundancy, allowing a receiver to repair some corrupted bits or symbols. A rising corrected-error count can indicate diminishing signal quality even while service stays available. Uncorrectable FEC events and post-FEC bit errors are more serious because correction capacity has been exceeded. Check whether counters are cumulative, clearable, per-lane, per-port or normalized to traffic; their semantics are not interchangeable. <a href="https://bitcoinversus.tech/2026/11/14/osntc-041-ethernet-fec-rs-fec-100g-400g-error-counters-troubleshooting/">OSNTC.041</a> explains FEC families and error-counter behavior.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Cisco's <a href="https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/implementation-optics-wp.html">optical FEC white paper</a> explains how different Ethernet optical links use FEC. Juniper's <a href="https://www.juniper.net/documentation/us/en/hardware/800g-optics-cables-guide/optics/topics/concept/800g-optics-faqs.html">800G FAQ</a> also states that supported FEC must match across both endpoints. Operators should not toggle FEC on a production interface simply to see whether the link comes up; wrong settings can cause outages or hide a real optical fault.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A practical read-only field workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>First:</strong> confirm the intended link, peer, cable map and change window. <strong>Second:</strong> capture both ends' DOM values, warning flags, FEC mode and the current corrected and uncorrectable counters. <strong>Third:</strong> repeat counters after a measured interval and calculate rates, rather than interpreting a lifetime total as a new fault. <strong>Fourth:</strong> compare each reading against the exact manufacturer specification and platform support table. <strong>Fifth:</strong> escalate suspected damage or contamination for authorized inspection with appropriate laser and fiber safety controls.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Never look into an optical connector, assume a dark port is non-emitting, or unplug active links without approval. Cleaning, loopbacks, optic swaps and FEC reconfiguration are <strong>controlled changes</strong>, not part of the read-only exercise. <a href="https://bitcoinversus.tech/2026/11/17/osfotc-017-mpo-mtp-fiber-polarity-type-a-b-c-field-verification/">OSFOTC.017 on MPO/MTP polarity</a> explains why a physical fiber map matters to multichannel optics.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=VMi0WEUNr_8","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=VMi0WEUNr_8
+</div><figcaption class="wp-element-caption"><em>Vitex Talks, “The Pros &amp; Cons of Forward Error Correction in Data Center &amp; Telecom Optical Networks,” October 2023. Supplier educational discussion of FEC trade-offs, not a substitute for a current 800G platform qualification.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice: separate observations from conclusions</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In a simulated ticket, the link is up, one receive lane reports a low-power warning, corrected FEC events rise over five minutes, and uncorrectable counts remain zero. Write an evidence log with exact timestamps, per-lane diagnostics and the applicable datasheet threshold. State a hypothesis without calling the fault confirmed. Your deliverable is a safe diagnostic report and escalation recommendation, not a production repair.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Lesson takeaway:</strong> DOM describes the optic's reported physical conditions, while FEC shows the receiver's ability to recover corrupted data. Only a combined reading, matched to the correct lanes, modules and time interval, supports a responsible high-speed Ethernet diagnosis.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> OSNTC.044 follows the published OSNTC.043 curriculum and references Cisco and Juniper technical documentation. The example dBm readings and incident are fictional. No optical hardware was tested or reconfigured. All three video identities were checked through public listings or preceding verified lessons, but actual player playback and mobile rendering are not verified. The original 1200×630 cover is conceptual editorial photography rather than an image of a tested production link.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech 5,000-satoshi optional donation QR code" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is independently published and volunteer-run. A voluntary <strong>5,000-satoshi</strong> contribution helps research. Verify recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount in a compatible wallet before sending; Bitcoin transfers generally cannot be reversed.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We work to make technical lessons Verifiably True. Educational examples are not permission to alter live networks or bypass electrical and optical safety rules. The material is not professional engineering, financial or investment advice.</em></p>
+<!-- /wp:paragraph -->

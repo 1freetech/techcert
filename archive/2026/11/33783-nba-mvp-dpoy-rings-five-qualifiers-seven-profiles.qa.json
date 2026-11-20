@@ -2,7 +2,7 @@
   "publication": "BitcoinVersus.Tech",
   "date": "2026-11-19",
   "section": "Sports / NBA history",
-  "title": "Only Five NBA Players Have Won MVP, DPOY and a Ring: Top 7 Countdown",
+  "title": "Five NBA Stars Won MVP, DPOY and a Ring: Top 7 With Kareem",
   "wp_post_id": 33783,
   "published_status": "publish",
   "published_url": "https://bitcoinversus.tech/2026/11/19/nba-mvp-dpoy-championship-five-players-top-seven-near-misses-2026/",
@@ -23,7 +23,7 @@
     "qualifying_count": 5,
     "qualifying_ranking": [
       {
-        "rank": 5,
+        "rank": "Eligible, unranked",
         "name": "Kevin Garnett",
         "mvp": 1,
         "dpoy": 1,
@@ -65,7 +65,7 @@
         "mvp": 0,
         "dpoy": 2,
         "rings": 2,
-        "reason": "No regular-season NBA MVP award"
+        "reason": "No regular-season NBA MVP"
       },
       {
         "rank": 6,
@@ -73,10 +73,18 @@
         "mvp": 2,
         "dpoy": 0,
         "rings": 5,
-        "reason": "Never won NBA Defensive Player of the Year"
+        "reason": "Never won NBA DPOY"
+      },
+      {
+        "rank": 5,
+        "name": "Kareem Abdul-Jabbar",
+        "mvp": 6,
+        "dpoy": 0,
+        "rings": 6,
+        "reason": "Never won NBA DPOY; award began 1982–83"
       }
     ],
-    "editorial_sort": "Editorial assessment of career honors, two-way peak and championship contributions; ranking not an NBA award or official statistic."
+    "editorial_sort": "Reader-requested ranked seven updated to feature Kareem at #5 in place of Kevin Garnett. Only four ranked players satisfy all three honors; Garnett remains the fifth qualified player in a separate table."
   },
   "sources": [
     "https://www.nba.com/news/history-mvp-award-winners",
@@ -86,7 +94,10 @@
     "https://www.usab.com/players/david-robinson",
     "https://www.nba.com/news/season-review-2007-08",
     "https://pr.nba.com/19-20-mvp-antetokounmpo/",
-    "https://www.nba.com/news/players-who-have-won-both-kia-mvp-and-nba-championship-in-the-same-season"
+    "https://www.nba.com/news/players-who-have-won-both-kia-mvp-and-nba-championship-in-the-same-season",
+    "https://www.nba.com/news/history-nba-legend-kareem-abdul-jabbar",
+    "https://www.nba.com/news/nba-players-with-at-least-3-mvps",
+    "https://www.nba.com/news/top-10-players-with-multiple-championships"
   ],
   "media": [
     {
@@ -109,12 +120,13 @@
     },
     {
       "rank": 5,
-      "player": "Kevin Garnett",
-      "url": "https://www.youtube.com/watch?v=StejdQWmb50",
+      "player": "Kareem Abdul-Jabbar",
+      "url": "https://www.youtube.com/watch?v=eQjYh9-Fr-g",
       "source": "NBA",
       "source_page_identified": true,
       "iframe_rendered": true,
-      "playback_verified": false
+      "playback_verified": false,
+      "segment": "NBA all-time scorers video, Kareem segment starts at 7:59"
     },
     {
       "rank": 4,
@@ -154,42 +166,41 @@
     }
   ],
   "featured_image": {
-    "id": 33781,
-    "filename": "nba-mvp-dpoy-champions-top-five-oil-painting-cover.jpg",
+    "id": 33785,
+    "filename": "nba-mvp-dpoy-kareem-cover-1200x630-1.jpg",
     "original_size_px": [
       1200,
       630
     ],
     "style": "fine-art oil painting",
-    "watermark_visual": "BitcoinVersus.tech green on tight black lower-left label; exact pixel-color value not independently sampled",
-    "alt": "Original oil painting of five legendary basketball players in red, green and black uniforms under golden trophies, representing the only five NBA players with MVP, DPOY and championship credentials",
+    "watermark_visual": "BitcoinVersus.tech neon green on tight black lower-left label",
+    "alt": "Oil painting of Giannis, Hakeem, Jordan, Robinson and Kareem in Lakers number 33 jersey",
     "duplicated_in_body": false
   },
   "chart": {
-    "id": 33782,
-    "file": "nba-mvp-dpoy-ring-counts-five-players-vertical-grouped-bars.png",
+    "id": 33786,
+    "file": "nba-mvp-dpoy-kareem-seven-countdown-vertical-bars.png",
     "type": "grouped vertical bar",
     "original_size_px": [
-      1785,
-      976
+      1920,
+      945
     ],
-    "source": "NBA MVP and DPOY histories; league and USA Basketball championship profiles",
-    "data": "five eligible players only; MVP, DPOY and title counts",
+    "source": "NBA MVP and DPOY winners histories; league championship records",
+    "data": "Seven ranked players, including three clearly identified near-misses, with separate career MVP, DPOY and title counts",
     "candidates_considered": [
       "grouped vertical bars",
       "stacked vertical bars",
       "donut chart"
     ],
-    "reason_for_choice": "Grouped vertical bars keep the award types separate and preserve absolute comparisons. Stacking would conflate distinct types; a donut would imply a misleading shared total.",
+    "reason_for_choice": "Separate award columns preserve distinctions and reveal Kareem has no DPOY. Stacking conflates different honors; donut implies a common total.",
     "zero_baseline": true,
     "labeled_series": true,
     "values_labeled": true,
-    "mobile_css_responsive": true,
-    "mobile_screenshot_verified": false,
-    "forecast_used": false
+    "forecast_used": false,
+    "mobile_screenshot_verified": false
   },
   "saved_gutenberg_qa": {
-    "verified_content_bytes": 15449,
+    "verified_content_bytes": 16868,
     "numbered_headings": 7,
     "video_embed_blocks": 7,
     "internal_contextual_links": 4,
@@ -197,15 +208,15 @@
     "donation_qr_present": true,
     "editor_note_present": true,
     "prohibited_editorial_words": [],
-    "seo_title": "Only 5 NBA Players Have Won MVP, DPOY and a Ring | Ranked",
-    "seo_description": "Five NBA players have won MVP, Defensive Player of the Year and a championship. Compare Jordan, Hakeem, Giannis, Robinson, Garnett and two near-misses.",
+    "seo_title": "NBA MVP, DPOY and Rings: Top 7 With Kareem | BitcoinVersus.Tech",
+    "seo_description": "NBA MVP, DPOY and ring countdown updated with Kareem Abdul-Jabbar at #5. Only five players qualify; Garnett stays in the complete historical eligibility table.",
     "novel_topic_checked_wordpress_published_drafts_and_github": true
   },
   "live_page_qa": {
     "public_http_status": 200,
     "canonical": "https://bitcoinversus.tech/2026/11/19/nba-mvp-dpoy-championship-five-players-top-seven-near-misses-2026/",
-    "seo_title": "Only 5 NBA Players Have Won MVP, DPOY and a Ring | Ranked",
-    "social_og_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/nba-mvp-dpoy-champions-top-five-oil-painting-cover.jpg",
+    "seo_title": "NBA MVP, DPOY and Rings: Top 7 With Kareem | BitcoinVersus.Tech",
+    "social_og_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/nba-mvp-dpoy-kareem-cover-1200x630-1.jpg",
     "og_image_alt_present": true,
     "rendered_youtube_iframes": 7,
     "rendered_chart_present": true,
@@ -220,5 +231,16 @@
     "Individual embedded video availability could change after publication",
     "Exact featured-wordmark green color #39FF14 not pixel-sampled"
   ],
-  "archive_date": "2026-11-19"
+  "archive_date": "2026-11-19",
+  "updated_date": "2026-11-19",
+  "current_wordpress_post_id": 33783,
+  "revision_history": [
+    {
+      "date": "2026-11-19",
+      "change": "User-requested Kareem for Garnett substitution at rank #5; Kareem explicitly ineligible, KG retained as fifth qualified player in table. Cover, chart, Kareem NBA video, article body and SEO revised.",
+      "live_page_http_status": 200,
+      "seven_iframes_rendered": true,
+      "live_video_playback_verified": false
+    }
+  ]
 }

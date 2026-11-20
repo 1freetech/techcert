@@ -1,0 +1,90 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "topic": "OSNTC.044: 800G DOM, optical Rx power and FEC troubleshooting",
+  "post_id": 33847,
+  "title": "OSNTC.044: Troubleshooting 800G Optics With DOM and FEC",
+  "slug": "osntc-044-800g-optical-dom-rx-power-fec-troubleshooting",
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/19/osntc-044-800g-optical-dom-rx-power-fec-troubleshooting/",
+  "published_date": "2026-11-19",
+  "categories": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tags": [
+    793257868,
+    2143232,
+    10748430
+  ],
+  "cover_media_id": 33844,
+  "original_cover_size_px": [
+    1200,
+    630
+  ],
+  "cover_style": "Photorealistic data-center editorial illustration",
+  "cover_not_repeated_in_article": true,
+  "source_evidence": [
+    "https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/command/show-interfaces-diagnostics-optics-ex-series.html",
+    "https://www.juniper.net/documentation/us/en/hardware/800g-optics-cables-guide/optics/topics/concept/800g-optics-faqs.html",
+    "https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/implementation-optics-wp.html"
+  ],
+  "original_sources_verified": true,
+  "youtube_embeds": [
+    {
+      "url": "https://www.youtube.com/watch?v=SXTARKZJjzc",
+      "publisher": "Teledyne LeCroy Xena",
+      "source_listing_verified": true,
+      "wordpress_saved_embed": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZIsdgw6YyD4",
+      "publisher": "FS.com",
+      "source_listing_verified": true,
+      "wordpress_saved_embed": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=VMi0WEUNr_8",
+      "publisher": "Vitex Talks",
+      "source_listing_verified": true,
+      "wordpress_saved_embed": true,
+      "rendered_iframe": true,
+      "playback_verified": false
+    }
+  ],
+  "saved_gutenberg": {
+    "content_bytes": 11115,
+    "core_embed_blocks": 3,
+    "internal_links": 5,
+    "donation_qr": true,
+    "editors_note": true,
+    "forbidden_editorial_terms": [],
+    "seo_title": "OSNTC.044: 800G Optical DOM and FEC Troubleshooting | BitcoinVersus.Tech",
+    "seo_description": "OSNTC.044 teaches 800G optical troubleshooting with digital optical monitoring, receive power, FEC counters and safe verification."
+  },
+  "chart": {
+    "description": "Not used: read-only command examples and diagnostic workflow are more informative than unsupported quantitative thresholds"
+  },
+  "live_page": {
+    "http_status": 200,
+    "site_visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/19/osntc-044-800g-optical-dom-rx-power-fec-troubleshooting/",
+    "open_graph_featured_image_present": true,
+    "missing_alt_count": 0,
+    "empty_link_count": 0,
+    "youtube_iframe_count": 3,
+    "site_level_placeholder_control_links": 8
+  },
+  "outstanding": [
+    "Actual player playback not verified with browser interaction",
+    "Mobile screenshot / responsive visual verification not performed",
+    "No physical production system or independent ASIC benchmark tested"
+  ],
+  "next_rotation_candidate": "OSNTC.045",
+  "archived_on": "2026-11-19"
+}

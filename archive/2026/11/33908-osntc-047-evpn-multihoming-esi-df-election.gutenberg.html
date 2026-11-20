@@ -1,0 +1,114 @@
+<!-- wp:paragraph -->
+<p><strong>OSNTC.047</strong> answers a practical data-center question: how can a server connected to two switches lose traffic when both Ethernet links still appear healthy? <strong>Ethernet VPN (EVPN) multihoming</strong> lets two or more provider-edge switches connect to the same customer-edge device while coordinating forwarding through BGP. The safeguards rely on more than a link aggregation group: operators must inspect the <strong>Ethernet Segment Identifier (ESI)</strong>, EVPN Route Types 1 and 4, and the designated-forwarder role. The lesson extends <a href="https://bitcoinversus.tech/2026/11/20/osntc-046-evpn-vxlan-route-type-2-5-troubleshooting/">OSNTC.046 on Route Types 2 and 5</a> and <a href="https://bitcoinversus.tech/2026/10/11/osdcec-009-data-center-network-fabrics/">OSDCEC.009 on network fabrics</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=EMA8-csnilA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=EMA8-csnilA
+</div><figcaption class="wp-element-caption"><em>Sneaky Subnet, July 29, 2026: EVPN Multihoming Deep Dive, covering Ethernet Segment routes, designated-forwarder election and split horizon. Public video listing confirmed. Embedded player playback requires a separate live browser check.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What an Ethernet Segment Identifier tells the fabric</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An Ethernet segment (ES) is the set of Ethernet links connecting a multihomed device or network to its provider-edge switches. An ESI identifies that segment; the identifier is <strong>10 octets</strong> long. The participating switches must consistently identify the intended shared segment. Otherwise, a remote switch may not recognize both attachments as one redundancy group. The authoritative <a href="https://www.rfc-editor.org/rfc/rfc7432.html">RFC 7432</a> defines the original EVPN multihoming procedures, while <a href="https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/concept/evpn-bgp-multihoming-overview.html">Juniper's EVPN multihoming reference</a> explains ESIs, all-active and single-active operation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An ESI does not replace the <strong>LACP</strong> relationship between a server bond and its attached switches. A misconfigured bond, incompatible aggregation settings, or a failed member can disrupt forwarding even if BGP EVPN looks healthy. Compare <a href="https://bitcoinversus.tech/2026/10/08/osntc-020-link-aggregation-lacp-etherchannel-port-channels-member-links-load-balancing-failure-recovery/">OSNTC.020 on LACP</a> before blaming the overlay.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Type 4 discovers peers; Type 1 advertises attachment</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Route Type 4</strong>, the Ethernet Segment route, helps the switches discover which EVPN peers serve the same segment. The participants can use the information in designated-forwarder election. <strong>Route Type 1</strong>, Ethernet Auto-Discovery, serves different purposes, including signaling ES and EVI attachment for functions such as aliasing and faster withdrawal after a failure. The route types are complementary, not interchangeable. Their roles are documented in <a href="https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/mpls/b-mpls/m-ce-evpn-multihoming.html">Cisco's EVPN multihoming guide</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Route Type 2, covered in the previous lesson, carries MAC reachability and optionally host IP information. Route Type 5 carries IP prefixes. A healthy Type 2 or Type 5 table alone cannot establish that the multihoming control plane is correctly discovering the shared ES. A fault investigation should keep the Ethernet segment, the tenant EVPN instance and the remote VTEP separate.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=pDwchcAXgdI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=pDwchcAXgdI
+</div><figcaption class="wp-element-caption"><em>BGP L2VPN EVPN Multihome Lab, published 2022: lab coverage of Ethernet Auto-Discovery, Ethernet Segment routes and designated-forwarder behavior. Public video listing confirmed. Embedded player playback requires a separate live browser check.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What the designated forwarder actually forwards</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On a multihomed Ethernet segment, the <strong>designated forwarder (DF)</strong> controls delivery of relevant broadcast, unknown-unicast and multicast traffic toward the attached site for a given service. DF election reduces the risk of duplicate BUM forwarding or Layer 2 loops. In <em>all-active</em> multihoming, known unicast can still use multiple qualified paths. A non-DF does <strong>not</strong> necessarily mean its entire physical uplink is broken or every unicast packet is prohibited. The precise behavior depends on redundancy mode and implementation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The original DF election procedures appear in RFC 7432. <a href="https://www.rfc-editor.org/rfc/rfc8584.html">RFC 8584</a> extends the framework and describes Highest Random Weight election, while <a href="https://www.rfc-editor.org/rfc/rfc9785.html">RFC 9785</a> specifies preference-based alternatives. An operator must verify which algorithm and capabilities both peers actually support rather than assume that a preferred switch always wins.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read-only verification on supported switches</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Begin with the exact switch model, operating-system release, active routing instance, ESI, VLAN or VNI, and neighboring device. Check LACP membership, EVPN BGP neighbor state, received and advertised routes, and the DF result on <strong>both</strong> peers. The commands below illustrate separate operating systems and are not a universal procedure. Verify syntax in the local vendor release reference before running any command.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code># Cisco NX-OS, on releases that support these forms
+show bgp l2vpn evpn route-type 1
+show bgp l2vpn evpn route-type 4
+
+# Junos, on supported platforms and releases
+show evpn instance designated-forwarder</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Cisco documents Type 1 route verification in its <a href="https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/105x/configuration/vxlan/cisco-nexus-9000-series-nx-os-vxlan-configuration-guide-release-105x/m-interoperability-with-mvpn-multi-homing-using-esi.html">Nexus 9000 ESI multihoming guide</a>. Juniper documents the designated-forwarder inspection command in its <a href="https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/example/example-evpn-active-active-multihoming-configuring.html">active-active configuration and verification example</a>. Do not infer absent routes from a single filtered command without checking which tenant and ESI the output represents.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Q-oBiCV_EO0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Q-oBiCV_EO0
+</div><figcaption class="wp-element-caption"><em>Sneaky Subnet, July 31, 2026: EVPN Multihoming Auto Discovery Routes, Fast Convergence and Aliasing, with live lab verification. Public video listing confirmed. Embedded player playback requires a separate live browser check.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice: a server remains up but duplicate traffic appears</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Fictional lab:</strong> Server A uses an approved bond to Leaf 1 and Leaf 2. Both physical links are up. Leaf 1 receives an expected Type 4 route from Leaf 2, but Leaf 2's read-only output shows no matching Type 4 advertisement for the shared ESI. A monitoring system also reports intermittent duplicate broadcast delivery. Record the configured ESI on each attachment, BGP sessions, route import/export status, redundancy mode, DF roles and BUM counters. Missing Type 4 information is an investigation lead, not definitive proof that the mismatch caused the duplicates.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Explain why a Type 1 Auto-Discovery route cannot simply be treated as a Type 4 Ethernet Segment route. Identify what evidence would distinguish a route-policy mismatch, inconsistent ESI, unreachable EVPN peer or stale operational view. Make a recommendation for further verification, but do not shut a port, alter a bond, change the DF algorithm, or clear live routes without an approved change and rollback plan.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If the physical side is suspect, return to <a href="https://bitcoinversus.tech/2026/11/19/osntc-044-800g-optical-dom-rx-power-fec-troubleshooting/">OSNTC.044 on DOM and FEC</a>. If performance degrades without clear Layer 2 failure, compare <a href="https://bitcoinversus.tech/2026/11/20/osntc-045-rocev2-congestion-pfc-ecn-dcqcn-troubleshooting/">OSNTC.045 on RoCEv2 congestion</a>. A successful lab report separates facts, hypotheses, missing evidence and approved next steps.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> EVPN multihoming coordinates multiple attachments using the ESI, Type 4 discovery, Type 1 Auto-Discovery and a DF election. Correct troubleshooting requires an end-to-end view of the physical bond, BGP advertisements, tenant context and forwarding roles, without treating one apparently healthy port as proof of fabric health.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> The technical mechanisms were checked against RFCs 7432, 8584 and 9785 and the linked Cisco and Juniper references. The sample incident is fictional. No physical switch, server or production configuration was accessed, and no commands were executed on network hardware. All three video identities were checked against their public listings; playback and mobile-browser appearance remain unverified. The original 1200 × 630 fine-art oil-painting featured cover is not repeated inside the article.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech optional 5,000-satoshi Bitcoin contribution QR" class="wp-image-24043" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech publishes independent technical education. An optional <strong>5,000-satoshi</strong> Bitcoin donation supports research. Independently verify wallet recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before transferring funds. Bitcoin transactions are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We work to make technical information Verifiably True. Educational examples do not authorize changes to production networks or replace site safety procedures, professional engineering review, financial advice or investment advice.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,126 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "lesson_id": "Linux Command #69",
+  "title": "Linux Command #69: systemd-cat Sends Logs to the Journal",
+  "wordpress_post_id": 33994,
+  "status": "publish",
+  "published_url": "https://bitcoinversus.tech/2026/11/20/linux-command-69-systemd-cat-send-logs-to-journald/",
+  "published_date": "2026-11-20",
+  "rotation": {
+    "scheme": "canonical 43 subjects",
+    "previous_subject": "Python",
+    "prior_python_lesson": "OSPython.049, published post 33973",
+    "current_subject": "Linux Commands",
+    "next_subject": "Windows Commands (number to verify)",
+    "duplicate_protection": "New OSPython.049 draft #33978 trashed after published duplicate #33973 was identified; Linux Command #69 checked unoccupied before publish"
+  },
+  "category_ids": [
+    5812,
+    34922710,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    419756103,
+    692143878
+  ],
+  "topic": "systemd-cat standard output/error routing into systemd journal and journalctl identifier/priority filters",
+  "primary_sources": [
+    "https://www.freedesktop.org/software/systemd/man/latest/systemd-cat.html",
+    "https://www.freedesktop.org/software/systemd/man/latest/journalctl.html",
+    "https://www.freedesktop.org/software/systemd/man/latest/systemd-journald.service.html"
+  ],
+  "source_date_checked": "2026-11-20",
+  "media": [
+    {
+      "publisher": "Jadi",
+      "url": "https://www.youtube.com/watch?v=jXO7q_7a6-s",
+      "topic": "systemd-cat and journalctl",
+      "source_identity_verified": true,
+      "wordpress_iframe_rendered": true,
+      "actual_playback_verified": false
+    },
+    {
+      "publisher": "HardReset_Pro",
+      "url": "https://www.youtube.com/watch?v=oqelHBvR_JE",
+      "topic": "journalctl filters",
+      "source_identity_verified": true,
+      "wordpress_iframe_rendered": true,
+      "actual_playback_verified": false
+    },
+    {
+      "publisher": "Tomás GD",
+      "url": "https://www.youtube.com/watch?v=jIhNUGKPjQM",
+      "topic": "systemd services and logs",
+      "source_identity_verified": true,
+      "wordpress_iframe_rendered": true,
+      "actual_playback_verified": false
+    }
+  ],
+  "featured_image": {
+    "id": 33993,
+    "filename": "linux-command-69-systemd-cat-server-logs.jpg",
+    "dimensions_px": [
+      1200,
+      630
+    ],
+    "style": "fine-art oil painting",
+    "subject": "Server racks and linked system monitor, no depicted person",
+    "alt": "Fine-art oil painting close-up of Linux data-center equipment, bundled fiber cables and a status monitor with no depicted person",
+    "watermark_label": "BitcoinVersus.tech neon green on tight black bottom-left label",
+    "exact_pixel_color_not_sampled": true,
+    "not_repeated_in_article": true
+  },
+  "chart": {
+    "used": false,
+    "candidates_considered": [
+      "vertical bar",
+      "line",
+      "scatter"
+    ],
+    "reason": "No independently sampled quantitative data; a chart of synthetic journal entries would mislead or add no instructional value."
+  },
+  "prepublication": {
+    "numbering_checked": true,
+    "duplicate_search_checked": true,
+    "gutenberg_core_embed_blocks": 3,
+    "core_code_blocks": 3,
+    "internal_links": 4,
+    "fixed_footer_exact": true,
+    "editor_note_present": true,
+    "qr_present": true,
+    "prohibited_editorial_words": [],
+    "seo_title": "Linux Command #69: systemd-cat and journald | BitcoinVersus.Tech",
+    "seo_description": "Linux Command #69 explains systemd-cat, journal identifiers, priorities and safe test logging with journalctl.",
+    "gutenberg_source_bytes": 11556
+  },
+  "live_audit": {
+    "wordPress_rendered_page_http_status": 200,
+    "page_visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/20/linux-command-69-systemd-cat-send-logs-to-journald/",
+    "og_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/linux-command-69-systemd-cat-server-logs.jpg",
+    "og_image_alt_present": true,
+    "missing_image_alt": 0,
+    "empty_links": 0,
+    "rendered_iframes": 3,
+    "rendered_video_ids": [
+      "jXO7q_7a6-s",
+      "oqelHBvR_JE",
+      "jIhNUGKPjQM"
+    ],
+    "site_ui_placeholder_links": 8,
+    "site_ui_note": "WordPress share and photo control links, not confirmed as article-body defects.",
+    "structured_data_types": [
+      "Person",
+      "Article",
+      "BreadcrumbList"
+    ]
+  },
+  "limitations": [
+    "No independent YouTube playback or iframe interaction test",
+    "No independent mobile viewport screenshot inspection",
+    "No systemd-cat/journalctl execution against a running journald service; commands source-verified only",
+    "Exact neon-green watermark hex pixels not independently sampled"
+  ],
+  "archive_date": "2026-11-20"
+}

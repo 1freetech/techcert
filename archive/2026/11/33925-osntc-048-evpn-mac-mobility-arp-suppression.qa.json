@@ -1,0 +1,149 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "recorded_date": "2026-11-20",
+  "curriculum": "OSNTC",
+  "lesson_number": "OSNTC.048",
+  "previous": "OSNTC.047",
+  "next_candidate": "OSNTC.049, subject to duplicate audit",
+  "wordpress_post_id": 33925,
+  "title": "OSNTC.048: Why EVPN Hosts Disappear After Moving",
+  "status": "publish",
+  "slug": "osntc-048-evpn-mac-mobility-duplicate-mac-arp-suppression",
+  "url": "https://bitcoinversus.tech/2026/11/20/osntc-048-evpn-mac-mobility-duplicate-mac-arp-suppression/",
+  "category_ids": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    793304669,
+    57619195,
+    793304668,
+    2143232
+  ],
+  "topic": "EVPN MAC mobility, RFC 7432 sequence numbers, duplicate-MAC suppression, RFC 9161 proxy ARP/ND, read-only switch verification",
+  "primary_sources": [
+    {
+      "title": "RFC 7432, BGP MPLS-Based Ethernet VPN, Section 15",
+      "url": "https://www.rfc-editor.org/rfc/rfc7432.html",
+      "published": "2015-02"
+    },
+    {
+      "title": "RFC 9161, Operational Aspects of Proxy ARP/ND in EVPN",
+      "url": "https://www.rfc-editor.org/rfc/rfc9161.html",
+      "published": "2022-01"
+    },
+    {
+      "title": "Juniper show evpn database reference",
+      "url": "https://www.juniper.net/documentation/us/en/software/junos/cli-reference/topics/ref/command/show-evpn-database.html"
+    },
+    {
+      "title": "Cisco NX-OS VXLAN BGP EVPN configuration guide",
+      "url": "https://www.cisco.com/c/en/us/td/docs/dcn/nx-os/nexus9000/103x/configuration/vxlan/cisco-nexus-9000-series-nx-os-vxlan-configuration-guide-release-103x/m_configuring_vxlan_bgp_evpn.html"
+    },
+    {
+      "title": "Juniper duplicate MAC detection settings",
+      "url": "https://www.juniper.net/documentation/us/en/software/junos/evpn/topics/task/configuring-mac-mobility-settings.html"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=QeRmgetsDx0",
+      "publisher": "EANTC AG",
+      "publication_date": "2020-04-15",
+      "title": "EVPN MAC Mobility Demo",
+      "listing_verified": true,
+      "saved_embed": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=x8Tm0kjlxrI",
+      "publisher": "The Netcademy",
+      "publication_date": "2026-03-18",
+      "title": "Junos EVPN MAC/IP learning and Type 2 propagation",
+      "listing_verified": true,
+      "saved_embed": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=D9k9_hRdrGc",
+      "publisher": "Network Direction",
+      "publication_date": "2018-03-08",
+      "title": "VXLAN Part 6 BGP EVPN control-plane learning on Nexus",
+      "listing_verified": true,
+      "saved_embed": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    }
+  ],
+  "featured_cover": {
+    "media_id": 33920,
+    "filename": "osntc048-evpn-mac-mobility-1200x630-1.jpg",
+    "dimensions_px": [
+      1200,
+      630
+    ],
+    "type": "photorealistic editorial illustration",
+    "person_rotation": "Asian man",
+    "wordmark": "BitcoinVersus.tech neon green on tight black label at bottom-left",
+    "pixel_color_independently_sampled": false,
+    "image_alt": "Photorealistic Asian male network technician studying EVPN endpoint mobility near fiber-connected data center switches",
+    "duplicated_in_article": false
+  },
+  "gutenberg_saved": {
+    "bytes": 12099,
+    "video_embed_blocks": 3,
+    "code_blocks": 2,
+    "internal_links": 5,
+    "forbidden_editorial_words": [],
+    "editor_note": true,
+    "donation_qr": true,
+    "seo_title": "OSNTC.048: EVPN MAC Mobility and ARP Suppression | BitcoinVersus.Tech",
+    "seo_description": "OSNTC.048 explains EVPN MAC mobility, sequence numbers, duplicate MAC detection, ARP/ND suppression and read-only troubleshooting."
+  },
+  "live_audit": {
+    "http_status": 200,
+    "site_visibility": "public",
+    "canonical_url": "https://bitcoinversus.tech/2026/11/20/osntc-048-evpn-mac-mobility-duplicate-mac-arp-suppression/",
+    "seo_title": "OSNTC.048: EVPN MAC Mobility and ARP Suppression | BitcoinVersus.Tech",
+    "open_graph_image": "https://bitcoinversus.tech/wp-content/uploads/2026/11/osntc048-evpn-mac-mobility-1200x630-1.jpg",
+    "open_graph_generated_preview_dimensions_px": [
+      1024,
+      538
+    ],
+    "original_uploaded_cover_dimensions_px": [
+      1200,
+      630
+    ],
+    "open_graph_image_alt_present": true,
+    "rendered_iframe_count": 3,
+    "rendered_iframe_ids": [
+      "QeRmgetsDx0",
+      "x8Tm0kjlxrI",
+      "D9k9_hRdrGc"
+    ],
+    "missing_image_alt_count": 0,
+    "empty_link_count": 0,
+    "site_level_placeholder_links_count": 8,
+    "placeholder_links_note": "Shared interface elements: Share, photo toggles, Download, Reblog and Subscribe controls; not confirmed article-body broken links."
+  },
+  "chart": {
+    "used": false,
+    "candidates": [
+      "timeline chart",
+      "stacked bars",
+      "vertical bars"
+    ],
+    "decision": "No measured time-series or comparable numerical dataset; a fictional migration example and original-source commands communicate the mechanisms without implying real telemetry."
+  },
+  "unverified": [
+    "Actual YouTube player playback and interaction were not tested in an interactive browser.",
+    "Mobile visual appearance and responsive viewport screenshots were not independently inspected.",
+    "Read-only example commands were not executed against Cisco, Junos or any actual network device.",
+    "Exact watermark green pixels were not independently sampled."
+  ],
+  "follow_up": "Next lesson candidate OSNTC.049 only after live duplicate and curriculum rotation check."
+}

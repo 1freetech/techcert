@@ -1,0 +1,147 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "lesson": "OSETC.044",
+  "category": "Electrical Technician",
+  "published_date": "2026-11-20",
+  "post_id": 34061,
+  "status": "publish",
+  "title": "OSETC.044: Motor Shaft Alignment, Soft Foot, and Offset",
+  "url": "https://bitcoinversus.tech/2026/11/20/osetc-044-motor-shaft-alignment-soft-foot-offset-angle/",
+  "slug": "osetc-044-motor-shaft-alignment-soft-foot-offset-angle",
+  "category_ids": [
+    233999,
+    547916683,
+    2509703,
+    6
+  ],
+  "tag_ids": [
+    91404117,
+    76657513,
+    57604244
+  ],
+  "rotation": {
+    "source": "canonical 43-subject registry",
+    "previous": "OSEEC.029",
+    "current": "OSETC.044",
+    "next": "PCB Engineering OSPCB.009 subject to duplicate audit",
+    "cover_style": "Detailed modern colored pencil",
+    "depicted_person": "White woman technician"
+  },
+  "cover": {
+    "media_id": 34059,
+    "filename": "osetc044-shaft-alignment-soft-foot-cover.jpg",
+    "original_size_px": [
+      1200,
+      630
+    ],
+    "style": "colored-pencil editorial illustration",
+    "source": "original generated cover",
+    "watermark": "BitcoinVersus.tech neon green on black, bottom-left",
+    "exact_color_pixel_verified": false,
+    "duplicate_in_body": false,
+    "alt": "Original colored-pencil illustration of a technician reviewing a laser shaft-alignment instrument beside a coupled electric motor and pump during a controlled maintenance inspection."
+  },
+  "primary_sources": [
+    {
+      "url": "https://www.skf.com/group/products/maintenance-products/alignment-tools/shaft-alignment/shaft-alignment-apps/soft-foot-app",
+      "authority": "SKF",
+      "type": "manufacturer"
+    },
+    {
+      "url": "https://www.skf.com/us/productinfo/productid-TKSA%2041",
+      "authority": "SKF",
+      "type": "manufacturer"
+    },
+    {
+      "url": "https://blog.pruftechnik.com/4-ways-to-diagnose-and-correct-shaft-misalignment/",
+      "authority": "PRUFTECHNIK",
+      "type": "manufacturer"
+    },
+    {
+      "url": "https://blog.pruftechnik.com/thermal-expansion-shaft-misalignment/",
+      "authority": "PRUFTECHNIK",
+      "type": "manufacturer"
+    },
+    {
+      "url": "https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147",
+      "authority": "OSHA",
+      "type": "regulatory"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=cDdHaHWdFKA",
+      "publisher": "SKF Group",
+      "date": "2024-01-25",
+      "title": "SKF Shaft Alignment Tool TKSA 41 Tech Tips",
+      "page_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=3g26rB3jyEQ",
+      "publisher": "SKF Group",
+      "date": "2024-01-25",
+      "title": "SKF Shaft Alignment Tool TKSA 71 Tech Tips",
+      "page_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=odBPEsgaja8",
+      "publisher": "PRUFTECHNIK Group",
+      "date": "2024-04-18",
+      "title": "How to Use ROTALIGN Touch",
+      "page_verified": true,
+      "iframe_rendered": true,
+      "playback_verified": false
+    }
+  ],
+  "prepublish_qa": {
+    "unique_number": true,
+    "matching_published_or_draft_before_create": 0,
+    "previous_lesson": "OSETC.043",
+    "prohibited_editorial_words": [],
+    "exact_mandatory_footer": true,
+    "internal_links": 5,
+    "saved_embed_blocks": 3,
+    "donation_qr_present": true,
+    "editor_note_present": true,
+    "seo_title": "OSETC.044: Motor Shaft Alignment and Soft Foot | BitcoinVersus.Tech",
+    "seo_description": "OSETC.044 teaches motor-pump shaft alignment, parallel and angular misalignment, soft foot, thermal expansion and safe diagnostic reporting."
+  },
+  "visitor_page_audit": {
+    "http_status": 200,
+    "visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/20/osetc-044-motor-shaft-alignment-soft-foot-offset-angle/",
+    "seo_meta_correct": true,
+    "og_image_alt_present": true,
+    "missing_image_alt_count": 0,
+    "empty_link_count": 0,
+    "rendered_youtube_iframes": 3,
+    "iframe_ids": [
+      "cDdHaHWdFKA",
+      "3g26rB3jyEQ",
+      "odBPEsgaja8"
+    ],
+    "site_control_placeholder_links": 8,
+    "site_control_note": "WordPress navigation/sharing controls, not verified article-body defects"
+  },
+  "chart": {
+    "included": false,
+    "candidates": [
+      "grouped vertical bars",
+      "line chart",
+      "scatter chart"
+    ],
+    "reason": "Training examples are fictional and no authentic numerical dataset supports a meaningful chart; manufacturer media and a diagnostic exercise are more informative."
+  },
+  "fictional_data": "Four hypothetical soft-foot readings: 0.02, 0.11, 0.03, 0.04 mm. No actual machine tested and no universal threshold asserted.",
+  "unverified": [
+    "Independent YouTube playback tests in a real browser",
+    "Mobile viewport screenshots and responsive visual review",
+    "Physical maintenance or laser measurement",
+    "Exact watermark color sampled from final uploaded image"
+  ],
+  "archived_date": "2026-11-20"
+}

@@ -1,0 +1,137 @@
+<!-- wp:paragraph -->
+<p><strong>Windows Command #55</strong> explains <code>wevtutil epl</code>, the built-in Windows command for exporting event records to a native <code>.evtx</code> file. Preserving relevant logs before troubleshooting helps investigators compare a service failure, update problem or unexpected shutdown without relying solely on a live Event Viewer session. The lesson follows <a href="https://bitcoinversus.tech/2026/11/15/windows-command-54-wevtutil-qe-read-filter-event-logs/">Windows Command #54</a>, which queried events on screen. Exporting creates a separate file for authorized offline review; it does <strong>not</strong> clear the original log. Microsoft's <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil">wevtutil command reference</a> documents the operation for Windows 10, Windows 11 and supported Windows Server releases.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=nOhQpVCHssc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=nOhQpVCHssc
+</div><figcaption class="wp-element-caption"><em>NKTechForAll, September 13, 2024: “How to Export Event viewer logs and share it on Windows.” Demonstrates the graphical export workflow; the command-line syntax below is verified against Microsoft, not inferred from the video.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Choose the correct log and storage location</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Run <code>wevtutil el</code> to list available channels. Common channels include <code>System</code> for operating-system and service activity, <code>Application</code> for application-generated entries, and <code>Security</code> for audit records when enabled. Access to protected channels may require elevated privileges or specific audit-log rights. Collect only records relevant to an approved investigation, because logs may reveal usernames, computer names, network addresses and application details.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a classroom exercise, create a separate folder under your own Windows profile. The examples below are intended for Command Prompt on an authorized Windows machine. Confirm the destination is not automatically synchronized to an unauthorized cloud account. Use secured organizational evidence storage for real incident files.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>mkdir "%USERPROFILE%\Documents\BV-Lesson55"
+wevtutil el
+wevtutil gl System</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Export a complete System log without clearing it</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <code>epl</code> subcommand means <em>export-log</em>. Give the source channel and an absolute output path. A successful command produces an EVTX file containing the exported records. The destination directory must already exist, and the account must have permission to read the channel and write the file.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>wevtutil epl System "%USERPROFILE%\Documents\BV-Lesson55\System-Lab.evtx"
+wevtutil epl Application "%USERPROFILE%\Documents\BV-Lesson55\Application-Lab.evtx"</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Keep the two channels separate: merging them manually or renaming a plain-text listing to <code>.evtx</code> does not create a valid Event Log archive. Export is preferable to copying a live, locked log file from the operating system's event directory. Microsoft's <a href="https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log-tools">Windows Event Log tools reference</a> establishes <code>wevtutil.exe</code> as a supported event-log utility.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Export only matching events</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a focused service incident, <code>/q:</code> accepts an XPath event query. The following example selects Event ID 7031 from the System channel. Event IDs must be interpreted alongside the provider, message, timestamp and incident context; a matching number alone does not prove a particular root cause.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>wevtutil epl System "%USERPROFILE%\Documents\BV-Lesson55\Service7031-Lab.evtx" /q:"*[System[(EventID=7031)]]"</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The query creates a filtered export, which is useful for triage but is <strong>not</strong> a complete preservation of the original channel. Keep a full export when investigation policy requires it. Microsoft documents <code>/q:</code> for filtering and <code>/sq:true</code> for reading a structured query from a separate file. For a broader event-context tutorial, review <a href="https://bitcoinversus.tech/2026/10/09/ositc-004-windows-event-viewer-fundamentals-logs-levels-event-ids-sources-filtering-troubleshooting/">OSITC.004 on Event Viewer</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=1ldbMlxKZVQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=1ldbMlxKZVQ
+</div><figcaption class="wp-element-caption"><em>“Peep the Technique Episode 1.2: Windows Event Logs,” a hands-on introduction to examining EVTX records. Included as independent analysis context, not as validation of the exact export commands.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Inspect the exported file</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Verify the output exists and is nonempty. Then ask <code>wevtutil qe</code> to read from the file by setting <code>/lf:true</code>, which treats the first argument as an EVTX path. Alternatively, PowerShell's <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent">Get-WinEvent</a> supports <code>-Path</code> for offline log files. Read access to the file remains subject to normal Windows permissions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>dir "%USERPROFILE%\Documents\BV-Lesson55\*.evtx"
+wevtutil qe "%USERPROFILE%\Documents\BV-Lesson55\System-Lab.evtx" /lf:true /c:3 /rd:true /f:text</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The listing proves only that a file exists; the second command helps establish that its contents are readable. No particular number of events or error messages is guaranteed in a teaching environment. An EVTX export may lack the provider resources needed to render full human-readable messages on another computer; archival metadata handling is covered by <code>wevtutil al</code> in Microsoft's command reference.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Avoid accidental overwrites and protect evidence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>By default, an existing export destination can cause the export to fail. The <code>/ow:true</code> option allows replacement without confirmation. For investigations, use unique filenames rather than overwriting an earlier export. Never confuse <code>epl</code> with <code>cl</code>, which clears a channel. Clearing the source log could destroy evidence and violate organizational incident-handling requirements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For stronger handling, record the source host, collection time with timezone, log name, operator, and a SHA-256 hash of the completed file. A hash allows a later analyst to check whether the file bytes match the collected version; it does not prove an event was truthful or that the collection captured every record. See <a href="https://bitcoinversus.tech/2026/10/27/ositc-010-windows-reliability-monitor-crash-history-perfmon-rel/">OSITC.010 on Reliability Monitor</a> for a complementary crash timeline and <a href="https://bitcoinversus.tech/2026/11/12/windows-sc-qfailure-service-recovery-actions-reset-period/">Windows Command #53</a> for understanding service recovery settings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>certutil -hashfile "%USERPROFILE%\Documents\BV-Lesson55\System-Lab.evtx" SHA256</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=08WZXnicLBo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=08WZXnicLBo
+</div><figcaption class="wp-element-caption"><em>Tech In Moments, “Windows Event Viewer Tutorial: A Step by Step Guide.” An independent walkthrough of log inspection and filtering; source identity confirmed, but embedded playback has not been tested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercise: produce a defensible collection note</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On an authorized lab computer, export the System channel and identify the filename, exact channel, host, export time, file size and SHA-256 digest. Then inspect three exported records without modifying the original channel. Explain why a full export and a query-filtered subset answer different questions, and why file hashes should be stored with controlled access. Avoid including raw usernames or private incident details in a public submission.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> <code>wevtutil epl</code> preserves event records in an EVTX file for subsequent analysis. Confirm the export is readable, restrict access, document its origin and refrain from clearing or overwriting evidence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Syntax and option meanings were checked against Microsoft Learn's wevtutil and Get-WinEvent documentation. No native Windows commands or live log exports were executed in the editorial environment. Three YouTube source identities were checked against their public listings; iframe rendering, player playback and mobile appearance require separate checks. The cover is original 1200 × 630 photorealistic conceptual editorial artwork, not a screenshot of actual collected records. No numerical chart was included because the exercise provides no measured dataset.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please scan the QR code below</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR for an optional 5,000-satoshi donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original BitcoinVersus.Tech donation QR. Independently verify the wallet address and amount before transfer.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. An optional <strong>5,000-satoshi</strong> donation supports verification work. Confirm recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount using a compatible wallet before sending. Bitcoin transfers are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Disclaimer:</strong> Educational instructions are not authorization to access another person's logs, alter production systems, disclose confidential event data, or make financial or investment decisions.</em></p>
+<!-- /wp:paragraph -->

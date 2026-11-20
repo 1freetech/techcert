@@ -1,0 +1,93 @@
+<!-- wp:paragraph -->
+<p><strong>OSPCB.009</strong> follows a circuit board beyond fabrication into <strong>PCB assembly (PCBA)</strong>. A factory can manufacture a bare board correctly and still populate the wrong component, rotate a connector, or omit a part. Assembly therefore needs a matched bill of materials (BOM), component placement coordinates, solder-paste information, and a clearly identified revision. The previous <a href="https://bitcoinversus.tech/2026/11/14/ospcb-008-kicad-10-drc-gerber-drill-fabrication-handoff/">OSPCB.008 fabrication handoff lesson</a> covered Gerbers and drill data. Here, the goal is to make the populated board match the electrical design.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=V2rnSN_lwjM","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=V2rnSN_lwjM
+</div><figcaption class="wp-element-caption"><em>Simon Gelo, April 17, 2026: “PCB Assembly Checklist: Gerbers, BOM &amp; Pick and Place Explained.” A directly relevant KiCad example. Source page verified; player playback remains untested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">1. A BOM identifies the actual parts</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A bill of materials ties designators such as <code>R1</code> or <code>U1</code> to part quantities, values, packages and preferably exact manufacturer part numbers. A generic description like “10 kΩ resistor” can leave uncertainty about tolerance, power rating, case size and temperature rating. Record approved alternatives explicitly instead of relying on an assembler to infer them. KiCad 10's schematic BOM exporter can generate configurable outputs; the <a href="https://docs.kicad.org/10.0/en/eeschema/eeschema.html">official Schematic Editor manual</a> explains the exporter. Verify sourcing availability and the purchasing version independently.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <strong>do-not-populate (DNP)</strong> item requires special attention. An intentionally unassembled footprint may remain on the board while its component should not be supplied or placed. Compare BOM inclusion settings with the assembler's accepted convention and final review screen. <a href="https://bitcoinversus.tech/2026/11/14/ospcb-008-pcb-vias-annular-rings-drill-aspect-ratio-fabrication-kicad-10/">OSPCB.008 on vias and manufacturing checks</a> explains why the bare board can remain valid without every possible part installed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">2. Placement data tell machines where to put parts</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A component placement list, sometimes called a centroid or pick-and-place file, contains designators, positions, orientations and board side. In KiCad 10, use <strong>File → Fabrication Outputs → Component Placement</strong> in PCB Editor. The <a href="https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html">KiCad PCB Editor reference</a> documents coordinate-origin, unit and footprint-exclusion options. Match the exported origin and rotation conventions to the assembly provider's requirements. An electrically correct footprint can still be physically rotated incorrectly during production.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Review top and bottom placements separately where appropriate. Check polarized capacitors, diodes, pin-one indicators, connectors and IC orientation against the schematic, silkscreen and assembly preview. Never assume a 0° rotation in one supplier's software means exactly the same physical orientation in another.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=82ujJ1URRxk","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=82ujJ1URRxk
+</div><figcaption class="wp-element-caption"><em>Build a CubeSat, May 23, 2026: EPS v2 hardware walkthrough, including pick-and-place files around 12:33 and BOM data around 13:03. Creator discloses PCBWay sponsorship; assembly concepts are cross-checked against KiCad documentation.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">3. Solder paste is not solder mask</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <strong>F.Paste</strong> and <strong>B.Paste</strong> layers specify solder-paste apertures for surface-mount assembly. Solder-mask layers serve a different purpose: they expose or cover copper during board manufacture. A stencil uses paste aperture data to deposit material on designated pads before components are placed and reflowed. Incorrect apertures can increase bridging, tombstoning or insufficient-solder risks. Follow the assembler's stencil rules rather than applying generic reductions without engineering approval. <a href="https://jlcpcb.com/help/article/smt-stencil-data-prepared-for-smt-orders">JLCPCB's stencil guidance</a> explains how selected assembly parts affect stencil preparation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A common assembly sequence is paste printing, component placement, reflow, inspection and any required through-hole operations. The <a href="https://jlcpcb.com/blog/printed-circuit-board-assembly/">manufacturer's PCBA process description</a> explains the stages. <a href="https://bitcoinversus.tech/2026/11/14/ospcb-007-signal-integrity-controlled-impedance-crosstalk-differential-pairs-kicad/">OSPCB.007 on signal integrity</a> provides context for why part placement and routing interact with board performance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=PfGJDiz7-TQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=PfGJDiz7-TQ
+</div><figcaption class="wp-element-caption"><em>Phil's Lab #94: “How To Get Your PCB Manufactured &amp; Assembled.” Walks through Gerbers, BOM, placement and assembly drawings. The video includes a disclosed PCBWay promotion; video identity verified, playback untested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">4. A practical assembly handoff review</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Before ordering, compare every populated designator across the schematic, BOM and placement file. Confirm component package, manufacturer number, board side, rotation, reference origin, DNP status and matching revision. Inspect the paste outputs, board outline, assembly notes, approved substitutions and the vendor's preview. The <a href="https://jlcpcb.com/blog/build-first-custom-pcba">JLCPCB assembly checklist</a> and <a href="https://www.pcbway.com/helpcenter/generate_gerber/How_to_Export_Gerber__BOM__and_Pick_and_Place_Files_in_KiCad_9_0.html">PCBWay's KiCad file guide</a> describe typical handoff fields.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Practice:</strong> A fictional assembly job lists <code>U1</code> in the BOM but not the position file; <code>D1</code> appears with a 180° rotation; <code>R9</code> is marked DNP. Explain which discrepancies require clarification before release. Do not treat the rotation value alone as a proven defect; inspect the supplier preview and part orientation. The task is document review, not unapproved operation of reflow or placement equipment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A finished assembly order should preserve approved outputs and revision history. <a href="https://bitcoinversus.tech/2026/11/14/ospcb-006-decoupling-capacitors-power-pins-ground-vias-kicad-placement/">OSPCB.006 on decoupling placement</a> shows why a correct component installed in the wrong place can undermine an otherwise valid circuit.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> Gerbers define the bare PCB. The BOM defines parts. Placement data define positions. Paste layers support solder deposition. Cross-checking all four turns a board design into a reproducible assembly package.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Technical behavior was checked against KiCad 10 documentation and current assembly-provider guides. The sample designators and discrepancies are hypothetical. The video pages and identities were verified, but independent playback and mobile visual tests were not completed. No real PCB assembly, stencil print or production upload was performed. The original 1200 × 630 fine-art oil-painting cover depicts an illustrative electronics lab, not a documented customer production line.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please scan the QR code below</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR for an optional 5,000-satoshi Bitcoin contribution" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi donation. Independently confirm recipient 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and amount before sending. Bitcoin transfers are generally irreversible.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Disclaimer:</strong> Educational information only. Verify supplier requirements, site safety procedures and qualified engineering approval before actual manufacturing. No electrical safety certification, financial advice or procurement guarantee is implied.</em></p>
+<!-- /wp:paragraph -->

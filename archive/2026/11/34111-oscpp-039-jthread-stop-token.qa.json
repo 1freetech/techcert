@@ -1,0 +1,155 @@
+{
+  "publication": "BitcoinVersus.Tech",
+  "lesson": "OSC++.039",
+  "track": "C++",
+  "post_id": 34111,
+  "title": "OSC++.039: C++20 jthread and Graceful Shutdown",
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/20/oscpp-039-cpp20-jthread-stop-token-cooperative-cancellation/",
+  "slug": "oscpp-039-cpp20-jthread-stop-token-cooperative-cancellation",
+  "published_date": "2026-11-20",
+  "categories": [
+    44329,
+    5812,
+    2509703,
+    6
+  ],
+  "tags": [
+    3032032,
+    198377341,
+    793316315
+  ],
+  "rotation": {
+    "canonical_43_track": true,
+    "previous": "OSPCB.009",
+    "current": "C++ OSC++.039",
+    "next": "Semiconductor Technician OSSTC, numbering requires fresh audit",
+    "cover_style": "photorealistic editorial",
+    "person": "Black woman"
+  },
+  "duplicate_qa": {
+    "number_checked": "OSC++.039",
+    "wordpress_published_or_draft_matches_before_creation": 0,
+    "github_archived_story_search_results": 0
+  },
+  "sources": [
+    {
+      "url": "https://cppreference.com/cpp/thread/jthread",
+      "type": "C++ standard library reference"
+    },
+    {
+      "url": "https://cppreference.com/cpp/thread/stop_token",
+      "type": "C++ standard library reference"
+    },
+    {
+      "url": "https://cppreference.com/cpp/thread/stop_source",
+      "type": "C++ standard library reference"
+    },
+    {
+      "url": "https://en.cppreference.com/cpp/thread/stop_callback",
+      "type": "C++ standard library reference"
+    },
+    {
+      "url": "https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0660r8.pdf",
+      "type": "C++ WG21 proposal P0660R8"
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=_X9kY3FdUUo",
+      "creator": "arisaif",
+      "published": "2025-05-22",
+      "source_page_verified": true,
+      "iframe_rendered": true,
+      "actual_playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=A7sVFJLJM-A",
+      "creator": "CppCon / Anthony Williams",
+      "conference": "CppCon 2022",
+      "source_page_verified": true,
+      "iframe_rendered": true,
+      "actual_playback_verified": false
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-VWCEklRP6I",
+      "creator": "Code for yourself",
+      "published": "2026-08-31",
+      "source_page_verified": true,
+      "iframe_rendered": true,
+      "actual_playback_verified": false
+    }
+  ],
+  "cover": {
+    "id": 34105,
+    "filename": "oscpp039-jthread-stop-token-cover-1200x630-1.jpg",
+    "dimensions_original": [
+      1200,
+      630
+    ],
+    "style": "photorealistic",
+    "source": "original generated illustration",
+    "alt": "Original photorealistic editorial cover showing a Black woman programming C++20 worker thread shutdown on dual monitors in a network equipment lab.",
+    "wordmark": "BitcoinVersus.tech neon green #39FF14 on black at bottom-left",
+    "pixel_color_not_independently_verified": true,
+    "not_repeated_inside_article": true
+  },
+  "local_code_test": {
+    "code_file": "oscpp039_jthread_demo.cpp",
+    "toolchain": "g++ -std=c++20 -Wall -Wextra -Werror -pthread",
+    "compiled": true,
+    "executed": true,
+    "observed_output": [
+      "request accepted: 1",
+      "work iterations: 4"
+    ],
+    "note": "Iteration count is scheduling-dependent; test was on local container and not user's production system."
+  },
+  "prepublication": {
+    "saved_blocks": 3,
+    "video_ids": [
+      "_X9kY3FdUUo",
+      "A7sVFJLJM-A",
+      "-VWCEklRP6I"
+    ],
+    "internal_links": 4,
+    "code_blocks": 2,
+    "editor_note": true,
+    "qr": true,
+    "exact_footer": true,
+    "banned_editorial_words": []
+  },
+  "live": {
+    "http_status": 200,
+    "visibility": "public",
+    "canonical": "https://bitcoinversus.tech/2026/11/20/oscpp-039-cpp20-jthread-stop-token-cooperative-cancellation/",
+    "seo_title": "OSC++.039: C++20 jthread and Cooperative Cancellation | BitcoinVersus.Tech",
+    "meta_description": "OSC++.039 explores std::jthread, stop_token, stop_source, cooperative cancellation, joining threads and C++20 worker shutdown with a tested example.",
+    "og_image_alt_present": true,
+    "missing_image_alt": 0,
+    "empty_article_links": 0,
+    "youtube_iframes": 3,
+    "iframe_ids": [
+      "_X9kY3FdUUo",
+      "A7sVFJLJM-A",
+      "-VWCEklRP6I"
+    ],
+    "site_ui_placeholder_links": 8
+  },
+  "chart": {
+    "included": false,
+    "reviewed": [
+      "vertical bar",
+      "line",
+      "scatter"
+    ],
+    "reason": "One timing-dependent local C++ run does not make a reliable benchmark dataset. A code example is more informative."
+  },
+  "limitations": [
+    "Actual YouTube playback unverified",
+    "Mobile viewport visual rendering unverified",
+    "No user's production systems tested",
+    "Exact watermark color/font independently unverified"
+  ],
+  "archived": "2026-11-20"
+}

@@ -1,0 +1,119 @@
+<!-- wp:paragraph -->
+<p><strong>Windows Command #56</strong> teaches a useful question before an incident-response export: is the Windows event log configured to retain the records investigators expect? The built-in <code>wevtutil gl</code> command displays channel settings without editing them. Its companion <code>wevtutil gli</code> reports current log status. Together they distinguish a full log, a disabled channel, a small capacity limit and a simple query mistake. Microsoft documents both commands for Windows 10, Windows 11 and supported Windows Server releases. Begin with <a href="https://bitcoinversus.tech/2026/11/15/windows-command-54-wevtutil-qe-read-filter-event-logs/">Windows Command #54</a> for event queries and <a href="https://bitcoinversus.tech/2026/11/20/windows-command-55-wevtutil-epl-export-event-logs-evtx/">Windows Command #55</a> for exporting evidence.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=08WZXnicLBo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=08WZXnicLBo
+</div><figcaption class="wp-element-caption"><em>Tech In Moments YT, “Windows Event Viewer Tutorial: A Step by Step Guide,” September 15, 2025. Demonstrates the graphical Event Viewer; command syntax below comes from Microsoft's reference.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">1. List the available event-log channels</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Open Command Prompt or PowerShell on a Windows machine where you have permission to inspect logs. Use <code>wevtutil el</code> to enumerate available channels. <code>System</code>, <code>Application</code> and <code>Security</code> are familiar examples, but provider-specific operational channels can have longer names. Visibility and access vary by account and log permissions; protected channels may require elevation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code" style="background:transparent;border:0;box-shadow:none;white-space:pre-wrap"><code>wevtutil el</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">2. Inspect configuration with gl</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Run <code>gl</code>, short for <em>get-log</em>, against a named channel. The default output is text; <code>/f:xml</code> produces XML for structured review. Neither command changes retention settings, clears events or exports their contents. Compare fields against the approved monitoring baseline rather than guessing what a factory default should be.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code" style="background:transparent;border:0;box-shadow:none;white-space:pre-wrap"><code>wevtutil gl System
+wevtutil gl Application /f:xml</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:table -->
+<figure class="wp-block-table"><table><thead><tr><th>Field</th><th>What it tells an engineer</th></tr></thead><tbody><tr><td><code>enabled</code></td><td>Whether the channel is enabled for collection.</td></tr><tr><td><code>maxSize</code></td><td>Configured file-size ceiling, in bytes.</td></tr><tr><td><code>retention</code></td><td>Whether existing events are retained rather than overwritten when full.</td></tr><tr><td><code>autoBackup</code></td><td>Whether automatic backup is configured for a full retained log.</td></tr><tr><td><code>logFileName</code></td><td>Location of the backing event-log file.</td></tr></tbody></table><figcaption class="wp-element-caption">Field meanings follow Microsoft Learn. Values depend on the computer and channel; no live machine readings are asserted.</figcaption></figure>
+<!-- /wp:table -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">3. Check live status with gli</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><code>gli</code>, short for <em>get-loginfo</em>, reports status information about a channel or an EVTX file. Compare the reported record count, file size and full-state indicators with the policy visible in <code>gl</code>. A low record count alone cannot prove that events were deleted; application activity, collection settings and capacity also affect what remains available. For individual event timestamps and IDs, continue with the read-only <code>qe</code> queries covered in <a href="https://bitcoinversus.tech/2026/11/15/windows-command-54-wevtutil-qe-read-filter-event-logs/">lesson #54</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code" style="background:transparent;border:0;box-shadow:none;white-space:pre-wrap"><code>wevtutil gli System
+wevtutil gli Application</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=FmaTlq21zWI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=FmaTlq21zWI
+</div><figcaption class="wp-element-caption"><em>Danny Moran, “How to Change the Event Viewer Log File Size,” May 18, 2024. Shows graphical size and archiving controls; the lesson keeps its examples read-only.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">4. Read retention settings correctly</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Microsoft defines <code>retention:false</code> as permitting newer events to overwrite the oldest records when a log reaches capacity. With <code>retention:true</code>, existing events are retained and incoming events can be discarded after the log fills. Automatic backup adds another policy consideration; Microsoft states that enabling <code>autoBackup</code> requires retention mode. A <code>maxSize</code> value is in <strong>bytes</strong>, not megabytes. For example, 20,971,520 bytes equal exactly 20 MiB when divided by 1,048,576. The example is arithmetic, not a measured log size.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A misconfigured policy can leave a false impression of complete audit coverage. In enterprise environments, Group Policy or MDM may enforce settings, so the effective configuration should be assessed against organizational policy. Microsoft's <a href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-eventlogservice">EventLogService policy documentation</a> explains managed retention and maximum-size controls. Avoid changing either setting during evidence collection without approval.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">5. Build a safe investigation trail</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Suppose a service restarted overnight, yet the relevant System events appear absent. Inspect the channel name and enabled state first, then read the size and retention policy. Check current status using <code>gli</code> before performing a targeted <code>qe</code> search. Record the command, time, hostname and relevant non-sensitive field values in an authorized incident ticket. Where preservation is required, use the established <a href="https://bitcoinversus.tech/2026/11/20/windows-command-55-wevtutil-epl-export-event-logs-evtx/">EVTX export procedure</a> and restricted storage; never clear the original event log as a troubleshooting shortcut.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=kD7qdeYMAQ8","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=kD7qdeYMAQ8
+</div><figcaption class="wp-element-caption"><em>WireDogSec, “Windows Event Logs” TryHackMe walkthrough, August 20, 2025. Covers defensive inspection with Event Viewer, wevtutil and Get-WinEvent; it is broader than the gl command.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Try a read-only lab</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>On a lab Windows system, run <code>wevtutil gl System</code>, <code>wevtutil gli System</code> and <code>wevtutil gl Application /f:xml</code>. Identify each channel's maximum size, retention mode and backing file location. Record whether the channel is enabled, then explain how a full log would behave under the observed retention setting. Do not run <code>wevtutil cl</code> (clear-log) or <code>wevtutil sl</code> (set-log); both alter state and fall outside the exercise.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For deeper root-cause analysis, correlate events with the relevant service trigger information in <a href="https://bitcoinversus.tech/2026/11/06/windows-command-52-sc-qtriggerinfo-service-trigger-events/">Windows Command #52</a> and with system performance measurements from <a href="https://bitcoinversus.tech/2026/11/01/ositc-012-windows-performance-monitor-perfmon-counters-baselines-data-collector-sets/">the Performance Monitor lesson</a>. A sound diagnosis considers event availability, actual symptoms and documented collection policy, not an isolated warning label.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> <code>gl</code> tells you how a Windows log is configured; <code>gli</code> tells you about its current status. Read both before deciding whether missing records signal a retention problem, disabled collection or an incomplete search.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Command behavior and retention rules were checked against Microsoft's wevtutil and EventLogService documentation. The videos are externally identified educational demonstrations, not independent verification of every command used in the lesson. No Windows event logs were accessed or altered during preparation. The featured cover is original conceptual artwork, not a real administrative session. Actual YouTube playback and mobile-browser rendering require separate device-level checks. No chart was included because the exercise has no empirical dataset.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please scan the QR code below</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech donation QR for an optional 5,000-satoshi Bitcoin contribution" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Original donation QR. Independently verify the destination and amount in your Bitcoin wallet before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-run and publishes independent technical education. Any contribution is optional; an example amount is <strong>5,000 satoshis</strong>. Confirm recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and the transaction amount independently before transfer. Bitcoin transactions are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Disclaimer:</strong> Educational material is not authorization to access another person's logs, disclose sensitive event data, alter enterprise policies or clear production evidence. Perform administrative actions only under approved change-control and security procedures.</em></p>
+<!-- /wp:paragraph -->

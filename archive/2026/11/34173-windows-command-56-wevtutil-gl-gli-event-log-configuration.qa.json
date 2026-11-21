@@ -1,0 +1,113 @@
+{
+  "post_id": 34173,
+  "title": "Windows Command #56: Inspect Event Logs with wevtutil gl",
+  "published_url": "https://bitcoinversus.tech/2026/11/21/windows-command-56-wevtutil-gl-gli-event-log-configuration/",
+  "status": "publish",
+  "series": "Windows Command #56",
+  "rotation_index": 34,
+  "prior_published_series": "Linux Command #69",
+  "next_rotation": "Electrical Engineering",
+  "topic": "Windows Event Log configuration inspection with wevtutil gl/get-log and gli/get-loginfo",
+  "article_kind": "technical educational lesson",
+  "published_date": "2026-11-21",
+  "primary_sources": [
+    {
+      "title": "Microsoft Learn — wevtutil",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil",
+      "checked": "2026-11-21"
+    },
+    {
+      "title": "Microsoft Learn — EventLogService Policy CSP",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-eventlogservice",
+      "checked": "2026-11-21"
+    },
+    {
+      "title": "Microsoft Learn — Windows Event Log Tools",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log-tools",
+      "checked": "2026-11-21"
+    }
+  ],
+  "embed_sources": [
+    {
+      "id": "08WZXnicLBo",
+      "channel": "Tech In Moments YT",
+      "published": "2025-09-15",
+      "subject": "Windows Event Viewer GUI",
+      "title": "Windows Event Viewer Tutorial: A Step by Step Guide"
+    },
+    {
+      "id": "FmaTlq21zWI",
+      "channel": "Danny Moran",
+      "published": "2024-05-18",
+      "subject": "Graphical Event Viewer log file size and archiving"
+    },
+    {
+      "id": "kD7qdeYMAQ8",
+      "channel": "WireDogSec",
+      "published": "2025-08-20",
+      "subject": "Windows event logs, wevtutil, Get-WinEvent and defense"
+    }
+  ],
+  "embed_ids_saved": [
+    "08WZXnicLBo",
+    "FmaTlq21zWI",
+    "kD7qdeYMAQ8"
+  ],
+  "iframe_ids_rendered": [
+    "08WZXnicLBo",
+    "FmaTlq21zWI",
+    "kD7qdeYMAQ8"
+  ],
+  "embed_match": true,
+  "gutenberg_embed_blocks": 3,
+  "internal_links": [
+    "https://bitcoinversus.tech/2026/11/15/windows-command-54-wevtutil-qe-read-filter-event-logs/",
+    "https://bitcoinversus.tech/2026/11/20/windows-command-55-wevtutil-epl-export-event-logs-evtx/",
+    "https://bitcoinversus.tech/2026/11/06/windows-command-52-sc-qtriggerinfo-service-trigger-events/",
+    "https://bitcoinversus.tech/2026/11/01/ositc-012-windows-performance-monitor-perfmon-counters-baselines-data-collector-sets/"
+  ],
+  "chart": {
+    "included": false,
+    "reason": "No real measured time series or comparable values; illustrative policy differences documented in a table."
+  },
+  "cover": {
+    "media_id": 34170,
+    "url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/windows-command-56-wevtutil-gl-1200x630-1.jpg",
+    "width": 1200,
+    "height": 630,
+    "alt_text": "Conceptual editorial photo of a network technician inspecting Windows System event-log configuration in Command Prompt and Event Viewer; original 1200 by 630 cover",
+    "style": "photorealistic editorial artwork",
+    "depicted_person": "Black man",
+    "story_specific": true,
+    "watermark": "BitcoinVersus.tech neon green on black text highlight at lower left; created in RGB #39FF14 before JPEG compression",
+    "image_inside_article": false
+  },
+  "footer": {
+    "approved_text_exact": true,
+    "donation_qr_id": 24043,
+    "donation_qr_occurrences": 1
+  },
+  "seo": {
+    "title": "Windows Command #56: wevtutil gl & gli | BitcoinVersus.Tech",
+    "description": "Windows Command #56 explains wevtutil gl and gli: review Windows event-log retention, capacity, enabled status and safe troubleshooting checks.",
+    "canonical": "https://bitcoinversus.tech/2026/11/21/windows-command-56-wevtutil-gl-gli-event-log-configuration/",
+    "live_title": "Windows Command #56: wevtutil gl & gli | BitcoinVersus.Tech",
+    "live_description": "Windows Command #56 explains wevtutil gl and gli: review Windows event-log retention, capacity, enabled status and safe troubleshooting checks."
+  },
+  "live_audit": {
+    "http_status": 200,
+    "visibility": "public",
+    "missing_image_alt": 0,
+    "empty_links": 0,
+    "links_to_nowhere_site_ui": 8,
+    "iframes_rendered": 3
+  },
+  "qa_limitations": [
+    "Actual playback of each YouTube video was not performed in a browser or phone",
+    "Mobile/desktop viewport screenshot and responsive behavior not tested",
+    "Native Windows commands and retention policies were not executed against a live Windows system",
+    "Social preview uses a WordPress 1024×538 derivative even though original featured media is 1200×630",
+    "Exact post-JPEG per-pixel green color not audited with remote media download"
+  ],
+  "archived_on": "2026-11-21"
+}

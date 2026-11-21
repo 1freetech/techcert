@@ -1,0 +1,110 @@
+<!-- wp:paragraph -->
+<p><strong>OSEEC.030</strong> explains a common variable-frequency-drive (VFD) fault: an accelerating motor works normally, but the drive trips as soon as a heavy flywheel, conveyor or descending load is told to slow down. The cause may not be a wiring defect. When a motor is driven by its load during deceleration, mechanical energy can return through the inverter into its DC bus, forcing bus voltage upward. <a href="https://www.se.com/ca/en/faqs/FA274432/">Schneider Electric’s braking guidance</a> connects rapid stopping and overhauling loads with braking-resistor applications.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=yQT-F4agXiE","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=yQT-F4agXiE
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>Video: AutomationDirect, “DURApulse GS4 VFD Dynamic Braking” (October 18, 2017). A manufacturer demonstration of dynamic braking on a specified drive family.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Where the energy goes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The rectifier and DC-link capacitors supply the inverter while motoring. During an overhauling or rapidly decelerating condition, power can flow in the opposite direction from the motor toward the DC link. A diode-front-end drive ordinarily cannot return that excess energy to the supply, so DC-link voltage can rise until protective controls intervene. For a foundation in rectification and PWM, review <a href="https://bitcoinversus.tech/2026/10/11/oseec-018-variable-frequency-drive-engineering-rectifier-dc-bus-pwm-vector-harmonics/">OSEEC.018: VFD Engineering</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <strong>braking chopper</strong> is a controlled electronic switch, frequently built around a power semiconductor. Once the DC bus reaches its specified switching threshold, the chopper connects a properly matched resistor so regenerative energy is converted into heat. A resistor alone cannot substitute for a compatible chopper. <a href="https://www.se.com/eg/en/faqs/FA379292/">Schneider Electric</a> explains the separation between switching and heat dissipation; <a href="https://www.abb.com/global/en/areas/motion/drives/low-voltage-ac-drives/industrial-drives/acs880-multidrives/acs880-607">ABB documents</a> the same principle in its ACS880 brake units.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why faster stops can create faults</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A shorter programmed deceleration ramp demands faster removal of kinetic energy. Without enough braking capability, drives may extend the ramp when supported, coast, or report DC-bus overvoltage. The actual response depends on the drive model, configuration, motor and load. Motor power rating alone does not establish resistor size; inertia, braking frequency, duty cycle, permissible resistance, cooling, and thermal protection all matter.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=3PNBk-V5x3o","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=3PNBk-V5x3o
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>Video: VFD Code, “Sizing a Dynamic Braking Resistor, for Stopping an Inertia Load” (January 30, 2026). An educational calculation demonstration; manufacturer design limits still govern.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked example: energy versus heat</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a <em>hypothetical</em> deceleration that transfers 5 kW to a resistor for four seconds. The energy is 5,000 W × 4 s = <strong>20,000 joules</strong>, or approximately <strong>5.56 watt-hours</strong>. If identical stops occur once every 60 seconds, the idealized cycle-average thermal load is 20,000 J ÷ 60 s = <strong>333 W</strong>. Both figures are calculated examples, not measured drive values. The resistor must also survive the higher short-duration pulse and any overlapping stops.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A 333 W average does <strong>not</strong> justify selecting a resistor marked 333 W. The allowable ohmic range and peak duty depend on the specific chopper and manufacturer-approved combinations. <a href="https://www.se.com/us/en/faqs/FA376712/">Schneider Electric’s resistor-selection guidance</a> emphasizes both braking energy and the load cycle. The worked example deliberately excludes mechanical losses, bus limits, wiring effects and ambient derating.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Dynamic braking is not the same as regeneration</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Resistor braking deliberately releases energy as heat. A compatible regenerative drive can instead return usable energy to the supply. <a href="https://www.abb.com/global/en/areas/motion/drives/expertise-technology/power-regeneration">ABB describes</a> energy recovery through regenerative supply hardware. Neither approach means the machine is electrically isolated or motion-safe. Compare <a href="https://bitcoinversus.tech/2026/11/20/oseec-029-safe-torque-off-sto-vfd-motor-safety-isolation/">OSEEC.029 on Safe Torque Off</a> and <a href="https://bitcoinversus.tech/2026/11/15/oseec-028-dual-channel-safety-relays-emergency-stops-monitored-reset/">OSEEC.028 on safety relays</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=P4bDpyJCzp4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=P4bDpyJCzp4
+</div></figure>
+<!-- /wp:embed -->
+<!-- wp:paragraph -->
+<p><em>Video: Jim Pytel / Big Bad Tech, “Motor Drive Deceleration and Braking Methods” (February 25, 2017). An independent lecture distinguishing coast, injection, resistor, and regenerative methods.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A read-only troubleshooting workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>First, capture the drive fault code, timestamp, model, software revision and deceleration profile from approved operator displays or logs. Next, compare fault occurrence with commanded stops, load direction, speed and operating duty. Check documented brake-chopper availability, resistor specifications, ventilation and thermal-alarm history against the specific manufacturer manual, without changing settings. If shaft behavior also appears abnormal, consult <a href="https://bitcoinversus.tech/2026/11/20/osetc-044-motor-shaft-alignment-soft-foot-offset-angle/">OSETC.044 on alignment and soft foot</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Safety boundary:</strong> Never open drive enclosures, touch DC-link terminals, handle braking resistors, bypass interlocks, change stopping ramps or perform live voltage checks based on a web lesson. DC buses can retain hazardous energy after supply power is removed; resistors can remain dangerously hot. Qualified personnel must follow the equipment manual, approved isolation procedures and appropriate verification. Rockwell Automation’s <a href="https://literature.rockwellautomation.com/idc/groups/literature/documents/um/1352-um000_-en-p.pdf">dynamic braking manual</a> warns specifically about live DC-bus potential and misleading indicator LEDs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Engineering takeaway</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An overvoltage trip during deceleration often points to an energy-management mismatch, not simply a defective VFD. Diagnose the load and duty, verify the approved braking architecture, and treat safety isolation as a separate design requirement. <a href="https://bitcoinversus.tech/2026/10/09/oseec-017-motor-starting-engineering-inrush-voltage-dip-dol-soft-starters-vfds-starter-selection/">OSEEC.017 on motor starting</a> provides useful background on matching motor controls to electrical and mechanical demands.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor’s Note:</strong> The technical explanation was checked against ABB, Schneider Electric and Rockwell Automation material, with independent educational video listings. The four-second power scenario is hypothetical. No energized equipment, drive configuration, video playback or mobile layout was tested; manufacturer literature and qualified engineering review govern real installations.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please scan the QR code below</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Original BitcoinVersus.Tech QR code for an optional 5,000-satoshi Bitcoin donation" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi support. Verify the recipient and amount independently before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.Tech is volunteer-supported. Confirm the recipient <strong>3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb</strong> and amount before any Bitcoin payment. Transfers are generally irreversible.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Disclaimer:</strong> Educational information only, not authorization to change industrial motor controls or operate hazardous equipment. Follow site procedures, applicable standards, manufacturer requirements and qualified professional supervision. No financial, investment or certified safety advice is provided.</em></p>
+<!-- /wp:paragraph -->

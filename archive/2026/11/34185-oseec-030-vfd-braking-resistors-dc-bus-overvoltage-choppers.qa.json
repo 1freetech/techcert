@@ -1,0 +1,112 @@
+{
+  "post_id": 34185,
+  "title": "OSEEC.030: Why VFDs Trip During Braking",
+  "status": "published",
+  "url": "https://bitcoinversus.tech/2026/11/21/oseec-030-vfd-braking-resistors-dc-bus-overvoltage-choppers/",
+  "published_date": "2026-11-21T08:39:48",
+  "category_rotation": {
+    "subject": "Electrical Engineering",
+    "prior_subject": "Windows Commands",
+    "next_subject": "Electrical Technician",
+    "lesson_number": "OSEEC.030"
+  },
+  "topic": "VFD dynamic braking; regenerative energy, DC bus overvoltage, choppers, resistor thermal sizing and qualified isolation",
+  "originality": {
+    "wordpress_series_search": "No OSEEC.030 published or draft; latest OSEEC.029",
+    "topical_search": "Related OSEEC.018 mentions braking resistors but no dedicated lesson; no duplicate found",
+    "github_code_search": "No OSEEC.030 entries"
+  },
+  "sources": {
+    "manufacturer": [
+      "https://www.se.com/ca/en/faqs/FA274432/",
+      "https://www.se.com/eg/en/faqs/FA379292/",
+      "https://www.se.com/us/en/faqs/FA376712/",
+      "https://www.abb.com/global/en/areas/motion/drives/low-voltage-ac-drives/industrial-drives/acs880-multidrives/acs880-607",
+      "https://www.abb.com/global/en/areas/motion/drives/expertise-technology/power-regeneration",
+      "https://literature.rockwellautomation.com/idc/groups/literature/documents/um/1352-um000_-en-p.pdf"
+    ],
+    "video_listings": [
+      {
+        "url": "https://www.youtube.com/watch?v=yQT-F4agXiE",
+        "channel": "AutomationDirect.com",
+        "published": "2017-10-18"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=3PNBk-V5x3o",
+        "channel": "VFD Code",
+        "published": "2026-01-30"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=P4bDpyJCzp4",
+        "channel": "Jim Pytel / Big Bad Tech",
+        "published": "2017-02-25"
+      }
+    ]
+  },
+  "calculated_example": {
+    "status": "Hypothetical not field-measured",
+    "power_W": 5000,
+    "braking_duration_s": 4,
+    "energy_J": 20000,
+    "energy_Wh": 5.5556,
+    "stop_period_s": 60,
+    "ideal_cycle_average_W": 333.3333,
+    "limits": "Not a design rating; pulse energy, peak dissipation, thermal time, resistance and drive approvals must be verified"
+  },
+  "chart": {
+    "included": false,
+    "rationale": "No independently measured comparative dataset; transparent equation example more suitable than a decorative chart"
+  },
+  "cover": {
+    "style": "cinematic anime",
+    "person": "none; subject-specific VFD, resistor, and flywheel",
+    "media_id": 34184,
+    "original_width_px": 1200,
+    "original_height_px": 630,
+    "alt": "Cinematic anime artwork of VFD, motor flywheel, chopper and dynamic braking resistor",
+    "wordmark": "BitcoinVersus.tech",
+    "wordmark_color": "#39FF14",
+    "wordmark_position": "bottom-left",
+    "wordmark_black_highlight": true,
+    "source_url": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oseec030-vfd-dynamic-braking-1200x630-1.jpg",
+    "in_body_duplicate": false
+  },
+  "multimedia": {
+    "gutenberg_embed_blocks": 3,
+    "rendered_youtube_iframes": 3,
+    "video_urls": [
+      "https://www.youtube.com/watch?v=yQT-F4agXiE",
+      "https://www.youtube.com/watch?v=3PNBk-V5x3o",
+      "https://www.youtube.com/watch?v=P4bDpyJCzp4"
+    ],
+    "playback_tested": false
+  },
+  "editorial": {
+    "approximate_words_before_editor_note": 737,
+    "contextual_internal_link_count": 5,
+    "prohibited_editorial_words_found": 0,
+    "approved_exact_footer": true,
+    "qr_media_id": 24043,
+    "qr_count": 1,
+    "no_decorative_text_boxes": true,
+    "seo_meta_present": true
+  },
+  "post_public_audit": {
+    "http_status": 200,
+    "canonical_matches": true,
+    "featured_media_matches": true,
+    "image_alt_missing_count": 0,
+    "empty_links_count": 0,
+    "links_to_nowhere_8_are_site_chrome": true,
+    "view_context_status": "publish",
+    "rendered_youtube_iframe_count": 3
+  },
+  "unresolved_checks": [
+    "Actual YouTube player loading and playback not tested via interactive browser",
+    "Desktop/mobile visual screenshot and responsive rendering not independently inspected",
+    "No energized VFD, motor, resistor, thermal performance or protection-device testing performed",
+    "Post-upload pixel-level watermark color not independently sampled from CDN-delivered asset",
+    "Public thumbnail/OG images may be WordPress-resized; original uploaded media details confirm 1200x630"
+  ],
+  "next_rotation_candidate": "OSETC.045 subject to fresh duplicate and sequence checks"
+}

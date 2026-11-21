@@ -1,0 +1,124 @@
+<!-- wp:paragraph -->
+<p><strong>OSC++.039</strong> explains how a C++20 application can ask a worker to stop without forcibly terminating its thread. <code>std::jthread</code> owns a thread and joins it automatically when the handle is destroyed; <code>std::stop_token</code> lets the worker observe a cooperative stop request. Earlier, <a href="https://bitcoinversus.tech/2026/11/15/oscpp-038-std-async-launch-policies-futures-lifetime-rules/">OSC++.038</a> examined asynchronous tasks and futures. The new challenge is managing the lifetime of a long-running worker, including shutdown when an application or test ends.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=_X9kY3FdUUo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=_X9kY3FdUUo
+</div><figcaption class="wp-element-caption"><em>Arisaif, May 22, 2025, “C++ Multi Threading Part 4: Why You Should Use std::jthread in Modern C++.” Discusses auto-joining and cancellation. Video identity confirmed; player playback not independently tested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why a joining thread differs from std::thread</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>C++20 introduced <code>std::jthread</code> to reduce lifetime hazards associated with manual joins. Destroying a joinable <code>std::thread</code> calls <code>std::terminate</code>. Destroying a joinable <code>std::jthread</code> instead calls <code>request_stop()</code> and then <code>join()</code>. The behavior appears in the <a href="https://cppreference.com/cpp/thread/jthread">jthread reference</a> and proposal <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0660r8.pdf">P0660R8</a>. A joining destructor improves cleanup but does not guarantee prompt completion when a worker ignores stop requests or blocks indefinitely.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The callable can accept a <code>std::stop_token</code> as its first parameter. The token observes a shared stop state, and <code>worker.request_stop()</code> marks the request. A worker must check that state or wait using a stop-aware operation. Calling <code>request_stop()</code> does not kill a thread, discard pending writes, or force an arbitrary blocking system call to return. The <a href="https://cppreference.com/cpp/thread/stop_token">stop-token reference</a> details the query methods.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Compile a reproducible example</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The following standalone program uses a ten-millisecond work interval and requests a stop after a short delay. The counter is atomic because two threads access it. Compile with a C++20-capable toolchain. The editorial build succeeded locally using GCC and strict compiler warnings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>#include &lt;atomic&gt;
+#include &lt;chrono&gt;
+#include &lt;iostream&gt;
+#include &lt;stop_token&gt;
+#include &lt;thread&gt;
+
+int main() {
+    std::atomic&lt;int&gt; completed{0};
+    std::jthread worker([&amp;](std::stop_token stop) {
+        while (!stop.stop_requested()) {
+            ++completed;
+            std::this_thread::sleep_for(
+                std::chrono::milliseconds{10});
+        }
+    });
+    std::this_thread::sleep_for(
+        std::chrono::milliseconds{35});
+    bool requested = worker.request_stop();
+    worker.join();
+    std::cout &lt;&lt; "request accepted: " &lt;&lt; requested &lt;&lt; "\n";
+    std::cout &lt;&lt; "work iterations: "
+              &lt;&lt; completed.load() &lt;&lt; "\n";
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>g++ -std=c++20 -Wall -Wextra -Werror -pthread demo.cpp -o demo
+./demo</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>One local run printed <code>request accepted: 1</code> and <code>work iterations: 4</code>. The iteration count is **not** a guaranteed result: operating-system scheduling and timer behavior affect it. <code>join()</code> waits for the worker to return, making the final counter read unambiguous. In actual applications, the worker must define safe places to stop after finishing or rolling back important operations.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=A7sVFJLJM-A","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=A7sVFJLJM-A
+</div><figcaption class="wp-element-caption"><em>CppCon 2022, Anthony Williams, “An Introduction to Multithreading in C++20.” The conference session covers jthread, stop source, callbacks and synchronization. Event identity verified through the CppCon session listing; playback untested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Cooperative cancellation and blocking waits</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A stop request is a signal, not an exception and not a forced process interruption. A worker that sleeps for a long interval with <code>std::this_thread::sleep_for</code> normally notices the request only after waking. For producer-consumer queues, <code>std::condition_variable_any</code> offers C++20 stop-token-aware wait overloads, allowing a waiting worker to awaken when cancellation is requested. Conventional blocking APIs and <code>std::condition_variable</code> do not automatically become cancellation-aware.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <code>std::stop_source</code> can request a stop for associated tokens outside a <code>jthread</code>. <code>std::stop_callback</code> registers an action that can run when the request occurs; its execution context demands care, because callbacks may execute on the thread issuing the request. Avoid slow, reentrant or lock-unsafe work inside such callbacks. See the <a href="https://cppreference.com/cpp/thread/stop_source">source reference</a> and <a href="https://en.cppreference.com/cpp/thread/stop_callback">callback reference</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Thread lifetime is not data-race protection</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Automatic joining only manages lifecycle. It cannot make shared counters, queues or application state inherently thread-safe. The example uses <code>std::atomic</code>; more complex data may require a mutex or another synchronization strategy. <a href="https://bitcoinversus.tech/2026/11/06/oscpp-037-std-packaged-task-move-only-futures-exceptions/">OSC++.037 on packaged tasks</a> explains another approach to asynchronous results and exceptions, while <a href="https://bitcoinversus.tech/2026/10/30/oscpp-036-std-move-only-function-cpp23-callbacks-resource-ownership/">OSC++.036 on move-only callables</a> introduces callback ownership. Workers that throw uncaught exceptions can still terminate a program despite using <code>jthread</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=-VWCEklRP6I","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=-VWCEklRP6I
+</div><figcaption class="wp-element-caption"><em>Code for yourself, August 31, 2026, “Parallelism in modern C++.” The stop-token and thread-pool discussion begins near 19:31. Verified source page; actual playback untested.</em></figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice: plan a safe shutdown</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a fictional device-monitoring worker that periodically polls a development simulator and writes status records. Identify where to check the stop token, where to finish an in-flight record, and which shared state needs synchronization. Explain why a blocked network operation may need an explicit cancellation facility or a bounded timeout. Then change the demonstration program's sleep interval and compare results without treating a fixed iteration count as proof of correctness.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Takeaway:</strong> <code>std::jthread</code> manages joining and exposes a cooperative stop mechanism. Correct shutdown still depends on worker cooperation, safe blocking behavior, thread-safe data, and clear ownership. The <a href="https://bitcoinversus.tech/2026/10/24/oscpp-033-std-invoke-functions-lambdas-member-pointers/">OSC++.033 callable lesson</a> provides a useful refresher on the function objects passed into modern concurrency APIs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> Standards behavior was checked against C++ proposal P0660R8, cppreference and vendor-neutral library documentation. The local example compiled using GCC in C++20 mode with <code>-Wall -Wextra -Werror -pthread</code> and ran successfully; results involving thread timing vary. Three educational YouTube video pages were verified, but actual playback and mobile rendering were not independently tested. The 1200 × 630 original photorealistic cover uses illustrative code and depicts no actual production system.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiatives, please scan the QR code below</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="BitcoinVersus.Tech optional contribution QR for 5,000 satoshis, verify recipient and amount independently" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi contribution. Verify recipient 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and amount before sending; Bitcoin payments are generally irreversible.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Disclaimer:</strong> Educational programming material only. Run examples in an authorized development environment. No production thread management, engineering certification, financial advice or investment recommendation is implied.</em></p>
+<!-- /wp:paragraph -->

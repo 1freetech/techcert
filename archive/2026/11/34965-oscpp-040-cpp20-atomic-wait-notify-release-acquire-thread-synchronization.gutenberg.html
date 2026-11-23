@@ -32,31 +32,13 @@ https://www.youtube.com/watch?v=Zcqwb3CWqs4
 <p>A producer publishes one integer payload; the main thread waits for a readiness signal. The atomic variable starts at <code>0</code>. After preparing the payload, the producer stores <code>1</code>, then notifies a waiting thread. The consumer asks <code>wait(0)</code> to return only when the observed state differs from the old value. The separate payload deliberately uses an ordinary <code>int</code>; synchronization comes from the atomic state.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:code -->
-<pre class="wp-block-code"><code>#include &lt;atomic&gt;
-#include &lt;iostream&gt;
-#include &lt;thread&gt;
+<!-- wp:paragraph -->
+<p><code style="font-family:ui-monospace,monospace;white-space:normal;background:transparent;border:0;padding:0;box-shadow:none;display:inline">#include &lt;atomic&gt;<br>#include &lt;iostream&gt;<br>#include &lt;thread&gt;<br>&nbsp;<br>int main() {<br>&nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;int&gt; state{0};<br>&nbsp;&nbsp;&nbsp;&nbsp;int payload = 0;<br>&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;std::jthread producer([&amp;] {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;payload = 42;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state.store(1, std::memory_order_release);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state.notify_one();<br>&nbsp;&nbsp;&nbsp;&nbsp;});<br>&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;state.wait(0, std::memory_order_acquire);<br>&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "received: " &lt;&lt; payload &lt;&lt; '\n';<br>&nbsp;&nbsp;&nbsp;&nbsp;producer.join();<br>}</code></p>
+<!-- /wp:paragraph -->
 
-int main() {
-    std::atomic&lt;int&gt; state{0};
-    int payload = 0;
-
-    std::jthread producer([&amp;] {
-        payload = 42;
-        state.store(1, std::memory_order_release);
-        state.notify_one();
-    });
-
-    state.wait(0, std::memory_order_acquire);
-    std::cout &lt;&lt; "received: " &lt;&lt; payload &lt;&lt; '\n';
-    producer.join();
-}</code></pre>
-<!-- /wp:code -->
-
-<!-- wp:code -->
-<pre class="wp-block-code"><code>g++ -std=c++20 -Wall -Wextra -Werror -pthread demo.cpp -o demo
-./demo</code></pre>
-<!-- /wp:code -->
+<!-- wp:paragraph -->
+<p><code style="font-family:ui-monospace,monospace;white-space:normal;background:transparent;border:0;padding:0;box-shadow:none;display:inline">g++ -std=c++20 -Wall -Wextra -Werror -pthread demo.cpp -o demo<br>./demo</code></p>
+<!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
 <p>Expected output: <code>received: 42</code>. The example compiled under a C++20-capable GCC toolchain and produced the expected result in thirty consecutive local runs. A signal emitted before the consumer begins waiting is not lost here: after the atomic changes to <code>1</code>, <code>wait(0)</code> observes a value different from <code>0</code> and returns. A <code>notify_one()</code> call without a corresponding value change cannot by itself satisfy the return condition.</p>

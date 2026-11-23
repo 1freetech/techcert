@@ -43,5 +43,10 @@
     "https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1135r6.html",
     "https://en.cppreference.com/cpp/atomic/atomic/wait",
     "https://en.cppreference.com/cpp/atomic/memory_order"
-  ]
+  ],
+  "content_fix_2026_11_22": {
+    "issue": "Boxed code blocks in published article",
+    "remediation": "Replaced 2 wp:code/pre boxes with borderless, transparent inline code in plain Gutenberg paragraphs, retaining complete compilable source and compiler command",
+    "verification": "WordPress public view read-back has zero pre or wp-block-code elements; rendered code keeps correct straight C++ quotes and both YouTube iframes; independent browser screenshot not available"
+  }
 }

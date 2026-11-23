@@ -1,0 +1,116 @@
+<!-- wp:paragraph -->
+<p><strong>OSC++.040</strong> explores efficient thread signaling with C++20 <code>std::atomic::wait()</code>, <code>notify_one()</code>, and <code>notify_all()</code>. A worker often needs to pause until another thread publishes a result. Continual polling consumes CPU time and can introduce avoidable scheduling overhead. Following <a href="https://bitcoinversus.tech/2026/11/20/oscpp-039-cpp20-jthread-stop-token-cooperative-cancellation/">OSC++.039 on cooperative thread shutdown</a>, the new lesson teaches value-based blocking, notification, and memory visibility in portable C++.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Key learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li><strong>Objective 1:</strong> Distinguish atomic waiting from busy polling and explain the value-change rule.</li><!-- /wp:list-item --><!-- wp:list-item --><li><strong>Objective 2:</strong> Build and run a signaling example using <code>wait</code> and <code>notify_one</code>.</li><!-- /wp:list-item --><!-- wp:list-item --><li><strong>Objective 3:</strong> Explain release/acquire ordering and why synchronization protects an ordinary payload.</li><!-- /wp:list-item --><!-- wp:list-item --><li><strong>Objective 4:</strong> Identify missed transitions, limitations, and appropriate alternative primitives.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Objective 1 — Waiting for a value, not a clock</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A <strong>busy-wait loop</strong> repeatedly reads shared state until a condition changes. Polling may be justified for tightly bounded specialized work, but repeated reads can waste processor cycles. In contrast, C++20 <code>atomic.wait(old)</code> compares the atomic object's value with <code>old</code>. If the values match, the operation can block; it returns only after observing a different value. A notification normally accompanies the producer's state change. The standard permits spurious unblocking internally, but <code>wait</code> rechecks the comparison before returning. Consult the <a href="https://en.cppreference.com/w/cpp/atomic/atomic/wait">atomic wait reference</a> and the committee's <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1135r6.html">C++20 synchronization proposal P1135R6</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Zcqwb3CWqs4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Zcqwb3CWqs4
+</div><figcaption class="wp-element-caption"><em>CppCon 2019: Bryce Adelstein Lelbach, “The C++20 Synchronization Library.” Covers atomic wait/notify and related thread coordination primitives.</em> <a href="https://www.youtube.com/watch?v=Zcqwb3CWqs4">Watch on YouTube</a> when embedding is restricted.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Objective 2 — Implement the producer–consumer handshake</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A producer publishes one integer payload; the main thread waits for a readiness signal. The atomic variable starts at <code>0</code>. After preparing the payload, the producer stores <code>1</code>, then notifies a waiting thread. The consumer asks <code>wait(0)</code> to return only when the observed state differs from the old value. The separate payload deliberately uses an ordinary <code>int</code>; synchronization comes from the atomic state.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>#include &lt;atomic&gt;
+#include &lt;iostream&gt;
+#include &lt;thread&gt;
+
+int main() {
+    std::atomic&lt;int&gt; state{0};
+    int payload = 0;
+
+    std::jthread producer([&amp;] {
+        payload = 42;
+        state.store(1, std::memory_order_release);
+        state.notify_one();
+    });
+
+    state.wait(0, std::memory_order_acquire);
+    std::cout &lt;&lt; "received: " &lt;&lt; payload &lt;&lt; '\n';
+    producer.join();
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>g++ -std=c++20 -Wall -Wextra -Werror -pthread demo.cpp -o demo
+./demo</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>Expected output: <code>received: 42</code>. The example compiled under a C++20-capable GCC toolchain and produced the expected result in thirty consecutive local runs. A signal emitted before the consumer begins waiting is not lost here: after the atomic changes to <code>1</code>, <code>wait(0)</code> observes a value different from <code>0</code> and returns. A <code>notify_one()</code> call without a corresponding value change cannot by itself satisfy the return condition.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Objective 3 — Make the payload visible</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Atomicity alone is not the complete memory-ordering story. <code>state.store(1, std::memory_order_release)</code> publishes the producer's preceding write to <code>payload</code>. The successful <code>state.wait(0, std::memory_order_acquire)</code> observes the new value with acquire semantics. Together, the release/acquire synchronization orders the payload write before the consumer's later read, preventing a data race in the demonstrated single-publication protocol. A relaxed wait would not provide the same synchronization guarantee. The <a href="https://en.cppreference.com/w/cpp/atomic/memory_order">memory-order reference</a> explains the formal happens-before relationship. <a href="https://bitcoinversus.tech/2026/11/06/oscpp-037-std-packaged-task-move-only-futures-exceptions/">OSC++.037 on futures</a> provides another way to communicate results between tasks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=ZQFzMfHIxng","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=ZQFzMfHIxng
+</div><figcaption class="wp-element-caption"><em>CppCon 2017: Fedor Pikus, “C++ atomics, from basic to advanced. What do they really do?” Explains atomic operations and memory ordering.</em> <a href="https://www.youtube.com/watch?v=ZQFzMfHIxng">Watch on YouTube</a> when embedding is restricted.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Objective 4 — Recognize edge cases and choose the right tool</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Atomic waiting checks a <em>value</em>, not a history of events. If state changes from <code>0</code> to <code>1</code> and rapidly returns to <code>0</code> before the waiter observes it, an intervening transition may be missed: an <strong>ABA-style</strong> hazard. Use durable state, monotonically advancing sequence numbers with a well-considered wraparound policy, or a queue when every event matters. <code>notify_one</code> is appropriate when one waiting thread should wake; <code>notify_all</code> may serve multiple observers, provided the state transition and protocol support them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>C++20 atomic waiting has no standard timed-wait overload and does not automatically respond to a <code>std::stop_token</code>. A <a href="https://en.cppreference.com/w/cpp/thread/condition_variable">condition variable</a> suits complex predicates and timeouts, while <code>std::condition_variable_any</code> offers stop-token-aware waits. For an owned result and exception propagation, revisit <a href="https://bitcoinversus.tech/2026/11/15/oscpp-038-std-async-launch-policies-futures-lifetime-rules/">OSC++.038 on async and futures</a>. A <a href="https://bitcoinversus.tech/2026/10/30/oscpp-036-std-move-only-function-cpp23-callbacks-resource-ownership/">move-only callback</a> can instead encapsulate work with explicit ownership. An atomic notification also cannot make unrelated shared objects safe without a sound state protocol.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Knowledge check and worked answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Check 1:</strong> Why is <code>wait(0)</code> better than a tight <code>while(state == 0)</code> loop for a sporadic event? <strong>Answer:</strong> blocking avoids repeated active polling and permits the implementation to use efficient waiting mechanisms. <strong>Check 2:</strong> Can a notification alone make <code>wait(0)</code> return while state remains zero? <strong>Answer:</strong> no. <strong>Check 3:</strong> Why is the ordinary payload read legal? <strong>Answer:</strong> release/acquire synchronization orders the producer's write before the consumer's read. <strong>Check 4:</strong> What if every state transition must be recorded? <strong>Answer:</strong> store durable queued events or use a suitable sequence protocol rather than a single toggling flag.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Engineering takeaway:</strong> <code>atomic.wait</code> and notifications coordinate state transitions without a traditional condition-variable mutex for simple protocols, but correct publication, lifetime management, memory ordering, and workload-specific testing remain essential. See <a href="https://bitcoinversus.tech/2026/10/24/oscpp-033-std-invoke-functions-lambdas-member-pointers/">OSC++.033 on callables</a> for the lambda-based worker used in the program.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Sources and verification:</strong> ISO C++ working-group P1135R6; cppreference atomic wait and memory-order documentation; CppCon 2019 and CppCon 2017 session pages. Local GCC compiled with <code>-Wall -Wextra -Werror -pthread</code>; 30 runs returned 42. Video identity and relevance verified from publisher listings; actual public player playback and mobile viewport behavior require live inspection.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional BitcoinVersus.Tech research support QR; confirm wallet destination and donation amount before sending" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Voluntary 5,000-satoshi contribution. Confirm the receiving address and amount in a wallet before sending irreversible Bitcoin payments.</em></figcaption></figure>
+<!-- /wp:image -->
+<!-- wp:paragraph -->
+<p><em>Educational code only. Use a controlled development environment and test concurrency requirements for each target platform. No production engineering certification or financial recommendation is implied.</em></p>
+<!-- /wp:paragraph -->

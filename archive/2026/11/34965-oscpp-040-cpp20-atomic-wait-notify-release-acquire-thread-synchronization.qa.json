@@ -1,0 +1,47 @@
+{
+  "post_id": 34965,
+  "lesson_id": "OSC++.040",
+  "site": "bitcoinversus.tech",
+  "live_url": "https://bitcoinversus.tech/2026/11/22/oscpp-040-cpp20-atomic-wait-notify-release-acquire-thread-synchronization/",
+  "wordpress_status": "publish",
+  "title": "OSC++.040: C++20 Atomic Wait and Notify for Efficient Thread Synchronization",
+  "topic": "C++20 atomic wait/notify and release/acquire synchronization",
+  "rotation": "OSPCB (slot 37) -> OSC++ (slot 38)",
+  "deduplication": "No published OSC++.040 existed in WordPress title search, no matching GitHub code search",
+  "cover": {
+    "id": 34960,
+    "width": 1200,
+    "height": 630,
+    "style": "Cinematic anime illustration",
+    "watermark": "exact cropped asset from editor-provided Sunset Skid-Steer Stunt Demo; resized and applied once bottom-left",
+    "source": "https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/oscpp040_atomic_wait_cover_1200x630.jpg"
+  },
+  "objectives": {
+    "one": "Difference between polling and atomic waiting taught in Objective 1",
+    "two": "Compilable signaling example taught in Objective 2",
+    "three": "Release/acquire happens-before taught in Objective 3",
+    "four": "ABA, cancellation/timeouts, alternatives taught in Objective 4"
+  },
+  "code_test": {
+    "toolchain": "g++ with C++20 -Wall -Wextra -Werror -pthread",
+    "result": "passed; 30 runs returned received: 42"
+  },
+  "youtube_embeds": [
+    "Zcqwb3CWqs4",
+    "ZQFzMfHIxng"
+  ],
+  "gutenberg_render_check": "WordPress view-context rendered two iframes; independent playback and viewport unavailable",
+  "internal_links": 5,
+  "footer": "user's exact approved singular 'initiative' sentence plus original QR ID 24043",
+  "archive_time": "2026-11-22",
+  "limitations": [
+    "Website public browser open failed in external checker",
+    "YouTube playback and mobile responsiveness not independently tested",
+    "No third-party external source images due to article's code-focused subject"
+  ],
+  "sources": [
+    "https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1135r6.html",
+    "https://en.cppreference.com/cpp/atomic/atomic/wait",
+    "https://en.cppreference.com/cpp/atomic/memory_order"
+  ]
+}

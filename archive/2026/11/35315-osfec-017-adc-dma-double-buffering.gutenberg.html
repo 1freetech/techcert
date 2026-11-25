@@ -1,0 +1,49 @@
+<!-- wp:paragraph --><p><strong>Open Source Firmware Engineering Certification (OSFEC.017) • Super-Fundamentals</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A microcontroller sampling a sensor continuously must preserve both the timing and integrity of its measurements. Direct memory access (DMA) can transfer ADC results into RAM while the processor handles other work. However, a stream can silently lose samples when firmware cannot process buffers before the hardware reuses them.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Ro2Rju-CurM","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Ro2Rju-CurM
+</div><figcaption class="wp-element-caption">STMicroelectronics STM32C0 workshop: effective data collection with ADC, DMA and a timer. <a href="https://www.youtube.com/watch?v=Ro2Rju-CurM">Watch at the source.</a></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Key objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Explain timer-triggered ADC sampling and circular DMA.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Calculate throughput, RAM allocation and the processing deadline.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Distinguish ADC overrun from software buffer overwrite and explain ownership.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Design a validation procedure with measurable pass criteria.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">1. Make the sampling interval predictable</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A hardware timer can trigger each ADC conversion at a defined interval. The ADC digitizes the input, and DMA transfers the result from a peripheral register to memory. In circular mode, DMA returns to the beginning of its allocated buffer after reaching the end. The <a href="https://wiki.st.com/stm32mcu/wiki/Getting_started_with_ADC">STMicroelectronics ADC tutorial</a> documents DMA configuration. Select an ADC conversion time short enough for the trigger interval, including acquisition and conversion. For analog accuracy, review <a href="https://bitcoinversus.tech/2026/11/25/osftc-018-mcu-adc-diagnostics-voltage-reference-sampling-sensor-accuracy/">OSFTC.018</a>; for transfer fundamentals, review <a href="https://bitcoinversus.tech/2026/10/08/osfec-006-direct-memory-access-dma-moving-data-without-stalling-the-cpu/">OSFEC.006</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">2. Calculate a ping-pong buffer deadline</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Assume one channel, 20,000 samples per second, and 16-bit storage per sample. Throughput is 40,000 bytes per second (40 kB/s). Allocate 1,024 samples in two halves of 512. Total memory consumption is 2,048 bytes, excluding metadata. Each half fills in 512 / 20,000 = 25.6 ms. DMA alternates halves; after one half completes, the processor has at most 25.6 ms before DMA begins rewriting it. A measured worst-case 8 ms processing interval leaves 17.6 ms nominal margin. Include interrupt latency, scheduling delay, cache maintenance and processing in the deadline.</p><!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=rb3j78\u002d\u002d7xU","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} --><figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=rb3j78--7xU
+</div><figcaption class="wp-element-caption">STM32World tutorial on ADC measurements with DMA, including a discussion of circular DMA buffers near 31:50. <a href="https://www.youtube.com/watch?v=rb3j78--7xU">Watch at the source.</a></figcaption></figure><!-- /wp:embed -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">3. Protect buffer ownership</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A half-transfer interrupt announces that the first half is ready; a transfer-complete interrupt announces the second. Keep callbacks short: record the completed region and sequence number, then notify a worker. The worker must release or copy the data before DMA returns. A queue of pointers alone does not extend sample lifetime. If processing stalls, record the lost block, reject invalid data and recover according to application policy. A larger buffer provides more time but increases latency and memory demand.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>ADC peripheral overrun occurs when an unread conversion result is displaced or otherwise cannot be delivered in time; exact behavior depends on device configuration. Software buffer overwrite is different: DMA may have transferred successfully, but the processor missed its ownership deadline. Track both errors separately. On processors with noncoherent data caches, use a suitable noncacheable DMA region or the platform's prescribed cache-maintenance and alignment rules. Volatile alone cannot guarantee cache coherency or safe synchronization. See <a href="https://docs.zephyrproject.org/latest/doxygen/html/group__ring__buffer__apis.html">Zephyr ring buffer concurrency documentation</a> and <a href="https://bitcoinversus.tech/2026/11/18/osfec-016-interrupt-latency-jitter-nvic-priority-isr-timing-trace-validation/">OSFEC.016 on interrupt timing</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">4. Simulated engineering lab</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Use an authorized low-voltage development board and a known in-range signal. Configure the timer, ADC and DMA using the exact device manual. Record expected sample rate, half-buffer size, sequence numbers, ADC and DMA error flags, and worst-case worker completion time. First verify a stable stream, then inject a controlled 30 ms worker delay. At 20 kS/s, 30 ms exceeds the 25.6 ms ownership budget: the test should detect a missed deadline or invalid block, even if no ADC overrun is raised. Resume normal scheduling and confirm the recovery policy works. Follow the <a href="https://bitcoinversus.tech/2026/10/29/osfec-013-hardware-in-the-loop-firmware-testing-test-rigs-fault-injection-ci/">hardware-in-the-loop testing lesson</a> to document reproducible results.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p><strong>How many bytes does each sample occupy?</strong> Two. <strong>How much time is available per half?</strong> 25.6 ms. <strong>Does a successful DMA interrupt guarantee that software retained every sample?</strong> No; ownership can expire before consumption.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Elementary conclusion</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Timer-triggered sampling controls when data arrives. DMA controls how data moves. Buffer ownership and deadlines determine whether the application keeps valid measurements.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><strong>Primary references:</strong> <a href="https://wiki.st.com/stm32mcu/wiki/ADC_measurements_recommendations">ST ADC measurement recommendations</a>; <a href="https://dev.st.com/stm32cube-docs/stm32u5-hal2/2.0.0-beta.1.1/docs/drivers/ll_drivers/adc/api/ll_adc_exported_constants.html">ST ADC transfer and overrun definitions</a>; Zephyr ring buffer documentation linked above.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Editor's Note: All numerical scenarios are instructional calculations, not measured hardware results. Cover photograph: <a href="https://commons.wikimedia.org/wiki/File:Nucleo-H755ZI-Q_board.jpg">Frans (fotoopa), Nucleo-H755ZI-Q board</a>, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, resized for editorial use; not the experimental setup.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} --><figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional BitcoinVersus.Tech donation QR code" class="wp-image-24043" /><figcaption class="wp-element-caption">Optional 5,000-satoshi donation. Verify the destination and amount in your wallet.</figcaption></figure><!-- /wp:image -->

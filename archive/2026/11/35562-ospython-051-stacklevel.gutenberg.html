@@ -1,0 +1,106 @@
+<!-- wp:paragraph --><p><strong>Open Source Python | Lesson 051 | Intermediate | Estimated study time: 30–40 minutes | Python 3.8 or later for logging stacklevel.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A monitoring application may report thousands of events from a shared logging helper. If every record identifies the helper instead of the application function that requested the message, an engineer loses a valuable debugging clue. Python's standard logging library offers caller attribution through the stacklevel argument, allowing reusable wrappers to preserve useful source locations.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Prerequisites and sequence</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Review <a href="https://bitcoinversus.tech/2026/11/21/ospython-050-faster-python-logging-lazy-formatting-isenabledfor/">OSPython.050: efficient logging</a>, <a href="https://bitcoinversus.tech/2026/11/20/ospython-049-test-python-logs-assertlogs-assertnologs-pytest-caplog/">OSPython.049: testing logs</a>, <a href="https://bitcoinversus.tech/2026/11/11/ospython-046-structured-json-logging-formatters-utc-safe-fields/">OSPython.046: structured logging</a> and <a href="https://bitcoinversus.tech/2026/10/10/ospython-035-logging-exceptions-exc-info-tracebacks-stack-info/">OSPython.035: exception logging</a>. A local Python interpreter and basic familiarity with functions, keyword arguments and unittest are sufficient.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Explain how logging records obtain source filename, line number and function name.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Use stacklevel to attribute an event to the caller of a helper, including nested wrappers.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Preserve lazy message formatting and distinguish stacklevel from stack_info and exc_info.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Write repeatable tests for caller attribution using captured LogRecord objects.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Recognize privacy, provenance and deployment boundaries for source-location metadata.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">1. From function call to LogRecord</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A stack frame represents an active function invocation, including its execution location. When an application calls a logger method and the event passes the logger's effective severity threshold, logging constructs a LogRecord. The standard Logger.findCaller mechanism locates the relevant calling frame while skipping internal logging frames. Record attributes include pathname (full source path), filename (base filename), lineno (source line number), funcName (function name) and name (logger name). The latter identifies the logger, not necessarily the source function.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Handlers receive eligible records and apply their own levels, filters and formatters. A formatter can display source attributes with %(filename)s:%(lineno)d and %(funcName)s. Altering a formatter changes presentation, not the original caller selection. Source metadata is created before a handler formats the message.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">2. Single and nested wrappers</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>The default stacklevel of 1 identifies the direct application-side logging call. If a helper calls logger.info, the recorded location usually points to the helper. Supplying stacklevel=2 advances attribution to the helper's caller. The logging methods gained the stacklevel keyword in Python 3.8.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A reusable wrapper can accept a caller-selected stacklevel and add one when forwarding it to logging. For two application wrappers, an effective stacklevel of 3 is needed to reach the function outside both wrappers. Increment once for each wrapper that deliberately hides its own frame; avoid hardcoding a large number because calling paths may have different depths.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Direct logger.info call: stacklevel=1 identifies the direct call site.</li><!-- /wp:list-item --><!-- wp:list-item --><li>One wrapper: its forwarded stacklevel=2 identifies the wrapper's caller.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Two nested wrappers: the outer wrapper requests stacklevel=2 from the inner wrapper, which forwards stacklevel=3 to the logger.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">3. Runnable lab: verify the caller, not just the message</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Save the following source as ospython051_stacklevel.py in a temporary working directory. The example uses only the standard library, an isolated named logger and fictional device identifiers. No network access, package installation or elevated privileges are required.</p><!-- /wp:paragraph -->
+
+<!-- wp:code --><pre class="wp-block-code"><code>import logging
+import unittest
+
+logger = logging.getLogger('lesson.caller')
+
+def plain(message, *args):
+    logger.info(message, *args)
+
+def event(message, *args, stacklevel=1):
+    logger.info(message, *args, stacklevel=stacklevel + 1)
+
+def report(device):
+    event('Device %s ready', device, stacklevel=2)
+
+def check_device():
+    plain('Device %s ready', 'lab-01')
+    event('Device %s ready', 'lab-01')
+    report('lab-01')
+
+class CallerTest(unittest.TestCase):
+    def test_attribution(self):
+        with self.assertLogs(logger, level='INFO') as captured:
+            check_device()
+        self.assertEqual([r.funcName for r in captured.records],
+                         ['plain', 'check_device', 'check_device'])
+        self.assertEqual([r.getMessage() for r in captured.records],
+                         ['Device lab-01 ready'] * 3)
+        self.assertEqual(len({r.lineno for r in captured.records}), 3)
+
+if __name__ == '__main__':
+    unittest.main()
+</code></pre><!-- /wp:code -->
+
+<!-- wp:paragraph --><p>Run <code>python ospython051_stacklevel.py</code> (or use python3 if required by the environment). The test captures three records. The first comes from plain, because the helper does not adjust attribution. The second comes from check_device, because event advances one frame. The third also comes from check_device, because report requests an additional frame.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The three records carry the same rendered message but different source line numbers. The assertions inspect LogRecord attributes directly, avoiding dependence on a formatter or absolute path. The complete example was executed under CPython 3.13.5 and passed one unittest test containing three assertions. Other versions and interpreters were not executed.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">4. Formatting cost and stack diagnostics</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Caller attribution is separate from message formatting. The helper forwards the format string and arguments separately, preserving logging's deferred interpolation. Passing an already evaluated f-string would still incur its construction cost before the logger decides whether to emit a record. Expensive argument expressions likewise execute before the call; use a severity guard when necessary, as taught in lesson 050.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>stacklevel selects the source location attributed to the record. stack_info=True adds information about the active call stack, whereas exc_info=True attaches exception details, commonly inside an exception handler. Neither option is needed merely to move the caller attribution by one frame. Tracebacks and stack dumps can increase log volume and expose sensitive implementation information; request them deliberately.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">5. Operational workflow and security boundaries</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>For a local verification, reproduce the wrapper call with synthetic identifiers, inspect funcName and lineno in captured records, and compare direct and nested invocation paths. Test each wrapper separately and include failure or early-return paths when they have different call structures. If a formatter displays source location, confirm that the fields match the captured record. Keep line-number tests independent of unrelated source edits where possible.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Full pathname values can disclose usernames, repository layouts and deployment directories. Prefer filename or a controlled relative source identifier for broadly accessible logs. Avoid real customer identifiers, tokens and secrets in test messages. Source attribution identifies a selected frame; it is not cryptographic evidence of who initiated an action. Use authenticated audit events, access controls, time synchronization and protected retention for security investigations.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>No production logger configuration needs to change for the lab. Changes to production logging levels, formatters, retention or log destinations require service-owner approval, privacy review, change control, rollback to the previous configuration and verification of downstream ingestion. Escalate missing or misleading caller metadata when it interferes with incident response.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Glossary</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Stack frame: execution context of a function invocation.</li><!-- /wp:list-item --><!-- wp:list-item --><li>LogRecord: structured event containing message arguments and event metadata.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Caller attribution: source location assigned to a log event.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Wrapper: a helper that invokes another function on behalf of its caller.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Deferred interpolation: retaining message and arguments separately until formatting is needed.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice exercises</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>A. Remove the stacklevel keyword from event. Predict which function names the second and third records will report; rerun the test.</li><!-- /wp:list-item --><!-- wp:list-item --><li>B. Change report to call event with stacklevel=1. Predict the third record's funcName and modify its expected value to validate the prediction.</li><!-- /wp:list-item --><!-- wp:list-item --><li>C. Explain why logger.info('Device %s ready', device) differs from logger.info(f'Device {device} ready') when INFO is disabled.</li><!-- /wp:list-item --><!-- wp:list-item --><li>D. Add an assertion that all captured records use the name lesson.caller. Explain why it does not identify the calling function.</li><!-- /wp:list-item --><!-- wp:list-item --><li>E. Propose a production format that provides useful source information without exposing absolute deployment paths.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>What are the differences among name, funcName, filename and lineno?</li><!-- /wp:list-item --><!-- wp:list-item --><li>What effective stacklevel identifies the caller outside two application wrappers?</li><!-- /wp:list-item --><!-- wp:list-item --><li>Does stacklevel add an exception traceback?</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why should tests inspect captured LogRecord objects?</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why is caller attribution insufficient as security proof?</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Answer key</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A: Both records identify event; the original test fails. B: The third identifies report, because the inner wrapper advances only one frame. C: The format-string version defers interpolation; the f-string is evaluated before logging is called. D: Use self.assertTrue(all(r.name == 'lesson.caller' for r in captured.records)); the logger name remains constant across call sites. E: Use %(filename)s:%(lineno)d %(funcName)s %(levelname)s %(message)s with an approved redaction and retention policy.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Knowledge check: 1. name is the logger identity, funcName the attributed function, filename the base source filename, lineno the attributed line. 2. Three for the demonstrated wrapper arrangement. 3. No; exc_info supplies exception details. 4. Records expose the original metadata independently of output formatting. 5. Applications can select or alter source metadata, so trusted identity and protected audit infrastructure are separate requirements.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Primary references</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li><a href="https://docs.python.org/3.12/library/logging.html">Python 3.12 logging reference: Logger methods, stacklevel, findCaller and LogRecord attributes</a>.</li><!-- /wp:list-item --><!-- wp:list-item --><li><a href="https://docs.python.org/3.12/library/unittest.html#unittest.TestCase.assertLogs">Python 3.12 unittest: assertLogs and captured records</a>.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24026,"sizeSlug":"medium","linkDestination":"none"} --><figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/img_06542.jpeg?w=300" alt="BitcoinVersus.Tech research support QR code" class="wp-image-24026" /></figure><!-- /wp:image -->

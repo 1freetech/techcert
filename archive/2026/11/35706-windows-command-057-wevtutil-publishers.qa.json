@@ -1,0 +1,34 @@
+{
+  "post_id": 35706,
+  "title": "Windows Command #57: Inspect Event Publishers with wevtutil ep and gp",
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/26/windows-command-57-wevtutil-ep-gp-event-publisher-metadata/",
+  "featured_media": 35705,
+  "cover_dimensions": [
+    1200,
+    630
+  ],
+  "watermark": "Exact pixel crop from preceding approved-tag Linux Command 71 cover, pasted unchanged once at lower left.",
+  "cover_style": "Original typographic command illustration; not photorealistic or a real Windows screen. Prior WordPress AI image limit prompted fallback.",
+  "body_media": [
+    35703,
+    35704
+  ],
+  "media_credit": "Microsoft Learn, Creating Get-WinEvent queries with FilterHashtable; both source images inspected on Microsoft Learn, uploaded and found in rendered WordPress HTML.",
+  "qr": 24593,
+  "objective_map": {
+    "1": "Section 1 and exercise A",
+    "2": "Section 2 and exercise B",
+    "3": "Section 3 and exercise C",
+    "4": "Section 4 and exercise D",
+    "5": "Section 5 and exercise E"
+  },
+  "command_validation": "Microsoft Learn wevtutil reference and provider metadata documentation; no Windows runtime, so no command execution claim.",
+  "internal_links": 4,
+  "word_count_approx": 1409,
+  "dedup": "WordPress published/draft/future/pending/private searches for #57 and wevtutil gp returned no results. wevtutil ep appears incidentally in earlier lessons; no standalone duplicate identified. Three targeted GitHub archive searches for candidate identifier and topic returned none.",
+  "rendered_html": "Publish status, 2 instructional image elements, QR, answer key and direct supplementary video link confirmed.",
+  "video": "Source-identified video direct link KA9WccJEe14; no iframe or playback claim. Credited instructional images are fallback.",
+  "screenshots": "WordPress screenshot service returned ready for 1200px and 390px viewports. Independent retrieval failed; pixels and layout not verified.",
+  "next_rotation": "Electrical Engineering; reconcile live lesson number and archives."
+}

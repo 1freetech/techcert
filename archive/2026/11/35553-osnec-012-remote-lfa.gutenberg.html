@@ -1,0 +1,71 @@
+<!-- wp:paragraph --><p><strong>Open Source Networking Engineer Certificate | Lesson 012 | Intermediate | Estimated study time: 35–45 minutes.</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A redundant physical network does not necessarily have a safe immediate backup route. When a router loses its primary link, neighboring routers may still forward according to the old topology. Remote loop-free alternate (RLFA) fast reroute solves some of those gaps by carrying repair traffic to a more distant router that can forward it safely.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Prerequisites and sequence</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Review <a href="https://bitcoinversus.tech/2026/10/02/osnec-001-ospf-fundamentals/">OSNEC.001: OSPF fundamentals</a>, <a href="https://bitcoinversus.tech/2026/11/06/osnec-005-ospf-link-state-advertisements-lsdb-spf-path-calculation/">OSNEC.005: link-state advertisements and SPF</a>, and the preceding <a href="https://bitcoinversus.tech/2026/11/22/osnec-011-ospf-fast-reroute-loop-free-alternates-rfc5286/">OSNEC.011: local loop-free alternates</a>. Familiarity with <a href="https://bitcoinversus.tech/2026/11/14/osnec-008-ospf-network-types-broadcast-point-to-point-nbma-point-to-multipoint/">OSNEC.008: OSPF network types</a> is useful.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Explain why physical redundancy does not guarantee a local LFA.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Distinguish P-space, extended P-space, Q-space and a PQ repair endpoint.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Calculate whether a candidate remote repair endpoint is safe in a weighted topology, including equal-cost paths.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Describe the repair tunnel lifecycle and MPLS/LDP architecture.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Assess coverage limits and prepare a read-only operational verification and escalation workflow.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">1. Why local protection can fail</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>OSPF advertises link-state information so routers independently calculate shortest paths. After a failure, flooding, computation and forwarding-table updates take time. A point of local repair (PLR) may have a preinstalled backup next hop to bridge that interval. RFC 5286 defines a local LFA test: distance(N,D) must be strictly less than distance(N,S) + distance(S,D), where S is the repairing router, N its candidate neighbor and D the destination. Equality is unsafe because N could send packets back toward S. The test is evaluated using pre-failure distances.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>An alternate physical path may exist but still fail the inequality. RLFA adds a virtual next hop reachable through a tunnel. The intermediate routers forward toward the tunnel endpoint rather than immediately looking up the original destination. See RFC 7490, sections 3–5, for the repair-path construction.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">2. Repair endpoint architecture</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Consider a protected point-to-point link S–E, where E is the primary neighbor. P-space contains nodes whose shortest paths from S avoid S–E, including all equal-cost choices. Extended P-space expands the search through eligible neighbors other than E; their usable shortest paths must avoid the protected link. Q-space for E contains nodes whose shortest paths toward E avoid S–E, again excluding candidates with an unsafe equal-cost branch. An intersection of the eligible P-side and Q-side sets yields PQ candidates.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The PLR selects a suitable PQ endpoint and establishes an eligible repair tunnel. In an MPLS/LDP deployment, a transport label steers packets to the endpoint; a destination label learned from the remote endpoint can preserve MPLS forwarding context. Targeted LDP exchanges provide the remote label bindings described in RFC 7490 section 8. An ordinary destination label or an arbitrary IP tunnel alone is not proof of correct repair behavior: the tunnel path itself must avoid the protected resource.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">3. Worked exercise: six-router ring</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Use the ring topology in <a href="https://datatracker.ietf.org/doc/html/rfc7490#section-3">RFC 7490 section 3, Figure 1</a>. Assign a bidirectional cost of 10 to every link: S–E, E–D, D–C, C–B, B–A, A–S. All values are instructional, not measured on live equipment. Assume the protected link is S–E and the destination is E.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Normal path S to E: 10. The alternate physical path S–A–B–C–D–E costs 50.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Local candidate A: distance(A,E) = 20 via S; distance(A,S) + distance(S,E) = 10 + 10 = 20. The strict LFA inequality fails.</li><!-- /wp:list-item --><!-- wp:list-item --><li>B to E has two paths costing 30: B–A–S–E and B–C–D–E. The first crosses the protected link, so B is not in E's Q-space.</li><!-- /wp:list-item --><!-- wp:list-item --><li>C to E costs 20 via D, while the path through B–A–S costs 40. C therefore qualifies on the Q side. S can reach C through A and B using a path of cost 30; ordinary S-to-C forwarding also has an equal-cost unsafe branch through E. Extended P-space makes C reachable through A, with an explicitly safe first hop.</li><!-- /wp:list-item --><!-- wp:list-item --><li>The selected repair tunnel delivers traffic along S–A–B–C. After decapsulation at C, ordinary forwarding to E proceeds through D. The end-to-end repair path costs 50.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>The distinction between P-space and extended P-space matters at C: S has two equal-cost shortest paths to C, but the repair must be deliberately steered through A. A tunnel that follows an unrestricted ECMP decision at S could still choose the failed link. Link protection is proven only for the stated failure and topology.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">4. Detection, activation and convergence</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Before failure: calculate valid alternates, resolve tunnel forwarding and program the appropriate backup state. Normal traffic uses its primary path.</li><!-- /wp:list-item --><!-- wp:list-item --><li>At failure: local link-state or authorized failure-detection mechanisms provide the trigger. The PLR activates eligible backup forwarding for affected destinations.</li><!-- /wp:list-item --><!-- wp:list-item --><li>During repair: packets reach the PQ node; ordinary onward forwarding carries them away from the failed link. Forwarding and control-plane telemetry must be checked separately.</li><!-- /wp:list-item --><!-- wp:list-item --><li>After convergence: routers install updated shortest paths and the repair is withdrawn according to the implementation's convergence behavior. The temporary tunnel is not intended for ordinary traffic.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Detection delay, switching delay and convergence delay are different intervals. For an illustrative timeline, assume detection at 15 ms and repair activation 5 ms later; activation occurs at 20 ms. A 160 ms SPF and forwarding convergence event does not establish zero loss during the first 20 ms. Such figures require measured traffic and timestamps before being presented as actual performance.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">5. Coverage, safety and read-only verification</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>RFC 7490 primarily addresses individual point-to-point link failures. A node failure, shared conduit or shared-risk link group (SRLG), simultaneous failures, missing tunnel support, insufficient label resources or insufficient spare capacity can invalidate protection. A tunnel is not encryption or authorization; retain routing authentication and management-plane access restrictions. Do not equate a computed backup with usable capacity or a verified forwarding entry.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Paper lab or authorized isolated environment: record the topology, link metrics and area boundaries; identify the protected link and primary next hop; compare calculated P and Q sets with available backup state; check all equal-cost branches and tunnel endpoint reachability; compare label bindings and hardware forwarding information where exposed by the platform; collect existing interface counters, timestamps and telemetry. Record missing evidence explicitly. Consult the installed platform's command reference before using read-only diagnostics; no vendor-specific command is required.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Escalate if the repair tunnel crosses the protected resource, backup entries are absent, label resolution fails, or available capacity is inadequate. Include affected prefixes, topology snapshot, timestamps, interface identifiers and change-ticket reference. Enabling remote LFA, adjusting metrics, configuring targeted LDP, clearing sessions or injecting failures requires owner authorization, change control, an approved rollback plan and post-change verification. Do not perform these operations on a production network for the lesson.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Glossary</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>PLR: router responsible for immediate local repair.</li><!-- /wp:list-item --><!-- wp:list-item --><li>PQ node: suitable endpoint in both relevant reachability sets.</li><!-- /wp:list-item --><!-- wp:list-item --><li>LDP: Label Distribution Protocol, used to distribute MPLS label bindings.</li><!-- /wp:list-item --><!-- wp:list-item --><li>ECMP: equal-cost multipath, where multiple shortest next hops can exist.</li><!-- /wp:list-item --><!-- wp:list-item --><li>SRLG: resources that may fail together due to a shared dependency.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice exercises</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>A. Recalculate the local LFA test for A in the ring and explain why equality fails.</li><!-- /wp:list-item --><!-- wp:list-item --><li>B. Explain why B cannot be a PQ endpoint and why C can be selected through extended P-space.</li><!-- /wp:list-item --><!-- wp:list-item --><li>C. Calculate the repair-path cost and activation time from the worked example.</li><!-- /wp:list-item --><!-- wp:list-item --><li>D. A shared conduit carries both S–E and S–A. Explain the effect on the repair and list evidence to collect before recommending a change.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>What distinguishes a local LFA from a remote LFA?</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why must all ECMP branches be considered?</li><!-- /wp:list-item --><!-- wp:list-item --><li>What does targeted LDP contribute in an MPLS repair?</li><!-- /wp:list-item --><!-- wp:list-item --><li>Can link protection be assumed to protect against router or conduit failure?</li><!-- /wp:list-item --><!-- wp:list-item --><li>Which changes require authorization and rollback planning?</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Answer key</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A: 20 = 10 + 10; the strict inequality fails because A can return traffic to S. B: B has an unsafe equal-cost path to E; C can be reached through the safe neighbor A and can forward onward via D. C: 50 cost units; 20 ms illustrative activation time. D: both exits may fail together, so the repair cannot carry traffic; record physical route diversity, SRLG membership, affected interfaces, backup paths and available capacity, then escalate.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Knowledge check: 1. A local LFA is a directly connected alternate; an RLFA uses a tunneled virtual neighbor. 2. A single unsafe branch can invalidate a candidate. 3. It supplies remote label bindings needed for the MPLS repair context. 4. No; failure coverage must be established for the specific risk. 5. Configuration changes, session resets and failure injection require authorization, change control and rollback.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Primary references</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li><a href="https://datatracker.ietf.org/doc/html/rfc7490">IETF RFC 7490: Remote Loop-Free Alternate Fast Reroute</a>.</li><!-- /wp:list-item --><!-- wp:list-item --><li><a href="https://www.rfc-editor.org/rfc/rfc5286.html">IETF RFC 5286: Basic Specification for IP Fast Reroute</a>.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24026,"sizeSlug":"medium","linkDestination":"none"} --><figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/img_06542.jpeg?w=300" alt="BitcoinVersus.Tech research support QR code" class="wp-image-24026" /></figure><!-- /wp:image -->

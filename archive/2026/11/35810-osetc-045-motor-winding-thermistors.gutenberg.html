@@ -1,0 +1,119 @@
+<!-- wp:paragraph -->
+<p><strong>Open Source Electrical Technician | Super-fundamental | 35–45 minutes</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A motor can overheat while its current appears normal. A blocked cooling passage, high ambient temperature or inadequate airflow at low speed can raise winding temperature without producing an obvious overcurrent alarm. A positive temperature coefficient (PTC) thermistor embedded near the winding gives a compatible protection relay a separate indication of excessive local heat. The method complements, rather than replaces, current-based overload and short-circuit protection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://download.se.com/files?default_image=DefaultProductImage.png&amp;p_Doc_Ref=ODA16093&amp;p_File_Type=rendition_369_jpg" alt="Schneider Electric TeSys LT3SA thermistor protection relay" /><figcaption class="wp-element-caption"><em>Schneider Electric TeSys LT3SA product photograph. The relay monitors a compatible motor thermistor circuit; the model shown supports automatic reset. Source: <a href="https://www.se.com/ng/en/product-range/677-tesys-lt3/">Schneider Electric</a>.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/11/13/motor-overload-relay-trip-classes-settings-current-safe-reset/">motor overload relay trip classes</a>, <a href="https://bitcoinversus.tech/2026/10/29/osetc-039-three-phase-motor-current-imbalance-clamp-meter-single-phasing/">current imbalance</a>, <a href="https://bitcoinversus.tech/2026/11/15/osetc-043-motor-bearing-condition-vibration-temperature-lubrication/">motor bearing condition</a> and <a href="https://bitcoinversus.tech/2026/11/20/osetc-044-motor-shaft-alignment-soft-foot-offset-angle/">shaft alignment</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Explain how a switching PTC thermistor and a compatible protection relay respond to winding heat.</li><li>Distinguish PTC threshold detection from current-based thermal overload protection and continuous temperature measurement.</li><li>Interpret illustrative series resistance measurements and distinguish plausible heat-related trips from sensor circuit faults.</li><li>Prepare a safe, evidence-based troubleshooting and restart recommendation without bypassing protective equipment.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How winding temperature becomes an electrical signal</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A thermistor is a resistor whose resistance depends on temperature. A switching PTC sensor used for motor protection has a sharply rising resistance near its specified response temperature. A compatible monitoring relay supplies an appropriate sensing signal and interprets the resulting resistance. Below the threshold, the sensor normally has relatively low resistance; near its transition, resistance rises substantially. The sensor's rated response temperature and the relay's electrical thresholds must be compatible. The sensor does not itself interrupt the motor's three-phase power.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In many three-phase motors, three PTC sensors are installed near separate stator windings and connected in series. The monitor sees their combined resistance. One sensor becoming sufficiently hot can cause the total to cross the relay's trip threshold. Placement and thermal contact matter: a sensor reports the condition of its own location, not every point inside the machine. ABB describes the principle in its <a href="https://new.abb.com/low-voltage/products/electronicrelays/monitors/thermistor-motor-protection-relays">thermistor motor protection relay documentation</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">PTC, overload relay and RTD</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A current-based overload relay estimates thermal stress from motor current and time, using a thermal mechanism or electronic model. It can react to excessive load or abnormal starting current. Winding PTC monitoring instead responds to heating at the installed sensor, including heating caused by poor cooling. Neither device alone provides all branch-circuit protection. An RTD such as a Pt100 is commonly used for continuous temperature estimation when connected to a compatible measurement circuit, whereas a switching PTC is primarily a threshold detector. Do not assume a PTC resistance can be converted to exact winding temperature with a simple linear formula. See <a href="https://bitcoinversus.tech/2026/10/06/osetc-029-rtds-thermocouples-wiring-cold-junction-compensation-signal-scaling-field-troubleshooting/">RTDs and thermocouples</a> for measurement principles.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.focusensing.com/uploadfile/202103/18/489ea5688300a7f74ad910c82d810a66_thumb.jpg" alt="Bundles of leaded PTC thermistor sensors for motor protection" /><figcaption class="wp-element-caption"><em>Lead-wire PTC motor-protection sensors. Source: <a href="https://www.focusensing.com/ptc-thermistor-for-motor-winding-protection-wiring-and-selection_n187">Focusens manufacturer technical article</a>.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked example: interpreting a sensor string</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider three fictional cold sensor readings of 110, 120 and 130 Ω. Their series resistance is 360 Ω before allowing for lead resistance. If one sensor rises to 3,500 Ω while the other two remain at 120 and 130 Ω, the total becomes 3,750 Ω. A hypothetical compatible relay with a 3,000 Ω trip threshold would indicate a trip. These values are illustrative and are not settings or measured data for any particular relay. Actual thresholds, reset hysteresis, permissible circuit resistance and test signals must come from the matching manufacturer's instructions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An open circuit can also appear as very high resistance. A shorted circuit can appear as very low resistance, potentially hiding heat unless the monitoring system detects the fault. ABB lists wire-interruption and sensor short-circuit monitoring among features of its CM-MSx.xx range; verify the particular model rather than assuming all relays implement both functions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The protection chain and restart behavior</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A typical protection chain comprises the winding sensor, sensor wiring, monitoring input, control logic and final motor stopping device. For a starter the protective relay may cause the contactor to release; for a variable-frequency drive a compatible input or approved external relay may request the configured stop action. A relay indicator or PLC alarm alone does not establish that the motor has stopped. The actual protective response and restart interlock must be evaluated against the approved circuit and equipment documentation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Schneider's TeSys LT3 family includes different manual- and automatic-reset models. The distinction matters because the sensor resistance falls as the winding cools, but cooling alone does not establish that the cause of overheating has been removed. Automatic restart can present an unexpected-motion hazard. Review the complete restart logic and the site's authorization procedure; never bridge a thermistor input or defeat a trip to restore production.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Safe diagnostic workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>Read the existing alarm log, load and speed trends, motor nameplate, sensor type and relay model. Record whether the indication was thermal, wire interruption, short circuit or another code.</li><li>Compare documented current with the applicable motor rating and operating conditions. Check recorded ambient temperature, cooling-fan status, ventilation condition and prior maintenance findings.</li><li>Treat high resistance as an observation rather than proof of an overheated winding. A broken wire and a hot PTC may require different evidence to distinguish.</li><li>Escalate electrical testing to qualified personnel operating under approved energy-control procedures. Sensor circuits can be associated with hazardous motor and drive voltages. Use only manufacturer-approved test methods, and never apply a high-voltage insulation tester to a thermistor circuit unless its instructions expressly permit the method.</li><li>Request a documented functional verification of the protection and restart chain after the root cause has been resolved. No live equipment manipulation is required for the learning exercise.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The OSHA <a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147">hazardous-energy control standard</a> requires applicable isolation and verification during covered maintenance. A thermal trip or stop command does not by itself establish energy isolation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice and answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><li>A three-sensor string has readings of 90, 100 and 110 Ω. What total does the relay see before lead resistance? Answer: 300 Ω.</li><li>A motor trips on winding temperature while recorded phase currents are balanced and within normal limits. Name two alternative causes. Answer: impaired cooling and elevated ambient temperature are plausible; the record alone does not prove either.</li><li>An alarm persists after the motor has cooled. What distinction matters? Answer: verify the relay fault category and approved records to distinguish a remaining sensor wiring fault, residual heat, latched trip or other condition.</li><li>Why should the relay not be bypassed for a trial run? Answer: bypassing defeats a protective function and may permit unsafe operation or unexpected restart. Authorized diagnosis and verification are required.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Additional learning resources</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>ABB provides a <a href="https://new.abb.com/low-voltage/products/electronicrelays/monitors/thermistor-motor-protection-relays">CM-MSS functionality demonstration</a> through its official product page. Schneider Electric describes <a href="https://www.se.com/ng/en/product-range/677-tesys-lt3/">TeSys LT3 relay options</a>. Study their specific manuals before interpreting real equipment readings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor’s Note:</strong> The worked resistance values and practice scenarios are fictional teaching examples, not measurements from a production motor. Manufacturer documentation and qualified site procedures govern equipment-specific decisions.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional BitcoinVersus.Tech 5,000-satoshi contribution QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending. Bitcoin transactions generally cannot be reversed.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

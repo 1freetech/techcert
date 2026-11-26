@@ -1,0 +1,131 @@
+<!-- wp:paragraph -->
+<p><strong>Open Source Semiconductor Technician | Super-fundamental curriculum | 40–50 minutes</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Two silicon wafers processed with the same nominal plasma etch recipe can emerge with different dimensions. A recently cleaned chamber may interact with the plasma differently from a chamber that has already processed several wafers. The first-wafer effect describes departures from established process behavior near the beginning of a run, after cleaning, idle time or other changes. Chamber seasoning aims to establish a reproducible internal surface condition before production qualification.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=5I1KGvO6O04","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=5I1KGvO6O04
+</div><figcaption class="wp-element-caption"><em>SemiSlides, Plasma Etch Basics, part 1 of 2. Background instruction on dry etching, process variables and equipment. Video listing identified; independent playback not established.</em> <a href="https://www.youtube.com/watch?v=5I1KGvO6O04">Watch directly on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/10/15/osstc-010-plasma-etch-equipment-basics-rie-icp-selectivity-endpoint-chamber-condition-troubleshooting/">plasma etch equipment</a>, <a href="https://bitcoinversus.tech/2026/11/22/osstc-021-plasma-etch-focus-rings-wafer-edge-uniformity-erosion/">focus rings and edge uniformity</a>, <a href="https://bitcoinversus.tech/2026/11/21/osstc-018-optical-emission-spectroscopy-plasma-etch-endpoint/">optical emission spectroscopy</a> and <a href="https://bitcoinversus.tech/2026/10/31/osstc-015-chamber-pressure-control-vacuum-gauges-throttle-valves-pumpdown/">chamber pressure control</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Explain why reactor walls influence plasma chemistry and process repeatability.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Distinguish cleaning, warm-up, seasoning and qualification.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Calculate etch rate and percentage deviation from a reference value.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Recognize evidence consistent with first-wafer effects without treating a trend as proof of a root cause.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Prepare a safe, read-only process recovery report.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why reactor walls matter</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Reactive plasma contains electrons, ions, neutral species and chemically active radicals. Some material removed from a wafer leaves the chamber as volatile products; other material can adhere to exposed chamber surfaces. The condition of those surfaces influences the reactions occurring when plasma species encounter them. A clean surface and a conditioned surface can therefore yield different concentrations of reactive species even when the commanded gas flow and RF power remain unchanged.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <a href="https://patents.justia.com/patent/7067432">2006 Applied Materials patent</a> describes a silicon etch reactor in which surface condition changes radical density and etch performance. A separate <a href="https://hero.epa.gov/reference/1616511/">2003 photomask study indexed by the EPA</a> documented a related first-mask effect and reductions after conditioning appropriate to the process. Neither result establishes a universal recipe or qualification threshold for other reactors.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Cleaning, seasoning and qualification are distinct</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Cleaning removes unwanted deposits and contamination. Warm-up establishes the relevant thermal state. Seasoning brings internal surfaces toward a process-compatible state, sometimes through approved dummy-wafer processing. Qualification uses designated checks to establish whether the chamber satisfies process specifications. A chamber can be clean and leak-tight without yet meeting etch-rate or uniformity requirements. Depending on the approved tool design, conditioning may occur without a production wafer; technicians must not substitute a generic sequence for controlled procedures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=zUW_RyukXTI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=zUW_RyukXTI
+</div><figcaption class="wp-element-caption"><em>SemiSlides, Plasma Etch Basics, part 2 of 2. Continuation of semiconductor plasma process instruction. Video listing identified; independent playback not established.</em> <a href="https://www.youtube.com/watch?v=zUW_RyukXTI">Watch directly on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked example: measuring first-wafer deviation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Assume a fictional monitor wafer has a measured film thickness of 510 nm before etching and 330 nm afterward. For an authorized recorded processing interval of 2 minutes, the average removal rate is (510 − 330)/2 = 90 nm/min. A previously established comparison rate is 100 nm/min. The signed relative deviation is (90 − 100)/100 × 100 = −10%. If the second and third hypothetical wafers show 96 and 100 nm/min, their deviations are −4% and 0%. The apparent convergence warrants investigation but does not establish wall chemistry as its cause. No actual production data or recipe values are represented.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Film thickness measurement can also have uncertainty, and an average removal rate does not describe across-wafer uniformity or feature profiles. Compare only equivalent films, recipes, measurement sites and relevant operating conditions.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Recognizing competing explanations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.plasmetrex.com/ag/processfault/firstwafer.html">Plasmetrex application guide</a> identifies idle time, process mix, maintenance and upstream processing as possible contributors. A cold chamber can produce a transient different from a chemically changed chamber. Other plausible explanations include unstable pressure, RF matching, gas delivery, chuck temperature, metrology error or changes in incoming wafers. The diagnostic task is to compare evidence rather than choose a cause from wafer position alone.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The Applied Materials patent reports relative bromine radical-density readings near 11 units after conditioning and 2 following cleaning for one specified process. The ratio of those reported readings is 5.5. The observations are specific to the disclosed setup, chemistry and optical method; they are not an absolute concentration or a recommendation for process settings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Read-only diagnostic workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Record the tool and chamber identifiers, maintenance event, elapsed idle time, recipe revision, wafer order and qualification status.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Compare authorized trend records for pressure, RF forward and reflected power, gas delivery, chuck or wall temperature, optical emission and relevant film measurements.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Use an equivalent qualified baseline. Distinguish missing data, instrumentation changes and measurement uncertainty from observed process drift.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Escalate departures to the responsible process engineer under the approved hold and release procedure. Do not release a production lot solely because a trend appears stable.</li><!-- /wp:list-item --><!-- wp:list-item --><li>After approved recovery, preserve monitor results, calibration status and release authorization. Document any unresolved alternative explanation.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Safety and common mistakes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Plasma processing can involve hazardous gases, vacuum equipment, RF energy, stored electrical energy and hot surfaces. Do not open chambers, bypass interlocks, change gas or RF settings, introduce substitute materials, or improvise seasoning steps. Actual maintenance and operation require tool-specific training and approved work controls. <a href="https://labadviser.nanolab.dtu.dk/index.php/LabAdviser/Courses/TPT_Dry_Etch">DTU Nanolab’s dry-etch training program</a> separates theoretical study from equipment-specific supervised training.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Avoid assuming that the first-wafer effect always lowers etch rate, that a fixed number of dummy wafers guarantees readiness, or that optical intensity directly measures absolute radical density. Optical signals depend on excitation, collection geometry, instrument response and process conditions. A passing average etch rate does not establish dimensional or spatial uniformity.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises and answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>A film falls from 440 to 320 nm in 1.5 minutes. Calculate the average removal rate. Answer: 80 nm/min.</li><!-- /wp:list-item --><!-- wp:list-item --><li>A baseline is 100 nm/min and a monitor shows 103 nm/min. Calculate signed deviation. Answer: +3%.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why might stable gas-flow and RF setpoints coexist with process drift? Answer: internal surface or thermal conditions and other physical variables can change independently of commanded values.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Does seasoning establish production readiness? Answer: no; the appropriate qualification checks and authorized release are still required.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Glossary</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Seasoning:</strong> conditioning reactor surfaces for reproducible processing. <strong>First-wafer effect:</strong> transient process variation near a run’s beginning. <strong>Radical:</strong> a chemically reactive species with an unpaired electron. <strong>Etch rate:</strong> material removal per unit time. <strong>Monitor wafer:</strong> a wafer used to evaluate specified process properties. <strong>Qualification:</strong> documented assessment against approved acceptance requirements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor’s Note:</strong> The worked monitor-wafer example is fictional. Patent observations are attributed to the specific disclosed apparatus; no production reactor was operated for the lesson.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

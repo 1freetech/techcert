@@ -48,26 +48,26 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "semiconductor_technician",
-    "lesson_number": 22,
-    "track_id": "OSSTC.022",
-    "title": "Why Plasma Etch Chambers Need Seasoning After Cleaning",
-    "wordpress_post_id": 35873,
-    "live_url": "https://bitcoinversus.tech/2026/11/26/osstc-022-plasma-etch-chamber-seasoning-first-wafer-effect/",
-    "featured_media_id": 35875,
-    "publication_status": "publish",
-    "archive_path": "archive/2026/11/35873-osstc-022-chamber-seasoning.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/35873-osstc-022-chamber-seasoning.publish.qa.json",
-    "verification_status": "WordPress read-back; two rendered iframes, playback/mobile unverified; archive identical in 3 repositories; cover uploaded 1200x630, single watermark recreated"
-  },
-  "next": {
     "subject": "semiconductor_engineer",
     "lesson_number": 19,
-    "title_format": "OSSEC.019: {topic}",
-    "public_title_format": "{topic}",
-    "resolution_note": "After OSSTC.022 WordPress #35873, live track search shows OSSEC.018 #34894. Candidate OSSEC.019 requires fresh exact identifier and subject duplicate checks."
+    "track_id": "OSSEC.019",
+    "title": "How EUV Mask Inspection Detects Hidden Optical Defects",
+    "wordpress_post_id": 35892,
+    "live_url": "https://bitcoinversus.tech/2026/11/26/ossec-019-actinic-euv-mask-inspection-buried-phase-defects/",
+    "featured_media_id": 35893,
+    "publication_status": "publish",
+    "archive_path": "archive/2026/11/35892-ossec-019-actinic-mask-inspection.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/35892-ossec-019-actinic-mask-inspection.publish.qa.json",
+    "verification_status": "WordPress read-back, two rendered iframes, two source-inspected image references; actual playback and mobile unverified; cover style and original watermark asset exceptions; three archives identical"
   },
-  "next_after_current": "hashboard_repair",
+  "next": {
+    "subject": "hashboard_repair",
+    "lesson_number": 12,
+    "title_format": "OSHRE.012: {topic}",
+    "public_title_format": "{topic}",
+    "resolution_note": "After OSSEC.019 WordPress #35892, live track search returned OSHRE.011 #34934. Candidate OSHRE.012 requires fresh identifier and subject duplicate checks."
+  },
+  "next_after_current": "robotics_technician",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -273,11 +273,11 @@
     },
     "semiconductor_engineer": {
       "acronym": "OSSEC",
-      "next_lesson_number": 19,
-      "last_published_lesson_number": 18,
-      "last_wordpress_post_id": 34894,
-      "last_published_title": "Why EUV Masks Cast Shadows on Chip Patterns",
-      "verification_status": "Live WordPress published identity confirmed; full QA tracked separately"
+      "next_lesson_number": 20,
+      "last_published_lesson_number": 19,
+      "last_wordpress_post_id": 35892,
+      "last_published_title": "How EUV Mask Inspection Detects Hidden Optical Defects",
+      "verification_status": "WordPress published identity confirmed; QA separate"
     },
     "robotics_technician": {
       "acronym": "OSRTC",
@@ -328,10 +328,12 @@
     },
     "hashboard_repair": {
       "acronym": "OSHRE",
-      "next_lesson_number": 7,
-      "last_published_lesson_number": 6,
-      "last_wordpress_post_id": 30531,
-      "photo_uniqueness_required": true
+      "next_lesson_number": 12,
+      "last_published_lesson_number": 11,
+      "last_wordpress_post_id": 34934,
+      "photo_uniqueness_required": true,
+      "last_published_title": "Why Hashboards Pass Bench Tests but Fail in Miners",
+      "verification_status": "Published search result; recheck before next lesson"
     },
     "history_of_engineering": {
       "acronym": "OSHE",

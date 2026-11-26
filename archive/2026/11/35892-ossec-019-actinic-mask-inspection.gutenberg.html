@@ -1,0 +1,143 @@
+<!-- wp:paragraph -->
+<p><strong>Open Source Semiconductor Engineering | Super-fundamental curriculum | 45–55 minutes</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A reflective photomask can contain an imperfection beneath its outer surface that changes how extreme ultraviolet (EUV) light returns to the projection system. Conventional surface inspection may characterize the shape or location of a defect without establishing whether it will distort a printed feature. Actinic inspection uses light at the lithographic wavelength to investigate optical behavior that matters during exposure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=G1A-5pt6h-4","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=G1A-5pt6h-4
+</div><figcaption class="wp-element-caption"><em>eBeam Initiative, Tech Talk: EUV Tech on EUV Metrology. Matt Hettermann discusses mask reflectometry, actinic image review and related metrology capabilities. Manufacturer presentation; playback has not been independently tested.</em> <a href="https://www.youtube.com/watch?v=G1A-5pt6h-4">Watch directly on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/11/22/ossec-018-euv-mask-3d-shadowing-orientation-pattern-shift/">three-dimensional EUV mask effects</a>, <a href="https://bitcoinversus.tech/2026/11/21/ossec-017-euv-mask-pellicles-transmission-heat-particles/">EUV pellicles</a>, <a href="https://bitcoinversus.tech/2026/11/15/ossec-016-euv-stochastic-defects-line-edge-roughness-inspection/">stochastic lithography defects</a> and <a href="https://bitcoinversus.tech/2026/11/07/ossec-015-lithography-focus-exposure-process-windows-fem-bossung-depth-of-focus/">lithography process windows</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Distinguish EUV mask blanks from patterned masks and amplitude defects from phase defects.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Explain why an inspection wavelength affects defect visibility and printability assessment.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Calculate a simplified reflected-wave phase shift and state the limits of the model.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Compare bright-field, dark-field and phase-contrast inspection.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Explain why detection, characterization, mitigation and printability verification are separate engineering tasks.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A defect beneath the surface</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>An EUV mask blank contains a low-expansion substrate, a reflective multilayer and protective material. Patterned absorber features are added during mask fabrication. Alternating materials such as molybdenum and silicon form a reflector optimized for EUV radiation. A buried particle, pit or bump can disturb the multilayer interfaces. Even when the outer profile appears relatively smooth, reflected optical waves may acquire different phases, amplitudes or both.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An amplitude defect changes the magnitude of the reflected optical field. A phase defect alters the relative phase of the field, changing interference when neighboring contributions combine. Real defects can exhibit both behaviors. Research at <a href="https://sharp.lbl.gov/sharp/why-sharp/">Lawrence Berkeley National Laboratory</a> documents why comparing surface microscopy and EUV imaging is important for evaluating mask defects.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://cdn.sanity.io/images/8u24qz8f/production/40163728eca9c7998b3f63c6d202f7cb7d6e9600-1280x400.png" alt="Three microscope images comparing a mask defect, the corresponding wafer feature and an actinic image" /><figcaption class="wp-element-caption"><em>Source: <a href="https://cxro.lbl.gov/capabilities/sharp">Berkeley Lab, SHARP EUV mask microscope</a>. Mask SEM, wafer SEM and actinic image of a large defect; the optical image reveals details not evident in the mask SEM.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Why inspect at 13.5 nanometers?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Actinic inspection uses the wavelength relevant to the intended optical process. For EUV lithography, the nominal wavelength is 13.5 nm. Deep-ultraviolet inspection, electron microscopy and atomic-force microscopy provide useful complementary information, but they do not automatically reproduce wavelength-dependent interference inside the reflective stack. An at-wavelength image is also not necessarily equivalent to a printed wafer image; illumination, numerical aperture, focus, polarization and downstream resist behavior must be considered.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Mbx6lsXSYVE","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Mbx6lsXSYVE
+</div><figcaption class="wp-element-caption"><em>SemiSlides, EUVL Part 4: EUV Mask. The chapter beginning at 48:40 introduces actinic blank inspection. The earlier mask-construction material provides context. Playback has not been independently tested.</em> <a href="https://www.youtube.com/watch?v=Mbx6lsXSYVE">Watch directly on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked example: a reflected-wave phase shift</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider an ideal reflecting surface displaced vertically by height h. For incident light at angle θ from the surface normal, a simple geometric approximation for the magnitude of the reflected phase shift is Δφ = 4πh cos(θ)/λ radians. The factor of two in optical path length comes from reflection. At normal incidence with λ = 13.5 nm, a hypothetical displacement of 0.5 nm gives Δφ ≈ 0.465 radians, or 26.7 degrees. Doubling the displacement to 1 nm doubles the phase estimate to about 53.3 degrees.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The model describes an ideal displaced reflector, not a multilayer defect simulation. Buried structures can change the optical field through material-dependent scattering, deformation across multiple layers and wavelength-dependent reflection. The calculated phase is not an inspection threshold or a prediction of wafer critical dimension.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Bright field, dark field and phase contrast</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Bright-field imaging records contrast against the main reflected background. Dark-field imaging suppresses a substantial part of the nominal reflected signal and detects scattered light. Phase-contrast methods manipulate the relationship between the scattered and reference contributions so phase variations become measurable intensity differences. Each approach involves trade-offs in collection efficiency, spatial resolution, noise, scanning speed and defect classification.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A <a href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2017/EECS-2017-188.html">2017 UC Berkeley dissertation by Yow-Gwo Wang</a> reported detection of a programmed defect with height 0.35 nm and signal-to-noise ratio near 8 at best focus using Zernike phase contrast in a SHARP microscope experiment. The result refers to the specific sample and optical arrangement, not a universal detection limit. The study also evaluated dark-field efficiency using simulations, a different evidence category from experimental detection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Blank inspection versus patterned-mask inspection</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Blank inspection occurs before the absorber pattern is fabricated and helps locate flaws in the reflective material. Patterned-mask inspection evaluates a more complete reticle, where absorber geometry introduces additional optical complexity. <a href="https://www.lasertec.co.jp/en/news/2024/20241202_3887.html">Lasertec's ABICS E320 announcement dated December 2, 2024</a> describes a commercial blank-inspection system using 13.5 nm light. The manufacturer specifies dark-field imaging at 40× and review at 1,500×. Magnification alone does not determine defect detection sensitivity or spatial resolution.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Lasertec's <a href="https://www.lasertec.co.jp/en/products/semiconductor/actis_a300.html">ACTIS A300 patterned-mask product documentation</a> identifies through-pellicle inspection and support for high-NA masks as intended capabilities. Such claims are attributed to the manufacturer rather than independent performance measurements. Berkeley Lab's <a href="https://cxro.lbl.gov/capabilities/sharp">SHARP research microscope</a> provides a complementary research platform for studying optical printability and mask effects.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://www.lasertec.co.jp/en/products/assets/img/ACTIS-A300.jpg" alt="Lasertec ACTIS A300 patterned mask inspection equipment" /><figcaption class="wp-element-caption"><em>Source: <a href="https://www.lasertec.co.jp/en/products/semiconductor/actis_a300.html">Lasertec ACTIS A300 product documentation</a>. Manufacturer photograph of an actinic patterned-mask inspection system.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">From defect detection to engineering disposition</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Record the mask identifier, inspection method, coordinates, defect signal, calibration state and uncertainty.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Correlate relevant measurements from complementary tools. A measured surface height and an optical contrast value describe different quantities.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Determine whether the defect is in a blank, absorber pattern, particle contamination or another part of the optical system.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Assess printability using qualified modeling, actinic review or approved wafer evidence under representative imaging conditions.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Evaluate authorized mitigation or rejection options. Reinspect any repaired region and preserve the evidence supporting the engineering decision.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Mask disposition must follow product-specific acceptance criteria. No generic height or signal threshold establishes printability for every illumination setting, pattern or process. Do not open or operate vacuum, EUV radiation or precision mask-handling systems without approved training and procedures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises and answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Calculate the ideal reflected phase shift at normal incidence for h = 0.25 nm and λ = 13.5 nm. Answer: approximately 0.233 radians, or 13.3 degrees.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why can a buried defect affect a mask even when its surface appears smooth? Answer: deformation and material changes within the reflective stack can modify optical phase and amplitude.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Does an actinic image guarantee a wafer defect? Answer: no; printability depends on representative imaging and resist conditions.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why is 1,500× magnification not a resolution specification? Answer: image enlargement does not establish the smallest resolvable structure, which also depends on optics, sampling and noise.</li><!-- /wp:list-item --><!-- wp:list-item --><li>What distinguishes blank inspection from patterned-mask inspection? Answer: the former examines the reflective blank before patterning; the latter also considers patterned absorber features and their optical effects.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Glossary</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Actinic:</strong> using radiation at the wavelength relevant to the process. <strong>Phase:</strong> relative position within an optical wave cycle. <strong>Printability:</strong> whether a mask feature or defect affects the wafer pattern under specified exposure conditions. <strong>SNR:</strong> signal-to-noise ratio. <strong>Mask blank:</strong> an unpatterned substrate and optical coating assembly.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor’s Note:</strong> Phase calculations are idealized classroom examples. Research results and manufacturer specifications are separately attributed. No physical mask inspection was performed for the lesson.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

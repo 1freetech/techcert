@@ -1,0 +1,191 @@
+<!-- wp:paragraph -->
+<p><strong>Open Source PCB Engineering | Super-fundamental | 35–45 minutes</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A printed circuit board can pass electrical inspection yet develop leakage between copper conductors months later. Conductive anodic filamentation (CAF) is a subsurface electrochemical degradation mechanism in glass-reinforced laminates. Moisture, an electrical potential difference and a susceptible migration path can gradually compromise the insulation that separates nets. Unlike a broken interconnect, which raises resistance in an intended conducting path, CAF reduces resistance where isolation should exist.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://mdpi-res.com/applsci/applsci-12-00640/article_deploy/html/images/applsci-12-00640-g001-550.jpg" alt="Top and side views of a circuit board with localized burned material near its edge" /><figcaption class="wp-element-caption"><em>Figure 1, <a href="https://doi.org/10.3390/app12020640">Tan et al., Applied Sciences 12(2), 640 (2022)</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Top and side photographs of a failed public-transport communication board. The burn mark is a symptom, not by itself proof of the initiating mechanism.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=FFR8IPu_vbY","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=FFR8IPu_vbY
+</div><figcaption class="wp-element-caption"><em>National Physical Laboratory webinar: CAF conductive anodic filaments, covering failure mechanisms and fabrication variables.</em> <a href="https://www.youtube.com/watch?v=FFR8IPu_vbY">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/10/24/ospcb-001-pcb-layers-copper-stackups/">PCB layers and stackups</a>, <a href="https://bitcoinversus.tech/2026/10/24/ospcb-002-pads-vias-through-holes/">pads and vias</a>, <a href="https://bitcoinversus.tech/2026/11/22/ospcb-011-diagnosing-pcb-open-short-circuits-continuity-netlist/">open and short circuit diagnosis</a> and <a href="https://bitcoinversus.tech/2026/11/22/ospcb-012-microvia-cracks-latent-failures-thermal-cycling-hdi/">latent microvia failures</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Explain why moisture and electrical bias can reduce insulation resistance inside a glass-reinforced PCB.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Distinguish conductive anodic filament growth from surface dendrites, microvia opens and ordinary manufacturing shorts.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Calculate illustrative leakage current and the nominal electric field between conductors.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Interpret reliability data and identify evidence needed to establish a root cause.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">The physical mechanism</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>FR-4 laminates commonly contain woven glass reinforcement held in an epoxy resin matrix. Ideally, the composite provides electrical isolation, mechanical stability and reliable separation of copper features. Degradation at the glass–resin interface can create a path for moisture and ionic transport. Under sustained electrical bias, electrochemical processes involving copper can develop a conductive copper-containing corrosion product extending from the anodic conductor toward the cathodic conductor. The filament can progress along internal interfaces and eventually reduce resistance between the originally isolated nets.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The UK's <a href="https://www.npl.co.uk/products-services/electronics-reliability/conductive-anodic-filament">National Physical Laboratory (NPL)</a> evaluates laminate reliability through resistance monitoring between biased conductive features. Relevant variables include conductor geometry, laminate construction and fabrication conditions. CAF is not identical to surface electrochemical migration; the latter may produce visible metallic dendrites across exposed insulation. Internal CAF can escape ordinary optical inspection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What makes a board susceptible?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A narrow separation, moisture exposure, weak adhesion between glass and resin, contamination and fabrication damage can contribute to failure risk. Increased potential difference may also affect the driving conditions for ionic transport. A material labeled CAF-resistant is not immune to mechanical or processing damage. <a href="https://industrial.panasonic.com/ww/faq/faq0160">Panasonic's materials guidance</a> emphasizes interface adhesion, contamination control and avoiding defects between the reinforcement and resin.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://mdpi-res.com/applsci/applsci-12-00640/article_deploy/html/images/applsci-12-00640-g012-550.jpg" alt="Microscopy showing cracks beside a circular plated feature and copper near a PCB cut edge" /><figcaption class="wp-element-caption"><em>Figure 12, <a href="https://doi.org/10.3390/app12020640">Tan et al., Applied Sciences 12(2), 640 (2022)</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Optical examination of damage following a board-separation operation. The labeled crack images show a potential pathway for moisture, not a universal CAF geometry.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked example: leakage and electric field</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a hypothetical 12 V potential difference across two isolated conductors. At 100 MΩ insulation resistance, an ideal ohmic path carries I = V/R = 0.12 µA. At 100 kΩ, the estimated current rises to 120 µA. The resistance has fallen by a factor of 1,000. A further reduction to 1 kΩ would correspond to 12 mA if the source maintained 12 V. Actual damaged insulation can behave nonlinearly, and source current limits and temperature can alter the outcome.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a simplified uniform-field estimate, E = V/d. With 12 V across 0.30 mm, the nominal value is 40 V/mm. Halving the distance to 0.15 mm doubles it to 80 V/mm. Real conductor edges and heterogeneous dielectric materials produce nonuniform fields. Neither estimate is an approved clearance rule or a prediction of time to failure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=bbdOjaFYkpk","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=bbdOjaFYkpk
+</div><figcaption class="wp-element-caption"><em>National Physical Laboratory webinar: A Beginners Guide to SIR CAF and Condensation Testing, covering electronics reliability test methods.</em> <a href="https://www.youtube.com/watch?v=bbdOjaFYkpk">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A documented failure investigation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A 2022 study by Tan and colleagues examined an eight-layer communication PCB used in public transport. The researchers attributed internal conductive failure to damage introduced while separating boards from the manufacturing panel. Their investigation combined electrical evidence, microscopy, X-ray examination, strain measurements and environmental testing. The case demonstrates why a laminate specification alone cannot establish the reliability of the finished product.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://mdpi-res.com/applsci/applsci-12-00640/article_deploy/html/images/applsci-12-00640-g004-550.jpg" alt="X-ray micrographs highlighting copper-containing features between ground and input voltage planes near a PCB edge" /><figcaption class="wp-element-caption"><em>Figure 4, <a href="https://doi.org/10.3390/app12020640">Tan et al., Applied Sciences 12(2), 640 (2022)</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. X-ray examination of the affected board near the power and ground layers. The authors used multiple complementary methods to investigate the failure.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>In the authors' reported environmental test at 65 °C and 95% relative humidity, five cracked specimens began above 100 MΩ. The final reported resistances varied substantially between specimens and test durations. Those results support a mechanism in that particular case, not a general service-life model or universal qualification condition. The investigators reported better outcomes after changing the board-separation process. Read the <a href="https://www.mdpi.com/2076-3417/12/2/640">original study, including Table 1 and the corrective-action section</a>, for the experimental boundaries.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Reliability testing and troubleshooting</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A qualified laboratory can select representative coupons containing electrically isolated features, expose them to controlled environmental stress and monitor resistance while applying the specified test bias. Use the approved revision of IPC-TM-650 method 2.6.25, manufacturer instructions and product-specific acceptance criteria. A short standard continuity test, a room-temperature resistance measurement and a visual inspection answer different questions from a long-term insulation reliability assessment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Record the board revision, material system, fabrication lot, conductor spacing, panel-separation process and operating environment.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Determine whether the fault lies within the laminate, on its surface, in a connector or in an attached component. Preserve the failed specimen for analysis.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Compare measurements under equivalent documented conditions. Check instrument leakage, measurement range and fixture insulation before interpreting high-resistance data.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Where authorized, obtain microscopy or other laboratory analysis to distinguish a migration path from a mechanical defect or contamination.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Verify corrective actions using representative samples and an approved reliability protocol. Avoid extrapolating lifetime from a single passing coupon.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Do not energize wet boards, induce shorts, perform destructive sampling or improvise high-voltage insulation tests on production hardware. The exercises below use recorded or fictional data. Review <a href="https://bitcoinversus.tech/2026/11/21/ospcb-010-aoi-xray-in-circuit-functional-testing/">inspection and functional testing</a> for complementary methods.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Design and manufacturing implications</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Work with the fabricator to specify laminate properties, appropriate spacing, drilling quality, handling controls and validated assembly processes. A tighter layout may satisfy a design-rule checker while still requiring reliability evidence for its intended environment. Preserve process history and ensure board separation does not introduce unacceptable damage near copper features. Coatings may address some surface exposure but should not be assumed to eliminate internal laminate defects.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice and answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>At 5 V and 10 MΩ, what ideal leakage current is expected? Answer: 0.5 µA.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>What is the nominal electric field for 24 V across 0.6 mm? Answer: 40 V/mm, under the uniform-field approximation.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Why does a room-temperature continuity pass not exclude CAF? Answer: the insulation may degrade later when exposed to moisture and bias, and a continuity check is not an environmental reliability test.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>A burnt board contains cracks near its edge. Does the observation prove CAF? Answer: no. Localize the conductive path, evaluate competing mechanisms and seek corroborating material and electrical evidence.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Glossary</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>CAF:</strong> internal electrochemical conductive filament growth. <strong>Insulation resistance:</strong> resistance across nominally isolated conductors. <strong>Bias:</strong> applied electrical potential difference. <strong>Coupon:</strong> representative test structure. <strong>Depanelization:</strong> separation of individual boards from a manufacturing panel.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Further learning</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Additional technical resources, webinar slides and laboratory capabilities are available through the <a href="https://www.npl.co.uk/products-services/electronics-reliability/conductive-anodic-filament">National Physical Laboratory CAF testing page</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> The electrical examples are fictional and use idealized relationships. Published photographs and micrographs are credited to the original open-access study. No physical board, humidity chamber or insulation tester was operated for the lesson.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional BitcoinVersus.Tech 5,000-satoshi contribution QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending. Bitcoin transactions generally cannot be reversed.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

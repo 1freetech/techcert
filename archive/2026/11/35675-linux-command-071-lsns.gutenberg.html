@@ -1,0 +1,77 @@
+<!-- wp:paragraph --><p><strong>Linux Commands | Lesson 71 | Intermediate | 30–40 minutes | util-linux and Linux procfs</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A container can share a host kernel while seeing a different network stack, process tree or mount layout. When a service behaves differently inside a container, engineers need evidence about its isolation boundaries before changing configuration. The read-only <code>lsns</code> utility enumerates namespaces visible from the current execution environment.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Prerequisites and sequence</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Continue from <a href="https://bitcoinversus.tech/2026/11/21/linux-command-70-unshare-namespaces-container-isolation/">Linux Command #70: unshare</a>. Review <a href="https://bitcoinversus.tech/2026/11/20/linux-command-69-systemd-cat-send-logs-to-journald/">#69: systemd-cat</a>, <a href="https://bitcoinversus.tech/2026/11/15/linux-command-68-systemd-cgls-service-process-tree-inspection/">#68: systemd-cgls</a> and <a href="https://bitcoinversus.tech/2026/11/06/linux-command-67-systemd-cgtop-cgroup-cpu-memory-io/">#67: systemd-cgtop</a>. Use a local Linux lab shell with util-linux installed; no administrator access is required for the examples.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Distinguish namespace types and explain how they relate to container isolation.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Interpret namespace identifiers, visible process counts and representative PIDs.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Filter namespace listings by process and type; corroborate a network namespace through procfs.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Produce predictable JSON output and recognize incomplete observations.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Apply a read-only diagnostic workflow and identify security and escalation boundaries.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">1. Kernel architecture: what a namespace represents</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A namespace provides a particular view of a kernel-managed resource. Processes sharing an instance of a namespace share the corresponding view; processes in different instances may see different resources. One process can belong to separate instances for each namespace type. Linux exposes the associated references in <code>/proc/PID/ns/</code>; their identifiers are inode numbers, not container names or permanent global asset IDs.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li><strong>mnt:</strong> mount topology; <strong>pid:</strong> process ID visibility; <strong>net:</strong> interfaces, routes and network stacks.</li><!-- /wp:list-item --><!-- wp:list-item --><li><strong>uts:</strong> host and domain names; <strong>ipc:</strong> supported interprocess communication resources.</li><!-- /wp:list-item --><!-- wp:list-item --><li><strong>user:</strong> user/group identity mappings and capability scope; <strong>cgroup:</strong> cgroup hierarchy view, not an enforcement policy by itself.</li><!-- /wp:list-item --><!-- wp:list-item --><li><strong>time:</strong> offsets for selected monotonic and boot-time clocks, not an independent wall-clock time zone.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Namespaces and cgroups solve different problems. Namespace membership controls views of resources, whereas resource controllers can constrain or account for CPU, memory and other consumption. Containers also depend on capabilities, mount permissions, system-call filtering and additional security policy.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">2. Reading namespace listings</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Run <code>lsns --version</code> and <code>lsns --help</code> to establish installed capabilities. Then run <code>lsns -l -o NS,TYPE,NPROCS,PID</code>. The list flag requests a flat layout; the output flag selects explicit columns.</p><!-- /wp:paragraph -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li><strong>NS:</strong> inode identifier of the visible namespace instance.</li><!-- /wp:list-item --><!-- wp:list-item --><li><strong>TYPE:</strong> the isolated resource category.</li><!-- /wp:list-item --><!-- wp:list-item --><li><strong>NPROCS:</strong> process membership count observed by the utility, subject to visibility and races.</li><!-- /wp:list-item --><!-- wp:list-item --><li><strong>PID:</strong> the lowest observed PID associated with the namespace, not proof that it created the namespace or owns it.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Two processes with matching network namespace identifiers share the same network namespace at observation time. They can still differ in mount, PID or user namespace membership. An inode number should not be treated as a durable identifier across reboots or namespace lifetimes.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">3. Read-only lab: inspect and corroborate</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Use a disposable local shell. The variable <code>$$</code> expands to the shell PID. Run <code>lsns -l -p $$ -o NS,TYPE,NPROCS,PID</code> to list namespaces held by the shell. Next run <code>lsns -l -t net -o NS,TYPE,NPROCS,PID</code> to list accessible network namespaces. Finally run <code>readlink /proc/$$/ns/net</code>. The value inside brackets should correspond to the network namespace inode observed for the shell.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":35674,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/linux-71-lab-output.png" alt="Actual lsns process-filtered output and readlink network namespace identifier" class="wp-image-35674" /><figcaption class="wp-element-caption">Actual local lab output, util-linux 2.41.5. The numbers and visible process counts depend on the environment; the capture was generated from command output, not a simulated deployment.</figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p>In the local test, the network namespace was 4026531833, and both the procfs link and the filtered listing reported the same value. Counts changed as short-lived processes started and stopped. No namespace was created, entered or modified.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">4. Structured output and observation limits</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Run <code>lsns -J -l -t net -o NS,TYPE</code> for JSON. Specify columns and layout explicitly because default output may change between releases. A consumer should parse JSON using a JSON parser, check that the namespaces array exists and handle missing values. The local test parsed the JSON with Python and matched the network inode to procfs successfully.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>An unprivileged observer may see only a subset of processes. A container's procfs view can also limit results. Some persistent namespaces held by bind mounts may not be visible through ordinary process enumeration; newer util-linux releases provide additional persistent-namespace options, so consult the local manual. Processes can exit between enumeration and inspection. An empty result does not establish that a namespace is absent from the entire host.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">5. Operational workflow and security boundaries</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Record the host or lab context, time, tool version and observation scope; collect the process-filtered namespace listing; compare the relevant procfs reference; repeat if the process exits or the result changes. Correlate with authorized container-runtime metadata and cgroup observations rather than assigning a container identity from an inode alone.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Restrict exported process details and command lines to approved diagnostic destinations. A namespace listing does not prove that a workload is safe or that its isolation policy is correctly enforced. Do not escalate privileges, enter a production namespace, change mounts or network policy, or relax procfs restrictions merely to resolve incomplete output. Those actions require authorization, change control, an approved rollback plan and service-owner coordination. Escalate unresolved visibility limitations to the responsible operator.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Glossary</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Namespace: a kernel object defining a resource view.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Inode: a filesystem object identifier used here to distinguish namespace instances.</li><!-- /wp:list-item --><!-- wp:list-item --><li>procfs: a virtual filesystem presenting kernel and process information.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Representative PID: an observed member process selected for display.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Persistent namespace: an instance kept alive by references even when it has no member process.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice exercises</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>A. Compare the network and mount namespace identifiers for your shell. Explain why different namespace types need separate comparisons.</li><!-- /wp:list-item --><!-- wp:list-item --><li>B. Filter the listing to PID namespaces using <code>-t pid</code>. Identify the NS and PID columns without confusing their meanings.</li><!-- /wp:list-item --><!-- wp:list-item --><li>C. Compare the network identifier from the filtered listing with the procfs link.</li><!-- /wp:list-item --><!-- wp:list-item --><li>D. Request JSON using only NS and TYPE; explain why explicit columns are preferable for automation.</li><!-- /wp:list-item --><!-- wp:list-item --><li>E. Write a two-sentence incident note explaining why a restricted container listing cannot prove host-wide absence of another namespace.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>1. Does sharing a network namespace imply sharing a mount namespace?</li><!-- /wp:list-item --><!-- wp:list-item --><li>2. Is NPROCS a guaranteed host-wide count?</li><!-- /wp:list-item --><!-- wp:list-item --><li>3. Which option filters by process ID?</li><!-- /wp:list-item --><!-- wp:list-item --><li>4. Does a namespace inode establish authenticated container ownership?</li><!-- /wp:list-item --><!-- wp:list-item --><li>5. Which kernel mechanism can enforce a memory limit independently of namespaces?</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Answer key</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Exercises: A. Compare identifiers within each type; different types isolate different resources. B. NS identifies the namespace instance; PID identifies a representative observed process. C. Match the digits within brackets to the NS field for the shell's network namespace. D. Explicit columns avoid dependence on changing defaults; parse JSON rather than whitespace. E. Restricted procfs and permissions can hide other processes and namespaces; document scope and escalate through approved channels if wider visibility is required.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Knowledge check: 1. No. 2. No; permissions and visibility matter. 3. <code>-p PID</code>. 4. No. 5. A cgroup memory controller.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Technical references</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li><a href="https://man7.org/linux/man-pages/man8/lsns.8.html">util-linux lsns(8) manual</a></li><!-- /wp:list-item --><!-- wp:list-item --><li><a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">Linux namespaces(7) manual</a></li><!-- /wp:list-item --><!-- wp:list-item --><li><a href="https://man7.org/linux/man-pages/man5/proc_pid_ns.5.html">Linux proc_pid_ns(5) manual</a></li><!-- /wp:list-item --><!-- wp:list-item --><li><a href="https://kernel.googlesource.com/pub/scm/utils/util-linux/util-linux/+/refs/tags/v2.43-devel/sys-utils/lsns.8.adoc">util-linux upstream manual source</a></li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p>Supplementary viewing: <a href="https://www.youtube.com/watch?v=kHTzpq1uGxM">Linux Namespaces Deep Dive – The Isolation Foundation</a>. A direct source link is provided rather than asserting that a video player has passed live playback testing.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>Cover: original instructional composition using actual local command output, with the approved watermark cropped directly from the saved source artwork.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24593,"sizeSlug":"large","linkDestination":"none"} --><figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr.png" alt="BitcoinVersus.Tech donation QR code requesting 5,000 sats" class="wp-image-24593" /><figcaption class="wp-element-caption"></figcaption></figure><!-- /wp:image -->

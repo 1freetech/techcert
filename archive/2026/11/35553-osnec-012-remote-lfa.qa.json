@@ -1,0 +1,28 @@
+{
+  "post_id": 35553,
+  "title": "OSNEC.012: Remote Loop-Free Alternates and OSPF Repair Tunnels",
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/26/osnec-012-remote-loop-free-alternates-ospf-repair-tunnels/",
+  "featured_media": 35552,
+  "cover_dimensions": [
+    1200,
+    630
+  ],
+  "watermark": "original reference cropped and proportionally scaled once; visually inspected",
+  "objective_map": {
+    "1": "section 1, exercise A",
+    "2": "sections 2–3, exercise B",
+    "3": "section 3, exercises A–C",
+    "4": "sections 2 and 4, knowledge check",
+    "5": "section 5, exercise D, knowledge check"
+  },
+  "internal_links": 4,
+  "footer_qr": 24026,
+  "primary_sources": [
+    "https://datatracker.ietf.org/doc/html/rfc7490",
+    "https://www.rfc-editor.org/rfc/rfc5286.html"
+  ],
+  "media": "no video or social embeds; linked IETF figure for paper lab",
+  "verification": "WordPress edit and view response confirmed published, cover assigned, 12 headings and four internal links. Live desktop/mobile browser and physical lab not tested.",
+  "rotation_next": "Python (OSPython), number requires fresh reconciliation"
+}

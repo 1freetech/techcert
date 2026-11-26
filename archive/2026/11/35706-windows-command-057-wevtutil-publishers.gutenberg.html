@@ -1,0 +1,89 @@
+<!-- wp:paragraph --><p><strong>Windows Commands | Lesson 57 | Intermediate | 35–45 minutes | Windows 10/11 and Windows Server 2016–2025</strong></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>An event log records observations, but its publisher defines what the observations mean. When two components produce the same numeric event ID, a technician who searches only for the number can misidentify the source of a fault. Windows supplies two read-only commands for examining registered event publishers: <code>wevtutil ep</code> and <code>wevtutil gp</code>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Prerequisites and sequence</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Use an authorized Windows lab, Command Prompt or PowerShell, and basic knowledge of Windows Event Viewer. Review <a href="https://bitcoinversus.tech/2026/11/21/windows-command-56-wevtutil-gl-gli-event-log-configuration/">Windows Command #56: log configuration</a>, <a href="https://bitcoinversus.tech/2026/11/20/windows-command-55-wevtutil-epl-export-event-logs-evtx/">#55: event export</a>, <a href="https://bitcoinversus.tech/2026/11/15/windows-command-54-wevtutil-qe-read-filter-event-logs/">#54: querying events</a> and <a href="https://bitcoinversus.tech/2026/11/21/ositc-016-windows-process-creation-auditing-event-4688-sysmon/">OSITC.016: process creation auditing</a>.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Learning objectives</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Distinguish publishers, event channels, registered definitions and recorded events.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Enumerate publishers and retrieve metadata using ep and gp.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Interpret event IDs, versions, levels, tasks, opcodes and keywords in context.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Correlate publisher metadata with a recent event using a read-only workflow and recognize incomplete evidence.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Identify privacy, authorization, change control and escalation boundaries.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">1. Architecture: provider, channel, event and message resources</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A provider or publisher is an instrumented component that can emit events. In manifest-based Windows Event Log, the instrumentation manifest describes a provider's identity, event definitions and associated channels. A channel organizes event records. For example, an event may be written to the System channel, but System is not necessarily the name of its originating provider.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>A recorded event is an occurrence with data and time information. Metadata is the definition used to interpret the occurrence. Windows can use registered resource and message files to resolve human-readable names and descriptions. If a collector lacks the appropriate resources, a message may fail to render even though the underlying event is preserved. Some legacy event sources and other ETW providers use different mechanisms, so the registered publisher list is not an exhaustive inventory of every possible tracing source.</p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":35703,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/windows-57-microsoft-event-viewer-provider.png" alt="Windows Event Viewer showing the .NET Runtime source and numeric event ID" class="wp-image-35703" /><figcaption class="wp-element-caption">Source: <a href="https://learn.microsoft.com/en-us/powershell/scripting/samples/creating-get-winevent-queries-with-filterhashtable?view=powershell-7.6">Microsoft Learn, Creating Get-WinEvent queries with FilterHashtable</a>. Historical Event Viewer example showing the event source. It is not a screenshot from our lab.</figcaption></figure><!-- /wp:image -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">2. Enumerate and inspect publishers</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Run the following commands individually in a local lab. They request information rather than changing event log settings. Begin without elevation; follow the environment's access rules if permissions prevent inspection.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><code>wevtutil ep</code></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The ep command enumerates publisher names registered on the local machine. Select an exact name from the result. Microsoft documents the Eventlog provider as an example; installed applications, Windows editions and versions affect which publishers are available.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><code>wevtutil gp Microsoft-Windows-Eventlog</code></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The gp command retrieves the selected publisher's configuration information. Depending on registration and resources, examine its identifier, linked channels and message-resource paths. Do not confuse a file path for a provider's message resources with the location of its recorded EVTX data.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><code>wevtutil gp Microsoft-Windows-Eventlog /ge:true /gm:true /f:xml</code></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>The ge option asks for definitions of events the publisher can generate. The gm option requests message strings rather than numeric message references, and f:xml requests XML representation. A definition in the results does not prove that an event occurred, that the relevant channel is enabled or that a collector received the event.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">3. Interpret definitions without confusing their meaning</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Event ID: numeric identifier within the provider's event definitions; use provider identity and version when interpreting it.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Version: revision of the event definition; payload interpretation can differ between versions.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Level: severity category. Common standard values are critical 1, error 2, warning 3, informational 4 and verbose 5.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Task and opcode: describe the activity category and operation within that activity; meanings depend on the provider.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Keywords: bitmask categories used to classify and filter events; several flags may be set together.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:image {"id":35704,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/windows-57-microsoft-event-viewer-keywords.png" alt="Windows Event Viewer filter dialog showing keyword categories" class="wp-image-35704" /><figcaption class="wp-element-caption">Source: <a href="https://learn.microsoft.com/en-us/powershell/scripting/samples/creating-get-winevent-queries-with-filterhashtable?view=powershell-7.6">Microsoft Learn</a>. Keyword names displayed in the graphical filter correspond to numeric values used by event APIs.</figcaption></figure><!-- /wp:image -->
+
+<!-- wp:paragraph --><p>Imagine two fictional providers, Lab.Storage and Lab.Network, both defining event 100. One definition could refer to a disk timeout and the other to a link transition. The number alone is inadequate; record provider name or GUID, ID, version and channel before attributing the fault. The example is hypothetical, not a measured Windows incident.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">4. Safe correlation lab: definition versus observation</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>First enumerate publishers and inspect the Eventlog provider as shown above. Then read up to five recent System events in XML form using the documented query command:</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><code>wevtutil qe System /c:5 /rd:true /f:xml</code></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>For one returned event, locate the Provider element, EventID, Version, TimeCreated and Channel within its System section. Compare the exact provider name with the registered publisher list. Substitute the observed name in <code>wevtutil gp "PublisherName" /ge:true</code>. Locate the applicable definition if available, then compare the event version and payload fields. Quotation marks protect names containing spaces.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>If the provider is not registered, the definition is missing, or the version differs, document the discrepancy. Do not infer tampering from a missing message alone. Registration, software updates, localization, forwarded records and permission boundaries are possible explanations. Check the applicable channel configuration with <code>wevtutil gl System</code> and its status with <code>wevtutil gli System</code>. A channel can be configured differently from its current operational status.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Expected evidence is a locally observed provider name, ID, version and matching definition when available. There is no fixed count of registered publishers or guaranteed matching recent event. Commands were checked against Microsoft documentation; no Windows runtime was available for execution during preparation.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">5. Security and operational boundaries</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>Keep the lab read-only. Publisher metadata may disclose installed software and resource paths; recorded events can expose account names, hostnames and operational details. Avoid sharing unredacted output outside an authorized incident record. Never pass credentials through the command line or query remote machines without permission.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Installing or removing manifests with <code>wevtutil im</code> or <code>wevtutil um</code>, changing log settings with <code>sl</code>, and clearing records with <code>cl</code> alter state and are outside the lab. Production changes require a service owner, change approval, an evidence-preservation decision, backup and rollback plan, and post-change checks. Escalate unexplained permission or missing-metadata problems rather than altering access controls.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Glossary</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>Publisher: registered source of event definitions.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Manifest: XML instrumentation description of providers and their events.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Channel: destination or grouping for event records.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Message resource: registered material used to resolve human-readable descriptions.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Event record: an actual recorded occurrence, not an event definition.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Practice exercises</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>A. Explain how a provider differs from a channel and a recorded event.</li><!-- /wp:list-item --><!-- wp:list-item --><li>B. Run ep, choose a registered publisher and run gp with its exact name.</li><!-- /wp:list-item --><!-- wp:list-item --><li>C. Inspect metadata with ge:true. Identify an event ID, version, level or other available definition fields; explain why an ID alone is insufficient.</li><!-- /wp:list-item --><!-- wp:list-item --><li>D. Query recent System events, choose a provider and attempt to match its definition. Record any limitation rather than guessing.</li><!-- /wp:list-item --><!-- wp:list-item --><li>E. Draft a short incident note listing the observed facts, redaction needs and actions requiring change approval.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Knowledge check</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>1. Which command lists registered publishers?</li><!-- /wp:list-item --><!-- wp:list-item --><li>2. Does ge:true return a chronological history of recorded events?</li><!-- /wp:list-item --><!-- wp:list-item --><li>3. Why can an event description be missing from a forwarded record?</li><!-- /wp:list-item --><!-- wp:list-item --><li>4. What fields help identify the correct event definition?</li><!-- /wp:list-item --><!-- wp:list-item --><li>5. May an operator install a manifest merely to complete the read-only exercise?</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Answer key</h2><!-- /wp:heading -->
+
+<!-- wp:paragraph --><p>A. A provider defines and emits events, a channel groups records, and a record represents an occurrence. B. Use wevtutil ep and wevtutil gp followed by the selected exact name. C. Interpret fields in the scope of the provider and version. D. Use the record's provider, ID and version; explain missing metadata or access restrictions without claiming a cause. E. Separate evidence from hypotheses, redact sensitive fields and obtain approval for changes.</p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p>Knowledge check: 1. wevtutil ep. 2. No, it retrieves definitions. 3. The viewer may lack the appropriate publisher message resources. 4. Provider identity, event ID, version and channel context. 5. No; manifest installation modifies registration and requires authorization.</p><!-- /wp:paragraph -->
+
+<!-- wp:heading --><h2 class="wp-block-heading">Sources and supplementary learning</h2><!-- /wp:heading -->
+
+<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil">Microsoft Learn: wevtutil syntax and examples</a></li><!-- /wp:list-item --><!-- wp:list-item --><li><a href="https://learn.microsoft.com/en-us/windows/desktop/WES/getting-a-provider-s-metadata-">Microsoft Learn: Getting a provider's metadata</a></li><!-- /wp:list-item --><!-- wp:list-item --><li><a href="https://learn.microsoft.com/en-us/windows/win32/wes/eventmanifestschema-schema">Microsoft Learn: EventManifest schema</a></li><!-- /wp:list-item --><!-- wp:list-item --><li><a href="https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-elements">Microsoft Learn: Event schema elements</a></li><!-- /wp:list-item --><!-- wp:list-item --><li><a href="https://www.youtube.com/watch?v=KA9WccJEe14">Motasem Hamdan, Event Log Management in Windows (May 29, 2021)</a>: supplementary walkthrough of Event Viewer, command-line log queries and provider searching. Direct link rather than an untested player.</li><!-- /wp:list-item --></ul><!-- /wp:list -->
+
+<!-- wp:paragraph --><p><em>Cover: original typographic editorial illustration of command syntax, not a Windows screenshot. The approved watermark was copied unchanged from the preceding lesson cover. Body screenshots are credited Microsoft documentation examples.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:paragraph --><p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p><!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24593,"sizeSlug":"full","linkDestination":"none"} --><figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr.png" alt="Optional BitcoinVersus.Tech donation QR code requesting 5,000 sats" class="wp-image-24593" /><figcaption class="wp-element-caption">Verify the destination and amount independently before sending any optional contribution.</figcaption></figure><!-- /wp:image -->

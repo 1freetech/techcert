@@ -1,0 +1,37 @@
+{
+  "post_id": 35562,
+  "title": "OSPython.051: Python Logging Caller Attribution with stacklevel",
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/26/ospython-051-python-logging-caller-attribution-stacklevel/",
+  "featured_media": 35561,
+  "cover_dimensions": [
+    1200,
+    630
+  ],
+  "watermark": "Original approved tag crop reused once; proportional scaling; visually inspected",
+  "objective_map": {
+    "1": "Section 1 and knowledge check 1",
+    "2": "Sections 2–3 and exercises A–B",
+    "3": "Section 4 and exercise C",
+    "4": "Section 3 and exercise D",
+    "5": "Section 5 and exercise E"
+  },
+  "test": {
+    "runtime": "CPython 3.13.5",
+    "result": "1 unittest passed, 3 assertions"
+  },
+  "primary_sources": [
+    "https://docs.python.org/3.12/library/logging.html",
+    "https://docs.python.org/3.12/library/unittest.html#unittest.TestCase.assertLogs"
+  ],
+  "checks": {
+    "status": "publish",
+    "cover": 35561,
+    "headings": 12,
+    "internal_links": 4,
+    "qr": true,
+    "code": true
+  },
+  "limitations": "No browser viewport testing; no unnecessary video/social embeds. WordPress rendered HTML verified.",
+  "next_rotation": "Linux Commands; reconcile lesson number before creating"
+}

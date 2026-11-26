@@ -1,0 +1,127 @@
+<!-- wp:paragraph -->
+<p><strong>Open Source C++ Programming | Super-fundamental curriculum | 45–60 minutes</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Parallel computation frequently divides a task among workers, but the workers must eventually coordinate. A network inventory program might wait until several independent discovery operations finish. An iterative numerical program might need every worker to finish calculating a partial result before beginning another iteration. C++20 introduces two standard-library coordination primitives for such problems: std::latch and std::barrier.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/11/22/oscpp-040-cpp20-atomic-wait-notify-release-acquire-thread-synchronization/">atomic wait and notify</a>, <a href="https://bitcoinversus.tech/2026/11/20/oscpp-039-cpp20-jthread-stop-token-cooperative-cancellation/">jthread and cooperative shutdown</a>, <a href="https://bitcoinversus.tech/2026/11/15/oscpp-038-std-async-launch-policies-futures-lifetime-rules/">futures and launch policies</a> and <a href="https://bitcoinversus.tech/2026/11/06/oscpp-037-std-packaged-task-move-only-futures-exceptions/">packaged tasks</a>. A compiler and standard library supporting the C++20 latch and barrier headers are required.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Distinguish one-time coordination from repeated phase synchronization.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Build and execute a latch program and a barrier program.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Explain memory visibility and why a synchronization point does not protect every shared operation.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Recognize incorrect participant counts, premature destruction and deadlock risks.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=A7sVFJLJM-A","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=A7sVFJLJM-A
+</div><figcaption class="wp-element-caption"><em>CppCon 2022, Anthony Williams: An Introduction to Multithreading in C++20. Explains modern standard-library concurrency and coordination tools.</em> <a href="https://www.youtube.com/watch?v=A7sVFJLJM-A">Watch directly on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A latch coordinates one milestone</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A latch contains a counter initialized at construction. count_down() subtracts a contribution without waiting, wait() blocks until the counter reaches zero, and arrive_and_wait() combines both operations. Once zero is reached, the object cannot be reset for another phase. try_wait() provides a nonblocking readiness check; a false result may be spurious. See the <a href="https://eel.is/c++draft/thread.latch">C++ working draft latch specification</a> and <a href="https://en.cppreference.com/cpp/thread/latch">cppreference API reference</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Create latch.cpp. Three workers write to separate array elements, then signal completion. The main thread waits for all three contributions before reading the results.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><span style="font-family:monospace;white-space:normal">#include &lt;array&gt;<br>#include &lt;cassert&gt;<br>#include &lt;iostream&gt;<br>#include &lt;latch&gt;<br>#include &lt;thread&gt;<br><br>int main() {<br>&nbsp;&nbsp;&nbsp;&nbsp;std::array&lt;int, 3&gt; results{};<br>&nbsp;&nbsp;&nbsp;&nbsp;std::latch ready(3);<br>&nbsp;&nbsp;&nbsp;&nbsp;std::array&lt;std::jthread, 3&gt; workers;<br>&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; 3; ++i) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;workers[i] = std::jthread([&amp;, i] {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results[i] = (i + 1) * 10;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ready.count_down();<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;ready.wait();<br>&nbsp;&nbsp;&nbsp;&nbsp;int total = results[0] + results[1] + results[2];<br>&nbsp;&nbsp;&nbsp;&nbsp;assert(total == 60);<br>&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; "Latch total: " &lt;&lt; total &lt;&lt; '\n';<br>}</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Compile with g++ -std=c++20 -O2 -Wall -Wextra -Werror -pthread latch.cpp -o latch and run ./latch. Observed output: Latch total: 60. Each worker owns a separate array element. The latch establishes the synchronization needed to read those completed writes after wait returns. The worker objects remain alive and are joined during destruction; waiting on a latch is not itself a thread join.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A barrier coordinates repeated phases</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A barrier represents a sequence of synchronization phases. Each arrival reduces the remaining count for the current phase. After the required contributions arrive, a completion step runs before waiting workers proceed. The count is then reset for the next phase, accounting for any participants that have dropped out. The completion callback must satisfy the nonthrowing invocation requirement. Read the <a href="https://eel.is/c++draft/thread.barrier">working draft barrier specification</a> and <a href="https://cppreference.com/cpp/thread/barrier">barrier reference</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=F6Ipn7gCOsY","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=F6Ipn7gCOsY
+</div><figcaption class="wp-element-caption"><em>CppCon 2020, Arthur O’Dwyer: Back to Basics: Concurrency. Compares locks, condition variables and C++20 synchronization primitives.</em> <a href="https://www.youtube.com/watch?v=F6Ipn7gCOsY">Watch directly on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:paragraph -->
+<p>Create barrier.cpp. Three workers compute independent partial values for four rounds. At each rendezvous, the completion callback sums their values into a separate result array. Every worker waits until the callback finishes before writing its next contribution.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><span style="font-family:monospace;white-space:normal">#include &lt;array&gt;<br>#include &lt;barrier&gt;<br>#include &lt;cassert&gt;<br>#include &lt;iostream&gt;<br>#include &lt;thread&gt;<br><br>int main() {<br>&nbsp;&nbsp;&nbsp;&nbsp;std::array&lt;int, 3&gt; partial{};<br>&nbsp;&nbsp;&nbsp;&nbsp;std::array&lt;int, 4&gt; sums{};<br>&nbsp;&nbsp;&nbsp;&nbsp;int phase = 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;std::barrier gate(3, [&amp;]() noexcept {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sums[phase++] = partial[0] + partial[1] + partial[2];<br>&nbsp;&nbsp;&nbsp;&nbsp;});<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::array&lt;std::jthread, 3&gt; workers;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int i = 0; i &lt; 3; ++i) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;workers[i] = std::jthread([&amp;, i] {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (int round = 1; round &lt;= 4; ++round) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;partial[i] = (i + 1) * round;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gate.arrive_and_wait();<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;assert(phase == 4);<br>&nbsp;&nbsp;&nbsp;&nbsp;assert((sums == std::array&lt;int, 4&gt;{6, 12, 18, 24}));<br>&nbsp;&nbsp;&nbsp;&nbsp;for (int value : sums) std::cout &lt;&lt; value &lt;&lt; ' ';<br>&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; '\n';<br>}</span></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Compile with g++ -std=c++20 -O2 -Wall -Wextra -Werror -pthread barrier.cpp -o barrier and run ./barrier. Observed output: 6 12 18 24. The callback runs once per completed phase in the example, and the completion step orders the next phase after the reduction. The enclosing scope joins all workers before the main thread examines sums. The program does not depend on which worker executes the callback.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Choosing the coordination primitive</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use a latch for a one-time readiness milestone, such as waiting for independent configuration loaders. Use a barrier when a known set of participants must repeatedly rendezvous. A mutex instead protects shared mutable state from conflicting access. A semaphore controls access to a finite number of permits. A future conveys a result or exception from an asynchronous operation. Atomic wait is suitable when progress depends on observing a change to an atomic value. Neither a latch nor a barrier automatically makes arbitrary concurrent writes safe.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Common failures and professional practice</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Match the expected count to the contributions that can actually arrive. An absent contribution can block progress indefinitely.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Never decrement a latch below zero, reset a latch, or destroy a synchronization object while another thread can access it.</li><!-- /wp:list-item --><!-- wp:list-item --><li>A worker that must leave a repeated barrier protocol can use arrive_and_drop() under a correctly designed departure plan. Merely returning early or requesting cancellation does not release other waiting participants.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Do not hold a mutex while waiting at a synchronization point if another participant needs that mutex to arrive.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Plan failure and thread-creation handling before deploying fixed-count synchronization. These examples assume successful worker creation and do not implement production cancellation or recovery.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Keep phase completion work brief and nonthrowing. Avoid accidentally allowing the next phase to overwrite data still being read by another worker.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Verification and exercises</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Both examples were compiled using GCC 14.2.0 with C++20, optimization and warnings treated as errors. A harness executed each binary 100 times with a two-second timeout and checked its expected output. All 200 executions passed. Assertions also checked the totals and phase count. The experiment demonstrates repeatability in the tested environment, not proof of correctness on every architecture or a measured performance advantage.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>A latch begins at 5 and receives contributions of 2 and 1. What remains? Answer: 2.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Three workers rendezvous for four rounds. How many completed phases occur? Answer: 4, with 12 individual arrivals.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why is a latch unsuitable for repeated phases? Answer: its counter cannot be reset.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why must a barrier completion callback finish before the workers overwrite their partial results? Answer: the reduction must read the contributions for the current phase; phase synchronization orders subsequent writes.</li><!-- /wp:list-item --><!-- wp:list-item --><li>What happens if one worker exits without satisfying the expected arrival protocol? Answer: remaining workers may wait indefinitely.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Glossary</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>Latch:</strong> single-use countdown coordination. <strong>Barrier:</strong> repeatable phase synchronization. <strong>Completion step:</strong> work associated with a completed barrier phase. <strong>Data race:</strong> conflicting unsynchronized accesses to a memory location, at least one of which modifies it, subject to the language's atomic-access rules. <strong>Deadlock:</strong> a state in which progress is prevented by unresolved dependencies.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor's Note:</strong> The cover is a rendered transcript of actual local lab results. The code examples were executed under the environment described above. The instructional talks are credited to their original presenters and conference; independent playback and mobile rendering have not been established.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

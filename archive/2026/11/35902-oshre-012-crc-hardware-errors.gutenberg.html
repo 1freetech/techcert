@@ -1,0 +1,131 @@
+<!-- wp:paragraph -->
+<p><strong>Open Source Hashboard Repair Engineering | Super-fundamental | 40–50 minutes</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A Bitcoin miner can detect every ASIC on a hashboard and still report communication errors or faulty computational results. Error counters help technicians identify degradation before a board stops hashing completely. A counter alone, however, cannot establish which component failed. Effective diagnosis requires separating communication integrity, computational validity, pool-side acceptance and the operating conditions under which each observation occurred.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=k0NQcTWy9ME","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=k0NQcTWy9ME
+</div><figcaption class="wp-element-caption"><em>ZEUS MINING, Learn ASIC miner repair for free! From log diagnosis to hardware replacement (February 14, 2026). Vendor overview of diagnostic training; independent video playback has not been established.</em> <a href="https://www.youtube.com/watch?v=k0NQcTWy9ME">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/10/28/oshre-002-hashboard-signal-chains-clk-co-ri-bo-rst/">hashboard signal chains</a>, <a href="https://bitcoinversus.tech/2026/11/01/hashboard-missing-asic-chip-diagnostics-test-fixtures-fault-localization/">missing ASIC diagnostics</a>, <a href="https://bitcoinversus.tech/2026/11/01/oshre-005-hashboard-cable-connectors-contact-faults/">cable and connector faults</a> and <a href="https://bitcoinversus.tech/2026/11/22/oshre-011-hashboard-bench-test-vs-full-miner-load-acceptance/">full-miner acceptance testing</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Explain the purpose and limitations of a cyclic redundancy check.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Distinguish communication errors, hardware errors and pool-side share rejection.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Calculate counter increments and event rates over a specified observation interval.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Recognize misleading comparisons caused by restarts, changing workload or inconsistent metric definitions.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Prepare an evidence-based diagnostic record without unsafe electrical intervention.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Communication integrity and CRC counters</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A cyclic redundancy check (CRC) is an error-detection method. A sender computes a remainder using an agreed polynomial and transmits check information with its data. A receiver applies the corresponding calculation and checks for inconsistency. A mismatch indicates that the received information did not satisfy the expected check. CRCs detect many accidental transmission errors, but they cannot guarantee detection of every possible alteration, identify a defective physical component or correct the corrupted message by themselves.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>On older ANTMINER S9-series firmware, BITMAIN documents a high CRC error counter as a possible indication of unstable ASIC operation. Its <a href="https://support.bitmain.com/hc/en-us/articles/360025531034--For-S9series-Common-Problems-Indicated-by-Miner-s-Kernel-Log-and-Ways-to-Resolve-them">model-specific kernel-log guide</a> recommends investigating firmware and power-supply conditions. The exact packet format, counter semantics and acceptable thresholds depend on the hardware and firmware revision. Do not transfer S9-specific interpretations to an S19 or S21 without confirming the relevant documentation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://support.bitmain.com/hc/article_attachments/360040444733/9.png" alt="BITMAIN S9 kernel log with a CRC error counter of 24283 highlighted" /><figcaption class="wp-element-caption"><em>BITMAIN S9-series kernel-log guide, updated July 29, 2022. Actual manufacturer example of an elevated CRC counter; the screenshot does not establish a universal acceptance threshold.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Hardware errors are a separate observation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>ASICs repeatedly evaluate candidate hashes and return selected results to the controller. Firmware may record invalid or otherwise faulty returned results in hardware-error counters. Exact definitions vary among implementations. BITMAIN's <a href="https://support.bitmain.com/hc/en-us/articles/360013577314-Miner-Status-Page-Explained">miner status-page documentation</a> distinguishes hardware errors, chain identification, ASIC count, frequency, hashrate and temperature. The manufacturer notes that some hardware errors can occur while a miner continues operating normally. A nonzero count is not sufficient evidence that an ASIC needs replacement.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://support.bitmain.com/hc/article_attachments/360020756073" alt="Manufacturer status table showing chain numbers, ASIC counts, frequency, hashrate, HW counts and ASIC status" /><figcaption class="wp-element-caption"><em>BITMAIN Miner Status Page Explained, updated August 26, 2024. Hardware-error counts appear beside per-chain operating data and should be interpreted in context.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Pool rejections are another category. A pool independently checks submitted work and may reject shares because they are stale, invalid, duplicate or fail its current acceptance rules. <a href="https://braiins.com/blog/bitcoin-mining-pools-luck-shares-estimated-hashrate">Braiins' share and hashrate explanation</a> describes probabilistic share discovery, verification and the impact of stale work. Pool rejections do not automatically prove an internal board communication fault. Local CRC counts, hardware errors and pool rejections may have different units, observation windows and denominators.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked example: compare increments, not lifetime totals</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Suppose a hypothetical board's cumulative CRC counter reads 120 at 10:00 and 150 at 10:15, with no restart or counter reset. The increment is 150 − 120 = 30 events. The average event rate is 30 ÷ 15 = 2 events per minute. A second board goes from 400 to 415 over the same interval, corresponding to 1 event per minute. Although the second board has the larger lifetime count, its observed event rate is lower during the comparison window.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If the firmware also reports a documented count of 20,000 checked messages for the first board during the interval, 30 ÷ 20,000 × 100 = 0.15% would represent an error-event-to-message ratio, assuming the counter counts one event per failed message and both counters cover the same traffic. Without a verified denominator, report events per minute rather than labeling a quantity as a percentage or a bit-error rate. The numbers are fictional and do not establish a service threshold.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=1qnC-4sAeVU","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=1qnC-4sAeVU
+</div><figcaption class="wp-element-caption"><em>Antminer Repair, hashboard repair: Diagnose and explore antminer T17 hashboard errors (April 8, 2021). Independent repair demonstration involving kernel and fixture logs; model-specific observations are not universal instructions.</em> <a href="https://www.youtube.com/watch?v=1qnC-4sAeVU">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Diagnosing trends safely</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Preserve the original log, model, firmware version, board identifier, uptime and timestamp before restarting the machine.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Identify whether the counter is cumulative, per interval, per board or global. Check for resets, wraparound, or a changed firmware metric definition.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Compare equivalent workload intervals and collect per-board chip count, frequency, temperature, hashrate and power telemetry where available.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Separate a single-chain symptom from simultaneous failures across multiple chains. Shared power, controller or environmental problems may affect multiple boards.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Use the approved manufacturer's escalation workflow. BITMAIN's <a href="https://support.bitmain.com/hc/en-us/articles/10845468564633-S19-XP-log-diagnosis-and-processing-methods">S19 XP log guide</a> treats power, fan, chip-detection and temperature faults as distinct categories.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Document the observed change after an authorized intervention, including any changed firmware, replacement component or environmental condition. Do not infer causality from a single coincidental improvement.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Safety and common mistakes</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>High-current mining equipment can retain hazardous energy after shutdown. Do not touch energized busbars, disconnect powered connectors, defeat thermal protections or improvise voltage and frequency settings to suppress a counter. Hands-on electrical measurements, component replacements and disassembly require trained personnel, model-specific procedures and approved isolation. A read-only log review can establish whether escalation is justified without opening the machine.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Avoid comparing raw counts from miners with different uptimes. A falling counter following a reboot may reflect reset behavior rather than improvement. A clean pool-side share ratio does not eliminate internal errors, and a single erroneous message does not identify a defective chip. Validate any repair under the applicable full-miner acceptance procedure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises and answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>A counter increases from 220 to 280 over 20 minutes. Answer: 60 additional events, averaging 3 per minute.</li><!-- /wp:list-item --><!-- wp:list-item --><li>A miner reports 12 CRC events but provides no checked-message count. Can a CRC error percentage be calculated? Answer: no; report the count or time-normalized rate.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why might a pool reject a share from otherwise healthy hardware? Answer: stale work, duplicate submissions or other pool acceptance conditions may be responsible.</li><!-- /wp:list-item --><!-- wp:list-item --><li>A counter falls from 400 to 0 after a restart. Does the drop establish a successful repair? Answer: no; confirm reset semantics and observe new increments under comparable conditions.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Glossary</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>CRC:</strong> cyclic redundancy check, an error-detection calculation. <strong>ASIC:</strong> application-specific integrated circuit. <strong>Counter delta:</strong> difference between two compatible counter readings. <strong>Stale share:</strong> submitted mining work that is no longer current under the pool's rules. <strong>Telemetry:</strong> recorded operating measurements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em><strong>Editor’s Note:</strong> Worked measurements are fictional. Manufacturer examples and training videos are credited to their sources. No physical miner was operated for the lesson.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption"><em>Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</em></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

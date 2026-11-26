@@ -1,6 +1,6 @@
 {
   "schema_version": 8,
-  "updated_at": "2026-11-19",
+  "updated_at": "2026-11-26",
   "rotation": [
     "data_center_technician",
     "data_center_engineer",
@@ -48,39 +48,26 @@
   ],
   "rotation_policy": "Reconcile every candidate against live WordPress and all three archives. Preserve every active subject, including newly created specialty tracks. Never renumber or duplicate. Require 2–10 relevant in-story media and unique 1200×630 current-cover-rotation image, correct links and footer. Archive identical final Gutenberg source to three repositories. Mark live visual or playback limitations explicitly and advance the subject pointer only as publication-state evidence warrants. Do not create or embed custom conceptual schematics or diagrams in lessons; source-grounded charts are allowed. Prefer open educational universities, official training institutions, open-source education providers and credited genuine equipment photographs and videos; distinguish educational source data from measured production results. Rotate visual age presentation, gender presentation, and person/equipment cover subjects across successive lessons instead of repeating the same profile; source authentic media for in-body photographs and label fictional or AI-made covers as illustrations. Choose lesson-cover subject from the lesson's real technology, artifact, code, equipment, or software first; include a rotating person only if relevant to the teaching subject. Never insert a person solely to satisfy demographic rotation; maintain demographic diversity among covers that genuinely benefit from people.",
   "last_completed": {
-    "subject": "chef",
-    "lesson_number": 3,
-    "track_id": "OSChefInfra.003",
-    "title": "OSChefInfra.003: Chef Infra Cookbooks, Node Attributes, and ERB Templates",
-    "public_title": "OSChefInfra.003: Chef Infra Cookbooks, Node Attributes, and ERB Templates",
-    "wordpress_post_id": 33575,
-    "live_url": "https://bitcoinversus.tech/2026/11/19/oschefinfra-003-cookbooks-node-attributes-erb-templates/",
-    "archive_path": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.gutenberg.html",
-    "qa_archive_path": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.qa.json",
-    "cookbook_archive_prefix": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.cookbook",
-    "verified_repositories": [
-      "1freetech/opencert.tech",
-      "1freetech/techcert",
-      "1freetech/Bitcoinversus.tech"
-    ],
+    "subject": "semiconductor_technician",
+    "lesson_number": 22,
+    "track_id": "OSSTC.022",
+    "title": "Why Plasma Etch Chambers Need Seasoning After Cleaning",
+    "wordpress_post_id": 35873,
+    "live_url": "https://bitcoinversus.tech/2026/11/26/osstc-022-plasma-etch-chamber-seasoning-first-wafer-effect/",
+    "featured_media_id": 35875,
     "publication_status": "publish",
-    "featured_media_id": 33573,
-    "body_video_ids": [
-      "TjBdaYlT-Uw",
-      "lqMijB1JIuU"
-    ],
-    "official_photo_media_id": 33574,
-    "verification_status": "WordPress public HTTP 200, correct visible title and SEO identifier OSChefInfra.003, two server-rendered YouTube iframes and no leftover shortcodes, original 1200x630 anime cover and authentic Progress Chef graphic. Ruby 3.3.8 syntax plus 20 ERB/structural checks passed; Chef convergence, third-party playback and WordPress-theme mobile screenshots untested.",
-    "qa_status": "Three sourced in-body media, four contextual internal links plus archive/test links, four unboxed source blocks, QR #24043, editor note and canonical SEO. Cookbook, Ruby test runner, exact Gutenberg and audit archived in three repositories; no chart because no dataset."
+    "archive_path": "archive/2026/11/35873-osstc-022-chamber-seasoning.gutenberg.html",
+    "qa_archive_path": "archive/2026/11/35873-osstc-022-chamber-seasoning.publish.qa.json",
+    "verification_status": "WordPress read-back; two rendered iframes, playback/mobile unverified; archive identical in 3 repositories; cover uploaded 1200x630, single watermark recreated"
   },
   "next": {
-    "subject": "shakespeare",
-    "lesson_number": 4,
-    "title_format": "OSShakespeare.004: {topic}",
-    "public_title_format": "OSShakespeare.004: {topic}",
-    "resolution_note": "After OSChefInfra.003 WordPress #33575 published 2026-11-19, proceed to Shakespeare Programming Language OSShakespeare.004; last OSShakespeare.003 #31676 published; no .004 published/draft/future/pending/private WordPress match on 2026-11-19. Recheck before creating."
+    "subject": "semiconductor_engineer",
+    "lesson_number": 19,
+    "title_format": "OSSEC.019: {topic}",
+    "public_title_format": "{topic}",
+    "resolution_note": "After OSSTC.022 WordPress #35873, live track search shows OSSEC.018 #34894. Candidate OSSEC.019 requires fresh exact identifier and subject duplicate checks."
   },
-  "next_after_current": "dotnet",
+  "next_after_current": "hashboard_repair",
   "track_state": {
     "data_center_technician": {
       "acronym": "OSDCTC",
@@ -262,27 +249,35 @@
     },
     "electrical_technician": {
       "acronym": "OSETC",
-      "next_lesson_number": 43,
-      "last_published_lesson_number": 42,
-      "last_wordpress_post_id": 32176
+      "next_lesson_number": 46,
+      "last_published_lesson_number": 45,
+      "last_wordpress_post_id": 35810,
+      "last_published_title": "Motor Winding Thermistors: PTC Protection and Safe Troubleshooting",
+      "verification_status": "Live WordPress published identity confirmed; full QA tracked separately"
     },
     "cpp": {
       "acronym": "OSC++",
-      "next_lesson_number": 38,
-      "last_published_lesson_number": 37,
-      "last_wordpress_post_id": 30492
+      "next_lesson_number": 42,
+      "last_published_lesson_number": 41,
+      "last_wordpress_post_id": 35863,
+      "last_published_title": "C++20 Latches and Barriers: Coordinating Worker Threads",
+      "verification_status": "Live WordPress published identity confirmed; full QA tracked separately"
     },
     "semiconductor_technician": {
       "acronym": "OSSTC",
-      "next_lesson_number": 17,
-      "last_published_lesson_number": 16,
-      "last_wordpress_post_id": 30505
+      "next_lesson_number": 23,
+      "last_published_lesson_number": 22,
+      "last_wordpress_post_id": 35873,
+      "last_published_title": "Why Plasma Etch Chambers Need Seasoning After Cleaning",
+      "verification_status": "Live WordPress published identity confirmed; full QA tracked separately"
     },
     "semiconductor_engineer": {
       "acronym": "OSSEC",
-      "next_lesson_number": 16,
-      "last_published_lesson_number": 15,
-      "last_wordpress_post_id": 30521
+      "next_lesson_number": 19,
+      "last_published_lesson_number": 18,
+      "last_wordpress_post_id": 34894,
+      "last_published_title": "Why EUV Masks Cast Shadows on Chip Patterns",
+      "verification_status": "Live WordPress published identity confirmed; full QA tracked separately"
     },
     "robotics_technician": {
       "acronym": "OSRTC",
@@ -325,9 +320,11 @@
     },
     "pcb_engineering": {
       "acronym": "OSPCB",
-      "next_lesson_number": 6,
-      "last_published_lesson_number": 5,
-      "last_wordpress_post_id": 32192
+      "next_lesson_number": 14,
+      "last_published_lesson_number": 13,
+      "last_wordpress_post_id": 35821,
+      "last_published_title": "How Moisture and Electrical Bias Cause Hidden PCB Insulation Failures",
+      "verification_status": "Live WordPress published identity confirmed; full QA tracked separately"
     },
     "hashboard_repair": {
       "acronym": "OSHRE",
@@ -1380,5 +1377,42 @@
     "duplicate_number_block": true,
     "legacy_url_preservation": true,
     "last_title_audit": "2026-11-19"
-  }
+  },
+  "previous_registry_checkpoint": {
+    "updated_at": "2026-11-19",
+    "last_completed": {
+      "subject": "chef",
+      "lesson_number": 3,
+      "track_id": "OSChefInfra.003",
+      "title": "OSChefInfra.003: Chef Infra Cookbooks, Node Attributes, and ERB Templates",
+      "public_title": "OSChefInfra.003: Chef Infra Cookbooks, Node Attributes, and ERB Templates",
+      "wordpress_post_id": 33575,
+      "live_url": "https://bitcoinversus.tech/2026/11/19/oschefinfra-003-cookbooks-node-attributes-erb-templates/",
+      "archive_path": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.gutenberg.html",
+      "qa_archive_path": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.qa.json",
+      "cookbook_archive_prefix": "archive/2026/11/33575-oschefinfra-003-cookbooks-attributes-templates.cookbook",
+      "verified_repositories": [
+        "1freetech/opencert.tech",
+        "1freetech/techcert",
+        "1freetech/Bitcoinversus.tech"
+      ],
+      "publication_status": "publish",
+      "featured_media_id": 33573,
+      "body_video_ids": [
+        "TjBdaYlT-Uw",
+        "lqMijB1JIuU"
+      ],
+      "official_photo_media_id": 33574,
+      "verification_status": "WordPress public HTTP 200, correct visible title and SEO identifier OSChefInfra.003, two server-rendered YouTube iframes and no leftover shortcodes, original 1200x630 anime cover and authentic Progress Chef graphic. Ruby 3.3.8 syntax plus 20 ERB/structural checks passed; Chef convergence, third-party playback and WordPress-theme mobile screenshots untested.",
+      "qa_status": "Three sourced in-body media, four contextual internal links plus archive/test links, four unboxed source blocks, QR #24043, editor note and canonical SEO. Cookbook, Ruby test runner, exact Gutenberg and audit archived in three repositories; no chart because no dataset."
+    },
+    "next": {
+      "subject": "shakespeare",
+      "lesson_number": 4,
+      "title_format": "OSShakespeare.004: {topic}",
+      "public_title_format": "OSShakespeare.004: {topic}",
+      "resolution_note": "After OSChefInfra.003 WordPress #33575 published 2026-11-19, proceed to Shakespeare Programming Language OSShakespeare.004; last OSShakespeare.003 #31676 published; no .004 published/draft/future/pending/private WordPress match on 2026-11-19. Recheck before creating."
+    }
+  },
+  "rotation_reconciliation_note": "Live recent lessons used to reconcile current cursor; unrelated track state entries may still be stale. Preserve historical checkpoint and verify each next subject against live publication and archives."
 }

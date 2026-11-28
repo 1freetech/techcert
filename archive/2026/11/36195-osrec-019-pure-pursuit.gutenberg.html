@@ -1,0 +1,107 @@
+<!-- wp:paragraph -->
+<p>Open-Source Robotics Engineering Certification • Intermediate • Estimated study time: 40 minutes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A mobile robot needs more than a route across a map. It must convert that route into feasible steering and speed commands as its position changes. Pure Pursuit is a geometric feedback controller that repeatedly selects a forward target on a planned path and calculates the curvature needed to approach it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/11/22/osrec-018-lidar-amcl-particle-filter-robot-localization-map-odom/">localization and AMCL</a>, <a href="https://bitcoinversus.tech/2026/11/21/osrec-016-a-star-path-planning-costmaps-heuristics/">A* path planning</a>, <a href="https://bitcoinversus.tech/2026/11/16/osrec-015-occupancy-grid-mapping-log-odds-lidar-navigation-costmaps/">occupancy grids</a> and <a href="https://bitcoinversus.tech/2026/10/06/osrec-004-robot-trajectory-planning-joint-space-cartesian-paths-time-scaling-velocity-acceleration-jerk/">trajectory planning</a>. Learners should understand Cartesian coordinates, radians and velocity.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Explain how lookahead converts a planned path into a steering target.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Calculate signed curvature, turning radius and angular velocity.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Compare fixed and velocity-scaled lookahead.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Explain regulated speed and predictive collision checking in Nav2.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Design a simulation-based validation workflow with appropriate safety boundaries.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Lookahead geometry</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The controller transforms the relevant path into the robot coordinate frame, where the positive x-axis points forward and positive y points left. It selects a lookahead point ahead along the path. For a nonzero target displacement (x, y), the chord length L is √(x² + y²). Under the forward-motion circular-arc model, signed curvature κ = 2y / L². Positive curvature turns left, negative curvature turns right and zero curvature represents straight travel. The controller recalculates the target as the robot moves.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For a differential-drive or unicycle model, angular velocity ω = vκ, where v is forward speed in m/s. Turning radius magnitude R = 1 / |κ| for nonzero curvature. Ackermann steering instead requires a steering-angle conversion using wheelbase and vehicle geometry. See the <a href="https://api.nav2.org/nav2-humble/html/regulated__pure__pursuit__controller_8cpp_source.html">Nav2 Humble implementation</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=zMdoLO4kRKg","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=zMdoLO4kRKg
+</div><figcaption class="wp-element-caption">MathWorks, Vehicle Path Tracking Using Pure Pursuit Controller. Tutorial on following a planned vehicle path with a geometric controller. <a href="https://www.youtube.com/watch?v=zMdoLO4kRKg">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked calculation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Suppose a hypothetical target lies 0.8 m forward and 0.6 m left. L² = 0.8² + 0.6² = 1.00 m². Curvature = 2 × 0.6 / 1.00 = 1.2 m⁻¹. Radius = 1 / 1.2 ≈ 0.833 m. At v = 0.4 m/s, ω = 0.48 rad/s. The values describe a commanded ideal arc, not guaranteed physical motion.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Fixed and adaptive lookahead</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A fixed lookahead uses a chosen distance regardless of speed. A very short distance can cause oscillatory steering; an overly long distance can cut corners or respond slowly to path changes. Adaptive Pure Pursuit scales lookahead with speed, bounded by minimum and maximum distances. For example, 0.5 m/s × 1.5 s = 0.75 m, clamped to the permitted interval. Actual target selection also depends on the available path.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=9VjWpw8XkgA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=9VjWpw8XkgA
+</div><figcaption class="wp-element-caption">Path Tracking with the Pure Pursuit Method | Mobile Robotics. Educational explanation of the lookahead tracking method. <a href="https://www.youtube.com/watch?v=9VjWpw8XkgA">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Regulated Pure Pursuit and safety</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://arxiv.org/abs/2305.20026">2023 Regulated Pure Pursuit research</a> and <a href="https://docs.nav2.org/jazzy/configuration_and_development/configuration_guide/controller_plugins/configuring_regulated_pp/">Nav2 Jazzy configuration guide</a> describe additional velocity constraints based on curvature and obstacle proximity. A controller can reduce forward speed in tight turns or when nearing obstacles and the goal. Predictive collision checking evaluates the projected motion against the local costmap over a limited horizon. A missed obstacle, stale localization estimate or insufficient braking capability can still produce unsafe motion. A navigation controller is not independently a certified safeguarding system.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Simulation validation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use a simulated differential-drive robot and compare straight segments, tight turns and obstacle-adjacent paths at different lookahead settings. Record cross-track error, commanded and measured velocity, overshoot, collision-check outcomes and localization confidence. Change one parameter at a time; keep the reference path and starting state identical. Stop simulated runs when the robot loses localization or violates the defined clearance. Real equipment tests require authorized procedures, verified safeguards and independent emergency stopping; do not disable collision checking to improve tracking.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>A target is at (1.0, −0.5) m. Find κ and ω at 0.25 m/s.</li><!-- /wp:list-item --><!-- wp:list-item --><li>A robot travels at 0.8 m/s with lookahead time 1.5 s and maximum lookahead 1.0 m. Find its adaptive distance.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Explain why a long lookahead can be problematic in a sharp turn.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Does successful simulated collision checking prove physical human safety?</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>L² = 1.25 m²; κ = −0.8 m⁻¹; ω = −0.20 rad/s.</li><!-- /wp:list-item --><!-- wp:list-item --><li>The unconstrained result is 1.2 m; the maximum clamps it to 1.0 m.</li><!-- /wp:list-item --><!-- wp:list-item --><li>A distant target can cause the controller to follow an arc that cuts across the planned corner.</li><!-- /wp:list-item --><!-- wp:list-item --><li>No. Sensor coverage, braking, safety-rated equipment and application validation remain necessary.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption">Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

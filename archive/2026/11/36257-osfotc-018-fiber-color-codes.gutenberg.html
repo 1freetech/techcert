@@ -1,0 +1,140 @@
+<!-- wp:paragraph -->
+<p>Open-Source Fiber Optics Technician Certification • Intermediate • Estimated study time: 35 minutes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A technician working on a 144-fiber cable must identify a single strand without disturbing neighboring circuits. Color coding provides a physical addressing system, but a color alone cannot establish the circuit identity. Reliable identification combines cable records, group markings, strand colors and authorized verification.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/10/04/osfotc-001-fiber-optic-safety-handling-inspection-cleaning-basics/">fiber safety</a>, <a href="https://bitcoinversus.tech/2026/10/27/osfotc-013-fiber-splice-tray-closure-acceptance/">splice tray acceptance</a>, <a href="https://bitcoinversus.tech/2026/10/29/osfotc-014-live-fiber-identification-signal-detection-optical-tones-non-disruptive-tracing/">live-fiber identification</a> and <a href="https://bitcoinversus.tech/2026/11/17/osfotc-017-mpo-mtp-fiber-polarity-type-a-b-c-field-verification/">MPO polarity</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Recall the standard twelve-color sequence.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Convert between strand numbers and tube or group positions.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Distinguish jacket, connector, tube and strand identification.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Recognize nonstandard codes, tracers and filler elements.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Build a safe cable identification and handoff record.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Twelve-color sequence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://www.thefoa.org/tech/ColCodes.htm">Fiber Optic Association color-code guide</a> describes the widely used TIA-598 convention. The first twelve positions are:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:table -->
+<figure class="wp-block-table"><table><thead><tr><th>Position</th><th>Color</th><th>Position</th><th>Color</th></tr></thead><tbody><tr><td>1</td><td>Blue</td><td>7</td><td>Red</td></tr><tr><td>2</td><td>Orange</td><td>8</td><td>Black</td></tr><tr><td>3</td><td>Green</td><td>9</td><td>Yellow</td></tr><tr><td>4</td><td>Brown</td><td>10</td><td>Violet</td></tr><tr><td>5</td><td>Slate</td><td>11</td><td>Rose</td></tr><tr><td>6</td><td>White</td><td>12</td><td>Aqua</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>Slate means gray; rose means pink. A common memory aid is to practice recalling the first six and last six separately. The featured photograph shows a twelve-color fiber sample, not a live circuit.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=uFjHvV6WjKA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=uFjHvV6WjKA
+</div><figcaption class="wp-element-caption">Fiber Optic Association, Lecture 61: Fiber Optic Color Codes. Learn common conventions and why alternate schemes exist. <a href="https://www.youtube.com/watch?v=uFjHvV6WjKA">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Mapping high-count cable</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>In a hypothetical cable containing twelve fibers in each sequentially numbered buffer tube, strand N corresponds to tube number floor((N − 1)/12) + 1 and local position ((N − 1) mod 12) + 1. The reverse calculation is N = 12(tube − 1) + position. These formulas assume a documented twelve-fiber grouping, not every cable design.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Example: strand 77 belongs to tube 7, red, and local position 5, slate. Conversely, tube 9, yellow, position 10, violet, corresponds to strand 106. Confirm the manufacturer's group sequence before relying on either result.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":36256,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/optical_fiber_cable-10asd.jpg" alt="Exposed optical cable with two colored groups and white fillers" class="wp-image-36256" /><figcaption class="wp-element-caption">A real cable with red and green twelve-fiber groups and white fillers illustrates why the actual construction must be checked. Photo: <a href="https://commons.wikimedia.org/wiki/File:Optical_fiber_cable-10ASD.jpg">Asurnipal</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, unmodified.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Identification layers and exceptions</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The outer jacket may suggest fiber category; connector colors can indicate polish or fiber type. Blue commonly indicates single-mode PC/UPC and green APC; aqua commonly identifies OM3/OM4 multimode assemblies. Neither color proves the specification. Read labels and equipment documentation. Tube colors identify groups, while individual strand colors identify positions within them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>High-count designs may repeat colors with contrasting tracers, use binder groups, numbered ribbons or alternate color conventions. The <a href="https://www.corning.com/catalog/coc/documents/application-engineering-notes/AEN029.pdf">Corning color-code application note</a> describes manufacturer-specific identification schemes. Do not assume that a white component is a working tube: some cables contain fillers. Obtain the exact cable datasheet, including group counts and marking legends.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=iGQ8Bl0XVoA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=iGQ8Bl0XVoA
+</div><figcaption class="wp-element-caption">The Four Layers of Fiber Optics Color Coding, Fiber Course EP06. Review strand, tube, jacket and connector identification. <a href="https://www.youtube.com/watch?v=iGQ8Bl0XVoA">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Field verification and safe handoff</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Start with an approved work order and cable ID. Compare both endpoints, sheath markings, splice records and assigned tube and strand positions. Use documented, authorized identification methods appropriate for the circuit status. Never cut, disconnect, bend or inject test light into an active circuit without authorization. Never look into a fiber or connector. Wear appropriate eye protection and collect fiber scraps in a designated sharps container. Escalate discrepancies rather than guessing.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Record cable ID, endpoint locations, group number and color, strand number and color, circuit assignment, verification method, timestamp and technician identity. Preserve the original record and document approved changes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Practice and answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Find strand 49 in a twelve-fiber-per-tube cable. Answer: tube 5, slate; position 1, blue.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Find the strand number for tube 12, position 7. Answer: 139.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Can a green connector establish the assigned circuit? Answer: no; check records and approved verification.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>What if the observed tube color disagrees with the datasheet? Answer: stop the identification procedure and escalate before intervention.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Featured photograph: <a href="https://commons.wikimedia.org/wiki/File:12_Optical_fibers_(2).jpg">Cjp24, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, unmodified.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi contribution QR" class="wp-image-24043" /><figcaption class="wp-element-caption">Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,42 @@
+{
+  "id": 36257,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/28/osfotc-018-fiber-color-codes-buffer-tubes-strand-number-identification/",
+  "featured_media": 36255,
+  "cover_dimensions": [
+    4300,
+    2400
+  ],
+  "watermark_verified": false,
+  "video_ids": [
+    "uFjHvV6WjKA",
+    "iGQ8Bl0XVoA"
+  ],
+  "actual_playback_verified": false,
+  "desktop_mobile_verified": false,
+  "objective_map": [
+    "Twelve-color sequence",
+    "Mapping high-count cable",
+    "Identification layers and exceptions",
+    "Identification layers and exceptions",
+    "Field verification and safe handoff"
+  ],
+  "internal_links": [
+    "https://bitcoinversus.tech/2026/10/04/osfotc-001-fiber-optic-safety-handling-inspection-cleaning-basics/",
+    "https://bitcoinversus.tech/2026/10/27/osfotc-013-fiber-splice-tray-closure-acceptance/",
+    "https://bitcoinversus.tech/2026/10/29/osfotc-014-live-fiber-identification-signal-detection-optical-tones-non-disruptive-tracing/",
+    "https://bitcoinversus.tech/2026/11/17/osfotc-017-mpo-mtp-fiber-polarity-type-a-b-c-field-verification/"
+  ],
+  "words": 711,
+  "calculations": [
+    7,
+    5,
+    106,
+    139
+  ],
+  "body_photo": true,
+  "footer": true,
+  "qr_destination_verified": false,
+  "no_duplicate_cover": true,
+  "limitations": "Cover is a provisional credited photograph, not approved dimensions or watermark. Playback and desktop/mobile checks unavailable. Prior candidate bidirectional OTDR rejected as duplicate OSFOEC.013; MPO insertion loss rejected for overlap with OSFOTC.017."
+}

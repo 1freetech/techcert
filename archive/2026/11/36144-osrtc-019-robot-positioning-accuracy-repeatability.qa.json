@@ -14,7 +14,7 @@
     "36138",
     "24043"
   ],
-  "word_count": 736,
+  "word_count": 776,
   "headings": [
     "Prerequisites",
     "Learning objectives",
@@ -55,12 +55,18 @@
     "36138",
     "24043"
   ],
-  "rendered_length": 11669,
+  "rendered_length": 13593,
   "cover_duplicate": false,
   "footer": true,
-  "video_embeds": 0,
+  "video_embeds": 2,
   "desktop_mobile_screenshot_verified": false,
   "qr_destination_verified": false,
   "rotation": "OSHRE.012 and OSRTC.018 previously published; OSRTC.019 next; no archive search match for ID; PROFINET topic already covered, changed to repeatability",
-  "next_subject": "robotics_engineer"
+  "next_subject": "robotics_engineer",
+  "video_ids": [
+    "DWSqZAFaJ2I",
+    "uz6Cm-v2bww"
+  ],
+  "rendered_iframes_verified": 2,
+  "actual_playback_verified": false
 }

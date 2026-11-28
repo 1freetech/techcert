@@ -1,0 +1,43 @@
+{
+  "id": 36298,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/28/osfoec-019-polarization-maintaining-fiber-birefringence-beat-length-per/",
+  "featured_media": 36292,
+  "cover_dimensions": [
+    3648,
+    2432
+  ],
+  "watermark_verified": false,
+  "video_ids": [
+    "4bQSpq5MdTw",
+    "6XdJEgt5OpQ"
+  ],
+  "actual_playback_verified": false,
+  "desktop_mobile_verified": false,
+  "objective_map": [
+    "Principal axes and birefringence",
+    "Phase beat length",
+    "Polarization extinction ratio",
+    "Independent optical metrics",
+    "Measurement and acceptance"
+  ],
+  "internal_links": [
+    "https://bitcoinversus.tech/2026/10/04/osfoec-002-fiber-dispersion-engineering-modal-chromatic-pmd-pulse-broadening-reach-limits/",
+    "https://bitcoinversus.tech/2026/10/09/osfoec-007-coherent-optical-transmission-engineering-i-q-modulation-qpsk-qam-coherent-receivers-dsp-osnr-fec-and-reach/",
+    "https://bitcoinversus.tech/2026/11/21/osfoec-016-fiber-bragg-grating-sensors-strain-temperature-interrogators/",
+    "https://bitcoinversus.tech/2026/11/23/osfoec-018-optical-frequency-domain-reflectometry-swept-laser-spatial-resolution/"
+  ],
+  "words": 718,
+  "calculations": {
+    "beat_mm": 3.8749999999999996,
+    "PER": 30,
+    "angle2": 29.138323900510382,
+    "exercise_beat_mm": 2.6199999999999997,
+    "exercise_PER": 20
+  },
+  "body_photo": true,
+  "footer": true,
+  "qr_destination_verified": false,
+  "no_duplicate_cover": true,
+  "limitations": "Provisional credited archival cover, not approved dimensions or watermark; actual playback and desktop/mobile checks unavailable."
+}

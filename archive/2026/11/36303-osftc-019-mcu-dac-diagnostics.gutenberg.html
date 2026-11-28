@@ -1,0 +1,124 @@
+<!-- wp:paragraph -->
+<p>Open-Source Firmware Technician Certification • Intermediate • Estimated study time: 35 minutes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A digital-to-analog converter (DAC) changes numerical codes into analog voltage or current. Embedded systems use DACs for reference signals, calibration, audio and waveform generation. A correct register value does not guarantee a correct voltage: the reference, output loading and timing also matter.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/11/25/osftc-018-mcu-adc-diagnostics-voltage-reference-sampling-sensor-accuracy/">ADC diagnostics</a>, <a href="https://bitcoinversus.tech/2026/11/17/osftc-017-mcu-timer-pwm-diagnostics-prescalers-duty-cycle-oscilloscope-checks/">timer and PWM diagnostics</a>, <a href="https://bitcoinversus.tech/2026/11/07/osftc-016-mcu-clock-source-diagnostics-oscillators-pll-clock-failure/">clock source diagnostics</a> and <a href="https://bitcoinversus.tech/2026/11/25/osfec-017-continuous-adc-sampling-dma-double-buffering-overrun-prevention/">DMA buffering</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Explain DAC resolution and reference-voltage dependence.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Calculate expected voltage and waveform repetition frequency.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Distinguish settling time, output loading and reference errors.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Interpret timer-trigger and DMA-underrun symptoms.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Perform safe, read-only diagnostic verification and document results.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Code-to-voltage conversion</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A 12-bit DAC accepts 4096 distinct codes, numbered 0 through 4095. For an ideal unipolar converter with a 3.3 V reference and a 4096-denominator transfer function, one least significant bit (LSB) equals 3.3/4096 ≈ 0.806 mV. Code 2048 gives 1.65 V. The maximum code gives approximately 3.2992 V in that ideal model. Consult the exact device's specified transfer function; some documentation uses a full-scale endpoint convention with denominator 4095. Real output offset, gain error and buffer headroom limit accuracy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=Ul7aAozJM8Q","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=Ul7aAozJM8Q
+</div><figcaption class="wp-element-caption">STM32 DAC Digital-to-analog Converter Tutorial: DMA and Timer trigger. Follow the configuration and timed-output demonstration. <a href="https://www.youtube.com/watch?v=Ul7aAozJM8Q">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Timing and waveform frequency</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A timer can trigger conversion of successive codes from a waveform table. DMA can transfer the codes without requiring software to write every sample. For a repeating table containing N samples per period, waveform frequency equals sample rate divided by N. A 100-sample table updated at 20,000 samples/s produces 200 Hz, with 50 μs between updates. The <a href="https://wiki.st.com/stm32mcu/wiki/Getting_started_with_DAC">STMicroelectronics DAC guide</a> describes buffered and triggered output modes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Settling and output loading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Settling time specifies how long the analog output takes to remain within a stated error band after a code change. It depends on step size, buffer mode and load. A conversion trigger can arrive before the voltage has settled, distorting the intended waveform. An unexpectedly low output may result from a heavy resistive load, excessive capacitance or insufficient output headroom. Compare observed conditions against the exact MCU datasheet, not a different STM32 family. Measure the reference as well as output and distinguish a constant offset from a proportional gain error.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=0N4ECamZw2k","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=0N4ECamZw2k
+</div><figcaption class="wp-element-caption">STM32World tutorial 15: Sine wave on DAC with DMA. Compare the repeating sample table and measured waveform. <a href="https://www.youtube.com/watch?v=0N4ECamZw2k">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Fault isolation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For a static output, inspect the configured pin, DAC channel enable, reference and commanded code using an approved debug method. For a repeating waveform, compare measured frequency with the timer clock, prescaler, period and table length. Stale or discontinuous samples can result from incorrect DMA routing, data width, buffer length or underrun. Check applicable hardware error flags and preserve the original fault state before restarting. A debugger halt can change timing; a readout from an actively running peripheral may also have side effects. Follow the device manual.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Safe verification</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Use a disconnected, low-voltage training board or supplied measurements, not production control hardware. Verify the permitted pin voltage, common reference and instrument input impedance before connecting a meter or oscilloscope. Never attach an earth-referenced probe to an unknown potential. Compare static low, mid and high codes within approved limits, then measure a safe waveform frequency and amplitude. Record board revision, firmware version, reference voltage, commanded code, measured output, load, instrument settings and applicable tolerances. Escalate faults rather than changing live firmware or protection settings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises and answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>For the ideal 3.3 V, 12-bit model, find code 1024 voltage. Answer: 0.825 V.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>A 64-sample table runs at 32 kHz. Find output frequency. Answer: 500 Hz.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Why might a correct code produce low voltage? Answer: reference error, loading, headroom or gain error.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>A waveform intermittently holds its previous sample. What evidence matters? Answer: trigger timing, DMA status, buffer configuration and underrun flags.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Featured photograph: STM32H755ZI-Q development board, <a href="https://commons.wikimedia.org/wiki/File:Nucleo-H755ZI-Q_board.jpg">Frans (fotoopa)</a>, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, unmodified. Hardware context, not a measured DAC experiment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi contribution QR" class="wp-image-24043" /><figcaption class="wp-element-caption">Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

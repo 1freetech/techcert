@@ -1,0 +1,123 @@
+<!-- wp:paragraph -->
+<p>Open-Source Firmware Engineering Certification • Advanced • Estimated study time: 40 minutes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Embedded signal processing often represents fractions as scaled integers. Fixed-point arithmetic can reduce computational cost on targets without suitable floating-point hardware, but finite precision and overflow require explicit engineering decisions. Performance benefits depend on the processor, compiler and algorithm; fixed point is not automatically faster.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/10/04/osfec-001-microcontroller-architecture-memory-maps-registers-interrupts/">microcontroller architecture</a>, <a href="https://bitcoinversus.tech/2026/10/05/osfec-002-real-time-firmware-scheduling-superloops-rtos-tasks-priorities-preemption-timing/">real-time scheduling</a>, <a href="https://bitcoinversus.tech/2026/11/25/osfec-017-continuous-adc-sampling-dma-double-buffering-overrun-prevention/">ADC and DMA buffering</a> and <a href="https://bitcoinversus.tech/2026/11/28/osftc-019-mcu-dac-diagnostics-output-voltage-settling-time-waveform/">DAC waveform diagnostics</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Explain fixed-point representation, resolution and signed Q15 range.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Convert between real values and scaled integers.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Derive addition and multiplication with appropriate intermediate precision.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Distinguish rounding, saturation and overflow.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Design boundary tests and measure performance before deployment.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Q15 representation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>For the signed Q15 convention used by Arm CMSIS-DSP, a 16-bit integer k represents x = k/32768. The code range is −32768 through 32767. Therefore the real range is −1 through 0.999969482421875, with resolution 1/32768 ≈ 0.00003052. Q-format naming varies across references, so always document the signedness, storage width and fractional-bit count.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=XaP6niiqJnA","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=XaP6niiqJnA
+</div><figcaption class="wp-element-caption">EC Academy: Fixed Point Format in DSP Explained. Study the relationship between bit allocation, range and resolution. <a href="https://www.youtube.com/watch?v=XaP6niiqJnA">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Conversion and arithmetic</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>To encode x, round x × 32768 according to the chosen rounding rule and clamp the result to the signed 16-bit interval. Decode by dividing by 32768. For example, 0.75 maps to 24576 and −0.5 maps to −16384. Addition of equally scaled numbers uses a wider integer sum, followed by saturation. Addition of differently scaled operands requires alignment of their fractional bits first.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Multiplication produces a wider intermediate with 30 fractional bits. Multiply codes 24576 and −16384 to obtain −402653184. Divide by 32768 to restore 15 fractional bits; the result is −12288, representing −0.375. For sums of many products, determine accumulator bounds before selecting the width. A 64-bit accumulator provides additional headroom but is still finite.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=lVa-AwaHbDQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=lVa-AwaHbDQ
+</div><figcaption class="wp-element-caption">Lecture 68: Fixed Point Arithmetic and Concept of Q Format. Review arithmetic scaling and representation. <a href="https://www.youtube.com/watch?v=lVa-AwaHbDQ">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Saturation and rounding</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Adding 0.75 and 0.75 yields an ideal 1.5, beyond Q15 range. Saturation clamps the result to 32767, whereas modulo wraparound of the code would yield −16384, or −0.5. In C, signed overflow is undefined behavior; do not rely on implicit wrapping or out-of-range narrowing conversions. Compute in a sufficiently wide type and clamp before narrowing. Rounding reduces quantization error; truncation toward zero and floor rounding differ for negative values. Document the selected convention. Arm's <a href="https://arm-software.github.io/CMSIS-DSP/latest/group__float__to__x.html">conversion documentation</a> and <a href="https://arm-software.github.io/CMSIS-DSP/main/group__FIXED.html">fixed-point datatypes</a> describe library-specific saturation and conversion behavior.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Validation workflow</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Create a host-side reference model with higher precision. Compare ordinary inputs, zero, both endpoints, positive and negative halfway cases, large intermediate sums and repeated operations. Include −1 multiplied by −1: the ideal +1 must saturate to 32767 in Q15. Use deterministic test vectors and record maximum absolute error, saturation counts and target execution cycles. Test across compiler optimization levels and confirm the library configuration. Independent exercises should run in a sandbox; never replace live control firmware without approved change control, safety validation and rollback.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises and answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Encode 0.25 in Q15. Answer: 8192.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Decode −8192. Answer: −0.25.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Multiply 0.5 by 0.5. Answer: 0.25, code 8192.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Add two codes of 24576 with saturation. Answer: 32767.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Why is a wider accumulator necessary? Answer: intermediate products and sums may exceed the final representation even when the final value fits.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Featured photograph: historical TI TMS320C15 DSP die, <a href="https://commons.wikimedia.org/wiki/File:TI_TMS320C15_DSP_die.JPG">Pauli Rautakorpi</a>, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>, unmodified; hardware context, not a benchmark of the lesson's examples.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi contribution QR" class="wp-image-24043" /><figcaption class="wp-element-caption">Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

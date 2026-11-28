@@ -1,0 +1,44 @@
+{
+  "id": 36303,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/28/osftc-019-mcu-dac-diagnostics-output-voltage-settling-time-waveform/",
+  "featured_media": 36302,
+  "cover_dimensions": [
+    3648,
+    1834
+  ],
+  "watermark_verified": false,
+  "video_ids": [
+    "Ul7aAozJM8Q",
+    "0N4ECamZw2k"
+  ],
+  "actual_playback_verified": false,
+  "desktop_mobile_verified": false,
+  "objective_map": [
+    "Code-to-voltage conversion",
+    "Code-to-voltage conversion and Timing and waveform frequency",
+    "Settling and output loading",
+    "Fault isolation",
+    "Safe verification"
+  ],
+  "internal_links": [
+    "https://bitcoinversus.tech/2026/11/25/osftc-018-mcu-adc-diagnostics-voltage-reference-sampling-sensor-accuracy/",
+    "https://bitcoinversus.tech/2026/11/17/osftc-017-mcu-timer-pwm-diagnostics-prescalers-duty-cycle-oscilloscope-checks/",
+    "https://bitcoinversus.tech/2026/11/07/osftc-016-mcu-clock-source-diagnostics-oscillators-pll-clock-failure/",
+    "https://bitcoinversus.tech/2026/11/25/osfec-017-continuous-adc-sampling-dma-double-buffering-overrun-prevention/"
+  ],
+  "words": 725,
+  "calculations": {
+    "lsb_mV": 0.8056640625,
+    "code2048": 1.65,
+    "code4095": 3.2991943359375,
+    "hz": 200,
+    "period_us": 50,
+    "code1024": 0.825,
+    "exercise_hz": 500
+  },
+  "footer": true,
+  "qr_destination_verified": false,
+  "no_duplicate_cover": true,
+  "limitations": "Provisional credited photograph, not required dimensions or approved watermark; actual playback and desktop/mobile checks unavailable. DMA topic rejected as overlap with OSFEC.017."
+}

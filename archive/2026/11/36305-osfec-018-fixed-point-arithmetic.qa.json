@@ -1,0 +1,44 @@
+{
+  "id": 36305,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/28/osfec-018-fixed-point-arithmetic-q15-saturation-embedded-dsp/",
+  "featured_media": 36304,
+  "cover_dimensions": [
+    3251,
+    3198
+  ],
+  "watermark_verified": false,
+  "video_ids": [
+    "XaP6niiqJnA",
+    "lVa-AwaHbDQ"
+  ],
+  "actual_playback_verified": false,
+  "desktop_mobile_verified": false,
+  "objective_map": [
+    "Q15 representation",
+    "Conversion and arithmetic",
+    "Conversion and arithmetic",
+    "Saturation and rounding",
+    "Validation workflow"
+  ],
+  "internal_links": [
+    "https://bitcoinversus.tech/2026/10/04/osfec-001-microcontroller-architecture-memory-maps-registers-interrupts/",
+    "https://bitcoinversus.tech/2026/10/05/osfec-002-real-time-firmware-scheduling-superloops-rtos-tasks-priorities-preemption-timing/",
+    "https://bitcoinversus.tech/2026/11/25/osfec-017-continuous-adc-sampling-dma-double-buffering-overrun-prevention/",
+    "https://bitcoinversus.tech/2026/11/28/osftc-019-mcu-dac-diagnostics-output-voltage-settling-time-waveform/"
+  ],
+  "words": 647,
+  "calculations": {
+    "max": 0.999969482421875,
+    "resolution": 0.000030517578125,
+    "code075": 24576,
+    "product": -402653184,
+    "rescaled": -12288,
+    "clamp": 32767,
+    "wrap": -16384
+  },
+  "footer": true,
+  "qr_destination_verified": false,
+  "no_duplicate_cover": true,
+  "limitations": "Provisional credited die photograph, not required dimensions or approved watermark; actual playback and desktop/mobile checks unavailable."
+}

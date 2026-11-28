@@ -1,0 +1,107 @@
+<!-- wp:paragraph -->
+<p>Open-Source Data Center Engineering Certification • Intermediate to advanced • Study time: 40 minutes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Liquid-to-liquid coolant distribution units (CDUs) transfer server heat into facility water while separating the two fluid circuits. Their heat exchanger determines how much thermal load can be transferred at a given flow rate and inlet temperature. Engineers must evaluate both heat-transfer capacity and the pumping energy required to achieve it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/11/21/osdctc-020-measuring-liquid-cooling-rack-heat-flow-delta-t/">rack heat removal</a>, <a href="https://bitcoinversus.tech/2026/11/21/osdctc-021-coolant-flow-balancing-rack-branch-pressure-drop/">branch flow balancing</a>, <a href="https://bitcoinversus.tech/2026/10/09/osdcec-008-data-center-water-systems-cooling-loops-towers-water-quality-blowdown-wue/">data center water systems</a>, and <a href="https://bitcoinversus.tech/2026/11/22/osdctc-022-cdu-pump-redundancy-failover-cooling-verification/">CDU redundancy</a>. Understand energy conservation, temperature differences and natural logarithms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Explain the facility-water and technology-coolant interfaces and temperature approach.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Calculate fluid heat-transfer rate and log-mean temperature difference (LMTD).</li><!-- /wp:list-item --><!-- wp:list-item --><li>Calculate required overall thermal conductance and exchanger effectiveness.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Evaluate fouling, pressure-drop and cooling-capacity tradeoffs.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Develop a safe, evidence-based commissioning and acceptance plan.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Circuit separation and temperature approach</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Corrugated plates provide heat-transfer area while separating the fluids. In a counterflow exchanger, the warmer technology cooling system (TCS) return travels opposite the cooler facility water system (FWS) supply. The TCS supply is the cooled hot-side outlet. The cold-end approach equals TCS supply temperature minus FWS supply temperature. A smaller positive approach can allow warmer facility water for the same server inlet temperature. <a href="https://handbook.ashrae.org/Handbooks/A23/SI/A23_Ch20/a23_ch20_si.aspx">ASHRAE’s data center guidance</a> requires designers to account for the CDU approach when meeting IT equipment temperature requirements.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=exgciiUhXyo","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=exgciiUhXyo
+</div><figcaption class="wp-element-caption">Alfa Laval: Optimizing your data center cooling with plate heat exchangers. Manufacturer overview of heat exchanger applications. <a href="https://www.youtube.com/watch?v=exgciiUhXyo">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked design calculation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Consider a hypothetical counterflow CDU transferring 500 kW. TCS enters at 45°C and leaves at 35°C; FWS enters at 30°C and leaves at 38°C. Assume water on both sides, specific heat 4.18 kJ/(kg·K), steady state and negligible heat loss.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Heat balance: Q = ṁ cₚ ΔT. TCS flow = 500/(4.18 × 10) ≈ 11.96 kg/s. FWS flow = 500/(4.18 × 8) ≈ 14.95 kg/s. The cold-end approach is 5 K and the hot-end difference is 7 K.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For ideal counterflow, LMTD = (7 − 5)/ln(7/5) ≈ 5.94 K. Required overall thermal conductance UA = Q/LMTD ≈ 84.1 kW/K. U represents overall heat-transfer coefficient and A represents effective surface area. Other exchanger arrangements can require correction factors. Equal terminal differences use their common value as the LMTD limit.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Effectiveness and selection</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Heat-capacity rate C = ṁcₚ. The smaller rate is 50 kW/K on the TCS side; the larger is 62.5 kW/K. Maximum theoretical heat transfer equals Cmin(45 − 30) = 750 kW. Effectiveness ε = 500/750 = 0.667, or 66.7%. NTU = UA/Cmin ≈ 1.68. The <a href="https://handbook.ashrae.org/Handbooks/F25/SI/F25_Ch04/F25_Ch04_SI.aspx">ASHRAE heat-transfer chapter</a> describes LMTD and effectiveness–NTU methods. Use manufacturer selections for actual plate geometry, fluid properties and operating limits.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=2EW03XMgZY0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=2EW03XMgZY0
+</div><figcaption class="wp-element-caption">Plate Heat Exchangers in Data Center Cooling, Week 1: Why Design Is More Difficult (Part 1). Engineering discussion of modern data center exchanger selection. <a href="https://www.youtube.com/watch?v=2EW03XMgZY0">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Hydraulic and thermal tradeoffs</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Deposits can increase thermal resistance and reduce effective UA. Fouling or restricted passages may increase pressure drop, although symptoms depend on operating conditions. Increasing flow can improve heat transfer but typically increases pumping demand. Trend temperatures, measured flows, exchanger differential pressure and calculated UA under comparable loads. Account for sensor uncertainty and coolant concentration before diagnosing performance loss.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Commissioning and safety</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Document design duty, specified approach, allowable pressure drop, approved fluid chemistry and acceptance tolerances. Verify calibrated temperature and flow sensors, reconcile both fluid-side heat balances, and compare measured performance with the vendor selection at approved test loads. Use read-only telemetry or simulation for independent study. Qualified personnel must follow isolation, depressurization, leak-response and change-control procedures for physical intervention. Never open pressurized plate packs or defeat thermal protection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises and answers</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>If FWS supply is 32°C and TCS supply is 36°C, what is approach? Answer: 4 K.</li><!-- /wp:list-item --><!-- wp:list-item --><li>For 250 kW with LMTD 5 K, find UA. Answer: 50 kW/K.</li><!-- /wp:list-item --><!-- wp:list-item --><li>If Qmax is 600 kW and actual duty is 420 kW, find effectiveness. Answer: 70%.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why compare UA at equivalent flow and fluid properties? Answer: operating changes can alter heat transfer even without fouling.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Featured photograph: dismantled plate heat exchanger, <a href="https://commons.wikimedia.org/wiki/File:Plate_heat_exchanger_-_dismantled_pic01.jpg">RomanM82, Wikimedia Commons</a>, 2018, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption">Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

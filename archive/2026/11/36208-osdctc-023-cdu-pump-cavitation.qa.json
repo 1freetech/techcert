@@ -1,0 +1,42 @@
+{
+  "id": 36208,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/28/osdctc-023-cdu-pump-cavitation-trapped-air-diagnostics/",
+  "featured_media": 36206,
+  "cover_dimensions": [
+    672,
+    252
+  ],
+  "cover_credit": "Klausbärbel, CC BY-SA 3.0 unmodified photograph",
+  "watermark_verified": false,
+  "video_ids": [
+    "U-uUYCFDTrc",
+    "uZ-_IVOxqLk"
+  ],
+  "video_identity_source_urls": [
+    "https://www.youtube.com/watch?v=U-uUYCFDTrc",
+    "https://www.youtube.com/watch?v=uZ-_IVOxqLk"
+  ],
+  "actual_playback_verified": false,
+  "desktop_mobile_verified": false,
+  "objective_map": [
+    "Vapor bubbles versus trapped air",
+    "Suction head calculation",
+    "Diagnostic evidence",
+    "Filling, deaeration and safety",
+    "Filling, deaeration and safety"
+  ],
+  "internal_links": [
+    "https://bitcoinversus.tech/2026/11/22/osdctc-022-cdu-pump-redundancy-failover-cooling-verification/",
+    "https://bitcoinversus.tech/2026/11/21/osdctc-021-coolant-flow-balancing-rack-branch-pressure-drop/",
+    "https://bitcoinversus.tech/2026/11/21/osdctc-020-measuring-liquid-cooling-rack-heat-flow-delta-t/",
+    "https://bitcoinversus.tech/2026/11/16/osdctc-019-coolant-sampling-filter-health-conductivity-contamination-pressure-drop/"
+  ],
+  "words": 724,
+  "npsha": 7.906338792115388,
+  "qr_verified": false,
+  "footer": true,
+  "no_duplicate_cover": true,
+  "next": "data_center_engineer",
+  "limitations": "WordPress AI quota exhausted; approved watermark identified as media 34354 but not composited. Provisional cover noncompliant dimensions. Actual playback, desktop/mobile and QR scan not verified."
+}

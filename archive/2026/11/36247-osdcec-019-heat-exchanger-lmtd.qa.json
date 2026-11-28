@@ -1,0 +1,42 @@
+{
+  "id": 36247,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/28/osdcec-019-heat-exchanger-approach-lmtd-thermal-capacity/",
+  "featured_media": 36246,
+  "cover_dimensions": [
+    2375,
+    3195
+  ],
+  "cover_credit": "RomanM82 Wikimedia Commons CC BY-SA 4.0",
+  "watermark_verified": false,
+  "video_ids": [
+    "exgciiUhXyo",
+    "2EW03XMgZY0"
+  ],
+  "actual_playback_verified": false,
+  "desktop_mobile_verified": false,
+  "objective_map": [
+    "Circuit separation and temperature approach",
+    "Worked design calculation",
+    "Worked design calculation and Effectiveness and selection",
+    "Hydraulic and thermal tradeoffs",
+    "Commissioning and safety"
+  ],
+  "internal_links": [
+    "https://bitcoinversus.tech/2026/11/21/osdctc-020-measuring-liquid-cooling-rack-heat-flow-delta-t/",
+    "https://bitcoinversus.tech/2026/11/21/osdctc-021-coolant-flow-balancing-rack-branch-pressure-drop/",
+    "https://bitcoinversus.tech/2026/10/09/osdcec-008-data-center-water-systems-cooling-loops-towers-water-quality-blowdown-wue/",
+    "https://bitcoinversus.tech/2026/11/22/osdctc-022-cdu-pump-redundancy-failover-cooling-verification/"
+  ],
+  "words": 749,
+  "calcs": {
+    "lmtd": 5.944026823976923,
+    "UA": 84.11805915530323,
+    "epsilon": 0.6666666666666666,
+    "NTU": 1.6823611831060645
+  },
+  "qr_destination_verified": false,
+  "footer": true,
+  "no_duplicate_cover": true,
+  "limitations": "Provisional credited photo not 1200x630 and approved watermark not applied; actual playback, desktop/mobile and QR scan not verified."
+}

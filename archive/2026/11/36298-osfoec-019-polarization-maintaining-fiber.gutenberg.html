@@ -1,0 +1,128 @@
+<!-- wp:paragraph -->
+<p>Open-Source Fiber Optics Engineering Certification • Advanced • Estimated study time: 40 minutes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Ordinary single-mode fiber guides one spatial mode but can support two orthogonal polarization modes. Mechanical stress, bending and temperature can alter their relative phase or coupling. Polarization-maintaining (PM) fiber deliberately introduces birefringence to preserve light launched along one principal axis. Precision optical sensors, interferometers and photonic instruments benefit from predictable polarization.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/10/04/osfoec-002-fiber-dispersion-engineering-modal-chromatic-pmd-pulse-broadening-reach-limits/">fiber dispersion</a>, <a href="https://bitcoinversus.tech/2026/10/09/osfoec-007-coherent-optical-transmission-engineering-i-q-modulation-qpsk-qam-coherent-receivers-dsp-osnr-fec-and-reach/">coherent transmission</a>, <a href="https://bitcoinversus.tech/2026/11/21/osfoec-016-fiber-bragg-grating-sensors-strain-temperature-interrogators/">fiber Bragg gratings</a> and <a href="https://bitcoinversus.tech/2026/11/23/osfoec-018-optical-frequency-domain-reflectometry-swept-laser-spatial-resolution/">OFDR</a>. Understand refractive index, optical power ratios and logarithms.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Explain principal polarization axes and stress-induced birefringence.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Calculate phase beat length from wavelength and effective-index difference.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Calculate polarization extinction ratio (PER) and estimate ideal alignment error.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Distinguish PER from insertion loss and polarization-dependent loss.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Design a safe measurement and acceptance workflow.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Principal axes and birefringence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>PANDA fiber uses two stress-applying rods adjacent to the core. Differential stress changes the effective refractive indices along two orthogonal eigenaxes. Light along the slow axis has a higher effective phase index than light along the fast axis. Strong birefringence helps suppress coupling caused by small perturbations. PM fiber does not automatically convert arbitrary input into one linear polarization: both eigenmodes can propagate.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":36293,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/panda_fiber2.jpg" alt="Microscope view of PANDA fiber core and two stress rods" class="wp-image-36293" /><figcaption class="wp-element-caption">PANDA fiber end face viewed through a fiberscope. The two larger circles are stress rods surrounding the central core. Photo: <a href="https://commons.wikimedia.org/wiki/File:Panda_fiber2.jpg">Quantumavik</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, unmodified.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=4bQSpq5MdTw","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=4bQSpq5MdTw
+</div><figcaption class="wp-element-caption">Thorlabs Insights: PM Fiber Measurements Used to Align Incident Polarization State. Observe input-axis alignment and polarimeter behavior. <a href="https://www.youtube.com/watch?v=4bQSpq5MdTw">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Phase beat length</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Let Δn = |nslow − nfast| and λ be the vacuum wavelength. The propagation-constant difference is Δβ = 2πΔn/λ. Phase beat length Lb = 2π/Δβ = λ/Δn, the propagation distance required to accumulate a full 2π relative phase change. With λ = 1550 nm and Δn = 4 × 10⁻⁴, Lb = 3.875 mm. Shorter beat length means stronger phase birefringence at a given wavelength. IEC 60793-1-60:2017 describes beat-length measurement procedures; consult the <a href="https://standards.iteh.ai/catalog/standards/iec/7cd105f1-5716-4f4a-9475-87a017c5d6dc/iec-60793-1-60-2017">standard overview</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Polarization extinction ratio</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Define PER = 10 log10(Pdesired/Porthogonal), measured along the selected axes. A desired-axis power of 1 mW and orthogonal power of 0.001 mW yield 30 dB. In an ideal alignment-only model, Pdesired/Porthogonal = cot²θ, so a 2° launch misalignment produces approximately 29.1 dB. Real assemblies also exhibit finite source purity, splice rotation, stress coupling and detector limitations. <a href="https://www.sukhamburg.com/support/technotes/fiberoptics/cablebasics/pmc.html">Schäfter+Kirchhoff's technical note</a> explains polarization-axis coupling.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=6XdJEgt5OpQ","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=6XdJEgt5OpQ
+</div><figcaption class="wp-element-caption">Making the Polarization Extinction Ratio Measurement of a Polarization Maintaining Fiber Easier. Demonstration of PER measurement for bare PM fiber. <a href="https://www.youtube.com/watch?v=6XdJEgt5OpQ">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Independent optical metrics</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Insertion loss measures total transmitted optical power relative to incident power. PER compares desired and orthogonal components of the output. Polarization-dependent loss measures how insertion loss varies with input polarization. A link may have low insertion loss but poor PER due to axis misalignment. Do not infer polarization quality from received power alone.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Measurement and acceptance</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Specify wavelength, desired axis, input polarization purity, minimum PER, maximum insertion loss and environmental conditions. Under approved laser-safe laboratory procedures, measure launched power, align the input to the specified eigenaxis, and use a calibrated polarization analyzer or appropriately aligned analyzer and power detector to resolve axis powers. Record connector keying, instrument uncertainty and stress conditions. If leakage is below detector sensitivity, report a lower bound rather than an invented exact PER. See the <a href="https://docs.open-quantum.org/curriculum/4-fiber-coupling-and-polarization-control/lab">OpenQuantum lab</a> for educational context. Never view a live fiber end; independent study uses supplied data or simulation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises and answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Calculate beat length at 1310 nm and Δn = 5 × 10⁻⁴. Answer: 2.62 mm.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Find PER for 2 mW desired and 0.02 mW orthogonal. Answer: 20 dB.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Does 0.2 dB insertion loss guarantee high PER? Answer: no; polarization and total power are distinct.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>If leakage falls below the detector floor, what should be reported? Answer: a lower bound with the measurement conditions.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Featured photograph: <a href="https://commons.wikimedia.org/wiki/File:ARL_Laser_Fiber_Laboratory_(34244386643).jpg">U.S. Army RDECOM, 2017</a>, public-domain laboratory context, not a photograph of the specific PER experiment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi contribution QR" class="wp-image-24043" /><figcaption class="wp-element-caption">Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,103 @@
+<!-- wp:paragraph -->
+<p>Open-Source Data Center Technician Certification • Intermediate • Estimated study time: 35 minutes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A coolant distribution unit (CDU) can report an operating pump while delivering insufficient coolant to server cold plates. Vapor bubbles and trapped air are two distinct hydraulic faults that can impair circulation and threaten thermal stability.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Review <a href="https://bitcoinversus.tech/2026/11/22/osdctc-022-cdu-pump-redundancy-failover-cooling-verification/">CDU pump redundancy</a>, <a href="https://bitcoinversus.tech/2026/11/21/osdctc-021-coolant-flow-balancing-rack-branch-pressure-drop/">rack flow balancing</a>, <a href="https://bitcoinversus.tech/2026/11/21/osdctc-020-measuring-liquid-cooling-rack-heat-flow-delta-t/">heat removal and coolant flow</a> and <a href="https://bitcoinversus.tech/2026/11/16/osdctc-019-coolant-sampling-filter-health-conductivity-contamination-pressure-drop/">filter health</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Distinguish cavitation from entrained and trapped air.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Calculate available suction head and compare it with a documented pump requirement.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Interpret pressure, flow, vibration and temperature trends.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Describe the role of approved filling and deaeration procedures.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Recognize safe diagnostic boundaries and escalation conditions.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Vapor bubbles versus trapped air</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Cavitation occurs when local liquid pressure falls below its vapor pressure, allowing vapor cavities to form. As they enter higher-pressure regions, their collapse can create noise, vibration and surface erosion. <a href="https://www.grundfos.com/solutions/learn/research-and-insights/cavitation">Grundfos</a> explains the relationship between pump inlet conditions and cavitation. The featured photograph shows erosion of a pump impeller; credit: <a href="https://commons.wikimedia.org/wiki/File:Kavitation_at_pump_impeller.jpg">Klausbärbel, Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, unmodified.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Entrained air consists of noncondensable gas carried through the coolant. Gas can also accumulate at high points and restrict circulation. Incomplete filling, leaks admitting air under low pressure, and inadequate separation may contribute. Air entrainment and cavitation can coexist, but bubbles alone cannot establish which mechanism is responsible.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=U-uUYCFDTrc","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=U-uUYCFDTrc
+</div><figcaption class="wp-element-caption">Institute for Energy Technology: Cavitation — Easily Explained! Observe the formation and collapse of vapor cavities. <a href="https://www.youtube.com/watch?v=U-uUYCFDTrc">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Suction head calculation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Net positive suction head available (NPSHa) is the total absolute suction head above the fluid vapor-pressure head at the pump suction reference. For a measurement at the inlet reference elevation, NPSHa = (p_abs − p_v)/(ρg) + v²/(2g). Use pascals for pressure, kg/m³ for density, m/s for velocity and 9.81 m/s² for gravitational acceleration. Gauge readings require conversion using local atmospheric pressure.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Example: hypothetical water at 25°C, absolute suction pressure 80 kPa, vapor pressure approximately 3.17 kPa, density 997 kg/m³ and inlet velocity 1 m/s. NPSHa ≈ 7.91 m. If the manufacturer specifies NPSH required of 4 m at that flow and speed, the numerical difference is approximately 3.91 m. The approved design margin still governs acceptance; NPSH required is not a guarantee of zero cavitation. Glycol mixtures require their own fluid properties.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Diagnostic evidence</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Compare suction pressure, pump differential pressure, speed, branch flow, filter differential pressure, supply and return temperatures, and alarm history against the approved baseline. A noisy pump with declining suction pressure and flow may indicate cavitation; oscillating flow after a fill may indicate residual gas. A clogged filter, sensor fault, valve restriction or worn pump can create similar symptoms. Verify measurement validity before assigning a cause.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:embed {"url":"https://www.youtube.com/watch?v=uZ-_IVOxqLk","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+https://www.youtube.com/watch?v=uZ-_IVOxqLk
+</div><figcaption class="wp-element-caption">Data Center MVAC Module 11B: Direct-to-chip liquid cooling, CDU and SPLC. Broader cooling-system commissioning and operation context. <a href="https://www.youtube.com/watch?v=uZ-_IVOxqLk">Watch on YouTube</a>.</figcaption></figure>
+<!-- /wp:embed -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Filling, deaeration and safety</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><a href="https://www.eaton.com/us/en-us/markets/data-centers/data-center-cooling/cdus/liquid-cooling-support-data-center.html">Eaton's liquid-cooling commissioning guidance</a> identifies proper filling and air evacuation as important commissioning activities. Follow the exact manufacturer and site-approved procedure, including approved coolant chemistry, fill equipment, air separation, pressure limits and acceptance checks. Do not open vents, loosen pressurized connections, run pumps dry or override alarms without authorization. Use read-only telemetry for independent study. Escalate suspected cavitation, leaks, lost flow or rising server temperatures through the approved incident procedure; stop or transfer equipment only under authorized operating procedures.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Why are vapor cavities different from entrained air?</li><!-- /wp:list-item --><!-- wp:list-item --><li>If NPSHa is 6 m and NPSH required is 4 m, calculate the numerical difference.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Which trends would help distinguish a suction restriction from a faulty flow sensor?</li><!-- /wp:list-item --><!-- wp:list-item --><li>What should a technician do if abnormal pump noise coincides with declining coolant flow?</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Vapor cavities form when liquid pressure falls sufficiently; entrained air is noncondensable gas carried by the liquid.</li><!-- /wp:list-item --><!-- wp:list-item --><li>2 m; compare against the specified engineering margin.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Suction pressure, filter differential pressure, pump speed, independent flow verification and temperature trends.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Escalate according to the approved procedure, preserve telemetry and avoid unauthorized intervention.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption">Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

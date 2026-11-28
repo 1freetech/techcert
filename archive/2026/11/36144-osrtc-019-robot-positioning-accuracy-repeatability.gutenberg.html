@@ -1,0 +1,111 @@
+<!-- wp:paragraph -->
+<p>Open-Source Robotics Technician Certification • Intermediate • Estimated study time: 35 minutes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A robot can return to nearly the same position every cycle and still miss its intended target. Distinguishing systematic position error from cycle-to-cycle variation helps technicians investigate defective fixtures, calibration problems and mechanical instability without replacing parts unnecessarily.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Prerequisites</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Understand millimeters, arithmetic means, coordinate frames, and the difference between a commanded and measured position. Review <a href="https://bitcoinversus.tech/2026/10/05/osrtc-003-robot-mastering-calibration-zero-position-encoders-reference-marks-recovery/">robot mastering</a> and <a href="https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/">tool center point calibration</a>. No physical robot is required for the exercises.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Learning objectives</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Distinguish positional accuracy from repeatability.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Calculate mean signed error, absolute mean-position error and observed range from repeated measurements.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Explain external measurement methods and their limitations.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Recognize factors that change positioning performance and prepare a controlled comparison.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Identify safe testing boundaries and appropriate escalation.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Accuracy versus repeatability</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Position accuracy describes how closely the center of repeated measured positions agrees with the commanded position. Repeatability describes how tightly repeated positions cluster under specified conditions. A consistent 0.50 mm offset may indicate a coordinate-frame or calibration problem; scattered measurements suggest variability that deserves investigation. Neither observation alone identifies the cause. Pose measurements can also include orientation, expressed separately in angular units.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":36139,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/robotlab.jpg.webp" alt="Orange robot in a manufacturing research workstation" class="wp-image-36139" /><figcaption class="wp-element-caption"><a href="https://www.nist.gov/laboratories/tools-instruments/manufacturing-robotics-testbed">NIST Manufacturing Robotics Testbed</a>, which includes external measurement equipment for evaluating robot performance.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Worked example: a one-axis measurement</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A hypothetical robot is commanded to x = 100.00 mm. Five independently measured arrivals are 100.48, 100.51, 100.50, 100.52 and 100.49 mm.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Mean position = (100.48 + 100.51 + 100.50 + 100.52 + 100.49) ÷ 5 = 100.50 mm.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Mean signed error = 100.50 − 100.00 = +0.50 mm. Absolute mean-position error = 0.50 mm. Observed range = 100.52 − 100.48 = 0.04 mm.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The range is a simple measure of spread, not an ISO repeatability rating or a guaranteed tolerance. <a href="https://www.iso.org/standard/22244.html">ISO 9283:1998</a> defines industrial robot performance criteria and associated test methods. Formal position repeatability uses distances from the measured centroid and a prescribed statistical calculation, rather than the one-axis range alone.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">External measurement and uncertainty</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A calibrated dial indicator can measure displacement along one direction. A laser tracker measures spatial coordinates using an external target. Calibrated cameras can locate fiducial markers, but lens distortion, lighting, resolution and mounting affect their results. Controller coordinates alone cannot independently establish actual tool position.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":36138,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/11/robotics-15-00086-g005-550.jpg" alt="Robot attachment above a Raspberry Pi camera in a test rig" class="wp-image-36138" /><figcaption class="wp-element-caption">Camera-based planar positioning experiment. Chajón, Reiff-Stephan and Günther, <a href="https://doi.org/10.3390/robotics15050086">Robotics 15(5), 86 (2026)</a>, Figure 5, CC BY 4.0.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>NIST's <a href="https://www.nist.gov/publications/using-laser-tracker-actively-coordinate-motion-3m-industrial-robot-within-50-microns">2013 robot metrology study</a> reported initial accuracy of 350 µm and repeatability near 40 µm for its particular system. The values are not universal specifications. Instrument uncertainty and the approved acceptance limits must be considered before deciding whether a result passes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Controlled comparison and safety</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Record robot model, tool and payload, fixture condition, coordinate frame, approach direction, commanded speed, warm-up state, measurement instrument, calibration status and timestamps. Compare repeated measurements under equivalent conditions. Changes with approach direction may indicate backlash or compliance; temperature-related changes may indicate thermal drift. Inspect evidence before altering mastering or compensation. See <a href="https://bitcoinversus.tech/2026/11/07/osrtc-017-robot-payload-center-gravity-verification-inertia-safe-pick-tests/">payload verification</a> and <a href="https://bitcoinversus.tech/2026/11/15/osrtc-018-robot-safety-laser-scanner-protective-fields-ossd-reset/">safety scanner inspection</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Use recorded or simulated measurements for independent study. Physical tests require authorized personnel, a risk-assessed procedure and validated safeguards. Isolate hazardous energy for applicable servicing and fixture installation. Never reach into a moving robot's workspace or bypass interlocks to collect readings. Escalate unexpected motion, loose equipment or results outside authorized limits. Consult <a href="https://www.osha.gov/otm/section-4-safety-hazards/chapter-4">OSHA's industrial robot safety guidance</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Exercises</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>A 50.00 mm target produces readings of 49.90, 49.92 and 49.94 mm. Calculate mean position, signed error and range.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Can a robot with a narrow measured range have poor accuracy? Explain.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Why is a controller position readout insufficient for independent accuracy verification?</li><!-- /wp:list-item --><!-- wp:list-item --><li>What should a technician do if a fixture becomes loose during testing?</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Answer key</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>Mean = 49.92 mm; signed error = −0.08 mm; range = 0.04 mm.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Yes. A narrow cluster can remain offset from the target.</li><!-- /wp:list-item --><!-- wp:list-item --><li>The controller reports its internal estimate; external measurement is needed to assess physical position independently.</li><!-- /wp:list-item --><!-- wp:list-item --><li>Stop the test safely, follow the approved isolation and escalation procedure, and resume only after authorized correction and verification.</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><em>We volunteer daily to ensure the credibility of the information on this platform is Verifiably True. If you would like to support to help further secure the integrity of our research initiative, please scan the QR code below.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":24043,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://bitcoinversus.wordpress.com/wp-content/uploads/2026/10/bitcoinversus-donation-qr-5000-sats-original.png" alt="Optional 5,000-satoshi donation QR" class="wp-image-24043" /><figcaption class="wp-element-caption">Optional 5,000-satoshi contribution. Independently confirm the wallet address 3C9o19EH5HSiwEPyCTmEKzxhNCbo2X6TTb and payment amount before sending.</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><em>BitcoinVersus.tech is not a financial advisor. This media platform reports on financial subjects purely for informational purposes.</em></p>
+<!-- /wp:paragraph -->

@@ -1,0 +1,66 @@
+{
+  "post_id": 36144,
+  "status": "publish",
+  "url": "https://bitcoinversus.tech/2026/11/28/osrtc-019-robot-positioning-accuracy-repeatability/",
+  "featured_media": 36141,
+  "cover_dimensions": [
+    350,
+    297
+  ],
+  "approved_watermark_verified": false,
+  "cover_exception": "WP AI image quota exhausted; container DNS failed, no exact watermark compositing; authentic NIST photo provisional",
+  "body_image_ids": [
+    "36139",
+    "36138",
+    "24043"
+  ],
+  "word_count": 736,
+  "headings": [
+    "Prerequisites",
+    "Learning objectives",
+    "Accuracy versus repeatability",
+    "Worked example: a one-axis measurement",
+    "External measurement and uncertainty",
+    "Controlled comparison and safety",
+    "Exercises",
+    "Answer key"
+  ],
+  "internal_links": [
+    "https://bitcoinversus.tech/2026/10/05/osrtc-003-robot-mastering-calibration-zero-position-encoders-reference-marks-recovery/",
+    "https://bitcoinversus.tech/2026/10/06/osrtc-004-end-effectors-tool-center-point-setup-grippers-tcp-calibration-payload-io-safe-verification/",
+    "https://bitcoinversus.tech/2026/11/07/osrtc-017-robot-payload-center-gravity-verification-inertia-safe-pick-tests/",
+    "https://bitcoinversus.tech/2026/11/15/osrtc-018-robot-safety-laser-scanner-protective-fields-ossd-reset/"
+  ],
+  "objective_coverage": {
+    "1": "Accuracy versus repeatability",
+    "2": "Worked example: a one-axis measurement",
+    "3": "External measurement and uncertainty",
+    "4": "Controlled comparison and safety",
+    "5": "Controlled comparison and safety"
+  },
+  "sources": [
+    "https://www.iso.org/standard/22244.html",
+    "https://doi.org/10.3390/robotics15050086",
+    "https://www.nist.gov/publications/using-laser-tracker-actively-coordinate-motion-3m-industrial-robot-within-50-microns",
+    "https://www.osha.gov/otm/section-4-safety-hazards/chapter-4"
+  ],
+  "calculations_verified": [
+    100.5,
+    0.03999999999999204,
+    49.919999999999995,
+    0.03999999999999915
+  ],
+  "rendered_image_ids": [
+    "36139",
+    "36138",
+    "24043"
+  ],
+  "rendered_length": 11669,
+  "cover_duplicate": false,
+  "footer": true,
+  "video_embeds": 0,
+  "desktop_mobile_screenshot_verified": false,
+  "qr_destination_verified": false,
+  "rotation": "OSHRE.012 and OSRTC.018 previously published; OSRTC.019 next; no archive search match for ID; PROFINET topic already covered, changed to repeatability",
+  "next_subject": "robotics_engineer"
+}
